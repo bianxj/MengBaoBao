@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#EF4399</color>
+    <color name="colorPrimaryDark">#EF4399</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorText">#FEFEFE</color>
+    <color name="colorEditText">#000000</color>
+    <color name="colorEditTextHint">#D81780</color>
+    <color name="colorBlackText">#333333</color>
+
+    <color name="white">#ffffff</color>
+    <color name="gray">#666666</color>
+    <color name="black">#000000</color>
+    <color name="thinPink">#FC6DA6</color>
+    <color name="deepPink">#D81780</color>
+    <color name="lightSky">#DAF4FF</color>
+    <color name="scanMask">#66777777</color>
+    <color name="lightPink">#F7D6D7</color>
+
+    <color name="btmMenuUnColor">#979797</color>
+    <color name="btmMenuColor">#EF4399</color>
+    <color name="circleFrame">#DE3B93</color>
+</resources>

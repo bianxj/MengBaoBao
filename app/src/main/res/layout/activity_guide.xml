@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_guide_botttom">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_guide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+        <LinearLayout
+            android:id="@+id/ll_guide_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/y50px"
+            android:layout_gravity="bottom|center_horizontal">
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_guide_botttom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/bt_guide_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guide_register"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/x80px"
+            />
+
+        <Button
+            android:id="@+id/bt_guide_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guide_login"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x80px"/>
+    </RelativeLayout>
+
+</RelativeLayout>

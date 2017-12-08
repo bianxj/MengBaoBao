@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <include layout="@layout/include_title_back"></include>
+
+    <ImageView
+        android:layout_width="@dimen/x184px"
+        android:layout_height="@dimen/y258px"
+        android:scaleType="fitXY"
+        android:src="@drawable/logo_about"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y207px"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_name"
+        android:textSize="@dimen/y34px"
+        android:textColor="@color/colorBlackText"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
+        android:layout_marginTop="@dimen/y500px"
+        />
+
+    <ImageView
+        android:id="@+id/iv_location"
+        android:layout_width="@dimen/y31px"
+        android:layout_height="@dimen/y31px"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_location"
+        android:layout_marginLeft="@dimen/x102px"
+        android:layout_marginTop="@dimen/y592px"
+        />
+    <ImageView
+        android:id="@+id/iv_tel"
+        android:layout_width="@dimen/y31px"
+        android:layout_height="@dimen/y31px"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_tel"
+        android:layout_marginLeft="@dimen/x102px"
+        android:layout_marginTop="@dimen/y663px"
+        />
+    <ImageView
+        android:id="@+id/iv_mail"
+        android:layout_width="@dimen/y31px"
+        android:layout_height="@dimen/y31px"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_mail"
+        android:layout_marginLeft="@dimen/x102px"
+        android:layout_marginTop="@dimen/y735px"
+        />
+    <ImageView
+        android:id="@+id/iv_website"
+        android:layout_width="@dimen/y31px"
+        android:layout_height="@dimen/y31px"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_website"
+        android:layout_marginLeft="@dimen/x102px"
+        android:layout_marginTop="@dimen/y802px"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AboutText"
+        android:text="@string/company_location"
+        android:layout_marginLeft="@dimen/x148px"
+        android:layout_alignBottom="@+id/iv_location"
+        android:includeFontPadding="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AboutText"
+        android:text="@string/company_phone"
+        android:layout_marginLeft="@dimen/x148px"
+        android:layout_alignBottom="@+id/iv_tel"
+        android:includeFontPadding="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AboutText"
+        android:text="@string/company_mail"
+        android:layout_marginLeft="@dimen/x148px"
+        android:layout_alignBottom="@+id/iv_mail"
+        android:includeFontPadding="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AboutText"
+        android:text="@string/company_website"
+        android:layout_marginLeft="@dimen/x148px"
+        android:layout_alignBottom="@+id/iv_website"
+        android:includeFontPadding="true"
+        />
+
+</RelativeLayout>

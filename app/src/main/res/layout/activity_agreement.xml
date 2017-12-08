@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include android:id="@+id/title" layout="@layout/include_title_back"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y199px"
+        android:background="@color/lightPink"
+        android:layout_alignParentBottom="true"
+        >
+        <LinearLayout
+            android:id="@+id/ll_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y21px"
+            android:gravity="center_vertical"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/cb_agreement"
+                android:layout_width="@dimen/y34px"
+                android:layout_height="@dimen/y34px"
+                android:button="@drawable/btn_checkbox"
+                android:clickable="false"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x32px"
+                style="@style/CheckBoxAgreement"
+                android:textColor="@color/colorEditTextHint"
+                android:text="@string/readed"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_agree"
+            android:layout_width="@dimen/x418px"
+            android:layout_height="@dimen/y117px"
+            android:background="@drawable/btn_agree"
+            android:layout_marginTop="@dimen/y68px"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

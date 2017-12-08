@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="EditContainerWidth">@dimen/x606px</dimen>
+    <dimen name="EditContainerHeight">@dimen/y84px</dimen>
+    <dimen name="EditVcContainerWidth">@dimen/x368px</dimen>
+    <dimen name="IconMarginLeft">@dimen/x16px</dimen>
+    <dimen name="EditMarginLeft">@dimen/x9px</dimen>
+    <dimen name="EditMarginRight">@dimen/x30px</dimen>
+
+    <dimen name="TextNormalSize">@dimen/y30px</dimen>
+
+    <dimen name="SideMenuLineHeight">@dimen/y150px</dimen>
+
+    <dimen name="SelfActionBarHeight">@dimen/y106px</dimen>
+    <dimen name="RowSplitLine">@dimen/y14px</dimen>
+
+    <dimen name="BtmMenuTextMarginTop">@dimen/y106px</dimen>
+</resources>

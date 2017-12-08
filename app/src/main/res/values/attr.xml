@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ViewfinderView">
+        <attr name="mask_color" format="color"></attr>
+        <attr name="laser_color" format="color"></attr>
+        <attr name="laser_size" format="dimension"></attr>
+        <attr name="border_color" format="color"></attr>
+        <attr name="border_size" format="color"></attr>
+        <attr name="cent_x" format="dimension"></attr>
+        <attr name="cent_y" format="dimension"></attr>
+        <attr name="side_size" format="dimension"></attr>
+    </declare-styleable>
+
+</resources>

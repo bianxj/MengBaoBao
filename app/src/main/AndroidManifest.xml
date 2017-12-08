@@ -1,0 +1,24 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.doumengmengandroidbady">
+    <application android:allowBackup="true"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:name=".base.BaseApplication">
+        <activity
+            android:name=".activity.GuideActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.ChangePwdActivity"></activity>
+        <activity android:name=".activity.AgreementActivity"></activity>
+        <activity android:name=".activity.LoadingActivity"></activity>
+    </application>
+</manifest>
