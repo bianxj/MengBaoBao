@@ -1,7 +1,10 @@
 package com.doumengmengandroidbady.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
@@ -15,12 +18,27 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.SideMenuAdapter;
 import com.doumengmengandroidbady.base.BaseFragmentActivity;
 import com.doumengmengandroidbady.entity.SideMenuItem;
+import com.doumengmengandroidbady.fragment.BabyKnowledgeFragment;
+import com.doumengmengandroidbady.fragment.HomePageFragment;
+import com.doumengmengandroidbady.fragment.HospitalReportFragment;
+import com.doumengmengandroidbady.fragment.LessonFragment;
+import com.doumengmengandroidbady.fragment.SpacialistServiceFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //TODO
 public class MainActivity extends BaseFragmentActivity {
+
+    public static final String SHOW_PAGE = "show_page";
+
+    public static final String PAGE_HOME = "home_page";
+    public static final String PAGE_BABY_KNOWLEDGE = "baby_knowledge_page";
+    public static final String PAGE_SPACIALIST_SERVICE = "spacialist_service_page";
+    public static final String PAGE_HOSPITAL_REPORT = "hospital_report_page";
+    public static final String PAGE_LESSON = "lesson_page";
 
     private DrawerLayout dl_main;
     private FrameLayout fl_content;
@@ -28,8 +46,11 @@ public class MainActivity extends BaseFragmentActivity {
 //    private ImageView iv_home_page , iv_baby_knowledge , iv_spacialist_service , iv_hospital_report , iv_meng_lesson;
 //    private TextView tv_home_page , tv_baby_knowledge , tv_spacialist_service , tv_hospital_report , tv_meng_lesson;
 
-    private ListView lv_side_menu;
+    private FragmentManager fm;
+    private Fragment currentFragment;
+    private Map<String,Fragment> fragmentMap;
 
+    private ListView lv_side_menu;
     private SideMenuAdapter adapter;
 
     @Override
@@ -38,6 +59,18 @@ public class MainActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_main);
         findView();
         configView();
+        initFragment();
+        showFragment();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     private void findView(){
@@ -78,6 +111,26 @@ public class MainActivity extends BaseFragmentActivity {
         lv_side_menu.setOnItemClickListener(itemClickListener);
     }
 
+    private void initFragment(){
+        fm = getSupportFragmentManager();
+        fragmentMap = new HashMap<String,Fragment>();
+        fragmentMap.put(PAGE_HOME,new HomePageFragment());
+        fragmentMap.put(PAGE_BABY_KNOWLEDGE,new BabyKnowledgeFragment());
+        fragmentMap.put(PAGE_LESSON,new LessonFragment());
+        fragmentMap.put(PAGE_SPACIALIST_SERVICE,new SpacialistServiceFragment());
+        fragmentMap.put(PAGE_HOSPITAL_REPORT,new HospitalReportFragment());
+    }
+
+    private void showFragment(){
+        Intent intent = getIntent();
+        if ( intent != null && intent.getStringExtra(SHOW_PAGE) != null ){
+            String page = intent.getStringExtra(SHOW_PAGE);
+            switchFragment(page);
+        } else {
+            switchFragment(PAGE_HOME);
+        }
+    }
+
     private DrawerLayout.DrawerListener drawerListener = new DrawerLayout.DrawerListener() {
         @Override
         public void onDrawerSlide(View drawerView, float slideOffset) {}
@@ -101,15 +154,19 @@ public class MainActivity extends BaseFragmentActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.rl_home_page:
-                    toggleSideMenu();
+                    switchFragment(PAGE_HOME);
                     break;
                 case R.id.rl_baby_knowledge:
+                    switchFragment(PAGE_BABY_KNOWLEDGE);
                     break;
                 case R.id.rl_spacialist_service:
+                    switchFragment(PAGE_SPACIALIST_SERVICE);
                     break;
                 case R.id.rl_hospital_report:
+                    switchFragment(PAGE_HOSPITAL_REPORT);
                     break;
                 case R.id.rl_meng_lesson:
+                    switchFragment(PAGE_LESSON);
                     break;
             }
         }
@@ -123,7 +180,7 @@ public class MainActivity extends BaseFragmentActivity {
         }
     };
 
-    private void toggleSideMenu(){
+    public void toggleSideMenu(){
         if ( dl_main.isDrawerOpen(Gravity.LEFT) ){
             dl_main.closeDrawer(Gravity.LEFT);
         } else {
@@ -131,8 +188,21 @@ public class MainActivity extends BaseFragmentActivity {
         }
     }
 
-    private void switchFragment(Fragment fragment){
-
+    private void switchFragment(String page){
+        Fragment fragment = fragmentMap.get(page);
+        if ( !fragment.isVisible() ){
+            FragmentTransaction transaction = fm.beginTransaction();
+            if ( currentFragment != null ){
+                transaction.hide(currentFragment);
+            }
+            if (fragment.isAdded()) {
+                transaction.show(fragment);
+            } else {
+                transaction.add(fragment,page).show(fragment);
+            }
+            currentFragment = fragment;
+            transaction.commitAllowingStateLoss();
+        }
     }
 
     private void refreshBottomMenu(ViewGroup group){

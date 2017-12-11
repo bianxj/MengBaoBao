@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y163px"
+    android:background="@color/lightSky"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/y19px"
+        android:background="@color/white"
+        >
+        <com.doumengmengandroidbady.view.CircleImageView
+            android:id="@+id/civ_head"
+            android:layout_width="@dimen/y95px"
+            android:layout_height="@dimen/y95px"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginLeft="@dimen/x48px"
+            android:layout_centerVertical="true"
+            />
+        <LinearLayout
+            android:layout_width="@dimen/x509px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x162px"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_doctor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="马骏"
+                    android:textSize="@dimen/y30px"
+                    android:textColor="@color/colorBlackText"
+                    android:layout_alignParentLeft="true"
+                    />
+                <TextView
+                    android:id="@+id/tv_doctor_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="副主任医师"
+                    android:textSize="@dimen/y23px"
+                    android:textColor="@color/thinPink"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignBottom="@+id/tv_doctor_name"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y1px"
+                android:background="@color/linkPink"
+                android:layout_marginTop="@dimen/y10px"
+                ></View>
+
+            <TextView
+                android:id="@+id/tv_doctor_hospital"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y12px"
+                android:text="上海儿童医学中心（上海交通…"
+                android:textSize="@dimen/y23px"
+                android:textColor="#808080"
+                android:includeFontPadding="false"
+                />
+
+            <TextView
+                android:id="@+id/tv_doctor_skill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10px"
+                android:text="语言障碍、注意缺陷多动障碍、学习障碍、抽…"
+                android:textSize="@dimen/y23px"
+                android:textColor="#808080"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

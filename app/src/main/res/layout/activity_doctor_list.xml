@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightSky"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y124px"
+        android:background="@color/colorPrimary"
+        >
+
+        <Button
+            android:id="@+id/bt_back"
+            android:layout_width="@dimen/x31px"
+            android:layout_height="@dimen/y50px"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/y28px"
+            android:layout_marginLeft="@dimen/x48px"
+            android:background="@drawable/btn_back" />
+
+        <FrameLayout
+            android:layout_width="@dimen/x288px"
+            android:layout_height="@dimen/y68px"
+            android:background="@drawable/bg_choose"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y18px"
+            >
+            <RelativeLayout
+                android:id="@+id/rl_doctor"
+                android:layout_width="@dimen/x154px"
+                android:layout_height="@dimen/y68px"
+                android:layout_gravity="left"
+                android:background="@drawable/btn_choose"
+                >
+                <TextView
+                    android:id="@+id/tv_doctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/y46px"
+                    android:text="@string/doctor"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_hospital"
+                android:layout_width="@dimen/x154px"
+                android:layout_height="@dimen/y68px"
+                android:layout_gravity="right"
+                >
+                <TextView
+                    android:id="@+id/tv_hospital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/y46px"
+                    android:text="@string/hospital"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/bt_search"
+            android:layout_width="@dimen/x43px"
+            android:layout_height="@dimen/y43px"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_search"
+            android:layout_marginRight="@dimen/x48px"
+            android:layout_marginTop="@dimen/y31px"
+            />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_doctor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_head"
+        android:visibility="gone"
+        ></ListView>
+
+    <ListView
+        android:id="@+id/lv_hospital"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_head"
+        android:visibility="gone"
+        ></ListView>
+
+</RelativeLayout>

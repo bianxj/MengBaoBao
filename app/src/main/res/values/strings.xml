@@ -23,7 +23,7 @@
     <string name="register_name">注   册</string>
     <string name="commit">提交</string>
 
-    <!--ChangePwdActivity信息-->
+    <!--ForgotPwdActivity信息-->
     <string name="change_pwd_name">设置新密码</string>
 
     <!--LoadingActivity信息-->
@@ -64,6 +64,31 @@
     <string name="company_phone">400-876-6060</string>
     <string name="company_mail">customerservice@mengbaobao.com</string>
     <string name="company_website">www.mengbaobao.com</string>
+
+    <!--SettingActivity信息-->
+    <string name="version">版本号2.0</string>
+    <string name="change_pwd">修改密码</string>
+    <string name="agreement">使用协议</string>
+
+    <!--ChangePwdActivity信息-->
+    <string name="old_pwd">旧密码</string>
+    <string name="new_pwd">新密码（6~16位数字、字母）</string>
+    <string name="confirm_pwd">新密码（再输入一次新密码）</string>
+
+    <!--DoctorListActivity信息-->
+    <string name="doctor">医生</string>
+    <string name="hospital">医院</string>
+
+    <!--SearchActivity信息-->
+    <string name="search">搜索</string>
+    <string name="cancel">取消</string>
+    <string name="search_hint">搜索医院、医生</string>
+    <string name="history_search">历史搜索</string>
+
+    <!--FragmentSpacialistService-->
+    <string name="slogan">宝宝生长发育好不好，\n可以请儿保专家来评估一下哦！</string>
+    <string name="add_record">增加新记录</string>
+    <string name="appraisal_result">测评结果</string>
 
     <!--异常退出提示-->
     <string name="error_exit_message">很抱歉，程序出现异常，即将退出</string>

@@ -4,26 +4,26 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 
 /**
- * Created by Administrator on 2017/12/8.
+ * Created by Administrator on 2017/12/11.
  */
 
-public class SettingActivity extends BaseActivity {
+public class ObserveActivity extends BaseActivity {
 
     private Button bt_back;
     private TextView tv_title;
-    private RelativeLayout rl_change_pwd , rl_agreement;
+    private ImageView iv_ad;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agreement);
+        setContentView(R.layout.activity_observe);
         findView();
         configView();
     }
@@ -31,15 +31,11 @@ public class SettingActivity extends BaseActivity {
     private void findView(){
         bt_back = findViewById(R.id.bt_back);
         tv_title = findViewById(R.id.tv_title);
-        rl_change_pwd = findViewById(R.id.rl_change_pwd);
-        rl_agreement = findViewById(R.id.rl_agreement);
+        iv_ad = findViewById(R.id.iv_ad);
     }
 
-    private void configView(){
-        tv_title.setText(R.string.setting);
+    private void configView() {
         bt_back.setOnClickListener(listener);
-        rl_change_pwd.setOnClickListener(listener);
-        rl_agreement.setOnClickListener(listener);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -48,10 +44,6 @@ public class SettingActivity extends BaseActivity {
             switch(v.getId()){
                 case R.id.bt_back:
                     back();
-                    break;
-                case R.id.rl_change_pwd:
-                    break;
-                case R.id.rl_agreement:
                     break;
             }
         }

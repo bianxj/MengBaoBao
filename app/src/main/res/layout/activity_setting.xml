@@ -26,7 +26,86 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/version"
+            android:layout_marginLeft="@dimen/x270px"
+            style="@style/SettingTextGray"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_change_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y144px"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/y336px"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/y48px"
+            android:layout_height="@dimen/y48px"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_lock"
+            android:layout_marginLeft="@dimen/x91px"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/MoreItemText"
+            android:text="@string/change_pwd"
+            android:layout_marginLeft="@dimen/x210px"
+            android:includeFontPadding="false"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/x21px"
+            android:layout_height="@dimen/y33px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x48px"
+            android:src="@drawable/right_allow"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_agreement"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y144px"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/y489px"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/y48px"
+            android:layout_height="@dimen/y48px"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_agreement"
+            android:layout_marginLeft="@dimen/x91px"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/MoreItemText"
+            android:text="@string/agreement"
+            android:layout_marginLeft="@dimen/x210px"
+            android:includeFontPadding="false"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/x21px"
+            android:layout_height="@dimen/y33px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x48px"
+            android:src="@drawable/right_allow"/>
 
     </RelativeLayout>
 

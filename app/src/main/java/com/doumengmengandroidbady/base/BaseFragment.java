@@ -1,5 +1,7 @@
 package com.doumengmengandroidbady.base;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 /**
@@ -9,4 +11,10 @@ import android.support.v4.app.Fragment;
  */
 
 public class BaseFragment extends Fragment {
+
+    protected void startActivity(Class<? extends Activity> act){
+        Intent intent = new Intent(getActivity(),act);
+        startActivity(intent);
+    }
+
 }

@@ -71,6 +71,11 @@
         <item name="android:textColor">#EF4399</item>
     </style>
 
+    <style name="SmallBlackText">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:textColor">@color/colorBlackText</item>
+    </style>
+
     <style name="MoreItemText">
         <item name="android:textSize">@dimen/y30px</item>
         <item name="android:textColor">@color/colorBlackText</item>
@@ -79,6 +84,16 @@
     <style name="AboutText">
         <item name="android:textSize">@dimen/y28px</item>
         <item name="android:textColor">#666666</item>
+    </style>
+
+    <style name="SettingTextGray">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:textColor">#909090</item>
+    </style>
+    
+    <style name="SmallGrayText">
+        <item name="android:textSize">@dimen/y24px</item>
+        <item name="android:textColor">@color/gray</item>
     </style>
 
 </resources>

@@ -5,7 +5,9 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
@@ -14,18 +16,19 @@ import com.doumengmengandroidbady.base.BaseActivity;
 /**
  * Created by Administrator on 2017/12/5.
  */
-public class LoginActivity extends BaseActivity {
+public class ForgotPwdActivity extends BaseActivity {
 
-    private Button bt_back;
-    private EditText et_phone,et_login_pwd;
-    private TextView tv_prompt;
-    private Button bt_sure;
-    private TextView tv_fast_register,tv_forgot_pwd;
+    private Button bt_back,bt_sure;
+    private TextView bt_get_vc , tv_prompt;
+    private EditText et_phone , et_vc , et_login_pwd;
+    private LinearLayout ll_agreement;
+    private CheckBox cb_agreement;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_forgot_pwd);
+
         findView();
         configView();
     }
@@ -40,20 +43,24 @@ public class LoginActivity extends BaseActivity {
 
     private void findView(){
         bt_back = findViewById(R.id.bt_back);
-        et_phone = findViewById(R.id.et_phone);
+        bt_get_vc = findViewById(R.id.bt_get_vc);
+
         et_login_pwd = findViewById(R.id.et_login_pwd);
+        et_phone = findViewById(R.id.et_phone);
+        et_vc = findViewById(R.id.et_vc);
 
         tv_prompt = findViewById(R.id.tv_prompt);
         bt_sure = findViewById(R.id.bt_sure);
-        tv_fast_register = findViewById(R.id.tv_fast_register);
-        tv_forgot_pwd = findViewById(R.id.tv_forgot_pwd);
+
+        ll_agreement = findViewById(R.id.ll_agreement);
+        cb_agreement = findViewById(R.id.cb_agreement);
     }
 
     private void configView(){
-        bt_sure.setOnClickListener(listener);
         bt_back.setOnClickListener(listener);
-        tv_fast_register.setOnClickListener(listener);
-        tv_forgot_pwd.setOnClickListener(listener);
+        bt_get_vc.setOnClickListener(listener);
+        bt_sure.setOnClickListener(listener);
+        ll_agreement.setOnClickListener(listener);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -63,14 +70,14 @@ public class LoginActivity extends BaseActivity {
                 case R.id.bt_back:
                     back();
                     break;
+                case R.id.bt_get_vc:
+                    getVc();
+                    break;
                 case R.id.bt_sure:
                     sure();
                     break;
-                case R.id.tv_fast_register:
-                    gotoRegister();
-                    break;
-                case R.id.tv_forgot_pwd:
-                    gotoChangePwd();
+                case R.id.ll_agreement:
+                    clickAgreement();
                     break;
             }
         }
@@ -80,16 +87,16 @@ public class LoginActivity extends BaseActivity {
         finish();
     }
 
+    private void getVc(){
+        //TODO
+    }
+
     private void sure(){
         //TODO
     }
 
-    private void gotoRegister(){
-        startActivity(RegisterActivity.class);
-    }
-
-    private void gotoChangePwd(){
-        startActivity(ForgotPwdActivity.class);
+    private void clickAgreement(){
+        cb_agreement.setChecked(!cb_agreement.isChecked());
     }
 
     private Handler handler = new Handler(){

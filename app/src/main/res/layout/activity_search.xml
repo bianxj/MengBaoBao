@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightSky"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y124px"
+        android:background="@color/colorPrimary"
+        >
+        <LinearLayout
+            android:id="@+id/ll_back"
+            android:layout_width="@dimen/x100px"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="@dimen/x31px"
+                android:layout_height="@dimen/y50px"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/x48px"
+                android:layout_marginTop="@dimen/y29px"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_back"
+                />
+        </LinearLayout>
+        
+        <RelativeLayout
+            android:layout_width="@dimen/x480px"
+            android:layout_height="@dimen/y58px"
+            android:background="@drawable/bg_search"
+            android:layout_marginLeft="@dimen/x120px"
+            android:layout_marginTop="@dimen/y28px"
+            >
+            <ImageView
+                android:layout_width="@dimen/y43px"
+                android:layout_height="@dimen/y43px"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_red_search"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x24px"
+                />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="@dimen/x340px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x82px"
+                style="@style/EditTextView"
+                android:hint="@string/search_hint"
+                />
+
+            <RelativeLayout
+                android:id="@+id/ll_close"
+                android:layout_width="@dimen/x80px"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                >
+                <ImageView
+                    android:layout_width="@dimen/y26px"
+                    android:layout_height="@dimen/y26px"
+                    android:src="@drawable/icon_close"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/x21px"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_width="@dimen/x100px"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            >
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
+                android:textSize="@dimen/y28px"
+                android:textColor="@color/white"
+                android:layout_marginRight="@dimen/x30px"
+                android:layout_marginTop="@dimen/y43px"
+                android:includeFontPadding="false"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/y19px"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/history_search"
+            android:textSize="@dimen/y28px"
+            android:textColor="@color/colorBlackText"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/x48px"
+            android:layout_marginTop="@dimen/y14px"
+            />
+
+        <ListView
+            android:id="@+id/lv_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+
+        </ListView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1px"
+            android:background="@color/lineGray"
+            ></View>
+
+        <Button
+            android:id="@+id/bt_clear_history"
+            android:layout_width="@dimen/x260px"
+            android:layout_height="@dimen/y49px"
+            android:background="@drawable/btn_clear_history"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/y13px"
+            android:layout_marginTop="@dimen/y15px"
+            />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+    <ListView
+        android:id="@+id/lv_hospital"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+</LinearLayout>

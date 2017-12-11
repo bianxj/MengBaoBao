@@ -7,6 +7,7 @@
     <include android:id="@+id/title" layout="@layout/include_title_back"></include>
 
     <RelativeLayout
+        android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y199px"
         android:background="@color/lightPink"

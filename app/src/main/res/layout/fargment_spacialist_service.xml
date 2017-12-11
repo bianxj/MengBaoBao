@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightSky"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <include layout="@layout/include_title_image"></include>
+
+        <RelativeLayout
+            android:id="@+id/rl_add_record"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y115px"
+            android:background="@color/white"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/x57px"
+                android:layout_height="@dimen/x56px"
+                android:src="@drawable/icon_add"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x39px"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_record"
+                style="@style/SmallBlackText"
+                android:layout_centerInParent="true"
+                />
+            <ImageView
+                android:layout_width="@dimen/x21px"
+                android:layout_height="@dimen/y33px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x48px"
+                android:src="@drawable/right_allow"/>
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/lv_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_unbuy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y106px"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/TitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/spacialist_service" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/y256px"
+            android:layout_height="@dimen/y256px"
+            android:src="@drawable/icon_unbuy"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y307px"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/slogan"
+            android:gravity="center_horizontal"
+            android:includeFontPadding="true"
+            android:layout_marginTop="@dimen/y611px"
+            android:layout_centerHorizontal="true"
+            style="@style/SmallBlackText"
+            />
+
+        <Button
+            android:id="@+id/bt_buy"
+            android:layout_width="@dimen/x418px"
+            android:layout_height="@dimen/y117px"
+            android:background="@drawable/btn_buy_service"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y704px"
+            />
+
+    </RelativeLayout>
+
+
+</FrameLayout>

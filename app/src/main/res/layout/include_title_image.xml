@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y304px"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96px"
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:id="@+id/rl_side_menu"
+            android:layout_width="@dimen/x150px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="@dimen/y48px"
+                android:layout_height="@dimen/y42px"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="@dimen/x41px"
+                android:layout_marginTop="@dimen/y32px"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_more" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_baby_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y24px"
+            android:includeFontPadding="false"
+            android:text="妮妮"
+            android:textColor="@color/white"
+            android:textSize="@dimen/y52px" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y201px"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.doumengmengandroidbady.view.CircleImageView
+                android:id="@+id/cim_baby"
+                android:layout_width="@dimen/y133px"
+                android:layout_height="@dimen/y133px"
+                android:src="@drawable/ic_launcher_background" />
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y48px"
+            android:layout_marginTop="@dimen/y13px"
+            android:background="@color/deepPink">
+
+            <ImageView
+                android:id="@+id/iv_sex"
+                android:layout_width="@dimen/y27px"
+                android:layout_height="@dimen/y27px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x32px"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_white_famale" />
+
+            <TextView
+                android:id="@+id/tv_baby_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x10px"
+                android:layout_marginRight="@dimen/x25px"
+                android:layout_toRightOf="@+id/iv_sex"
+                android:includeFontPadding="false"
+                android:text="28月20天"
+                android:textColor="@color/white"
+                android:textSize="@dimen/y26px" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

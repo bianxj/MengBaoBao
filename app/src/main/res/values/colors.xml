@@ -18,6 +18,9 @@
     <color name="scanMask">#66777777</color>
     <color name="lightPink">#F7D6D7</color>
 
+    <color name="lineGray">#D7D7D7</color>
+    <color name="linkPink">#EF4399</color>
+
     <color name="btmMenuUnColor">#979797</color>
     <color name="btmMenuColor">#EF4399</color>
     <color name="circleFrame">#DE3B93</color>
