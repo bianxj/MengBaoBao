@@ -6,4 +6,83 @@
     android:layout_height="match_parent"
     >
 
+    <include layout="@layout/include_title_back"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y113px"
+        android:background="@color/colorPrimary"
+        >
+
+        <RelativeLayout
+            android:id="@+id/rl_location_area"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                style="@style/BigWhiteText"
+                android:text="上海"
+                android:layout_marginLeft="@dimen/x28px"
+                />
+            <ImageView
+                android:layout_width="@dimen/y29px"
+                android:layout_height="@dimen/y17px"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_down_arrow"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x114px"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/x434px"
+            android:layout_height="@dimen/y59px"
+            android:background="@drawable/bg_search_short"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x170px"
+            >
+            <ImageView
+                android:layout_width="@dimen/y44px"
+                android:layout_height="@dimen/y44px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x30px"
+                android:src="@drawable/icon_red_search"
+                />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="@dimen/x300px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x97px"
+                style="@style/EditTextView"
+                android:hint="@string/search_hint"
+                android:textColorHint="@color/thinPink"
+                />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_scan"
+            android:layout_width="@dimen/y60px"
+            android:layout_height="@dimen/y59px"
+            android:src="@drawable/btn_scan"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x34px"
+            >
+
+        </ImageView>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_doctor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
 </LinearLayout>
