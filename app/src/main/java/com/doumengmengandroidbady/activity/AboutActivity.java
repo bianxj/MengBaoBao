@@ -3,7 +3,7 @@ package com.doumengmengandroidbady.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
@@ -15,7 +15,7 @@ import com.doumengmengandroidbady.base.BaseActivity;
 
 public class AboutActivity extends BaseActivity {
 
-    private Button bt_back;
+    private RelativeLayout rl_back;
     private TextView tv_title;
 
     @Override
@@ -32,13 +32,13 @@ public class AboutActivity extends BaseActivity {
     }
 
     private void findView(){
-        bt_back = findViewById(R.id.bt_back);
+        rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);
     }
 
     private void configView(){
         tv_title.setText(R.string.about);
-        bt_back.setOnClickListener(new View.OnClickListener() {
+        rl_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 back();

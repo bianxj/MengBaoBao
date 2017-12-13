@@ -5,15 +5,20 @@
     android:background="@color/colorPrimary"
     >
 
-    <Button
-        android:id="@+id/bt_back"
-        android:layout_width="@dimen/x31px"
-        android:layout_height="@dimen/y50px"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/btn_back"
-        android:layout_marginLeft="@dimen/x48px"
-        android:layout_marginTop="@dimen/y29px"
-        />
+    <RelativeLayout
+        android:id="@+id/rl_back"
+        android:layout_width="@dimen/x100px"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="@dimen/x31px"
+            android:layout_height="@dimen/y50px"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/btn_back"
+            android:layout_marginLeft="@dimen/x48px"
+            android:layout_marginTop="@dimen/y29px"
+            android:scaleType="fitXY"
+            />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_title"
@@ -21,7 +26,24 @@
         android:layout_height="wrap_content"
         style="@style/TitleTextView"
         android:layout_centerInParent="true"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:text=""/>
 
+    <RelativeLayout
+        android:id="@+id/rl_complete"
+        android:layout_width="@dimen/x100px"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/complete"
+            style="@style/TextColor28px"
+            />
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -3,7 +3,6 @@ package com.doumengmengandroidbady.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,7 +15,7 @@ import com.doumengmengandroidbady.base.BaseActivity;
 
 public class SettingActivity extends BaseActivity {
 
-    private Button bt_back;
+    private RelativeLayout rl_back;
     private TextView tv_title;
     private RelativeLayout rl_change_pwd , rl_agreement;
 
@@ -29,7 +28,7 @@ public class SettingActivity extends BaseActivity {
     }
 
     private void findView(){
-        bt_back = findViewById(R.id.bt_back);
+        rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);
         rl_change_pwd = findViewById(R.id.rl_change_pwd);
         rl_agreement = findViewById(R.id.rl_agreement);
@@ -37,7 +36,7 @@ public class SettingActivity extends BaseActivity {
 
     private void configView(){
         tv_title.setText(R.string.setting);
-        bt_back.setOnClickListener(listener);
+        rl_back.setOnClickListener(listener);
         rl_change_pwd.setOnClickListener(listener);
         rl_agreement.setOnClickListener(listener);
     }
@@ -46,7 +45,7 @@ public class SettingActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
-                case R.id.bt_back:
+                case R.id.rl_back:
                     back();
                     break;
                 case R.id.rl_change_pwd:

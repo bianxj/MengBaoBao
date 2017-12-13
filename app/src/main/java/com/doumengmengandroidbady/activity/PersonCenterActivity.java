@@ -3,7 +3,6 @@ package com.doumengmengandroidbady.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,7 +16,7 @@ import com.doumengmengandroidbady.base.BaseActivity;
 public class PersonCenterActivity extends BaseActivity {
 
     private TextView tv_title;
-    private Button bt_back;
+    private RelativeLayout rl_back;
     private RelativeLayout rl_child_info , rl_parent_info;
 
     @Override
@@ -35,7 +34,7 @@ public class PersonCenterActivity extends BaseActivity {
 
     private void findView(){
         tv_title = findViewById(R.id.tv_title);
-        bt_back = findViewById(R.id.bt_back);
+        rl_back = findViewById(R.id.rl_back);
         rl_child_info = findViewById(R.id.rl_child_info);
         rl_parent_info = findViewById(R.id.rl_parent_info);
     }
@@ -43,7 +42,7 @@ public class PersonCenterActivity extends BaseActivity {
     private void configView(){
         tv_title.setText(R.string.person_center);
 
-        bt_back.setOnClickListener(listener);
+        rl_back.setOnClickListener(listener);
         rl_child_info.setOnClickListener(listener);
         rl_parent_info.setOnClickListener(listener);
     }
@@ -56,7 +55,7 @@ public class PersonCenterActivity extends BaseActivity {
                     break;
                 case R.id.rl_parent_info:
                     break;
-                case R.id.bt_back:
+                case R.id.rl_back:
                     back();
                     break;
             }

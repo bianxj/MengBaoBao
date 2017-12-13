@@ -17,7 +17,8 @@ import com.doumengmengandroidbady.base.BaseActivity;
 
 public class DoctorListActivity extends BaseActivity {
 
-    private Button bt_back,bt_search;
+    private RelativeLayout rl_back;
+    private Button bt_search;
     private RelativeLayout rl_doctor , rl_hospital;
     private TextView tv_doctor , tv_hospital;
     private ListView lv_doctor , lv_hospital;
@@ -31,7 +32,7 @@ public class DoctorListActivity extends BaseActivity {
     }
 
     private void findView(){
-        bt_back = findViewById(R.id.bt_back);
+        rl_back = findViewById(R.id.rl_back);
         bt_search = findViewById(R.id.bt_search);
         rl_doctor = findViewById(R.id.rl_doctor);
         rl_hospital = findViewById(R.id.rl_hospital);
@@ -42,7 +43,7 @@ public class DoctorListActivity extends BaseActivity {
     }
 
     private void configView(){
-        bt_back.setOnClickListener(listener);
+        rl_back.setOnClickListener(listener);
         bt_search.setOnClickListener(listener);
         rl_doctor.setOnClickListener(listener);
         rl_hospital.setOnClickListener(listener);
@@ -52,7 +53,7 @@ public class DoctorListActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.bt_back:
+                case R.id.rl_back:
                     back();
                     break;
                 case R.id.bt_search:

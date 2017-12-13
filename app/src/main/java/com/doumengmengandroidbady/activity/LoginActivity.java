@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
@@ -16,7 +17,7 @@ import com.doumengmengandroidbady.base.BaseActivity;
  */
 public class LoginActivity extends BaseActivity {
 
-    private Button bt_back;
+    private RelativeLayout rl_back;
     private EditText et_phone,et_login_pwd;
     private TextView tv_prompt;
     private Button bt_sure;
@@ -39,7 +40,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void findView(){
-        bt_back = findViewById(R.id.bt_back);
+        rl_back = findViewById(R.id.rl_back);
         et_phone = findViewById(R.id.et_phone);
         et_login_pwd = findViewById(R.id.et_login_pwd);
 
@@ -51,7 +52,7 @@ public class LoginActivity extends BaseActivity {
 
     private void configView(){
         bt_sure.setOnClickListener(listener);
-        bt_back.setOnClickListener(listener);
+        rl_back.setOnClickListener(listener);
         tv_fast_register.setOnClickListener(listener);
         tv_forgot_pwd.setOnClickListener(listener);
     }
@@ -60,7 +61,7 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
-                case R.id.bt_back:
+                case R.id.rl_back:
                     back();
                     break;
                 case R.id.bt_sure:

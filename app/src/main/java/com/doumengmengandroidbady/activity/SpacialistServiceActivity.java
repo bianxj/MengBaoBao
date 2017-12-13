@@ -3,38 +3,32 @@ package com.doumengmengandroidbady.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 
 /**
- * Created by Administrator on 2017/12/11.
+ * Created by Administrator on 2017/12/12.
  */
 
-public class ObserveActivity extends BaseActivity {
+public class SpacialistServiceActivity extends BaseActivity {
 
     private RelativeLayout rl_back;
-    private TextView tv_title;
-    private ImageView iv_ad;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_observe);
+        setContentView(R.layout.activity_spacialist_service);
         findView();
         configView();
     }
 
     private void findView(){
         rl_back = findViewById(R.id.rl_back);
-        tv_title = findViewById(R.id.tv_title);
-        iv_ad = findViewById(R.id.iv_ad);
     }
 
-    private void configView() {
+    private void configView(){
         rl_back.setOnClickListener(listener);
     }
 

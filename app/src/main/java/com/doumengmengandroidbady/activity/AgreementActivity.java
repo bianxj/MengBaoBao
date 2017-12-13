@@ -22,7 +22,7 @@ public class AgreementActivity extends BaseActivity {
 
     private RelativeLayout rl_bottom;
     private TextView tv_title;
-    private Button bt_back;
+    private RelativeLayout rl_back;
     private LinearLayout ll_agreement;
     private Button bt_agree;
     private CheckBox cb_agreement;
@@ -43,7 +43,7 @@ public class AgreementActivity extends BaseActivity {
     private void findView(){
         rl_bottom = findViewById(R.id.rl_bottom);
         tv_title = findViewById(R.id.tv_title);
-        bt_back = findViewById(R.id.bt_back);
+        rl_back = findViewById(R.id.rl_back);
         ll_agreement = findViewById(R.id.ll_agreement);
         bt_agree = findViewById(R.id.bt_agree);
         cb_agreement = findViewById(R.id.cb_agreement);
@@ -57,14 +57,15 @@ public class AgreementActivity extends BaseActivity {
             ll_agreement.setOnClickListener(listener);
         }
         tv_title.setText(R.string.agreement_name);
-        bt_back.setOnClickListener(listener);
+        rl_back.setOnClickListener(listener);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.bt_back:
+                case R.id.rl_back:
+                    back();
                     break;
                 case R.id.ll_agreement:
                     clickAgreement();

@@ -101,4 +101,60 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="BlackText34px">
+        <item name="android:textSize">@dimen/y34px</item>
+        <item name="android:textColor">@color/colorBlackText</item>
+    </style>
+
+    <style name="BlackText26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:textColor">@color/colorBlackText</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="BlackText28px">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:textColor">@color/colorBlackText</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="LightGrayText23px">
+        <item name="android:textSize">@dimen/y23px</item>
+        <item name="android:textColor">@color/lightGray</item>
+    </style>
+
+    <style name="SecondBlackText28px">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:textColor">@color/secondBlack</item>
+    </style>
+
+    <style name="ThirdBlackText26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:textColor">@color/thirdBlack</item>
+    </style>
+
+    <style name="TextColor28px">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="InputDataStyle">
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/colorBlackText</item>
+        <item name="android:textSize">@dimen/y34px</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="GrayText26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="LinkPinkText23px">
+        <item name="android:textSize">@dimen/y23px</item>
+        <item name="android:textColor">@color/linkPink</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
 </resources>

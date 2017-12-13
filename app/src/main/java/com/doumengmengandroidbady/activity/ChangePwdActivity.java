@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
@@ -16,7 +17,7 @@ import com.doumengmengandroidbady.base.BaseActivity;
 
 public class ChangePwdActivity extends BaseActivity {
 
-    private Button bt_back;
+    private RelativeLayout rl_back;
     private TextView tv_title,tv_prompt;
     private EditText et_old_pwd , et_new_pwd , et_confirm_pwd;
     private Button bt_sure;
@@ -30,7 +31,7 @@ public class ChangePwdActivity extends BaseActivity {
     }
 
     private void findView(){
-        bt_back = findViewById(R.id.bt_back);
+        rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);
         tv_prompt = findViewById(R.id.tv_prompt);
         et_old_pwd = findViewById(R.id.et_old_pwd);
@@ -41,14 +42,14 @@ public class ChangePwdActivity extends BaseActivity {
 
     private void configView(){
         bt_sure.setOnClickListener(listener);
-        bt_back.setOnClickListener(listener);
+        rl_back.setOnClickListener(listener);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
-                case R.id.bt_back:
+                case R.id.rl_back:
                     back();
                     break;
                 case R.id.bt_sure:

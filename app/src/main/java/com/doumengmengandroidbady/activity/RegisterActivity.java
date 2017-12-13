@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
@@ -18,7 +19,8 @@ import com.doumengmengandroidbady.base.BaseActivity;
  */
 public class RegisterActivity extends BaseActivity {
 
-    private Button bt_back,bt_sure;
+    private RelativeLayout rl_back;
+    private Button bt_sure;
     private TextView bt_get_vc , tv_prompt;
     private EditText et_phone , et_vc , et_login_pwd;
     private LinearLayout ll_agreement;
@@ -41,7 +43,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void findView(){
-        bt_back = findViewById(R.id.bt_back);
+        rl_back = findViewById(R.id.rl_back);
         bt_get_vc = findViewById(R.id.bt_get_vc);
 
         et_login_pwd = findViewById(R.id.et_login_pwd);
@@ -56,7 +58,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void configView(){
-        bt_back.setOnClickListener(listener);
+        rl_back.setOnClickListener(listener);
         bt_get_vc.setOnClickListener(listener);
         bt_sure.setOnClickListener(listener);
         ll_agreement.setOnClickListener(listener);
@@ -66,7 +68,7 @@ public class RegisterActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
-                case R.id.bt_back:
+                case R.id.rl_back:
                     back();
                     break;
                 case R.id.bt_get_vc:

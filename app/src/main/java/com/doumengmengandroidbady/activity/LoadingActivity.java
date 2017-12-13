@@ -2,7 +2,7 @@ package com.doumengmengandroidbady.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
@@ -13,7 +13,7 @@ import com.doumengmengandroidbady.base.BaseActivity;
 //TODO
 public class LoadingActivity extends BaseActivity {
 
-    private Button bt_back;
+    private RelativeLayout rl_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private void findView(){
-        bt_back = findViewById(R.id.bt_back);
+        rl_back = findViewById(R.id.rl_back);
     }
 
 }
