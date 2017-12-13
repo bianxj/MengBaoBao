@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="@dimen/x674px"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/father_name" />
+
+            <TextView
+                android:id="@+id/tv_father_name"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y192px"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y96px"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:visibility="visible">
+
+                <TextView
+                    style="@style/BlackText28px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/culture" />
+            </RelativeLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_father_calture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y96px"
+                    android:layout_gravity="right"
+                    >
+                    <RadioButton
+                        android:id="@+id/rb_father_choose"
+                        style="@style/CheckTextStyle"
+                        android:layout_width="@dimen/x114px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_check"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/choose"
+                        android:layout_centerVertical="true" />
+                    <RadioButton
+                        android:id="@+id/rb_father_primary"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x172px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/primary"
+                        android:layout_toRightOf="@+id/rb_father_choose"
+                        android:layout_centerVertical="true"
+                        />
+                    <RadioButton
+                        android:id="@+id/rb_father_junior"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/junior"
+                        android:layout_toRightOf="@+id/rb_father_primary"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y96px"
+                    android:layout_gravity="right">
+                    <RadioButton
+                        android:id="@+id/rb_father_senior"
+                        style="@style/CheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_check"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/senior"
+                        android:layout_centerVertical="true" />
+                    <RadioButton
+                        android:id="@+id/rb_father_university"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/university"
+                        android:layout_toRightOf="@+id/rb_father_senior"
+                        android:layout_centerVertical="true"
+                        />
+                    <RadioButton
+                        android:id="@+id/rb_father_master"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/master"
+                        android:layout_toRightOf="@+id/rb_father_university"
+                        android:layout_centerVertical="true"
+                        />
+                    <RadioButton
+                        android:id="@+id/rb_father_doctor"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/doctor_culture"
+                        android:layout_toRightOf="@+id/rb_father_master"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/father_height" />
+
+            <EditText
+                android:id="@+id/et_father_height"
+                style="@style/BlackText26px"
+                android:layout_width="@dimen/x153px"
+                android:layout_height="@dimen/y56px"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv_father_height_unit"
+                android:layout_marginRight="@dimen/x18px"
+                android:background="@drawable/bg_circle_edittext"
+                android:gravity="center"
+                android:text="妮妮" />
+
+            <TextView
+                android:id="@+id/tv_father_height_unit"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/cm" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/father_weight" />
+
+            <TextView
+                android:id="@+id/tv_father_weight"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/tv_father_weight_unit"
+                android:layout_marginRight="@dimen/x18px"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <TextView
+                android:id="@+id/tv_father_weight_unit"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/kg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/father_BMI" />
+
+            <TextView
+                android:id="@+id/tv_father_BMI"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/mother_name" />
+
+            <TextView
+                android:id="@+id/tv_mother_name"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y192px"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y96px"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:visibility="visible">
+
+                <TextView
+                    style="@style/BlackText28px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/culture" />
+            </RelativeLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_mother_calture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y96px"
+                    android:layout_gravity="right"
+                    >
+                    <RadioButton
+                        android:id="@+id/rb_mother_choose"
+                        style="@style/CheckTextStyle"
+                        android:layout_width="@dimen/x114px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_check"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/choose"
+                        android:layout_centerVertical="true" />
+                    <RadioButton
+                        android:id="@+id/rb_mother_primary"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x172px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/primary"
+                        android:layout_toRightOf="@+id/rb_mother_choose"
+                        android:layout_centerVertical="true"
+                        />
+                    <RadioButton
+                        android:id="@+id/rb_mother_junior"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/junior"
+                        android:layout_toRightOf="@+id/rb_mother_primary"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y96px"
+                    android:layout_gravity="right">
+                    <RadioButton
+                        android:id="@+id/rb_mother_senior"
+                        style="@style/CheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_check"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/senior"
+                        android:layout_centerVertical="true" />
+                    <RadioButton
+                        android:id="@+id/rb_mother_university"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/university"
+                        android:layout_toRightOf="@+id/rb_mother_senior"
+                        android:layout_centerVertical="true"
+                        />
+                    <RadioButton
+                        android:id="@+id/rb_mother_master"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/master"
+                        android:layout_toRightOf="@+id/rb_mother_university"
+                        android:layout_centerVertical="true"
+                        />
+                    <RadioButton
+                        android:id="@+id/rb_mother_doctor"
+                        style="@style/UnCheckTextStyle"
+                        android:layout_width="@dimen/x96px"
+                        android:layout_height="@dimen/y56px"
+                        android:layout_marginLeft="@dimen/x8px"
+                        android:background="@drawable/bg_circle_uncheck"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/doctor_culture"
+                        android:layout_toRightOf="@+id/rb_mother_master"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/mother_height" />
+
+            <EditText
+                android:id="@+id/et_mother_height"
+                style="@style/BlackText26px"
+                android:layout_width="@dimen/x153px"
+                android:layout_height="@dimen/y56px"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv_mother_height_unit"
+                android:layout_marginRight="@dimen/x18px"
+                android:background="@drawable/bg_circle_edittext"
+                android:gravity="center"
+                android:text="妮妮" />
+
+            <TextView
+                android:id="@+id/tv_mother_height_unit"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/cm" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/mother_weight" />
+
+            <TextView
+                android:id="@+id/tv_mother_weight"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/tv_mother_weight_unit"
+                android:layout_marginRight="@dimen/x18px"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <TextView
+                android:id="@+id/tv_mother_weight_unit"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/kg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/mother_BMI" />
+
+            <TextView
+                android:id="@+id/tv_mother_BMI"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

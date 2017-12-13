@@ -10,6 +10,7 @@
     <string name="get_vc">获取验证码</string>
     <string name="prompt_read_agreement">我已阅读同意萌宝宝用户协议</string>
     <string name="complete">完成</string>
+    <string name="mark">*</string>
 
 
     <!--GuideActivity信息-->
@@ -153,6 +154,102 @@
     <string name="other_reference_value">参考值：300~400毫升</string>
     <string name="other_fedding_title">奶制品喂养</string>
     <string name="other_fedding_content">牛乳过敏-对确诊牛乳过敏的婴儿，人乳喂养时间 应延长至12~18个月；如不能进行人乳喂养而牛乳 过敏的婴儿应首选氨基酸配方或深</string>
+
+    <!--SupplementRecordActivity-->
+    <string name="month_age">月龄</string>
+    <string name="height_cm">身长cm</string>
+    <string name="weight_kg">体重kg</string>
+    
+    <!--BaseInfo-->
+    <string name="baby_name">宝宝姓名</string>
+    <string name="baby_gender">宝宝性别</string>
+    <string name="baby_birthday">出生日期</string>
+    <string name="baby_gestational_age">孕周(胎龄)</string>
+    <string name="baby_gestational_age_2">孕周</string>
+    <string name="phone">联系手机</string>
+
+    <string name="birth_weight">出生体重</string>
+    <string name="birth_height">出生身长</string>
+    <string name="parity_count">产次</string>
+    <string name="birth_count">胎次</string>
+    <string name="birth_age">母亲生育年龄</string>
+    
+    <string name="birth_state">出生状态</string>
+    <string name="single_birth">单胎</string>
+    <string name="polyembryony">多胎</string>
+    
+    <string name="parturition_state">分娩状态</string>
+    <string name="eutocia">顺</string>
+    <string name="breech">臀</string>
+    <string name="odinopoeia">引</string>
+    <string name="parturition">产</string>
+    <string name="cesarean">剖</string>
+
+    <string name="assisted_reproduction">辅助生育</string>
+    <string name="artificial_insemination">人工授精</string>
+    <string name="tube_baby">试管婴儿</string>
+
+    <string name="none">无</string>
+    <string name="has">有</string>
+    
+    <string name="birth_injury">产伤</string>
+    <string name="stifle">新生儿窒息</string>
+    <string name="ICH">颅内出血</string>
+    <string name="genetic_history">家族遗传史</string>
+    <string name="allergy_disease">家族过敏疾病</string>
+
+    <string name="pervious_history">既往史</string>
+    <string name="choleplania">黄疸</string>
+    <string name="ACHD">先心</string>
+    <string name="hearing_disorder">听力障碍</string>
+    <string name="rethinopthy">视网膜病变</string>
+    <string name="PKU">PKU（高苯丙氨酸血症）</string>
+    <string name="lower_weight_baby">低体重儿</string>
+    <string name="EUGR">发育迟缓</string>
+    <string name="neoplastic_disease">肿瘤性疾病</string>
+    <string name="hydrocephalus">脑积水</string>
+    <string name="CH">甲状腺功能低下</string>
+    <string name="enteritis">小肠炎</string>
+    <string name="rickets">佝偻病</string>
+    <string name="anemia">贫血</string>
+    <string name="CAH">CAH（21-羟化酶缺乏症）</string>
+    <string name="fat">肥胖</string>
+    <string name="malnutrition">营养不良</string>
+    <string name="develop_lower">生长迟缓</string>
+    <string name="epilepsy">癫痫</string>
+    <string name="genetic_disease">遗传性疾病</string>
+    <string name="PD">G-6-PD缺乏症</string>
+    <string name="leukemia">白血病</string>
+    <string name="asthma">哮喘</string>
+    <string name="pneumonia">肺炎</string>
+    <string name="allergy">过敏</string>
+    <string name="HIE">缺氧缺血性脑病</string>
+    <string name="chronic_disease">慢性疾病</string>
+    <string name="other_disease">其他（请输入）</string>
+
+    <!--ParentInfo-->
+    <string name="culture">文化程度</string>
+    <string name="choose">请选择</string>
+    <string name="primary">小学及以下</string>
+    <string name="junior">初中</string>
+    <string name="senior">高中</string>
+    <string name="university">大学</string>
+    <string name="master">硕士</string>
+    <string name="doctor_culture">博士</string>
+
+    <string name="father_name">父亲姓名</string>
+    <string name="father_height">身高（父亲）</string>
+    <string name="father_weight">体重（父亲）</string>
+    <string name="father_BMI">BMI（父亲）</string>
+    <string name="mother_name">母亲姓名</string>
+    <string name="mother_height">身高（母亲）</string>
+    <string name="mother_weight">体重（母亲）</string>
+    <string name="mother_BMI">BMI（母亲）</string>
+
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
+
+
 
     <!--异常退出提示-->
     <string name="error_exit_message">很抱歉，程序出现异常，即将退出</string>

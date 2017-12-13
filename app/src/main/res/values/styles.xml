@@ -145,6 +145,18 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="FourthGrayText28px">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:textColor">@color/fourthGray</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="GrayText28px">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
     <style name="GrayText26px">
         <item name="android:textSize">@dimen/y26px</item>
         <item name="android:textColor">@color/gray</item>
@@ -155,6 +167,23 @@
         <item name="android:textSize">@dimen/y23px</item>
         <item name="android:textColor">@color/linkPink</item>
         <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="CheckTextStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/y26px</item>
+    </style>
+    <style name="UnCheckTextStyle">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/y26px</item>
+    </style>
+    <style name="SixthGray23px">
+        <item name="android:textColor">@color/sixthGray</item>
+        <item name="android:textSize">@dimen/y23px</item>
+    </style>
+    <style name="MarkStyle">
+        <item name="android:textColor">@color/btmMenuColor</item>
+        <item name="android:textSize">@dimen/y26px</item>
     </style>
 
 </resources>

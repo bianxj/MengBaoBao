@@ -1,0 +1,1222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+    <LinearLayout
+        android:layout_width="@dimen/x674px"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/baby_name" />
+
+            <TextView
+                android:id="@+id/tv_baby_name"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/baby_gender" />
+
+            <TextView
+                android:id="@+id/tv_baby_gender"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/baby_birthday" />
+
+            <TextView
+                android:id="@+id/tv_baby_birthday"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/baby_gestational_age" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_week"
+                    style="@style/BlackText26px"
+                    android:layout_width="@dimen/x97px"
+                    android:layout_height="@dimen/y65px"
+                    android:background="@drawable/bg_input_data_four"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/x10px"
+                    android:paddingRight="@dimen/x10px" />
+
+                <TextView
+                    style="@style/GrayText26px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:layout_marginRight="@dimen/x16px"
+                    android:text="周" />
+
+                <EditText
+                    android:id="@+id/et_day"
+                    style="@style/BlackText26px"
+                    android:layout_width="@dimen/x97px"
+                    android:layout_height="@dimen/y65px"
+                    android:background="@drawable/bg_input_data_four"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/x10px"
+                    android:paddingRight="@dimen/x10px" />
+
+                <TextView
+                    style="@style/GrayText26px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:text="天" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/phone" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/birth_weight" />
+
+            <TextView
+                android:id="@+id/tv_birth_weight"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/birth_height" />
+
+            <TextView
+                android:id="@+id/tv_birth_height"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/parity_count" />
+
+            <TextView
+                android:id="@+id/tv_parity_count"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/birth_count" />
+
+            <TextView
+                android:id="@+id/tv_birth_count"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/birth_age" />
+
+            <TextView
+                android:id="@+id/tv_birth_age"
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="妮妮" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/birth_state" />
+
+            <RadioGroup
+                android:id="@+id/rg_birth_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_single_birth"
+                    style="@style/CheckTextStyle"
+                    android:layout_width="@dimen/x96px"
+                    android:layout_height="@dimen/y56px"
+                    android:background="@drawable/bg_circle_check"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/single_birth" />
+
+                <RadioButton
+                    android:id="@+id/rb_spolyembryony"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x96px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/polyembryony" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/parturition_state" />
+
+            <RadioGroup
+                android:id="@+id/rg_parturition_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_eutocia"
+                    style="@style/CheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:background="@drawable/bg_circle_check"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/eutocia" />
+
+                <RadioButton
+                    android:id="@+id/rb_breech"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/breech" />
+
+                <RadioButton
+                    android:id="@+id/rb_odinopoeia"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/odinopoeia" />
+
+                <RadioButton
+                    android:id="@+id/rb_parturition"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/parturition" />
+
+                <RadioButton
+                    android:id="@+id/rb_cesarean"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/cesarean" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/assisted_reproduction" />
+
+            <RadioGroup
+                android:id="@+id/rg_assisted_reproduction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_assisted_none"
+                    style="@style/CheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:background="@drawable/bg_circle_check"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/none" />
+
+                <RadioButton
+                    android:id="@+id/rb_artificial_insemination"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x144px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/artificial_insemination" />
+
+                <RadioButton
+                    android:id="@+id/rb_tube_baby"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x144px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/tube_baby" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/birth_injury" />
+
+            <RadioGroup
+                android:id="@+id/rg_birth_injury"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_injury_none"
+                    style="@style/CheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:background="@drawable/bg_circle_check"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/none" />
+
+                <RadioButton
+                    android:id="@+id/rb_injury_has"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/has" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/stifle" />
+
+            <RadioGroup
+                android:id="@+id/rg_stifle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_istifle_none"
+                    style="@style/CheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:background="@drawable/bg_circle_check"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/none" />
+
+                <RadioButton
+                    android:id="@+id/rb_stifle_has"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/has" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/ICH" />
+
+            <RadioGroup
+                android:id="@+id/rg_ICH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_ICH_none"
+                    style="@style/CheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:background="@drawable/bg_circle_check"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/none" />
+
+                <RadioButton
+                    android:id="@+id/rb_ICH_has"
+                    style="@style/UnCheckTextStyle"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x8px"
+                    android:background="@drawable/bg_circle_uncheck"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/has" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/lightPink"></View>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                style="@style/BlackText28px"
+                android:text="@string/genetic_history"
+                />
+            <RadioGroup
+                android:id="@+id/rg_genetic_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                >
+                <RadioButton
+                    android:id="@+id/rb_genetic_none"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:text="@string/none"
+                    android:background="@drawable/bg_circle_check"
+                    style="@style/CheckTextStyle"
+                    android:gravity="center"
+                    android:button="@null"
+                    />
+                <RadioButton
+                    android:id="@+id/rb_genetic_has"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:text="@string/has"
+                    android:background="@drawable/bg_circle_uncheck"
+                    style="@style/UnCheckTextStyle"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:layout_marginLeft="@dimen/x8px"
+                    />
+            </RadioGroup>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:background="@color/lightPink"
+                android:layout_alignParentBottom="true"
+                ></View>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                style="@style/BlackText28px"
+                android:text="@string/allergy_disease"
+                />
+            <RadioGroup
+                android:id="@+id/rg_allergy_disease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                >
+                <RadioButton
+                    android:id="@+id/rb_allergy_none"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:text="@string/none"
+                    android:background="@drawable/bg_circle_check"
+                    style="@style/CheckTextStyle"
+                    android:gravity="center"
+                    android:button="@null"
+                    />
+                <RadioButton
+                    android:id="@+id/rb_allergy_has"
+                    android:layout_width="@dimen/x68px"
+                    android:layout_height="@dimen/y56px"
+                    android:text="@string/has"
+                    android:background="@drawable/bg_circle_uncheck"
+                    style="@style/UnCheckTextStyle"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:layout_marginLeft="@dimen/x8px"
+                    />
+            </RadioGroup>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_allergy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+        <EditText
+            android:id="@+id/et_allergy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y56px"
+            android:background="@drawable/bg_circle_edittext"
+            android:layout_centerVertical="true"
+            style="@style/BlackText26px"
+            android:paddingLeft="@dimen/x25px"
+            />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:background="@color/lightPink"
+                android:layout_alignParentBottom="true"
+                ></View>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pervious_history"
+                android:layout_centerVertical="true"
+                style="@style/BlackText28px"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                >
+                <CheckBox
+                    android:id="@+id/cb_choleplania"
+                    android:layout_width="@dimen/x96px"
+                    android:layout_height="@dimen/y56px"
+                    android:button="@null"
+                    android:background="@drawable/bg_circle_check"
+                    style="@style/CheckTextStyle"
+                    android:text="@string/choleplania"
+                    android:gravity="center"
+                    />
+                <CheckBox
+                    android:id="@+id/cb_ACHD"
+                    android:layout_width="@dimen/x96px"
+                    android:layout_height="@dimen/y56px"
+                    android:button="@null"
+                    android:background="@drawable/bg_circle_uncheck"
+                    style="@style/UnCheckTextStyle"
+                    android:text="@string/ACHD"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/x9px"
+                    />
+                <CheckBox
+                    android:id="@+id/cb_hearing_disorder"
+                    android:layout_width="@dimen/x114px"
+                    android:layout_height="@dimen/y56px"
+                    android:button="@null"
+                    android:background="@drawable/bg_circle_uncheck"
+                    style="@style/UnCheckTextStyle"
+                    android:text="@string/hearing_disorder"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/x9px"
+                    />
+                <CheckBox
+                    android:id="@+id/cb_rethinopthy"
+                    android:layout_width="@dimen/x172px"
+                    android:layout_height="@dimen/y56px"
+                    android:button="@null"
+                    android:background="@drawable/bg_circle_uncheck"
+                    style="@style/UnCheckTextStyle"
+                    android:text="@string/rethinopthy"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/x9px"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <CheckBox
+                android:id="@+id/cb_PKU"
+                android:layout_width="@dimen/x326px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/PKU"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
+            <CheckBox
+                android:id="@+id/cb_lower_weight_baby"
+                android:layout_width="@dimen/x144px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/lower_weight_baby"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x357px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_toRightOf="@+id/cb_PKU"
+                />
+            <CheckBox
+                android:id="@+id/cb_EUGR"
+                android:layout_width="@dimen/x144px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/EUGR"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <CheckBox
+                android:id="@+id/cb_neoplastic_disease"
+                android:layout_width="@dimen/x172px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/neoplastic_disease"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
+            <CheckBox
+                android:id="@+id/cb_hydrocephalus"
+                android:layout_width="@dimen/x115px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/hydrocephalus"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x6px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_neoplastic_disease"
+                />
+            <CheckBox
+                android:id="@+id/cb_CH"
+                android:layout_width="@dimen/x220px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/CH"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_hydrocephalus"
+                />
+            <CheckBox
+                android:id="@+id/cb_ICH"
+                android:layout_width="@dimen/x144px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/ICH"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <CheckBox
+                android:id="@+id/cb_enteritis"
+                android:layout_width="@dimen/x115px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/enteritis"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
+            <CheckBox
+                android:id="@+id/cb_rickets"
+                android:layout_width="@dimen/x115px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/rickets"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x6px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_enteritis"
+                />
+            <CheckBox
+                android:id="@+id/cb_anemia"
+                android:layout_width="@dimen/x96px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/anemia"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_rickets"
+                />
+            <CheckBox
+                android:id="@+id/cb_CAH"
+                android:layout_width="@dimen/x318px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/CAH"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <CheckBox
+                android:id="@+id/cb_fat"
+                android:layout_width="@dimen/x96px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/fat"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
+            <CheckBox
+                android:id="@+id/cb_malnutvrition"
+                android:layout_width="@dimen/x144px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/malnutrition"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x6px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_fat"
+                />
+            <CheckBox
+                android:id="@+id/cb_develop_lower"
+                android:layout_width="@dimen/x144px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/develop_lower"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_malnutvrition"
+                />
+            <CheckBox
+                android:id="@+id/cb_epilepsy"
+                android:layout_width="@dimen/x96px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/epilepsy"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_develop_lower"
+                />
+            <CheckBox
+                android:id="@+id/cb_genetic_disease"
+                android:layout_width="@dimen/x155px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/genetic_disease"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <CheckBox
+                android:id="@+id/cb_PD"
+                android:layout_width="@dimen/x230px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/PD"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
+            <CheckBox
+                android:id="@+id/cb_leukemia"
+                android:layout_width="@dimen/x114px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/leukemia"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x6px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_PD"
+                />
+            <CheckBox
+                android:id="@+id/cb_asthma"
+                android:layout_width="@dimen/x96px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/asthma"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_leukemia"
+                />
+            <CheckBox
+                android:id="@+id/cb_pneumonia"
+                android:layout_width="@dimen/x96px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/pneumonia"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_asthma"
+                />
+            <CheckBox
+                android:id="@+id/cb_allergy"
+                android:layout_width="@dimen/x96px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/allergy"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <CheckBox
+                android:id="@+id/cb_HIE"
+                android:layout_width="@dimen/x230px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/HIE"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
+            <CheckBox
+                android:id="@+id/cb_chronic_disease"
+                android:layout_width="@dimen/x144px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/chronic_disease"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x6px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_HIE"
+                />
+            <CheckBox
+                android:id="@+id/cb_none"
+                android:layout_width="@dimen/x66px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/none"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/cb_chronic_disease"
+                />
+            <CheckBox
+                android:id="@+id/cb_other_disease"
+                android:layout_width="@dimen/x203px"
+                android:layout_height="@dimen/y56px"
+                android:button="@null"
+                android:background="@drawable/bg_circle_uncheck"
+                style="@style/UnCheckTextStyle"
+                android:text="@string/other_disease"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x9px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_other_disease"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px">
+            <EditText
+                android:id="@+id/et_other_disease"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y56px"
+                android:background="@drawable/bg_circle_edittext"
+                android:layout_centerVertical="true"
+                style="@style/BlackText26px"
+                android:paddingLeft="@dimen/x25px"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

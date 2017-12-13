@@ -15,4 +15,7 @@
     <dimen name="RowSplitLine">@dimen/y14px</dimen>
 
     <dimen name="BtmMenuTextMarginTop">@dimen/y106px</dimen>
+
+    <dimen name="InputInfo_Title_MarginLeft">@dimen/x29px</dimen>
+    <dimen name="InputInfo_Input_MarginLeft">@dimen/x382px</dimen>
 </resources>

@@ -28,4 +28,12 @@
     <color name="circleFrame">#DE3B93</color>
     <color name="secondBlack">#1A1A1A</color>
     <color name="thirdBlack">#4D4D4D</color>
+    <color name="thirdGray">#F0F0F0</color>
+    <color name="fourthGray">#909090</color>
+
+    <color name="editFrame">#B7B7B7</color>
+    <color name="uncheckFrame">#DADADA</color>
+    <color name="checkColor">#FC6DA6</color>
+    <color name="fifthGray">#F5F5F5</color>
+    <color name="sixthGray">#999999</color>
 </resources>
