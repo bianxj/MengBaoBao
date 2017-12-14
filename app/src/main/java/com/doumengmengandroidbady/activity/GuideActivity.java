@@ -26,6 +26,7 @@ public class GuideActivity extends BaseActivity {
         setContentView(R.layout.activity_guide);
         findView();
         configView();
+
     }
 
     @Override

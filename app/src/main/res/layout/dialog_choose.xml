@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="@dimen/x528px"
+        android:layout_height="@dimen/y289px"
+        android:background="@drawable/bg_dialog"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/tv_prompt"
+                style="@style/BlackText28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:maxWidth="@dimen/x427px"
+                android:gravity="center"
+                android:text="" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1px"
+            android:background="@color/dialogPink">
+        </View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/DialogPinkText34px"
+                android:gravity="center"
+                android:text="@string/go_on"/>
+            <View
+                android:layout_width="@dimen/y1px"
+                android:layout_height="match_parent"
+                android:background="@color/dialogPink">
+            </View>
+            <TextView
+                android:id="@+id/tv_sure"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/DialogPinkText34px"
+                android:gravity="center"
+                android:text="@string/go_on"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

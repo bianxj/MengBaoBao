@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/lightSky">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_hehavior_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y32px"
+            android:layout_marginLeft="@dimen/x46px"
+            style="@style/BlackTitle34px"
+            android:text="Hahaha"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x46px"
+            android:layout_marginRight="@dimen/x46px"
+            android:layout_marginTop="@dimen/y32px"
+            >
+            <RelativeLayout
+                android:id="@+id/rl_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/cb_hebavior"
+                    android:layout_width="@dimen/y50px"
+                    android:layout_height="@dimen/y50px"
+                    android:button="@drawable/cb_selector"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/tv_behavior"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/BlackText26px"
+                    android:layout_toRightOf="@+id/cb_hebavior"
+                    android:layout_marginLeft="@dimen/x12px"
+                    android:layout_marginBottom="@dimen/y58px"
+                    android:maxWidth="@dimen/x300px"
+                    />
+            </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_behavior"
+                android:layout_width="@dimen/x179px"
+                android:layout_height="@dimen/y120px"
+                android:scaleType="fitXY"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_underline"
+            android:layout_width="@dimen/x681px"
+            android:layout_height="@dimen/y1px"
+            android:background="@color/gray"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal"
+            ></View>
+    </LinearLayout>
+    <android.support.v4.widget.Space
+        android:id="@+id/space_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y10px" />
+
+</LinearLayout>

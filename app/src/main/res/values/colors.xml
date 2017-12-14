@@ -22,6 +22,7 @@
     <color name="lineGray">#D7D7D7</color>
     <color name="linePink">#FFD6EB</color>
     <color name="linkPink">#EF4399</color>
+    <color name="dialogPink">#D81780</color>
 
     <color name="btmMenuUnColor">#979797</color>
     <color name="btmMenuColor">#EF4399</color>
@@ -36,4 +37,6 @@
     <color name="checkColor">#FC6DA6</color>
     <color name="fifthGray">#F5F5F5</color>
     <color name="sixthGray">#999999</color>
+    
+    <color name="transparent">#00000000</color>
 </resources>

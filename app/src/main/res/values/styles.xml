@@ -118,6 +118,21 @@
         <item name="android:lineSpacingExtra">@dimen/y10px</item>
     </style>
 
+    <style name="BlackText30px">
+        <item name="android:textSize">@dimen/y30px</item>
+        <item name="android:textColor">@color/colorBlackText</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="BlackText26px_Margin29px" parent="BlackText26px">
+        <item name="android:layout_marginLeft">@dimen/x29px</item>
+        <item name="android:layout_marginRight">@dimen/x29px</item>
+    </style>
+
+    <style name="BlackText28px_MarginLeft29px" parent="BlackText28px">
+        <item name="android:layout_marginLeft">@dimen/x29px</item>
+    </style>
+
     <style name="LightGrayText23px">
         <item name="android:textSize">@dimen/y23px</item>
         <item name="android:textColor">@color/lightGray</item>
@@ -163,10 +178,47 @@
         <item name="android:lineSpacingExtra">@dimen/y10px</item>
     </style>
 
+    <style name="GrayText26px_MarginLeft382px" parent="GrayText26px">
+        <item name="android:layout_marginLeft">@dimen/x382px</item>
+    </style>
+
+    <style name="InputDataNormalEditText" parent="GrayText26px_MarginLeft382px">
+        <item name="android:layout_width">@dimen/x241px</item>
+        <item name="android:layout_height">@dimen/y56px</item>
+        <item name="android:background">@drawable/bg_circle_edittext</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="InputDataMargin29px">
+        <item name="android:layout_marginLeft">@dimen/x29px</item>
+        <item name="android:layout_marginRight">@dimen/x29px</item>
+    </style>
+
+    <style name="InputDataMarginRight64px">
+        <item name="android:layout_marginRight">@dimen/x64px</item>
+    </style>
+
+    <!--<style name="HorizontalLine">-->
+        <!---->
+    <!--</style>-->
+    <!---->
+    <!--<style name="LightPinkHorizontalLine">-->
+        <!---->
+    <!--</style>-->
+    <style name="DialogPinkText34px">
+        <item name="android:textSize">@dimen/y34px</item>
+        <item name="android:textColor">@color/dialogPink</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
     <style name="LinkPinkText23px">
         <item name="android:textSize">@dimen/y23px</item>
         <item name="android:textColor">@color/linkPink</item>
         <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="BlackText23px">
+        <item name="android:textSize">@dimen/y23px</item>
+        <item name="android:textColor">@color/colorBlackText</item>
     </style>
 
     <style name="CheckTextStyle">
@@ -186,4 +238,18 @@
         <item name="android:textSize">@dimen/y26px</item>
     </style>
 
+    <style name="BlackTitle34px">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/y34px</item>
+    </style>
+
+    <style name="MyDialog" parent="@android:style/Theme.Dialog" >
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    
 </resources>

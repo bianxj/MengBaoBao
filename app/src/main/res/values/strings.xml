@@ -249,7 +249,16 @@
     <string name="cm">cm</string>
     <string name="kg">kg</string>
 
+    <!--AssessmentActivity-->
+    <string name="realy_age">实足年龄</string>
+    <string name="correct_age">矫正月龄</string>
+    <string name="height">身长</string>
+    <string name="weight">体重</string>
+    <string name="BMI">BMI</string>
 
+    <!--Dialog-->
+    <string name="update_content">的用户正在使用新版本</string>
+    <string name="go_on">继续</string>
 
     <!--异常退出提示-->
     <string name="error_exit_message">很抱歉，程序出现异常，即将退出</string>

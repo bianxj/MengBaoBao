@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:layout_width="@dimen/x576px"
+        android:layout_height="@dimen/y558px"
+        android:background="@drawable/bg_update"
+        >
+        <RelativeLayout
+            android:id="@+id/rl_close"
+            android:layout_width="@dimen/y56px"
+            android:layout_height="@dimen/y56px"
+            android:layout_marginTop="@dimen/y64px"
+            android:layout_marginLeft="@dimen/x487px"
+            >
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="@dimen/y26px"
+                android:layout_height="@dimen/y26px"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_close"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/y230px"
+            android:layout_marginLeft="@dimen/x40px"
+            >
+            <TextView
+                android:id="@+id/tv_use_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/LinkPinkText23px"
+                android:text="82%"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BlackText23px"
+                android:text="@string/update_content"/>
+            <TextView
+                android:id="@+id/tv_update_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/LinkPinkText23px"
+                android:text="V1.2.0"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_update_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x58px"
+            android:layout_marginTop="@dimen/y277px"
+            style="@style/BlackText23px"/>
+
+        <ImageView
+            android:id="@+id/iv_update"
+            android:layout_width="@dimen/x483px"
+            android:layout_height="@dimen/y102px"
+            android:src="@drawable/btn_update"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y453px"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
