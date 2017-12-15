@@ -1,11 +1,14 @@
 package com.doumengmengandroidbady.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
@@ -45,6 +48,14 @@ public class GuideActivity extends BaseActivity {
         bt_guide_register.setOnClickListener(listener);
         bt_guide_login.setOnClickListener(listener);
     }
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Toast.makeText(GuideActivity.this,(String)msg.obj,Toast.LENGTH_SHORT).show();
+        }
+    };
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override

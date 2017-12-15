@@ -18,9 +18,11 @@ public class MyDialog {
     private static Object updateLock = new Object();
     private static Object promptLock = new Object();
     private static Object chooseLock = new Object();
+    private static Object loadingLock = new Object();
     private static Dialog updateDialog;
     private static Dialog promptDialog;
     private static Dialog chooseDialog;
+    private static Dialog loadingDialog;
 
     public static void showUpdateDialog(Context context,boolean isForce,String content,final UpdateDialogCallback callback){
         synchronized (updateLock){
@@ -156,6 +158,21 @@ public class MyDialog {
             if ( chooseDialog != null ){
                 chooseDialog.dismiss();
                 chooseDialog = null;
+            }
+        }
+    }
+
+    public void showLoadingDialog(){
+        synchronized (loadingLock){
+
+        }
+    }
+
+    public void dismissLoadingDialog(){
+        synchronized (loadingLock){
+            if ( loadingDialog != null ){
+                loadingDialog.dismiss();
+                loadingDialog = null;
             }
         }
     }

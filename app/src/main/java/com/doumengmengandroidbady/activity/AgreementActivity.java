@@ -1,5 +1,6 @@
 package com.doumengmengandroidbady.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -53,6 +54,7 @@ public class AgreementActivity extends BaseActivity {
         Intent intent = getIntent();
         if ( null != intent && intent.getBooleanExtra(HIDE_BOTTOM,false) ){
             rl_bottom.setVisibility(View.GONE);
+        } else {
             bt_agree.setOnClickListener(listener);
             ll_agreement.setOnClickListener(listener);
         }
@@ -78,6 +80,7 @@ public class AgreementActivity extends BaseActivity {
     };
 
     private void back(){
+        setResult(Activity.RESULT_CANCELED);
         finish();
     }
 
@@ -86,7 +89,8 @@ public class AgreementActivity extends BaseActivity {
     }
 
     private void agree(){
-
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 
 }

@@ -20,4 +20,9 @@ public class BaseActivity extends Activity {
         startActivity(intent);
     }
 
+    protected boolean isResponceError(String msg){
+//        if (ResponseErrorCode.getErrorMsg())
+        return true;
+    }
+
 }

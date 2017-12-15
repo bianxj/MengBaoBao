@@ -17,7 +17,7 @@ import java.io.File;
 
 public class BaseApplication extends Application {
 
-    private MLog log;
+    private static MLog log;
 
     @Override
     public void onCreate() {
@@ -37,7 +37,7 @@ public class BaseApplication extends Application {
         log = builder.build();
     }
 
-    public MLog getMLog(){
+    public static MLog getMLog(){
         return log;
     }
 
