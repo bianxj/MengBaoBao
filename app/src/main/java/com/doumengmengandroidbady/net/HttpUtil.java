@@ -52,12 +52,12 @@ public class HttpUtil {
             if (response.code() == 200) {
                 result = response.body().string();
             } else {
-                result = ResponseErrorCode.ERROR_REQUEST_FAILED;
+                result = ResponseErrorCode.ERROR_REQUEST_FAILED_MSG;
             }
             BaseApplication.getMLog().info("result:"+result);
         } catch (Exception e) {
             e.printStackTrace();
-            result = ResponseErrorCode.ERROR_REQUEST_FAILED;
+            result = ResponseErrorCode.ERROR_REQUEST_FAILED_MSG;
         }
         return result;
     }

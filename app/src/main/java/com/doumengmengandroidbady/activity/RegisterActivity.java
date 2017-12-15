@@ -164,6 +164,7 @@ public class RegisterActivity extends BaseActivity {
 
                     @Override
                     public void onPostExecute(String result) {
+
                         startActivity(LoadingActivity.class);
                     }
                 }).execute();

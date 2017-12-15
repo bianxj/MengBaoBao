@@ -11,7 +11,7 @@ public class ResponseErrorCode {
     private static Map<Integer,String> errorCodeMap;
     private static final int SUCCESS = 0;								//成功
 
-    public static final String ERROR_REQUEST_FAILED = "";
+    public static final String ERROR_REQUEST_FAILED_MSG = "{\"errorId\":-10000}";
     /*************************************  失败      *****************************************/
 
     //服务器
@@ -85,6 +85,8 @@ public class ResponseErrorCode {
     private static final int ERROR_DB_INSERT = -500;						//数据库插入数据失败
     private static final int ERROR_DB_RECORD_HELP = -501;				//数据库获取在线月记录规则失败
 
+    private static final int ERROR_REQUEST_FAILED = -10000;
+
     static {
         errorCodeMap.put(ERROR_SERVER_MAINTENANCE,"服务器正在维护");
         errorCodeMap.put(ERROR_SERVER_NOT_RESPONDING,"服务器没有响应");
@@ -148,6 +150,8 @@ public class ResponseErrorCode {
 
         errorCodeMap.put(ERROR_DB_INSERT,"数据库插入数据失败");
         errorCodeMap.put(ERROR_DB_RECORD_HELP,"数据库获取在线月记录规则失败");
+
+        errorCodeMap.put(ERROR_REQUEST_FAILED,"请求失败");
     }
 
     public static String getErrorMsg(int code){
