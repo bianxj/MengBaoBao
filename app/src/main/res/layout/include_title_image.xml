@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/y304px"
+    android:layout_height="@dimen/y307px"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/y48px"
             android:layout_marginTop="@dimen/y13px"
-            android:background="@color/deepPink">
+            android:background="@drawable/bg_rect_circle">
 
             <ImageView
                 android:id="@+id/iv_sex"

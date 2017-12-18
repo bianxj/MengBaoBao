@@ -43,18 +43,18 @@ public class HttpUtil {
         try {
             RequestBody body = RequestBody.create(mediaType, "");
             Request.Builder builder = new Request.Builder();
-            BaseApplication.getMLog().info("url:"+url);
+            BaseApplication.getInstance().getMLog().info("url:"+url);
             builder.url(url);
             builder.post(body);
             Request request = builder.build();
             Response response = client.newCall(builder.build()).execute();
-            BaseApplication.getMLog().info("code:"+response.code());
+            BaseApplication.getInstance().getMLog().info("code:"+response.code());
             if (response.code() == 200) {
                 result = response.body().string();
             } else {
                 result = ResponseErrorCode.ERROR_REQUEST_FAILED_MSG;
             }
-            BaseApplication.getMLog().info("result:"+result);
+            BaseApplication.getInstance().getMLog().info("result:"+result);
         } catch (Exception e) {
             e.printStackTrace();
             result = ResponseErrorCode.ERROR_REQUEST_FAILED_MSG;

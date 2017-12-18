@@ -2,6 +2,7 @@ package com.doumengmengandroidbady.base;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 
 /**
  * 作者:边贤君
@@ -10,6 +11,8 @@ import android.content.Intent;
  */
 
 public class BaseActivity extends Activity {
+
+    public static final int REQUEST_AGREEMENT = 0x01;
 
     public BaseApplication getBaseApplication(){
         return (BaseApplication) getApplication();
@@ -23,6 +26,14 @@ public class BaseActivity extends Activity {
     protected boolean isResponceError(String msg){
 //        if (ResponseErrorCode.getErrorMsg())
         return true;
+    }
+
+    protected void stopTask(AsyncTask task){
+        if ( task != null ){
+            if ( AsyncTask.Status.FINISHED != task.getStatus() ){
+                task.cancel(false);
+            }
+        }
     }
 
 }

@@ -113,7 +113,7 @@ public class MyDialog {
     }
 
     public static void showChooseDialog(Context context,String content,ChooseDialogCallback callback){
-        showChooseDialog(context,content,R.string.cancel,R.string.sure,callback);
+        showChooseDialog(context,content,R.string.prompt_bt_cancel,R.string.prompt_bt_sure,callback);
     }
 
     public static void showChooseDialog(Context context,String content,int cancel,int sure,final ChooseDialogCallback callback){

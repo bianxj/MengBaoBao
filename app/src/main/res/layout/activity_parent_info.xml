@@ -7,11 +7,21 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.doumengmengandroidbady.view.ParentInfoLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/y19px"
-            ></com.doumengmengandroidbady.view.ParentInfoLayout>
+            >
+            <com.doumengmengandroidbady.view.ParentInfoLayout
+                android:id="@+id/parent_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/y19px"
+                ></com.doumengmengandroidbady.view.ParentInfoLayout>
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y95px" />
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

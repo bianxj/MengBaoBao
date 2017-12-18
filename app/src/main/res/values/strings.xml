@@ -11,6 +11,7 @@
     <string name="prompt_read_agreement">我已阅读同意萌宝宝用户协议</string>
     <string name="complete">完成</string>
     <string name="mark">*</string>
+    <string name="title_save">保存</string>
 
 
     <!--GuideActivity信息-->
@@ -261,11 +262,18 @@
     <string name="go_on">继续</string>
 
     <!--ErrorMsg-->
+    <string name="prompt_bt_cancel">取消</string>
+    <string name="prompt_bt_sure">确认</string>
+    <string name="prompt_bt_buy">购买</string>
+
     <string name="prompt_no_account">请输入帐号</string>
     <string name="prompt_error_phone">请输入11位正确的手机号码</string>
     <string name="prompt_no_vc">请输入验证码</string>
     <string name="prompt_no_password">请输入6-16位由数字、字母组成的密码</string>
     <string name="prompt_error_password">请输入6-16位由数字、字母组成的密码</string>
+
+    <string name="prompt_no_wifi">当前不在wifi状态下，可能会产生流量费用</string>
+    <string name="prompt_need_buy">只有付费用户才能填写</string>
     
     
     <!--异常退出提示-->

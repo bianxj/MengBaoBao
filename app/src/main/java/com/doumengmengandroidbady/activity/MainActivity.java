@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -198,7 +199,7 @@ public class MainActivity extends BaseFragmentActivity {
             if (fragment.isAdded()) {
                 transaction.show(fragment);
             } else {
-                transaction.add(fragment,page).show(fragment);
+                transaction.add(R.id.fl_content,fragment).show(fragment);
             }
             currentFragment = fragment;
             transaction.commitAllowingStateLoss();
@@ -207,6 +208,17 @@ public class MainActivity extends BaseFragmentActivity {
 
     private void refreshBottomMenu(ViewGroup group){
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ( keyCode == KeyEvent.KEYCODE_BACK ){
+            if ( dl_main.isDrawerOpen(Gravity.LEFT) ) {
+                dl_main.closeDrawer(Gravity.LEFT);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

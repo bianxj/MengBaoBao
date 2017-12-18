@@ -24,6 +24,7 @@
         <item name="android:textColorHint">@color/colorEditTextHint</item>
         <item name="android:background">@null</item>
         <item name="android:layout_height">@dimen/y84px</item>
+        <item name="android:lines">1</item>
     </style>
 
     <style name="NormalTextView">
@@ -178,6 +179,11 @@
         <item name="android:lineSpacingExtra">@dimen/y10px</item>
     </style>
 
+    <style name="GrayText24px">
+        <item name="android:textSize">@dimen/y24px</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
     <style name="GrayText26px_MarginLeft382px" parent="GrayText26px">
         <item name="android:layout_marginLeft">@dimen/x382px</item>
     </style>
@@ -222,7 +228,7 @@
     </style>
 
     <style name="CheckTextStyle">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@drawable/bg_circle_text_color</item>
         <item name="android:textSize">@dimen/y26px</item>
     </style>
     <style name="UnCheckTextStyle">

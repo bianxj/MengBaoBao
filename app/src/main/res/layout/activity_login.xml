@@ -44,6 +44,8 @@
             android:hint="@string/input_phone_hint"
             android:layout_marginLeft="@dimen/EditMarginLeft"
             android:layout_marginRight="@dimen/EditMarginRight"
+            android:inputType="phone"
+            android:lines="1"
             style="@style/EditTextView"/>
 
     </LinearLayout>
@@ -70,6 +72,8 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/EditMarginLeft"
             android:layout_marginRight="@dimen/EditMarginRight"
+            android:inputType="textPassword"
+            android:lines="1"
             android:hint="@string/input_pwd_hint" />
 
     </LinearLayout>

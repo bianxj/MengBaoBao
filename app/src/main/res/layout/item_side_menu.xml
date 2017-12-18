@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/x641px"
-    android:layout_height="@dimen/y97px">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_icon"
-        android:layout_width="@dimen/y40px"
-        android:layout_height="@dimen/y40px"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/x45px"
-        android:scaleType="fitXY"/>
+    <RelativeLayout
+        android:layout_width="@dimen/x641px"
+        android:layout_height="@dimen/y97px">
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        style="@style/SideMenuText"
-        android:layout_marginLeft="@dimen/x127px"
-        android:text="36777447"/>
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/y40px"
+            android:layout_height="@dimen/y40px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x45px"
+            android:scaleType="fitXY" />
 
-    <ImageView
-        android:layout_width="@dimen/x21px"
-        android:layout_height="@dimen/y33px"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/x48px"
-        android:src="@drawable/right_allow"/>
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/SideMenuText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x127px"
+            android:text="36777447" />
 
+        <ImageView
+            android:layout_width="@dimen/x21px"
+            android:layout_height="@dimen/y33px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x48px"
+            android:src="@drawable/right_allow" />
+        <View
+            android:layout_width="@dimen/x596px"
+            android:layout_height="@dimen/y1px"
+            android:background="@color/lineGray"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ></View>
+    </RelativeLayout>
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.doumengmengandroidbady.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +18,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.net.UrlAddressList;
-import com.doumengmengandroidbady.request.BaseAsyncTask;
+import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
 
@@ -36,15 +37,13 @@ public class RegisterActivity extends BaseActivity {
     private LinearLayout ll_agreement;
     private CheckBox cb_agreement;
 
-    public static final int REQUEST_AGREEMENT = 0x01;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         findView();
-        configView();
+        initView();
     }
 
     @Override
@@ -67,7 +66,7 @@ public class RegisterActivity extends BaseActivity {
         cb_agreement = findViewById(R.id.cb_agreement);
     }
 
-    private void configView(){
+    private void initView(){
         rl_back.setOnClickListener(listener);
         bt_get_vc.setOnClickListener(listener);
         bt_sure.setOnClickListener(listener);
@@ -82,10 +81,10 @@ public class RegisterActivity extends BaseActivity {
                     back();
                     break;
                 case R.id.bt_get_vc:
-                    getVc();
+                    getVerificationCode();
                     break;
                 case R.id.bt_sure:
-                    sure();
+                    register();
                     break;
                 case R.id.ll_agreement:
                     clickAgreement();
@@ -98,31 +97,48 @@ public class RegisterActivity extends BaseActivity {
         finish();
     }
 
-    private void getVc(){
-        if ( checkVcData() ) {
-            new BaseAsyncTask(new RequestCallBack() {
-                @Override
-                public void onPreExecute() {
-
-                }
-
-                @Override
-                public String getUrl() {
-                    return UrlAddressList.URL_GET_VC+"&paramStr="+et_phone.getText().toString();
-                }
-
-                @Override
-                public void disposeResponseInThread(String result) {}
-
-                @Override
-                public void onPostExecute(String result) {
-
-                }
-            }).execute();
+    private void getVerificationCode(){
+        if ( checkVerificationCode() ) {
+            try {
+                buildGetVerificationCodeTask().execute();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
         }
     }
 
-    private boolean checkVcData(){
+    private RequestTask buildGetVerificationCodeTask() throws Throwable {
+        return new RequestTask.Builder(getVerificationCodeCallBack).build();
+    }
+
+    private RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+            //TODO
+        }
+
+        @Override
+        public String getUrl() {
+            return UrlAddressList.URL_GET_VC+"&paramStr="+et_phone.getText().toString();
+        }
+
+        @Override
+        public Context getContext() {
+            return RegisterActivity.this;
+        }
+
+        @Override
+        public void onError(String result) {
+            //TODO
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            //TODO
+        }
+    };
+
+    private boolean checkVerificationCode(){
         if (Config.isTest){
             return true;
         }
@@ -135,39 +151,14 @@ public class RegisterActivity extends BaseActivity {
         return true;
     }
 
-    private void sure(){
+    private void register(){
         if ( checkSureData() ){
             if ( cb_agreement.isChecked() ){
-                new BaseAsyncTask(new RequestCallBack() {
-                    @Override
-                    public void onPreExecute() {
-                        //TODO
-                    }
-
-                    @Override
-                    public String getUrl() {
-
-                        JSONObject object = new JSONObject();
-                        try {
-                            object.put("accountMobile",et_phone.getText().toString().trim());
-                            object.put("loginPwd",et_login_pwd.getText().toString().trim());
-                            object.put("code",et_vc.getText().toString().trim());
-                            object.put("checkCode",et_vc.getText().toString().trim());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        return UrlAddressList.REGISTER_CHECT+"&paramStr="+object.toString();
-                    }
-
-                    @Override
-                    public void disposeResponseInThread(String result) {}
-
-                    @Override
-                    public void onPostExecute(String result) {
-
-                        startActivity(LoadingActivity.class);
-                    }
-                }).execute();
+                try {
+                    buildRegisterTask().execute();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
             } else {
                 Intent intent = new Intent(RegisterActivity.this,AgreementActivity.class);
                 startActivityForResult(intent,REQUEST_AGREEMENT);
@@ -175,25 +166,70 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
+    private RequestTask buildRegisterTask() throws Throwable {
+        return new RequestTask.Builder(registerCallBack).build();
+    }
+
+    private RequestCallBack registerCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+            //TODO
+        }
+
+        @Override
+        public String getUrl() {
+            JSONObject object = new JSONObject();
+            try {
+                object.put("accountMobile",et_phone.getText().toString().trim());
+                object.put("loginPwd",et_login_pwd.getText().toString().trim());
+                object.put("code",et_vc.getText().toString().trim());
+                object.put("checkCode",et_vc.getText().toString().trim());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return UrlAddressList.REGISTER_CHECT+"&paramStr="+object.toString();
+        }
+
+        @Override
+        public Context getContext() {
+            return RegisterActivity.this;
+        }
+
+        @Override
+        public void onError(String result) {
+            //TODO
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            //TODO
+            startActivity(LoadingActivity.class);
+        }
+    };
+
     private boolean checkSureData(){
         if (Config.isTest){
             return true;
         }
         tv_prompt.setText("");
         String phone = et_phone.getText().toString().trim();
-        String vc = et_vc.getText().toString().trim();
-        String password = et_login_pwd.getText().toString().trim();
+
+        if ( TextUtils.isEmpty(phone) ){
+            tv_prompt.setText(R.string.prompt_no_account);
+        }
 
         if ( !FormatCheckUtil.isPhone(phone) ){
             tv_prompt.setText(R.string.prompt_error_phone);
             return false;
         }
 
+        String vc = et_vc.getText().toString().trim();
         if (TextUtils.isEmpty(vc)){
             tv_prompt.setText(R.string.prompt_no_vc);
             return false;
         }
 
+        String password = et_login_pwd.getText().toString().trim();
         if ( TextUtils.isEmpty(password) ){
             tv_prompt.setText(R.string.prompt_no_password);
             return false;
@@ -203,7 +239,6 @@ public class RegisterActivity extends BaseActivity {
             tv_prompt.setText(R.string.prompt_error_password);
             return false;
         }
-
         return true;
     }
 

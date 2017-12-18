@@ -78,14 +78,15 @@
                         android:layout_width="@dimen/x114px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/choose"
+                        android:checked="true"
                         android:layout_centerVertical="true" />
                     <RadioButton
                         android:id="@+id/rb_father_primary"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x172px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -98,7 +99,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_father_junior"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -120,14 +121,14 @@
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/senior"
                         android:layout_centerVertical="true" />
                     <RadioButton
                         android:id="@+id/rb_father_university"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -140,7 +141,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_father_master"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -153,7 +154,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_father_doctor"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -347,14 +348,15 @@
                         android:layout_width="@dimen/x114px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/choose"
+                        android:checked="true"
                         android:layout_centerVertical="true" />
                     <RadioButton
                         android:id="@+id/rb_mother_primary"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x172px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -367,7 +369,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_mother_junior"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -389,14 +391,14 @@
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/senior"
                         android:layout_centerVertical="true" />
                     <RadioButton
                         android:id="@+id/rb_mother_university"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -409,7 +411,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_mother_master"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -422,7 +424,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_mother_doctor"
-                        style="@style/UnCheckTextStyle"
+                        style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"

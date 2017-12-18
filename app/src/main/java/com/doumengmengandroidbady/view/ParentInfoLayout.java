@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.entity.ParentInfo;
 
 /**
  * Created by Administrator on 2017/12/13.
@@ -36,6 +37,30 @@ public class ParentInfoLayout extends LinearLayout {
         this.context = context;
         View view = LayoutInflater.from(context).inflate(R.layout.view_parent_info,null);
         addView(view);
+        findView();
+        initView();
     }
 
+
+    private void findView(){
+
+    }
+
+    private void initView(){
+
+    }
+
+    private ParentInfo parentInfo;
+
+    public boolean checkParentInfo(){
+        return true;
+    }
+
+    public ParentInfo getParentInfo() {
+        return parentInfo;
+    }
+
+    public void setParentInfo(ParentInfo parentInfo) {
+        this.parentInfo = parentInfo;
+    }
 }

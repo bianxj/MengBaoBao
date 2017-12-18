@@ -1,7 +1,11 @@
 package com.doumengmengandroidbady.base;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
 
+import com.doumengmengandroidbady.entity.UserData;
 import com.doumengmengandroidbady.util.MLog;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -17,6 +21,8 @@ import java.io.File;
 
 public class BaseApplication extends Application {
 
+    private static BaseApplication application;
+
     private static MLog log;
 
     @Override
@@ -25,6 +31,9 @@ public class BaseApplication extends Application {
         initImageLoader();
         initMLog();
         initCrashHandler();
+        application = this;
+
+
     }
 
     private void initMLog(){
@@ -37,7 +46,11 @@ public class BaseApplication extends Application {
         log = builder.build();
     }
 
-    public static MLog getMLog(){
+    public static BaseApplication getInstance(){
+        return application;
+    }
+
+    public MLog getMLog(){
         return log;
     }
 
@@ -67,6 +80,53 @@ public class BaseApplication extends Application {
 
     private void initCrashHandler(){
         BaseCrashHandler.getInstance().init(this);
+    }
+
+    public void clearUserData(){
+        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+    }
+
+    public void saveUserData(UserData userData){
+        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(UserData.ACCOUNT,userData.getAccount());
+        editor.putString(UserData.PWD,userData.getPwd());
+        editor.commit();
+    }
+
+    public UserData getUserData(){
+        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        String account = preferences.getString(UserData.ACCOUNT,null);
+        String pwd = preferences.getString(UserData.PWD,null);
+
+        if (TextUtils.isEmpty(account)){
+            return null;
+        }
+
+        if (TextUtils.isEmpty(pwd)){
+            return null;
+        }
+
+        UserData data = new UserData(account,pwd);
+        return data;
+    }
+
+    public boolean isPay(){
+        return true;
+    }
+
+    public boolean isFistLogin(){
+        SharedPreferences preferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+        return preferences.getBoolean("isFirstLogin",true);
+    }
+
+    public void saveLoginCount(){
+        SharedPreferences preferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("isFistLogin",false);
+        editor.commit();
     }
 
 }

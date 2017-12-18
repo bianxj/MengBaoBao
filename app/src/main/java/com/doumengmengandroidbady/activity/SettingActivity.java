@@ -1,5 +1,6 @@
 package com.doumengmengandroidbady.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -22,9 +23,9 @@ public class SettingActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agreement);
+        setContentView(R.layout.activity_setting);
         findView();
-        configView();
+        initView();
     }
 
     private void findView(){
@@ -34,7 +35,7 @@ public class SettingActivity extends BaseActivity {
         rl_agreement = findViewById(R.id.rl_agreement);
     }
 
-    private void configView(){
+    private void initView(){
         tv_title.setText(R.string.setting);
         rl_back.setOnClickListener(listener);
         rl_change_pwd.setOnClickListener(listener);
@@ -49,8 +50,12 @@ public class SettingActivity extends BaseActivity {
                     back();
                     break;
                 case R.id.rl_change_pwd:
+                    startActivity(ChangePwdActivity.class);
                     break;
                 case R.id.rl_agreement:
+                    Intent intent = new Intent(SettingActivity.this,AgreementActivity.class);
+                    intent.putExtra(AgreementActivity.HIDE_BOTTOM,true);
+                    startActivity(intent);
                     break;
             }
         }
