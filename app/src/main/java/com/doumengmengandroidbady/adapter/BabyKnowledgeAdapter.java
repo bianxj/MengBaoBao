@@ -27,12 +27,18 @@ public class BabyKnowledgeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        if ( null == infos ){
+            return 0;
+        }
         return infos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        if ( null == infos ){
+            return null;
+        }
+        return infos.get(position);
     }
 
     @Override

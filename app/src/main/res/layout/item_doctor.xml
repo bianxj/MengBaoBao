@@ -3,13 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/y163px"
+    android:layout_height="match_parent"
     android:background="@color/lightSky"
     >
-
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/x720px"
+        android:layout_height="@dimen/y163px"
         android:layout_marginTop="@dimen/y19px"
         android:background="@color/white"
         >
@@ -17,11 +16,18 @@
             android:id="@+id/civ_head"
             android:layout_width="@dimen/y95px"
             android:layout_height="@dimen/y95px"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginLeft="@dimen/x48px"
+            android:layout_centerVertical="true" />
+<!--        <com.doumengmengandroidbady.view.CircleImageView
+            android:id="@+id/civ_head"
+            android:layout_width="@dimen/y95px"
+            android:layout_height="@dimen/y95px"
             android:scaleType="fitXY"
             android:src="@drawable/ic_launcher_background"
             android:layout_marginLeft="@dimen/x48px"
             android:layout_centerVertical="true"
-            />
+            />-->
         <LinearLayout
             android:layout_width="@dimen/x509px"
             android:layout_height="wrap_content"
@@ -83,5 +89,4 @@
 
         </LinearLayout>
     </RelativeLayout>
-
 </LinearLayout>

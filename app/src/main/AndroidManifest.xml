@@ -41,5 +41,13 @@
         <activity android:name=".activity.SettingActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ChangePwdActivity" android:screenOrientation="portrait"></activity>
 
+        <activity android:name=".activity.BabyKnowledegDetailsActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.HospitalReportActivity" android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.HeadImageActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ObserveActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.DoctorListActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.SearchActivity" android:screenOrientation="portrait"></activity>
+
     </application>
 </manifest>

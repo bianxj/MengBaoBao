@@ -184,6 +184,11 @@
         <item name="android:textColor">@color/gray</item>
     </style>
 
+    <style name="FourthGrayText24px">
+        <item name="android:textSize">@dimen/y24px</item>
+        <item name="android:textColor">@color/fourthGray</item>
+    </style>
+
     <style name="GrayText26px_MarginLeft382px" parent="GrayText26px">
         <item name="android:layout_marginLeft">@dimen/x382px</item>
     </style>

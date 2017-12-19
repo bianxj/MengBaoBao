@@ -257,6 +257,12 @@
     <string name="weight">体重</string>
     <string name="BMI">BMI</string>
 
+    <!--ObserveActivity-->
+    <string name="oberve_matter">观察要点</string>
+
+    <!--HeadImageActivity-->
+    <string name="head_image">个人头像</string>
+
     <!--Dialog-->
     <string name="update_content">的用户正在使用新版本</string>
     <string name="go_on">继续</string>

@@ -53,6 +53,7 @@
             android:orientation="vertical">
 
             <FrameLayout
+                android:id="@+id/rl_baby_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -62,7 +63,7 @@
                     android:src="@drawable/icon_head"/>
 
                 <com.doumengmengandroidbady.view.CircleImageView
-                    android:id="@+id/cim_baby"
+                    android:id="@+id/civ_baby"
                     android:layout_width="@dimen/y133px"
                     android:layout_height="@dimen/y133px"
                     android:src="@drawable/ic_launcher_background" />
@@ -150,6 +151,7 @@
                 android:layout_marginLeft="@dimen/x40px"
                 />
             <TextView
+                android:id="@+id/tv_observe_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/MainPageItemTitle"
@@ -157,6 +159,7 @@
                 android:layout_marginLeft="@dimen/x11px"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/tv_observe_point_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/MainPageItemText"
@@ -187,6 +190,7 @@
                 android:layout_marginLeft="@dimen/x40px"
                 />
             <TextView
+                android:id="@+id/tv_doctor_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/MainPageItemTitle"
@@ -194,6 +198,7 @@
                 android:layout_marginLeft="@dimen/x11px"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/tv_doctor_list_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/MainPageItemText"

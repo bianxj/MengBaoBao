@@ -1,16 +1,18 @@
 package com.doumengmengandroidbady.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.activity.BabyKnowledegDetailsActivity;
 import com.doumengmengandroidbady.adapter.BabyKnowledgeAdapter;
 import com.doumengmengandroidbady.base.BaseFragment;
 
@@ -23,7 +25,7 @@ import java.util.List;
 
 public class BabyKnowledgeFragment extends BaseFragment {
 
-    private Button bt_back;
+    private RelativeLayout rl_back;
     private TextView tv_title;
     private GridView gv;
     private BabyKnowledgeAdapter adapter;
@@ -39,13 +41,13 @@ public class BabyKnowledgeFragment extends BaseFragment {
     }
 
     private void findView(View view){
-        bt_back = view.findViewById(R.id.bt_back);
+        rl_back = view.findViewById(R.id.rl_back);
         tv_title = view.findViewById(R.id.tv_title);
         gv = view.findViewById(R.id.gv);
     }
 
     private void configView(){
-        bt_back.setVisibility(View.INVISIBLE);
+        rl_back.setVisibility(View.INVISIBLE);
         tv_title.setText(R.string.baby_knowledge);
         initGridView();
     }
@@ -59,7 +61,7 @@ public class BabyKnowledgeFragment extends BaseFragment {
 
     private List<String> genTimeQuantum(int maxMonth,int split){
         List<String> infos = new ArrayList<String>();
-        for (int i = 0; i <= maxMonth; i+=split) {
+        for (int i = 0; i < maxMonth; i+=split) {
             infos.add(i+"~"+(i+3)+"个月");
         }
         return infos;
@@ -68,7 +70,10 @@ public class BabyKnowledgeFragment extends BaseFragment {
     private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            //TODO
+            String title = (String) adapter.getItem(position);
+            Intent intent = new Intent(getContext(), BabyKnowledegDetailsActivity.class);
+            intent.putExtra(BabyKnowledegDetailsActivity.TITLE,title);
+            startActivity(intent);
         }
     };
 

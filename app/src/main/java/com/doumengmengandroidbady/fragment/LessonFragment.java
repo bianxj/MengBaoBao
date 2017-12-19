@@ -11,7 +11,7 @@ import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
@@ -20,10 +20,9 @@ import com.doumengmengandroidbady.base.BaseFragment;
 /**
  * Created by Administrator on 2017/12/7.
  */
-
 public class LessonFragment extends BaseFragment {
 
-    private Button bt_back;
+    private RelativeLayout rl_back;
     private TextView tv_title;
     private WebView wv;
 
@@ -31,18 +30,19 @@ public class LessonFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lesson, null);
-        findView(view);configView();
+        findView(view);
         return view;
     }
 
     private void findView(View view) {
-        bt_back = view.findViewById(R.id.bt_back);
+        rl_back = view.findViewById(R.id.rl_back);
         tv_title = view.findViewById(R.id.tv_title);
         wv = view.findViewById(R.id.wv);
+        initView();
     }
 
-    private void configView() {
-        bt_back.setVisibility(View.INVISIBLE);
+    private void initView() {
+        rl_back.setVisibility(View.INVISIBLE);
         tv_title.setText(R.string.meng_lesson);
 
         initWebView();
@@ -53,6 +53,7 @@ public class LessonFragment extends BaseFragment {
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
         settings.setLoadsImagesAutomatically(true);
+        settings.setDomStorageEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             settings.setMixedContentMode(settings.getMixedContentMode());
         }
@@ -71,6 +72,7 @@ public class LessonFragment extends BaseFragment {
         if ( wv != null ) {
             wv.onResume();
             wv.resumeTimers();
+            wv.loadUrl("https://www.baidu.com");
         }
         super.onResume();
     }
@@ -95,5 +97,10 @@ public class LessonFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
     }
 }

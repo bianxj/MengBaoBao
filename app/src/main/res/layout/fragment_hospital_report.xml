@@ -7,11 +7,13 @@
 
     <include android:id="@+id/title" layout="@layout/include_title_back"></include>
 
-    <ListView
-        android:id="@+id/lv_report"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_report"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        >
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
