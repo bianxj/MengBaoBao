@@ -36,6 +36,26 @@
             android:textColor="@color/white"
             android:textSize="@dimen/y52px" />
 
+        <RelativeLayout
+            android:id="@+id/rl_supplement_record"
+            android:layout_width="@dimen/x140px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/tv_supplement_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x27px"
+                android:layout_marginTop="@dimen/y39px"
+                android:includeFontPadding="false"
+                android:text="补充记录"
+                android:textColor="@color/white"
+                android:textSize="@dimen/y28px"
+                />
+        </RelativeLayout>
     </RelativeLayout>
 
     <LinearLayout

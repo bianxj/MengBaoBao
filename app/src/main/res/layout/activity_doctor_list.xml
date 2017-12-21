@@ -109,19 +109,21 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_doctor"
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xrv_doctor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_head"
-        ></android.support.v7.widget.RecyclerView>
+        android:overScrollMode="never"
+        ></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_hospital"
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xrv_hospital"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_head"
         android:visibility="gone"
-        ></android.support.v7.widget.RecyclerView>
+        android:overScrollMode="never"
+        ></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
 </RelativeLayout>

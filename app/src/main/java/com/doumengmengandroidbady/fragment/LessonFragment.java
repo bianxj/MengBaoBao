@@ -65,6 +65,7 @@ public class LessonFragment extends BaseFragment {
                 handler.proceed();
             }
         });
+        wv.loadUrl("https://www.baidu.com");
     }
 
     @Override
@@ -72,7 +73,6 @@ public class LessonFragment extends BaseFragment {
         if ( wv != null ) {
             wv.onResume();
             wv.resumeTimers();
-            wv.loadUrl("https://www.baidu.com");
         }
         super.onResume();
     }
@@ -102,5 +102,8 @@ public class LessonFragment extends BaseFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        if ( !hidden ){
+            wv.loadUrl("https://www.baidu.com");
+        }
     }
 }

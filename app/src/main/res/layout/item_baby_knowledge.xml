@@ -25,7 +25,7 @@
         android:layout_width="@dimen/y52px"
         android:layout_height="@dimen/y52px"
         android:scaleType="fitXY"
-        android:src="@drawable/icon_baby_knowledge"
+        android:src="@drawable/icon_baby_knowledge1"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/y79px"
         />

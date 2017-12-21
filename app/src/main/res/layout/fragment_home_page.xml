@@ -75,14 +75,17 @@
                 android:layout_marginTop="@dimen/y13px"
                 android:background="@drawable/bg_rect_circle">
 
-                <ImageView
-                    android:id="@+id/iv_sex"
+                <CheckBox
+                    android:id="@+id/cb_male"
                     android:layout_width="@dimen/y27px"
                     android:layout_height="@dimen/y27px"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x32px"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/icon_white_famale" />
+                    android:background="@drawable/icon_white_gender"
+                    android:clickable="false"
+                    android:checked="true"
+                    android:button="@null"
+                    />
 
                 <TextView
                     android:id="@+id/tv_baby_age"
@@ -91,7 +94,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x10px"
                     android:layout_marginRight="@dimen/x25px"
-                    android:layout_toRightOf="@+id/iv_sex"
+                    android:layout_toRightOf="@+id/cb_male"
                     android:includeFontPadding="false"
                     android:text="28月20天"
                     android:textColor="@color/white"

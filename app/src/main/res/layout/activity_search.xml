@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
+
             <ImageView
                 android:layout_width="@dimen/x31px"
                 android:layout_height="@dimen/y50px"
@@ -25,7 +26,7 @@
                 android:layout_marginTop="@dimen/y29px"
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_back"
-                />
+                android:visibility="gone" />
         </LinearLayout>
         
         <RelativeLayout
@@ -55,7 +56,7 @@
                 />
 
             <RelativeLayout
-                android:id="@+id/ll_close"
+                android:id="@+id/rl_close"
                 android:layout_width="@dimen/x80px"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
@@ -111,14 +112,14 @@
             android:layout_marginTop="@dimen/y14px"
             />
 
-        <ListView
-            android:id="@+id/lv_history"
+        <LinearLayout
+            android:id="@+id/ll_history_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:orientation="vertical"
             >
 
-        </ListView>
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -138,14 +139,13 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv_doctor"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
-
-    <ListView
-        android:id="@+id/lv_hospital"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent">
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/xrv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+    </FrameLayout>
 
 </LinearLayout>

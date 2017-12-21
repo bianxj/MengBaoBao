@@ -12,14 +12,16 @@
         android:layout_marginTop="@dimen/y10px"
         android:background="@color/white"
         >
-        <ImageView
-            android:id="@+id/iv_unread"
+        <TextView
+            android:id="@+id/tv_read_state"
             android:layout_width="@dimen/y62px"
             android:layout_height="@dimen/y40px"
-            android:src="@drawable/icon_unread"
             android:layout_marginLeft="@dimen/x36px"
             android:layout_marginTop="@dimen/y14px"
-            android:scaleType="fitXY"
+            android:background="@drawable/bg_circle_read"
+            style="@style/WhiteText26px"
+            android:gravity="center"
+            android:text="未读"
             />
 
         <ImageView

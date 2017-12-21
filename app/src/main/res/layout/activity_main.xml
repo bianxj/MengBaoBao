@@ -27,14 +27,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView
+                <CheckBox
                     android:id="@+id/iv_home_page"
                     android:layout_width="@dimen/y80px"
                     android:layout_height="@dimen/y80px"
                     android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/icon_home_check"
+                    android:background="@drawable/icon_home"
                     android:layout_marginTop="@dimen/y20px"
+                    android:button="@null"
+                    android:checked="true"
+                    android:clickable="false"
                     />
                 <TextView
                     android:id="@+id/tv_home_page"
@@ -50,14 +52,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView
+                <CheckBox
                     android:id="@+id/iv_baby_knowledge"
                     android:layout_width="@dimen/y80px"
                     android:layout_height="@dimen/y80px"
                     android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/icon_baby_knowledge_uncheck"
+                    android:background="@drawable/icon_baby_knowledge"
                     android:layout_marginTop="@dimen/y20px"
+                    android:button="@null"
+                    android:clickable="false"
+                    android:checked="false"
                     />
                 <TextView
                     android:id="@+id/tv_baby_knowledge"
@@ -73,14 +77,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView
+                <CheckBox
                     android:id="@+id/iv_spacialist_service"
                     android:layout_width="@dimen/y80px"
                     android:layout_height="@dimen/y80px"
                     android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/icon_spacialist_service_uncheck"
+                    android:background="@drawable/icon_spacialist_service"
                     android:layout_marginTop="@dimen/y20px"
+                    android:checked="false"
+                    android:clickable="false"
+                    android:button="@null"
                     />
                 <TextView
                     android:id="@+id/tv_spacialist_service"
@@ -96,14 +102,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView
+                <CheckBox
                     android:id="@+id/iv_hospital_report"
                     android:layout_width="@dimen/y80px"
                     android:layout_height="@dimen/y80px"
                     android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/icon_hospital_report_uncheck"
+                    android:background="@drawable/icon_hospital_report"
                     android:layout_marginTop="@dimen/y20px"
+                    android:button="@null"
+                    android:checked="false"
+                    android:clickable="false"
                     />
                 <TextView
                     android:id="@+id/tv_hospital_report"
@@ -119,14 +127,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView
+                <CheckBox
                     android:id="@+id/iv_meng_lesson"
                     android:layout_width="@dimen/y80px"
                     android:layout_height="@dimen/y80px"
                     android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/icon_lessen_uncheck"
+                    android:background="@drawable/icon_lessen"
                     android:layout_marginTop="@dimen/y20px"
+                    android:button="@null"
+                    android:checked="false"
+                    android:clickable="false"
                     />
                 <TextView
                     android:id="@+id/tv_meng_lesson"

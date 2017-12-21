@@ -1,9 +1,8 @@
 package com.doumengmengandroidbady.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -12,12 +11,13 @@ import android.widget.RelativeLayout;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.DoctorAdapter;
-import com.doumengmengandroidbady.adapter.HeadAndFootAdapter;
 import com.doumengmengandroidbady.adapter.HospitalAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.entity.Doctor;
 import com.doumengmengandroidbady.entity.Hospital;
+import com.doumengmengandroidbady.view.XLoadMoreFooter;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +33,16 @@ public class DoctorListActivity extends BaseActivity {
 
     private RadioButton rb_doctor , rb_hospital;
 
-    private RecyclerView rv_doctor , rv_hospital;
+    private XRecyclerView xrv_doctor,xrv_hospital;
 
     private List<Doctor> doctors;
     private List<Hospital> hospitals;
 
-    private HeadAndFootAdapter doctorAdapter;
-    private HeadAndFootAdapter hospitalAdapter;
+    private DoctorAdapter doctorAdapter;
+    private HospitalAdapter hospitalAdapter;
+
+//    private HeadAndFootAdapter doctorAdapter;
+//    private HeadAndFootAdapter hospitalAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,8 +57,8 @@ public class DoctorListActivity extends BaseActivity {
         rb_doctor = findViewById(R.id.rb_doctor);
         rb_hospital = findViewById(R.id.rb_hospital);
 
-        rv_doctor = findViewById(R.id.rv_doctor);
-        rv_hospital = findViewById(R.id.rv_hospital);
+        xrv_doctor = findViewById(R.id.xrv_doctor);
+        xrv_hospital = findViewById(R.id.xrv_hospital);
         initView();
     }
 
@@ -68,9 +71,13 @@ public class DoctorListActivity extends BaseActivity {
 
         doctors = new ArrayList<Doctor>();
         hospitals = new ArrayList<Hospital>();
+        initDoctorListView();
+        initHospitalListView();
+    }
 
+    private void initDoctorListView(){
         if (Config.isTest){
-            for (int i = 0; i <1000 ; i++) {
+            for (int i = 0; i <10 ; i++) {
                 Doctor doctor = new Doctor();
                 doctor.setHeadUrl("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
                 doctor.setDescribe("Describe1");
@@ -80,8 +87,19 @@ public class DoctorListActivity extends BaseActivity {
                 doctor.setSkill("Skill"+i);
                 doctors.add(doctor);
             }
+        }
 
-            for (int i = 0; i <1000 ; i++) {
+        xrv_doctor.setLoadingMoreEnabled(true);
+        xrv_doctor.setFootView(new XLoadMoreFooter(this));
+
+        xrv_doctor.setLoadingListener(doctorLoadingListener);
+        doctorAdapter = new DoctorAdapter(doctors);
+        xrv_doctor.setAdapter(doctorAdapter);
+    }
+
+    private void initHospitalListView(){
+        if (Config.isTest){
+            for (int i = 0; i <10 ; i++) {
                 Hospital hospital = new Hospital();
                 hospital.setImageUrl("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
                 hospital.setName("HospitalName"+i);
@@ -90,17 +108,12 @@ public class DoctorListActivity extends BaseActivity {
             }
         }
 
-        rv_doctor.setVisibility(View.VISIBLE);
-        doctorAdapter = new HeadAndFootAdapter(new DoctorAdapter(doctors));
-        rv_doctor.setLayoutManager(new LinearLayoutManager(this));
-        rv_doctor.setAdapter(doctorAdapter);
-        doctorAdapter.notifyDataSetChanged();
+        xrv_hospital.setLoadingMoreEnabled(true);
+        xrv_hospital.setFootView(new XLoadMoreFooter(this));
 
-        rv_hospital.setVisibility(View.GONE);
-        hospitalAdapter = new HeadAndFootAdapter(new HospitalAdapter(hospitals));
-        rv_hospital.setLayoutManager(new LinearLayoutManager(this));
-        rv_hospital.setAdapter(hospitalAdapter);
-        hospitalAdapter.notifyDataSetChanged();
+        xrv_hospital.setLoadingListener(hospitalLoadingListener);
+        hospitalAdapter = new HospitalAdapter(hospitals);
+        xrv_hospital.setAdapter(hospitalAdapter);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -122,14 +135,68 @@ public class DoctorListActivity extends BaseActivity {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if ( isChecked ){
                 if ( buttonView.getId() == rb_doctor.getId() ){
-                    rv_doctor.setVisibility(View.VISIBLE);
-                    rv_hospital.setVisibility(View.GONE);
+                    xrv_doctor.setVisibility(View.VISIBLE);
+                    xrv_hospital.setVisibility(View.GONE);
                     rb_hospital.setChecked(false);
                 } else {
-                    rv_doctor.setVisibility(View.GONE);
-                    rv_hospital.setVisibility(View.VISIBLE);
+                    xrv_doctor.setVisibility(View.GONE);
+                    xrv_hospital.setVisibility(View.VISIBLE);
                     rb_doctor.setChecked(false);
                 }
+            }
+        }
+    };
+
+    private XRecyclerView.LoadingListener doctorLoadingListener = new XRecyclerView.LoadingListener(){
+
+        @Override
+        public void onRefresh() {}
+
+        @Override
+        public void onLoadMore() {
+            if ( Config.isTest ){
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i <10 ; i++) {
+                            Doctor doctor = new Doctor();
+                            doctor.setHeadUrl("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
+                            doctor.setDescribe("Describe1");
+                            doctor.setName("Name"+i);
+                            doctor.setHospital("Hospital"+i);
+                            doctor.setPosition("Position"+i);
+                            doctor.setSkill("Skill"+i);
+                            doctors.add(doctor);
+                        }
+                        xrv_doctor.loadMoreComplete();
+                        doctorAdapter.notifyDataSetChanged();
+                    }
+                },2000);
+            }
+        }
+    };
+
+    private XRecyclerView.LoadingListener hospitalLoadingListener = new XRecyclerView.LoadingListener() {
+        @Override
+        public void onRefresh() {}
+
+        @Override
+        public void onLoadMore() {
+            if ( Config.isTest ) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < 10; i++) {
+                            Hospital hospital = new Hospital();
+                            hospital.setImageUrl("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
+                            hospital.setName("HospitalName" + i);
+                            hospital.setHospitalAddress("HospitalAddress" + i);
+                            hospitals.add(hospital);
+                        }
+                        xrv_hospital.loadMoreComplete();
+                        hospitalAdapter.notifyDataSetChanged();
+                    }
+                }, 2000);
             }
         }
     };

@@ -6,8 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,7 +35,7 @@ public class HomePageFragment extends BaseFragment {
     private TextView tv_observe_point_content , tv_doctor_list_content;
     private FrameLayout rl_baby_head;
     private CircleImageView civ_baby;
-    private ImageView iv_sex;
+    private CheckBox cb_male;
     private TextView tv_baby_age;
     private ViewPager vp_home;
     private LinearLayout ll_home_dot;
@@ -59,7 +59,7 @@ public class HomePageFragment extends BaseFragment {
         tv_doctor_list_content = view.findViewById(R.id.tv_doctor_list_content);
         rl_baby_head = view.findViewById(R.id.rl_baby_head);
         civ_baby = view.findViewById(R.id.civ_baby);
-        iv_sex = view.findViewById(R.id.iv_sex);
+        cb_male = view.findViewById(R.id.cb_male);
         tv_baby_age = view.findViewById(R.id.tv_baby_age);
         vp_home = view.findViewById(R.id.vp_home);
         ll_home_dot = view.findViewById(R.id.ll_home_dot);

@@ -29,8 +29,8 @@ public class MLog {
     private SimpleDateFormat fileFormat;
     private Builder builder;
     private MLog(Builder builder){
-        format = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
-        fileFormat = new SimpleDateFormat("YYYY-MM-DD");
+        format = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+        fileFormat = new SimpleDateFormat("yyyy-MM-DD");
         this.builder = builder;
     }
 

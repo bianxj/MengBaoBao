@@ -285,4 +285,36 @@
     <!--异常退出提示-->
     <string name="error_exit_message">很抱歉，程序出现异常，即将退出</string>
 
+
+    <string-array name="citys">
+        <item>上海</item>
+        <item>广州</item>
+        <item>深证</item>
+        <item>黑龙江</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+        <item>上海</item>
+    </string-array>
+
 </resources>

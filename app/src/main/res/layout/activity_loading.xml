@@ -17,8 +17,8 @@
 
 
     <FrameLayout
-        android:layout_width="@dimen/y128px"
-        android:layout_height="@dimen/y128px"
+        android:layout_width="@dimen/y148px"
+        android:layout_height="@dimen/y148px"
         android:layout_marginTop="@dimen/y116px"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageView"
@@ -27,7 +27,8 @@
             android:id="@+id/iv_loading_icon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/loading" />
+            android:src="@drawable/loading"
+            android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/tv_loading_percent"
             android:layout_width="match_parent"

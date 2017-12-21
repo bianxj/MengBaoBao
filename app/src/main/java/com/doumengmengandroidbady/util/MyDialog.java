@@ -2,9 +2,17 @@ package com.doumengmengandroidbady.util;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,10 +27,12 @@ public class MyDialog {
     private static Object promptLock = new Object();
     private static Object chooseLock = new Object();
     private static Object loadingLock = new Object();
+    private static Object cityLock = new Object();
     private static Dialog updateDialog;
     private static Dialog promptDialog;
     private static Dialog chooseDialog;
     private static Dialog loadingDialog;
+    private static PopupWindow cityDialog;
 
     public static void showUpdateDialog(Context context,boolean isForce,String content,final UpdateDialogCallback callback){
         synchronized (updateLock){
@@ -153,6 +163,90 @@ public class MyDialog {
         }
     }
 
+    public static void showChooseCityDialog(final Context context,View view,final ChooseCityCallback callback){
+        synchronized (cityLock) {
+            final String[] citys = context.getResources().getStringArray(R.array.citys);
+            cityDialog = new PopupWindow(context);
+            cityDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));
+            cityDialog.setBackgroundDrawable(null);
+            View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_choose_city, null);
+            ListView lv_city = contentView.findViewById(R.id.lv_city);
+            contentView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            cityDialog.setContentView(contentView);
+
+            lv_city.setAdapter(new CityAdapter(context, citys));
+            lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    callback.choose(citys[i]);
+                }
+            });
+            if (Build.VERSION.SDK_INT < 24) {
+                cityDialog.showAsDropDown(view);
+            } else {
+                int[] location = new int[2];
+                view.getLocationOnScreen(location);
+                int x = location[0];
+                int y = location[1];
+                cityDialog.showAtLocation(view, Gravity.NO_GRAVITY, 0, y + view.getHeight());
+            }
+        }
+    }
+
+    public static boolean isShowingChooseCityDialog(){
+        synchronized (cityLock){
+            if ( cityDialog != null ){
+                return cityDialog.isShowing();
+            }
+            return false;
+        }
+    }
+
+    public static void dismissChooseCityDialog(){
+        synchronized (cityLock){
+            if ( cityDialog != null && cityDialog.isShowing() ) {
+                cityDialog.dismiss();
+                cityDialog = null;
+            }
+        }
+    }
+
+    private static class CityAdapter extends BaseAdapter{
+
+        private Context context;
+        private String[] citys;
+
+        public CityAdapter(Context context,String[] citys) {
+            this.context = context;
+            this.citys = citys;
+        }
+
+        @Override
+        public int getCount() {
+            return citys.length;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return citys[i];
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            if ( view == null ){
+                view = LayoutInflater.from(context).inflate(R.layout.item_choose_city,null);
+            }
+            TextView tv_city_name = view.findViewById(R.id.tv_city_name);
+            tv_city_name.setText(citys[i]);
+            return view;
+        }
+    }
+
     private static void dismissChooseDialog(){
         synchronized (chooseLock){
             if ( chooseDialog != null ){
@@ -189,6 +283,10 @@ public class MyDialog {
     public interface ChooseDialogCallback{
         public void sure();
         public void cancel();
+    }
+
+    public interface ChooseCityCallback{
+        public void choose(String city);
     }
 
 }

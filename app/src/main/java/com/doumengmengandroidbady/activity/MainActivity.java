@@ -5,15 +5,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.SideMenuAdapter;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 //TODO
 public class MainActivity extends BaseFragmentActivity {
@@ -43,6 +46,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     private DrawerLayout dl_main;
     private FrameLayout fl_content;
+
     private RelativeLayout rl_home_page , rl_baby_knowledge , rl_spacialist_service , rl_hospital_report , rl_meng_lesson;
 //    private ImageView iv_home_page , iv_baby_knowledge , iv_spacialist_service , iv_hospital_report , iv_meng_lesson;
 //    private TextView tv_home_page , tv_baby_knowledge , tv_spacialist_service , tv_hospital_report , tv_meng_lesson;
@@ -50,6 +54,7 @@ public class MainActivity extends BaseFragmentActivity {
     private FragmentManager fm;
     private Fragment currentFragment;
     private Map<String,Fragment> fragmentMap;
+    private Map<String,RelativeLayout> bottomMap = new HashMap<>();
 
     private ListView lv_side_menu;
     private SideMenuAdapter adapter;
@@ -59,7 +64,7 @@ public class MainActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findView();
-        configView();
+        initView();
         initFragment();
         showFragment();
     }
@@ -87,7 +92,13 @@ public class MainActivity extends BaseFragmentActivity {
         dl_main = findViewById(R.id.dl_main);
     }
 
-    private void configView() {
+    private void initView() {
+        bottomMap.put(PAGE_HOME,rl_home_page);
+        bottomMap.put(PAGE_BABY_KNOWLEDGE,rl_baby_knowledge);
+        bottomMap.put(PAGE_SPACIALIST_SERVICE,rl_spacialist_service);
+        bottomMap.put(PAGE_HOSPITAL_REPORT,rl_hospital_report);
+        bottomMap.put(PAGE_LESSON,rl_meng_lesson);
+
         rl_home_page.setOnClickListener(listener);
         rl_baby_knowledge.setOnClickListener(listener);
         rl_spacialist_service.setOnClickListener(listener);
@@ -138,12 +149,12 @@ public class MainActivity extends BaseFragmentActivity {
 
         @Override
         public void onDrawerOpened(View drawerView) {
-            dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
+//            dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
         }
 
         @Override
         public void onDrawerClosed(View drawerView) {
-            dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//            dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
 
         @Override
@@ -156,18 +167,23 @@ public class MainActivity extends BaseFragmentActivity {
             switch(v.getId()){
                 case R.id.rl_home_page:
                     switchFragment(PAGE_HOME);
+                    dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                     break;
                 case R.id.rl_baby_knowledge:
                     switchFragment(PAGE_BABY_KNOWLEDGE);
+                    dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
                 case R.id.rl_spacialist_service:
                     switchFragment(PAGE_SPACIALIST_SERVICE);
+                    dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
                 case R.id.rl_hospital_report:
                     switchFragment(PAGE_HOSPITAL_REPORT);
+                    dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
                 case R.id.rl_meng_lesson:
                     switchFragment(PAGE_LESSON);
+                    dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
             }
         }
@@ -203,11 +219,24 @@ public class MainActivity extends BaseFragmentActivity {
             }
             currentFragment = fragment;
             transaction.commitAllowingStateLoss();
+            refreshBottomMenu(page);
         }
     }
 
-    private void refreshBottomMenu(ViewGroup group){
-
+    private void refreshBottomMenu(String page){
+        Set<String> keys = bottomMap.keySet();
+        for (String key:keys) {
+            RelativeLayout layout = bottomMap.get(key);
+            CheckBox button = (CheckBox) layout.getChildAt(0);
+            TextView textView = (TextView) layout.getChildAt(1);
+            if ( key.equals(page) ){
+                button.setChecked(true);
+                textView.setTextColor(ContextCompat.getColor(this,R.color.btmMenuColor));
+            } else {
+                button.setChecked(false);
+                textView.setTextColor(ContextCompat.getColor(this,R.color.btmMenuUnColor));
+            }
+        }
     }
 
     @Override

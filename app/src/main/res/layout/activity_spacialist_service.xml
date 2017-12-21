@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 style="@style/BigWhiteText"
-                android:text="上海"
+                android:text="江苏省"
                 android:layout_marginLeft="@dimen/x28px"
                 />
             <ImageView
@@ -33,17 +33,17 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_down_arrow"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x114px"
+                android:layout_marginLeft="@dimen/x134px"
                 />
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:layout_width="@dimen/x434px"
+            android:layout_width="@dimen/x404px"
             android:layout_height="@dimen/y59px"
             android:background="@drawable/bg_search_short"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x170px"
+            android:layout_marginLeft="@dimen/x190px"
             >
             <ImageView
                 android:layout_width="@dimen/y44px"
@@ -61,6 +61,7 @@
                 style="@style/EditTextView"
                 android:hint="@string/search_hint"
                 android:textColorHint="@color/thinPink"
+                android:imeOptions="actionSearch"
                 />
         </RelativeLayout>
 
@@ -77,12 +78,16 @@
         </ImageView>
 
     </RelativeLayout>
-
-    <ListView
-        android:id="@+id/lv_doctor"
+    <FrameLayout
+        android:id="@+id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/xrv_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </ListView>
+        </com.jcodecraeer.xrecyclerview.XRecyclerView>
+    </FrameLayout>
 
 </LinearLayout>

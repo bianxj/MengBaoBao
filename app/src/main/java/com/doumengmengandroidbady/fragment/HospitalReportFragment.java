@@ -1,9 +1,9 @@
 package com.doumengmengandroidbady.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +11,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.adapter.HeadAndFootAdapter;
 import com.doumengmengandroidbady.adapter.HospitalReportAdapter;
 import com.doumengmengandroidbady.base.BaseFragment;
 import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.entity.HospitalReport;
+import com.doumengmengandroidbady.view.XLoadMoreFooter;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +29,9 @@ public class HospitalReportFragment extends BaseFragment {
 
     private RelativeLayout rl_back;
     private TextView tv_title;
-    private RecyclerView rv_report;
-    private HeadAndFootAdapter adapter;
+    private XRecyclerView xrv_report;
     private List<HospitalReport> reports;
+    private HospitalReportAdapter hospitalReportAdapter;
 
     @Nullable
     @Override
@@ -41,7 +42,7 @@ public class HospitalReportFragment extends BaseFragment {
     }
 
     private void findView(View view){
-        rv_report = view.findViewById(R.id.rv_report);
+        xrv_report = view.findViewById(R.id.xrv_report);
         rl_back = view.findViewById(R.id.rl_back);
         tv_title = view.findViewById(R.id.tv_title);
         initView();
@@ -65,11 +66,30 @@ public class HospitalReportFragment extends BaseFragment {
                 reports.add(report);
             }
         }
-        rv_report.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new HeadAndFootAdapter(new HospitalReportAdapter(reports));
-        rv_report.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
+        xrv_report.setLoadingMoreEnabled(true);
+        xrv_report.setFootView(new XLoadMoreFooter(getContext()));
+
+        xrv_report.setLoadingListener(loadingListener);
+        hospitalReportAdapter = new HospitalReportAdapter(reports);
+        xrv_report.setAdapter(hospitalReportAdapter);
+        xrv_report.setLayoutManager(new LinearLayoutManager(getContext()));
+        hospitalReportAdapter.notifyDataSetChanged();
     }
+
+    private XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
+        @Override
+        public void onRefresh() {}
+
+        @Override
+        public void onLoadMore() {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    xrv_report.setNoMore(true);
+                }
+            },2000);
+        }
+    };
 
 }

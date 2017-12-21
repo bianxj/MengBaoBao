@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="@dimen/x720px"
+        android:layout_height="@dimen/y56px">
+        <View
+            android:layout_width="@dimen/x710px"
+            android:layout_height="@dimen/y1px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/lineGray"></View>
+        <TextView
+            android:id="@+id/tv_search_history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x49px"
+            style="@style/BlackText23px"
+            android:text=""
+            />
+    </RelativeLayout>
+
+</LinearLayout>

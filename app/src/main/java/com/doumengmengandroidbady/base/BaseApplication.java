@@ -11,6 +11,9 @@ import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.File;
 
 /**
@@ -32,8 +35,6 @@ public class BaseApplication extends Application {
         initMLog();
         initCrashHandler();
         application = this;
-
-
     }
 
     private void initMLog(){
@@ -111,6 +112,33 @@ public class BaseApplication extends Application {
 
         UserData data = new UserData(account,pwd);
         return data;
+    }
+
+    public void saveSearchHistory(JSONArray array){
+        SharedPreferences preferences = getSharedPreferences("history",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("histroy_value",array.toString());
+        editor.commit();
+    }
+
+    public JSONArray getSearchHistory(){
+        SharedPreferences preferences = getSharedPreferences("history",Context.MODE_PRIVATE);
+        String value = preferences.getString("histroy_value",null);
+        JSONArray array = null;
+        if ( value != null ) {
+            try {
+                array = new JSONArray(value);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return array;
+    }
+
+    public void clearSearchHistory(){
+        SharedPreferences preferences = getSharedPreferences("history",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("histroy_value").commit();
     }
 
     public boolean isPay(){

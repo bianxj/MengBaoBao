@@ -5,12 +5,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -58,14 +53,14 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private void configView(){
-//        AnimationDrawable drawable = (AnimationDrawable) iv_loading_icon.getDrawable();
-//        drawable.start();
-        RotateAnimation set = (RotateAnimation) AnimationUtils.loadAnimation(LoadingActivity.this,R.anim.loading_rotate);
-        set.setDuration(1500);
-        set.setRepeatMode(Animation.RESTART);
-        set.setRepeatCount(Animation.INFINITE);
-        set.setInterpolator(new LinearInterpolator());
-        iv_loading_icon.startAnimation(set);
+        AnimationDrawable drawable = (AnimationDrawable) iv_loading_icon.getDrawable();
+        drawable.start();
+//        RotateAnimation set = (RotateAnimation) AnimationUtils.loadAnimation(LoadingActivity.this,R.anim.loading_rotate);
+//        set.setDuration(1500);
+//        set.setRepeatMode(Animation.RESTART);
+//        set.setRepeatCount(Animation.INFINITE);
+//        set.setInterpolator(new LinearInterpolator());
+//        iv_loading_icon.startAnimation(set);
     }
 
     private void loading(){

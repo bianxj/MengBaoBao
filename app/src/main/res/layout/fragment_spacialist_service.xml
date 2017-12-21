@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightSky"
+    >
+    <LinearLayout
+        android:id="@+id/ll_buy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y307px"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y96px"
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:id="@+id/tv_baby_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/y24px"
+                    android:includeFontPadding="false"
+                    android:text="妮妮"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/y52px" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_supplement_record"
+                    android:layout_width="@dimen/x140px"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    >
+                    <TextView
+                        android:id="@+id/tv_supplement_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/x27px"
+                        android:layout_marginTop="@dimen/y39px"
+                        android:includeFontPadding="false"
+                        android:text="补充记录"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/y28px"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y201px"
+                android:background="@color/colorPrimary"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.doumengmengandroidbady.view.CircleImageView
+                        android:id="@+id/cim_baby"
+                        android:layout_width="@dimen/y133px"
+                        android:layout_height="@dimen/y133px"
+                        android:src="@drawable/ic_launcher_background" />
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y48px"
+                    android:layout_marginTop="@dimen/y13px">
+
+                    <TextView
+                        android:id="@+id/tv_appraisal_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/y48px"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/iv_sex"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="@dimen/x20px"
+                        android:paddingRight="@dimen/x20px"
+                        android:text="您还剩XX次测评"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/y26px"
+                        android:background="@drawable/bg_rect_circle"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tv_buy"
+                        style="@style/WhiteText26px"
+                        android:layout_width="@dimen/y62px"
+                        android:layout_height="@dimen/y40px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x13px"
+                        android:layout_toRightOf="@+id/tv_appraisal_count"
+                        android:background="@drawable/bg_circle_read"
+                        android:gravity="center"
+                        android:text="购买" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_add_record"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y115px"
+            android:background="@color/white"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/x57px"
+                android:layout_height="@dimen/x56px"
+                android:src="@drawable/icon_add"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x39px"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_record"
+                style="@style/SmallBlackText"
+                android:layout_centerInParent="true"
+                />
+            <ImageView
+                android:layout_width="@dimen/x21px"
+                android:layout_height="@dimen/y33px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x48px"
+                android:src="@drawable/right_allow"/>
+
+        </RelativeLayout>
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/xrv_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            >
+
+        </com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_unbuy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y106px"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/TitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/spacialist_service" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/y256px"
+            android:layout_height="@dimen/y256px"
+            android:src="@drawable/icon_unbuy"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y307px"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/slogan"
+            android:gravity="center_horizontal"
+            android:includeFontPadding="true"
+            android:layout_marginTop="@dimen/y611px"
+            android:layout_centerHorizontal="true"
+            style="@style/SmallBlackText"
+            />
+
+        <Button
+            android:id="@+id/bt_buy"
+            android:layout_width="@dimen/x418px"
+            android:layout_height="@dimen/y117px"
+            android:background="@drawable/btn_buy_service"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y704px"
+            />
+
+    </RelativeLayout>
+
+
+</FrameLayout>
