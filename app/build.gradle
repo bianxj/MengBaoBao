@@ -39,4 +39,5 @@ dependencies {
     implementation 'com.android.support:design:27.0.2'
     implementation project(':xrecyclerview')
     implementation files('libs/BaiduLBS_Android.jar')
+    compile project(path: ':zxing')
 }

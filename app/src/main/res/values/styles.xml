@@ -103,10 +103,18 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="WhiteText26px">
+    <style name="WhiteText22px">
         <item name="android:textSize">@dimen/y22px</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="WhiteText26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="WhiteText34px">
+    <item name="android:textSize">@dimen/y34px</item>
+    <item name="android:textColor">@color/white</item>
+</style>
 
     <style name="BlackText34px">
         <item name="android:textSize">@dimen/y34px</item>

@@ -263,6 +263,11 @@
     <!--HeadImageActivity-->
     <string name="head_image">个人头像</string>
 
+    <!--ScanActivity-->
+    <string name="scan">扫码</string>
+    <string name="photo_album">相册</string>
+    <string name="scan_hint">对准二维码</string>
+
     <!--Dialog-->
     <string name="update_content">的用户正在使用新版本</string>
     <string name="go_on">继续</string>

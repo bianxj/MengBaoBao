@@ -95,7 +95,7 @@
 
                     <TextView
                         android:id="@+id/tv_buy"
-                        style="@style/WhiteText26px"
+                        style="@style/WhiteText22px"
                         android:layout_width="@dimen/y62px"
                         android:layout_height="@dimen/y40px"
                         android:layout_centerVertical="true"

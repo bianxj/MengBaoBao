@@ -1,24 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <SurfaceView
-        android:id="@+id/sv_scan"
+    <include layout="@layout/include_title_back"></include>
+
+    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <com.doumengmengandroidbady.view.ViewfinderView
-        android:id="@+id/vfv_scan"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:mask_color="@color/scanMask"
-        app:border_color="@color/colorPrimary"
-        app:border_size="@dimen/x5px"
-        app:cent_x="@dimen/x360px"
-        app:cent_y="@dimen/y540px"
-        app:side_size="@dimen/x400px"
-        />
+        <SurfaceView
+            android:id="@+id/sv_scan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-</FrameLayout>
+        <com.doumengmengandroidbady.view.ViewfinderView
+            android:id="@+id/vfv_scan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:border_color="@color/colorPrimary"
+            app:border_size="@dimen/x5px"
+            app:cent_x="@dimen/x360px"
+            app:cent_y="@dimen/y450px"
+            app:mask_color="@color/scanMask"
+            app:side_size="@dimen/x400px"
+            android:visibility="invisible"/>
+
+        <CheckBox
+            android:id="@+id/cb_flash"
+            android:layout_width="@dimen/y40px"
+            android:layout_height="@dimen/y59px"
+            android:layout_marginTop="@dimen/y563px"
+            android:background="@drawable/icon_flash"
+            android:button="@null"
+            android:checked="false"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/WhiteText26px"
+            android:text="@string/scan_hint"
+            android:layout_marginTop="@dimen/y660px"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/tv_photo_album"
+            android:layout_width="@dimen/x100px"
+            android:layout_height="@dimen/y49px"
+            android:text="@string/photo_album"
+            android:layout_gravity="bottom|right"
+            android:gravity="center"
+            style="@style/WhiteText34px"
+            android:layout_marginRight="@dimen/x40px"
+            android:layout_marginBottom="@dimen/y60px"
+            />
+
+
+    </FrameLayout>
+</LinearLayout>

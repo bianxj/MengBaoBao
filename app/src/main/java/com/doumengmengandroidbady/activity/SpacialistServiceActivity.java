@@ -1,6 +1,7 @@
 package com.doumengmengandroidbady.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -12,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -39,6 +41,8 @@ import java.util.List;
 
 public class SpacialistServiceActivity extends BaseActivity {
 
+    private final static int REQUEST_QR = 0x01;
+
     private RelativeLayout rl_back;
     private TextView tv_title;
 
@@ -60,13 +64,24 @@ public class SpacialistServiceActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spacialist_service);
         findView();
-//        initLocation();
+        initLocation();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        destoryLocation();
+//        destoryLocation();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ( requestCode == REQUEST_QR ){
+            if ( resultCode == RESULT_OK ){
+                String value = data.getStringExtra(ScanActivity.RESULT_QR_VALUE);
+                Toast.makeText(SpacialistServiceActivity.this,value,Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void findView(){
@@ -133,7 +148,8 @@ public class SpacialistServiceActivity extends BaseActivity {
                     }
                     break;
                 case R.id.iv_scan:
-
+                    Intent intent = new Intent(SpacialistServiceActivity.this,ScanActivity.class);
+                    startActivityForResult(intent,REQUEST_QR);
                     break;
             }
         }
@@ -235,7 +251,7 @@ public class SpacialistServiceActivity extends BaseActivity {
     private LocationClientOption option;
 
     private void initLocation(){
-        rl_location_area.setEnabled(false);
+//        rl_location_area.setEnabled(false);
         client = new LocationClient(this);
         client.setLocOption(initLocationClientOption());
         client.registerLocationListener(locationListener);

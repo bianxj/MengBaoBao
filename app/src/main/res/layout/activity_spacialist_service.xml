@@ -26,6 +26,7 @@
                 style="@style/BigWhiteText"
                 android:text="江苏省"
                 android:layout_marginLeft="@dimen/x28px"
+                android:maxLength="3"
                 />
             <ImageView
                 android:layout_width="@dimen/y29px"

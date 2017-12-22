@@ -16,7 +16,18 @@
 
 package com.google.zxing.client.android.result;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
+import android.util.Log;
+
 import com.google.zxing.Result;
 import com.google.zxing.client.android.Contents;
 import com.google.zxing.client.android.Intents;
@@ -28,21 +39,10 @@ import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ParsedResultType;
 import com.google.zxing.client.result.ResultParser;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
-import android.content.ContentValues;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
-import android.util.Log;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Locale;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * A base class for the Android-specific barcode handlers. These allow the app to polymorphically
@@ -465,7 +465,6 @@ public abstract class ResultHandler {
       rawLaunchIntent(intent);
     } catch (ActivityNotFoundException ignored) {
       AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-      builder.setTitle(R.string.app_name);
       builder.setMessage(R.string.msg_intent_failed);
       builder.setPositiveButton(R.string.button_ok, null);
       builder.show();
