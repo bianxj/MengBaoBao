@@ -46,7 +46,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/count_day"
+                        android:text="@string/day_count"
                         style="@style/GrayText26px"
                         android:layout_marginLeft="@dimen/x18px"
                         />

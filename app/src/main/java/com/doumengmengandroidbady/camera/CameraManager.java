@@ -6,18 +6,21 @@ import android.graphics.Rect;
 import android.hardware.Camera;
 import android.view.SurfaceHolder;
 
+import com.doumengmengandroidbady.camera.open.OpenCamera;
+import com.doumengmengandroidbady.camera.open.OpenCameraInterface;
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
-import com.google.zxing.client.android.camera.open.OpenCamera;
-import com.google.zxing.client.android.camera.open.OpenCameraInterface;
 import com.google.zxing.common.HybridBinarizer;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.Map;
 
 
@@ -36,7 +39,7 @@ public class CameraManager {
     private boolean previewing;
     private AutoFocusManager autoFocusManager;
 
-    private MultiFormatReader reader;
+    private MultiFormatReader multiFormatReader;
 
     public CameraManager(Context context) {
         this.context = context;
@@ -45,10 +48,11 @@ public class CameraManager {
     }
 
     private void initFormatReader(){
-        Map<DecodeHintType,Object> hints = new EnumMap<>(DecodeHintType.class);
-        reader = new MultiFormatReader();
-        hints.put(DecodeHintType.POSSIBLE_FORMATS, DecodeFormatManager.QR_CODE_FORMATS);
-        reader.setHints(hints);
+        this.multiFormatReader = new MultiFormatReader();
+        Collection<BarcodeFormat> decodeFormats = EnumSet.of(BarcodeFormat.QR_CODE);
+        Map<DecodeHintType,Object> hints = new EnumMap<DecodeHintType, Object>(DecodeHintType.class);
+        hints.put(DecodeHintType.POSSIBLE_FORMATS,decodeFormats);
+        multiFormatReader.setHints(hints);
     }
 
     /**
@@ -130,8 +134,33 @@ public class CameraManager {
         }
     }
 
+    public Rect getDecodeArea(Rect framingRect) {
+        if (framingRect == null) {
+            return null;
+        }
+        Rect rect = new Rect(framingRect);
+        Point cameraResolution = configManager.getCameraResolution();
+        Point screenResolution = configManager.getScreenResolution();
+        if (cameraResolution == null || screenResolution == null) {
+            // Called early, before init even finished
+            return null;
+        }
+        rect.left = rect.left * cameraResolution.y / screenResolution.x;
+        rect.right = rect.right * cameraResolution.y / screenResolution.x;
+        rect.top = rect.top * cameraResolution.x / screenResolution.y;
+        rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
+        return rect;
+    }
+
+    public synchronized void requestPreviewFrame(PreviewCallback callback) {
+        OpenCamera theCamera = camera;
+        if (theCamera != null && previewing) {
+            this.callback = callback;
+            theCamera.getCamera().setOneShotPreviewCallback(previewCallback);
+        }
+    }
+
     /**
-     * Convenience method for {@link com.google.zxing.client.android.CaptureActivity}
      *
      * @param newSetting if {@code true}, light should be turned on if currently off. And vice versa.
      */
@@ -148,41 +177,6 @@ public class CameraManager {
                 autoFocusManager = new AutoFocusManager(context, theCamera.getCamera());
                 autoFocusManager.start();
             }
-        }
-    }
-
-    public synchronized Rect getFramingRectInPreview(Rect framingRect) {
-        if (framingRect == null) {
-            return null;
-        }
-        Rect rect = new Rect(framingRect);
-        Point cameraResolution = configManager.getCameraResolution();
-        Point screenResolution = configManager.getScreenResolution();
-        if (cameraResolution == null || screenResolution == null) {
-            // Called early, before init even finished
-            return null;
-        }
-        rect.left = rect.left * cameraResolution.x / screenResolution.x;
-        rect.right = rect.right * cameraResolution.x / screenResolution.x;
-        rect.top = rect.top * cameraResolution.y / screenResolution.y;
-        rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
-
-        return rect;
-    }
-
-    private void calculatePoint(Point point){
-        if ( point.x > point.y ){
-            int temp = point.x;
-            point.x = point.y;
-            point.y = temp;
-        }
-    }
-
-    public synchronized void requestPreviewFrame(PreviewCallback callback) {
-        OpenCamera theCamera = camera;
-        if (theCamera != null && previewing) {
-            this.callback = callback;
-            theCamera.getCamera().setOneShotPreviewCallback(previewCallback);
         }
     }
 
@@ -211,15 +205,15 @@ public class CameraManager {
         Result result = null;
 
         PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top,
-                rect.width(), rect.height(), false);
+                rect.width(), rect.height(), true);
         if ( source != null ){
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
             try {
-                result = reader.decodeWithState(bitmap);
+                result = multiFormatReader.decodeWithState(bitmap);
             } catch (ReaderException re){
 
             } finally {
-                reader.reset();
+                multiFormatReader.reset();
             }
         }
         return result;

@@ -86,11 +86,49 @@
                     android:layout_toRightOf="@+id/unuse_tv_baby_gender"
                     android:text="@string/mark" />
 
-                <EditText
-                    android:id="@+id/et_baby_gender"
-                    style="@style/InputDataNormalEditText"
+                <RadioGroup
+                    android:id="@+id/rg_gender"
+                    android:layout_width="@dimen/x241px"
+                    android:layout_height="@dimen/y56px"
+                    android:layout_marginLeft="@dimen/x382px"
                     android:layout_centerVertical="true"
-                    android:text="妮妮" />
+                    android:orientation="horizontal"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/cb_famale"
+                        android:layout_width="@dimen/y54px"
+                        android:layout_height="@dimen/y54px"
+                        android:background="@drawable/rb_famale"
+                        android:button="@null"
+                        android:checked="true"></RadioButton>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="女"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x12px"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/cb_male"
+                        android:layout_width="@dimen/y54px"
+                        android:layout_height="@dimen/y54px"
+                        android:button="@null"
+                        android:background="@drawable/rb_male"
+                        android:layout_marginLeft="@dimen/x56px"
+                        >
+                    </RadioButton>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="男"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x12px"
+                        />
+                </RadioGroup>
 
                 <View
                     android:layout_width="match_parent"
@@ -120,6 +158,22 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/unuse_tv_baby_birthday"
                     android:text="@string/mark" />
+
+                <TextView
+                    android:id="@+id/tv_calendar"
+                    android:layout_width="@dimen/y240px"
+                    android:layout_height="@dimen/y54px"
+                    android:background="@drawable/bg_calendar"
+                    android:layout_marginLeft="@dimen/x382px"
+                    android:layout_centerVertical="true"
+                    android:text=""
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:scrollHorizontally="true"
+                    >
+
+                </TextView>
 
                 <View
                     android:layout_width="match_parent"
@@ -1759,7 +1813,7 @@
                     android:text="@string/mother_name" />
 
                 <EditText
-                    android:id="@+id/tv_mother_name"
+                    android:id="@+id/et_mother_name"
                     style="@style/InputDataNormalEditText"
                     android:layout_centerVertical="true"
                     android:text="妮妮" />
@@ -1962,7 +2016,7 @@
                     android:text="@string/mother_weight" />
 
                 <EditText
-                    android:id="@+id/tv_mother_weight"
+                    android:id="@+id/et_mother_weight"
                     style="@style/InputDataNormalEditText"
                     android:layout_centerVertical="true"
                     android:text="妮妮" />

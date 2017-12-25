@@ -1,9 +1,13 @@
 package com.doumengmengandroidbady.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -64,13 +68,13 @@ public class SpacialistServiceActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spacialist_service);
         findView();
-        initLocation();
+        checkPermission();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        destoryLocation();
+        destoryLocation();
     }
 
     @Override
@@ -245,6 +249,33 @@ public class SpacialistServiceActivity extends BaseActivity {
         }
     };
 
+    //---------------------------------检查权限------------------------------------------------
+    private final static String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
+    private final static int REQUEST_PERMISSION = 0x01;
+    private void checkPermission(){
+        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ){
+            initLocation();
+        } else {
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if ( REQUEST_PERMISSION == requestCode ){
+            if (PackageManager.PERMISSION_GRANTED != grantResults[0] ){
+                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
+                    checkPermission();
+                } else {
+//                    Toast.makeText(this,"请打开照相机权限",Toast.LENGTH_LONG).show();
+                }
+            } else {
+                initLocation();
+            }
+        }
+    }
+
     //---------------------------------定位模块分割线---------------------------------------------
 
     private LocationClient client;
@@ -252,7 +283,7 @@ public class SpacialistServiceActivity extends BaseActivity {
 
     private void initLocation(){
 //        rl_location_area.setEnabled(false);
-        client = new LocationClient(this);
+        client = new LocationClient(getApplicationContext());
         client.setLocOption(initLocationClientOption());
         client.registerLocationListener(locationListener);
         client.start();

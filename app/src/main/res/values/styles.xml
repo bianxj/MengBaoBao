@@ -223,6 +223,12 @@
         <item name="android:layout_marginRight">@dimen/x64px</item>
     </style>
 
+    <style name="RecordInputStyle">
+        <item name="android:layout_height">@dimen/y56px</item>
+        <item name="android:layout_width">@dimen/x116px</item>
+        <item name="android:background">@drawable/bg_circle_edittext</item>
+    </style>
+
     <!--<style name="HorizontalLine">-->
         <!---->
     <!--</style>-->
@@ -237,6 +243,11 @@
     </style>
     <style name="LinkPinkText23px">
         <item name="android:textSize">@dimen/y23px</item>
+        <item name="android:textColor">@color/linkPink</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+    <style name="LinkPinkText21px">
+        <item name="android:textSize">@dimen/y21px</item>
         <item name="android:textColor">@color/linkPink</item>
         <item name="android:lineSpacingExtra">@dimen/y10px</item>
     </style>

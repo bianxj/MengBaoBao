@@ -37,7 +37,8 @@ public class ViewfinderView extends View {
     private final int borderColor;
     private final int borderSize;
     private final Rect rect;
-    private final int laserBorder;
+    private Rect scanRect;
+//    private final int laserBorder;
 //    private final int centPointX;
 //    private final int centPointY;
     private final int sideSize;
@@ -74,7 +75,7 @@ public class ViewfinderView extends View {
         int x = a.getDimensionPixelSize(R.styleable.ViewfinderView_cent_x,DEFAULT_CENT_POINT_X);
         int y = a.getDimensionPixelSize(R.styleable.ViewfinderView_cent_y,DEFAULT_CENT_POINT_Y);
         int halfSideSize = sideSize/2;
-        laserBorder = sideSize/50;
+//        laserBorder = sideSize/50;
 
 
         rect = new Rect();
@@ -82,6 +83,7 @@ public class ViewfinderView extends View {
         rect.left = x - halfSideSize;
         rect.right = x + halfSideSize;
         rect.bottom = y + halfSideSize;
+
         //反锯齿
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
@@ -149,7 +151,14 @@ public class ViewfinderView extends View {
     }
 
     public Rect getScanRect(){
-        return rect;
+        if ( scanRect == null ) {
+            scanRect = new Rect();
+            scanRect.top = rect.top + getTop();
+            scanRect.bottom = rect.bottom + getTop();
+            scanRect.left = rect.left + getLeft();
+            scanRect.right = rect.right + getLeft();
+        }
+        return scanRect;
     }
 
 }

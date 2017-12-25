@@ -7,8 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,20 +17,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.camera.AmbientLightManager;
 import com.doumengmengandroidbady.camera.CameraManager;
 import com.doumengmengandroidbady.view.ViewfinderView;
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.EnumSet;
 
 /**
  * Created by Administrator on 2017/12/6.
@@ -42,6 +38,7 @@ public class ScanActivity extends BaseActivity {
 
     private final static int REQUEST_ALBUM_OK = 0x01;
     private final static int REQUEST_PERMISSION = 0x02;
+    private String[] permissions = new String[]{Manifest.permission.CAMERA};
 
     public final static String RESULT_QR_VALUE = "result_rq";
 
@@ -50,6 +47,7 @@ public class ScanActivity extends BaseActivity {
     private TextView tv_photo_album;
     private CheckBox cb_flash;
     private ViewfinderView vfv_scan;
+    private FrameLayout fl_shade;
 
     private SurfaceView sv_scan;
 
@@ -68,28 +66,13 @@ public class ScanActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if ( cameraManager != null ) {
-            cb_flash.setChecked(false);
-            if (hasSurface) {
-                initCamera(holder);
-            } else {
-                holder.addCallback(holderCallback);
-            }
-        }
-//        ambientLightManager.start(cameraManager,sensorCallBack);
+        checkPermission();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        ambientLightManager.stop();
-        if ( cameraManager != null ) {
-            cameraManager.stopPreview();
-            cameraManager.closeDriver();
-            if (!hasSurface) {
-                holder.removeCallback(holderCallback);
-            }
-        }
+        stopScan();
     }
 
     @Override
@@ -101,12 +84,14 @@ public class ScanActivity extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if ( REQUEST_PERMISSION == requestCode ){
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                initScan();
-                onResume();
+            if (PackageManager.PERMISSION_GRANTED != grantResults[0] ){
+                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
+                    checkPermission();
+                } else {
+                    Toast.makeText(this,"请打开照相机权限",Toast.LENGTH_LONG).show();
+                }
             } else {
-                back();
+                startScan();
             }
         }
     }
@@ -124,6 +109,7 @@ public class ScanActivity extends BaseActivity {
         tv_photo_album = findViewById(R.id.tv_photo_album);
         cb_flash = findViewById(R.id.cb_flash);
         vfv_scan = findViewById(R.id.vfv_scan);
+        fl_shade = findViewById(R.id.fl_shade);
     }
 
     private void initView(){
@@ -131,6 +117,10 @@ public class ScanActivity extends BaseActivity {
         tv_photo_album.setOnClickListener(listener);
         tv_title.setText(R.string.scan);
         cb_flash.setOnCheckedChangeListener(changeListener);
+
+        holder = sv_scan.getHolder();
+        holder.addCallback(holderCallback);
+        cameraManager = new CameraManager(getApplicationContext());
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -173,56 +163,76 @@ public class ScanActivity extends BaseActivity {
 
     //--------------------------------------扫码处理代码--------------------------------------------
 
-    private CameraManager cameraManager;
-    private AmbientLightManager ambientLightManager;
     private SurfaceHolder holder;
-    private Collection<BarcodeFormat> decodeFormats;
-    private boolean hasSurface;
 
-    private final static int DECODE_QR = 0x01;
-    private Handler handler = new Handler(){
+    private void checkPermission(){
+        if ( ActivityCompat.checkSelfPermission(this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED ){
+            startScan();
+        } else {
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSION);
+        }
+    }
+
+    private CameraManager cameraManager;
+    private boolean hasSurface;
+    private boolean canScan;
+
+    private void startScan(){
+        fl_shade.setVisibility(View.VISIBLE);
+        canScan = true;
+        if ( !hasSurface ){
+            return;
+        }
+        try {
+            if ( !cameraManager.isOpen() ) {
+                cameraManager.openDriver(sv_scan.getHolder());
+            }
+            cameraManager.startPreview();
+            cameraManager.requestPreviewFrame(previewCallback);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void stopScan(){
+        fl_shade.setVisibility(View.INVISIBLE);
+        canScan = false;
+        if ( cameraManager != null ){
+            cameraManager.stopPreview();
+            cameraManager.closeDriver();
+        }
+    }
+
+    private CameraManager.PreviewCallback previewCallback = new CameraManager.PreviewCallback() {
+
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if ( msg.what == DECODE_QR ){
-                requestCameraData();
+        public void onPreviewFrame(byte[] data, Camera camera, int height, int width) {
+            byte[] rotatedData = new byte[data.length];
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++)
+                    rotatedData[x * height + height - y - 1] = data[x + y * width];
+            }
+            int tmp = width;
+            width = height;
+            height = tmp;
+            Rect rect = cameraManager.getDecodeArea(vfv_scan.getScanRect());
+
+            Result result = cameraManager.decode(rect,rotatedData,width,height);
+            if ( result != null ){
+                resultBack(result.getText());
+//                Toast.makeText(ScanActivity.this,result.getText(), Toast.LENGTH_SHORT).show();
+            } else {
+                cameraManager.requestPreviewFrame(previewCallback);
             }
         }
     };
 
-    private void checkPermission(){
-        if ( ActivityCompat.checkSelfPermission(this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
-            initScan();
-        } else {
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_PERMISSION);
-//            } else {
-//                MyDialog.showPromptDialog(this, "请打开相机权限", new MyDialog.PromptDialogCallback() {
-//                    @Override
-//                    public void sure() {
-//                        back();
-//                    }
-//                });
-//            }
-        }
-    }
-
-    private void initScan(){
-        cameraManager = new CameraManager(getApplicationContext());
-        ambientLightManager = new AmbientLightManager(getApplicationContext());
-        decodeFormats = EnumSet.of(BarcodeFormat.QR_CODE);
-        vfv_scan.setVisibility(View.VISIBLE);
-
-        holder = sv_scan.getHolder();
-        holder.addCallback(holderCallback);
-    }
-
     private SurfaceHolder.Callback holderCallback = new SurfaceHolder.Callback() {
         @Override
         public void surfaceCreated(SurfaceHolder surfaceHolder) {
-            if ( !hasSurface ) {
-                hasSurface = true;
-                initCamera(surfaceHolder);
+            hasSurface = true;
+            if ( canScan ){
+                startScan();
             }
         }
 
@@ -234,43 +244,6 @@ public class ScanActivity extends BaseActivity {
         @Override
         public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
             hasSurface = false;
-        }
-    };
-
-    private void initCamera(SurfaceHolder surfaceHolder){
-        if ( cameraManager.isOpen() ){
-            return;
-        }
-        try {
-            cameraManager.openDriver(surfaceHolder);
-            cameraManager.startPreview();
-            handler.sendEmptyMessage(DECODE_QR);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void requestCameraData(){
-        cameraManager.requestPreviewFrame(previewCallback);
-    }
-
-    private CameraManager.PreviewCallback previewCallback = new CameraManager.PreviewCallback() {
-
-        @Override
-        public void onPreviewFrame(byte[] data, Camera camera, int height, int width) {
-            Rect rect = new Rect(0,0,width,height);
-            Result result = cameraManager.decode(rect,data,width,height);
-            if ( result == null ){
-                handler.sendEmptyMessage(DECODE_QR);
-            } else {
-                resultBack(result.getText());
-            }
-        }
-    };
-
-    private AmbientLightManager.SensorCallBack sensorCallBack = new AmbientLightManager.SensorCallBack() {
-        @Override
-        public void onSensorChanged(boolean isDark) {
         }
     };
 

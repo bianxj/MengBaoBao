@@ -131,7 +131,7 @@
     <string name="cacation_content">你一开始让宝宝进食固体食物，宝宝的大便会更硬，颜色也会发生变化。 由于糖和脂肪的进食量增加，所以气味也更臭；豆类和其他蔬菜可</string>
 
     <!--MicturitionInputActivity-->
-    <string name="count_day">天/次</string>
+    <string name="day_count">天/次</string>
     <string name="micturition_content">宝宝每1-3小时就可能需要排尿，母乳喂养的宝宝 每日6-7次，次数较少时可能每天4-6次。 如果生病了或是发热以及天气炎热时</string>
 
     <!--NightSleepInputActivity-->
@@ -268,11 +268,39 @@
     <string name="photo_album">相册</string>
     <string name="scan_hint">对准二维码</string>
 
+    <!--RecordActivity-->
+    <string name="really_month">实际月龄:</string>
+    <string name="correct_month">实际月龄</string>
+    <string name="measure_info">测量信息</string>
+    <string name="head_circumference">头围</string>
+    <string name="chest_circumference">胸围</string>
+    <string name="cacation">排便</string>
+    <string name="micturition">排尿</string>
+    <string name="count_day">次/天</string>
+    <string name="night_sleep">夜间睡眠</string>
+    <string name="day_sleep">日间睡眠</string>
+
+    <string name="fedding_info">喂养情况</string>
+    <string name="breastfeeding">人乳喂养量</string>
+    <string name="breastfeeding_count">人乳喂养次数</string>
+    <string name="formula_milk">配方奶喂养量</string>
+    <string name="formula_milk_count">配方奶喂养次数</string>
+    <string name="ml_count">毫升/次</string>
+    
+    <string name="assisted_food_add">辅食添加</string>
+    <string name="milk">牛奶</string>
+    <string name="milk_powder">奶粉</string>
+    <string name="ml_day">毫升/日</string>
+    <string name=""
+    <string name="gram_day">克/日</string>
+
     <!--Dialog-->
     <string name="update_content">的用户正在使用新版本</string>
     <string name="go_on">继续</string>
 
     <!--ErrorMsg-->
+    <string name="prompt_bt_edit">返回修改</string>
+    <string name="prompt_bt_submit">确认提交</string>
     <string name="prompt_bt_cancel">取消</string>
     <string name="prompt_bt_sure">确认</string>
     <string name="prompt_bt_buy">购买</string>
@@ -285,6 +313,7 @@
 
     <string name="prompt_no_wifi">当前不在wifi状态下，可能会产生流量费用</string>
     <string name="prompt_need_buy">只有付费用户才能填写</string>
+    <string name="prompt_submit_base_info">提交后将不能修改宝宝姓名、宝宝性别、出生日期、出生体重、出生身长、孕周</string>
     
     
     <!--异常退出提示-->

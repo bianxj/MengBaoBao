@@ -8,11 +8,11 @@
 
     <include layout="@layout/include_title_back"></include>
 
-    <ListView
-        android:id="@+id/lv_doctor"
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xrv_doctor"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
 
 </LinearLayout>

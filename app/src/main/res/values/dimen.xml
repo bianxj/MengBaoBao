@@ -18,4 +18,20 @@
 
     <dimen name="InputInfo_Title_MarginLeft">@dimen/x29px</dimen>
     <dimen name="InputInfo_Input_MarginLeft">@dimen/x382px</dimen>
+
+    <!--RecordActivity对应参数-->
+    <dimen name="Record_Margin_Left">@dimen/x19px</dimen>
+    <dimen name="Record_Margin_Right">@dimen/x19px</dimen>
+    <dimen name="Record_Padding_Left">@dimen/x19px</dimen>
+    <dimen name="Record_Padding_Right">@dimen/x19px</dimen>
+
+    <dimen name="Record_Row_Layout_Height">@dimen/y103px</dimen>
+
+    <dimen name="Record_First_SubTitle_Margin_Left">@dimen/x82px</dimen>
+    <dimen name="Record_First_Input_Margin_Left">@dimen/x180px</dimen>
+    <dimen name="Record_First_Unit_Margin_Right">@dimen/x342px</dimen>
+
+    <dimen name="Record_Second_SubTitle_Margin_Right">@dimen/x268px</dimen>
+    <dimen name="Record_Second_Input_Margin_Left">@dimen/x497px</dimen>
+    <dimen name="Record_Second_Unit_Margin_Right">@dimen/x20px</dimen>
 </resources>

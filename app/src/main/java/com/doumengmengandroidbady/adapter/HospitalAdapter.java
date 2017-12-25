@@ -1,5 +1,7 @@
 package com.doumengmengandroidbady.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.activity.HospitalDoctorActivity;
 import com.doumengmengandroidbady.entity.Hospital;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -35,10 +38,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Hospital hospital = hospitals.get(position);
-        ImageLoader.getInstance().displayImage(hospital.getImageUrl(),holder.civ_hospital);
-        holder.tv_hospital_address.setText(hospital.getHospitalAddress());
-        holder.tv_hospital_name.setText(hospital.getName());
-        holder.hospital = hospital;
+        holder.initValue(hospital);
     }
 
     @Override
@@ -57,7 +57,26 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
             civ_hospital = itemView.findViewById(R.id.civ_hospital);
             tv_hospital_name = itemView.findViewById(R.id.tv_hospital_name);
             tv_hospital_address = itemView.findViewById(R.id.tv_hospital_address);
+            itemView.setOnClickListener(listener);
         }
+
+        private void initValue(Hospital hospital){
+            this.hospital = hospital;
+            ImageLoader.getInstance().displayImage(hospital.getImageUrl(),civ_hospital);
+            tv_hospital_address.setText(hospital.getHospitalAddress());
+            tv_hospital_name.setText(hospital.getName());
+        }
+
+        private View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO
+                Context context = view.getContext();
+                Intent intent = new Intent(context, HospitalDoctorActivity.class);
+                context.startActivity(intent);
+            }
+        };
+
     }
 
 //    private Context context;

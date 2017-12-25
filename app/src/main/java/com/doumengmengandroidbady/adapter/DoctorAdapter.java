@@ -70,6 +70,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
             @Override
             public void onClick(View v) {
                 //TODO
+
             }
         };
     }
