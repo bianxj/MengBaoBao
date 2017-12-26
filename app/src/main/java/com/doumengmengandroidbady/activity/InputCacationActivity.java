@@ -75,6 +75,7 @@ public class InputCacationActivity extends BaseActivity {
             intent.putExtra(RESULT_CACATION_DAY,et_input_data_one.getText().toString());
             intent.putExtra(RESULT_CACATION_COUNT,et_input_data_two.getText().toString());
             setResult(Activity.RESULT_OK,intent);
+            finish();
         }
     }
 

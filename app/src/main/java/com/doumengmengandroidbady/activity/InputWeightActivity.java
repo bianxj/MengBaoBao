@@ -72,6 +72,7 @@ public class InputWeightActivity extends BaseActivity {
             Intent intent = new Intent();
             intent.putExtra(RESULT_WEIGHT,et_input_data.getText().toString());
             setResult(Activity.RESULT_OK,intent);
+            finish();
         }
     }
 

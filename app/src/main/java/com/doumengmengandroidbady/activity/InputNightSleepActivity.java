@@ -72,6 +72,7 @@ public class InputNightSleepActivity extends BaseActivity {
             Intent intent = new Intent();
             intent.putExtra(RESULT_NIGHT_SLEEP,et_input_data.getText().toString());
             setResult(Activity.RESULT_OK,intent);
+            finish();
         }
     }
 

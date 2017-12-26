@@ -72,6 +72,7 @@ public class InputHeadActivity extends BaseActivity {
             Intent intent = new Intent();
             intent.putExtra(RESULT_HEAD,et_input_data.getText().toString());
             setResult(Activity.RESULT_OK,intent);
+            finish();
         }
     }
 
