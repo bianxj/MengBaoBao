@@ -111,7 +111,7 @@ public class MainActivity extends BaseFragmentActivity {
     private void initSideMenu(){
         List<SideMenuItem> items = new ArrayList<SideMenuItem>();
         items.add(new SideMenuItem(R.drawable.icon_person_center,R.string.person_center,PersonCenterActivity.class));
-        items.add(new SideMenuItem(R.drawable.icon_shop,R.string.shop,ShopActivity.class));
+        items.add(new SideMenuItem(R.drawable.icon_shop,R.string.shop,SpacialistServiceActivity.class));
         items.add(new SideMenuItem(R.drawable.icon_contact,R.string.contact,ContactActivity.class));
         items.add(new SideMenuItem(R.drawable.icon_about,R.string.about,AboutActivity.class));
         items.add(new SideMenuItem(R.drawable.icon_setting,R.string.setting,SettingActivity.class));

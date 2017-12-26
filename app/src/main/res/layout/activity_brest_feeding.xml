@@ -36,7 +36,8 @@
                             android:layout_height="@dimen/y86px"
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
-                            android:text="85.3"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
                             />
                     <TextView
                         android:layout_width="wrap_content"
@@ -90,7 +91,8 @@
                             android:layout_height="@dimen/y57px"
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
-                            android:text="85.3"
+                            android:inputType="number"
+                            android:imeOptions="actionDone"
                             />
                     <TextView
                         android:layout_width="wrap_content"

@@ -55,6 +55,7 @@
         <activity android:name=".activity.ObserveActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.DoctorListActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.SearchActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.HospitalDoctorActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name=".activity.SpacialistServiceActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.SupplementRecordActivity" android:screenOrientation="portrait"></activity>

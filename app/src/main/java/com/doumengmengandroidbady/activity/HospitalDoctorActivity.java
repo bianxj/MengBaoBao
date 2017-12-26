@@ -16,6 +16,7 @@ import com.doumengmengandroidbady.entity.Hospital;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class HospitalDoctorActivity extends BaseActivity {
 
     private XRecyclerView xrv_doctor;
     private DoctorAdapter doctorAdapter;
-    private List<Doctor> doctors;
+    private List<Doctor> doctors = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class HospitalDoctorActivity extends BaseActivity {
 
         doctorAdapter = new DoctorAdapter(doctors);
         xrv_doctor.setAdapter(doctorAdapter);
+        requestDoctorList();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -71,11 +73,15 @@ public class HospitalDoctorActivity extends BaseActivity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.rl_back:
-
+                    back();
                     break;
             }
         }
     };
+
+    private void back(){
+        finish();
+    }
 
     private XRecyclerView.LoadingListener doctorLoadingListener = new XRecyclerView.LoadingListener(){
 
@@ -108,6 +114,19 @@ public class HospitalDoctorActivity extends BaseActivity {
 
     private void requestDoctorList(){
         //TODO
+        if ( Config.isTest ){
+            for (int i = 0; i <10 ; i++) {
+                Doctor doctor = new Doctor();
+                doctor.setHeadUrl("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
+                doctor.setDescribe("Describe1");
+                doctor.setName("Name"+i);
+                doctor.setHospital("Hospital"+i);
+                doctor.setPosition("Position"+i);
+                doctor.setSkill("Skill"+i);
+                doctors.add(doctor);
+            }
+        }
+        doctorAdapter.notifyDataSetChanged();
     }
 
 }
