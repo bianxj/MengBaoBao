@@ -125,7 +125,7 @@
     <string name="chest_title">家庭正确的胸围测量方法</string>
     <string name="chest_content">采用无伸缩性软尺测量 让宝宝卧位或立位姿势（可扶立时） 测量者于宝宝前方或右侧，左手拇指固定软尺零点于宝宝右侧乳头下</string>
 
-    <!--CacationInputActivity-->
+    <!--InputCacationActivity-->
     <string name="day">天</string>
     <string name="count">次</string>
     <string name="cacation_content">你一开始让宝宝进食固体食物，宝宝的大便会更硬，颜色也会发生变化。 由于糖和脂肪的进食量增加，所以气味也更臭；豆类和其他蔬菜可</string>
@@ -269,6 +269,8 @@
     <string name="scan_hint">对准二维码</string>
 
     <!--RecordActivity-->
+    <string name="record">记录</string>
+
     <string name="really_month">实际月龄:</string>
     <string name="correct_month">实际月龄</string>
     <string name="measure_info">测量信息</string>
@@ -291,8 +293,35 @@
     <string name="milk">牛奶</string>
     <string name="milk_powder">奶粉</string>
     <string name="ml_day">毫升/日</string>
-    <string name=""
+    <string name="flour">米粉</string>
+    <string name="food">面食</string>
+    <string name="porridge">粥</string>
+    <string name="rice">饭</string>
+    <string name="meat">荤菜（鱼肉肝）</string>
+    <string name="egg">全蛋或蛋黄</string>
+    <string name="bean">豆制品</string>
+    <string name="vegetables">蔬菜</string>
+    <string name="fruit">水果</string>
+    <string name="water">水</string>
+    <string name="vitamin">维生素</string>
+    <string name="calcium">钙</string>
+    <string name="appetite">食欲</string>
+    <string name="other">其他</string>
+    <string name="product_name">品名</string>
+    <string name="dosage">剂量</string>
     <string name="gram_day">克/日</string>
+
+    <string name="good">好</string>
+    <string name="mid">中</string>
+    <string name="bad">差</string>
+
+    <string name="develop_action">发育行为观察</string>
+
+    <string name="parent_message">家长留言板</string>
+    <string name="upload_report">上传报告</string>
+
+    <!--InputInfoActivity-->
+    <string name="input_info">填写信息</string>
 
     <!--Dialog-->
     <string name="update_content">的用户正在使用新版本</string>
@@ -300,7 +329,8 @@
 
     <!--ErrorMsg-->
     <string name="prompt_bt_edit">返回修改</string>
-    <string name="prompt_bt_submit">确认提交</string>
+    <string name="prompt_bt_sure_submit">确认提交</string>
+    <string name="prompt_bt_submit">提交</string>
     <string name="prompt_bt_cancel">取消</string>
     <string name="prompt_bt_sure">确认</string>
     <string name="prompt_bt_buy">购买</string>

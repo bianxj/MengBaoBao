@@ -15,396 +15,405 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/lightSky">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y83px"
-                android:orientation="horizontal"
                 android:background="@color/white"
+                android:orientation="horizontal"
                 android:paddingLeft="@dimen/Record_Padding_Left"
-                android:paddingRight="@dimen/Record_Padding_Right">
+                android:paddingRight="@dimen/Record_Padding_Right"
+                android:visibility="visible">
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
+
                     <TextView
                         android:id="@+id/unuse_really_month"
+                        style="@style/BlackText23px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        style="@style/BlackText23px"
-                        android:text="@string/really_month"
-                        />
+                        android:text="@string/really_month" />
+
                     <TextView
                         android:id="@+id/tv_really_month"
+                        style="@style/BlackText23px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/unuse_really_month"
-                        style="@style/BlackText23px"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/x10px"
-                        android:text="24个月5天"/>
+                        android:layout_toRightOf="@+id/unuse_really_month"
+                        android:text="24个月5天" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
+
                     <TextView
                         android:id="@+id/unuse_correct_month"
+                        style="@style/LinkPinkText23px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        style="@style/LinkPinkText23px"
-                        android:text="@string/really_month"
-                        />
+                        android:text="@string/really_month" />
+
                     <TextView
                         android:id="@+id/tv_correct_month"
+                        style="@style/BlackText23px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/unuse_correct_month"
                         android:layout_centerVertical="true"
-                        style="@style/BlackText23px"
                         android:layout_marginLeft="@dimen/x10px"
-                        android:text="24个月5天"/>
+                        android:layout_toRightOf="@+id/unuse_correct_month"
+                        android:text="24个月5天" />
                 </RelativeLayout>
             </LinearLayout>
             
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y28px" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical"
-                android:background="@color/white">
+                android:visibility="visible">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y68px">
+
                     <ImageView
                         android:layout_width="@dimen/y40px"
                         android:layout_height="@dimen/y40px"
-                        android:src="@drawable/icon_measure"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="@dimen/Record_Padding_Left"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/BlackText28px"
-                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        android:text="@string/measure_info"
-                        android:textStyle="bold"
-                        android:layout_alignParentBottom="true"/>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                        android:layout_marginLeft="@dimen/Record_Padding_Left"
+                        android:src="@drawable/icon_measure" />
 
                     <TextView
+                        style="@style/BlackText28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/height"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/measure_info"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
+                    <TextView
                         style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
-                    
+                        android:text="@string/height" />
+
                     <TextView
                         android:id="@+id/tv_height"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/cent"/>
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/weight"
-                        style="@style/ThirdBlackText26px"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
+                        android:text="@string/cent" />
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
-                        />
+                        android:text="@string/weight" />
 
                     <TextView
                         android:id="@+id/tv_weight"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/kilograme"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/kilograme" />
 
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
-                        android:background="@color/linePink"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        ></View>
+                        android:background="@color/linePink"></View>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
 
                     <TextView
+                        style="@style/ThirdBlackText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/head_circumference"
-                        style="@style/ThirdBlackText26px"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
+                        android:text="@string/head_circumference" />
 
                     <TextView
                         android:id="@+id/tv_head_circumference"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/cent"/>
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/chest_circumference"
-                        style="@style/ThirdBlackText26px"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
+                        android:text="@string/cent" />
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
-                        />
+                        android:text="@string/chest_circumference" />
 
                     <TextView
                         android:id="@+id/tv_chest_circumference"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/cent"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/cent" />
                 </RelativeLayout>
             </LinearLayout>
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y28px" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical"
-                android:background="@color/white">
+                android:visibility="visible">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
                     <ImageView
                         android:layout_width="@dimen/y40px"
                         android:layout_height="@dimen/y40px"
-                        android:src="@drawable/icon_cacation"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Padding_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Padding_Left"
+                        android:src="@drawable/icon_cacation" />
+
                     <TextView
+                        style="@style/ThirdBlackText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cacation"
-                        style="@style/ThirdBlackText26px"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
+                        android:text="@string/cacation"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_cacation_day"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/x286px"/>
+                        android:layout_marginLeft="@dimen/x286px" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
+                        style="@style/LinkPinkText21px"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/x438px"
-                        style="@style/LinkPinkText21px"
-                        android:text="@string/day"/>
+                        android:text="@string/day" />
 
                     <TextView
                         android:id="@+id/tv_cacation_count"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/count"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/count" />
 
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
-                        android:background="@color/linePink"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        ></View>
+                        android:background="@color/linePink"></View>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
                     <ImageView
                         android:layout_width="@dimen/y40px"
                         android:layout_height="@dimen/y40px"
-                        android:src="@drawable/icon_micturition"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Padding_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Padding_Left"
+                        android:src="@drawable/icon_micturition" />
+
                     <TextView
+                        style="@style/ThirdBlackText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/micturition"
-                        style="@style/ThirdBlackText26px"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
+                        android:text="@string/micturition"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_micturition_count"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/count_day"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/count_day" />
 
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
-                        android:background="@color/linePink"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        ></View>
+                        android:background="@color/linePink"></View>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
                     <ImageView
                         android:layout_width="@dimen/y40px"
                         android:layout_height="@dimen/y40px"
-                        android:src="@drawable/icon_night_sleep"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Padding_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Padding_Left"
+                        android:src="@drawable/icon_night_sleep" />
+
                     <TextView
+                        style="@style/ThirdBlackText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/night_sleep"
-                        style="@style/ThirdBlackText26px"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
+                        android:text="@string/night_sleep"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_night_sleep"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/hour_day"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/hour_day" />
 
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
-                        android:background="@color/linePink"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        ></View>
+                        android:background="@color/linePink"></View>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
                     <ImageView
                         android:layout_width="@dimen/y40px"
                         android:layout_height="@dimen/y40px"
-                        android:src="@drawable/icon_day_sleep"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Padding_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Padding_Left"
+                        android:src="@drawable/icon_day_sleep" />
+
                     <TextView
+                        style="@style/ThirdBlackText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/day_sleep"
-                        style="@style/ThirdBlackText26px"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
+                        android:text="@string/day_sleep"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_day_sleep"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/hour_day"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/hour_day" />
                 </RelativeLayout>
             </LinearLayout>
             <Space
@@ -414,174 +423,879 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical"
-                android:background="@color/white">
+                android:visibility="visible">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y68px">
+
                     <ImageView
                         android:layout_width="@dimen/y40px"
                         android:layout_height="@dimen/y40px"
-                        android:src="@drawable/icon_feed"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="@dimen/Record_Padding_Left"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/BlackText28px"
-                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        android:text="@string/fedding_info"
-                        android:textStyle="bold"
-                        android:layout_alignParentBottom="true"/>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                        android:layout_marginLeft="@dimen/Record_Padding_Left"
+                        android:src="@drawable/icon_feed" />
 
                     <TextView
+                        style="@style/BlackText28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/breastfeeding"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/fedding_info"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
+                    <TextView
                         style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
+                        android:text="@string/breastfeeding" />
 
 
                     <TextView
                         android:id="@+id/tv_breastfeeding"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/ml_count"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/ml_count" />
 
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
-                        android:background="@color/linePink"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        ></View>
+                        android:background="@color/linePink"></View>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
 
                     <TextView
+                        style="@style/ThirdBlackText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/breastfeeding_count"
-                        style="@style/ThirdBlackText26px"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
+                        android:text="@string/breastfeeding_count" />
 
 
                     <TextView
                         android:id="@+id/tv_breastfeeding_count"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/count_day"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/count_day" />
 
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
-                        android:background="@color/linePink"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        ></View>
+                        android:background="@color/linePink"></View>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
 
                     <TextView
+                        style="@style/ThirdBlackText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/formula_milk"
-                        style="@style/ThirdBlackText26px"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
+                        android:text="@string/formula_milk" />
 
 
                     <TextView
                         android:id="@+id/tv_formula_milk"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/ml_count"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/ml_count" />
 
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
-                        android:background="@color/linePink"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        ></View>
+                        android:background="@color/linePink"></View>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
 
                     <TextView
+                        style="@style/ThirdBlackText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/formula_milk_count"
-                        style="@style/ThirdBlackText26px"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
+                        android:text="@string/formula_milk_count" />
 
 
                     <TextView
                         android:id="@+id/tv_formula_milk_count"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left" />
 
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         style="@style/LinkPinkText21px"
-                        android:text="@string/count_day"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/count_day" />
                 </RelativeLayout>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y28px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y68px"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="@dimen/y40px"
+                        android:layout_height="@dimen/y40px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/Record_Padding_Left"
+                        android:src="@drawable/icon_assisted_food" />
+
+                    <TextView
+                        style="@style/BlackText28px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/measure_info"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/milk" />
+
+                    <EditText
+                        android:id="@+id/et_milk"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
+                        android:text="@string/ml_day" />
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
+                        android:text="@string/milk_powder" />
+
+                    <EditText
+                        android:id="@+id/et_milk_powder"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/ml_day" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/flour" />
+
+                    <EditText
+                        android:id="@+id/et_flour"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
+                        android:text="@string/gram_day" />
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
+                        android:text="@string/food" />
+
+                    <EditText
+                        android:id="@+id/et_food"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/ml_day" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/porridge" />
+
+                    <EditText
+                        android:id="@+id/et_porridge"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
+                        android:text="@string/gram_day" />
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
+                        android:text="@string/rice" />
+
+                    <EditText
+                        android:id="@+id/et_rice"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/ml_day" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/meat" />
+
+                    <EditText
+                        android:id="@+id/et_meat"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/ml_day" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/egg" />
+
+                    <EditText
+                        android:id="@+id/et_egg"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/ml_day" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/bean" />
+
+                    <EditText
+                        android:id="@+id/et_bean"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
+                        android:text="@string/gram_day" />
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
+                        android:text="@string/vegetables" />
+
+                    <EditText
+                        android:id="@+id/et_vegetables"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/ml_day" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/fruit" />
+
+                    <EditText
+                        android:id="@+id/et_fruit"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
+                        android:text="@string/gram_day" />
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
+                        android:text="@string/water" />
+
+                    <EditText
+                        android:id="@+id/et_water"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/ml_day" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/vitamin" />
+
+                    <TextView
+                        style="@style/ThirdBlackText23px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Product_Name_Margin_Left"
+                        android:text="@string/product_name" />
+
+                    <EditText
+                        android:id="@+id/et_vitamin_product"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Product_Name_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+                    <TextView
+                        style="@style/ThirdBlackText23px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Dosage_Margin_Left"
+                        android:text="@string/dosage" />
+
+                    <EditText
+                        android:id="@+id/et_vitamin_dosage"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Dosage_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/calcium" />
+
+                    <TextView
+                        style="@style/ThirdBlackText23px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Product_Name_Margin_Left"
+                        android:text="@string/product_name" />
+
+                    <EditText
+                        android:id="@+id/et_calcium_product"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Product_Name_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+                    <TextView
+                        style="@style/ThirdBlackText23px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Dosage_Margin_Left"
+                        android:text="@string/dosage" />
+
+                    <EditText
+                        android:id="@+id/et_calcium_dosage"
+                        style="@style/RecordInputStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_Dosage_Input_Margin_Left"
+                        android:inputType="number"
+                        android:lines="1" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/other" />
+
+                    <EditText
+                        android:id="@+id/et_other"
+                        style="@style/RecordInputStyle"
+                        android:layout_width="@dimen/x496px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x180px"
+                        android:inputType="text"
+                        android:lines="1" />
+
+                    <View
+                        android:layout_width="@dimen/x637px"
+                        android:layout_height="@dimen/y1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/linePink"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Record_Row_Layout_Height">
+
+                    <TextView
+                        style="@style/ThirdBlackText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/appetite" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_appetite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x301px"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_good"
+                            android:layout_width="@dimen/x84px"
+                            android:layout_height="@dimen/y56px"
+                            android:background="@drawable/bg_circle"
+                            android:button="@null"
+                            android:checked="true"
+                            android:gravity="center"
+                            android:text="@string/good"
+                            android:textColor="@drawable/bg_circle_text_color" />
+
+                        <RadioButton
+                            android:id="@+id/rb_mid"
+                            android:layout_width="@dimen/x84px"
+                            android:layout_height="@dimen/y56px"
+                            android:layout_marginLeft="@dimen/x28px"
+                            android:background="@drawable/bg_circle"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/mid"
+                            android:textColor="@drawable/bg_circle_text_color" />
+
+                        <RadioButton
+                            android:id="@+id/rb_bad"
+                            android:layout_width="@dimen/x84px"
+                            android:layout_height="@dimen/y56px"
+                            android:layout_marginLeft="@dimen/x28px"
+                            android:background="@drawable/bg_circle"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/bad"
+                            android:textColor="@drawable/bg_circle_text_color" />
+                    </RadioGroup>
+                </RelativeLayout>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y28px" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y108px"
+                android:background="@color/checkColor"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="@dimen/y44px"
+                    android:layout_height="@dimen/y44px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/Record_Margin_Left"
+                    android:src="@drawable/icon_develop_action" />
+
+                <TextView
+                    style="@style/WhiteText28px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                    android:text="@string/develop_action" />
+
+                <ImageView
+                    android:id="@+id/iv_develop_action"
+                    android:layout_width="@dimen/y154px"
+                    android:layout_height="@dimen/y55px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x28px"
+                    android:src="@drawable/btn_develop_action" />
+
+            </RelativeLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y28px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y68px"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="@dimen/y40px"
+                        android:layout_height="@dimen/y40px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/Record_Padding_Left"
+                        android:src="@drawable/icon_message" />
+
+                    <TextView
+                        style="@style/BlackText28px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
+                        android:text="@string/parent_message"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/et_parent_message"
+                    style="@style/EditTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y221px"
+                    android:layout_marginBottom="@dimen/y31px"
+                    android:layout_marginLeft="@dimen/x30px"
+                    android:layout_marginRight="@dimen/x30px"
+                    android:layout_marginTop="@dimen/y12px"
+                    android:background="@drawable/bg_circle_parent_message" />
+
             </LinearLayout>
             <Space
                 android:layout_width="match_parent"
@@ -589,162 +1303,41 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical"
-                android:background="@color/white">
+                android:visibility="visible">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y68px">
+                    android:layout_height="@dimen/y68px"
+                    android:visibility="visible">
+
                     <ImageView
                         android:layout_width="@dimen/y40px"
                         android:layout_height="@dimen/y40px"
-                        android:src="@drawable/icon_assisted_food"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="@dimen/Record_Padding_Left"/>
+                        android:layout_marginLeft="@dimen/Record_Padding_Left"
+                        android:src="@drawable/icon_upload_report" />
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         style="@style/BlackText28px"
-                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        android:text="@string/measure_info"
-                        android:textStyle="bold"
-                        android:layout_alignParentBottom="true"/>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/milk"
-                        style="@style/ThirdBlackText26px"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
-
-                    <EditText
-                        android:id="@+id/et_milk"
-                        style="@style/RecordInputStyle"
-                        android:inputType="number"
-                        android:lines="1"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"/>
-
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
-                        style="@style/LinkPinkText21px"
-                        android:text="@string/ml_day"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/milk_powder"
-                        style="@style/ThirdBlackText26px"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
-                        />
-
-                    <EditText
-                        android:id="@+id/et_milk_powder"
-                        style="@style/RecordInputStyle"
-                        android:layout_centerVertical="true"
-                        android:inputType="number"
-                        android:lines="1"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
-
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        style="@style/LinkPinkText21px"
-                        android:text="@string/ml_day"/>
-
-                    <View
-                        android:layout_width="@dimen/x637px"
-                        android:layout_height="@dimen/y1px"
-                        android:background="@color/linePink"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        ></View>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/Record_Row_Layout_Height"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/milk"
-                        style="@style/ThirdBlackText26px"
-                        android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        />
-
-                    <EditText
-                        android:id="@+id/et_milk"
-                        style="@style/RecordInputStyle"
-                        android:inputType="number"
-                        android:lines="1"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"/>
-
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
-                        style="@style/LinkPinkText21px"
-                        android:text="@string/ml_day"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/milk_powder"
-                        style="@style/ThirdBlackText26px"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
-                        />
-
-                    <EditText
-                        android:id="@+id/et_milk_powder"
-                        style="@style/RecordInputStyle"
-                        android:layout_centerVertical="true"
-                        android:inputType="number"
-                        android:lines="1"
-                        android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"/>
-
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        style="@style/LinkPinkText21px"
-                        android:text="@string/ml_day"/>
-
-                    <View
-                        android:layout_width="@dimen/x637px"
-                        android:layout_height="@dimen/y1px"
-                        android:background="@color/linePink"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        ></View>
+                        android:text="@string/upload_report"
+                        android:textStyle="bold" />
                 </RelativeLayout>
+
+                <GridView
+                    android:id="@+id/gv_upload_report"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x75px"
+                    android:layout_marginRight="@dimen/x75px"
+                    android:layout_marginTop="@dimen/y22px"
+                    android:layout_marginBottom="@dimen/y46px"></GridView>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

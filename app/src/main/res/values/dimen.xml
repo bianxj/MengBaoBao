@@ -27,6 +27,11 @@
 
     <dimen name="Record_Row_Layout_Height">@dimen/y103px</dimen>
 
+    <dimen name="Record_Product_Name_Margin_Left">@dimen/x256px</dimen>
+    <dimen name="Record_Product_Name_Input_Margin_Left">@dimen/x308px</dimen>
+    <dimen name="Record_Dosage_Margin_Left">@dimen/x442px</dimen>
+    <dimen name="Record_Dosage_Input_Margin_Left">@dimen/x497px</dimen>
+    
     <dimen name="Record_First_SubTitle_Margin_Left">@dimen/x82px</dimen>
     <dimen name="Record_First_Input_Margin_Left">@dimen/x180px</dimen>
     <dimen name="Record_First_Unit_Margin_Right">@dimen/x342px</dimen>

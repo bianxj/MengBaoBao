@@ -45,20 +45,14 @@
                         android:layout_marginRight="@dimen/x18px"
                         android:text="@string/day"
                         android:visibility="gone" />
-                    <RelativeLayout
-                        android:layout_width="@dimen/x233px"
-                        android:layout_height="@dimen/y86px"
-                        android:background="@drawable/bg_input_data"
-                        >
                         <EditText
                             android:id="@+id/et_input_data_two"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="@dimen/x233px"
+                            android:layout_height="@dimen/y86px"
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
                             android:text="85.3"
                             />
-                    </RelativeLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

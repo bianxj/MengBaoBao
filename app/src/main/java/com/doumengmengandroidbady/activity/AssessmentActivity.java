@@ -7,14 +7,14 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 
 /**
- * Created by Administrator on 2017/12/12.
+ * Created by Administrator on 2017/12/26.
  */
 
-public class CacationInputActivity extends BaseActivity {
+public class AssessmentActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cacation);
+        setContentView(R.layout.activity_assessment);
     }
 }

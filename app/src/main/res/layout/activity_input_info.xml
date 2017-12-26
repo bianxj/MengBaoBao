@@ -502,7 +502,7 @@
                         style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/single_birth" />
@@ -513,7 +513,7 @@
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/polyembryony" />
@@ -562,7 +562,7 @@
                         style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/eutocia" />
@@ -573,7 +573,7 @@
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/breech" />
@@ -584,7 +584,7 @@
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/odinopoeia" />
@@ -595,7 +595,7 @@
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/parturition" />
@@ -606,7 +606,7 @@
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/cesarean" />
@@ -655,7 +655,7 @@
                         style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/none" />
@@ -666,7 +666,7 @@
                         android:layout_width="@dimen/x144px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/artificial_insemination" />
@@ -677,7 +677,7 @@
                         android:layout_width="@dimen/x144px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/tube_baby" />
@@ -779,7 +779,7 @@
                         style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/none" />
@@ -790,7 +790,7 @@
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/has" />
@@ -839,7 +839,7 @@
                         style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/none" />
@@ -850,7 +850,7 @@
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/has" />
@@ -899,7 +899,7 @@
                         style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/none" />
@@ -910,7 +910,7 @@
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/has" />
@@ -959,7 +959,7 @@
                         style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/none" />
@@ -970,7 +970,7 @@
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/has" />
@@ -1019,7 +1019,7 @@
                         style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/none" />
@@ -1030,7 +1030,7 @@
                         android:layout_width="@dimen/x68px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/has" />
@@ -1093,7 +1093,7 @@
                         style="@style/CheckTextStyle"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
-                        android:background="@drawable/bg_circle_check"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/choleplania" />
@@ -1104,7 +1104,7 @@
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x9px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/ACHD" />
@@ -1115,7 +1115,7 @@
                         android:layout_width="@dimen/x114px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x9px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/hearing_disorder" />
@@ -1126,7 +1126,7 @@
                         android:layout_width="@dimen/x172px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x9px"
-                        android:background="@drawable/bg_circle_uncheck"
+                        android:background="@drawable/bg_circle"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/rethinopthy" />
@@ -1146,7 +1146,7 @@
                     android:layout_height="@dimen/y56px"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/PKU" />
@@ -1160,7 +1160,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x357px"
                     android:layout_toRightOf="@+id/cb_PKU"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/lower_weight_baby" />
@@ -1173,7 +1173,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/EUGR" />
@@ -1192,7 +1192,7 @@
                     android:layout_height="@dimen/y56px"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/neoplastic_disease" />
@@ -1205,7 +1205,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x6px"
                     android:layout_toRightOf="@+id/cb_neoplastic_disease"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/hydrocephalus" />
@@ -1218,7 +1218,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
                     android:layout_toRightOf="@+id/cb_hydrocephalus"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/CH" />
@@ -1231,7 +1231,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/ICH" />
@@ -1250,7 +1250,7 @@
                     android:layout_height="@dimen/y56px"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/enteritis" />
@@ -1263,7 +1263,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x6px"
                     android:layout_toRightOf="@+id/cb_enteritis"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/rickets" />
@@ -1276,7 +1276,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
                     android:layout_toRightOf="@+id/cb_rickets"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/anemia" />
@@ -1289,7 +1289,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/CAH" />
@@ -1308,7 +1308,7 @@
                     android:layout_height="@dimen/y56px"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/fat" />
@@ -1321,7 +1321,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x6px"
                     android:layout_toRightOf="@+id/cb_fat"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/malnutrition" />
@@ -1334,7 +1334,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
                     android:layout_toRightOf="@+id/cb_malnutvrition"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/develop_lower" />
@@ -1347,7 +1347,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
                     android:layout_toRightOf="@+id/cb_develop_lower"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/epilepsy" />
@@ -1360,7 +1360,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/genetic_disease" />
@@ -1379,7 +1379,7 @@
                     android:layout_height="@dimen/y56px"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/PD" />
@@ -1392,7 +1392,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x6px"
                     android:layout_toRightOf="@+id/cb_PD"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/leukemia" />
@@ -1405,7 +1405,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
                     android:layout_toRightOf="@+id/cb_leukemia"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/asthma" />
@@ -1418,7 +1418,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
                     android:layout_toRightOf="@+id/cb_asthma"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/pneumonia" />
@@ -1431,7 +1431,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/allergy" />
@@ -1450,7 +1450,7 @@
                     android:layout_height="@dimen/y56px"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/HIE" />
@@ -1463,7 +1463,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x6px"
                     android:layout_toRightOf="@+id/cb_HIE"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/chronic_disease" />
@@ -1476,7 +1476,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
                     android:layout_toRightOf="@+id/cb_chronic_disease"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/none" />
@@ -1489,7 +1489,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x9px"
-                    android:background="@drawable/bg_circle_uncheck"
+                    android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/other_disease" />
@@ -1602,7 +1602,7 @@
                             android:layout_height="@dimen/y56px"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x8px"
-                            android:background="@drawable/bg_circle_check"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/choose" />
@@ -1615,7 +1615,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x8px"
                             android:layout_toRightOf="@+id/rb_father_choose"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/primary" />
@@ -1628,7 +1628,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x8px"
                             android:layout_toRightOf="@+id/rb_father_primary"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/junior" />
@@ -1646,7 +1646,7 @@
                             android:layout_height="@dimen/y56px"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x8px"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/senior" />
@@ -1659,7 +1659,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x8px"
                             android:layout_toRightOf="@+id/rb_father_senior"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/university" />
@@ -1672,7 +1672,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x8px"
                             android:layout_toRightOf="@+id/rb_father_university"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/master" />
@@ -1685,7 +1685,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x8px"
                             android:layout_toRightOf="@+id/rb_father_master"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/doctor_culture" />
@@ -1872,7 +1872,7 @@
                             android:layout_width="@dimen/x114px"
                             android:layout_height="@dimen/y56px"
                             android:layout_marginLeft="@dimen/x8px"
-                            android:background="@drawable/bg_circle_check"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/choose"
@@ -1883,7 +1883,7 @@
                             android:layout_width="@dimen/x172px"
                             android:layout_height="@dimen/y56px"
                             android:layout_marginLeft="@dimen/x8px"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/primary"
@@ -1896,7 +1896,7 @@
                             android:layout_width="@dimen/x96px"
                             android:layout_height="@dimen/y56px"
                             android:layout_marginLeft="@dimen/x8px"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/junior"
@@ -1914,7 +1914,7 @@
                             android:layout_width="@dimen/x96px"
                             android:layout_height="@dimen/y56px"
                             android:layout_marginLeft="@dimen/x8px"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/senior"
@@ -1925,7 +1925,7 @@
                             android:layout_width="@dimen/x96px"
                             android:layout_height="@dimen/y56px"
                             android:layout_marginLeft="@dimen/x8px"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/university"
@@ -1938,7 +1938,7 @@
                             android:layout_width="@dimen/x96px"
                             android:layout_height="@dimen/y56px"
                             android:layout_marginLeft="@dimen/x8px"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/master"
@@ -1951,7 +1951,7 @@
                             android:layout_width="@dimen/x96px"
                             android:layout_height="@dimen/y56px"
                             android:layout_marginLeft="@dimen/x8px"
-                            android:background="@drawable/bg_circle_uncheck"
+                            android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/doctor_culture"
@@ -2027,7 +2027,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x14px"
-                    android:layout_toRightOf="@+id/tv_mother_weight"
+                    android:layout_toRightOf="@+id/et_mother_weight"
                     android:layout_centerVertical="true"
                     android:text="@string/kg" />
 

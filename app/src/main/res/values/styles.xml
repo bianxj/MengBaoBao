@@ -111,6 +111,10 @@
         <item name="android:textSize">@dimen/y26px</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="WhiteText28px">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
     <style name="WhiteText34px">
     <item name="android:textSize">@dimen/y34px</item>
     <item name="android:textColor">@color/white</item>
@@ -163,13 +167,18 @@
         <item name="android:textColor">@color/thirdBlack</item>
     </style>
 
+    <style name="ThirdBlackText23px">
+        <item name="android:textSize">@dimen/y23px</item>
+        <item name="android:textColor">@color/thirdBlack</item>
+    </style>
+
     <style name="TextColor28px">
         <item name="android:textSize">@dimen/y28px</item>
         <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="InputDataStyle">
-        <item name="android:background">@null</item>
+        <item name="android:background">@drawable/bg_circle_edittext_pink</item>
         <item name="android:textColor">@color/colorBlackText</item>
         <item name="android:textSize">@dimen/y34px</item>
         <item name="android:gravity">center</item>
@@ -223,10 +232,13 @@
         <item name="android:layout_marginRight">@dimen/x64px</item>
     </style>
 
-    <style name="RecordInputStyle">
+    <style name="RecordInputStyle" parent="ThirdBlackText26px">
         <item name="android:layout_height">@dimen/y56px</item>
         <item name="android:layout_width">@dimen/x116px</item>
         <item name="android:background">@drawable/bg_circle_edittext</item>
+        <item name="android:paddingRight">@dimen/x20px</item>
+        <item name="android:paddingLeft">@dimen/x20px</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <!--<style name="HorizontalLine">-->
@@ -285,7 +297,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/transparent</item>
-        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
     
 </resources>

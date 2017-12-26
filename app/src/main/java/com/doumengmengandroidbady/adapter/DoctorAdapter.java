@@ -1,5 +1,7 @@
 package com.doumengmengandroidbady.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.activity.DoctorInfoActivity;
 import com.doumengmengandroidbady.entity.Doctor;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -70,7 +73,9 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
             @Override
             public void onClick(View v) {
                 //TODO
-
+                Context context = v.getContext();
+                Intent intent = new Intent(context, DoctorInfoActivity.class);
+                context.startActivity(intent);
             }
         };
     }

@@ -61,5 +61,22 @@
 
         <activity android:name=".activity.ScanActivity" android:screenOrientation="portrait"></activity>
 
+        <activity android:name=".activity.DoctorInfoActivity" android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.InputInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.RecordActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputBreastFeedingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputCacationActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputChestActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputDaySleepActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputHeadActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputHeightActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputMilkActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputNightSleepActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputWeightActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputMicturitionActivity" android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.AssessmentActivity" android:screenOrientation="portrait" ></activity>
+
     </application>
 </manifest>

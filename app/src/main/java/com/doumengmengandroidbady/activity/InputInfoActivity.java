@@ -27,6 +27,7 @@ public class InputInfoActivity extends BaseActivity {
     private RelativeLayout rl_back;
     private TextView tv_title;
     private RelativeLayout rl_complete;
+    private TextView tv_complete;
 
     //-------------------------------基本信息控件-------------------------------------
     private EditText et_baby_name;
@@ -103,6 +104,7 @@ public class InputInfoActivity extends BaseActivity {
         rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);
         rl_complete = findViewById(R.id.rl_complete);
+        tv_complete = findViewById(R.id.tv_complete);
 
         et_baby_name = findViewById(R.id.et_baby_name);
         rg_gender = findViewById(R.id.rg_gender);
@@ -148,6 +150,9 @@ public class InputInfoActivity extends BaseActivity {
     private void initView(){
         rl_back.setOnClickListener(listener);
         rl_complete.setOnClickListener(listener);
+
+        rl_complete.setVisibility(View.VISIBLE);
+        tv_title.setText(R.string.input_info);
     }
 
     private CompoundButton.OnCheckedChangeListener diseaseCheckListener = new CompoundButton.OnCheckedChangeListener() {
@@ -177,7 +182,7 @@ public class InputInfoActivity extends BaseActivity {
 
     private void complete(){
         if ( checkData() ){
-            MyDialog.showChooseDialog(this, getString(R.string.prompt_submit_base_info), R.string.prompt_bt_edit, R.string.prompt_bt_submit, new MyDialog.ChooseDialogCallback() {
+            MyDialog.showChooseDialog(this, getString(R.string.prompt_submit_base_info), R.string.prompt_bt_edit, R.string.prompt_bt_sure_submit, new MyDialog.ChooseDialogCallback() {
                 @Override
                 public void sure() {
                     startActivity(RecordActivity.class);

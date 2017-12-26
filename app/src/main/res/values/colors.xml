@@ -41,4 +41,5 @@
     <color name="sixthGray">#999999</color>
     
     <color name="transparent">#00000000</color>
+    <color name="translucence">#330e0000</color>
 </resources>

@@ -49,9 +49,9 @@ public class BaseCrashHandler implements Thread.UncaughtExceptionHandler {
                 Looper.prepare();
                 Toast.makeText(context, R.string.error_exit_message,Toast.LENGTH_SHORT).show();
                 Looper.loop();
-                System.exit(0);
             }
         }).start();
+        System.exit(0);
         return true;
     }
 
