@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.DoctorInfoActivity;
-import com.doumengmengandroidbady.entity.Doctor;
+import com.doumengmengandroidbady.entity.DoctorEntity;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -22,9 +22,9 @@ import java.util.List;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHolder> {
 
-    private List<Doctor> doctors;
+    private List<DoctorEntity> doctors;
 
-    public DoctorAdapter(List<Doctor> doctors) {
+    public DoctorAdapter(List<DoctorEntity> doctors) {
         this.doctors = doctors;
     }
 
@@ -37,13 +37,13 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
 
     @Override
     public void onBindViewHolder(DoctorHolder holder, int position) {
-        Doctor doctor = doctors.get(position);
+        DoctorEntity doctor = doctors.get(position);
 
-        ImageLoader.getInstance().displayImage(doctor.getHeadUrl(),holder.civ_head);
+        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),holder.civ_head);
         holder.tv_doctor_hospital.setText(doctor.getHospital());
-        holder.tv_doctor_position.setText(doctor.getPosition());
-        holder.tv_doctor_name.setText(doctor.getName());
-        holder.tv_doctor_skill.setText(doctor.getSkill());
+        holder.tv_doctor_position.setText(doctor.getPositionaltitles());
+        holder.tv_doctor_name.setText(doctor.getDoctorname());
+        holder.tv_doctor_skill.setText(doctor.getSpeciality());
         holder.doctor = doctor;
     }
 
@@ -57,7 +57,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
         private CircleImageView civ_head;
         private TextView tv_doctor_name , tv_doctor_position;
         private TextView tv_doctor_hospital , tv_doctor_skill;
-        private Doctor doctor;
+        private DoctorEntity doctor;
 
         public DoctorHolder(View itemView) {
             super(itemView);
@@ -81,9 +81,9 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
     }
 
 //    private Context context;
-//    private List<Doctor> doctors;
+//    private List<DoctorEntity> doctors;
 //
-//    public DoctorAdapter(Context context,List<Doctor> doctors) {
+//    public DoctorAdapter(Context context,List<DoctorEntity> doctors) {
 //        this.doctors = doctors;
 //        this.context = context;
 //    }
@@ -109,7 +109,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
 //            convertView = LayoutInflater.from(context).inflate(R.layout.item_doctor,null);
 //        }
 //
-//        Doctor doctor = doctors.get(position);
+//        DoctorEntity doctor = doctors.get(position);
 //
 //        CircleImageView civ_head = convertView.findViewById(R.id.civ_head);
 //        TextView tv_doctor_name = convertView.findViewById(R.id.tv_doctor_name);
@@ -118,10 +118,10 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
 //        TextView tv_doctor_skill = convertView.findViewById(R.id.tv_doctor_skill);
 //
 //        ImageLoader.getInstance().displayImage(doctor.getHeadUrl(),civ_head);
-//        tv_doctor_name.setText(doctor.getName());
-//        tv_doctor_position.setText(doctor.getPosition());
+//        tv_doctor_name.setText(doctor.getDoctorname());
+//        tv_doctor_position.setText(doctor.getPositionaltitles());
 //        tv_doctor_hospital.setText(doctor.getHospital());
-//        tv_doctor_skill.setText(doctor.getSkill());
+//        tv_doctor_skill.setText(doctor.getSpeciality());
 //
 //        return convertView;
 //    }

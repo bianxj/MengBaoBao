@@ -8,10 +8,13 @@ import android.content.Context;
 
 public interface RequestCallBack {
 
+    public final static String JSON = "json";
+
     public void onPreExecute();
     public String getUrl();
     public Context getContext();
     public void onError(String result);
     public void onPostExecute(String result);
+    public String type();
 
 }

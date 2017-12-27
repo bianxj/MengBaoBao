@@ -12,14 +12,28 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.db.DaoManager;
+import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.response.InitConfigure;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/5.
  */
 public class LoadingActivity extends BaseActivity {
+
+    private final static boolean isTest = true;
 
     private RelativeLayout rl_back;
     private TextView tv_loading_percent;
@@ -33,7 +47,6 @@ public class LoadingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         findView();
-        configView();
         loading();
     }
 
@@ -50,17 +63,12 @@ public class LoadingActivity extends BaseActivity {
         rl_back = findViewById(R.id.rl_back);
         tv_loading_percent = findViewById(R.id.tv_loading_percent);
         iv_loading_icon = findViewById(R.id.iv_loading_icon);
+        initView();
     }
 
-    private void configView(){
+    private void initView(){
         AnimationDrawable drawable = (AnimationDrawable) iv_loading_icon.getDrawable();
         drawable.start();
-//        RotateAnimation set = (RotateAnimation) AnimationUtils.loadAnimation(LoadingActivity.this,R.anim.loading_rotate);
-//        set.setDuration(1500);
-//        set.setRepeatMode(Animation.RESTART);
-//        set.setRepeatCount(Animation.INFINITE);
-//        set.setInterpolator(new LinearInterpolator());
-//        iv_loading_icon.startAnimation(set);
     }
 
     private void loading(){
@@ -82,11 +90,15 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private void checkVersion(){
-        try {
-            checkVersionTask = buildCheckVersionTask();
-            checkVersionTask.execute();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+        if ( isTest ){
+            initConfigure();
+        } else {
+            try {
+                checkVersionTask = buildCheckVersionTask();
+                checkVersionTask.execute();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
         }
     }
 
@@ -120,6 +132,75 @@ public class LoadingActivity extends BaseActivity {
         public void onPostExecute(String result) {
             //TODO
             startActivity(MainActivity.class);
+        }
+
+        @Override
+        public String type() {
+            return null;
+        }
+    };
+
+    private RequestTask initConfigureTask = null;
+    private void initConfigure(){
+        try {
+            initConfigureTask = new RequestTask.Builder(initConfigureCallback).build();
+            initConfigureTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private RequestCallBack initConfigureCallback = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public String getUrl() {
+            UserData userData = BaseApplication.getInstance().getUserData();
+            Map<String,String> map = new HashMap<>();
+            JSONObject object = new JSONObject();
+            try {
+                object.put("userId",userData.getUserid());
+                map.put("paramStr",object.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            map.put("sesId",userData.getSessionId());
+            return UrlAddressList.mergUrlAndParam(UrlAddressList.URL_INIT_CONFIGURE,map);
+        }
+
+        @Override
+        public Context getContext() {
+            return LoadingActivity.this;
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                //TODO
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                InitConfigure configure = GsonUtil.getInstance().getGson().fromJson(res.toString(),InitConfigure.class);
+                DaoManager.getInstance().getDaotorDao().saveDoctorList(getContext(),configure.getDoctorList());
+                DaoManager.getInstance().getGrowthDao().saveGrowthList(getContext(),configure.getGrowthList());
+                DaoManager.getInstance().getHospitalDao().saveHospitalList(getContext(),configure.getHospitalList());
+                DaoManager.getInstance().getMengClassDao().saveMengClassList(getContext(),configure.getMengClassList());
+                startActivity(MainActivity.class);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public String type() {
+            return JSON;
         }
     };
 

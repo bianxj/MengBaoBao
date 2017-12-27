@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.config.Config;
-import com.doumengmengandroidbady.entity.Doctor;
+import com.doumengmengandroidbady.entity.DoctorEntity;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -20,7 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class DoctorInfoActivity extends BaseActivity {
 
-    private Doctor doctor;
+    private DoctorEntity doctor;
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -39,13 +39,13 @@ public class DoctorInfoActivity extends BaseActivity {
 
     private void getDoctorInfo(){
         if (Config.isTest){
-            doctor = new Doctor();
-            doctor.setName("Name1");
+            doctor = new DoctorEntity();
+            doctor.setDoctorname("Name1");
             doctor.setHospital("Hospital1");
-            doctor.setHeadUrl("http://www.qqzhi.com/uploadpic/2015-01-22/022222987.jpg");
-            doctor.setPosition("Position1");
-            doctor.setDescribe("Describe1");
-            doctor.setSkill("Skill");
+            doctor.setDoctorimg("http://www.qqzhi.com/uploadpic/2015-01-22/022222987.jpg");
+            doctor.setPositionaltitles("Position1");
+            doctor.setDoctordesc("Describe1");
+            doctor.setSpeciality("Skill");
         }
     }
 
@@ -68,11 +68,11 @@ public class DoctorInfoActivity extends BaseActivity {
         bt_choose.setOnClickListener(listener);
         tv_title.setText(R.string.introduce);
 
-        tv_doctor_name.setText(doctor.getName());
-        tv_doctor_position.setText(doctor.getPosition());
-        tv_doctor_introduce.setText(doctor.getDescribe());
-        tv_doctor_skill.setText(doctor.getSkill());
-        ImageLoader.getInstance().displayImage(doctor.getHeadUrl(),civ_head);
+        tv_doctor_name.setText(doctor.getDoctorname());
+        tv_doctor_position.setText(doctor.getPositionaltitles());
+        tv_doctor_introduce.setText(doctor.getDoctordesc());
+        tv_doctor_skill.setText(doctor.getSpeciality());
+        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_head);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="@dimen/x528px"
+        android:layout_height="@dimen/x598px"
+        android:background="@drawable/bg_notification">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="@dimen/x26px"
+            android:layout_height="@dimen/x26px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="@dimen/x23px"
+            android:layout_marginTop="@dimen/x123px"
+            android:src="@drawable/icon_close"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            style="@style/DialogPinkText34px"
+            android:text="@string/notification_message"
+            android:layout_marginTop="@dimen/x337px"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            style="@style/BlackText28px"
+            android:text="@string/notification_message_2"
+            android:layout_marginTop="@dimen/x397px"/>
+
+        <Button
+            android:id="@+id/bt_sure"
+            android:layout_width="@dimen/x440px"
+            android:layout_height="@dimen/x97px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x25px"
+            android:background="@drawable/btn_notification_sure"
+            android:layout_centerHorizontal="true"
+            />
+        
+    </RelativeLayout>
+
+</LinearLayout>

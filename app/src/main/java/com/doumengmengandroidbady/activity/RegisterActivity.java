@@ -16,11 +16,13 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.config.Config;
+import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.net.UrlAddressList;
-import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.RequestCallBack;
+import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
+import com.doumengmengandroidbady.util.GsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,13 +32,14 @@ import org.json.JSONObject;
  */
 public class RegisterActivity extends BaseActivity {
 
+    private static boolean isTest = false;
+
     private RelativeLayout rl_back;
     private Button bt_sure;
     private TextView bt_get_vc , tv_prompt;
     private EditText et_phone , et_vc , et_login_pwd;
     private LinearLayout ll_agreement;
     private CheckBox cb_agreement;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class RegisterActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopTask(getVerificationTask);
+        stopTask(registerTask);
     }
 
     private void findView(){
@@ -97,29 +102,27 @@ public class RegisterActivity extends BaseActivity {
         finish();
     }
 
+    private RequestTask getVerificationTask;
     private void getVerificationCode(){
         if ( checkVerificationCode() ) {
             try {
-                buildGetVerificationCodeTask().execute();
+                getVerificationTask = new RequestTask.Builder(getVerificationCodeCallBack).build();
+                getVerificationTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
         }
     }
 
-    private RequestTask buildGetVerificationCodeTask() throws Throwable {
-        return new RequestTask.Builder(getVerificationCodeCallBack).build();
-    }
-
+    private String verificationCode;
     private RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-            //TODO
         }
 
         @Override
         public String getUrl() {
-            return UrlAddressList.URL_GET_VC+"&paramStr="+et_phone.getText().toString();
+            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_GET_VC,et_phone.getText().toString());
         }
 
         @Override
@@ -129,21 +132,39 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            //TODO
         }
 
         @Override
         public void onPostExecute(String result) {
             //TODO
+            //{"result":{"code":"8931"},"errorId":0,"serverTime":"2017-12-27 11:47:38"}
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                verificationCode = res.optString("code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(UrlAddressList.URL_GET_VC+":"+result);
+        }
+
+        @Override
+        public String type() {
+            return RequestCallBack.JSON;
         }
     };
 
     private boolean checkVerificationCode(){
-        if (Config.isTest){
+        if (isTest){
             return true;
         }
         tv_prompt.setText("");
         String phone = et_phone.getText().toString().trim();
+        if ( TextUtils.isEmpty(phone) ){
+            tv_prompt.setText(R.string.prompt_no_account);
+            return false;
+        }
         if (!FormatCheckUtil.isPhone(phone) ){
             tv_prompt.setText(R.string.prompt_error_phone);
             return false;
@@ -151,11 +172,13 @@ public class RegisterActivity extends BaseActivity {
         return true;
     }
 
+    private RequestTask registerTask;
     private void register(){
         if ( checkSureData() ){
             if ( cb_agreement.isChecked() ){
                 try {
-                    buildRegisterTask().execute();
+                    registerTask = new RequestTask.Builder(registerCallBack).build();
+                    registerTask.execute();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
@@ -166,14 +189,68 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    private RequestTask buildRegisterTask() throws Throwable {
-        return new RequestTask.Builder(registerCallBack).build();
-    }
-
     private RequestCallBack registerCallBack = new RequestCallBack() {
         @Override
+        public void onPreExecute() {}
+
+        @Override
+        public String getUrl() {
+            JSONObject object = new JSONObject();
+            try {
+                object.put("accountMobile",et_phone.getText().toString().trim());
+                object.put("loginPwd",et_login_pwd.getText().toString().trim());
+                object.put("code", verificationCode);
+                object.put("checkCode",et_vc.getText().toString().trim());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_REGISTER,object.toString());
+        }
+
+        @Override
+        public Context getContext() {
+            return RegisterActivity.this;
+        }
+
+        @Override
+        public void onError(String result) {}
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                int isSuccess = res.getInt("isSuccess");
+                if ( 1 == isSuccess ){
+                    login();
+                } else {
+                    //TODO
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public String type() {
+            return RequestCallBack.JSON;
+        }
+    };
+
+    private RequestTask loginTask;
+    private void login(){
+        try {
+            loginTask = new RequestTask.Builder(loginCallback).build();
+            loginTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private RequestCallBack loginCallback = new RequestCallBack() {
+        @Override
         public void onPreExecute() {
-            //TODO
+
         }
 
         @Override
@@ -182,12 +259,10 @@ public class RegisterActivity extends BaseActivity {
             try {
                 object.put("accountMobile",et_phone.getText().toString().trim());
                 object.put("loginPwd",et_login_pwd.getText().toString().trim());
-                object.put("code",et_vc.getText().toString().trim());
-                object.put("checkCode",et_vc.getText().toString().trim());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return UrlAddressList.REGISTER_CHECT+"&paramStr="+object.toString();
+            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_LOGIN,object.toString());
         }
 
         @Override
@@ -197,18 +272,35 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            //TODO
+
         }
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-            startActivity(LoadingActivity.class);
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                String sessionId = res.getString("SessionId");
+                JSONObject user = res.getJSONObject("User");
+                UserData userData = GsonUtil.getInstance().getGson().fromJson(user.toString(),UserData.class);
+                userData.setSessionId(sessionId);
+
+                BaseApplication.getInstance().saveUserData(userData);
+
+                startActivity(LoadingActivity.class);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public String type() {
+            return JSON;
         }
     };
 
     private boolean checkSureData(){
-        if (Config.isTest){
+        if (isTest){
             return true;
         }
         tv_prompt.setText("");
@@ -216,6 +308,7 @@ public class RegisterActivity extends BaseActivity {
 
         if ( TextUtils.isEmpty(phone) ){
             tv_prompt.setText(R.string.prompt_no_account);
+            return false;
         }
 
         if ( !FormatCheckUtil.isPhone(phone) ){

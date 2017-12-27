@@ -113,6 +113,11 @@ public class ParentInfoActivity extends BaseActivity {
             //TODO
             back();
         }
+
+        @Override
+        public String type() {
+            return null;
+        }
     };
 
 }

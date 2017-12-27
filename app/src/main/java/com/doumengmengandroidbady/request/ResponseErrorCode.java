@@ -1,5 +1,6 @@
 package com.doumengmengandroidbady.request;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -88,6 +89,7 @@ public class ResponseErrorCode {
     private static final int ERROR_REQUEST_FAILED = -10000;
 
     static {
+        errorCodeMap = new HashMap<>();
         errorCodeMap.put(ERROR_SERVER_MAINTENANCE,"服务器正在维护");
         errorCodeMap.put(ERROR_SERVER_NOT_RESPONDING,"服务器没有响应");
         errorCodeMap.put(ERROR_SERVER_BUSY,"服务器繁忙");

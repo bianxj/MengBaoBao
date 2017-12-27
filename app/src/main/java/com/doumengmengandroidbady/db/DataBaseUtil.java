@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseUtil extends SQLiteOpenHelper {
 
-    private final static String DB_NAME = "";
+    private final static String DB_NAME = "MENG_BAOBAO_DB";
     private final static int DB_VERSION = 1;
     private static DataBaseUtil dbUtil;
     private static SQLiteDatabase db;
@@ -21,16 +21,25 @@ public class DataBaseUtil extends SQLiteOpenHelper {
 
     private DataBaseUtil(Context context) {
         super(context.getApplicationContext(), DB_NAME, null, DB_VERSION);
+        System.out.println("DataBaseUtil");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        System.out.println("DataBaseUtil:onCreate");
+        DoctorDao.createTable(db);
+        HospitalDao.createTable(db);
+        MengClassDao.createTable(db);
+        GrowthDao.createTable(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        System.out.println("DataBaseUtil:onUpgrade");
+        DoctorDao.updateTable(db,oldVersion,newVersion);
+        HospitalDao.updateTable(db,oldVersion,newVersion);
+        MengClassDao.updateTable(db,oldVersion,newVersion);
+        GrowthDao.updateTable(db,oldVersion,newVersion);
     }
 
     public static SQLiteDatabase openDataBase(Context context){

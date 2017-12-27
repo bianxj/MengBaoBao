@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.HospitalDoctorActivity;
-import com.doumengmengandroidbady.entity.Hospital;
+import com.doumengmengandroidbady.entity.HospitalEntity;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -22,9 +22,9 @@ import java.util.List;
 
 public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHolder> {
 
-    private List<Hospital> hospitals;
+    private List<HospitalEntity> hospitals;
 
-    public HospitalAdapter(List<Hospital> hospitals) {
+    public HospitalAdapter(List<HospitalEntity> hospitals) {
         this.hospitals = hospitals;
     }
 
@@ -37,7 +37,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Hospital hospital = hospitals.get(position);
+        HospitalEntity hospital = hospitals.get(position);
         holder.initValue(hospital);
     }
 
@@ -50,7 +50,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
 
         private CircleImageView civ_hospital;
         private TextView tv_hospital_name , tv_hospital_address;
-        private Hospital hospital;
+        private HospitalEntity hospital;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -60,11 +60,11 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
             itemView.setOnClickListener(listener);
         }
 
-        private void initValue(Hospital hospital){
+        private void initValue(HospitalEntity hospital){
             this.hospital = hospital;
-            ImageLoader.getInstance().displayImage(hospital.getImageUrl(),civ_hospital);
-            tv_hospital_address.setText(hospital.getHospitalAddress());
-            tv_hospital_name.setText(hospital.getName());
+            ImageLoader.getInstance().displayImage(hospital.getHospitalicon(),civ_hospital);
+            tv_hospital_address.setText(hospital.getHospitaladdress());
+            tv_hospital_name.setText(hospital.getHospitalname());
         }
 
         private View.OnClickListener listener = new View.OnClickListener() {
@@ -80,9 +80,9 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     }
 
 //    private Context context;
-//    private List<Hospital> hospitals;
+//    private List<HospitalEntity> hospitals;
 //
-//    public HospitalAdapter(Context context,List<Hospital> hospitals) {
+//    public HospitalAdapter(Context context,List<HospitalEntity> hospitals) {
 //        this.hospitals = hospitals;
 //        this.context = context;
 //    }
@@ -112,10 +112,10 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
 //        TextView tv_hospital_name = convertView.findViewById(R.id.tv_hospital_name);
 //        TextView tv_hospital_address = convertView.findViewById(R.id.tv_hospital_address);
 //
-//        Hospital hospital = hospitals.get(position);
-//        ImageLoader.getInstance().displayImage(hospital.getImageUrl(),civ_hospital);
-//        tv_hospital_name.setText(hospital.getName());
-//        tv_hospital_address.setText(hospital.getHospitalAddress());
+//        HospitalEntity hospital = hospitals.get(position);
+//        ImageLoader.getInstance().displayImage(hospital.getHospitalicon(),civ_hospital);
+//        tv_hospital_name.setText(hospital.getDoctorname());
+//        tv_hospital_address.setText(hospital.getHospitaladdress());
 //        return null;
 //    }
 }

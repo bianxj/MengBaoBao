@@ -3,9 +3,9 @@ package com.doumengmengandroidbady.base;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.text.TextUtils;
 
-import com.doumengmengandroidbady.entity.UserData;
+import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MLog;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,6 +28,8 @@ public class BaseApplication extends Application {
 
     private static MLog log;
 
+    private UserData userData;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -40,9 +42,10 @@ public class BaseApplication extends Application {
     private void initMLog(){
         MLog.Builder builder = new MLog.Builder(this);
         builder.setDebug(true);
-        builder.setInner(true);
-        builder.setLogDirName("log");
+        builder.setInner(false);
+        builder.setLogDirName("/log");
         builder.setSaveDay(5);
+        builder.setSaveLog(true);
         builder.setShow(true);
         log = builder.build();
     }
@@ -83,6 +86,18 @@ public class BaseApplication extends Application {
         BaseCrashHandler.getInstance().init(this);
     }
 
+    public void saveVerificationCode(String verification){
+        SharedPreferences preferences = getSharedPreferences("temp", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("verification",verification);
+        editor.commit();
+    }
+
+    public String getVerificationCode(){
+        SharedPreferences preferences = getSharedPreferences("temp", Context.MODE_PRIVATE);
+        return preferences.getString("verification",null);
+    }
+
     public void clearUserData(){
         SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -90,28 +105,23 @@ public class BaseApplication extends Application {
     }
 
     public void saveUserData(UserData userData){
+        this.userData = userData;
         SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(UserData.ACCOUNT,userData.getAccount());
-        editor.putString(UserData.PWD,userData.getPwd());
+        String data = GsonUtil.getInstance().getGson().toJson(userData);
+        editor.putString("user",data);
         editor.commit();
     }
 
     public UserData getUserData(){
-        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        String account = preferences.getString(UserData.ACCOUNT,null);
-        String pwd = preferences.getString(UserData.PWD,null);
-
-        if (TextUtils.isEmpty(account)){
-            return null;
+        if ( userData == null ) {
+            SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+            String data = preferences.getString("user", null);
+            if (data != null) {
+                userData = GsonUtil.getInstance().getGson().fromJson(data, UserData.class);
+            }
         }
-
-        if (TextUtils.isEmpty(pwd)){
-            return null;
-        }
-
-        UserData data = new UserData(account,pwd);
-        return data;
+        return userData;
     }
 
     public void saveSearchHistory(JSONArray array){

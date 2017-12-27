@@ -3,7 +3,6 @@ package com.doumengmengandroidbady.request;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.net.HttpUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
@@ -16,6 +15,8 @@ import org.json.JSONObject;
 
 public class RequestTask extends AsyncTask<String,Void,String> {
 
+    private final static boolean isTest = false;
+
     private Builder builder;
 
     private RequestTask(Builder builder) {
@@ -26,6 +27,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     protected void onPreExecute() {
         super.onPreExecute();
         if ( null != builder.getCallBack() ){
+            MyDialog.showLoadingDialog(builder.getCallBack().getContext());
             builder.getCallBack().onPreExecute();
         }
     }
@@ -33,7 +35,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... strings) {
         String result = null;
-        if (!Config.isTest) {
+        if (!isTest) {
             String url = builder.getCallBack().getUrl();
             result = HttpUtil.getInstance().httpsRequestPost(url);
         }
@@ -43,9 +45,10 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        if ( Config.isTest ){
+        if ( isTest ){
             builder.getCallBack().onPostExecute(s);
         } else {
+            MyDialog.dismissLoadingDialog();
             if (!isError(s)) {
                 builder.getCallBack().onPostExecute(s);
             } else {

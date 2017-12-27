@@ -118,6 +118,11 @@ public class BaseInfoActivity extends BaseActivity {
             //TODO
             finish();
         }
+
+        @Override
+        public String type() {
+            return RequestCallBack.JSON;
+        }
     };
 
 }

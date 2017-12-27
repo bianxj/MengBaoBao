@@ -12,15 +12,23 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.config.Config;
-import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
+import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
+import com.doumengmengandroidbady.util.GsonUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Administrator on 2017/12/5.
  */
 public class LoginActivity extends BaseActivity {
+
+    private static boolean isTest = false;
 
     private RelativeLayout rl_back;
     private EditText et_phone,et_login_pwd;
@@ -39,6 +47,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopTask(loginTask);
     }
 
     private void findView(){
@@ -83,10 +92,12 @@ public class LoginActivity extends BaseActivity {
         finish();
     }
 
+    private RequestTask loginTask = null;
     private void login(){
         if ( checkLogin() ){
             try {
-                buildLoginTask().execute();
+                loginTask = new RequestTask.Builder(loginCallBack).build();
+                loginTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
@@ -94,7 +105,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private boolean checkLogin(){
-        if (Config.isTest){
+        if (isTest){
             return true;
         }
         tv_prompt.setText("");
@@ -120,21 +131,21 @@ public class LoginActivity extends BaseActivity {
         return true;
     }
 
-    private RequestTask buildLoginTask() throws Throwable {
-        return new RequestTask.Builder(loginCallBack).build();
-    }
-
     private RequestCallBack loginCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-            //TODO
         }
 
         @Override
         public String getUrl() {
-            String phone = et_phone.getText().toString().trim();
-            String pwd = et_login_pwd.getText().toString().trim();
-            return null;
+            JSONObject object = new JSONObject();
+            try {
+                object.put("accountMobile",et_phone.getText().toString().trim());
+                object.put("loginPwd",et_login_pwd.getText().toString().trim());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_LOGIN,object.toString()) ;
         }
 
         @Override
@@ -144,13 +155,30 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            //TODO
         }
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-            startActivity(LoadingActivity.class);
+            System.out.println(result);
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                String sessionId = res.getString("SessionId");
+                JSONObject user = res.getJSONObject("User");
+                UserData userData = GsonUtil.getInstance().getGson().fromJson(user.toString(),UserData.class);
+                userData.setSessionId(sessionId);
+
+                BaseApplication.getInstance().saveUserData(userData);
+
+                startActivity(LoadingActivity.class);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public String type() {
+            return RequestCallBack.JSON;
         }
     };
 

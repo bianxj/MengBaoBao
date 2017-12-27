@@ -84,12 +84,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/y34px"
         style="@style/PropmtTextStyle"
-        android:text="请输入6-16位由数字、字母组成的密码"/>
+        android:text=""/>
 
     <Button
         android:id="@+id/bt_sure"
         android:layout_width="@dimen/x639px"
-        android:layout_height="@dimen/y127px"
+        android:layout_height="@dimen/y117px"
         android:layout_marginTop="@dimen/y48px"
         android:background="@drawable/btn_sure"/>
 

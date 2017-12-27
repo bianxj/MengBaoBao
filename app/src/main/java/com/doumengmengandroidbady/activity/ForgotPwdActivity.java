@@ -16,16 +16,21 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.config.Config;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.net.UrlAddressList;
-import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.RequestCallBack;
+import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Administrator on 2017/12/5.
  */
 public class ForgotPwdActivity extends BaseActivity {
+
+    public final static boolean isTest = false;
 
     private RelativeLayout rl_back;
     private Button bt_sure;
@@ -97,16 +102,13 @@ public class ForgotPwdActivity extends BaseActivity {
     private void getVerificationCode(){
         if ( checkVerificationCode() ) {
             try {
-                buildGetVerificationCodeTask().execute();
+                new RequestTask.Builder(getVerificationCodeCallBack).build().execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
         }
     }
 
-    private RequestTask buildGetVerificationCodeTask() throws Throwable {
-        return new RequestTask.Builder(getVerificationCodeCallBack).build();
-    }
 
     private RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
@@ -116,7 +118,7 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-            return UrlAddressList.URL_GET_VC+"&paramStr="+et_phone.getText().toString();
+            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_RESET_PASSWORD_GET_VC,et_phone.getText().toString());
         }
 
         @Override
@@ -126,17 +128,21 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            //TODO
         }
 
         @Override
         public void onPostExecute(String result) {
             //TODO
         }
+
+        @Override
+        public String type() {
+            return RequestCallBack.JSON;
+        }
     };
 
     private boolean checkVerificationCode(){
-        if (Config.isTest){
+        if (isTest){
             return true;
         }
         tv_prompt.setText("");
@@ -164,7 +170,7 @@ public class ForgotPwdActivity extends BaseActivity {
     }
 
     private boolean checkChangePwd(){
-        if (Config.isTest){
+        if (isTest){
             return true;
         }
         tv_prompt.setText("");
@@ -211,7 +217,16 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-            return null;
+            JSONObject object = new JSONObject();
+            try {
+                object.put("accountMobile",et_phone.getText().toString().trim());
+                object.put("loginPwd",et_login_pwd.getText().toString().trim());
+                object.put("code", BaseApplication.getInstance().getVerificationCode());
+                object.put("checkCode",et_vc.getText().toString().trim());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_RESET_PASSWORD,object.toString());
         }
 
         @Override
@@ -228,6 +243,11 @@ public class ForgotPwdActivity extends BaseActivity {
         public void onPostExecute(String result) {
             //TODO
             startActivity(LoadingActivity.class);
+        }
+
+        @Override
+        public String type() {
+            return RequestCallBack.JSON;
         }
     };
 

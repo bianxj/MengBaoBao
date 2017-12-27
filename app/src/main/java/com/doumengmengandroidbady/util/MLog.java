@@ -127,7 +127,7 @@ public class MLog {
 
         try {
             File file = getLogFile();
-            outputStream = new FileOutputStream(file);
+            outputStream = new FileOutputStream(file,true);
             outputStream.write(content.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
@@ -146,6 +146,10 @@ public class MLog {
         String dirPath = getLogDir();
         File dir = new File(dirPath);
         File[] files = dir.listFiles();
+
+        if ( files == null ){
+            return;
+        }
 
         Arrays.sort(files, new Comparator<File>() {
             @Override

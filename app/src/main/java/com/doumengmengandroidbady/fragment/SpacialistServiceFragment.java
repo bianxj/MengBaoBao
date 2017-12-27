@@ -180,6 +180,11 @@ public class SpacialistServiceFragment extends BaseFragment {
                 adapter.notifyDataSetChanged();
             }
         }
+
+        @Override
+        public String type() {
+            return JSON;
+        }
     };
 
     private XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {

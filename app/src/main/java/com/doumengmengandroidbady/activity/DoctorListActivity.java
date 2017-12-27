@@ -14,8 +14,8 @@ import com.doumengmengandroidbady.adapter.DoctorAdapter;
 import com.doumengmengandroidbady.adapter.HospitalAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.config.Config;
-import com.doumengmengandroidbady.entity.Doctor;
-import com.doumengmengandroidbady.entity.Hospital;
+import com.doumengmengandroidbady.entity.DoctorEntity;
+import com.doumengmengandroidbady.entity.HospitalEntity;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -35,8 +35,8 @@ public class DoctorListActivity extends BaseActivity {
 
     private XRecyclerView xrv_doctor,xrv_hospital;
 
-    private List<Doctor> doctors;
-    private List<Hospital> hospitals;
+    private List<DoctorEntity> doctors;
+    private List<HospitalEntity> hospitals;
 
     private DoctorAdapter doctorAdapter;
     private HospitalAdapter hospitalAdapter;
@@ -69,8 +69,8 @@ public class DoctorListActivity extends BaseActivity {
         rb_doctor.setOnCheckedChangeListener(changeListener);
         rb_hospital.setOnCheckedChangeListener(changeListener);
 
-        doctors = new ArrayList<Doctor>();
-        hospitals = new ArrayList<Hospital>();
+        doctors = new ArrayList<DoctorEntity>();
+        hospitals = new ArrayList<HospitalEntity>();
         initDoctorListView();
         initHospitalListView();
     }
@@ -78,13 +78,13 @@ public class DoctorListActivity extends BaseActivity {
     private void initDoctorListView(){
         if (Config.isTest){
             for (int i = 0; i <10 ; i++) {
-                Doctor doctor = new Doctor();
-                doctor.setHeadUrl("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-                doctor.setDescribe("Describe1");
-                doctor.setName("Name"+i);
-                doctor.setHospital("Hospital"+i);
-                doctor.setPosition("Position"+i);
-                doctor.setSkill("Skill"+i);
+                DoctorEntity doctor = new DoctorEntity();
+                doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
+                doctor.setDoctordesc("Describe1");
+                doctor.setDoctorname("Name"+i);
+                doctor.setHospital("HospitalEntity"+i);
+                doctor.setPositionaltitles("Position"+i);
+                doctor.setSpeciality("Skill"+i);
                 doctors.add(doctor);
             }
         }
@@ -100,10 +100,10 @@ public class DoctorListActivity extends BaseActivity {
     private void initHospitalListView(){
         if (Config.isTest){
             for (int i = 0; i <10 ; i++) {
-                Hospital hospital = new Hospital();
-                hospital.setImageUrl("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
-                hospital.setName("HospitalName"+i);
-                hospital.setHospitalAddress("HospitalAddress"+i);
+                HospitalEntity hospital = new HospitalEntity();
+                hospital.setHospitalicon("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
+                hospital.setHospitalname("HospitalName"+i);
+                hospital.setHospitaladdress("HospitalAddress"+i);
                 hospitals.add(hospital);
             }
         }
@@ -159,13 +159,13 @@ public class DoctorListActivity extends BaseActivity {
                     @Override
                     public void run() {
                         for (int i = 0; i <10 ; i++) {
-                            Doctor doctor = new Doctor();
-                            doctor.setHeadUrl("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-                            doctor.setDescribe("Describe1");
-                            doctor.setName("Name"+i);
-                            doctor.setHospital("Hospital"+i);
-                            doctor.setPosition("Position"+i);
-                            doctor.setSkill("Skill"+i);
+                            DoctorEntity doctor = new DoctorEntity();
+                            doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
+                            doctor.setDoctordesc("Describe1");
+                            doctor.setDoctorname("Name"+i);
+                            doctor.setHospital("HospitalEntity"+i);
+                            doctor.setPositionaltitles("Position"+i);
+                            doctor.setSpeciality("Skill"+i);
                             doctors.add(doctor);
                         }
                         xrv_doctor.loadMoreComplete();
@@ -187,10 +187,10 @@ public class DoctorListActivity extends BaseActivity {
                     @Override
                     public void run() {
                         for (int i = 0; i < 10; i++) {
-                            Hospital hospital = new Hospital();
-                            hospital.setImageUrl("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
-                            hospital.setName("HospitalName" + i);
-                            hospital.setHospitalAddress("HospitalAddress" + i);
+                            HospitalEntity hospital = new HospitalEntity();
+                            hospital.setHospitalicon("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
+                            hospital.setHospitalname("HospitalName" + i);
+                            hospital.setHospitaladdress("HospitalAddress" + i);
                             hospitals.add(hospital);
                         }
                         xrv_hospital.loadMoreComplete();

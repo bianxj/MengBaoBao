@@ -95,7 +95,7 @@
 
     <!--DoctorInfoActivity信息-->
     <string name="choose_me">选我</string>
-    <string name="skill">擅长</string>
+    <string name="speciality">擅长</string>
     <string name="introduce">医生介绍</string>
 
     <!--HeightInputActivity信息-->
@@ -326,6 +326,9 @@
     <!--Dialog-->
     <string name="update_content">的用户正在使用新版本</string>
     <string name="go_on">继续</string>
+    
+    <string name="notification_message">请允许我们向您发送通知</string>
+    <string name="notification_message_2">让您不错过每一条育儿知识</string>
 
     <!--ErrorMsg-->
     <string name="prompt_bt_edit">返回修改</string>

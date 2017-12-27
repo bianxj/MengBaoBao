@@ -11,8 +11,8 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.DoctorAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.config.Config;
-import com.doumengmengandroidbady.entity.Doctor;
-import com.doumengmengandroidbady.entity.Hospital;
+import com.doumengmengandroidbady.entity.DoctorEntity;
+import com.doumengmengandroidbady.entity.HospitalEntity;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -25,13 +25,13 @@ import java.util.List;
 
 public class HospitalDoctorActivity extends BaseActivity {
 
-    private Hospital hospital;
+    private HospitalEntity hospital;
     private RelativeLayout rl_back;
     private TextView tv_title;
 
     private XRecyclerView xrv_doctor;
     private DoctorAdapter doctorAdapter;
-    private List<Doctor> doctors = new ArrayList<>();
+    private List<DoctorEntity> doctors = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,13 +95,13 @@ public class HospitalDoctorActivity extends BaseActivity {
                     @Override
                     public void run() {
                         for (int i = 0; i <10 ; i++) {
-                            Doctor doctor = new Doctor();
-                            doctor.setHeadUrl("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-                            doctor.setDescribe("Describe1");
-                            doctor.setName("Name"+i);
-                            doctor.setHospital("Hospital"+i);
-                            doctor.setPosition("Position"+i);
-                            doctor.setSkill("Skill"+i);
+                            DoctorEntity doctor = new DoctorEntity();
+                            doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
+                            doctor.setDoctordesc("Describe1");
+                            doctor.setDoctorname("Name"+i);
+                            doctor.setHospital("HospitalEntity"+i);
+                            doctor.setPositionaltitles("Position"+i);
+                            doctor.setSpeciality("Skill"+i);
                             doctors.add(doctor);
                         }
                         xrv_doctor.loadMoreComplete();
@@ -116,13 +116,13 @@ public class HospitalDoctorActivity extends BaseActivity {
         //TODO
         if ( Config.isTest ){
             for (int i = 0; i <10 ; i++) {
-                Doctor doctor = new Doctor();
-                doctor.setHeadUrl("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-                doctor.setDescribe("Describe1");
-                doctor.setName("Name"+i);
-                doctor.setHospital("Hospital"+i);
-                doctor.setPosition("Position"+i);
-                doctor.setSkill("Skill"+i);
+                DoctorEntity doctor = new DoctorEntity();
+                doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
+                doctor.setDoctordesc("Describe1");
+                doctor.setDoctorname("Name"+i);
+                doctor.setHospital("HospitalEntity"+i);
+                doctor.setPositionaltitles("Position"+i);
+                doctor.setSpeciality("Skill"+i);
                 doctors.add(doctor);
             }
         }

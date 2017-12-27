@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -27,11 +28,13 @@ public class MyDialog {
     private static Object promptLock = new Object();
     private static Object chooseLock = new Object();
     private static Object loadingLock = new Object();
+    private static Object notificationLock = new Object();
     private static Object cityLock = new Object();
     private static Dialog updateDialog;
     private static Dialog promptDialog;
     private static Dialog chooseDialog;
     private static Dialog loadingDialog;
+    private static Dialog notificationDialog;
     private static PopupWindow cityDialog;
 
     public static void showUpdateDialog(Context context,boolean isForce,String content,final UpdateDialogCallback callback){
@@ -193,6 +196,50 @@ public class MyDialog {
         }
     }
 
+    private static void showNotificationDialog(Context context, final NotificationCallback callback){
+        synchronized (notificationLock){
+            notificationDialog = new Dialog(context,R.style.MyDialog);
+            View view = LayoutInflater.from(context).inflate(R.layout.dialog_notification,null);
+
+            ImageView iv_close = view.findViewById(R.id.iv_close);
+            Button bt_sure = view.findViewById(R.id.bt_sure);
+
+            iv_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismissNotificationDialog();
+                    if ( callback != null ){
+                        callback.cancel();
+                    }
+                }
+            });
+
+            bt_sure.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismissNotificationDialog();
+                    if ( callback != null ){
+                        callback.sure();
+                    }
+                }
+            });
+
+            notificationDialog.setCancelable(false);
+            notificationDialog.setCanceledOnTouchOutside(false);
+            notificationDialog.setContentView(view);
+            notificationDialog.show();
+        }
+    }
+
+    private static void dismissNotificationDialog(){
+        synchronized (notificationLock){
+            if ( notificationDialog != null){
+                notificationDialog.dismiss();
+                notificationDialog = null;
+            }
+        }
+    }
+
     public static boolean isShowingChooseCityDialog(){
         synchronized (cityLock){
             if ( cityDialog != null ){
@@ -256,13 +303,13 @@ public class MyDialog {
         }
     }
 
-    public void showLoadingDialog(){
+    public static void showLoadingDialog(Context context){
         synchronized (loadingLock){
 
         }
     }
 
-    public void dismissLoadingDialog(){
+    public static void dismissLoadingDialog(){
         synchronized (loadingLock){
             if ( loadingDialog != null ){
                 loadingDialog.dismiss();
@@ -287,6 +334,11 @@ public class MyDialog {
 
     public interface ChooseCityCallback{
         public void choose(String city);
+    }
+
+    public interface NotificationCallback{
+        public void sure();
+        public void cancel();
     }
 
 }

@@ -128,6 +128,11 @@ public class ChangePwdActivity extends BaseActivity {
             //TODO
             back();
         }
+
+        @Override
+        public String type() {
+            return null;
+        }
     };
 
 }
