@@ -1,5 +1,6 @@
 package com.doumengmengandroidbady.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,8 +10,9 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.config.Config;
-import com.doumengmengandroidbady.entity.DoctorEntity;
+import com.doumengmengandroidbady.db.DaoManager;
+import com.doumengmengandroidbady.response.Doctor;
+import com.doumengmengandroidbady.response.Hospital;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -20,7 +22,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class DoctorInfoActivity extends BaseActivity {
 
-    private DoctorEntity doctor;
+    private final static boolean isTest = false;
+
+    public final static String IN_PARAM_DOCTOR_ID = "doctor_id";
+
+//    private DoctorEntity doctor;
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -29,23 +35,35 @@ public class DoctorInfoActivity extends BaseActivity {
     private TextView tv_doctor_introduce , tv_doctor_skill;
     private Button bt_choose;
 
+    private Doctor doctor;
+    private Hospital hospital;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_info);
-        getDoctorInfo();
+        getNeedInfo();
         findView();
     }
 
-    private void getDoctorInfo(){
-        if (Config.isTest){
-            doctor = new DoctorEntity();
+    private void getNeedInfo(){
+        if (isTest){
+            doctor = new Doctor();
             doctor.setDoctorname("Name1");
-            doctor.setHospital("Hospital1");
             doctor.setDoctorimg("http://www.qqzhi.com/uploadpic/2015-01-22/022222987.jpg");
             doctor.setPositionaltitles("Position1");
             doctor.setDoctordesc("Describe1");
             doctor.setSpeciality("Skill");
+
+            hospital = new Hospital();
+            hospital.setHospitalname("Hospital1");
+        } else {
+            Intent intent = getIntent();
+            String doctorId = intent.getStringExtra(IN_PARAM_DOCTOR_ID);
+            doctor = DaoManager.getInstance().getDaotorDao().searchDoctorById(this,doctorId);
+            if ( doctor != null ){
+                hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this,doctor.getDoctorid());
+            }
         }
     }
 
@@ -72,6 +90,7 @@ public class DoctorInfoActivity extends BaseActivity {
         tv_doctor_position.setText(doctor.getPositionaltitles());
         tv_doctor_introduce.setText(doctor.getDoctordesc());
         tv_doctor_skill.setText(doctor.getSpeciality());
+        tv_hospital.setText(hospital.getHospitalname());
         ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_head);
     }
 

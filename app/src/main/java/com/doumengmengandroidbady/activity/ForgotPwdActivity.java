@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,7 +19,9 @@ import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
+import com.doumengmengandroidbady.util.GsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +52,9 @@ public class ForgotPwdActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopTask(getVerificationCodeTask);
+        stopTask(changePwdTask);
+        stopTask(loginTask);
     }
 
     private void findView(){
@@ -99,21 +103,22 @@ public class ForgotPwdActivity extends BaseActivity {
         finish();
     }
 
+    private RequestTask getVerificationCodeTask;
     private void getVerificationCode(){
         if ( checkVerificationCode() ) {
             try {
-                new RequestTask.Builder(getVerificationCodeCallBack).build().execute();
+                getVerificationCodeTask = new RequestTask.Builder(getVerificationCodeCallBack).build();
+                getVerificationCodeTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
         }
     }
 
-
+    private String verificationCode;
     private RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-            //TODO
         }
 
         @Override
@@ -132,7 +137,13 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                verificationCode = res.optString("code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -158,7 +169,8 @@ public class ForgotPwdActivity extends BaseActivity {
         if ( cb_agreement.isChecked() ) {
             if (checkChangePwd()) {
                 try {
-                    buildChangePwdTask().execute();
+                    changePwdTask = new RequestTask.Builder(changePwdCallBack).build();
+                    changePwdTask.execute();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
@@ -173,41 +185,39 @@ public class ForgotPwdActivity extends BaseActivity {
         if (isTest){
             return true;
         }
-        tv_prompt.setText("");
-        String phone = et_phone.getText().toString().trim();
-        if (TextUtils
-                .isEmpty(phone)){
-            tv_prompt.setText(R.string.prompt_no_account);
-            return false;
-        }
-        if (!FormatCheckUtil.isPhone(phone) ){
-            tv_prompt.setText(R.string.prompt_error_phone);
-            return false;
-        }
-
-        String vc = et_vc.getText().toString().trim();
-        if ( TextUtils.isEmpty(vc) ){
-            tv_prompt.setText(R.string.prompt_no_vc);
-            return false;
-        }
-
-        String pwd = et_login_pwd.getText().toString().trim();
-        if ( TextUtils.isEmpty(pwd) ){
-            tv_prompt.setText(R.string.prompt_no_password);
-            return false;
-        }
-
-        if ( FormatCheckUtil.isLetterDigit(pwd) ){
-            tv_prompt.setText(R.string.prompt_error_password);
-            return false;
-        }
+//        tv_prompt.setText("");
+//        String phone = et_phone.getText().toString().trim();
+//        if (TextUtils
+//                .isEmpty(phone)){
+//            tv_prompt.setText(R.string.prompt_no_account);
+//            return false;
+//        }
+//        if (!FormatCheckUtil.isPhone(phone) ){
+//            tv_prompt.setText(R.string.prompt_error_phone);
+//            return false;
+//        }
+//
+//        String vc = et_vc.getText().toString().trim();
+//        if ( TextUtils.isEmpty(vc) ){
+//            tv_prompt.setText(R.string.prompt_no_vc);
+//            return false;
+//        }
+//
+//        String pwd = et_login_pwd.getText().toString().trim();
+//        if ( TextUtils.isEmpty(pwd) ){
+//            tv_prompt.setText(R.string.prompt_no_password);
+//            return false;
+//        }
+//
+//        if ( FormatCheckUtil.isLetterDigit(pwd) ){
+//            tv_prompt.setText(R.string.prompt_error_password);
+//            return false;
+//        }
 
         return true;
     }
 
-    private RequestTask buildChangePwdTask() throws Throwable {
-        return new RequestTask.Builder(changePwdCallBack).build();
-    }
+    private RequestTask changePwdTask;
 
     private RequestCallBack changePwdCallBack = new RequestCallBack() {
         @Override
@@ -221,7 +231,7 @@ public class ForgotPwdActivity extends BaseActivity {
             try {
                 object.put("accountMobile",et_phone.getText().toString().trim());
                 object.put("loginPwd",et_login_pwd.getText().toString().trim());
-                object.put("code", BaseApplication.getInstance().getVerificationCode());
+                object.put("code", verificationCode);
                 object.put("checkCode",et_vc.getText().toString().trim());
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -236,18 +246,78 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            //TODO
         }
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-            startActivity(LoadingActivity.class);
+            login();
         }
 
         @Override
         public String type() {
             return RequestCallBack.JSON;
+        }
+    };
+
+    private RequestTask loginTask;
+    private void login(){
+        try {
+            loginTask = new RequestTask.Builder(loginCallback).build();
+            loginTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private RequestCallBack loginCallback = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public String getUrl() {
+            JSONObject object = new JSONObject();
+            try {
+                object.put("accountMobile",et_phone.getText().toString().trim());
+                object.put("loginPwd",et_login_pwd.getText().toString().trim());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_LOGIN,object.toString());
+        }
+
+        @Override
+        public Context getContext() {
+            return ForgotPwdActivity.this;
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                String sessionId = res.getString("SessionId");
+                JSONObject user = res.getJSONObject("User");
+                UserData userData = GsonUtil.getInstance().getGson().fromJson(user.toString(),UserData.class);
+                userData.setSessionId(sessionId);
+
+                BaseApplication.getInstance().saveUserData(userData);
+
+                startActivity(LoadingActivity.class);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public String type() {
+            return JSON;
         }
     };
 

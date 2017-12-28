@@ -11,6 +11,8 @@ import java.util.Set;
 
 public class UrlAddressList {
 
+    public final static String PARAM = "paramStr";
+
     public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneServerV2/";
 
     public final static String URL_GET_VC = BASE_URL + "babyUser.do?method=SendMessage";
@@ -18,8 +20,9 @@ public class UrlAddressList {
     public final static String URL_REGISTER = BASE_URL + "babyUser.do?method=Register";
     public final static String URL_LOGIN = BASE_URL +  "babyUser.do?method=Login";
     public final static String URL_RESET_PASSWORD_GET_VC = BASE_URL + "babyUser.do?method=SendResetPasswordMessage";
-    public final static String URL_RESET_PASSWORD = BASE_URL + "babyUser.do?method=SendResetPasswordMessage";
+    public final static String URL_RESET_PASSWORD = BASE_URL + "babyUser.do?method=SaveNewPwd";
     public final static String URL_INIT_CONFIGURE = BASE_URL + "system.do?method=InitServerConfigure";
+    public final static String URL_EIDT_PASSWORD = BASE_URL + "babyUser.do?method=EditPwd";
 
     public static String mergeUrlAndParam(String url , String value){
         return url+"&paramStr="+value;

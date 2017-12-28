@@ -3,7 +3,7 @@ package com.doumengmengandroidbady.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +12,17 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.response.UserData;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/11.
@@ -27,6 +36,7 @@ public class ChangePwdActivity extends BaseActivity {
     private Button bt_sure;
 
     private RequestTask changePwdTask;
+    private UserData userData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +44,12 @@ public class ChangePwdActivity extends BaseActivity {
         setContentView(R.layout.activity_change_pwd);
         findView();
         initView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTask(changePwdTask);
     }
 
     private void findView(){
@@ -47,27 +63,13 @@ public class ChangePwdActivity extends BaseActivity {
     }
 
     private void initView(){
+        userData = BaseApplication.getInstance().getUserData();
+
         tv_title.setText(R.string.change_pwd_name);
         tv_prompt.setText("");
 
         bt_sure.setOnClickListener(listener);
         rl_back.setOnClickListener(listener);
-
-        et_old_pwd.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if ( actionId == EditorInfo.IME_ACTION_GO){
-//                    Toast.makeText(ChangePwdActivity.this,"GO",Toast.LENGTH_SHORT).show();
-//                }
-//                if ( actionId == EditorInfo.IME_ACTION_DONE){
-//                    Toast.makeText(ChangePwdActivity.this,"DONE",Toast.LENGTH_SHORT).show();
-//                }
-//                if ( actionId == EditorInfo.IME_ACTION_NEXT){
-//                    Toast.makeText(ChangePwdActivity.this,"NEXT",Toast.LENGTH_SHORT).show();
-//                }
-                return false;
-            }
-        });
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -89,28 +91,47 @@ public class ChangePwdActivity extends BaseActivity {
     }
 
     private void changePwd(){
-        try {
-            buildChangePwdTask().execute();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+        if ( checkData() ) {
+            try {
+                changePwdTask = new RequestTask.Builder(changePwdCallBack).build();
+                changePwdTask.execute();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
         }
     }
 
-    private RequestTask buildChangePwdTask() throws Throwable {
-        changePwdTask = new RequestTask.Builder(changePwdCallBack).build();
-        return changePwdTask;
+    private boolean checkData(){
+        String newPwd = et_new_pwd.getText().toString().trim();
+        String oldPwd = et_old_pwd.getText().toString().trim();
+        String comfirmPwd = et_confirm_pwd.getText().toString().trim();
+        if (TextUtils.isEmpty(newPwd)){
+//            tv_prompt.setText();
+            //TODO
+        }
+        return true;
     }
 
     private RequestCallBack changePwdCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-            //TODO
         }
 
         @Override
         public String getUrl() {
-            //TODO
-            return null;
+            Map<String,String> map = new HashMap<>();
+            JSONObject object = new JSONObject();
+            try {
+                object.put("oldPwd",et_old_pwd.getText().toString().trim());
+                object.put("newPwd",et_new_pwd.getText().toString().trim());
+                object.put("userId",userData.getUserid());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            map.put(UrlAddressList.PARAM,object.toString());
+            map.put("sesId",userData.getSessionId());
+
+            return UrlAddressList.mergUrlAndParam(UrlAddressList.URL_EIDT_PASSWORD,map);
         }
 
         @Override
@@ -126,12 +147,11 @@ public class ChangePwdActivity extends BaseActivity {
         @Override
         public void onPostExecute(String result) {
             //TODO
-            back();
         }
 
         @Override
         public String type() {
-            return null;
+            return JSON;
         }
     };
 

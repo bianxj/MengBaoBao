@@ -2,10 +2,13 @@ package com.doumengmengandroidbady.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.doumengmengandroidbady.entity.HospitalEntity;
 import com.doumengmengandroidbady.response.Hospital;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,15 +17,15 @@ import java.util.List;
 
 public class HospitalDao {
 
-    private final static String TABLE_NAME = "Hospital";
+    public final static String TABLE_NAME = "Hospital";
 
     private final static String AREA = "area";
     private final static String HOSPITAL_ADDRESS = "hospitaladdress";
     private final static String HOSPITAL_DESC = "hospitaldesc";
     private final static String HOSPITAL_ICON = "hospitalicon";
-    private final static String HOSPITAL_ID = "hospitalid";
+    protected final static String HOSPITAL_ID = "hospitalid";
     private final static String HOSPITAL_MAP = "hospitalmap";
-    private final static String HOSPITAL_NAME = "hospitalname";
+    protected final static String HOSPITAL_NAME = "hospitalname";
     private final static String HOSPITAL_ORDER = "hospitalorder";
     private final static String HOSPITAL_PHONE = "hospitalphone";
     private final static String HOSPITAL_TYPE = "hospitaltype";
@@ -84,6 +87,93 @@ public class HospitalDao {
         db.setTransactionSuccessful();
         db.endTransaction();
         DataBaseUtil.closeDataBase();
+    }
+
+    public List<HospitalEntity> searchHospitalList(Context context , int offset , int limit){
+        List<HospitalEntity> entities = new ArrayList<>();
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("select ");
+        builder.append(HOSPITAL_ID+",");
+        builder.append(HOSPITAL_ICON+",");
+        builder.append(HOSPITAL_NAME+",");
+        builder.append(HOSPITAL_ADDRESS);
+        builder.append(" from " + TABLE_NAME);
+        builder.append(" order by " + HOSPITAL_ORDER);
+        builder.append(" limit " + limit);
+        builder.append(" offset " + offset*limit);
+
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(builder.toString(),null);
+
+        if ( cursor != null ){
+            while(cursor.moveToNext()){
+                HospitalEntity entity = new HospitalEntity();
+                entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
+                entity.setHospitaladdress(cursor.getString(cursor.getColumnIndex(HOSPITAL_ADDRESS)));
+                entity.setHospitalicon(cursor.getString(cursor.getColumnIndex(HOSPITAL_ICON)));
+                entity.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
+                entities.add(entity);
+            }
+        }
+        DataBaseUtil.closeDataBase();
+        return entities;
+    }
+
+    public List<HospitalEntity> searchHospitalList(Context context){
+        List<HospitalEntity> entities = new ArrayList<>();
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("select ");
+        builder.append(HOSPITAL_ID+",");
+        builder.append(HOSPITAL_ICON+",");
+        builder.append(HOSPITAL_NAME+",");
+        builder.append(HOSPITAL_ADDRESS);
+        builder.append(" from " + TABLE_NAME);
+        builder.append(" order by " + HOSPITAL_ORDER);
+
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(builder.toString(),null);
+
+        if ( cursor != null ){
+            while(cursor.moveToNext()){
+                HospitalEntity entity = new HospitalEntity();
+                entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
+                entity.setHospitaladdress(cursor.getString(cursor.getColumnIndex(HOSPITAL_ADDRESS)));
+                entity.setHospitalicon(cursor.getString(cursor.getColumnIndex(HOSPITAL_ICON)));
+                entity.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
+                entities.add(entity);
+            }
+        }
+        DataBaseUtil.closeDataBase();
+        return entities;
+    }
+
+    public Hospital searchHospitalById(Context context,String hospitalId){
+        Hospital hospital = null;
+        String sql = "select * from " + TABLE_NAME + " where " + HOSPITAL_ID + " = " + hospitalId;
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(sql,null);
+        if ( cursor.moveToNext() ){
+            hospital = new Hospital();
+            hospital.setArea(cursor.getString(cursor.getColumnIndex(AREA)));
+            hospital.setHospitaladdress(cursor.getString(cursor.getColumnIndex(HOSPITAL_ADDRESS)));
+            hospital.setHospitaldesc(cursor.getString(cursor.getColumnIndex(HOSPITAL_DESC)));
+            hospital.setHospitalicon(cursor.getString(cursor.getColumnIndex(HOSPITAL_ICON)));
+            hospital.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
+            hospital.setHospitalmap(cursor.getString(cursor.getColumnIndex(HOSPITAL_MAP)));
+            hospital.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
+            hospital.setHospitalorder(cursor.getString(cursor.getColumnIndex(HOSPITAL_ORDER)));
+            hospital.setHospitalphone(cursor.getString(cursor.getColumnIndex(HOSPITAL_PHONE)));
+            hospital.setHospitaltype(cursor.getString(cursor.getColumnIndex(HOSPITAL_TYPE)));
+            hospital.setHospitalurl(cursor.getString(cursor.getColumnIndex(HOSPITAL_URL)));
+            hospital.setPediatricsdesc(cursor.getString(cursor.getColumnIndex(PEDIATRICS_DESC)));
+            hospital.setProvince(cursor.getString(cursor.getColumnIndex(PROVINCE)));
+            hospital.setShowtag(cursor.getString(cursor.getColumnIndex(SHOW_TAG)));
+            hospital.setState(cursor.getString(cursor.getColumnIndex(STATE)));
+        }
+        DataBaseUtil.closeDataBase();
+        return hospital;
     }
 
 }

@@ -6,17 +6,6 @@ package com.doumengmengandroidbady.entity;
 
 public class HospitalEntity {
 
-//    private String hospitaltype;
-//    private String hospitalmap;
-//    private String hospitalphone;
-//    private String hospitaldesc;
-//    private String state;
-//    private String hospitalorder;
-//    private String pediatricsdesc;
-//    private String area;
-//    private String showtag;
-//    private String hospitalurl;
-
     private String hospitalid;
     private String hospitalicon;
     private String hospitalname;
@@ -46,14 +35,6 @@ public class HospitalEntity {
         this.hospitaladdress = hospitaladdress;
     }
 
-//    public String getHospitaltype() {
-//        return hospitaltype;
-//    }
-//
-//    public void setHospitaltype(String hospitaltype) {
-//        this.hospitaltype = hospitaltype;
-//    }
-
     public String getHospitalid() {
         return hospitalid;
     }
@@ -62,76 +43,5 @@ public class HospitalEntity {
         this.hospitalid = hospitalid;
     }
 
-//    public String getHospitalmap() {
-//        return hospitalmap;
-//    }
-//
-//    public void setHospitalmap(String hospitalmap) {
-//        this.hospitalmap = hospitalmap;
-//    }
-//
-//    public String getHospitalphone() {
-//        return hospitalphone;
-//    }
-//
-//    public void setHospitalphone(String hospitalphone) {
-//        this.hospitalphone = hospitalphone;
-//    }
-//
-//    public String getHospitaldesc() {
-//        return hospitaldesc;
-//    }
-//
-//    public void setHospitaldesc(String hospitaldesc) {
-//        this.hospitaldesc = hospitaldesc;
-//    }
-//
-//    public String getState() {
-//        return state;
-//    }
-//
-//    public void setState(String state) {
-//        this.state = state;
-//    }
-//
-//    public String getHospitalorder() {
-//        return hospitalorder;
-//    }
-//
-//    public void setHospitalorder(String hospitalorder) {
-//        this.hospitalorder = hospitalorder;
-//    }
-//
-//    public String getPediatricsdesc() {
-//        return pediatricsdesc;
-//    }
-//
-//    public void setPediatricsdesc(String pediatricsdesc) {
-//        this.pediatricsdesc = pediatricsdesc;
-//    }
-//
-//    public String getArea() {
-//        return area;
-//    }
-//
-//    public void setArea(String area) {
-//        this.area = area;
-//    }
-//
-//    public String getShowtag() {
-//        return showtag;
-//    }
-//
-//    public void setShowtag(String showtag) {
-//        this.showtag = showtag;
-//    }
-//
-//    public String getHospitalurl() {
-//        return hospitalurl;
-//    }
-//
-//    public void setHospitalurl(String hospitalurl) {
-//        this.hospitalurl = hospitalurl;
-//    }
 
 }

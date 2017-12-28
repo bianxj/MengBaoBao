@@ -14,7 +14,7 @@ import java.util.List;
 
 public class GrowthDao {
 
-    private final static String TABLE_NAME = "Growth";
+    public final static String TABLE_NAME = "Growth";
 
     private final static String AGE = "age";
     private final static String OBSERVE_CONTENT = "observecontent";

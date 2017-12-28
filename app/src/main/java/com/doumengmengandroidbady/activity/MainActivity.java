@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.SideMenuAdapter;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragmentActivity;
 import com.doumengmengandroidbady.entity.SideMenuItem;
 import com.doumengmengandroidbady.fragment.BabyKnowledgeFragment;
@@ -26,6 +28,9 @@ import com.doumengmengandroidbady.fragment.HomePageFragment;
 import com.doumengmengandroidbady.fragment.HospitalReportFragment;
 import com.doumengmengandroidbady.fragment.LessonFragment;
 import com.doumengmengandroidbady.fragment.SpacialistServiceFragment;
+import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +64,10 @@ public class MainActivity extends BaseFragmentActivity {
     private ListView lv_side_menu;
     private SideMenuAdapter adapter;
 
+    private CircleImageView civ_head;
+    private CheckBox cb_male;
+    private TextView tv_baby_name , tv_baby_age;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +99,11 @@ public class MainActivity extends BaseFragmentActivity {
 
         lv_side_menu = findViewById(R.id.lv_side_menu);
         dl_main = findViewById(R.id.dl_main);
+
+        civ_head = findViewById(R.id.civ_head);
+        cb_male = findViewById(R.id.cb_male);
+        tv_baby_name = findViewById(R.id.tv_baby_name);
+        tv_baby_age = findViewById(R.id.tv_baby_age);
     }
 
     private void initView() {
@@ -104,6 +118,16 @@ public class MainActivity extends BaseFragmentActivity {
         rl_spacialist_service.setOnClickListener(listener);
         rl_hospital_report.setOnClickListener(listener);
         rl_meng_lesson.setOnClickListener(listener);
+
+        UserData userData = BaseApplication.getInstance().getUserData();
+        if (TextUtils.isEmpty(userData.getHeadimg())){
+
+        } else {
+            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+        }
+        tv_baby_age.setText(userData.getBabyAge());
+        tv_baby_name.setText(userData.getTruename());
+        cb_male.setChecked(userData.isMale());
 
         initSideMenu();
     }

@@ -6,23 +6,14 @@ package com.doumengmengandroidbady.entity;
 
 public class DoctorEntity {
 
-//    private String doctorcode;
-//    private String state;
-//    private String certificatea;
-//    private String certificateb;
-//    private String doctorphone;
-//    private String cost;
-//    private String loginpwd;
-//    private String doctororder;
-
     private String doctorid;
     private String doctorimg;
     private String doctorname;
     private String positionaltitles;
-    private String hospitalid;
-    private String hospital;
     private String speciality;
     private String doctordesc;
+    private String hospitalid;
+    private String hospital;
 
     public String getDoctorimg() {
         return doctorimg;

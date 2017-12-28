@@ -20,7 +20,6 @@
             android:id="@+id/civ_baby_img"
             android:layout_width="@dimen/y132px"
             android:layout_height="@dimen/y132px"
-            android:src="@drawable/ic_launcher_background"
             app:civ_border_color="@color/circleFrame"
             app:civ_border_width="@dimen/y2px"
             android:layout_centerVertical="true"
@@ -39,46 +38,63 @@
             android:includeFontPadding="false"
             />
 
-        <TextView
-            android:id="@+id/tv_baby_month"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_male"
-            android:drawablePadding="@dimen/x5px"
-            style="@style/GrayText24px"
-            android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/x30px"
             android:layout_marginTop="@dimen/y104px"
-            android:layout_toRightOf="@+id/civ_baby_img"
-            android:text="28月22天"
-            />
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/civ_baby_img">
 
-<!--        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/civ_baby_img"
-            android:layout_marginLeft="@dimen/x30px"
-            android:layout_marginTop="@dimen/y104px">
-            <ImageView
-                android:id="@+id/iv_sex"
+            <CheckBox
+                android:id="@+id/cb_male"
                 android:layout_width="@dimen/y22px"
                 android:layout_height="@dimen/y22px"
-                android:src="@drawable/icon_male"
                 android:layout_centerVertical="true"
+                android:background="@drawable/icon_gender"
+                android:clickable="false"
+                android:checked="true"
+                android:button="@null"
                 />
-            
+
             <TextView
-                android:id="@+id/tv_baby_month"
+                android:id="@+id/tv_baby_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/y24px"
-                android:text="28月20天"
-                android:includeFontPadding="false"
-                android:layout_toRightOf="@+id/iv_sex"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x10px"
-                />
-        </RelativeLayout>-->
+                android:layout_toRightOf="@+id/cb_male"
+                android:includeFontPadding="false"
+                android:text="28月20天"
+                style="@style/GrayText24px"/>
+        </RelativeLayout>
+
+        <!--        <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/civ_baby_img"
+                    android:layout_marginLeft="@dimen/x30px"
+                    android:layout_marginTop="@dimen/y104px">
+                    <ImageView
+                        android:id="@+id/iv_sex"
+                        android:layout_width="@dimen/y22px"
+                        android:layout_height="@dimen/y22px"
+                        android:src="@drawable/icon_male"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_baby_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/y24px"
+                        android:text="28月20天"
+                        android:includeFontPadding="false"
+                        android:layout_toRightOf="@+id/iv_sex"
+                        android:layout_marginLeft="@dimen/x10px"
+                        />
+                </RelativeLayout>-->
 
     </RelativeLayout>
 

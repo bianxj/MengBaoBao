@@ -3,6 +3,7 @@ package com.doumengmengandroidbady.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,11 @@ import com.doumengmengandroidbady.activity.DoctorListActivity;
 import com.doumengmengandroidbady.activity.HeadImageActivity;
 import com.doumengmengandroidbady.activity.MainActivity;
 import com.doumengmengandroidbady.activity.ObserveActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragment;
+import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * Created by Administrator on 2017/12/5.
@@ -70,6 +74,14 @@ public class HomePageFragment extends BaseFragment {
         ll_observe_point.setOnClickListener(listener);
         ll_doctor_list.setOnClickListener(listener);
         rl_baby_head.setOnClickListener(listener);
+
+        UserData userData = BaseApplication.getInstance().getUserData();
+        tv_baby_name.setText(userData.getTruename());
+        cb_male.setChecked(userData.isMale());
+        if ( !TextUtils.isEmpty(userData.getHeadimg()) ) {
+            ImageLoader.getInstance().displayImage(userData.getHeadimg(), civ_baby);
+        }
+        tv_baby_age.setText(userData.getBabyAge());
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

@@ -347,6 +347,8 @@
     <string name="prompt_no_wifi">当前不在wifi状态下，可能会产生流量费用</string>
     <string name="prompt_need_buy">只有付费用户才能填写</string>
     <string name="prompt_submit_base_info">提交后将不能修改宝宝姓名、宝宝性别、出生日期、出生体重、出生身长、孕周</string>
+
+    <string name="prompt_old_passwd_empty"></string>
     
     
     <!--异常退出提示-->

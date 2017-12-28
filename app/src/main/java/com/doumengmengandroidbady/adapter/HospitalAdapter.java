@@ -70,52 +70,13 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
         private View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
                 Context context = view.getContext();
                 Intent intent = new Intent(context, HospitalDoctorActivity.class);
+                intent.putExtra(HospitalDoctorActivity.IN_PARAM_HOSPITAL_ID,hospital.getHospitalid());
+                intent.putExtra(HospitalDoctorActivity.IN_PARAM_HOSPITAL_NAME,hospital.getHospitalname());
                 context.startActivity(intent);
             }
         };
 
     }
-
-//    private Context context;
-//    private List<HospitalEntity> hospitals;
-//
-//    public HospitalAdapter(Context context,List<HospitalEntity> hospitals) {
-//        this.hospitals = hospitals;
-//        this.context = context;
-//    }
-//
-//    @Override
-//    public int getCount() {
-//        return hospitals.size();
-//    }
-//
-//    @Override
-//    public Object getItem(int position) {
-//        return hospitals.get(position);
-//    }
-//
-//    @Override
-//    public long getItemId(int position) {
-//        return position;
-//    }
-//
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        if ( null == convertView ){
-//            convertView = LayoutInflater.from(context).inflate(R.layout.item_hospital,null);
-//        }
-//
-//        CircleImageView civ_hospital = convertView.findViewById(R.id.civ_hospital);
-//        TextView tv_hospital_name = convertView.findViewById(R.id.tv_hospital_name);
-//        TextView tv_hospital_address = convertView.findViewById(R.id.tv_hospital_address);
-//
-//        HospitalEntity hospital = hospitals.get(position);
-//        ImageLoader.getInstance().displayImage(hospital.getHospitalicon(),civ_hospital);
-//        tv_hospital_name.setText(hospital.getDoctorname());
-//        tv_hospital_address.setText(hospital.getHospitaladdress());
-//        return null;
-//    }
 }

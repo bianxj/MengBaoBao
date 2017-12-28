@@ -14,11 +14,15 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.db.DoctorDao;
+import com.doumengmengandroidbady.db.GrowthDao;
+import com.doumengmengandroidbady.db.HospitalDao;
+import com.doumengmengandroidbady.db.MengClassDao;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.response.InitConfigure;
+import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
@@ -185,6 +189,11 @@ public class LoadingActivity extends BaseActivity {
         public void onPostExecute(String result) {
             try {
                 //TODO
+                DaoManager.getInstance().deleteTable(LoadingActivity.this, DoctorDao.TABLE_NAME);
+                DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
+                DaoManager.getInstance().deleteTable(LoadingActivity.this, GrowthDao.TABLE_NAME);
+                DaoManager.getInstance().deleteTable(LoadingActivity.this, MengClassDao.TABLE_NAME);
+
                 JSONObject object = new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
                 InitConfigure configure = GsonUtil.getInstance().getGson().fromJson(res.toString(),InitConfigure.class);

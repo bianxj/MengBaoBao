@@ -12,6 +12,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.DoctorInfoActivity;
 import com.doumengmengandroidbady.entity.DoctorEntity;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -38,7 +39,6 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
     @Override
     public void onBindViewHolder(DoctorHolder holder, int position) {
         DoctorEntity doctor = doctors.get(position);
-
         ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),holder.civ_head);
         holder.tv_doctor_hospital.setText(doctor.getHospital());
         holder.tv_doctor_position.setText(doctor.getPositionaltitles());
@@ -72,12 +72,19 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
         private View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
                 Context context = v.getContext();
                 Intent intent = new Intent(context, DoctorInfoActivity.class);
+                intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_ID,doctor.getDoctorid());
                 context.startActivity(intent);
             }
         };
+    }
+
+    private void initDisplayImageOption(){
+        DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+//        builder.showImageOnFail();
+//        builder.showImageForEmptyUri();
+//        builder.showImageOnLoading();
     }
 
 //    private Context context;

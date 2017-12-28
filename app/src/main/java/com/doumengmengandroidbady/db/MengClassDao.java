@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MengClassDao {
 
-    private final static String TABLE_NAME = "MengClass";
+    public final static String TABLE_NAME = "MengClass";
 
     private final static String CLASS_CONTEXT = "classcontext";
     private final static String CLASS_ID = "classid";

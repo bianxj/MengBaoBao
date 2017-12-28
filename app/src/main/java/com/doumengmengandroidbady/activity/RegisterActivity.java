@@ -136,8 +136,6 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-            //{"result":{"code":"8931"},"errorId":0,"serverTime":"2017-12-27 11:47:38"}
             try {
                 JSONObject object = new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
@@ -145,8 +143,6 @@ public class RegisterActivity extends BaseActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            System.out.println(UrlAddressList.URL_GET_VC+":"+result);
         }
 
         @Override

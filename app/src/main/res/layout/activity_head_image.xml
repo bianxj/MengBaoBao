@@ -17,7 +17,7 @@
     <ImageView
         android:id="@+id/iv_camera"
         android:layout_width="@dimen/x166px"
-        android:layout_height="@dimen/y114px"
+        android:layout_height="@dimen/x114px"
         android:src="@drawable/btn_camera"
         android:layout_marginTop="@dimen/y847px"
         android:layout_marginLeft="@dimen/x156px"
@@ -27,7 +27,7 @@
     <ImageView
         android:id="@+id/iv_picture"
         android:layout_width="@dimen/x166px"
-        android:layout_height="@dimen/y114px"
+        android:layout_height="@dimen/x114px"
         android:src="@drawable/btn_picture"
         android:layout_marginTop="@dimen/y847px"
         android:layout_marginRight="@dimen/x156px"

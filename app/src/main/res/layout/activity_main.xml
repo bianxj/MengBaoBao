@@ -163,11 +163,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/SideMenuLineHeight">
             <com.doumengmengandroidbady.view.CircleImageView
+                android:id="@+id/civ_head"
                 android:layout_width="@dimen/y67px"
                 android:layout_height="@dimen/y67px"
                 android:layout_marginLeft="@dimen/x24px"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_launcher_background"/>
+                android:layout_centerVertical="true"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,17 +180,27 @@
                     android:layout_height="wrap_content"
                     style="@style/BlackText30px"
                     android:text="测试"/>
-                <TextView
-                    android:id="@+id/tv_baby_month"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_male"
-                    android:drawablePadding="@dimen/x5px"
                     android:layout_marginTop="@dimen/y5px"
-                    style="@style/GrayText24px"
                     android:gravity="center_vertical"
-                    android:text="28月22天"
-                    />
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/cb_male"
+                        android:layout_width="@dimen/y22px"
+                        android:layout_height="@dimen/y22px"
+                        android:background="@drawable/icon_gender"
+                        android:button="@null"/>
+                    <TextView
+                        android:id="@+id/tv_baby_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x5px"
+                        style="@style/GrayText24px"
+                        android:text="28月22天"
+                        />
+                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
 

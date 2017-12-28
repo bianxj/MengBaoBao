@@ -115,6 +115,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_head"
         android:overScrollMode="never"
+        android:background="@color/lightSky"
         ></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
@@ -124,6 +125,7 @@
         android:layout_below="@+id/rl_head"
         android:visibility="gone"
         android:overScrollMode="never"
+        android:background="@color/lightSky"
         ></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
 </RelativeLayout>

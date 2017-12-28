@@ -6,40 +6,46 @@ package com.doumengmengandroidbady.response;
 
 public class UserData {
 
-    private String sessionId;
-    private String birthday;
-    private String sex;
-    private String childuserid;
-    private String assistedreproductive;
-    private String truename;
-    private String pregnancydays;
-    private String pregnancyweeks;
-    private String mumbearage;
-    private String userid;
-    private String intracranialhemorrhage;
-    private String accountmobile;
-    private String weekdvalue;
-    private String birthtimes;
-    private String isstop;
-    private String deliverymethods;
-    private String pregnancies;
-    private String loginpwd;
-    private String bornweight;
-    private String pasthistoryother;
-    private String borntype;
-    private String neonatalasphyxia;
-    private String bornheight;
-    private String allergichistorydesc;
-    private String roletype;
-    private String hereditaryhistorydesc;
-    private String headimg;
-    private String allergichistory;
-    private String birthinjury;
-    private String pasthistory;
-    private String daydvalue;
-    private String hereditaryhistory;
-    private String recordtimes;
+    private final static String MALE = "1";
+    private final static String FEMALE = "0";
 
+    private String sessionId;
+    private String userid;
+    private String headimg;                     //头像
+    private String birthday;
+    private String sex;                         //性别(0女,1男)
+    private String weekdvalue;                  //矫正周差
+    private String daydvalue;                   //矫正天差
+    private String truename;
+
+    private String accountmobile;               //手机账号
+    private String loginpwd;                    //登录密码
+
+    private String childuserid;                 //?
+    private String assistedreproductive;        //辅助生育
+    private String mumbearage;                  //妈妈生育年龄
+    private String intracranialhemorrhage;      //颅内出血
+    private String pregnancyweeks;              //孕周
+    private String pregnancydays;               //孕周天
+    private String birthtimes;                  //产次
+    private String isstop;                      //是否禁用?
+    private String deliverymethods;             //分娩方式
+    private String pregnancies;                 //胎次
+    private String bornweight;                  //出生体重
+    private String borntype;                    //出生状况(1单胎,2多胎)
+    private String neonatalasphyxia;            //新生儿窒息
+    private String bornheight;                  //出生身高
+    private String allergichistory;             //家族过敏史
+    private String allergichistorydesc;         //家族过敏疾病内容
+    private String roletype;                    //用户角色 0免费,1普通用户,2医院
+    private String hereditaryhistory;           //家族遗传史
+    private String hereditaryhistorydesc;       //家族遗传史内容
+    private String birthinjury;                 //产伤
+    private String pasthistory;                 //既往史
+    private String pasthistoryother;            //既往史其他
+    private String recordtimes;                 //剩余测评次数
+
+    private String babyAge;
 
     public String getSessionId() {
         return sessionId;
@@ -55,6 +61,14 @@ public class UserData {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public boolean isMale(){
+        if ( MALE.equals(sex) ){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String getSex() {
@@ -304,4 +318,9 @@ public class UserData {
     public void setRecordtimes(String recordtimes) {
         this.recordtimes = recordtimes;
     }
+
+    public String getBabyAge(){
+        return weekdvalue+"周"+daydvalue+"日";
+    }
+
 }

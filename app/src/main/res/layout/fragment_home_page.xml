@@ -65,8 +65,7 @@
                 <com.doumengmengandroidbady.view.CircleImageView
                     android:id="@+id/civ_baby"
                     android:layout_width="@dimen/y133px"
-                    android:layout_height="@dimen/y133px"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:layout_height="@dimen/y133px" />
             </FrameLayout>
 
             <RelativeLayout

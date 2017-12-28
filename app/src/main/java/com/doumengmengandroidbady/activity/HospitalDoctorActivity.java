@@ -1,7 +1,7 @@
 package com.doumengmengandroidbady.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -10,10 +10,8 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.DoctorAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.config.Config;
+import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.entity.DoctorEntity;
-import com.doumengmengandroidbady.entity.HospitalEntity;
-import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -25,7 +23,10 @@ import java.util.List;
 
 public class HospitalDoctorActivity extends BaseActivity {
 
-    private HospitalEntity hospital;
+    public final static String IN_PARAM_HOSPITAL_ID = "hospitalId";
+    public final static String IN_PARAM_HOSPITAL_NAME = "hospitalName";
+
+    private String hospitalName;
     private RelativeLayout rl_back;
     private TextView tv_title;
 
@@ -42,7 +43,18 @@ public class HospitalDoctorActivity extends BaseActivity {
     }
 
     private void getHospitalInfo(){
-        //TODO
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String hospitalId = intent.getStringExtra(IN_PARAM_HOSPITAL_ID);
+            hospitalName = intent.getStringExtra(IN_PARAM_HOSPITAL_NAME);
+            List<DoctorEntity> entities = DaoManager.getInstance().getDaotorDao().searchDoctorsByHospitalId(this,hospitalId);
+            for (DoctorEntity entity:entities){
+                entity.setHospital(hospitalName);
+            }
+            doctors.addAll(entities);
+        } else {
+            //TODO EXCEPTION
+        }
     }
 
     private void findView(){
@@ -56,16 +68,17 @@ public class HospitalDoctorActivity extends BaseActivity {
 
     private void initView() {
         rl_back.setOnClickListener(listener);
+        tv_title.setText(hospitalName);
     }
 
     private void initList(){
-        xrv_doctor.setLoadingMoreEnabled(true);
-        xrv_doctor.setFootView(new XLoadMoreFooter(this));
-        xrv_doctor.setLoadingListener(doctorLoadingListener);
+        xrv_doctor.setLoadingMoreEnabled(false);
+//        xrv_doctor.setFootView(new XLoadMoreFooter(this));
+//        xrv_doctor.setLoadingListener(doctorLoadingListener);
 
         doctorAdapter = new DoctorAdapter(doctors);
         xrv_doctor.setAdapter(doctorAdapter);
-        requestDoctorList();
+        doctorAdapter.notifyDataSetChanged();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -83,50 +96,50 @@ public class HospitalDoctorActivity extends BaseActivity {
         finish();
     }
 
-    private XRecyclerView.LoadingListener doctorLoadingListener = new XRecyclerView.LoadingListener(){
-
-        @Override
-        public void onRefresh() {}
-
-        @Override
-        public void onLoadMore() {
-            if ( Config.isTest ){
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (int i = 0; i <10 ; i++) {
-                            DoctorEntity doctor = new DoctorEntity();
-                            doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-                            doctor.setDoctordesc("Describe1");
-                            doctor.setDoctorname("Name"+i);
-                            doctor.setHospital("HospitalEntity"+i);
-                            doctor.setPositionaltitles("Position"+i);
-                            doctor.setSpeciality("Skill"+i);
-                            doctors.add(doctor);
-                        }
-                        xrv_doctor.loadMoreComplete();
-                        doctorAdapter.notifyDataSetChanged();
-                    }
-                },2000);
-            }
-        }
-    };
-
-    private void requestDoctorList(){
-        //TODO
-        if ( Config.isTest ){
-            for (int i = 0; i <10 ; i++) {
-                DoctorEntity doctor = new DoctorEntity();
-                doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-                doctor.setDoctordesc("Describe1");
-                doctor.setDoctorname("Name"+i);
-                doctor.setHospital("HospitalEntity"+i);
-                doctor.setPositionaltitles("Position"+i);
-                doctor.setSpeciality("Skill"+i);
-                doctors.add(doctor);
-            }
-        }
-        doctorAdapter.notifyDataSetChanged();
-    }
+//    private XRecyclerView.LoadingListener doctorLoadingListener = new XRecyclerView.LoadingListener(){
+//
+//        @Override
+//        public void onRefresh() {}
+//
+//        @Override
+//        public void onLoadMore() {
+//            if ( Config.isTest ){
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        for (int i = 0; i <10 ; i++) {
+//                            DoctorEntity doctor = new DoctorEntity();
+//                            doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
+//                            doctor.setDoctordesc("Describe1");
+//                            doctor.setDoctorname("Name"+i);
+//                            doctor.setHospital("HospitalEntity"+i);
+//                            doctor.setPositionaltitles("Position"+i);
+//                            doctor.setSpeciality("Skill"+i);
+//                            doctors.add(doctor);
+//                        }
+//                        xrv_doctor.loadMoreComplete();
+//                        doctorAdapter.notifyDataSetChanged();
+//                    }
+//                },2000);
+//            }
+//        }
+//    };
+//
+//    private void requestDoctorList(){
+//        //TODO
+//        if ( Config.isTest ){
+//            for (int i = 0; i <10 ; i++) {
+//                DoctorEntity doctor = new DoctorEntity();
+//                doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
+//                doctor.setDoctordesc("Describe1");
+//                doctor.setDoctorname("Name"+i);
+//                doctor.setHospital("HospitalEntity"+i);
+//                doctor.setPositionaltitles("Position"+i);
+//                doctor.setSpeciality("Skill"+i);
+//                doctors.add(doctor);
+//            }
+//        }
+//        doctorAdapter.notifyDataSetChanged();
+//    }
 
 }
