@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,9 +20,11 @@ import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
+import com.doumengmengandroidbady.util.MyDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -133,6 +136,7 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
+            disposeError(result);
         }
 
         @Override
@@ -148,7 +152,7 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public String type() {
-            return RequestCallBack.JSON;
+            return RequestCallBack.JSON_NO_PROMPT;
         }
     };
 
@@ -185,34 +189,34 @@ public class ForgotPwdActivity extends BaseActivity {
         if (isTest){
             return true;
         }
-//        tv_prompt.setText("");
-//        String phone = et_phone.getText().toString().trim();
-//        if (TextUtils
-//                .isEmpty(phone)){
-//            tv_prompt.setText(R.string.prompt_no_account);
-//            return false;
-//        }
-//        if (!FormatCheckUtil.isPhone(phone) ){
-//            tv_prompt.setText(R.string.prompt_error_phone);
-//            return false;
-//        }
-//
-//        String vc = et_vc.getText().toString().trim();
-//        if ( TextUtils.isEmpty(vc) ){
-//            tv_prompt.setText(R.string.prompt_no_vc);
-//            return false;
-//        }
-//
-//        String pwd = et_login_pwd.getText().toString().trim();
-//        if ( TextUtils.isEmpty(pwd) ){
-//            tv_prompt.setText(R.string.prompt_no_password);
-//            return false;
-//        }
-//
-//        if ( FormatCheckUtil.isLetterDigit(pwd) ){
-//            tv_prompt.setText(R.string.prompt_error_password);
-//            return false;
-//        }
+        tv_prompt.setText("");
+        String phone = et_phone.getText().toString().trim();
+        if (TextUtils
+                .isEmpty(phone)){
+            tv_prompt.setText(R.string.prompt_no_account);
+            return false;
+        }
+        if (!FormatCheckUtil.isPhone(phone) ){
+            tv_prompt.setText(R.string.prompt_error_phone);
+            return false;
+        }
+
+        String vc = et_vc.getText().toString().trim();
+        if ( TextUtils.isEmpty(vc) ){
+            tv_prompt.setText(R.string.prompt_no_vc);
+            return false;
+        }
+
+        String pwd = et_login_pwd.getText().toString().trim();
+        if ( TextUtils.isEmpty(pwd) ){
+            tv_prompt.setText(R.string.prompt_no_password);
+            return false;
+        }
+
+        if ( !FormatCheckUtil.isLetterDigit(pwd) ){
+            tv_prompt.setText(R.string.prompt_error_password);
+            return false;
+        }
 
         return true;
     }
@@ -222,7 +226,6 @@ public class ForgotPwdActivity extends BaseActivity {
     private RequestCallBack changePwdCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-            //TODO
         }
 
         @Override
@@ -246,6 +249,7 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
+            disposeError(result);
         }
 
         @Override
@@ -255,7 +259,7 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public String type() {
-            return RequestCallBack.JSON;
+            return RequestCallBack.JSON_NO_PROMPT;
         }
     };
 
@@ -294,7 +298,7 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-
+            disposeError(result);
         }
 
         @Override
@@ -317,7 +321,7 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public String type() {
-            return JSON;
+            return JSON_NO_PROMPT;
         }
     };
 
@@ -332,6 +336,22 @@ public class ForgotPwdActivity extends BaseActivity {
             if ( resultCode == Activity.RESULT_OK){
                 cb_agreement.setChecked(true);
             }
+        }
+    }
+
+    private void disposeError(String result){
+        int errorCode = ResponseErrorCode.getErrorCode(result);
+        String errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
+        if ( ResponseErrorCode.ERROR_LOGIN_ROLE_NOT_EXIST == errorCode ){
+            MyDialog.showPromptDialog(this, errorMsg, new MyDialog.PromptDialogCallback() {
+                @Override
+                public void sure() {
+                    startActivity(RegisterActivity.class);
+                    back();
+                }
+            });
+        } else {
+            tv_prompt.setText(errorMsg);
         }
     }
 

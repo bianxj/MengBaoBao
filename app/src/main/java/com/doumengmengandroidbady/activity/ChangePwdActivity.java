@@ -16,6 +16,7 @@ import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.response.UserData;
 
 import org.json.JSONException;
@@ -27,7 +28,6 @@ import java.util.Map;
 /**
  * Created by Administrator on 2017/12/11.
  */
-//TODO
 public class ChangePwdActivity extends BaseActivity {
 
     private RelativeLayout rl_back;
@@ -104,11 +104,27 @@ public class ChangePwdActivity extends BaseActivity {
     private boolean checkData(){
         String newPwd = et_new_pwd.getText().toString().trim();
         String oldPwd = et_old_pwd.getText().toString().trim();
-        String comfirmPwd = et_confirm_pwd.getText().toString().trim();
-        if (TextUtils.isEmpty(newPwd)){
-//            tv_prompt.setText();
-            //TODO
+        String confirmPwd = et_confirm_pwd.getText().toString().trim();
+        if (TextUtils.isEmpty(oldPwd)){
+            tv_prompt.setText(R.string.prompt_old_passwd_empty);
+            return false;
         }
+
+        if (TextUtils.isEmpty(newPwd)){
+            tv_prompt.setText(R.string.prompt_new_passwd_empty);
+            return false;
+        }
+
+        if (TextUtils.isEmpty(confirmPwd)){
+            tv_prompt.setText(R.string.prompt_confirm_passwd_empty);
+            return false;
+        }
+
+        if ( !confirmPwd.equals(newPwd) ){
+            tv_prompt.setText(R.string.prompt_confirm_passwd_error);
+            return false;
+        }
+
         return true;
     }
 
@@ -141,17 +157,18 @@ public class ChangePwdActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            //TODO
+            int errorCode = ResponseErrorCode.getErrorCode(result);
+            String errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
+            tv_prompt.setText(errorMsg);
         }
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
         }
 
         @Override
         public String type() {
-            return JSON;
+            return JSON_NO_PROMPT;
         }
     };
 

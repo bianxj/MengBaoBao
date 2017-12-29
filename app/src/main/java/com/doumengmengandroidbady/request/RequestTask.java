@@ -6,9 +6,6 @@ import android.os.AsyncTask;
 import com.doumengmengandroidbady.net.HttpUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 /**
  * Created by Administrator on 2017/12/15.
  */
@@ -63,19 +60,15 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         if ( null == json ){
             errorMsg = "数据为空";
         } else {
-            try {
-                JSONObject object = new JSONObject(json);
-                int errorCode = object.getInt("errorId");
-                errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                errorMsg = "数据解析出错";
-            }
+            int errorCode = ResponseErrorCode.getErrorCode(json);
+            errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
         }
         if ( null == errorMsg ){
             return false;
         } else {
-            errorDispose(errorMsg);
+            if ( RequestCallBack.JSON == builder.getCallBack().type() ) {
+                errorDispose(errorMsg);
+            }
             return true;
         }
     }

@@ -348,8 +348,11 @@
     <string name="prompt_need_buy">只有付费用户才能填写</string>
     <string name="prompt_submit_base_info">提交后将不能修改宝宝姓名、宝宝性别、出生日期、出生体重、出生身长、孕周</string>
 
-    <string name="prompt_old_passwd_empty"></string>
-    
+    <string name="prompt_old_passwd_empty">旧密码为空</string>
+    <string name="prompt_new_passwd_empty">新密码为空</string>
+    <string name="prompt_confirm_passwd_empty">请确认密码</string>
+    <string name="prompt_confirm_passwd_error">两次输入的面膜不一致</string>
+
     
     <!--异常退出提示-->
     <string name="error_exit_message">很抱歉，程序出现异常，即将退出</string>

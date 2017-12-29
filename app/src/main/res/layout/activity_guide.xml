@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+<!--    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_guide_botttom">
@@ -22,7 +23,24 @@
             android:layout_gravity="bottom|center_horizontal">
 
         </LinearLayout>
-    </FrameLayout>
+    </FrameLayout>-->
+
+    <com.doumengmengandroidbady.view.AutoScrollViewPager
+        android:id="@+id/asvp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_guide_botttom"
+        app:dot_src="@drawable/icon_dot"
+        app:dot_gap="@dimen/x20px"
+        app:dot_size="@dimen/x16px"
+        app:dot_margin_bottom="@dimen/y40px"
+        app:page_height="@dimen/y600px"
+        app:page_margin_top="@dimen/y50px"
+        app:canLoop="false"
+        android:background="@color/lightSky"
+        >
+
+    </com.doumengmengandroidbady.view.AutoScrollViewPager>
 
     <RelativeLayout
         android:id="@+id/ll_guide_botttom"

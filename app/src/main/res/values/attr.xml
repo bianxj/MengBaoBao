@@ -19,9 +19,14 @@
     </declare-styleable>
 
 
-    //TODO
     <declare-styleable name="AutoScrollViewPager">
         <attr name="dot_src" format="reference"></attr>
+        <attr name="dot_size" format="dimension"></attr>
+        <attr name="dot_gap" format="dimension"></attr>
+        <attr name="dot_margin_bottom" format="dimension"></attr>
+        <attr name="page_height" format="dimension"></attr>
+        <attr name="page_margin_top" format="dimension"></attr>
+        <attr name="canLoop" format="boolean"></attr>
     </declare-styleable>
 
 </resources>
