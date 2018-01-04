@@ -71,6 +71,8 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private void initView(){
+        rl_back.setOnClickListener(listener);
+
         AnimationDrawable drawable = (AnimationDrawable) iv_loading_icon.getDrawable();
         drawable.start();
     }
@@ -128,6 +130,11 @@ public class LoadingActivity extends BaseActivity {
         }
 
         @Override
+        public Map<String, String> getContent() {
+            return null;
+        }
+
+        @Override
         public void onError(String result) {
             //TODO
         }
@@ -162,6 +169,17 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
+
+            return UrlAddressList.URL_INIT_CONFIGURE;
+        }
+
+        @Override
+        public Context getContext() {
+            return LoadingActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
             UserData userData = BaseApplication.getInstance().getUserData();
             Map<String,String> map = new HashMap<>();
             JSONObject object = new JSONObject();
@@ -172,12 +190,7 @@ public class LoadingActivity extends BaseActivity {
                 e.printStackTrace();
             }
             map.put("sesId",userData.getSessionId());
-            return UrlAddressList.mergUrlAndParam(UrlAddressList.URL_INIT_CONFIGURE,map);
-        }
-
-        @Override
-        public Context getContext() {
-            return LoadingActivity.this;
+            return map;
         }
 
         @Override
@@ -187,24 +200,28 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                //TODO
-                DaoManager.getInstance().deleteTable(LoadingActivity.this, DoctorDao.TABLE_NAME);
-                DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
-                DaoManager.getInstance().deleteTable(LoadingActivity.this, GrowthDao.TABLE_NAME);
-                DaoManager.getInstance().deleteTable(LoadingActivity.this, MengClassDao.TABLE_NAME);
+//            if ( isTest ) {
+//                startActivity(MainActivity.class);
+//            } else {
+                try {
+                    //TODO
+                    DaoManager.getInstance().deleteTable(LoadingActivity.this, DoctorDao.TABLE_NAME);
+                    DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
+                    DaoManager.getInstance().deleteTable(LoadingActivity.this, GrowthDao.TABLE_NAME);
+                    DaoManager.getInstance().deleteTable(LoadingActivity.this, MengClassDao.TABLE_NAME);
 
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                InitConfigure configure = GsonUtil.getInstance().getGson().fromJson(res.toString(),InitConfigure.class);
-                DaoManager.getInstance().getDaotorDao().saveDoctorList(getContext(),configure.getDoctorList());
-                DaoManager.getInstance().getGrowthDao().saveGrowthList(getContext(),configure.getGrowthList());
-                DaoManager.getInstance().getHospitalDao().saveHospitalList(getContext(),configure.getHospitalList());
-                DaoManager.getInstance().getMengClassDao().saveMengClassList(getContext(),configure.getMengClassList());
-                startActivity(MainActivity.class);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                    JSONObject object = new JSONObject(result);
+                    JSONObject res = object.getJSONObject("result");
+                    InitConfigure configure = GsonUtil.getInstance().getGson().fromJson(res.toString(), InitConfigure.class);
+                    DaoManager.getInstance().getDaotorDao().saveDoctorList(getContext(), configure.getDoctorList());
+                    DaoManager.getInstance().getGrowthDao().saveGrowthList(getContext(), configure.getGrowthList());
+                    DaoManager.getInstance().getHospitalDao().saveHospitalList(getContext(), configure.getHospitalList());
+                    DaoManager.getInstance().getMengClassDao().saveMengClassList(getContext(), configure.getMengClassList());
+                    startActivity(MainActivity.class);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+//            }
         }
 
         @Override

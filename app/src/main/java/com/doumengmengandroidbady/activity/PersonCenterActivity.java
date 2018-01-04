@@ -2,7 +2,6 @@ package com.doumengmengandroidbady.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
@@ -14,6 +13,7 @@ import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -59,6 +59,10 @@ public class PersonCenterActivity extends BaseActivity {
 
         if (!BaseApplication.getInstance().isPay()){
             tv_baby_age.setVisibility(View.INVISIBLE);
+            cb_male.setVisibility(View.INVISIBLE);
+        } else {
+            tv_baby_age.setVisibility(View.VISIBLE);
+            cb_male.setVisibility(View.VISIBLE);
         }
 
         rl_back.setOnClickListener(listener);
@@ -69,11 +73,16 @@ public class PersonCenterActivity extends BaseActivity {
         tv_baby_name.setText(userData.getTruename());
         tv_baby_age.setText(userData.getBabyAge());
         cb_male.setChecked(userData.isMale());
-        if (TextUtils.isEmpty(userData.getHeadimg()) ){
-            //TODO
-        } else {
-            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_baby_img);
-        }
+
+        ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_baby_img);
+    }
+
+    private void initDisplayImageOption(){
+        //TODO
+        DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+//        builder.showImageOnLoading();
+//        builder.showImageOnFail();
+//        builder.showImageForEmptyUri();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

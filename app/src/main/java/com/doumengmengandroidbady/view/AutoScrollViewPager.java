@@ -45,6 +45,7 @@ public class AutoScrollViewPager extends FrameLayout {
     private int pageCount = 0;
     private ScrollPagerAdapter adapter;
     private Timer timer;
+    private OnClickCallBack callBack;
 
     private final static int SCROLL_NEXT = 0x31;
     private final static int SCROLL_NEXT_NOSCROLL = 0x32;
@@ -93,6 +94,7 @@ public class AutoScrollViewPager extends FrameLayout {
         dotMarginBottom = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_dot_margin_bottom,0);
         pageHeight = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_page_height,0);
         pageMarginTop = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_page_margin_top,0);
+        canLoop = array.getBoolean(R.styleable.AutoScrollViewPager_canLoop,false);
     }
 
     private void initViewPager(){
@@ -114,6 +116,10 @@ public class AutoScrollViewPager extends FrameLayout {
         addView(dotLayout);
     }
 
+    public void setOnClickCallBack(OnClickCallBack onClickCallBack){
+        this.callBack = onClickCallBack;
+    }
+
     public void setImageList(int[] imageList){
         if ( canLoop() ){
             List<ImageView> imageViews = new ArrayList<>();
@@ -132,7 +138,6 @@ public class AutoScrollViewPager extends FrameLayout {
             initDotList(pageCount);
             this.adapter = new ScrollPagerAdapter(imageViews);
             viewPager.setAdapter(this.adapter);
-            viewPager.setCurrentItem(1,false);
             viewPager.addOnPageChangeListener(pageChangeListener);
             viewPager.setOnTouchListener(onTouchListener);
             this.adapter.notifyDataSetChanged();
@@ -281,8 +286,33 @@ public class AutoScrollViewPager extends FrameLayout {
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
             container.addView(imageViews.get(position));
-            return imageViews.get(position);
+            ImageView view = imageViews.get(position);
+            view.setTag(position);
+            view.setOnClickListener(listener);
+            return view;
         }
+    }
+
+    private OnClickListener listener = new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int position = (int) view.getTag();
+            if ( callBack != null ){
+                if ( position == 0 ) {
+                    callBack.onClick(pageCount - 1);
+                } else if ( position == pageCount +1 ) {
+                    callBack.onClick(0);
+                } else {
+                    callBack.onClick(position);
+                }
+            }
+        }
+    };
+
+    public interface OnClickCallBack{
+
+        public void onClick(int position);
+
     }
 
 }

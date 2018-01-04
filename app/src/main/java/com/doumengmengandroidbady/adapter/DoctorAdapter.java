@@ -78,6 +78,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
                 context.startActivity(intent);
             }
         };
+
+
     }
 
     private void initDisplayImageOption(){

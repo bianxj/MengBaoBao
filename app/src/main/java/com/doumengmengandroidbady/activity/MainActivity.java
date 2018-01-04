@@ -81,6 +81,7 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        initData();
     }
 
     @Override
@@ -119,16 +120,6 @@ public class MainActivity extends BaseFragmentActivity {
         rl_hospital_report.setOnClickListener(listener);
         rl_meng_lesson.setOnClickListener(listener);
 
-        UserData userData = BaseApplication.getInstance().getUserData();
-        if (TextUtils.isEmpty(userData.getHeadimg())){
-
-        } else {
-            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
-        }
-        tv_baby_age.setText(userData.getBabyAge());
-        tv_baby_name.setText(userData.getTruename());
-        cb_male.setChecked(userData.isMale());
-
         initSideMenu();
     }
 
@@ -155,6 +146,18 @@ public class MainActivity extends BaseFragmentActivity {
         fragmentMap.put(PAGE_LESSON,new LessonFragment());
         fragmentMap.put(PAGE_SPACIALIST_SERVICE,new SpacialistServiceFragment());
         fragmentMap.put(PAGE_HOSPITAL_REPORT,new HospitalReportFragment());
+    }
+
+    private void initData(){
+        UserData userData = BaseApplication.getInstance().getUserData();
+        if (TextUtils.isEmpty(userData.getHeadimg())){
+
+        } else {
+            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+        }
+        tv_baby_age.setText(userData.getBabyAge());
+        tv_baby_name.setText(userData.getTruename());
+        cb_male.setChecked(userData.isMale());
     }
 
     private void showFragment(){

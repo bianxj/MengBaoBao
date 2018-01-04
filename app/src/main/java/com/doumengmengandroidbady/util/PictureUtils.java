@@ -12,8 +12,12 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
@@ -190,11 +194,29 @@ public class PictureUtils {
     }
 
     /**
-     * 根据路径获得照片并压缩返回bitmap用于显示
+     * 压缩指定byte[]图片，并得到压缩后的图像
      *
-     * @param filePath
+     * @param bts
+     * @param reqsW
+     * @param reqsH
      * @return
      */
+    public static Bitmap getSmallBitmap(byte[] bts, int reqsW, int reqsH) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
+        options.inSampleSize = calculateInSampleSize(options, reqsW, reqsH);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
+    }
+
+
+        /**
+         * 根据路径获得照片并压缩返回bitmap用于显示
+         *
+         * @param filePath
+         * @return
+         */
     public static Bitmap getSmallBitmap(String filePath, int reqWidth, int reqHeight) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;  //只返回图片的大小信息
@@ -231,4 +253,37 @@ public class PictureUtils {
         File file = new File(appDir, fileName);
         return file;
     }
+
+    /**
+     * 图片转成string
+     *
+     * @param bitmap
+     * @return
+     */
+    public static String convertBitmapToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();// outputstream
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] bytes = baos.toByteArray();// 转为byte数组
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+
+    public static void compressPicture(String source , String target, int reqWidth, int reqHeight) {
+        Bitmap bitmap = getSmallBitmap(source, reqWidth, reqHeight);
+        File file = new File(target);
+        try {
+            if ( !file.exists() ){
+                file.createNewFile();
+            }
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if ( bitmap != null ){
+                bitmap.recycle();
+            }
+        }
+    }
+
 }

@@ -4,7 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -24,14 +28,11 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.adapter.DoctorAdapter;
-import com.doumengmengandroidbady.adapter.HospitalAdapter;
+import com.doumengmengandroidbady.adapter.HospitalDoctorAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.config.Config;
+import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.entity.DoctorEntity;
 import com.doumengmengandroidbady.entity.HospitalEntity;
-import com.doumengmengandroidbady.request.RequestCallBack;
-import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -56,12 +57,13 @@ public class SpacialistServiceActivity extends BaseActivity {
     private ImageView iv_scan;
     private XRecyclerView xrv_search;
     private FrameLayout fl_content;
+    private ImageView iv_arrow;
+    private TextView tv_location_failed;
 
     private List<DoctorEntity> doctors = new ArrayList<>();
     private List<HospitalEntity> hospitals = new ArrayList<>();
 
-    private DoctorAdapter doctorAdapter;
-    private HospitalAdapter hospitalAdapter;
+    private HospitalDoctorAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class SpacialistServiceActivity extends BaseActivity {
     }
 
     private void findView(){
+        iv_arrow = findViewById(R.id.iv_arrow);
         rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);
 
@@ -98,6 +101,8 @@ public class SpacialistServiceActivity extends BaseActivity {
         iv_scan = findViewById(R.id.iv_scan);
         xrv_search = findViewById(R.id.xrv_search);
         fl_content = findViewById(R.id.fl_content);
+        tv_location_failed = findViewById(R.id.tv_location_failed);
+        iv_arrow = findViewById(R.id.iv_arrow);
         initView();
         initListView();
     }
@@ -106,6 +111,7 @@ public class SpacialistServiceActivity extends BaseActivity {
         rl_back.setOnClickListener(listener);
         rl_location_area.setOnClickListener(listener);
         iv_scan.setOnClickListener(listener);
+        tv_location_failed.setOnClickListener(listener);
 
         tv_title.setText(R.string.spacialist_service);
 
@@ -117,8 +123,9 @@ public class SpacialistServiceActivity extends BaseActivity {
         xrv_search.setFootView(new XLoadMoreFooter(this));
         xrv_search.setLoadingListener(searchLoadingListener);
 
-        doctorAdapter = new DoctorAdapter(doctors);
-        hospitalAdapter = new HospitalAdapter(hospitals);
+
+        adapter = new HospitalDoctorAdapter(hospitals,doctors);
+        xrv_search.setAdapter(adapter);
     }
 
     private XRecyclerView.LoadingListener searchLoadingListener = new XRecyclerView.LoadingListener() {
@@ -139,6 +146,8 @@ public class SpacialistServiceActivity extends BaseActivity {
                     back();
                     break;
                 case R.id.rl_location_area:
+                    rotateCount++;
+                    iv_arrow.setRotation(180F*rotateCount%360);
                     if ( MyDialog.isShowingChooseCityDialog() ){
                         MyDialog.dismissChooseCityDialog();
                     } else {
@@ -154,6 +163,9 @@ public class SpacialistServiceActivity extends BaseActivity {
                 case R.id.iv_scan:
                     Intent intent = new Intent(SpacialistServiceActivity.this,ScanActivity.class);
                     startActivityForResult(intent,REQUEST_QR);
+                    break;
+                case R.id.tv_location_failed:
+                    checkPermissionTwice();
                     break;
             }
         }
@@ -179,90 +191,98 @@ public class SpacialistServiceActivity extends BaseActivity {
         }
     };
 
+//    private RotateAnimation animation;
+    private int rotateCount = 0;
+//    private RotateAnimation buildRotateAnimation(){
+//        if ( animation == null ) {
+//            animation = new RotateAnimation(0F, 180F, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+//            animation.setFillBefore(true);
+//            animation.setInterpolator(new LinearInterpolator());
+//            animation.setDuration(500);
+//            animation.setAnimationListener(new Animation.AnimationListener() {
+//                @Override
+//                public void onAnimationStart(Animation animation) {
+//                    rotateCount++;
+//                }
+//
+//                @Override
+//                public void onAnimationEnd(Animation animation) {
+//                    iv_arrow.setRotation(180F*rotateCount%360);
+//                }
+//
+//                @Override
+//                public void onAnimationRepeat(Animation animation) {
+//
+//                }
+//            });
+//        }
+//        return animation;
+//    }
+
     //---------------------------------查询模块--------------------------------------------------
 
-    private void search(){
-        try {
-            buildSearchTask().execute();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
-    private RequestTask buildSearchTask() throws Throwable {
-        return new RequestTask.Builder(searchCallBack).build();
-    }
-
-    private int times = 0;
-    private RequestCallBack searchCallBack = new RequestCallBack() {
+    private final static int UPDATAE_LIST = 0x01;
+    private Handler handler = new Handler(){
         @Override
-        public void onPreExecute() {
-
-        }
-
-        @Override
-        public String getUrl() {
-            return null;
-        }
-
-        @Override
-        public Context getContext() {
-            return null;
-        }
-
-        @Override
-        public void onError(String result) {
-
-        }
-
-        @Override
-        public void onPostExecute(String result) {
-            if (Config.isTest){
-                    times++;
-                    if ( times %2 == 0 ){
-                        xrv_search.setAdapter(hospitalAdapter);
-                        hospitals.clear();
-                        for (int i = 0; i < 10; i++) {
-                            HospitalEntity hospital = new HospitalEntity();
-                            hospital.setHospitalicon("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
-                            hospital.setHospitalname("HospitalName" + i);
-                            hospital.setHospitaladdress("HospitalAddress" + i);
-                            hospitals.add(hospital);
-                        }
-                        hospitalAdapter.notifyDataSetChanged();
-                    } else {
-                        xrv_search.setAdapter(doctorAdapter);
-                        doctors.clear();
-                        for (int i = 0; i <10 ; i++) {
-                            DoctorEntity doctor = new DoctorEntity();
-                            doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-                            doctor.setDoctordesc("Describe1");
-                            doctor.setDoctorname("Name"+i);
-                            doctor.setHospital("HospitalEntity"+i);
-                            doctor.setPositionaltitles("Position"+i);
-                            doctor.setSpeciality("Skill"+i);
-                            doctors.add(doctor);
-                        }
-                        doctorAdapter.notifyDataSetChanged();
-                    }
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( UPDATAE_LIST == msg.what ){
+                updateList();
             }
         }
-
-        @Override
-        public String type() {
-            return JSON;
-        }
     };
+
+    List<DoctorEntity> tempDoctors;
+    List<HospitalEntity> tempHospitals;
+    private void search(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String name = et_search.getText().toString();
+                tempDoctors = DaoManager.getInstance().getDaotorDao().searchDoctorListByName(SpacialistServiceActivity.this,name);
+                tempHospitals = DaoManager.getInstance().getHospitalDao().searchHospitalListByName(SpacialistServiceActivity.this,name);
+                handler.sendEmptyMessage(UPDATAE_LIST);
+            }
+        }).start();
+    }
+
+    private void updateList(){
+        doctors.clear();
+        doctors.addAll(tempDoctors);
+        hospitals.clear();
+        hospitals.addAll(tempHospitals);
+        adapter.notifyDataSetChanged();
+    }
 
     //---------------------------------检查权限------------------------------------------------
     private final static String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
     private final static int REQUEST_PERMISSION = 0x01;
+    private final static int REQUEST_PERMISSIN_TWICE = 0x02;
     private void checkPermission(){
         if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ){
             initLocation();
         } else {
             ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSION);
         }
+    }
+
+    private void checkPermissionTwice(){
+        MyDialog.showChooseDialog(SpacialistServiceActivity.this, getString(R.string.location_content), R.string.later, R.string.go_setting, new MyDialog.ChooseDialogCallback() {
+            @Override
+            public void sure() {
+                //TODO
+                //跳转到权限设置界面
+                skipToSetPermission();
+            }
+
+            @Override
+            public void cancel() {}
+        });
+//        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ){
+//            initLocation();
+//        } else {
+//            ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSIN_TWICE);
+//        }
     }
 
     @Override
@@ -279,6 +299,38 @@ public class SpacialistServiceActivity extends BaseActivity {
                 initLocation();
             }
         }
+
+        if ( REQUEST_PERMISSIN_TWICE == requestCode ){
+            if (PackageManager.PERMISSION_GRANTED != grantResults[0] ) {
+                if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
+                    MyDialog.showChooseDialog(SpacialistServiceActivity.this, getString(R.string.location_content), R.string.later, R.string.go_setting, new MyDialog.ChooseDialogCallback() {
+                        @Override
+                        public void sure() {
+                            //TODO
+                            //跳转到权限设置界面
+                            skipToSetPermission();
+                        }
+
+                        @Override
+                        public void cancel() {}
+                    });
+                }
+            }
+        }
+    }
+
+    private void skipToSetPermission(){
+        Intent localIntent = new Intent();
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= 9) {
+            localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+            localIntent.setData(Uri.fromParts("package", getPackageName(), null));
+        } else if (Build.VERSION.SDK_INT <= 8) {
+            localIntent.setAction(Intent.ACTION_VIEW);
+            localIntent.setClassName("com.android.settings","com.android.settings.InstalledAppDetails");
+            localIntent.putExtra("com.android.settings.ApplicationPkgName", getPackageName());
+        }
+        startActivity(localIntent);
     }
 
     //---------------------------------定位模块分割线---------------------------------------------

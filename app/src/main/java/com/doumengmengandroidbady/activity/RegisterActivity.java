@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
@@ -26,6 +27,9 @@ import com.doumengmengandroidbady.util.GsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/5.
@@ -122,7 +126,7 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_GET_VC,et_phone.getText().toString());
+            return UrlAddressList.URL_GET_VC;
         }
 
         @Override
@@ -131,7 +135,17 @@ public class RegisterActivity extends BaseActivity {
         }
 
         @Override
+        public Map<String, String> getContent() {
+            Map<String,String> map = new HashMap<>();
+            map.put(UrlAddressList.PARAM,et_phone.getText().toString());
+            return map;
+        }
+
+        @Override
         public void onError(String result) {
+            int errorCode = ResponseErrorCode.getErrorCode(result);
+            String errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
+            tv_prompt.setText(errorMsg);
         }
 
         @Override
@@ -191,6 +205,16 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
+            return UrlAddressList.URL_REGISTER;
+        }
+
+        @Override
+        public Context getContext() {
+            return RegisterActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
             JSONObject object = new JSONObject();
             try {
                 object.put("accountMobile",et_phone.getText().toString().trim());
@@ -200,12 +224,9 @@ public class RegisterActivity extends BaseActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_REGISTER,object.toString());
-        }
-
-        @Override
-        public Context getContext() {
-            return RegisterActivity.this;
+            Map<String,String> map = new HashMap<>();
+            map.put(UrlAddressList.PARAM,object.toString());
+            return map;
         }
 
         @Override
@@ -251,6 +272,16 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
+            return UrlAddressList.URL_LOGIN;
+        }
+
+        @Override
+        public Context getContext() {
+            return RegisterActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
             JSONObject object = new JSONObject();
             try {
                 object.put("accountMobile",et_phone.getText().toString().trim());
@@ -258,12 +289,9 @@ public class RegisterActivity extends BaseActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_LOGIN,object.toString());
-        }
-
-        @Override
-        public Context getContext() {
-            return RegisterActivity.this;
+            Map<String,String> map = new HashMap<>();
+            map.put(UrlAddressList.PARAM,object.toString());
+            return map;
         }
 
         @Override

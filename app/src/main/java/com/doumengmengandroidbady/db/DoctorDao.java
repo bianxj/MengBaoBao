@@ -89,6 +89,44 @@ public class DoctorDao {
         DataBaseUtil.closeDataBase();
     }
 
+    public List<DoctorEntity> searchDoctorListByName(Context context , String name){
+        List<DoctorEntity> doctorEntities = new ArrayList<>();
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        StringBuilder builder = new StringBuilder();
+        builder.append("select ");
+        builder.append("a."+DOCTOR_ID+",");
+        builder.append("a."+DOCTOR_IMG+",");
+        builder.append("a."+DOCTOR_NAME+",");
+        builder.append("a."+POSITIONAL_TITLES+",");
+        builder.append("a."+SPECIALITY+",");
+        builder.append("a."+DOCTOR_DESC+",");
+        builder.append("b."+HospitalDao.HOSPITAL_ID+",");
+        builder.append("b."+HospitalDao.HOSPITAL_NAME);
+        builder.append(" from "+ TABLE_NAME + " a ," + HospitalDao.TABLE_NAME +" b ");
+        builder.append(" where a." + HOSPITAL_ID + " = " + "b."+HospitalDao.HOSPITAL_ID);
+        builder.append(" and a."+DOCTOR_NAME + " like '%" + name+"%' ");
+        builder.append(" order by a." + DOCTOR_ORDER);
+
+        Cursor cursor = db.rawQuery(builder.toString(),null);
+
+        if ( cursor != null ){
+            while(cursor.moveToNext()){
+                DoctorEntity entity = new DoctorEntity();
+                entity.setDoctorid(cursor.getString(cursor.getColumnIndex(DOCTOR_ID)));
+                entity.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
+                entity.setDoctorimg(cursor.getString(cursor.getColumnIndex(DOCTOR_IMG)));
+                entity.setDoctorname(cursor.getString(cursor.getColumnIndex(DOCTOR_NAME)));
+                entity.setHospital(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_NAME)));
+                entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
+                entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
+                entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
+                doctorEntities.add(entity);
+            }
+        }
+        DataBaseUtil.closeDataBase();
+        return doctorEntities;
+    }
+
     public List<DoctorEntity> searchDoctorList(Context context , int offset , int limit ){
         List<DoctorEntity> doctorEntities = new ArrayList<>();
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);

@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import com.doumengmengandroidbady.net.HttpUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
+import java.util.Map;
+
 /**
  * Created by Administrator on 2017/12/15.
  */
@@ -34,7 +36,8 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         String result = null;
         if (!isTest) {
             String url = builder.getCallBack().getUrl();
-            result = HttpUtil.getInstance().httpsRequestPost(url);
+            Map<String,String> map = builder.getCallBack().getContent();
+            result = HttpUtil.getInstance().httpsRequestPost(url,map);
         }
         return result;
     }

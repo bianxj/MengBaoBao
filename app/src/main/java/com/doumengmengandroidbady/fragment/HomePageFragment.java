@@ -2,7 +2,6 @@ package com.doumengmengandroidbady.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.DoctorListActivity;
@@ -21,6 +21,7 @@ import com.doumengmengandroidbady.activity.ObserveActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragment;
 import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -41,8 +42,7 @@ public class HomePageFragment extends BaseFragment {
     private CircleImageView civ_baby;
     private CheckBox cb_male;
     private TextView tv_baby_age;
-    private ViewPager vp_home;
-    private LinearLayout ll_home_dot;
+    private AutoScrollViewPager asvp;
 
     @Nullable
     @Override
@@ -65,8 +65,7 @@ public class HomePageFragment extends BaseFragment {
         civ_baby = view.findViewById(R.id.civ_baby);
         cb_male = view.findViewById(R.id.cb_male);
         tv_baby_age = view.findViewById(R.id.tv_baby_age);
-        vp_home = view.findViewById(R.id.vp_home);
-        ll_home_dot = view.findViewById(R.id.ll_home_dot);
+        asvp = view.findViewById(R.id.asvp);
     }
 
     private void initView(){
@@ -75,6 +74,12 @@ public class HomePageFragment extends BaseFragment {
         ll_doctor_list.setOnClickListener(listener);
         rl_baby_head.setOnClickListener(listener);
 
+        int[] images = new int[]{R.drawable.v1,R.drawable.v2,R.drawable.v3};
+        asvp.setImageList(images);
+        asvp.setOnClickCallBack(onClickCallBack);
+    }
+
+    private void initData(){
         UserData userData = BaseApplication.getInstance().getUserData();
         tv_baby_name.setText(userData.getTruename());
         cb_male.setChecked(userData.isMale());
@@ -82,6 +87,12 @@ public class HomePageFragment extends BaseFragment {
             ImageLoader.getInstance().displayImage(userData.getHeadimg(), civ_baby);
         }
         tv_baby_age.setText(userData.getBabyAge());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -101,6 +112,13 @@ public class HomePageFragment extends BaseFragment {
                     startActivity(HeadImageActivity.class);
                     break;
             }
+        }
+    };
+
+    private AutoScrollViewPager.OnClickCallBack onClickCallBack = new AutoScrollViewPager.OnClickCallBack() {
+        @Override
+        public void onClick(int position) {
+            Toast.makeText(getContext(),position+"",Toast.LENGTH_SHORT).show();
         }
     };
 

@@ -22,6 +22,7 @@ import java.util.Comparator;
  */
 public class MLog {
 
+    private final static String LOG_DIR_NAME = "logs";
     private final static String DEFAULT_TAG = "DEFAULT";
 //    private final static long ONE_DAY = 24 * 60 * 60 * 1000;
 
@@ -183,9 +184,9 @@ public class MLog {
     private String getLogDir(){
         String dir = null;
         if ( builder.isInner() ){
-            dir = builder.getContext().getFilesDir().getPath();
+            dir = builder.getContext().getFilesDir().getPath()+File.separator+LOG_DIR_NAME;
         } else {
-            dir = Environment.getExternalStorageDirectory().getPath();
+            dir = Environment.getExternalStorageDirectory().getPath()+File.separator+LOG_DIR_NAME;
         }
         dir = dir + builder.getLogDirName();
         File d = new File(dir);

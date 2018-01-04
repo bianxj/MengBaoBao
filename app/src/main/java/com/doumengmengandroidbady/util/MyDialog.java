@@ -39,6 +39,7 @@ public class MyDialog {
 
     public static void showUpdateDialog(Context context,boolean isForce,String content,final UpdateDialogCallback callback){
         synchronized (updateLock){
+            dismissUpdateDialog();
             updateDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_update,null);
             RelativeLayout rl_close = view.findViewById(R.id.rl_close);
@@ -92,6 +93,7 @@ public class MyDialog {
 
     public static void showPromptDialog(Context context, String content, int sure, final PromptDialogCallback callback){
         synchronized (promptLock){
+            dismissPromptDialog();
             promptDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_prompt,null);
 
@@ -131,6 +133,7 @@ public class MyDialog {
 
     public static void showChooseDialog(Context context,String content,int cancel,int sure,final ChooseDialogCallback callback){
         synchronized (chooseLock){
+            dismissChooseDialog();
             chooseDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_choose,null);
 
@@ -168,6 +171,7 @@ public class MyDialog {
 
     public static void showChooseCityDialog(final Context context,View view,final ChooseCityCallback callback){
         synchronized (cityLock) {
+            dismissChooseCityDialog();
             final String[] citys = context.getResources().getStringArray(R.array.citys);
             cityDialog = new PopupWindow(context);
             cityDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));

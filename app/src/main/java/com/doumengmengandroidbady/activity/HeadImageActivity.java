@@ -2,6 +2,7 @@ package com.doumengmengandroidbady.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -12,6 +13,8 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,8 +23,23 @@ import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.net.HttpUtil;
+import com.doumengmengandroidbady.net.UrlAddressList;
+import com.doumengmengandroidbady.request.RequestCallBack;
+import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.PictureUtils;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/12.
@@ -34,6 +52,7 @@ public class HeadImageActivity extends BaseActivity {
     private final static int REQUEST_CAMERA = 0x01;
     private final static int REQUEST_IMAGE = 0x02;
 
+    private UserData userData;
     private RelativeLayout rl_back;
     private TextView tv_title;
 
@@ -60,6 +79,11 @@ public class HeadImageActivity extends BaseActivity {
         iv_picture.setOnClickListener(listener);
         iv_camera.setOnClickListener(listener);
         tv_title.setText(R.string.head_image);
+
+        userData = BaseApplication.getInstance().getUserData();
+        if ( !TextUtils.isEmpty(userData.getHeadimg()) ) {
+            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -84,8 +108,20 @@ public class HeadImageActivity extends BaseActivity {
     }
 
     private void openCamera(){
-        if ( checkCameraPermission() ) {
+        if ( checkCameraPermission()) {
+            File picture = new File(BaseApplication.getInstance().getPersonHeadImgPath());
+            if ( picture.exists() ){
+                picture.delete();
+            }
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) {
+                Uri uri = FileProvider.getUriForFile(this, getPackageName() + ".fileProvider", picture);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            } else {
+                Uri uri = Uri.fromFile(picture);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            }
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             startActivityForResult(intent, REQUEST_CAMERA);
         }
     }
@@ -143,27 +179,103 @@ public class HeadImageActivity extends BaseActivity {
         }
     }
 
+    private Bitmap headImg = null;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if ( REQUEST_CAMERA == requestCode && Activity.RESULT_OK == resultCode && null != data){
-            Bundle bundle = data.getExtras();
-            Bitmap bitmap = (Bitmap) bundle.get("data");
-            civ_head.setImageBitmap(bitmap);
+        String source = null;
+        if ( REQUEST_CAMERA == requestCode && Activity.RESULT_OK == resultCode){
+            source = BaseApplication.getInstance().getPersonHeadImgPath();
         }
 
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             if (data == null) return;
-            String path;
             Uri uri = data.getData();
             int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
             if (sdkVersion >= 19) {
-                path = uri.getPath();
-                path = PictureUtils.getPath_above19(HeadImageActivity.this, uri);
+                source = uri.getPath();
+                source = PictureUtils.getPath_above19(HeadImageActivity.this, uri);
             } else {
-                path = PictureUtils.getFilePath_below19(HeadImageActivity.this,uri);
+                source = PictureUtils.getFilePath_below19(HeadImageActivity.this,uri);
             }
-            civ_head.setImageBitmap(PictureUtils.getSmallBitmap(path,civ_head.getWidth(),civ_head.getHeight()));
+        }
+        if ( Activity.RESULT_OK == resultCode ) {
+            String target = BaseApplication.getInstance().getPersonHeadImgPath();
+            PictureUtils.compressPicture(source,target,civ_head.getWidth(), civ_head.getHeight());
+            Bitmap tempImg = PictureUtils.getSmallBitmap(target, civ_head.getWidth(), civ_head.getHeight());
+            civ_head.setImageBitmap(tempImg);
+            if (tempImg != headImg) {
+                if ( headImg != null ) {
+                    headImg.recycle();
+                }
+                headImg = tempImg;
+            }
+            uploadHeadImg();
         }
     }
+
+    private void uploadHeadImg(){
+        try {
+            uploadHeadImageTask = new RequestTask.Builder(uploadHeadImageCallBack).build();
+            uploadHeadImageTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private RequestTask uploadHeadImageTask = null;
+
+    private RequestCallBack uploadHeadImageCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public String getUrl() {
+            return UrlAddressList.URL_UPLOAD_HEAD_IMG;
+        }
+
+        @Override
+        public Context getContext() {
+            return HeadImageActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
+            UserData userData = BaseApplication.getInstance().getUserData();
+            Map<String,String> map = new HashMap<>();
+            map.put("sesId",userData.getSessionId());
+            map.put("userId",userData.getUserid());
+
+            HttpUtil.UploadFile uploadFile = new HttpUtil.UploadFile();
+            uploadFile.setFileName("userHead");
+            uploadFile.setFilePath(BaseApplication.getInstance().getPersonHeadImgPath());
+            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().getGson().toJson(uploadFile));
+            return map;
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                userData.setHeadimg(res.getString("headimg"));
+                BaseApplication.getInstance().saveUserData(userData);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public String type() {
+            return JSON;
+        }
+    };
+
 }

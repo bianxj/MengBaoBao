@@ -13,15 +13,19 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
-import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
+import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/5.
@@ -138,14 +142,7 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-            JSONObject object = new JSONObject();
-            try {
-                object.put("accountMobile",et_phone.getText().toString().trim());
-                object.put("loginPwd",et_login_pwd.getText().toString().trim());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_LOGIN,object.toString()) ;
+            return UrlAddressList.URL_LOGIN;
         }
 
         @Override
@@ -154,31 +151,51 @@ public class LoginActivity extends BaseActivity {
         }
 
         @Override
+        public Map<String, String> getContent() {
+            JSONObject object = new JSONObject();
+            try {
+                object.put("accountMobile",et_phone.getText().toString().trim());
+                object.put("loginPwd",et_login_pwd.getText().toString().trim());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Map<String,String> map = new HashMap<>();
+            map.put(UrlAddressList.PARAM,object.toString());
+            return map;
+        }
+
+        @Override
         public void onError(String result) {
+            int errorCode = ResponseErrorCode.getErrorCode(result);
+            String errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
+            tv_prompt.setText(errorMsg);
         }
 
         @Override
         public void onPostExecute(String result) {
-            System.out.println(result);
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                String sessionId = res.getString("SessionId");
-                JSONObject user = res.getJSONObject("User");
-                UserData userData = GsonUtil.getInstance().getGson().fromJson(user.toString(),UserData.class);
-                userData.setSessionId(sessionId);
-
-                BaseApplication.getInstance().saveUserData(userData);
-
+            if ( isTest ) {
                 startActivity(LoadingActivity.class);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } else {
+                try {
+                    JSONObject object = new JSONObject(result);
+                    JSONObject res = object.getJSONObject("result");
+                    String sessionId = res.getString("SessionId");
+                    JSONObject user = res.getJSONObject("User");
+                    UserData userData = GsonUtil.getInstance().getGson().fromJson(user.toString(), UserData.class);
+                    userData.setSessionId(sessionId);
+
+                    BaseApplication.getInstance().saveUserData(userData);
+
+                    startActivity(LoadingActivity.class);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
         @Override
         public String type() {
-            return RequestCallBack.JSON;
+            return RequestCallBack.JSON_NO_PROMPT;
         }
     };
 

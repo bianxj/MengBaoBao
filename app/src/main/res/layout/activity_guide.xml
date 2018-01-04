@@ -36,8 +36,8 @@
         app:dot_margin_bottom="@dimen/y40px"
         app:page_height="@dimen/y600px"
         app:page_margin_top="@dimen/y50px"
-        app:canLoop="false"
-        android:background="@color/lightSky"
+        app:canLoop="true"
+        android:background="@color/white"
         >
 
     </com.doumengmengandroidbady.view.AutoScrollViewPager>

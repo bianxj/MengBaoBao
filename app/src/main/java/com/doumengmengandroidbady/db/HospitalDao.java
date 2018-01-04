@@ -89,6 +89,36 @@ public class HospitalDao {
         DataBaseUtil.closeDataBase();
     }
 
+    public List<HospitalEntity> searchHospitalListByName(Context context,String name){
+        List<HospitalEntity> entities = new ArrayList<>();
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("select ");
+        builder.append(HOSPITAL_ID+",");
+        builder.append(HOSPITAL_ICON+",");
+        builder.append(HOSPITAL_NAME+",");
+        builder.append(HOSPITAL_ADDRESS);
+        builder.append(" from " + TABLE_NAME);
+        builder.append(" where " + HOSPITAL_NAME + " like '%"+name+"%'");
+        builder.append(" order by " + HOSPITAL_ORDER);
+
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(builder.toString(),null);
+
+        if ( cursor != null ){
+            while(cursor.moveToNext()){
+                HospitalEntity entity = new HospitalEntity();
+                entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
+                entity.setHospitaladdress(cursor.getString(cursor.getColumnIndex(HOSPITAL_ADDRESS)));
+                entity.setHospitalicon(cursor.getString(cursor.getColumnIndex(HOSPITAL_ICON)));
+                entity.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
+                entities.add(entity);
+            }
+        }
+        DataBaseUtil.closeDataBase();
+        return entities;
+    }
+
     public List<HospitalEntity> searchHospitalList(Context context , int offset , int limit){
         List<HospitalEntity> entities = new ArrayList<>();
 

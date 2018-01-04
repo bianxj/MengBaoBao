@@ -1,5 +1,9 @@
 package com.doumengmengandroidbady.response;
 
+import android.text.TextUtils;
+
+import com.doumengmengandroidbady.net.UrlAddressList;
+
 /**
  * Created by Administrator on 2017/12/18.
  */
@@ -264,7 +268,11 @@ public class UserData {
     }
 
     public String getHeadimg() {
-        return headimg;
+        if (TextUtils.isEmpty(headimg)){
+            return null;
+        } else {
+            return UrlAddressList.BASE_URL + headimg;
+        }
     }
 
     public void setHeadimg(String headimg) {

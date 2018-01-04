@@ -135,6 +135,16 @@ public class ChangePwdActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
+            return UrlAddressList.URL_EIDT_PASSWORD;
+        }
+
+        @Override
+        public Context getContext() {
+            return ChangePwdActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
             Map<String,String> map = new HashMap<>();
             JSONObject object = new JSONObject();
             try {
@@ -146,13 +156,7 @@ public class ChangePwdActivity extends BaseActivity {
             }
             map.put(UrlAddressList.PARAM,object.toString());
             map.put("sesId",userData.getSessionId());
-
-            return UrlAddressList.mergUrlAndParam(UrlAddressList.URL_EIDT_PASSWORD,map);
-        }
-
-        @Override
-        public Context getContext() {
-            return ChangePwdActivity.this;
+            return map;
         }
 
         @Override

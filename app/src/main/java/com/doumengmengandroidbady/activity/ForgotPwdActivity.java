@@ -29,6 +29,9 @@ import com.doumengmengandroidbady.util.MyDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2017/12/5.
  */
@@ -126,12 +129,19 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_RESET_PASSWORD_GET_VC,et_phone.getText().toString());
+            return UrlAddressList.URL_RESET_PASSWORD_GET_VC;
         }
 
         @Override
         public Context getContext() {
             return ForgotPwdActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
+            Map<String,String> map = new HashMap<>();
+            map.put(UrlAddressList.PARAM,et_phone.getText().toString());
+            return map;
         }
 
         @Override
@@ -230,6 +240,17 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
+
+            return UrlAddressList.URL_RESET_PASSWORD;
+        }
+
+        @Override
+        public Context getContext() {
+            return ForgotPwdActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
             JSONObject object = new JSONObject();
             try {
                 object.put("accountMobile",et_phone.getText().toString().trim());
@@ -239,12 +260,9 @@ public class ForgotPwdActivity extends BaseActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_RESET_PASSWORD,object.toString());
-        }
-
-        @Override
-        public Context getContext() {
-            return ForgotPwdActivity.this;
+            Map<String,String> map = new HashMap<>();
+            map.put(UrlAddressList.PARAM,object.toString());
+            return map;
         }
 
         @Override
@@ -281,6 +299,16 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
+            return UrlAddressList.URL_LOGIN;
+        }
+
+        @Override
+        public Context getContext() {
+            return ForgotPwdActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
             JSONObject object = new JSONObject();
             try {
                 object.put("accountMobile",et_phone.getText().toString().trim());
@@ -288,12 +316,9 @@ public class ForgotPwdActivity extends BaseActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return UrlAddressList.mergeUrlAndParam(UrlAddressList.URL_LOGIN,object.toString());
-        }
-
-        @Override
-        public Context getContext() {
-            return ForgotPwdActivity.this;
+            Map<String,String> map = new HashMap<>();
+            map.put(UrlAddressList.PARAM,object.toString());
+            return map;
         }
 
         @Override

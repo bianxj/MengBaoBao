@@ -13,6 +13,8 @@ import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.view.BaseInfoLayout;
 
+import java.util.Map;
+
 /**
  * Created by Administrator on 2017/12/13.
  */
@@ -106,6 +108,11 @@ public class BaseInfoActivity extends BaseActivity {
         public Context getContext() {
             //TODO
             return BaseInfoActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
+            return null;
         }
 
         @Override

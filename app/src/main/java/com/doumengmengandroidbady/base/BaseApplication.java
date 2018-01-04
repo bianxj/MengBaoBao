@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MLog;
@@ -152,7 +153,11 @@ public class BaseApplication extends Application {
     }
 
     public boolean isPay(){
-        return true;
+        UserData data = getUserData();
+        if (RoleType.FREE_USER == data.getRoletype() ){
+            return true;
+        }
+        return false;
     }
 
     public boolean isFistLogin(){
@@ -165,6 +170,18 @@ public class BaseApplication extends Application {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("isFistLogin",false);
         editor.commit();
+    }
+
+    public final static String PERSON_DIR = "person";
+    public final static String PERSON_HEAD_IMG = "headimg.jpg";
+    public String getPersonHeadImgPath(){
+        String dirPath = getFilesDir().getPath()+File.separator+PERSON_DIR;
+//        String dirPath = Environment.getExternalStorageDirectory().getPath()+File.separator+PERSON_DIR;
+        File dir = new File(dirPath);
+        if ( !dir.exists() || !dir.isDirectory() ){
+            dir.mkdirs();
+        }
+        return dirPath + File.separator + PERSON_HEAD_IMG;
     }
 
 }

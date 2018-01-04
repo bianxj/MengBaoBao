@@ -29,6 +29,7 @@
                 android:maxLength="3"
                 />
             <ImageView
+                android:id="@+id/iv_arrow"
                 android:layout_width="@dimen/y29px"
                 android:layout_height="@dimen/y17px"
                 android:scaleType="fitXY"
@@ -36,7 +37,17 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x134px"
                 />
+
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_location_failed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="定位失败，请点击重试GPS定位"
+            android:layout_alignParentBottom="true"
+            style="@style/WhiteText22px"
+            />
 
 
         <RelativeLayout
@@ -86,7 +97,9 @@
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_search"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/lightSky"
+            android:overScrollMode="never">
 
         </com.jcodecraeer.xrecyclerview.XRecyclerView>
     </FrameLayout>

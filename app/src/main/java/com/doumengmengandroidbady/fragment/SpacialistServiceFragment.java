@@ -27,6 +27,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/11.
@@ -155,6 +156,11 @@ public class SpacialistServiceFragment extends BaseFragment {
 
         @Override
         public Context getContext() {
+            return null;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
             return null;
         }
 

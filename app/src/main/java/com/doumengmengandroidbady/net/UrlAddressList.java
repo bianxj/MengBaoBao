@@ -1,5 +1,7 @@
 package com.doumengmengandroidbady.net;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,15 +26,24 @@ public class UrlAddressList {
     public final static String URL_INIT_CONFIGURE = BASE_URL + "system.do?method=InitServerConfigure";
     public final static String URL_EIDT_PASSWORD = BASE_URL + "babyUser.do?method=EditPwd";
 
+    public final static String URL_SAVE_USER_INFO = BASE_URL + "babyUser.do?method=SaveUser";
+    public final static String URL_UPLOAD_HEAD_IMG = BASE_URL + "babyUser.do?method=UploadUserHead";
+
     public static String mergeUrlAndParam(String url , String value){
-        return url+"&paramStr="+value;
+        String result = null;
+        try {
+            result = url+"&paramStr="+ URLEncoder.encode(value,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public static String mergUrlAndParam(String url, Map<String,String> map){
         StringBuilder builder = new StringBuilder(url);
         Set<String> keys = map.keySet();
         for (String key:keys) {
-            builder.append("&"+key+"="+map.get(key));
+                builder.append("&"+key+"="+map.get(key));
         }
         return builder.toString();
     }

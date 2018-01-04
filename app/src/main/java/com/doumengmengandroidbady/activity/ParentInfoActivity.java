@@ -13,6 +13,8 @@ import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.view.ParentInfoLayout;
 
+import java.util.Map;
+
 /**
  * Created by Administrator on 2017/12/13.
  */
@@ -101,6 +103,11 @@ public class ParentInfoActivity extends BaseActivity {
         @Override
         public Context getContext() {
             return ParentInfoActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
+            return null;
         }
 
         @Override

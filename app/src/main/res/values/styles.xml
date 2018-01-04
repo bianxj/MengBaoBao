@@ -221,6 +221,12 @@
         <item name="android:layout_height">@dimen/y56px</item>
         <item name="android:background">@drawable/bg_circle_edittext</item>
         <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingLeft">@dimen/x20px</item>
+        <item name="android:paddingRight">@dimen/x20px</item>
     </style>
 
     <style name="InputDataMargin29px">

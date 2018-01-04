@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="@dimen/y1075px"
@@ -106,29 +107,22 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/RowSplitLine" />
 
-    <RelativeLayout
+    <com.doumengmengandroidbady.view.AutoScrollViewPager
+        android:id="@+id/asvp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y476px"
-        android:background="@color/white">
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_home"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y260px"
-            android:layout_centerInParent="true"
-            >
+        android:layout_above="@+id/ll_guide_botttom"
+        app:dot_src="@drawable/icon_dot"
+        app:dot_gap="@dimen/x8px"
+        app:dot_size="@dimen/x16px"
+        app:dot_margin_bottom="@dimen/y23px"
+        app:page_height="@dimen/y260px"
+        app:page_margin_top="@dimen/y99px"
+        app:canLoop="true"
+        android:background="@color/white"
+        >
 
-        </android.support.v4.view.ViewPager>
-        <LinearLayout
-            android:id="@+id/ll_home_dot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/y23px"
-            >
-
-        </LinearLayout>
-    </RelativeLayout>
+    </com.doumengmengandroidbady.view.AutoScrollViewPager>
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
