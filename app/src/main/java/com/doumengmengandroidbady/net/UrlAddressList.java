@@ -14,6 +14,7 @@ import java.util.Set;
 public class UrlAddressList {
 
     public final static String PARAM = "paramStr";
+    public final static String SESSION_ID = "sesId";
 
     public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneServerV2/";
 
@@ -28,6 +29,7 @@ public class UrlAddressList {
 
     public final static String URL_SAVE_USER_INFO = BASE_URL + "babyUser.do?method=SaveUser";
     public final static String URL_UPLOAD_HEAD_IMG = BASE_URL + "babyUser.do?method=UploadUserHead";
+    public final static String URL_SAVE_PARENT_INFO = BASE_URL + "babyUser.do?method=EditParent";
 
     public static String mergeUrlAndParam(String url , String value){
         String result = null;

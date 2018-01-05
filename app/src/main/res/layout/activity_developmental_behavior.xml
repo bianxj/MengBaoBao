@@ -6,9 +6,9 @@
     android:layout_height="match_parent">
     <include layout="@layout/include_title_back"></include>
 
-    <ListView
-        android:id="@+id/lv_behavior"
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xrv_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
 </LinearLayout>

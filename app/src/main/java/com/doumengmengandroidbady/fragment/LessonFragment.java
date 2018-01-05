@@ -72,7 +72,6 @@ public class LessonFragment extends BaseFragment {
     public void onResume() {
         if ( wv != null ) {
             wv.onResume();
-            wv.resumeTimers();
         }
         super.onResume();
     }
@@ -81,7 +80,6 @@ public class LessonFragment extends BaseFragment {
     public void onPause() {
         if ( wv != null ) {
             wv.onPause();
-            wv.pauseTimers();
         }
         super.onPause();
     }

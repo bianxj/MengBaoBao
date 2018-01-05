@@ -2,6 +2,7 @@ package com.doumengmengandroidbady.util;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,18 +29,23 @@ public class MyDialog {
     private static Object promptLock = new Object();
     private static Object chooseLock = new Object();
     private static Object loadingLock = new Object();
+    private static Object pictureLock = new Object();
     private static Object notificationLock = new Object();
     private static Object cityLock = new Object();
     private static Dialog updateDialog;
     private static Dialog promptDialog;
     private static Dialog chooseDialog;
     private static Dialog loadingDialog;
+    private static Dialog pictureDialog;
     private static Dialog notificationDialog;
     private static PopupWindow cityDialog;
 
     public static void showUpdateDialog(Context context,boolean isForce,String content,final UpdateDialogCallback callback){
         synchronized (updateLock){
-            dismissUpdateDialog();
+            if ( updateDialog != null ){
+                updateDialog.dismiss();
+                updateDialog = null;
+            }
             updateDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_update,null);
             RelativeLayout rl_close = view.findViewById(R.id.rl_close);
@@ -93,7 +99,10 @@ public class MyDialog {
 
     public static void showPromptDialog(Context context, String content, int sure, final PromptDialogCallback callback){
         synchronized (promptLock){
-            dismissPromptDialog();
+            if ( promptDialog != null ){
+                promptDialog.dismiss();
+                promptDialog = null;
+            }
             promptDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_prompt,null);
 
@@ -133,7 +142,10 @@ public class MyDialog {
 
     public static void showChooseDialog(Context context,String content,int cancel,int sure,final ChooseDialogCallback callback){
         synchronized (chooseLock){
-            dismissChooseDialog();
+            if ( chooseDialog != null ){
+                chooseDialog.dismiss();
+                chooseDialog = null;
+            }
             chooseDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_choose,null);
 
@@ -171,7 +183,10 @@ public class MyDialog {
 
     public static void showChooseCityDialog(final Context context,View view,final ChooseCityCallback callback){
         synchronized (cityLock) {
-            dismissChooseCityDialog();
+            if ( cityDialog != null && cityDialog.isShowing() ) {
+                cityDialog.dismiss();
+                cityDialog = null;
+            }
             final String[] citys = context.getResources().getStringArray(R.array.citys);
             cityDialog = new PopupWindow(context);
             cityDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));
@@ -197,6 +212,17 @@ public class MyDialog {
                 int y = location[1];
                 cityDialog.showAtLocation(view, Gravity.NO_GRAVITY, 0, y + view.getHeight());
             }
+        }
+    }
+
+    public static void showPictureDialog(Context context, Bitmap bitmap){
+        synchronized (pictureLock){
+            pictureDialog = new Dialog(context,R.style.MyDialog);
+            View view = LayoutInflater.from(context).inflate(R.layout.dialog_picture,null);
+            ImageView iv_picture = view.findViewById(R.id.iv_picture);
+            iv_picture.setImageBitmap(bitmap);
+            pictureDialog.setContentView(view);
+            pictureDialog.show();
         }
     }
 
@@ -258,6 +284,15 @@ public class MyDialog {
             if ( cityDialog != null && cityDialog.isShowing() ) {
                 cityDialog.dismiss();
                 cityDialog = null;
+            }
+        }
+    }
+
+    private static void dismissPictureDialog(){
+        synchronized (pictureLock){
+            if ( pictureDialog != null && pictureDialog.isShowing() ){
+                pictureDialog.dismiss();
+                pictureDialog = null;
             }
         }
     }

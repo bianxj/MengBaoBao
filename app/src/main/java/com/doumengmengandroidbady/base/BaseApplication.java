@@ -3,11 +3,14 @@ package com.doumengmengandroidbady.base;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.DisplayMetrics;
 
 import com.doumengmengandroidbady.entity.RoleType;
+import com.doumengmengandroidbady.response.ParentInfo;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MLog;
+import com.doumengmengandroidbady.util.SharedPreferencesUtil;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -29,7 +32,6 @@ public class BaseApplication extends Application {
 
     private static MLog log;
 
-    private UserData userData;
 
     @Override
     public void onCreate() {
@@ -99,25 +101,27 @@ public class BaseApplication extends Application {
         return preferences.getString("verification",null);
     }
 
+
+    //----------------------------------------------------------------------------------------------
+    public final static String TABLE_USER = "user";
+    public final static String COLUMN_USER = "user";
+    public final static String COLUMN_PARENT = "parent";
+
+    private UserData userData;
+    private ParentInfo parentInfo;
     public void clearUserData(){
-        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
+        SharedPreferencesUtil.clearTable(this,TABLE_USER);
     }
 
     public void saveUserData(UserData userData){
         this.userData = userData;
-        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
         String data = GsonUtil.getInstance().getGson().toJson(userData);
-        editor.putString("user",data);
-        editor.commit();
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_USER,data);
     }
 
     public UserData getUserData(){
         if ( userData == null ) {
-            SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-            String data = preferences.getString("user", null);
+            String data = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_USER,null);
             if (data != null) {
                 userData = GsonUtil.getInstance().getGson().fromJson(data, UserData.class);
             }
@@ -125,16 +129,31 @@ public class BaseApplication extends Application {
         return userData;
     }
 
+    public void saveParentInfo(ParentInfo parentInfo){
+        this.parentInfo = parentInfo;
+        String data = GsonUtil.getInstance().getGson().toJson(parentInfo);
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_PARENT,data);
+    }
+
+    public ParentInfo getParentInfo(){
+        if ( parentInfo == null ) {
+            String data = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_PARENT,null);
+            if (data != null) {
+                parentInfo = GsonUtil.getInstance().getGson().fromJson(data, ParentInfo.class);
+            }
+        }
+        return parentInfo;
+    }
+
+    //----------------------------------------------------------------------------------------------
+    private final static String TABLE_SEARCH_HISTORY = "history";
+    private final static String COLUMN_HISTORY = "histroy_value";
     public void saveSearchHistory(JSONArray array){
-        SharedPreferences preferences = getSharedPreferences("history",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("histroy_value",array.toString());
-        editor.commit();
+        SharedPreferencesUtil.saveString(this,TABLE_SEARCH_HISTORY,COLUMN_HISTORY,array.toString());
     }
 
     public JSONArray getSearchHistory(){
-        SharedPreferences preferences = getSharedPreferences("history",Context.MODE_PRIVATE);
-        String value = preferences.getString("histroy_value",null);
+        String value = SharedPreferencesUtil.loadString(this,TABLE_SEARCH_HISTORY,COLUMN_HISTORY,null);
         JSONArray array = null;
         if ( value != null ) {
             try {
@@ -147,9 +166,28 @@ public class BaseApplication extends Application {
     }
 
     public void clearSearchHistory(){
-        SharedPreferences preferences = getSharedPreferences("history",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("histroy_value").commit();
+        SharedPreferencesUtil.deleteColumn(this,TABLE_SEARCH_HISTORY,COLUMN_HISTORY);
+    }
+
+
+    //----------------------------------------------------------------------------------------------
+    public final static String TABLE_CONFIG = "config";
+    public final static String COLUMN_IS_FIRST = "isFirstLogin";
+    public final static String COLUMN_IS_ABNORMAL_EXIT = "isAbnormalExit";
+    public boolean isFistLogin(){
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_CONFIG,COLUMN_IS_FIRST,false);
+    }
+
+    public void saveLoginCount(){
+        SharedPreferencesUtil.saveBoolean(this,TABLE_CONFIG,COLUMN_IS_FIRST,false);
+    }
+
+    public boolean isAbnormalExit(){
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_CONFIG,COLUMN_IS_FIRST,false);
+    }
+
+    public void saveAbnormalExit(boolean isAbnormalExit){
+        SharedPreferencesUtil.saveBoolean(this,TABLE_CONFIG,COLUMN_IS_ABNORMAL_EXIT,isAbnormalExit);
     }
 
     public boolean isPay(){
@@ -158,18 +196,6 @@ public class BaseApplication extends Application {
             return true;
         }
         return false;
-    }
-
-    public boolean isFistLogin(){
-        SharedPreferences preferences = getSharedPreferences("login", Context.MODE_PRIVATE);
-        return preferences.getBoolean("isFirstLogin",true);
-    }
-
-    public void saveLoginCount(){
-        SharedPreferences preferences = getSharedPreferences("login", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("isFistLogin",false);
-        editor.commit();
     }
 
     public final static String PERSON_DIR = "person";
@@ -182,6 +208,35 @@ public class BaseApplication extends Application {
             dir.mkdirs();
         }
         return dirPath + File.separator + PERSON_HEAD_IMG;
+    }
+
+    public final static String PICTURE_DIR = "picture";
+    public String getUploadPicture(){
+        String dirPath = getFilesDir().getPath()+File.separator+PICTURE_DIR;
+        File dir = new File(dirPath);
+        if ( !dir.exists() || !dir.isDirectory() ){
+            dir.mkdirs();
+        }
+        return dirPath + File.separator + "picture_" + System.currentTimeMillis();
+    }
+
+    public void clearUploadPicture(){
+        String dirPath = getFilesDir().getPath()+File.separator+PICTURE_DIR;
+        File dir = new File(dirPath);
+        File[] files = dir.listFiles();
+        if ( files != null ){
+            for (File file : files){
+                file.delete();
+            }
+        }
+    }
+
+    private DisplayMetrics display;
+    public DisplayMetrics getDisplayInfo(){
+        if ( display == null ) {
+            display = getResources().getDisplayMetrics();
+        }
+        return display;
     }
 
 }

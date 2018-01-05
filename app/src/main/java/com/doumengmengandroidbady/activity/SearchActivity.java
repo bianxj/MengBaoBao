@@ -84,7 +84,8 @@ public class SearchActivity extends BaseActivity {
         bt_clear_history.setOnClickListener(listener);
 
         tv_search.setText(R.string.cancel);
-        rl_close.setVisibility(View.GONE);
+        ll_back.setVisibility(View.GONE);
+
         et_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

@@ -217,6 +217,7 @@ public class LoadingActivity extends BaseActivity {
                     DaoManager.getInstance().getGrowthDao().saveGrowthList(getContext(), configure.getGrowthList());
                     DaoManager.getInstance().getHospitalDao().saveHospitalList(getContext(), configure.getHospitalList());
                     DaoManager.getInstance().getMengClassDao().saveMengClassList(getContext(), configure.getMengClassList());
+                    BaseApplication.getInstance().saveParentInfo(configure.getParentInfo());
                     startActivity(MainActivity.class);
                 } catch (JSONException e) {
                     e.printStackTrace();

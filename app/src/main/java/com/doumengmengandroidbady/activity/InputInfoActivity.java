@@ -24,6 +24,7 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
+import com.doumengmengandroidbady.util.FormulaUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
@@ -302,14 +303,14 @@ public class InputInfoActivity extends BaseActivity {
                     String height = et_father_height.getText().toString().trim();
                     String weight = et_father_weight.getText().toString().trim();
                     if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
-                        tv_father_BMI.setText(calculateBMI(Float.parseFloat(weight),Float.parseFloat(height))+"");
+                        tv_father_BMI.setText(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))+"");
                     }
                 }
                 if ( R.id.et_mother_height == view.getId() || R.id.et_mother_weight == view.getId() ){
                     String height = et_mother_height.getText().toString().trim();
                     String weight = et_mother_weight.getText().toString().trim();
                     if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
-                        tv_mother_BMI.setText(calculateBMI(Float.parseFloat(weight),Float.parseFloat(height))+"");
+                        tv_mother_BMI.setText(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))+"");
                     }
                 }
             }
@@ -323,7 +324,7 @@ public class InputInfoActivity extends BaseActivity {
                 String height = et_mother_height.getText().toString().trim();
                 String weight = et_mother_weight.getText().toString().trim();
                 if (!TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight)) {
-                    tv_mother_BMI.setText(calculateBMI(Float.parseFloat(weight), Float.parseFloat(height)) + "");
+                    tv_mother_BMI.setText(FormulaUtil.formulaBMI(Float.parseFloat(weight), Float.parseFloat(height)) + "");
                 }
             }
             return false;
@@ -354,10 +355,6 @@ public class InputInfoActivity extends BaseActivity {
             }
         }
     };
-
-    private float calculateBMI(float weight,float height){
-        return (Math.round((weight * 10000) / (height*height)*100))/100f;
-    }
 
     private void back(){
         finish();

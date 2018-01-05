@@ -1,19 +1,32 @@
 package com.doumengmengandroidbady.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.adapter.PictureAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.util.PictureUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,10 +47,12 @@ public class RecordActivity extends BaseActivity {
     private final static int REQUEST_BREASTFEEDING = 0x08;
     private final static int REQUEST_MILK = 0x09;
     private final static int REQUEST_MICTURITION = 0x10;
+    private final static int REQUEST_DEVELOPMENTAL_ACTION = 0x11;
 
     private RelativeLayout rl_back,rl_complete;
     private TextView tv_title,tv_complete;
 
+    private RelativeLayout rl_correct_month;
     private TextView tv_really_month,tv_correct_month;
     private TextView tv_height,tv_weight,tv_micturition_count,
             tv_head_circumference,tv_chest_circumference,
@@ -60,6 +75,7 @@ public class RecordActivity extends BaseActivity {
     private EditText et_parent_message;
 
     private GridView gv_upload_report;
+    private PictureAdapter adapter;
 
     private Map<Integer,InputActivityCallBack> requestMap;
 
@@ -76,6 +92,7 @@ public class RecordActivity extends BaseActivity {
         tv_title = findViewById(R.id.tv_title);
         tv_complete = findViewById(R.id.tv_complete);
 
+        rl_correct_month = findViewById(R.id.rl_correct_month);
         tv_really_month = findViewById(R.id.tv_really_month);
         tv_micturition_count = findViewById(R.id.tv_micturition_count);
         tv_correct_month = findViewById(R.id.tv_correct_month);
@@ -154,6 +171,10 @@ public class RecordActivity extends BaseActivity {
         tv_micturition_count.setOnClickListener(listener);
 
         iv_develop_action.setOnClickListener(listener);
+
+        adapter = new PictureAdapter(this,tackPictureCallBack);
+        gv_upload_report.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -220,6 +241,24 @@ public class RecordActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if ( requestMap.containsKey(requestCode) ){
             requestMap.get(requestCode).response(resultCode,data);
+        }
+
+        if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
+            String source = null;
+            if (data == null) return;
+            Uri uri = data.getData();
+            int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
+            if (sdkVersion >= 19) {
+                source = PictureUtils.getPath_above19(RecordActivity.this, uri);
+            } else {
+                source = PictureUtils.getFilePath_below19(RecordActivity.this,uri);
+            }
+            DisplayMetrics display = BaseApplication.getInstance().getDisplayInfo();
+            String target = BaseApplication.getInstance().getUploadPicture();
+
+            PictureUtils.compressPicture(source,target,display.widthPixels,display.heightPixels);
+            adapter.addPicture(target);
+            setGridViewHeight(gv_upload_report);
         }
     }
 
@@ -439,10 +478,75 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
+    private final static int REQUEST_IMAGE = 0x02;
+    private final static int REQUEST_PERMISSION_STORAGE = 0x02;
+    private PictureAdapter.TackPictureCallBack tackPictureCallBack = new PictureAdapter.TackPictureCallBack() {
+        @Override
+        public void tackPicture() {
+            RecordActivity.this.tackPicture();
+        }
+    };
+
+    private void tackPicture(){
+        if ( checkExternalStoragePermission() ){
+            Intent intent = new Intent(Intent.ACTION_PICK) ;
+            intent.setType("image/*") ;
+            startActivityForResult(intent , REQUEST_IMAGE) ;
+        }
+    }
+
+    private boolean checkExternalStoragePermission(){
+        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ){
+            return true;
+        } else {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_PERMISSION_STORAGE);
+            return false;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if ( REQUEST_PERMISSION_STORAGE == requestCode ){
+            if ( PackageManager.PERMISSION_GRANTED == grantResults[0] ){
+                tackPicture();
+            } else {
+                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
+                    checkExternalStoragePermission();
+                } else {
+                    Toast.makeText(this,"请打开存储权限",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
     private interface InputActivityCallBack{
         public int requestCode();
         public void request();
         public void response(int resultCode,Intent data);
+    }
+
+    public void setGridViewHeight(GridView gridview) {
+        // 获取gridview的adapter
+        ListAdapter listAdapter = gridview.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        // 固定列宽，有多少列
+        int numColumns= gridview.getNumColumns(); //5
+        int totalHeight = 0;
+        // 计算每一列的高度之和
+        for (int i = 0; i < listAdapter.getCount(); i += numColumns) {
+            // 获取gridview的每一个item
+            View listItem = listAdapter.getView(i, null, gridview);
+            listItem.measure(0, 0);
+            // 获取item的高度和
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        // 获取gridview的布局参数
+        ViewGroup.LayoutParams params = gridview.getLayoutParams();
+        params.height = totalHeight;
+        gridview.setLayoutParams(params);
     }
 
 }

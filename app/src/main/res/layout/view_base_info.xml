@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
     <LinearLayout
         android:layout_width="@dimen/x674px"
@@ -33,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="妮妮" />
+                android:layout_marginRight="@dimen/x75px" />
 
             <View
                 android:layout_width="match_parent"
@@ -62,7 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="妮妮" />
+                android:layout_marginRight="@dimen/x75px"
+                android:text="" />
 
             <View
                 android:layout_width="match_parent"
@@ -91,7 +94,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="妮妮" />
+                android:layout_marginRight="@dimen/x75px"
+                android:text="" />
 
             <View
                 android:layout_width="match_parent"
@@ -121,12 +125,11 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/et_week"
+                <TextView
+                    android:id="@+id/tv_week"
                     style="@style/BlackText26px"
                     android:layout_width="@dimen/x97px"
                     android:layout_height="@dimen/y65px"
-                    android:background="@drawable/bg_input_data_four"
                     android:gravity="center"
                     android:inputType="number"
                     android:lines="1"
@@ -144,12 +147,11 @@
                     android:layout_marginRight="@dimen/x16px"
                     android:text="周" />
 
-                <EditText
-                    android:id="@+id/et_day"
+                <TextView
+                    android:id="@+id/tv_day"
                     style="@style/BlackText26px"
                     android:layout_width="@dimen/x97px"
                     android:layout_height="@dimen/y65px"
-                    android:background="@drawable/bg_input_data_four"
                     android:gravity="center"
                     android:inputType="number"
                     android:lines="1"
@@ -194,7 +196,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="妮妮" />
+                android:layout_marginRight="@dimen/x75px"
+                android:text="" />
 
             <View
                 android:layout_width="match_parent"
@@ -223,7 +226,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="妮妮" />
+                android:layout_marginRight="@dimen/x75px"
+                android:text="" />
+
+            <TextView
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/kg" />
 
             <View
                 android:layout_width="match_parent"
@@ -252,8 +264,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="妮妮" />
+                android:layout_marginRight="@dimen/x75px"
+                android:text="" />
 
+            <TextView
+                style="@style/GrayText26px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/cm" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
@@ -274,16 +294,20 @@
                 android:layout_centerVertical="true"
                 android:text="@string/parity_count" />
 
+            <EditText
+                android:id="@+id/et_parity_count"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="number"
+                android:text="" />
+
             <TextView
-                android:id="@+id/tv_parity_count"
                 style="@style/GrayText26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="妮妮" />
-
-            <View
+                android:layout_alignParentRight="true"
+                android:text="@string/count" />            <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
@@ -303,15 +327,20 @@
                 android:layout_centerVertical="true"
                 android:text="@string/birth_count" />
 
+            <EditText
+                android:id="@+id/et_birth_count"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="number"
+                android:text="" />
+
             <TextView
-                android:id="@+id/tv_birth_count"
                 style="@style/GrayText26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="妮妮" />
-
+                android:layout_alignParentRight="true"
+                android:text="@string/count" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
@@ -332,15 +361,20 @@
                 android:layout_centerVertical="true"
                 android:text="@string/birth_age" />
 
+            <EditText
+                android:id="@+id/et_birth_age"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="number"
+                android:text="" />
+
             <TextView
-                android:id="@+id/tv_birth_age"
                 style="@style/GrayText26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="妮妮" />
-
+                android:layout_alignParentRight="true"
+                android:text="@string/age" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
@@ -377,7 +411,7 @@
                     android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
-                    android:checked="true"
+                    
                     android:text="@string/single_birth" />
 
                 <RadioButton
@@ -412,27 +446,26 @@
                 android:layout_centerVertical="true"
                 android:text="@string/parturition_state" />
 
-            <RadioGroup
-                android:id="@+id/rg_parturition_state"
+            <LinearLayout
+                android:id="@+id/ll_parturition_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rb_eutocia"
+                <CheckBox
+                    android:id="@+id/cb_eutocia"
                     style="@style/CheckTextStyle"
                     android:layout_width="@dimen/x68px"
                     android:layout_height="@dimen/y56px"
                     android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
-                    android:checked="true"
                     android:text="@string/eutocia" />
 
-                <RadioButton
-                    android:id="@+id/rb_breech"
+                <CheckBox
+                    android:id="@+id/cb_breech"
                     style="@style/CheckTextStyle"
                     android:layout_width="@dimen/x68px"
                     android:layout_height="@dimen/y56px"
@@ -442,8 +475,8 @@
                     android:gravity="center"
                     android:text="@string/breech" />
 
-                <RadioButton
-                    android:id="@+id/rb_odinopoeia"
+                <CheckBox
+                    android:id="@+id/cb_odinopoeia"
                     style="@style/CheckTextStyle"
                     android:layout_width="@dimen/x68px"
                     android:layout_height="@dimen/y56px"
@@ -453,8 +486,8 @@
                     android:gravity="center"
                     android:text="@string/odinopoeia" />
 
-                <RadioButton
-                    android:id="@+id/rb_parturition"
+                <CheckBox
+                    android:id="@+id/cb_parturition"
                     style="@style/CheckTextStyle"
                     android:layout_width="@dimen/x68px"
                     android:layout_height="@dimen/y56px"
@@ -464,8 +497,8 @@
                     android:gravity="center"
                     android:text="@string/parturition" />
 
-                <RadioButton
-                    android:id="@+id/rb_cesarean"
+                <CheckBox
+                    android:id="@+id/cb_cesarean"
                     style="@style/CheckTextStyle"
                     android:layout_width="@dimen/x68px"
                     android:layout_height="@dimen/y56px"
@@ -474,7 +507,7 @@
                     android:button="@null"
                     android:gravity="center"
                     android:text="@string/cesarean" />
-            </RadioGroup>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -512,7 +545,7 @@
                     android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
-                    android:checked="true"
+                    
                     android:text="@string/none" />
 
                 <RadioButton
@@ -574,7 +607,7 @@
                     android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
-                    android:checked="true"
+                    
                     android:text="@string/none" />
 
                 <RadioButton
@@ -618,14 +651,14 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/rb_istifle_none"
+                    android:id="@+id/rb_stifle_none"
                     style="@style/CheckTextStyle"
                     android:layout_width="@dimen/x68px"
                     android:layout_height="@dimen/y56px"
                     android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
-                    android:checked="true"
+                    
                     android:text="@string/none" />
 
                 <RadioButton
@@ -676,7 +709,7 @@
                     android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
-                    android:checked="true"
+                    
                     android:text="@string/none" />
 
                 <RadioButton
@@ -724,7 +757,7 @@
                     android:background="@drawable/bg_circle"
                     style="@style/CheckTextStyle"
                     android:gravity="center"
-                    android:checked="true"
+                    
                     android:button="@null"
                     />
                 <RadioButton
@@ -739,13 +772,29 @@
                     android:layout_marginLeft="@dimen/x8px"
                     />
             </RadioGroup>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y1px"
-                android:background="@color/lightPink"
-                android:layout_alignParentBottom="true"
-                ></View>
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_genetic_history"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y96px"
+            android:visibility="gone">
+            <EditText
+                android:id="@+id/et_genetic_history"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y56px"
+                android:background="@drawable/bg_circle_edittext"
+                android:layout_centerVertical="true"
+                style="@style/BlackText26px"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x25px"
+                />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1px"
+            android:background="@color/lightPink"
+            android:layout_alignParentBottom="true"
+            ></View>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px">
@@ -773,7 +822,7 @@
                     android:background="@drawable/bg_circle"
                     style="@style/CheckTextStyle"
                     android:gravity="center"
-                    android:checked="true"
+                    
                     android:button="@null"
                     />
                 <RadioButton
@@ -792,7 +841,8 @@
         <RelativeLayout
             android:id="@+id/rl_allergy"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y96px">
+            android:layout_height="@dimen/y96px"
+            android:visibility="gone">
         <EditText
             android:id="@+id/et_allergy"
             android:layout_width="match_parent"
@@ -800,6 +850,7 @@
             android:background="@drawable/bg_circle_edittext"
             android:layout_centerVertical="true"
             style="@style/BlackText26px"
+            android:gravity="center_vertical"
             android:paddingLeft="@dimen/x25px"
             />
         </RelativeLayout>
@@ -809,6 +860,11 @@
             android:background="@color/lightPink"
             android:layout_alignParentBottom="true"
             ></View>
+        <LinearLayout
+            android:id="@+id/ll_past_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px">
@@ -834,7 +890,7 @@
                     android:background="@drawable/bg_circle"
                     style="@style/CheckTextStyle"
                     android:text="@string/choleplania"
-                    android:checked="true"
+                    
                     android:gravity="center"
                     />
                 <CheckBox
@@ -958,13 +1014,13 @@
                 android:layout_toRightOf="@+id/cb_hydrocephalus"
                 />
             <CheckBox
-                android:id="@+id/cb_ICH"
+                android:id="@+id/cb_chronic_disease"
                 android:layout_width="@dimen/x144px"
                 android:layout_height="@dimen/y56px"
                 android:button="@null"
                 android:background="@drawable/bg_circle"
                 style="@style/CheckTextStyle"
-                android:text="@string/ICH"
+                android:text="@string/chronic_disease"
                 android:gravity="center"
                 android:layout_marginLeft="@dimen/x9px"
                 android:layout_centerVertical="true"
@@ -1178,19 +1234,6 @@
                 android:layout_alignParentLeft="true"
                 />
             <CheckBox
-                android:id="@+id/cb_chronic_disease"
-                android:layout_width="@dimen/x144px"
-                android:layout_height="@dimen/y56px"
-                android:button="@null"
-                android:background="@drawable/bg_circle"
-                style="@style/CheckTextStyle"
-                android:text="@string/chronic_disease"
-                android:gravity="center"
-                android:layout_marginLeft="@dimen/x6px"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/cb_HIE"
-                />
-            <CheckBox
                 android:id="@+id/cb_none"
                 android:layout_width="@dimen/x66px"
                 android:layout_height="@dimen/y56px"
@@ -1201,7 +1244,7 @@
                 android:gravity="center"
                 android:layout_marginLeft="@dimen/x9px"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/cb_chronic_disease"
+                android:layout_toRightOf="@+id/cb_HIE"
                 />
             <CheckBox
                 android:id="@+id/cb_other_disease"
@@ -1214,14 +1257,16 @@
                 android:gravity="center"
                 android:layout_marginLeft="@dimen/x9px"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/cb_none"
                 />
         </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/rl_other_disease"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y96px">
+            android:layout_height="@dimen/y96px"
+            android:visibility="gone">
             <EditText
                 android:id="@+id/et_other_disease"
                 android:layout_width="match_parent"
@@ -1229,6 +1274,7 @@
                 android:background="@drawable/bg_circle_edittext"
                 android:layout_centerVertical="true"
                 style="@style/BlackText26px"
+                android:gravity="center_vertical"
                 android:paddingLeft="@dimen/x25px"
                 />
         </RelativeLayout>

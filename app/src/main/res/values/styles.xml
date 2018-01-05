@@ -277,6 +277,7 @@
 
     <style name="CheckTextStyle">
         <item name="android:textColor">@drawable/bg_circle_text_color</item>
+        <item name="android:background">@drawable/bg_circle</item>
         <item name="android:textSize">@dimen/y26px</item>
     </style>
     <style name="UnCheckTextStyle">

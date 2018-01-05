@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include layout="@layout/include_title_back"></include>
 
@@ -12,21 +12,30 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
+        <ListView
+            android:id="@+id/lv_observe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#00000000"
+            android:dividerHeight="0dip"
+            android:overScrollMode="never"></ListView>
+
         <Button
             android:id="@+id/bt_buy"
             android:layout_width="@dimen/x418px"
             android:layout_height="@dimen/y118px"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/btn_buy"
-            android:layout_gravity="center_horizontal"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/iv_ad"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y156px"
             android:layout_alignParentBottom="true"
-            />
+            android:visibility="gone" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

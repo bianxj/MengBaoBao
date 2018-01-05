@@ -4,4 +4,7 @@
     <files-path
         name="person_head_img"
         path="person/"></files-path>
+    <files-path
+        name="upload_file"
+        path="picture"></files-path>
 </paths>

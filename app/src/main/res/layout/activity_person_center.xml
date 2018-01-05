@@ -20,8 +20,6 @@
             android:id="@+id/civ_baby_img"
             android:layout_width="@dimen/y132px"
             android:layout_height="@dimen/y132px"
-            app:civ_border_color="@color/circleFrame"
-            app:civ_border_width="@dimen/y2px"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x48px"
             />

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.view.BaseInfoLayout;
@@ -57,6 +58,8 @@ public class BaseInfoActivity extends BaseActivity {
         tv_title.setText(R.string.base_info);
         rl_complete.setVisibility(View.VISIBLE);
         tv_complete.setText(R.string.title_save);
+
+        base_info.setUserData(BaseApplication.getInstance().getUserData());
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

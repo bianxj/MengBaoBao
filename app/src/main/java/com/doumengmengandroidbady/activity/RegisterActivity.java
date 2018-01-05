@@ -16,14 +16,12 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.base.BaseApplication;
-import com.doumengmengandroidbady.request.ResponseErrorCode;
-import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
+import com.doumengmengandroidbady.request.task.LoginTask;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
-import com.doumengmengandroidbady.util.GsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,6 +56,9 @@ public class RegisterActivity extends BaseActivity {
         super.onDestroy();
         stopTask(getVerificationTask);
         stopTask(registerTask);
+        if ( loginTask != null ) {
+            stopTask(loginTask.getTask());
+        }
     }
 
     private void findView(){
@@ -254,74 +255,32 @@ public class RegisterActivity extends BaseActivity {
         }
     };
 
-    private RequestTask loginTask;
+    private LoginTask loginTask;
     private void login(){
+        String accountMobile = et_phone.getText().toString().trim();
+        String loginPwd = et_login_pwd.getText().toString().trim();
         try {
-            loginTask = new RequestTask.Builder(loginCallback).build();
+            loginTask = new LoginTask(this, accountMobile, loginPwd, new LoginTask.LoginCallBack() {
+                @Override
+                public void onPreExecute() {
+
+                }
+
+                @Override
+                public void onError(String result) {
+                    tv_prompt.setText(result);
+                }
+
+                @Override
+                public void onPostExecute(String result) {
+                    startActivity(LoadingActivity.class);
+                }
+            });
             loginTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
     }
-
-    private RequestCallBack loginCallback = new RequestCallBack() {
-        @Override
-        public void onPreExecute() {
-
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_LOGIN;
-        }
-
-        @Override
-        public Context getContext() {
-            return RegisterActivity.this;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            JSONObject object = new JSONObject();
-            try {
-                object.put("accountMobile",et_phone.getText().toString().trim());
-                object.put("loginPwd",et_login_pwd.getText().toString().trim());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM,object.toString());
-            return map;
-        }
-
-        @Override
-        public void onError(String result) {
-
-        }
-
-        @Override
-        public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                String sessionId = res.getString("SessionId");
-                JSONObject user = res.getJSONObject("User");
-                UserData userData = GsonUtil.getInstance().getGson().fromJson(user.toString(),UserData.class);
-                userData.setSessionId(sessionId);
-
-                BaseApplication.getInstance().saveUserData(userData);
-
-                startActivity(LoadingActivity.class);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public String type() {
-            return JSON;
-        }
-    };
 
     private boolean checkSureData(){
         if (isTest){

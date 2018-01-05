@@ -50,6 +50,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_correct_month"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -60,7 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/really_month" />
+                        android:text="@string/correct_month" />
 
                     <TextView
                         android:id="@+id/tv_correct_month"
@@ -1240,7 +1241,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                    android:text="@string/develop_action" />
+                    android:text="@string/developmental_hehavior" />
 
                 <ImageView
                     android:id="@+id/iv_develop_action"
@@ -1294,6 +1295,8 @@
                     android:layout_marginLeft="@dimen/x30px"
                     android:layout_marginRight="@dimen/x30px"
                     android:layout_marginTop="@dimen/y12px"
+                    android:padding="@dimen/y10px"
+                    android:gravity="top|left"
                     android:background="@drawable/bg_circle_parent_message" />
 
             </LinearLayout>
@@ -1333,10 +1336,12 @@
                     android:id="@+id/gv_upload_report"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x75px"
-                    android:layout_marginRight="@dimen/x75px"
+                    android:layout_marginLeft="@dimen/x37px"
+                    android:layout_marginRight="@dimen/x50px"
                     android:layout_marginTop="@dimen/y22px"
-                    android:layout_marginBottom="@dimen/y46px"></GridView>
+                    android:layout_marginBottom="@dimen/y46px"
+                    android:listSelector="@color/transparent"
+                    android:numColumns="3"></GridView>
 
             </LinearLayout>
         </LinearLayout>

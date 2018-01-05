@@ -4,6 +4,8 @@ import android.text.TextUtils;
 
 import com.doumengmengandroidbady.net.UrlAddressList;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/12/18.
  */
@@ -45,7 +47,7 @@ public class UserData {
     private String hereditaryhistory;           //家族遗传史
     private String hereditaryhistorydesc;       //家族遗传史内容
     private String birthinjury;                 //产伤
-    private String pasthistory;                 //既往史
+    private List<String> pasthistory;            //既往史
     private String pasthistoryother;            //既往史其他
     private String recordtimes;                 //剩余测评次数
 
@@ -295,11 +297,11 @@ public class UserData {
         this.birthinjury = birthinjury;
     }
 
-    public String getPasthistory() {
+    public List<String> getPasthistory() {
         return pasthistory;
     }
 
-    public void setPasthistory(String pasthistory) {
+    public void setPasthistory(List<String> pasthistory) {
         this.pasthistory = pasthistory;
     }
 

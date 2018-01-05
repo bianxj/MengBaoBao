@@ -9,6 +9,7 @@ import java.util.List;
 
 public class InitConfigure {
 
+    private ParentInfo ParentInfo;
     private List<Doctor> DoctorList;
     private List<Hospital> HospitalList;
     private List<MengClass> MengClassList;
@@ -44,5 +45,13 @@ public class InitConfigure {
 
     public List<Growth> getGrowthList() {
         return GrowthList;
+    }
+
+    public com.doumengmengandroidbady.response.ParentInfo getParentInfo() {
+        return ParentInfo;
+    }
+
+    public void setParentInfo(com.doumengmengandroidbady.response.ParentInfo parentInfo) {
+        ParentInfo = parentInfo;
     }
 }
