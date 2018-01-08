@@ -59,13 +59,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
     private boolean isError(String json){
         String errorMsg = null;
-
-        if ( null == json ){
-            errorMsg = "数据为空";
-        } else {
-            int errorCode = ResponseErrorCode.getErrorCode(json);
-            errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
-        }
+        errorMsg = ResponseErrorCode.getErrorMsg(json);
         if ( null == errorMsg ){
             return false;
         } else {

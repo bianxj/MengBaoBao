@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
@@ -30,11 +31,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/5.
+ * 作者: 边贤君
+ * 描述
+ * 创建日期: 2018/1/8 9:23
+ * 萌宝宝用户注册界面
  */
 public class RegisterActivity extends BaseActivity {
-
-    private static boolean isTest = false;
+    private static boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private Button bt_sure;
@@ -107,7 +110,13 @@ public class RegisterActivity extends BaseActivity {
         finish();
     }
 
+
     private RequestTask getVerificationTask;
+    /**
+     * 作者: 边贤君
+     * 描述: 获取验证码
+     * 日期: 2018/1/8 9:24
+     */
     private void getVerificationCode(){
         if ( checkVerificationCode() ) {
             try {
@@ -144,9 +153,7 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            int errorCode = ResponseErrorCode.getErrorCode(result);
-            String errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
-            tv_prompt.setText(errorMsg);
+            tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
         }
 
         @Override
@@ -162,10 +169,16 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public String type() {
-            return RequestCallBack.JSON;
+            return RequestCallBack.JSON_NO_PROMPT;
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 检测获取验证码信息是否完整
+     * 返回:
+     * 日期: 2018/1/8 9:26
+     */
     private boolean checkVerificationCode(){
         if (isTest){
             return true;
@@ -184,9 +197,16 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private RequestTask registerTask;
+    /**
+     * 作者: 边贤君
+     * 描述: 注册
+     * 日期: 2018/1/8 9:25
+     */
     private void register(){
-        if ( checkSureData() ){
+        if ( checkRegisterData() ){
+            //检测是否勾选用户协议
             if ( cb_agreement.isChecked() ){
+                //进入激活流程
                 try {
                     registerTask = new RequestTask.Builder(registerCallBack).build();
                     registerTask.execute();
@@ -194,6 +214,7 @@ public class RegisterActivity extends BaseActivity {
                     throwable.printStackTrace();
                 }
             } else {
+                //跳转至用户协议界面
                 Intent intent = new Intent(RegisterActivity.this,AgreementActivity.class);
                 startActivityForResult(intent,REQUEST_AGREEMENT);
             }
@@ -231,7 +252,9 @@ public class RegisterActivity extends BaseActivity {
         }
 
         @Override
-        public void onError(String result) {}
+        public void onError(String result) {
+            tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
+        }
 
         @Override
         public void onPostExecute(String result) {
@@ -251,11 +274,16 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public String type() {
-            return RequestCallBack.JSON;
+            return RequestCallBack.JSON_NO_PROMPT;
         }
     };
 
     private LoginTask loginTask;
+    /**
+     * 作者: 边贤君
+     * 描述: 登录
+     * 日期: 2018/1/8 9:26
+     */
     private void login(){
         String accountMobile = et_phone.getText().toString().trim();
         String loginPwd = et_login_pwd.getText().toString().trim();
@@ -268,11 +296,12 @@ public class RegisterActivity extends BaseActivity {
 
                 @Override
                 public void onError(String result) {
-                    tv_prompt.setText(result);
+                    tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
                 }
 
                 @Override
                 public void onPostExecute(String result) {
+                    //登录成功后,进入Loading页面
                     startActivity(LoadingActivity.class);
                 }
             });
@@ -282,7 +311,13 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    private boolean checkSureData(){
+    /**
+     * 作者: 边贤君
+     * 描述: 检测激活数据是否完整
+     * 返回:
+     * 日期: 2018/1/8 9:27
+     */
+    private boolean checkRegisterData(){
         if (isTest){
             return true;
         }

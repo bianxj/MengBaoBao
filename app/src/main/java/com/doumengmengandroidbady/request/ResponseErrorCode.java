@@ -168,6 +168,14 @@ public class ResponseErrorCode {
         return null;
     }
 
+    public static String getErrorMsg(String errorMsg){
+        if ( errorMsg == null ){
+            return "数据为空";
+        }
+        int errorCode = getErrorCode(errorMsg);
+        return getErrorMsg(errorCode);
+    }
+
     public static int getErrorCode(String errorMsg){
         int errorCode = 0;
         try {
