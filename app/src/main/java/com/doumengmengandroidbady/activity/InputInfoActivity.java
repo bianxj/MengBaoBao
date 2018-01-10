@@ -23,6 +23,7 @@ import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.entity.InputUserInfo;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
 import com.doumengmengandroidbady.util.FormulaUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
@@ -440,10 +441,11 @@ public class InputInfoActivity extends BaseActivity {
         }
     };
 
-    private InputData inputData = new InputData();
+    private InputUserInfo inputData = new InputUserInfo();
     private boolean checkData(){
-        BabyInfo babyInfo = inputData.babyInfo;
-        babyInfo.clearData();
+        inputData.clearData();
+        InputUserInfo.BabyInfo babyInfo = inputData.getBabyInfo();
+        InputUserInfo.ParentInfo parentInfo = inputData.getParentInfo();
 
         //宝宝姓名
         String babyName = et_baby_name.getText().toString().trim();
@@ -550,13 +552,14 @@ public class InputInfoActivity extends BaseActivity {
             return false;
         }
 
-        for (int i=0;i<parturitionState.size();i++){
-            if ( i == 0 ){
-                babyInfo.DeliveryMethods = parturitionState.get(i);
-            } else {
-                babyInfo.DeliveryMethods += ","+parturitionState.get(i);
-            }
-        }
+        babyInfo.DeliveryMethods = parturitionState;
+//        for (int i=0;i<parturitionState.size();i++){
+//            if ( i == 0 ){
+//                babyInfo.DeliveryMethods = parturitionState.get(i);
+//            } else {
+//                babyInfo.DeliveryMethods += ","+parturitionState.get(i);
+//            }
+//        }
 
         //辅助生育
         int assistedReproduction = singleChooseCheck(rb_assisted_reproduction);
@@ -669,7 +672,7 @@ public class InputInfoActivity extends BaseActivity {
             return false;
         }
         RadioButton fatherCaltureButton = findViewById(fatherCalture);
-        babyInfo.DadEducation = fatherCaltureButton.getText().toString().trim();
+        parentInfo.DadEducation = fatherCaltureButton.getText().toString().trim();
 
         //母亲文化程度
         int motherCalture = singleChooseCheck(mother_culture_id);
@@ -678,18 +681,18 @@ public class InputInfoActivity extends BaseActivity {
             return false;
         }
         RadioButton motherCaltureButton = findViewById(motherCalture);
-        babyInfo.MumEducation = motherCaltureButton.getText().toString().trim();
+        parentInfo.MumEducation = motherCaltureButton.getText().toString().trim();
 
         //父母信息赋值
-        babyInfo.DadName = et_father_name.getText().toString().trim();
-        babyInfo.DadHeight = et_father_height.getText().toString().trim();
-        babyInfo.DadWeight = et_father_weight.getText().toString().trim();
-        babyInfo.DadBMI = tv_father_BMI.getText().toString().trim();
+        parentInfo.DadName = et_father_name.getText().toString().trim();
+        parentInfo.DadHeight = et_father_height.getText().toString().trim();
+        parentInfo.DadWeight = et_father_weight.getText().toString().trim();
+        parentInfo.DadBMI = tv_father_BMI.getText().toString().trim();
 
-        babyInfo.MumName = et_mother_name.getText().toString().trim();
-        babyInfo.MumHeight = et_mother_height.getText().toString().trim();
-        babyInfo.MumWeight = et_mother_weight.getText().toString().trim();
-        babyInfo.MumBMI = tv_mother_BMI.getText().toString().trim();
+        parentInfo.MumName = et_mother_name.getText().toString().trim();
+        parentInfo.MumHeight = et_mother_height.getText().toString().trim();
+        parentInfo.MumWeight = et_mother_weight.getText().toString().trim();
+        parentInfo.MumBMI = tv_mother_BMI.getText().toString().trim();
 
         //宝宝性别
         if ( rg_gender.getCheckedRadioButtonId() == R.id.rb_famale ){
@@ -755,97 +758,6 @@ public class InputInfoActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private class InputData {
-        private String userId;
-        private BabyInfo babyInfo;
 
-        public InputData() {
-            babyInfo = new BabyInfo();
-        }
-    }
-
-    private class BabyInfo {
-        //真实姓名
-        private String TrueName;
-        //性别 0 女 1 男
-        private String Sex;
-        //联系手机
-        private String AccountMobile;
-        //生日 format '1970-01-01 00:00:00'
-        private String Birthday;
-        //孕周(周)
-        private String PregnancyWeeks;
-        //孕周(日)
-        private String PregnancyDays;
-        //出生体重
-        private String BornWeight;
-        //出生身长
-        private String BornHeight;
-        //胎次
-        private String Pregnancies;
-        //产次
-        private String BirthTimes;
-        //母亲生育年龄
-        private String MumBearAge;
-        //出生状况 1单胎 2 多胎
-        private String BornType;
-        //分娩方式
-        private String DeliveryMethods;
-        //辅助生育 0无 1人工授精 2试管婴儿
-        private String AssistedReproductive;
-        //产伤  0无 1有
-        private String BirthInjury;
-        //新生儿窒息 0无 1有
-        private String NeonatalAsphyxia;
-        //颅内出血 0无 1有
-        private String IntracranialHemorrhage;
-        //家族遗传史 0无 1有
-        private String HereditaryHistory;
-        //家族遗传史内容
-        private String HereditaryHistoryDesc;
-        //家族过敏史 0无 1有
-        private String AllergicHistory;
-        //家族过敏史内容
-        private String AllergicHistoryDesc;
-        //既往史
-        private List<String> PastHistory;
-        //既往史其他内容
-        private String PastHistoryOther;
-        //父亲姓名
-        private String DadName;
-        //父亲文化程度
-        private String DadEducation;
-        //父亲身高
-        private String DadHeight;
-        //父亲体重
-        private String DadWeight;
-        //父亲BMI
-        private String DadBMI;
-        //母亲姓名
-        private String MumName;
-        //母亲文化程度
-        private String MumEducation;
-        //母亲身高
-        private String MumHeight;
-        //母亲体重
-        private String MumWeight;
-        //母亲BMI
-        private String MumBMI;
-
-        public void clearData(){
-            HereditaryHistoryDesc = "";
-            AllergicHistoryDesc = "";
-            PastHistoryOther = "";
-            DadName = "";
-            DadHeight = "";
-            DadWeight = "";
-            MumBMI = "";
-            MumName = "";
-            MumHeight = "";
-            MumWeight = "";
-            MumBMI = "";
-        }
-
-    }
 
 }

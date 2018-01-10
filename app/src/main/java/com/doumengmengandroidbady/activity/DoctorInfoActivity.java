@@ -2,12 +2,17 @@ package com.doumengmengandroidbady.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.db.DaoManager;
@@ -15,6 +20,15 @@ import com.doumengmengandroidbady.response.Doctor;
 import com.doumengmengandroidbady.response.Hospital;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/12.
@@ -25,6 +39,7 @@ public class DoctorInfoActivity extends BaseActivity {
     private final static boolean isTest = false;
 
     public final static String IN_PARAM_DOCTOR_ID = "doctor_id";
+    public final static String IN_PARAM_DOCTOR_NAME = "doctor_name";
 
 //    private DoctorEntity doctor;
 
@@ -60,9 +75,14 @@ public class DoctorInfoActivity extends BaseActivity {
         } else {
             Intent intent = getIntent();
             String doctorId = intent.getStringExtra(IN_PARAM_DOCTOR_ID);
-            doctor = DaoManager.getInstance().getDaotorDao().searchDoctorById(this,doctorId);
-            if ( doctor != null ){
-                hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this,doctor.getDoctorid());
+            if (TextUtils.isEmpty(doctorId) ){
+                String doctorName = intent.getStringExtra(IN_PARAM_DOCTOR_NAME);
+                doctor = DaoManager.getInstance().getDaotorDao().searchDoctorByName(this, doctorName);
+            } else {
+                doctor = DaoManager.getInstance().getDaotorDao().searchDoctorById(this, doctorId);
+            }
+            if (doctor != null) {
+                hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this, doctor.getDoctorid());
             }
         }
     }
@@ -116,5 +136,95 @@ public class DoctorInfoActivity extends BaseActivity {
         //TODO
         startActivity(InputInfoActivity.class);
     }
+
+    //-----------------------------------支付------------------------------------------------
+
+    private final static int MESSAGE_ALI_PAY = 0x01;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case MESSAGE_ALI_PAY: {
+                    Map<String,String> result = (Map<String, String>) msg.obj;
+                    if ( TextUtils.equals("9000",result.get("resultStatus")) ){
+                        Toast.makeText(DoctorInfoActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(DoctorInfoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                }
+            }
+        }
+    };
+
+    private void alipay(){
+        final String orderInfo = null;   // 订单信息
+//        /**
+//         * 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
+//         * 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
+//         * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
+//         *
+//         * orderInfo的获取必须来自服务端；
+//         */
+//        boolean rsa2 = (RSA2_PRIVATE.length() > 0);
+//        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID, rsa2);
+//        String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
+//
+//        String privateKey = rsa2 ? RSA2_PRIVATE : RSA_PRIVATE;
+//        String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
+//        final String orderInfo = orderParam + "&" + sign;
+
+        Runnable payRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                PayTask alipay = new PayTask(DoctorInfoActivity.this);
+                Map<String, String> result = alipay.payV2(orderInfo,true);
+
+                Message msg = new Message();
+                msg.what = MESSAGE_ALI_PAY;
+                msg.obj = result;
+                handler.sendMessage(msg);
+            }
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+
+    private final static String APP_ID = "";
+    private void iwxPay(){
+        IWXAPI api = WXAPIFactory.createWXAPI(this, APP_ID, false);
+        api.handleIntent(getIntent(),eventHandler);
+
+        PayReq request = new PayReq();
+        request.appId = "wxd930ea5d5a258f4f";
+        request.partnerId = "1900000109";
+        request.prepayId= "1101000000140415649af9fc314aa427";
+        request.packageValue = "Sign=WXPay";
+        request.nonceStr= "1101000000140429eb40476f8896f4c9";
+        request.timeStamp= "1398746574";
+        request.sign= "7FFECB600D7157C5AA49810D2D8F28BC2811827B";
+        api.sendReq(request);
+    }
+
+    private IWXAPIEventHandler eventHandler = new IWXAPIEventHandler() {
+        @Override
+        public void onReq(BaseReq baseReq) {
+        }
+
+        @Override
+        public void onResp(BaseResp resp) {
+            if(resp.getType()== ConstantsAPI.COMMAND_PAY_BY_WX){
+                if( "0".equals(resp.errCode) ){
+                    Toast.makeText(DoctorInfoActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(DoctorInfoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    };
 
 }

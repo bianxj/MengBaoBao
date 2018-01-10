@@ -1,6 +1,8 @@
 package com.doumengmengandroidbady.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.DoctorAdapter;
 import com.doumengmengandroidbady.adapter.HospitalAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.entity.DoctorEntity;
 import com.doumengmengandroidbady.entity.HospitalEntity;
@@ -22,16 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/11.
+ * 作者: 边贤君
+ * 描述: 萌宝宝医生医院
+ * 创建日期: 2018/1/8 11:28
  */
-
 public class DoctorListActivity extends BaseActivity {
 
-    private final static int PAGE_SIZE = 10;
+    private final static int PAGE_SIZE = 100;
     private int doctor_page = 0;
     private int hospital_page = 0;
 
-    private final static boolean isTest = false;
+    private final static boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private Button bt_search;
@@ -51,6 +55,11 @@ public class DoctorListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_list);
         findView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void findView(){
@@ -155,53 +164,99 @@ public class DoctorListActivity extends BaseActivity {
         finish();
     }
 
-    private void searchDoctorData(){
-        if ( isTest ){
-            for (int i = 0; i <10 ; i++) {
-                DoctorEntity doctor = new DoctorEntity();
-                doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-                doctor.setDoctordesc("Describe1");
-                doctor.setDoctorname("Name"+i);
-                doctor.setHospital("HospitalEntity"+i);
-                doctor.setPositionaltitles("Position"+i);
-                doctor.setSpeciality("Skill"+i);
-                doctors.add(doctor);
-            }
-            hospitalAdapter.notifyDataSetChanged();
-        } else {
-            List<DoctorEntity> doctorList = DaoManager.getInstance().getDaotorDao().searchDoctorList(this,doctor_page,PAGE_SIZE);
-            if ( doctorList != null && doctorList.size() > 0 ){
-                doctors.addAll(doctorList);
+    //------------------------------------数据获取------------------------------------------------
+    public final static int MESSAGE_SEARCH_DOCTOR = 0x01;
+    public final static int MESSAGE_SEARCH_HOSPITAL = 0x02;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( msg.what == MESSAGE_SEARCH_DOCTOR ) {
                 doctor_page++;
-                doctorAdapter.notifyDataSetChanged();
+                if ( tempDoctors != null ){
+                    if ( tempDoctors.size() < PAGE_SIZE ){
+                        xrv_doctor.setNoMore(true);
+                    }
+                    for (DoctorEntity doctorEntity:tempDoctors){
+                        doctors.add(doctorEntity);
+                    }
+                    doctorAdapter.notifyDataSetChanged();
+                } else {
+                    xrv_doctor.setNoMore(true);
+                }
             }
-            if ( doctorList.size() < PAGE_SIZE ){
-                xrv_doctor.setNoMore(true);
+            if ( msg.what == MESSAGE_SEARCH_HOSPITAL ) {
+                hospital_page++;
+                if ( tempHospital != null ){
+                    if ( tempHospital.size() < PAGE_SIZE ){
+                        xrv_hospital.setNoMore(true);
+                    }
+                    for (HospitalEntity hospitalEntity:tempHospital){
+                        hospitals.add(hospitalEntity);
+                    }
+                    doctorAdapter.notifyDataSetChanged();
+                } else {
+                    xrv_hospital.setNoMore(true);
+                }
             }
         }
+    };
+
+    private void searchDoctorData(){
+        new Thread(searchDoctorRunnable).start();
     }
 
-    private void searchHospitalData(){
-        if ( isTest ){
-            for (int i = 0; i <10 ; i++) {
-                HospitalEntity hospital = new HospitalEntity();
-                hospital.setHospitalicon("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
-                hospital.setHospitalname("HospitalName"+i);
-                hospital.setHospitaladdress("HospitalAddress"+i);
-                hospitals.add(hospital);
+    private List<DoctorEntity> tempDoctors = new ArrayList<>();
+    private Runnable searchDoctorRunnable = new Runnable() {
+        @Override
+        public void run() {
+            tempDoctors.clear();
+            if ( isTest ){
+                for (int i = 0; i <10 ; i++) {
+                    DoctorEntity doctor = new DoctorEntity();
+                    doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
+                    doctor.setDoctordesc("Describe1");
+                    doctor.setDoctorname("Name"+i);
+                    doctor.setHospital("HospitalEntity"+i);
+                    doctor.setPositionaltitles("Position"+i);
+                    doctor.setSpeciality("Skill"+i);
+                    tempDoctors.add(doctor);
+                }
+            } else {
+                List<DoctorEntity> doctorList = DaoManager.getInstance().getDaotorDao().searchDoctorList(DoctorListActivity.this,doctor_page,PAGE_SIZE);
+                if ( doctorList != null && doctorList.size() > 0 ){
+                    tempDoctors.addAll(doctorList);
+                }
             }
-            hospitalAdapter.notifyDataSetChanged();
-        } else {
-            List<HospitalEntity> hospitalList = DaoManager.getInstance().getHospitalDao().searchHospitalList(this,hospital_page,PAGE_SIZE);
-            if ( hospitalList != null && hospitalList.size() > 0 ){
-                hospitals.addAll(hospitalList);
-                hospital_page++;
-                hospitalAdapter.notifyDataSetChanged();
-            }
-            if ( hospitalList.size() < PAGE_SIZE ){
-                xrv_hospital.setNoMore(true);
-            }
+            handler.sendEmptyMessage(MESSAGE_SEARCH_DOCTOR);
         }
+    };
+
+    private void searchHospitalData(){
+        new Thread(searchHospitalRunnable).start();
     }
+
+    private List<HospitalEntity> tempHospital = new ArrayList<>();
+    private Runnable searchHospitalRunnable = new Runnable() {
+        @Override
+        public void run() {
+            tempHospital.clear();
+            if ( isTest ){
+                for (int i = 0; i <10 ; i++) {
+                    HospitalEntity hospital = new HospitalEntity();
+                    hospital.setHospitalicon("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
+                    hospital.setHospitalname("HospitalName"+i);
+                    hospital.setHospitaladdress("HospitalAddress"+i);
+                    tempHospital.add(hospital);
+                }
+            } else {
+                List<HospitalEntity> hospitalList = DaoManager.getInstance().getHospitalDao().searchHospitalList(DoctorListActivity.this,hospital_page,PAGE_SIZE);
+                if ( hospitalList != null && hospitalList.size() > 0 ){
+                    tempHospital.addAll(hospitalList);
+                }
+            }
+            handler.sendEmptyMessage(MESSAGE_SEARCH_HOSPITAL);
+        }
+    };
 
 }

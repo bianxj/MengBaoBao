@@ -9,6 +9,8 @@
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrv_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+        android:layout_height="match_parent">
+
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
 
 </LinearLayout>

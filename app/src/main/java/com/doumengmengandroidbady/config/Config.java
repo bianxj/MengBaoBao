@@ -6,6 +6,6 @@ package com.doumengmengandroidbady.config;
 
 public class Config {
 
-    public final static boolean isTest = true;
+    public final static boolean isTest = false;
 
 }

@@ -11,7 +11,7 @@
             android:id="@+id/unuse_view"
             android:layout_width="@dimen/x19px"
             android:layout_height="@dimen/x19px"
-            android:background="@drawable/bg_circle_point"
+            android:background="@drawable/bg_circle_point_19"
             android:layout_marginLeft="@dimen/x48px"
             android:layout_marginTop="@dimen/y10px"></View>
 

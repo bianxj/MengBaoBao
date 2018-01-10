@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
+import com.doumengmengandroidbady.view.MyGifPlayer;
 
 /**
  * Created by Administrator on 2017/12/5.
@@ -18,13 +19,14 @@ public class GuideActivity extends BaseActivity {
     private AutoScrollViewPager asvp;
     private Button bt_guide_register , bt_guide_login;
 
+    private MyGifPlayer player;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
         findView();
         initView();
-
     }
 
     @Override
@@ -36,6 +38,8 @@ public class GuideActivity extends BaseActivity {
         asvp = findViewById(R.id.asvp);
         bt_guide_register = findViewById(R.id.bt_guide_register);
         bt_guide_login = findViewById(R.id.bt_guide_login);
+
+        player = findViewById(R.id.player);
     }
 
     private void initView(){
@@ -44,6 +48,7 @@ public class GuideActivity extends BaseActivity {
 
         int[] images = new int[]{R.drawable.v1,R.drawable.v2,R.drawable.v3};
         asvp.setImageList(images);
+        player.setDrawable(R.drawable.celiangshengao1);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

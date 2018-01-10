@@ -13,9 +13,10 @@ import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.util.SystemUtil;
 
 /**
- * Created by Administrator on 2017/12/8.
+ * 作者: 边贤君
+ * 描述: 设置
+ * 创建日期: 2018/1/8 10:47
  */
-
 public class SettingActivity extends BaseActivity {
 
     private RelativeLayout rl_back;

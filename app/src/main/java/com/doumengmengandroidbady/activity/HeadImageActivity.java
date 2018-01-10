@@ -42,7 +42,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/12.
+ * 作者: 边贤君
+ * 描述: 上传头像
+ * 创建日期: 2018/1/8 13:53
  */
 public class HeadImageActivity extends BaseActivity {
 
@@ -262,6 +264,7 @@ public class HeadImageActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
+            //修改用户头像数据
             try {
                 JSONObject object = new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");

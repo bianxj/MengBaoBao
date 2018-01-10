@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/lightSky">
-
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="@dimen/x720px"
+        android:layout_height="wrap_content">
     <android.support.v4.widget.Space
         android:id="@+id/space_behavior"
         android:layout_width="match_parent"
@@ -71,10 +74,11 @@
             android:id="@+id/view_underline"
             android:layout_width="@dimen/x681px"
             android:layout_height="@dimen/y1px"
-            android:background="@color/gray"
+            android:background="@color/linkLightPink"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center_horizontal"
             ></View>
     </LinearLayout>
 
+    </LinearLayout>
 </LinearLayout>

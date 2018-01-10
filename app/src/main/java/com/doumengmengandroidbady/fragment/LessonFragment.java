@@ -16,9 +16,12 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseFragment;
+import com.doumengmengandroidbady.net.UrlAddressList;
 
 /**
- * Created by Administrator on 2017/12/7.
+ * 作者: 边贤君
+ * 描述: 萌课堂
+ * 创建日期: 2018/1/8 14:06
  */
 public class LessonFragment extends BaseFragment {
 
@@ -65,7 +68,7 @@ public class LessonFragment extends BaseFragment {
                 handler.proceed();
             }
         });
-        wv.loadUrl("https://www.baidu.com");
+        wv.loadUrl(UrlAddressList.URL_MENG_LESSION);
     }
 
     @Override

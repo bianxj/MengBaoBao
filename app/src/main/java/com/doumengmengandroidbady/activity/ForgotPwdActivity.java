@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
@@ -31,11 +33,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/5.
+ * 作者: 边贤君
+ * 描述: 忘记密码
+ * 创建日期: 2018/1/8 9:52
  */
 public class ForgotPwdActivity extends BaseActivity {
 
-    public final static boolean isTest = false;
+    public final static boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private Button bt_sure;
@@ -110,6 +114,11 @@ public class ForgotPwdActivity extends BaseActivity {
     }
 
     private RequestTask getVerificationCodeTask;
+    /**
+     * 作者: 边贤君
+     * 描述: 获取验证码
+     * 日期: 2018/1/8 9:52
+     */
     private void getVerificationCode(){
         if ( checkVerificationCode() ) {
             try {
@@ -121,7 +130,6 @@ public class ForgotPwdActivity extends BaseActivity {
         }
     }
 
-    private String verificationCode;
     private RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
@@ -154,7 +162,8 @@ public class ForgotPwdActivity extends BaseActivity {
             try {
                 JSONObject object = new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
-                verificationCode = res.optString("code");
+                String verificationCode = res.optString("code");
+                BaseApplication.getInstance().saveForgetVc(verificationCode);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -166,6 +175,11 @@ public class ForgotPwdActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 检测验证码
+     * 日期: 2018/1/8 10:01
+     */
     private boolean checkVerificationCode(){
         if (isTest){
             return true;
@@ -180,21 +194,28 @@ public class ForgotPwdActivity extends BaseActivity {
     }
 
     private void changePwd(){
-        if ( cb_agreement.isChecked() ) {
-            if (checkChangePwd()) {
+        if (checkChangePwd()) {
+            //检测用户协议是否勾选
+            if ( cb_agreement.isChecked() ) {
                 try {
                     changePwdTask = new RequestTask.Builder(changePwdCallBack).build();
                     changePwdTask.execute();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
+            } else {
+                //跳转至用户协议
+                Intent intent = new Intent(ForgotPwdActivity.this,AgreementActivity.class);
+                startActivityForResult(intent,REQUEST_AGREEMENT);
             }
-        } else {
-            Intent intent = new Intent(ForgotPwdActivity.this,AgreementActivity.class);
-            startActivityForResult(intent,REQUEST_AGREEMENT);
         }
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 检测修改密码数据是否完全
+     * 日期: 2018/1/8 9:58
+     */
     private boolean checkChangePwd(){
         if (isTest){
             return true;
@@ -227,12 +248,10 @@ public class ForgotPwdActivity extends BaseActivity {
             tv_prompt.setText(R.string.prompt_error_password);
             return false;
         }
-
         return true;
     }
 
     private RequestTask changePwdTask;
-
     private RequestCallBack changePwdCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
@@ -240,7 +259,6 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-
             return UrlAddressList.URL_RESET_PASSWORD;
         }
 
@@ -255,7 +273,7 @@ public class ForgotPwdActivity extends BaseActivity {
             try {
                 object.put("accountMobile",et_phone.getText().toString().trim());
                 object.put("loginPwd",et_login_pwd.getText().toString().trim());
-                object.put("code", verificationCode);
+                object.put("code", BaseApplication.getInstance().getForgetVc());
                 object.put("checkCode",et_vc.getText().toString().trim());
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -294,7 +312,7 @@ public class ForgotPwdActivity extends BaseActivity {
 
                 @Override
                 public void onError(String result) {
-                    tv_prompt.setText(result);
+                    tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
                 }
 
                 @Override
@@ -322,10 +340,16 @@ public class ForgotPwdActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 错误提示
+     * 日期: 2018/1/8 9:57
+     */
     private void disposeError(String result){
         int errorCode = ResponseErrorCode.getErrorCode(result);
         String errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
         if ( ResponseErrorCode.ERROR_LOGIN_ROLE_NOT_EXIST == errorCode ){
+            //用户不存在跳转至注册界面
             MyDialog.showPromptDialog(this, errorMsg, new MyDialog.PromptDialogCallback() {
                 @Override
                 public void sure() {

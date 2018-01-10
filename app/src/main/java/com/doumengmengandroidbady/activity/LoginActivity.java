@@ -11,15 +11,19 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.config.Config;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.request.task.LoginTask;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
 
 /**
- * Created by Administrator on 2017/12/5.
+ * 作者: 边贤君
+ * 描述: 登录页面
+ * 创建日期: 2018/1/8 9:50
  */
 public class LoginActivity extends BaseActivity {
 
-    private static boolean isTest = false;
+    private static boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private EditText et_phone,et_login_pwd;
@@ -86,6 +90,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     private LoginTask loginTask = null;
+    /**
+     * 作者: 边贤君
+     * 描述: 登录
+     * 日期: 2018/1/8 9:51
+     */
     private void login(){
         if ( checkLogin() ){
             String accountMobile = et_phone.getText().toString().trim();
@@ -99,11 +108,12 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void onError(String result) {
-                        tv_prompt.setText(result);
+                        tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
                     }
 
                     @Override
                     public void onPostExecute(String result) {
+                        //跳转至Loading界面
                         startActivity(LoadingActivity.class);
                     }
                 });
@@ -142,10 +152,12 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void gotoRegister(){
+        //跳转至注册界面
         startActivity(RegisterActivity.class);
     }
 
     private void gotoChangePwd(){
+        //跳转至忘记密码界面
         startActivity(ForgotPwdActivity.class);
     }
 

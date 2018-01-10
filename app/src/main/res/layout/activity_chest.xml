@@ -25,7 +25,6 @@
                 <RelativeLayout
                     android:layout_width="@dimen/x233px"
                     android:layout_height="@dimen/y86px"
-                    android:background="@drawable/bg_input_data"
                     android:layout_centerHorizontal="true"
                     >
                     <EditText
@@ -34,7 +33,7 @@
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         style="@style/InputDataStyle"
-                        android:text="85.3"
+                        android:text=""
                         />
                 </RelativeLayout>
                 <TextView
@@ -46,24 +45,69 @@
                     android:layout_marginLeft="@dimen/x490px"
                     />
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y32px">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chest_reference_value"
+                    style="@style/LinkPinkText23px"
+                    android:includeFontPadding="false"
+                    android:layout_marginLeft="@dimen/x76px"
+                    />
 
-            <TextView
+                <View
+                    android:layout_width="@dimen/x10px"
+                    android:layout_height="@dimen/x10px"
+                    android:background="@drawable/bg_circle_point_10"
+                    android:layout_marginLeft="@dimen/x310px"
+                    android:layout_centerVertical="true"></View>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chest_reference_dest"
+                    style="@style/GrayText21px"
+                    android:includeFontPadding="false"
+                    android:layout_marginLeft="@dimen/x329px"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/chest_reference_value"
-                style="@style/LinkPinkText23px"
-                android:layout_marginTop="@dimen/y32px"
-                android:includeFontPadding="false"
-                />
+                android:layout_marginTop="@dimen/y32px">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chest_diff_value"
+                    style="@style/LinkPinkText23px"
+                    android:includeFontPadding="false"
+                    android:layout_marginLeft="@dimen/x76px"
+                    />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/chest_diff_value"
-                style="@style/LinkPinkText23px"
-                android:layout_marginTop="@dimen/y32px"
-                android:includeFontPadding="false"
-                />
+                <View
+                    android:layout_width="@dimen/x10px"
+                    android:layout_height="@dimen/x10px"
+                    android:background="@drawable/bg_circle_point_10"
+                    android:layout_marginLeft="@dimen/x310px"
+                    android:layout_centerVertical="true"></View>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chest_diff_desc"
+                    style="@style/GrayText21px"
+                    android:includeFontPadding="false"
+                    android:layout_marginLeft="@dimen/x329px"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+            </RelativeLayout>
 
             <View
                 android:layout_width="@dimen/x681px"

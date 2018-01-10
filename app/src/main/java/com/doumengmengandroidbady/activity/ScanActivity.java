@@ -4,13 +4,19 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.hardware.Camera;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.util.DisplayMetrics;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -24,20 +30,33 @@ import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.camera.CameraManager;
+import com.doumengmengandroidbady.util.PictureUtils;
 import com.doumengmengandroidbady.view.ViewfinderView;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.ChecksumException;
+import com.google.zxing.FormatException;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.RGBLuminanceSource;
+import com.google.zxing.Reader;
 import com.google.zxing.Result;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
 
 import java.io.IOException;
 
 /**
- * Created by Administrator on 2017/12/6.
+ * 作者: 边贤君
+ * 描述: 扫一扫
+ * 创建日期: 2018/1/8 16:25
  */
-
 public class ScanActivity extends BaseActivity {
 
-    private final static int REQUEST_ALBUM_OK = 0x01;
-    private final static int REQUEST_PERMISSION = 0x02;
+    private final static int REQUEST_PERMISSION_STORAGE = 0x01;
+    private final static int REQUEST_CAMERA_PERMISSION = 0x02;
+
+    private final static int REQUEST_ALBUM = 0x11;
     private String[] permissions = new String[]{Manifest.permission.CAMERA};
 
     public final static String RESULT_QR_VALUE = "result_rq";
@@ -60,13 +79,13 @@ public class ScanActivity extends BaseActivity {
         hasSurface = false;
         findView();
         initView();
-        checkPermission();
+        checkCameraPermission();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkPermission();
+        checkCameraPermission();
     }
 
     @Override
@@ -83,10 +102,10 @@ public class ScanActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if ( REQUEST_PERMISSION == requestCode ){
+        if ( REQUEST_CAMERA_PERMISSION == requestCode ){
             if (PackageManager.PERMISSION_GRANTED != grantResults[0] ){
                 if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
-                    checkPermission();
+                    checkCameraPermission();
                 } else {
                     Toast.makeText(this,"请打开照相机权限",Toast.LENGTH_LONG).show();
                 }
@@ -94,11 +113,34 @@ public class ScanActivity extends BaseActivity {
                 startScan();
             }
         }
+        if ( REQUEST_PERMISSION_STORAGE == requestCode ){
+            if ( PackageManager.PERMISSION_GRANTED != grantResults[0] ){
+                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
+                    checkExternalStoragePermission();
+                } else {
+                    Toast.makeText(this,"请打开存储权限",Toast.LENGTH_LONG).show();
+                }
+            } else {
+                openAlbum();
+            }
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if ( REQUEST_ALBUM == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
+            String source = null;
+            if (data == null) return;
+            Uri uri = data.getData();
+            int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
+            if (sdkVersion >= 19) {
+                source = PictureUtils.getPath_above19(ScanActivity.this, uri);
+            } else {
+                source = PictureUtils.getFilePath_below19(ScanActivity.this,uri);
+            }
+            new Thread(new DecodeRunnable(source)).start();
+        }
     }
 
     private void findView(){
@@ -147,7 +189,7 @@ public class ScanActivity extends BaseActivity {
     private void openAlbum(){
         Intent albumIntent = new Intent(Intent.ACTION_PICK, null);
         albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(albumIntent, REQUEST_ALBUM_OK);
+        startActivityForResult(albumIntent, REQUEST_ALBUM);
     }
 
     private void back(){
@@ -165,11 +207,19 @@ public class ScanActivity extends BaseActivity {
 
     private SurfaceHolder holder;
 
-    private void checkPermission(){
+    private void checkCameraPermission(){
         if ( ActivityCompat.checkSelfPermission(this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED ){
             startScan();
         } else {
-            ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSION);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CAMERA_PERMISSION);
+        }
+    }
+
+    private void checkExternalStoragePermission(){
+        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ){
+            openAlbum();
+        } else {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_PERMISSION_STORAGE);
         }
     }
 
@@ -215,7 +265,8 @@ public class ScanActivity extends BaseActivity {
             int tmp = width;
             width = height;
             height = tmp;
-            Rect rect = cameraManager.getDecodeArea(vfv_scan.getScanRect());
+            int top = getResources().getDimensionPixelOffset(R.dimen.SelfActionBarHeight);
+            Rect rect = cameraManager.getDecodeArea(vfv_scan.getScanRect(top,0));
 
             Result result = cameraManager.decode(rect,rotatedData,width,height);
             if ( result != null ){
@@ -246,5 +297,68 @@ public class ScanActivity extends BaseActivity {
             hasSurface = false;
         }
     };
+
+    private final static int MESSAGE_DECODE_RESULT = 0x01;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( MESSAGE_DECODE_RESULT == msg.what ){
+                if ( msg.obj == null ){
+                    Toast.makeText(ScanActivity.this,"图片解析错误",Toast.LENGTH_LONG).show();
+                } else {
+                    Result result = (Result) msg.obj;
+                    resultBack(result.getText());
+                }
+            }
+        }
+    };
+
+    private Reader reader;
+    private class DecodeRunnable implements Runnable{
+
+        private String picturePath;
+
+        public DecodeRunnable(String picturePath) {
+            this.picturePath = picturePath;
+        }
+
+        @Override
+        public void run() {
+//            Hashtable<DecodeHintType, String> hints = new Hashtable<DecodeHintType, String>();
+//            hints.put(DecodeHintType.CHARACTER_SET, "utf-8"); // 设置二维码内容的编码
+            DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
+            Bitmap bitmap = PictureUtils.getSmallBitmap(picturePath, metrics.widthPixels,metrics.heightPixels);
+
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            int[] pixels = new int[width*height];
+            bitmap.getPixels(pixels,0,width,0,0,width,height);
+
+            // 最新的库中，RGBLuminanceSource 的构造器参数不只是bitmap了
+            RGBLuminanceSource source = new RGBLuminanceSource(width,height,pixels);
+            BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
+            if ( reader == null ){
+                reader = new QRCodeReader();
+            }
+
+            Result result = null;
+
+            // 尝试解析此bitmap，！！注意！！ 这个部分一定写到外层的try之中，因为只有在bitmap获取到之后才能解析。写外部可能会有异步的问题。（开始解析时bitmap为空）
+            try {
+                result = reader.decode(binaryBitmap);
+            } catch (NotFoundException e) {
+                e.printStackTrace();
+            } catch (ChecksumException e) {
+                e.printStackTrace();
+            } catch (FormatException e) {
+                e.printStackTrace();
+            }
+            Message message = handler.obtainMessage();
+            message.what = MESSAGE_DECODE_RESULT;
+            message.obj = result;
+            handler.sendMessage(message);
+        }
+    }
 
 }

@@ -13,9 +13,10 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 
 /**
- * Created by Administrator on 2017/12/26.
+ * 作者: 边贤君
+ * 描述: 日间睡眠
+ * 创建日期: 2018/1/10 13:24
  */
-
 public class InputDaySleepActivity extends BaseActivity {
     public final static String RESULT_DAY_SLEEP = "result_night_sleep";
 

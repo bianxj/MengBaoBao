@@ -12,13 +12,17 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Scroller;
 
 import com.doumengmengandroidbady.R;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -104,6 +108,17 @@ public class AutoScrollViewPager extends FrameLayout {
         params.topMargin = pageMarginTop;
         viewPager.setLayoutParams(params);
         addView(viewPager);
+
+        try {
+            Field field = ViewPager.class.getDeclaredField("mScroller");
+            field.setAccessible(true);
+            FixedSpeedScroller scroller = new FixedSpeedScroller(viewPager.getContext(),
+                    new AccelerateInterpolator());
+            field.set(viewPager, scroller);
+            scroller.setmDuration(500);
+        } catch (Exception e) {
+
+        }
     }
 
     private void initDotLayout(){
@@ -141,6 +156,7 @@ public class AutoScrollViewPager extends FrameLayout {
             viewPager.addOnPageChangeListener(pageChangeListener);
             viewPager.setOnTouchListener(onTouchListener);
             this.adapter.notifyDataSetChanged();
+            viewPager.setCurrentItem(1);
             startLoop();
         } else {
             List<ImageView> imageViews = new ArrayList<>();
@@ -218,7 +234,7 @@ public class AutoScrollViewPager extends FrameLayout {
                     handler.sendEmptyMessage(SCROLL_NEXT);
                 }
             }
-        }, 0, 3000);
+        }, 3000, 3000);
     }
 
     private void stopLoop(){
@@ -313,6 +329,38 @@ public class AutoScrollViewPager extends FrameLayout {
 
         public void onClick(int position);
 
+    }
+
+    public class FixedSpeedScroller extends Scroller {
+        private int mDuration = 1500;
+
+        public FixedSpeedScroller(Context context) {
+            super(context);
+        }
+
+        public FixedSpeedScroller(Context context, Interpolator interpolator) {
+            super(context, interpolator);
+        }
+
+        @Override
+        public void startScroll(int startX, int startY, int dx, int dy, int duration) {
+            // Ignore received duration, use fixed one instead
+            super.startScroll(startX, startY, dx, dy, mDuration);
+        }
+
+        @Override
+        public void startScroll(int startX, int startY, int dx, int dy) {
+            // Ignore received duration, use fixed one instead
+            super.startScroll(startX, startY, dx, dy, mDuration);
+        }
+
+        public void setmDuration(int time) {
+            mDuration = time;
+        }
+
+        public int getmDuration() {
+            return mDuration;
+        }
     }
 
 }

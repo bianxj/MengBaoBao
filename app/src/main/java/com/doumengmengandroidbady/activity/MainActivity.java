@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -30,6 +29,7 @@ import com.doumengmengandroidbady.fragment.LessonFragment;
 import com.doumengmengandroidbady.fragment.SpacialistServiceFragment;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -38,23 +38,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-//TODO
+/**
+ * 作者: 边贤君
+ * 描述: 主页面
+ * 创建日期: 2018/1/8 10:15
+ */
 public class MainActivity extends BaseFragmentActivity {
 
     public static final String SHOW_PAGE = "show_page";
 
+    //首页
     public static final String PAGE_HOME = "home_page";
+    //育儿知识
     public static final String PAGE_BABY_KNOWLEDGE = "baby_knowledge_page";
+    //专家服务
     public static final String PAGE_SPACIALIST_SERVICE = "spacialist_service_page";
+    //医院报告
     public static final String PAGE_HOSPITAL_REPORT = "hospital_report_page";
+    //萌课堂
     public static final String PAGE_LESSON = "lesson_page";
 
+    //抽屉
     private DrawerLayout dl_main;
+    //内容页
     private FrameLayout fl_content;
 
     private RelativeLayout rl_home_page , rl_baby_knowledge , rl_spacialist_service , rl_hospital_report , rl_meng_lesson;
-//    private ImageView iv_home_page , iv_baby_knowledge , iv_spacialist_service , iv_hospital_report , iv_meng_lesson;
-//    private TextView tv_home_page , tv_baby_knowledge , tv_spacialist_service , tv_hospital_report , tv_meng_lesson;
 
     private FragmentManager fm;
     private Fragment currentFragment;
@@ -75,7 +84,7 @@ public class MainActivity extends BaseFragmentActivity {
         findView();
         initView();
         initFragment();
-        showFragment();
+        showDefaultFragment();
     }
 
     @Override
@@ -138,6 +147,11 @@ public class MainActivity extends BaseFragmentActivity {
         lv_side_menu.setOnItemClickListener(itemClickListener);
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 初始化子页面
+     * 日期: 2018/1/8 10:23
+     */
     private void initFragment(){
         fm = getSupportFragmentManager();
         fragmentMap = new HashMap<String,Fragment>();
@@ -150,17 +164,37 @@ public class MainActivity extends BaseFragmentActivity {
 
     private void initData(){
         UserData userData = BaseApplication.getInstance().getUserData();
-        if (TextUtils.isEmpty(userData.getHeadimg())){
-
+        if ( BaseApplication.getInstance().isPay() ) {
+            loadHeadImg(userData.isMale(),userData.getHeadimg());
         } else {
-            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+            loadHeadImg(userData.isMale(),"");
         }
         tv_baby_age.setText(userData.getBabyAge());
         tv_baby_name.setText(userData.getTruename());
         cb_male.setChecked(userData.isMale());
     }
 
-    private void showFragment(){
+    /**
+     * 作者: 边贤君
+     * 描述: 加载头像
+     * 参数:
+     * 日期: 2018/1/8 10:35
+     */
+    private void loadHeadImg(boolean isMale,String urlHeadImg){
+        DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+        if ( isMale ){
+            builder.showImageOnLoading(R.drawable.default_icon_boy);
+            builder.showImageForEmptyUri(R.drawable.default_icon_boy);
+            builder.showImageOnFail(R.drawable.default_icon_boy);
+        } else {
+            builder.showImageOnLoading(R.drawable.default_icon_girl);
+            builder.showImageForEmptyUri(R.drawable.default_icon_girl);
+            builder.showImageOnFail(R.drawable.default_icon_girl);
+        }
+        ImageLoader.getInstance().displayImage(urlHeadImg,civ_head,builder.build());
+    }
+
+    private void showDefaultFragment(){
         Intent intent = getIntent();
         if ( intent != null && intent.getStringExtra(SHOW_PAGE) != null ){
             String page = intent.getStringExtra(SHOW_PAGE);
@@ -175,14 +209,10 @@ public class MainActivity extends BaseFragmentActivity {
         public void onDrawerSlide(View drawerView, float slideOffset) {}
 
         @Override
-        public void onDrawerOpened(View drawerView) {
-//            dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
-        }
+        public void onDrawerOpened(View drawerView) {}
 
         @Override
-        public void onDrawerClosed(View drawerView) {
-//            dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        }
+        public void onDrawerClosed(View drawerView) {}
 
         @Override
         public void onDrawerStateChanged(int newState) {}
@@ -224,6 +254,11 @@ public class MainActivity extends BaseFragmentActivity {
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 展开或收合抽屉
+     * 日期: 2018/1/8 10:25
+     */
     public void toggleSideMenu(){
         if ( dl_main.isDrawerOpen(Gravity.LEFT) ){
             dl_main.closeDrawer(Gravity.LEFT);
@@ -232,6 +267,12 @@ public class MainActivity extends BaseFragmentActivity {
         }
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 切换子页面
+     * 参数: 
+     * 日期: 2018/1/8 10:25
+     */
     private void switchFragment(String page){
         Fragment fragment = fragmentMap.get(page);
         if ( !fragment.isVisible() ){
@@ -250,6 +291,12 @@ public class MainActivity extends BaseFragmentActivity {
         }
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 刷新Tab标签
+     * 参数:
+     * 日期: 2018/1/8 10:26
+     */
     private void refreshBottomMenu(String page){
         Set<String> keys = bottomMap.keySet();
         for (String key:keys) {
@@ -268,6 +315,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //截取返回键
         if ( keyCode == KeyEvent.KEYCODE_BACK ){
             if ( dl_main.isDrawerOpen(Gravity.LEFT) ) {
                 dl_main.closeDrawer(Gravity.LEFT);

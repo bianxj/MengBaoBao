@@ -17,9 +17,10 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
- * Created by Administrator on 2017/12/8.
+ * 作者: 边贤君
+ * 描述: 个人中心
+ * 创建日期: 2018/1/8 10:39
  */
-
 public class PersonCenterActivity extends BaseActivity {
 
     private TextView tv_baby_name ,tv_baby_age;
@@ -57,32 +58,49 @@ public class PersonCenterActivity extends BaseActivity {
     private void initView(){
         tv_title.setText(R.string.person_center);
 
+        UserData userData = BaseApplication.getInstance().getUserData();
         if (!BaseApplication.getInstance().isPay()){
+            //免费用户
             tv_baby_age.setVisibility(View.INVISIBLE);
             cb_male.setVisibility(View.INVISIBLE);
+            if ( userData.isMale() ){
+                civ_baby_img.setImageResource(R.drawable.default_icon_boy);
+            } else {
+                civ_baby_img.setImageResource(R.drawable.default_icon_girl);
+            }
         } else {
+            //付费用户
             tv_baby_age.setVisibility(View.VISIBLE);
             cb_male.setVisibility(View.VISIBLE);
+            loadHeadImg(userData);
         }
-
-        rl_back.setOnClickListener(listener);
-        rl_child_info.setOnClickListener(listener);
-        rl_parent_info.setOnClickListener(listener);
-
-        UserData userData = BaseApplication.getInstance().getUserData();
         tv_baby_name.setText(userData.getTruename());
         tv_baby_age.setText(userData.getBabyAge());
         cb_male.setChecked(userData.isMale());
 
-        ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_baby_img);
+        rl_back.setOnClickListener(listener);
+        rl_child_info.setOnClickListener(listener);
+        rl_parent_info.setOnClickListener(listener);
     }
 
-    private void initDisplayImageOption(){
-        //TODO
+    /**
+     * 作者: 边贤君
+     * 描述: 加载头像
+     * 参数:
+     * 日期: 2018/1/8 10:35
+     */
+    private void loadHeadImg(UserData userData){
         DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
-//        builder.showImageOnLoading();
-//        builder.showImageOnFail();
-//        builder.showImageForEmptyUri();
+        if ( userData.isMale() ){
+            builder.showImageOnLoading(R.drawable.default_icon_boy);
+            builder.showImageForEmptyUri(R.drawable.default_icon_boy);
+            builder.showImageOnFail(R.drawable.default_icon_boy);
+        } else {
+            builder.showImageOnLoading(R.drawable.default_icon_girl);
+            builder.showImageForEmptyUri(R.drawable.default_icon_girl);
+            builder.showImageOnFail(R.drawable.default_icon_girl);
+        }
+        ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_baby_img,builder.build());
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -110,7 +128,7 @@ public class PersonCenterActivity extends BaseActivity {
         if ( BaseApplication.getInstance().isPay() ){
             startActivity(BaseInfoActivity.class);
         } else {
-            showNeedByDialog();
+            showNeedBuyDialog();
         }
     }
 
@@ -118,15 +136,17 @@ public class PersonCenterActivity extends BaseActivity {
         if ( BaseApplication.getInstance().isPay() ){
             startActivity(ParentInfoActivity.class);
         } else {
-            showNeedByDialog();
+            showNeedBuyDialog();
         }
     }
 
-    private void showNeedByDialog(){
+    private void showNeedBuyDialog(){
         MyDialog.showChooseDialog(this, getString(R.string.prompt_need_buy),R.string.prompt_bt_cancel,R.string.prompt_bt_buy, new MyDialog.ChooseDialogCallback() {
             @Override
             public void sure() {
+                //跳转至找医生界面
                 startActivity(SpacialistServiceActivity.class);
+                back();
             }
 
             @Override

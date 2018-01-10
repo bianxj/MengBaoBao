@@ -13,9 +13,10 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 
 /**
- * Created by Administrator on 2017/12/26.
+ * 作者: 边贤君
+ * 描述: 母乳喂养
+ * 创建日期: 2018/1/10 13:27
  */
-
 public class InputBreastFeedingActivity extends BaseActivity {
     public final static String RESULT_BREAST_FEEDING = "result_breast_feeding";
     public final static String RESULT_BREAST_FEEDING_COUNT = "result_breast_feeding_count";

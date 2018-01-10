@@ -76,6 +76,7 @@
         <activity android:name=".activity.InputNightSleepActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.InputWeightActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.InputMicturitionActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.DevelopmentalBehaviorActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name=".activity.AssessmentActivity" android:screenOrientation="portrait" ></activity>
 

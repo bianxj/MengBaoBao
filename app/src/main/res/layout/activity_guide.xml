@@ -38,10 +38,16 @@
         app:page_margin_top="@dimen/y50px"
         app:canLoop="true"
         android:background="@color/white"
+        android:visibility="gone"
         >
 
     </com.doumengmengandroidbady.view.AutoScrollViewPager>
 
+    <com.doumengmengandroidbady.view.MyGifPlayer
+        android:id="@+id/player"
+        android:layout_width="@dimen/x720px"
+        android:layout_height="@dimen/y540px"></com.doumengmengandroidbady.view.MyGifPlayer>
+    
     <RelativeLayout
         android:id="@+id/ll_guide_botttom"
         android:layout_width="match_parent"

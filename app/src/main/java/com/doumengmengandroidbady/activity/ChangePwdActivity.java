@@ -18,6 +18,7 @@ import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.util.MyDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +27,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/11.
+ * 作者: 边贤君
+ * 描述: 修改密码
+ * 创建日期: 2018/1/8 10:47
  */
 public class ChangePwdActivity extends BaseActivity {
 
@@ -90,6 +93,11 @@ public class ChangePwdActivity extends BaseActivity {
         finish();
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 修改密码
+     * 日期: 2018/1/8 10:48
+     */
     private void changePwd(){
         if ( checkData() ) {
             try {
@@ -101,6 +109,11 @@ public class ChangePwdActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 检测修改密码数据是否完整
+     * 日期: 2018/1/8 10:47
+     */
     private boolean checkData(){
         String newPwd = et_new_pwd.getText().toString().trim();
         String oldPwd = et_old_pwd.getText().toString().trim();
@@ -124,7 +137,6 @@ public class ChangePwdActivity extends BaseActivity {
             tv_prompt.setText(R.string.prompt_confirm_passwd_error);
             return false;
         }
-
         return true;
     }
 
@@ -161,13 +173,17 @@ public class ChangePwdActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            int errorCode = ResponseErrorCode.getErrorCode(result);
-            String errorMsg = ResponseErrorCode.getErrorMsg(errorCode);
-            tv_prompt.setText(errorMsg);
+            tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
         }
 
         @Override
         public void onPostExecute(String result) {
+            MyDialog.showPromptDialog(getContext(), getString(R.string.change_pwd_content), new MyDialog.PromptDialogCallback() {
+                @Override
+                public void sure() {
+                    back();
+                }
+            });
         }
 
         @Override

@@ -1,8 +1,8 @@
 package com.doumengmengandroidbady.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.activity.DoctorInfoActivity;
 import com.doumengmengandroidbady.activity.DoctorListActivity;
 import com.doumengmengandroidbady.activity.HeadImageActivity;
 import com.doumengmengandroidbady.activity.MainActivity;
@@ -23,12 +24,14 @@ import com.doumengmengandroidbady.base.BaseFragment;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
- * Created by Administrator on 2017/12/5.
+ * 作者: 边贤君
+ * 描述: 首页
+ * 创建日期: 2018/1/8 11:09
  */
-//TODO
 public class HomePageFragment extends BaseFragment {
 
     private MainActivity activity;
@@ -74,7 +77,8 @@ public class HomePageFragment extends BaseFragment {
         ll_doctor_list.setOnClickListener(listener);
         rl_baby_head.setOnClickListener(listener);
 
-        int[] images = new int[]{R.drawable.v1,R.drawable.v2,R.drawable.v3};
+        //初始化轮播图
+        int[] images = new int[]{R.drawable.banner1,R.drawable.banner2,R.drawable.banner3};
         asvp.setImageList(images);
         asvp.setOnClickCallBack(onClickCallBack);
     }
@@ -83,10 +87,32 @@ public class HomePageFragment extends BaseFragment {
         UserData userData = BaseApplication.getInstance().getUserData();
         tv_baby_name.setText(userData.getTruename());
         cb_male.setChecked(userData.isMale());
-        if ( !TextUtils.isEmpty(userData.getHeadimg()) ) {
-            ImageLoader.getInstance().displayImage(userData.getHeadimg(), civ_baby);
+        if ( BaseApplication.getInstance().isPay() ) {
+            loadHeadImg(userData.isMale(),userData.getHeadimg());
+        } else {
+            loadHeadImg(userData.isMale(),"");
         }
         tv_baby_age.setText(userData.getBabyAge());
+    }
+
+    /**
+     * 作者: 边贤君
+     * 描述: 加载头像
+     * 参数:
+     * 日期: 2018/1/8 10:35
+     */
+    private void loadHeadImg(boolean isMale,String urlHeadImg){
+        DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+        if ( isMale ){
+            builder.showImageOnLoading(R.drawable.default_icon_boy);
+            builder.showImageForEmptyUri(R.drawable.default_icon_boy);
+            builder.showImageOnFail(R.drawable.default_icon_boy);
+        } else {
+            builder.showImageOnLoading(R.drawable.default_icon_girl);
+            builder.showImageForEmptyUri(R.drawable.default_icon_girl);
+            builder.showImageOnFail(R.drawable.default_icon_girl);
+        }
+        ImageLoader.getInstance().displayImage(urlHeadImg,civ_baby,builder.build());
     }
 
     @Override
@@ -100,16 +126,22 @@ public class HomePageFragment extends BaseFragment {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.rl_side_menu:
+                    //切换抽屉
                     activity.toggleSideMenu();
                     break;
                 case R.id.ll_observe_point:
+                    //观察要点
                     startActivity(ObserveActivity.class);
                     break;
                 case R.id.ll_doctor_list:
+                    //医院医生列表
                     startActivity(DoctorListActivity.class);
                     break;
                 case R.id.rl_baby_head:
-                    startActivity(HeadImageActivity.class);
+                    //上传头像
+                    if ( BaseApplication.getInstance().isPay() ) {
+                        startActivity(HeadImageActivity.class);
+                    }
                     break;
             }
         }
@@ -119,6 +151,15 @@ public class HomePageFragment extends BaseFragment {
         @Override
         public void onClick(int position) {
             Toast.makeText(getContext(),position+"",Toast.LENGTH_SHORT).show();
+            String doctorName = "马骏";
+            if ( 1 == position ) {
+                doctorName = "金星明";
+            } else if ( 2 == position ){
+                doctorName = "章依雯";
+            }
+            Intent intent = new Intent(getContext(),DoctorInfoActivity.class);
+            intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_NAME , doctorName);
+            startActivity(intent);
         }
     };
 

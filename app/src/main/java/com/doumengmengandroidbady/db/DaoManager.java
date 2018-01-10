@@ -53,8 +53,20 @@ public class DaoManager {
         return mengClassDao;
     }
 
+    private FeatureDao featureDao;
+    public FeatureDao getFeatureDao(){
+        if ( featureDao == null ){
+            featureDao = new FeatureDao();
+        }
+        return featureDao;
+    }
+
     public void deleteTable(Context context ,String tableName){
-        DataBaseUtil.openDataBase(context).delete(tableName,null,null);
+        try {
+            DataBaseUtil.openDataBase(context).delete(tableName,null,null);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

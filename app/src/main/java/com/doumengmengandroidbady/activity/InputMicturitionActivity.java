@@ -13,9 +13,10 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 
 /**
- * Created by Administrator on 2017/12/26.
+ * 作者: 边贤君
+ * 描述: 排尿
+ * 创建日期: 2018/1/10 13:33
  */
-
 public class InputMicturitionActivity extends BaseActivity {
     public final static String RESULT_MICTURITION = "result_micturition";
 
@@ -26,7 +27,7 @@ public class InputMicturitionActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_day_sleep);
+        setContentView(R.layout.activity_micturition);
         findView();
     }
 
@@ -41,7 +42,7 @@ public class InputMicturitionActivity extends BaseActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.night_sleep);
+        tv_title.setText(R.string.micturition);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);

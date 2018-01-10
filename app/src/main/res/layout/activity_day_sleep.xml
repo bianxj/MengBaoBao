@@ -30,12 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y27px">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_centerInParent="true"
-                    >
 
                         <EditText
                             android:id="@+id/et_input_data_two"
@@ -43,16 +37,17 @@
                             android:layout_height="@dimen/y86px"
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
-                            android:text="85.3"
+                            android:inputType="numberDecimal"
                             />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hour_day"
-                        style="@style/GrayText26px"
-                        android:layout_marginLeft="@dimen/x18px"
-                        />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hour_day"
+                    style="@style/GrayText26px"
+                    android:layout_marginLeft="@dimen/x18px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/et_input_data_two"
+                    />
             </RelativeLayout>
 
             <View

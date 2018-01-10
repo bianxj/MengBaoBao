@@ -24,28 +24,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y50px">
                 <LinearLayout
+                    android:id="@+id/ll_input_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true"
                     >
-
                         <EditText
                             android:id="@+id/et_input_data"
                             android:layout_width="@dimen/x233px"
                             android:layout_height="@dimen/y86px"
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
-                            android:text="85.3"
+                            android:inputType="numberDecimal"
                             />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hour_day"
-                        style="@style/GrayText26px"
-                        android:layout_marginLeft="@dimen/x18px"
-                        />
                 </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/milliliter"
+                    style="@style/GrayText26px"
+                    android:layout_marginLeft="@dimen/x18px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ll_input_date"
+                    />
             </RelativeLayout>
 
             <TextView
@@ -90,12 +92,12 @@
                             android:layout_height="@dimen/y57px"
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
-                            android:text="85.3"
+                            android:inputType="numberDecimal"
                             />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hour_day"
+                        android:text="@string/count_day"
                         style="@style/GrayText26px"
                         android:layout_marginLeft="@dimen/x18px"
                         />

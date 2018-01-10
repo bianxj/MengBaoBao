@@ -21,6 +21,7 @@
     <color name="lightPink">#F7D6D7</color>
 
     <color name="lightGray">#808080</color>
+    <color name="linkLightPink">#FEF1F7</color>
     <color name="lineGray">#D7D7D7</color>
     <color name="linePink">#FFD6EB</color>
     <color name="linkPink">#EF4399</color>
@@ -39,7 +40,10 @@
     <color name="checkColor">#FC6DA6</color>
     <color name="fifthGray">#F5F5F5</color>
     <color name="sixthGray">#999999</color>
-    
+    <color name="doctorFrame">#A6F5ED</color>
+    <color name="hospitalFrame">#A6F5ED</color>
+
+
     <color name="transparent">#00000000</color>
     <color name="translucence">#330e0000</color>
 </resources>

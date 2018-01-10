@@ -13,12 +13,13 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 
 /**
- * Created by Administrator on 2017/12/12.
+ * 作者: 边贤君
+ * 描述: 测量升高页面
+ * 创建日期: 2018/1/10 11:43
  */
-
 public class InputHeightActivity extends BaseActivity {
 
-    public final static String RESULT_HEIGHT = "result_height";
+    public final static String OUT_PARAM_HEIGHT = "result_height";
 
     private RelativeLayout rl_back,rl_complete;
     private TextView tv_title,tv_complete;
@@ -72,7 +73,7 @@ public class InputHeightActivity extends BaseActivity {
     private void complete(){
         if ( checkData() ){
             Intent intent = new Intent();
-            intent.putExtra(RESULT_HEIGHT,et_input_data.getText().toString());
+            intent.putExtra(OUT_PARAM_HEIGHT,et_input_data.getText().toString());
             setResult(Activity.RESULT_OK,intent);
             finish();
         }

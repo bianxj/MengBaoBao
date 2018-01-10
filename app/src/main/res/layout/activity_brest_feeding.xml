@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y50px">
                 <LinearLayout
+                    android:id="@+id/ll_input_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -39,14 +40,16 @@
                             android:inputType="number"
                             android:imeOptions="actionNext"
                             />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hour_day"
-                        style="@style/GrayText26px"
-                        android:layout_marginLeft="@dimen/x18px"
-                        />
                 </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/milliliter"
+                    style="@style/GrayText26px"
+                    android:layout_marginLeft="@dimen/x18px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ll_input_data"
+                    />
             </RelativeLayout>
 
             <TextView
@@ -97,7 +100,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hour_day"
+                        android:text="@string/count_day"
                         style="@style/GrayText26px"
                         android:layout_marginLeft="@dimen/x18px"
                         />

@@ -145,7 +145,8 @@
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"></com.jcodecraeer.xrecyclerview.XRecyclerView>
     </FrameLayout>
 
 </LinearLayout>

@@ -19,7 +19,6 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.response.UserData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -187,9 +186,8 @@ public class BaseInfoLayout extends LinearLayout {
             selectRadioButton(R.id.rb_spolyembryony);
         }
 
-        String string = userData.getDeliverymethods();
-        String[] strings = string.split(",");
-        selectCheckBox(parturitionCheckBox,Arrays.asList(strings));
+        List<String> string = userData.getDeliverymethods();
+        selectCheckBox(parturitionCheckBox,string);
 
         String assistedreproductive = userData.getAssistedreproductive();
         if ( "0".equals(assistedreproductive) ){

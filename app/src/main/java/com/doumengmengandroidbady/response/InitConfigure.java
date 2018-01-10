@@ -14,6 +14,8 @@ public class InitConfigure {
     private List<Hospital> HospitalList;
     private List<MengClass> MengClassList;
     private List<Growth> GrowthList;
+    private List<Feature> FeatureList;
+    private DayList DayList;
 
     public void setDoctorList(List<Doctor> doctorList) {
         DoctorList = doctorList;
@@ -45,6 +47,22 @@ public class InitConfigure {
 
     public List<Growth> getGrowthList() {
         return GrowthList;
+    }
+
+    public List<Feature> getFeatureList() {
+        return FeatureList;
+    }
+
+    public com.doumengmengandroidbady.response.DayList getDayList() {
+        return DayList;
+    }
+
+    public void setDayList(com.doumengmengandroidbady.response.DayList dayList) {
+        DayList = dayList;
+    }
+
+    public void setFeatureList(List<Feature> featureList) {
+        FeatureList = featureList;
     }
 
     public com.doumengmengandroidbady.response.ParentInfo getParentInfo() {

@@ -113,14 +113,18 @@
     <string name="weight_suggest">每一次的测量应该与第一次的测量环境、穿着 情况（裸体或仅穿内衣）尽量相同，才能尽量保证 测量的精准。</string>
 
     <!--HeadInputActivity信息-->
-    <string name="head_reference_value">参考值：85.11~97.33厘米</string>
+    <string name="head_reference_value">参考值：48.78厘米</string>
+    <string name="head_reference_dest">参考值为2005年上海市平均标准</string>
     <string name="head_diff_value">标准差：1.27厘米</string>
+    <string name="head_diff_desc">标准差指的是平均值的上下标准差</string>
     <string name="head_title">家庭正确的头围测量方法</string>
     <string name="head_content">取坐位或立位。测量者立于被测者之前或右方，用软尺从头部右侧眉弓上缘经枕骨粗隆，从左侧眉弓上缘回至零点，读出头围数字。 测量时</string>
 
     <!--ChestInputActivity信息-->
-    <string name="chest_reference_value">参考值：85.11~97.33厘米</string>
-    <string name="chest_diff_value">标准差：1.27厘米</string>
+    <string name="chest_reference_value">参考值：49.50厘米</string>
+    <string name="chest_reference_dest">参考值为2005年上海市平均标准</string>
+    <string name="chest_diff_value">标准差：1.79厘米</string>
+    <string name="chest_diff_desc">标准差指的是平均值的上下标准差</string>
     <string name="chest_title">家庭正确的胸围测量方法</string>
     <string name="chest_content">采用无伸缩性软尺测量 让宝宝卧位或立位姿势（可扶立时） 测量者于宝宝前方或右侧，左手拇指固定软尺零点于宝宝右侧乳头下</string>
 
@@ -272,7 +276,7 @@
     <string name="record">记录</string>
 
     <string name="really_month">实际月龄:</string>
-    <string name="correct_month">实际月龄</string>
+    <string name="correct_month">矫正月龄</string>
     <string name="measure_info">测量信息</string>
     <string name="head_circumference">头围</string>
     <string name="chest_circumference">胸围</string>
@@ -310,6 +314,7 @@
     <string name="product_name">品名</string>
     <string name="dosage">剂量</string>
     <string name="gram_day">克/日</string>
+    <string name="mg_day">毫克/日</string>
 
     <string name="good">好</string>
     <string name="mid">中</string>
@@ -329,6 +334,7 @@
     <string name="go_setting">去设置</string>
     
     <string name="update_content">的用户正在使用新版本</string>
+    <string name="change_pwd_content">修改密码成功</string>
     <string name="go_on">继续</string>
     
     <string name="notification_message">请允许我们向您发送通知</string>

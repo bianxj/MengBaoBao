@@ -91,7 +91,6 @@ public class DoctorDao {
 
     public List<DoctorEntity> searchDoctorListByName(Context context , String name){
         List<DoctorEntity> doctorEntities = new ArrayList<>();
-        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         StringBuilder builder = new StringBuilder();
         builder.append("select ");
         builder.append("a."+DOCTOR_ID+",");
@@ -107,6 +106,7 @@ public class DoctorDao {
         builder.append(" and a."+DOCTOR_NAME + " like '%" + name+"%' ");
         builder.append(" order by a." + DOCTOR_ORDER);
 
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         Cursor cursor = db.rawQuery(builder.toString(),null);
 
         if ( cursor != null ){
@@ -224,6 +224,33 @@ public class DoctorDao {
         }
         DataBaseUtil.closeDataBase();
         return entities;
+    }
+
+    public Doctor searchDoctorByName(Context context,String doctorName){
+        Doctor doctor = null;
+        String sql = "select * from " + TABLE_NAME + " where " + DOCTOR_NAME + " = '" + doctorName+"'";
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(sql,null);
+        if ( cursor.moveToNext() ){
+            doctor = new Doctor();
+            doctor.setDoctorid(cursor.getString(cursor.getColumnIndex(DOCTOR_ID)));
+            doctor.setDoctorcode(cursor.getString(cursor.getColumnIndex(DOCTOR_CODE)));
+            doctor.setState(cursor.getString(cursor.getColumnIndex(STATE)));
+            doctor.setCertificatea(cursor.getString(cursor.getColumnIndex(CERTIFICATE_A)));
+            doctor.setCertificateb(cursor.getString(cursor.getColumnIndex(CERTIFICATE_B)));
+            doctor.setDoctorphone(cursor.getString(cursor.getColumnIndex(DOCTOR_PHONE)));
+            doctor.setCost(cursor.getString(cursor.getColumnIndex(COST)));
+            doctor.setLoginpwd(cursor.getString(cursor.getColumnIndex(LOGIN_PWD)));
+            doctor.setDoctorimg(cursor.getString(cursor.getColumnIndex(DOCTOR_IMG)));
+            doctor.setDoctorname(cursor.getString(cursor.getColumnIndex(DOCTOR_NAME)));
+            doctor.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
+            doctor.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
+            doctor.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
+            doctor.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
+            doctor.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
+        }
+        DataBaseUtil.closeDataBase();
+        return doctor;
     }
 
     public Doctor searchDoctorById(Context context , String doctorId){

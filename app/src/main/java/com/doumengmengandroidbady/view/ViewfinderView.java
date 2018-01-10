@@ -150,13 +150,13 @@ public class ViewfinderView extends View {
         canvas.drawBitmap(lazer, laserSrcRect, laserDesRect,paint);
     }
 
-    public Rect getScanRect(){
+    public Rect getScanRect(int top,int left){
         if ( scanRect == null ) {
             scanRect = new Rect();
-            scanRect.top = rect.top + getTop();
-            scanRect.bottom = rect.bottom + getTop();
-            scanRect.left = rect.left + getLeft();
-            scanRect.right = rect.right + getLeft();
+            scanRect.top = rect.top + top;
+            scanRect.bottom = rect.bottom + top;
+            scanRect.left = rect.left + left;
+            scanRect.right = rect.right + left;
         }
         return scanRect;
     }

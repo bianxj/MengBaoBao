@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
@@ -128,7 +129,6 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    private String verificationCode;
     private RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
@@ -161,7 +161,8 @@ public class RegisterActivity extends BaseActivity {
             try {
                 JSONObject object = new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
-                verificationCode = res.optString("code");
+                String verificationCode = res.optString("code");
+                BaseApplication.getInstance().saveRegisterVc(verificationCode);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -241,7 +242,7 @@ public class RegisterActivity extends BaseActivity {
             try {
                 object.put("accountMobile",et_phone.getText().toString().trim());
                 object.put("loginPwd",et_login_pwd.getText().toString().trim());
-                object.put("code", verificationCode);
+                object.put("code", BaseApplication.getInstance().getRegisterVc());
                 object.put("checkCode",et_vc.getText().toString().trim());
             } catch (JSONException e) {
                 e.printStackTrace();

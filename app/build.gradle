@@ -41,4 +41,7 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'com.google.zxing:android-core:3.3.0'
+    implementation files('libs/alipaySdk-20170922.jar')
+    implementation files('libs/wechat-sdk-android-with-mta-5.1.0.jar')
+    implementation files('libs/glide-full-4.5.0.jar')
 }

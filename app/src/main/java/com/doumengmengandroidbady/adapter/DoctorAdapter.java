@@ -18,9 +18,10 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/11.
+ * 作者: 边贤君
+ * 描述: 医生列表适配器
+ * 创建日期: 2018/1/8 11:22
  */
-
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHolder> {
 
     private List<DoctorEntity> doctors;
@@ -39,7 +40,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
     @Override
     public void onBindViewHolder(DoctorHolder holder, int position) {
         DoctorEntity doctor = doctors.get(position);
-        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),holder.civ_head);
+        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),holder.civ_head,getDisplayImageOption());
         holder.tv_doctor_hospital.setText(doctor.getHospital());
         holder.tv_doctor_position.setText(doctor.getPositionaltitles());
         holder.tv_doctor_name.setText(doctor.getDoctorname());
@@ -82,56 +83,15 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
 
     }
 
-    private void initDisplayImageOption(){
-        DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
-//        builder.showImageOnFail();
-//        builder.showImageForEmptyUri();
-//        builder.showImageOnLoading();
+    private DisplayImageOptions options = null;
+    private DisplayImageOptions getDisplayImageOption(){
+        if ( options == null ) {
+            DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+            builder.showImageOnFail(R.drawable.default_icon_doctor);
+            builder.showImageForEmptyUri(R.drawable.default_icon_doctor);
+            builder.showImageOnLoading(R.drawable.default_icon_doctor);
+            options = builder.build();
+        }
+        return options;
     }
-
-//    private Context context;
-//    private List<DoctorEntity> doctors;
-//
-//    public DoctorAdapter(Context context,List<DoctorEntity> doctors) {
-//        this.doctors = doctors;
-//        this.context = context;
-//    }
-//
-//    @Override
-//    public int getCount() {
-//        return doctors.size();
-//    }
-//
-//    @Override
-//    public Object getItem(int position) {
-//        return doctors.get(position);
-//    }
-//
-//    @Override
-//    public long getItemId(int position) {
-//        return position;
-//    }
-//
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        if ( null == convertView  ){
-//            convertView = LayoutInflater.from(context).inflate(R.layout.item_doctor,null);
-//        }
-//
-//        DoctorEntity doctor = doctors.get(position);
-//
-//        CircleImageView civ_head = convertView.findViewById(R.id.civ_head);
-//        TextView tv_doctor_name = convertView.findViewById(R.id.tv_doctor_name);
-//        TextView tv_doctor_position = convertView.findViewById(R.id.tv_doctor_position);
-//        TextView tv_doctor_hospital = convertView.findViewById(R.id.tv_doctor_hospital);
-//        TextView tv_doctor_skill = convertView.findViewById(R.id.tv_doctor_skill);
-//
-//        ImageLoader.getInstance().displayImage(doctor.getHeadUrl(),civ_head);
-//        tv_doctor_name.setText(doctor.getDoctorname());
-//        tv_doctor_position.setText(doctor.getPositionaltitles());
-//        tv_doctor_hospital.setText(doctor.getHospital());
-//        tv_doctor_skill.setText(doctor.getSpeciality());
-//
-//        return convertView;
-//    }
 }

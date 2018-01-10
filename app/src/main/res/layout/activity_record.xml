@@ -3,6 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightSky"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 
     <include layout="@layout/include_title_back"></include>
@@ -619,7 +621,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        android:text="@string/measure_info"
+                        android:text="@string/assisted_food_add"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -638,33 +640,6 @@
 
                     <EditText
                         android:id="@+id/et_milk"
-                        style="@style/RecordInputStyle"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
-                        android:inputType="number"
-                        android:lines="1" />
-
-
-                    <TextView
-                        style="@style/LinkPinkText21px"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
-                        android:text="@string/ml_day" />
-
-                    <TextView
-                        style="@style/ThirdBlackText26px"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
-                        android:text="@string/milk_powder" />
-
-                    <EditText
-                        android:id="@+id/et_milk_powder"
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
@@ -1042,30 +1017,6 @@
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
                         android:text="@string/vitamin" />
 
-                    <TextView
-                        style="@style/ThirdBlackText23px"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Product_Name_Margin_Left"
-                        android:text="@string/product_name" />
-
-                    <EditText
-                        android:id="@+id/et_vitamin_product"
-                        style="@style/RecordInputStyle"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Product_Name_Input_Margin_Left"
-                        android:inputType="number"
-                        android:lines="1" />
-
-                    <TextView
-                        style="@style/ThirdBlackText23px"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Dosage_Margin_Left"
-                        android:text="@string/dosage" />
-
                     <EditText
                         android:id="@+id/et_vitamin_dosage"
                         style="@style/RecordInputStyle"
@@ -1073,6 +1024,15 @@
                         android:layout_marginLeft="@dimen/Record_Dosage_Input_Margin_Left"
                         android:inputType="number"
                         android:lines="1" />
+
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/mg_day" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -1094,30 +1054,6 @@
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
                         android:text="@string/calcium" />
 
-                    <TextView
-                        style="@style/ThirdBlackText23px"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Product_Name_Margin_Left"
-                        android:text="@string/product_name" />
-
-                    <EditText
-                        android:id="@+id/et_calcium_product"
-                        style="@style/RecordInputStyle"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Product_Name_Input_Margin_Left"
-                        android:inputType="number"
-                        android:lines="1" />
-
-                    <TextView
-                        style="@style/ThirdBlackText23px"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/Record_Dosage_Margin_Left"
-                        android:text="@string/dosage" />
-
                     <EditText
                         android:id="@+id/et_calcium_dosage"
                         style="@style/RecordInputStyle"
@@ -1126,6 +1062,14 @@
                         android:inputType="number"
                         android:lines="1" />
 
+                    <TextView
+                        style="@style/LinkPinkText21px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
+                        android:text="@string/mg_day" />
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
@@ -1153,6 +1097,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/x180px"
                         android:inputType="text"
+                        android:gravity="left"
                         android:lines="1" />
 
                     <View
@@ -1297,6 +1242,8 @@
                     android:layout_marginTop="@dimen/y12px"
                     android:padding="@dimen/y10px"
                     android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:lines="@null"
                     android:background="@drawable/bg_circle_parent_message" />
 
             </LinearLayout>

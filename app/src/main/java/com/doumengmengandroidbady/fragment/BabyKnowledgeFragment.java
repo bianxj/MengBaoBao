@@ -20,9 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/5.
+ * 作者: 边贤君
+ * 描述: 育儿知识
+ * 创建日期: 2018/1/8 13:57
  */
-
 public class BabyKnowledgeFragment extends BaseFragment {
 
     private RelativeLayout rl_back;
@@ -53,17 +54,22 @@ public class BabyKnowledgeFragment extends BaseFragment {
     }
 
     private void initGridView(){
-        infos = genTimeQuantum(36,3);
+        infos = genTimeQuantum();
         adapter = new BabyKnowledgeAdapter(getContext(),infos);
         gv.setAdapter(adapter);
         gv.setOnItemClickListener(itemClickListener);
     }
 
-    private List<String> genTimeQuantum(int maxMonth,int split){
+    private List<String> genTimeQuantum(){
         List<String> infos = new ArrayList<String>();
-        for (int i = 0; i < maxMonth; i+=split) {
-            infos.add(i+"~"+(i+3)+"个月");
-        }
+        infos.add("0~1个月");
+        infos.add("1~3个月");
+        infos.add("4~6个月");
+        infos.add("6~9个月");
+        infos.add("9~12个月");
+        infos.add("12~18个月");
+        infos.add("18~24个月");
+        infos.add("24~36个月");
         return infos;
     }
 

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.db.DoctorDao;
+import com.doumengmengandroidbady.db.FeatureDao;
 import com.doumengmengandroidbady.db.GrowthDao;
 import com.doumengmengandroidbady.db.HospitalDao;
 import com.doumengmengandroidbady.db.MengClassDao;
@@ -33,7 +36,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/5.
+ * 作者: 边贤君
+ * 描述: Loading界面
+ *       首先检测WIFI是否打开
+ *       而后检测版本更新
+ *       最后获取初始化数据
+ * 创建日期: 2018/1/8 10:06
  */
 public class LoadingActivity extends BaseActivity {
 
@@ -163,13 +171,10 @@ public class LoadingActivity extends BaseActivity {
 
     private RequestCallBack initConfigureCallback = new RequestCallBack() {
         @Override
-        public void onPreExecute() {
-
-        }
+        public void onPreExecute() {}
 
         @Override
         public String getUrl() {
-
             return UrlAddressList.URL_INIT_CONFIGURE;
         }
 
@@ -194,34 +199,14 @@ public class LoadingActivity extends BaseActivity {
         }
 
         @Override
-        public void onError(String result) {
-
-        }
+        public void onError(String result) {}
 
         @Override
         public void onPostExecute(String result) {
 //            if ( isTest ) {
 //                startActivity(MainActivity.class);
 //            } else {
-                try {
-                    //TODO
-                    DaoManager.getInstance().deleteTable(LoadingActivity.this, DoctorDao.TABLE_NAME);
-                    DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
-                    DaoManager.getInstance().deleteTable(LoadingActivity.this, GrowthDao.TABLE_NAME);
-                    DaoManager.getInstance().deleteTable(LoadingActivity.this, MengClassDao.TABLE_NAME);
-
-                    JSONObject object = new JSONObject(result);
-                    JSONObject res = object.getJSONObject("result");
-                    InitConfigure configure = GsonUtil.getInstance().getGson().fromJson(res.toString(), InitConfigure.class);
-                    DaoManager.getInstance().getDaotorDao().saveDoctorList(getContext(), configure.getDoctorList());
-                    DaoManager.getInstance().getGrowthDao().saveGrowthList(getContext(), configure.getGrowthList());
-                    DaoManager.getInstance().getHospitalDao().saveHospitalList(getContext(), configure.getHospitalList());
-                    DaoManager.getInstance().getMengClassDao().saveMengClassList(getContext(), configure.getMengClassList());
-                    BaseApplication.getInstance().saveParentInfo(configure.getParentInfo());
-                    startActivity(MainActivity.class);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                new Thread(new DataBaseRunnable(result)).start();
 //            }
         }
 
@@ -245,4 +230,52 @@ public class LoadingActivity extends BaseActivity {
     private void back(){
         finish();
     }
+
+    private final static int MESSAGE_JUMP_TO_MAIN = 0x01;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( msg.what == MESSAGE_JUMP_TO_MAIN ) {
+//                startActivity(MainActivity.class);
+//                startActivity(InputInfoActivity.class);
+            }
+        }
+    };
+
+    private class DataBaseRunnable implements Runnable{
+
+        private String result;
+
+        public DataBaseRunnable(String result) {
+            this.result = result;
+        }
+
+        @Override
+        public void run() {
+            DaoManager.getInstance().deleteTable(LoadingActivity.this, DoctorDao.TABLE_NAME);
+            DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
+            DaoManager.getInstance().deleteTable(LoadingActivity.this, GrowthDao.TABLE_NAME);
+            DaoManager.getInstance().deleteTable(LoadingActivity.this, MengClassDao.TABLE_NAME);
+            DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
+
+            JSONObject object = null;
+            try {
+                object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                InitConfigure configure = GsonUtil.getInstance().getGson().fromJson(res.toString(), InitConfigure.class);
+                DaoManager.getInstance().getDaotorDao().saveDoctorList(LoadingActivity.this, configure.getDoctorList());
+                DaoManager.getInstance().getGrowthDao().saveGrowthList(LoadingActivity.this, configure.getGrowthList());
+                DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, configure.getHospitalList());
+                DaoManager.getInstance().getMengClassDao().saveMengClassList(LoadingActivity.this, configure.getMengClassList());
+                DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,configure.getFeatureList());
+                BaseApplication.getInstance().saveParentInfo(configure.getParentInfo());
+                BaseApplication.getInstance().saveDayList(configure.getDayList());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            handler.sendEmptyMessage(MESSAGE_JUMP_TO_MAIN);
+        }
+    }
+
 }

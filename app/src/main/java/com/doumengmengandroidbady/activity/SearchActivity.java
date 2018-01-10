@@ -1,7 +1,8 @@
 package com.doumengmengandroidbady.activity;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,16 +15,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.adapter.DoctorAdapter;
-import com.doumengmengandroidbady.adapter.HospitalAdapter;
+import com.doumengmengandroidbady.adapter.HospitalDoctorAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
-import com.doumengmengandroidbady.config.Config;
+import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.entity.DoctorEntity;
 import com.doumengmengandroidbady.entity.HospitalEntity;
-import com.doumengmengandroidbady.request.RequestCallBack;
-import com.doumengmengandroidbady.request.RequestTask;
-import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONArray;
@@ -31,12 +28,12 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/11.
+ * 作者: 边贤君
+ * 描述: 搜索
+ * 创建日期: 2018/1/8 11:51
  */
-
 public class SearchActivity extends BaseActivity {
 
     private LinearLayout ll_back,ll_search;
@@ -52,8 +49,7 @@ public class SearchActivity extends BaseActivity {
 
     private List<DoctorEntity> doctors = new ArrayList<>();
     private List<HospitalEntity> hospitals = new ArrayList<>();
-    private HospitalAdapter hospitalAdapter;
-    private DoctorAdapter doctorAdapter;
+    private HospitalDoctorAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,12 +109,11 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void initSearchList(){
-        xrv_search.setLoadingMoreEnabled(true);
-        xrv_search.setFootView(new XLoadMoreFooter(this));
-        xrv_search.setLoadingListener(searchLoadingListener);
+        xrv_search.setLoadingMoreEnabled(false);
 
-        doctorAdapter = new DoctorAdapter(doctors);
-        hospitalAdapter = new HospitalAdapter(hospitals);
+        adapter = new HospitalDoctorAdapter(hospitals,doctors);
+        xrv_search.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void initSearchHistory(){
@@ -134,16 +129,6 @@ public class SearchActivity extends BaseActivity {
             }
         }
     }
-
-    private XRecyclerView.LoadingListener searchLoadingListener = new XRecyclerView.LoadingListener() {
-        @Override
-        public void onRefresh() {}
-
-        @Override
-        public void onLoadMore() {
-
-        }
-    };
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -170,94 +155,59 @@ public class SearchActivity extends BaseActivity {
         }
     };
 
-    private void search(){
-        try {
-            buildSearchTask().execute();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+    //-----------------------------------------查询----------------------------------------------
+    private final static int MESSAGE_SEARCH = 0x01;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( msg.what == MESSAGE_SEARCH ) {
+                if (tempDoctors != null || tempHospitals != null) {
+                    if (tempHospitals.size() > 0 || tempDoctors.size() > 0) {
+                        hospitals.clear();
+                        doctors.clear();
+                        hospitals.addAll(tempHospitals);
+                        doctors.addAll(tempDoctors);
+
+                        adapter.notifyDataSetChanged();
+                        try {
+                            putSearchHistory((String) msg.obj);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        ll_history.setVisibility(View.GONE);
+                    }
+                }
+            }
         }
+    };
+
+    private void search(){
+        new Thread(searchRunnable).start();
     }
+
+    private List<DoctorEntity> tempDoctors = null;
+    private List<HospitalEntity> tempHospitals = null;
+    private Runnable searchRunnable = new Runnable() {
+        @Override
+        public void run() {
+            String search = et_search.getText().toString().trim();
+            tempDoctors = DaoManager.getInstance().getDaotorDao().searchDoctorListByName(SearchActivity.this,search);
+            tempHospitals = DaoManager.getInstance().getHospitalDao().searchHospitalListByName(SearchActivity.this,search);
+
+            Message message = handler.obtainMessage();
+            message.what = MESSAGE_SEARCH;
+            message.obj = search;
+            handler.sendMessage(message);
+        }
+    };
+
 
     private void back(){
         finish();
     }
 
-    private RequestTask buildSearchTask() throws Throwable {
-        return new RequestTask.Builder(searchCallBack).build();
-    }
-
-    private int times = 0;
-    private RequestCallBack searchCallBack = new RequestCallBack() {
-        @Override
-        public void onPreExecute() {
-
-        }
-
-        @Override
-        public String getUrl() {
-            return null;
-        }
-
-        @Override
-        public Context getContext() {
-            return null;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            return null;
-        }
-
-        @Override
-        public void onError(String result) {
-
-        }
-
-        @Override
-        public void onPostExecute(String result) {
-            if (Config.isTest){
-                times++;
-                if ( times %2 == 0 ){
-                    xrv_search.setAdapter(hospitalAdapter);
-                    for (int i = 0; i < 10; i++) {
-                        HospitalEntity hospital = new HospitalEntity();
-                        hospital.setHospitalicon("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
-                        hospital.setHospitalname("HospitalName" + i);
-                        hospital.setHospitaladdress("HospitalAddress" + i);
-                        hospitals.add(hospital);
-                    }
-                    hospitalAdapter.notifyDataSetChanged();
-                } else {
-                    xrv_search.setAdapter(doctorAdapter);
-                    doctors.clear();
-                    for (int i = 0; i <10 ; i++) {
-                        DoctorEntity doctor = new DoctorEntity();
-                        doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-                        doctor.setDoctordesc("Describe1");
-                        doctor.setDoctorname("Name"+i);
-                        doctor.setHospital("HospitalEntity"+i);
-                        doctor.setPositionaltitles("Position"+i);
-                        doctor.setSpeciality("Skill"+i);
-                        doctors.add(doctor);
-                    }
-                    doctorAdapter.notifyDataSetChanged();
-                }
-                String historyWord = et_search.getText().toString();
-                try {
-                    putSearchHistory(historyWord);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                ll_history.setVisibility(View.GONE);
-            }
-        }
-
-        @Override
-        public String type() {
-            return JSON;
-        }
-    };
-
+    //--------------------------------------搜索历史处理--------------------------------------------
     private JSONArray array = null;
     private List<View> historyItem = new ArrayList<>();
     public final static int HISTORY_ITEM_COUNT = 3;

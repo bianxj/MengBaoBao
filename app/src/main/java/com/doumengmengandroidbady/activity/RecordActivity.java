@@ -2,6 +2,7 @@ package com.doumengmengandroidbady.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,17 +28,33 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.PictureAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.net.UrlAddressList;
+import com.doumengmengandroidbady.request.RequestCallBack;
+import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.entity.SubmitRecord;
+import com.doumengmengandroidbady.response.DayList;
+import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.util.FormulaUtil;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.PictureUtils;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/25.
+ * 作者: 边贤君
+ * 描述: 记录
+ * 创建日期: 2018/1/10 13:56
  */
-
 public class RecordActivity extends BaseActivity {
 
+    //--------------------------------------回调CODE------------------------------------------------
     private final static int REQUEST_HEIGHT = 0x01;
     private final static int REQUEST_WEIGHT = 0x02;
     private final static int REQUEST_HEAD_CIRCUMFERENCE = 0x03;
@@ -49,6 +67,7 @@ public class RecordActivity extends BaseActivity {
     private final static int REQUEST_MICTURITION = 0x10;
     private final static int REQUEST_DEVELOPMENTAL_ACTION = 0x11;
 
+    //------------------------------------------控件-----------------------------------------------
     private RelativeLayout rl_back,rl_complete;
     private TextView tv_title,tv_complete;
 
@@ -61,12 +80,14 @@ public class RecordActivity extends BaseActivity {
             tv_breastfeeding,tv_breastfeeding_count,
             tv_formula_milk,tv_formula_milk_count;
 
-    private EditText et_milk,et_milk_powder,
+    private EditText et_milk,
             et_flour,et_food,et_porridge,et_rice,
             et_meat,et_egg,et_bean,et_vegetables,
-            et_fruit,et_water,et_vitamin_product,et_vitamin_dosage,
-            et_calcium_product,et_calcium_dosage,
+            et_fruit,et_water,et_vitamin_dosage,
+            et_calcium_dosage,
             et_other;
+
+    private List<EditText> editTexts = new ArrayList<>();
 
     private RadioGroup rg_appetite;
 
@@ -77,7 +98,14 @@ public class RecordActivity extends BaseActivity {
     private GridView gv_upload_report;
     private PictureAdapter adapter;
 
+    //-----------------------------------------------------------------------------------------
     private Map<Integer,InputActivityCallBack> requestMap;
+    //用户信息
+    private UserData userData = BaseApplication.getInstance().getUserData();
+    //发育行为
+    private List<String> developments = new ArrayList<>();
+    //月龄信息
+    private DayList dayList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,7 +138,6 @@ public class RecordActivity extends BaseActivity {
         tv_formula_milk_count = findViewById(R.id.tv_formula_milk_count);
 
         et_milk = findViewById(R.id.et_milk);
-        et_milk_powder = findViewById(R.id.et_milk_powder);
         et_flour = findViewById(R.id.et_flour);
         et_food = findViewById(R.id.et_food);
         et_porridge = findViewById(R.id.et_porridge);
@@ -121,9 +148,7 @@ public class RecordActivity extends BaseActivity {
         et_vegetables = findViewById(R.id.et_vegetables);
         et_fruit = findViewById(R.id.et_fruit);
         et_water = findViewById(R.id.et_water);
-        et_vitamin_product = findViewById(R.id.et_vitamin_product);
         et_vitamin_dosage = findViewById(R.id.et_vitamin_dosage);
-        et_calcium_product = findViewById(R.id.et_calcium_product);
         et_calcium_dosage = findViewById(R.id.et_calcium_dosage);
         et_other = findViewById(R.id.et_other);
 
@@ -131,10 +156,32 @@ public class RecordActivity extends BaseActivity {
         iv_develop_action = findViewById(R.id.iv_develop_action);
         et_parent_message = findViewById(R.id.et_parent_message);
         gv_upload_report = findViewById(R.id.gv_upload_report);
+
+        editTexts.add(et_milk);
+        editTexts.add(et_flour);
+        editTexts.add(et_food);
+        editTexts.add(et_porridge);
+        editTexts.add(et_rice);
+        editTexts.add(et_meat);
+        editTexts.add(et_egg);
+        editTexts.add(et_bean);
+        editTexts.add(et_vegetables);
+        editTexts.add(et_fruit);
+        editTexts.add(et_water);
+        editTexts.add(et_vitamin_dosage);
+        editTexts.add(et_calcium_dosage);
+        editTexts.add(et_other);
+        editTexts.add(et_parent_message);
+
         initRequestMap();
         initView();
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 初始化各类测量页面回调
+     * 日期: 2018/1/10 13:58
+     */
     private void initRequestMap(){
         requestMap = new HashMap<>();
         requestMap.put(inputHeightCallBack.requestCode(),inputHeightCallBack);
@@ -175,6 +222,17 @@ public class RecordActivity extends BaseActivity {
         adapter = new PictureAdapter(this,tackPictureCallBack);
         gv_upload_report.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        dayList = BaseApplication.getInstance().getDayList();
+        if ( dayList == null ){
+            //TODO
+        } else {
+            tv_really_month.setText(dayList.getCurrentMonth()+"个月"+dayList.getCurrentDay()+"天");
+            tv_correct_month.setText(dayList.getCorrentMonth()+"个月"+dayList.getCorrentDay()+"天");
+            if ( tv_correct_month.getText().toString().trim().equals(tv_correct_month.getText().toString().trim()) ){
+                rl_correct_month.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -221,7 +279,12 @@ public class RecordActivity extends BaseActivity {
                     inputMicturitionCallBack.request();
                     break;
                 case R.id.iv_develop_action:
-                    //TODO
+                        Intent intent = new Intent(RecordActivity.this, DevelopmentalBehaviorActivity.class);
+                        String development = GsonUtil.getInstance().getGson().toJson(developments);
+                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_DEVELOPMENT, development);
+                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_MONTH_AGE, dayList.getCurrentMonth());
+                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_RECORD_TIME, FormulaUtil.getCurrentTime());
+                        startActivityForResult(intent, REQUEST_DEVELOPMENTAL_ACTION);
                     break;
             }
         }
@@ -231,18 +294,16 @@ public class RecordActivity extends BaseActivity {
         finish();
     }
 
-    private void submit(){
-        //TODO
-        startActivity(AssessmentActivity.class);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //测量页面返回
         if ( requestMap.containsKey(requestCode) ){
+            clearEditTextFocus();
             requestMap.get(requestCode).response(resultCode,data);
         }
 
+        //照片返回
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             String source = null;
             if (data == null) return;
@@ -260,8 +321,19 @@ public class RecordActivity extends BaseActivity {
             adapter.addPicture(target);
             setGridViewHeight(gv_upload_report);
         }
+
+        //发育行为返回
+        if ( REQUEST_DEVELOPMENTAL_ACTION == requestCode && Activity.RESULT_OK == resultCode && data != null ){
+            String result = data.getStringExtra(DevelopmentalBehaviorActivity.OUT_PARAM_DEVELOPMENT);
+            developments = GsonUtil.getInstance().getGson().fromJson(result,new TypeToken<List<String>>(){}.getType());
+        }
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 测量身高回调
+     * 创建日期: 2018/1/10 11:43
+     */
     private InputActivityCallBack inputHeightCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
@@ -277,12 +349,17 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String value = data.getStringExtra(InputHeightActivity.RESULT_HEIGHT);
+                String value = data.getStringExtra(InputHeightActivity.OUT_PARAM_HEIGHT);
                 tv_height.setText(value);
             }
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 测量体重回调
+     * 创建日期: 2018/1/10 11:46
+     */
     private InputActivityCallBack inputWeightCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
@@ -304,6 +381,11 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 测量头围回调
+     * 创建日期: 2018/1/10 11:47
+     */
     private InputActivityCallBack inputHeadCircumferenceCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
@@ -325,6 +407,11 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 测量胸围回调
+     * 创建日期: 2018/1/10 13:20
+     */
     private InputActivityCallBack inputChestCircumferenceCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
@@ -346,6 +433,11 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 排便回调
+     * 创建日期: 2018/1/10 13:21
+     */
     private InputActivityCallBack inputCacationCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
@@ -369,6 +461,11 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 夜间睡眠回调
+     * 创建日期: 2018/1/10 13:23
+     */
     private InputActivityCallBack inputNightSleepCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
@@ -390,6 +487,11 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 日间睡眠回调
+     * 创建日期: 2018/1/10 13:23
+     */
     private InputActivityCallBack inputDaySleepCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
@@ -411,6 +513,11 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 母乳喂养回调
+     * 创建日期: 2018/1/10 13:27
+     */
     private InputActivityCallBack inputBreastFeedingCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
@@ -434,6 +541,11 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 作者: 边贤君
+     * 描述: 配方奶喂养回调
+     * 创建日期: 2018/1/10 13:31
+     */
     private InputActivityCallBack inputMilkCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
@@ -478,8 +590,14 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
-    private final static int REQUEST_IMAGE = 0x02;
-    private final static int REQUEST_PERMISSION_STORAGE = 0x02;
+    private interface InputActivityCallBack{
+        public int requestCode();
+        public void request();
+        public void response(int resultCode,Intent data);
+    }
+    //--------------------------------------调用相册-----------------------------------------------
+    private final static int REQUEST_IMAGE = 0x99;
+    private final static int REQUEST_PERMISSION_STORAGE = 0x99;
     private PictureAdapter.TackPictureCallBack tackPictureCallBack = new PictureAdapter.TackPictureCallBack() {
         @Override
         public void tackPicture() {
@@ -520,12 +638,6 @@ public class RecordActivity extends BaseActivity {
         }
     }
 
-    private interface InputActivityCallBack{
-        public int requestCode();
-        public void request();
-        public void response(int resultCode,Intent data);
-    }
-
     public void setGridViewHeight(GridView gridview) {
         // 获取gridview的adapter
         ListAdapter listAdapter = gridview.getAdapter();
@@ -548,5 +660,114 @@ public class RecordActivity extends BaseActivity {
         params.height = totalHeight;
         gridview.setLayoutParams(params);
     }
+
+    //---------------------------------提交记录------------------------------------------------
+    public RequestTask submitRecordTask;
+    private void submit(){
+        submitRecord();
+    }
+
+    public void submitRecord(){
+        try {
+            submitRecordTask = new RequestTask.Builder(submitRecordCallBack).build();
+            submitRecordTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private RequestCallBack submitRecordCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public String getUrl() {
+            return UrlAddressList.URL_SUBMIT_RECORD;
+        }
+
+        @Override
+        public Context getContext() {
+            return RecordActivity.this;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
+            Map<String,String> map = new HashMap<>();
+
+            SubmitRecord record  = new SubmitRecord(userData.getUserid());
+            record.setHeight(tv_height.getText().toString().trim());
+            record.setWeight(tv_weight.getText().toString().trim());
+            record.setHeadcircumference(tv_head_circumference.getText().toString().trim());
+            record.setChestcircumference(tv_chest_circumference.getText().toString().trim());
+            record.setCacation(tv_cacation_count.getText().toString().trim());
+            record.setCacationdays(tv_cacation_day.getText().toString().trim());
+            record.setUrinate(tv_micturition_count.getText().toString().trim());
+            record.setNighttimeSleep(tv_night_sleep.getText().toString().trim());
+            record.setDaytimesleep(tv_day_sleep.getText().toString().trim());
+            record.setBreastfeedingml(tv_breastfeeding.getText().toString().trim());
+            record.setBreastfeedingcount(tv_breastfeeding_count.getText().toString().trim());
+            record.setMilkfeedingml(tv_formula_milk.getText().toString().trim());
+            record.setMilkfeedingcount(tv_formula_milk_count.getText().toString().trim());
+
+            record.setMilk(et_milk.getText().toString().trim());
+            record.setRiceflour(et_flour.getText().toString().trim());
+            record.setPasta(et_food.getText().toString().trim());
+            record.setCongee(et_porridge.getText().toString().trim());
+            record.setRice(et_rice.getText().toString().trim());
+            record.setMeat(et_meat.getText().toString().trim());
+            record.setEggs(et_egg.getText().toString().trim());
+            record.setSoyproducts(et_bean.getText().toString().trim());
+            record.setVegetables(et_vegetables.getText().toString().trim());
+            record.setFruit(et_fruit.getText().toString().trim());
+            record.setWater(et_water.getText().toString().trim());
+            record.setVitaminaddose(et_vitamin_dosage.getText().toString().trim());
+            record.setCalciumdose(et_calcium_dosage.getText().toString().trim());
+            record.setOther(et_parent_message.getText().toString().trim());
+            record.setOtherfood(et_other.getText().toString().trim());
+
+            RadioButton button = findViewById(rg_appetite.getCheckedRadioButtonId());
+            record.setOrexia(button.getText().toString().trim());
+
+            record.setFeature(developments);
+
+            map.put(UrlAddressList.PARAM, GsonUtil.getInstance().getGson().toJson(record));
+            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+            return map;
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                if ( 1 == res.getInt("isSuccess") ){
+                    startActivity(AssessmentActivity.class);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public String type() {
+            return JSON;
+        }
+    };
+
+    //-------------------------------OTHERS--------------------------------------------------------
+
+    public void clearEditTextFocus(){
+        for (EditText editText:editTexts){
+            editText.clearFocus();
+        }
+    }
+
 
 }

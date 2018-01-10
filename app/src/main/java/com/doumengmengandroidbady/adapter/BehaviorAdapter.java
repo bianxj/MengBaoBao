@@ -5,10 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.response.Feature;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/1/4.
@@ -16,6 +20,13 @@ import com.doumengmengandroidbady.R;
 
 public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHolder> {
 
+    private List<String> selection;
+    private List<Feature> features;
+
+    public BehaviorAdapter(List<Feature> features,List<String> selection) {
+        this.features = features;
+        this.selection = selection;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -26,12 +37,13 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        Feature feature = features.get(position);
+        holder.initData(feature,selection);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return features.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -42,6 +54,8 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
         private ImageView iv_behavior;
         private View view_underline;
         private android.support.v4.widget.Space space_behavior;
+        private Feature feature;
+        private List<String> selection;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -53,17 +67,33 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
             space_behavior = itemView.findViewById(R.id.space_behavior);
         }
 
-        private void initData(){
-            //TODO
-            boolean isTitle = false;
-            if ( isTitle ) {
+        private void initData(Feature feature,List<String> selection){
+            this.feature = feature;
+            this.selection = selection;
+            if ( feature.isTitle() ) {
                 tv_hehavior_title.setVisibility(View.VISIBLE);
                 space_behavior.setVisibility(View.VISIBLE);
             } else {
                 tv_hehavior_title.setVisibility(View.GONE);
                 space_behavior.setVisibility(View.GONE);
             }
+
+            tv_hehavior_title.setText(feature.getFeaturetype());
+            tv_behavior.setText(feature.getDetaildesc());
+            cb_hebavior.setChecked(selection.contains( feature.getId()));
+            cb_hebavior.setOnCheckedChangeListener(changeListener);
         }
+
+        private CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if ( b ){
+                    selection.add(feature.getId());
+                } else {
+                    selection.remove(feature.getId());
+                }
+            }
+        };
 
     }
 

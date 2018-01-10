@@ -13,9 +13,10 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 
 /**
- * Created by Administrator on 2017/12/12.
+ * 作者: 边贤君
+ * 描述: 排便
+ * 创建日期: 2018/1/10 13:20
  */
-
 public class InputCacationActivity extends BaseActivity {
     public final static String RESULT_CACATION_DAY = "result_cacation_day";
     public final static String RESULT_CACATION_COUNT = "result_cacation_count";

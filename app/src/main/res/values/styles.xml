@@ -202,6 +202,11 @@
         <item name="android:lineSpacingExtra">@dimen/y10px</item>
     </style>
 
+    <style name="GrayText21px">
+        <item name="android:textSize">@dimen/y21px</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
     <style name="GrayText24px">
         <item name="android:textSize">@dimen/y24px</item>
         <item name="android:textColor">@color/gray</item>

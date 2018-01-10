@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.util.DisplayMetrics;
 
 import com.doumengmengandroidbady.entity.RoleType;
+import com.doumengmengandroidbady.response.DayList;
 import com.doumengmengandroidbady.response.ParentInfo;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.GsonUtil;
@@ -106,6 +107,15 @@ public class BaseApplication extends Application {
     public final static String TABLE_USER = "user";
     public final static String COLUMN_USER = "user";
     public final static String COLUMN_PARENT = "parent";
+    public final static String COLUMN_REGISTER_VC = "register_vc";
+    public final static String COLUMN_FORGET_VC = "forget_vc";
+
+    public final static String COLUMN_DAY_LIST = "day_list";
+
+    public final static String COLUMN_CORRENT_DAY = "corrent_day";
+    public final static String COLUMN_CORRENT_MONTH = "corrent_month";
+    public final static String COLUMN_CURRENT_DAY = "current_day";
+    public final static String COLUMN_CURRENT_MONTH = "current_month";
 
     private UserData userData;
     private ParentInfo parentInfo;
@@ -143,6 +153,35 @@ public class BaseApplication extends Application {
             }
         }
         return parentInfo;
+    }
+
+    public void saveRegisterVc(String registerVc){
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_REGISTER_VC,registerVc);
+    }
+
+    public String getRegisterVc(){
+        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_REGISTER_VC,null);
+    }
+
+    public void saveForgetVc(String forgetVc){
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_FORGET_VC,forgetVc);
+    }
+
+    public String getForgetVc(){
+        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_FORGET_VC,null);
+    }
+
+    public void saveDayList(DayList dayList){
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_DAY_LIST,GsonUtil.getInstance().getGson().toJson(dayList));
+    }
+
+    public DayList getDayList(){
+        DayList list = null;
+        String value = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_DAY_LIST,null);
+        if ( value != null ){
+            list = GsonUtil.getInstance().getGson().fromJson(value,DayList.class);
+        }
+        return list;
     }
 
     //----------------------------------------------------------------------------------------------

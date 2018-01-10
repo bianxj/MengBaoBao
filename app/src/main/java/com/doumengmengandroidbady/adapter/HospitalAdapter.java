@@ -12,6 +12,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.HospitalDoctorActivity;
 import com.doumengmengandroidbady.entity.HospitalEntity;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -62,7 +63,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
 
         private void initValue(HospitalEntity hospital){
             this.hospital = hospital;
-            ImageLoader.getInstance().displayImage(hospital.getHospitalicon(),civ_hospital);
+            ImageLoader.getInstance().displayImage(hospital.getHospitalicon(),civ_hospital,getDisplayImageOption());
             tv_hospital_address.setText(hospital.getHospitaladdress());
             tv_hospital_name.setText(hospital.getHospitalname());
         }
@@ -78,5 +79,17 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
             }
         };
 
+        private static DisplayImageOptions options = null;
+        private DisplayImageOptions getDisplayImageOption(){
+            if ( options == null ) {
+                DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+                builder.showImageOnFail(R.drawable.default_icon_hospital);
+                builder.showImageForEmptyUri(R.drawable.default_icon_hospital);
+                builder.showImageOnLoading(R.drawable.default_icon_hospital);
+                options = builder.build();
+            }
+            return options;
+        }
     }
+
 }

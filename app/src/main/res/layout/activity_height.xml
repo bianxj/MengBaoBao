@@ -29,7 +29,7 @@
                         android:layout_height="@dimen/y86px"
                         android:layout_centerHorizontal="true"
                         style="@style/InputDataStyle"
-                        android:text="85.3"
+                        android:text=""
                         />
                 <TextView
                     android:layout_width="wrap_content"

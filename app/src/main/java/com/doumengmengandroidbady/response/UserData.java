@@ -35,7 +35,7 @@ public class UserData {
     private String pregnancydays;               //孕周天
     private String birthtimes;                  //产次
     private String isstop;                      //是否禁用?
-    private String deliverymethods;             //分娩方式
+    private List<String> deliverymethods;       //分娩方式
     private String pregnancies;                 //胎次
     private String bornweight;                  //出生体重
     private String borntype;                    //出生状况(1单胎,2多胎)
@@ -181,14 +181,6 @@ public class UserData {
         this.isstop = isstop;
     }
 
-    public String getDeliverymethods() {
-        return deliverymethods;
-    }
-
-    public void setDeliverymethods(String deliverymethods) {
-        this.deliverymethods = deliverymethods;
-    }
-
     public String getPregnancies() {
         return pregnancies;
     }
@@ -329,7 +321,21 @@ public class UserData {
         this.recordtimes = recordtimes;
     }
 
+    public List<String> getDeliverymethods() {
+        return deliverymethods;
+    }
+
+    public void setDeliverymethods(List<String> deliverymethods) {
+        this.deliverymethods = deliverymethods;
+    }
+
     public String getBabyAge(){
+        if ( TextUtils.isEmpty(weekdvalue) ){
+            weekdvalue = "0";
+        }
+        if ( TextUtils.isEmpty(daydvalue) ){
+            daydvalue = "0";
+        }
         return weekdvalue+"周"+daydvalue+"日";
     }
 

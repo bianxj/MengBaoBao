@@ -14,6 +14,7 @@ import com.doumengmengandroidbady.activity.HospitalDoctorActivity;
 import com.doumengmengandroidbady.entity.DoctorEntity;
 import com.doumengmengandroidbady.entity.HospitalEntity;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -97,7 +98,7 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         private void initValue(HospitalEntity hospital){
             this.hospital = hospital;
-            ImageLoader.getInstance().displayImage(hospital.getHospitalicon(),civ_hospital);
+            ImageLoader.getInstance().displayImage(hospital.getHospitalicon(),civ_hospital,getDisplayImageOption());
             tv_hospital_address.setText(hospital.getHospitaladdress());
             tv_hospital_name.setText(hospital.getHospitalname());
         }
@@ -112,6 +113,18 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 context.startActivity(intent);
             }
         };
+
+        private static DisplayImageOptions options = null;
+        private DisplayImageOptions getDisplayImageOption(){
+            if ( options == null ) {
+                DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+                builder.showImageOnFail(R.drawable.default_icon_hospital);
+                builder.showImageForEmptyUri(R.drawable.default_icon_hospital);
+                builder.showImageOnLoading(R.drawable.default_icon_hospital);
+                options = builder.build();
+            }
+            return options;
+        }
     }
 
     public static class DoctorHolder extends  RecyclerView.ViewHolder{
@@ -141,12 +154,24 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         };
 
         public void initValue(DoctorEntity doctor){
-            ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_head);
+            ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_head,getDisplayImageOption());
             tv_doctor_hospital.setText(doctor.getHospital());
             tv_doctor_position.setText(doctor.getPositionaltitles());
             tv_doctor_name.setText(doctor.getDoctorname());
             tv_doctor_skill.setText(doctor.getSpeciality());
             this.doctor = doctor;
+        }
+
+        private DisplayImageOptions options = null;
+        private DisplayImageOptions getDisplayImageOption(){
+            if ( options == null ) {
+                DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+                builder.showImageOnFail(R.drawable.default_icon_doctor);
+                builder.showImageForEmptyUri(R.drawable.default_icon_doctor);
+                builder.showImageOnLoading(R.drawable.default_icon_doctor);
+                options = builder.build();
+            }
+            return options;
         }
     }
 
