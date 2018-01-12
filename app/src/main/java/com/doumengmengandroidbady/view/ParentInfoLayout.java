@@ -191,6 +191,9 @@ public class ParentInfoLayout extends LinearLayout {
     }
 
     public void setParentInfo(ParentInfo parentInfo) {
+        if ( parentInfo == null ){
+            return;
+        }
         this.parentInfo = parentInfo;
         et_father_name.setText(parentInfo.getDadName());
         et_father_height.setText(parentInfo.getDadHeight());

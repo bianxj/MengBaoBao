@@ -43,11 +43,26 @@
 
     </com.doumengmengandroidbady.view.AutoScrollViewPager>
 
-    <com.doumengmengandroidbady.view.MyGifPlayer
-        android:id="@+id/player"
-        android:layout_width="@dimen/x720px"
-        android:layout_height="@dimen/y540px"></com.doumengmengandroidbady.view.MyGifPlayer>
-    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x716px">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x716px">
+            <ImageView
+                android:id="@+id/iv_weight_details"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x716px"
+                android:src="@drawable/bg_boy_height_weight_2_5"/>
+            <com.doumengmengandroidbady.view.DiagramView
+                android:id="@+id/d_weight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:origin_x="@dimen/x41px"
+                app:origin_y="@dimen/x53px"/>
+        </FrameLayout>
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/ll_guide_botttom"
         android:layout_width="match_parent"

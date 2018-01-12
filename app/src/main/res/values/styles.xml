@@ -162,6 +162,11 @@
         <item name="android:textColor">@color/secondBlack</item>
     </style>
 
+    <style name="SecondBlackText26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:textColor">@color/secondBlack</item>
+    </style>
+
     <style name="ThirdBlackText26px">
         <item name="android:textSize">@dimen/y26px</item>
         <item name="android:textColor">@color/thirdBlack</item>
@@ -210,6 +215,12 @@
     <style name="GrayText24px">
         <item name="android:textSize">@dimen/y24px</item>
         <item name="android:textColor">@color/gray</item>
+    </style>
+
+
+    <style name="FourthGrayText26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:textColor">@color/fourthGray</item>
     </style>
 
     <style name="FourthGrayText24px">

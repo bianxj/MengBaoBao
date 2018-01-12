@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.activity.BabyKnowledegDetailsActivity;
+import com.doumengmengandroidbady.activity.BabyKnowledgeDetailsActivity;
 import com.doumengmengandroidbady.adapter.BabyKnowledgeAdapter;
 import com.doumengmengandroidbady.base.BaseFragment;
 
@@ -77,8 +77,8 @@ public class BabyKnowledgeFragment extends BaseFragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String title = (String) adapter.getItem(position);
-            Intent intent = new Intent(getContext(), BabyKnowledegDetailsActivity.class);
-            intent.putExtra(BabyKnowledegDetailsActivity.TITLE,title);
+            Intent intent = new Intent(getContext(), BabyKnowledgeDetailsActivity.class);
+            intent.putExtra(BabyKnowledgeDetailsActivity.TITLE,title);
             startActivity(intent);
         }
     };

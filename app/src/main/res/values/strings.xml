@@ -328,6 +328,9 @@
     <!--InputInfoActivity-->
     <string name="input_info">填写信息</string>
 
+    <!--AssessmentActivity-->
+    <string name="assessment">评估</string>
+    
     <!--Dialog-->
     <string name="location_content">定位服务为开启,请在系统中开启定位服务</string>
     <string name="later">暂不</string>

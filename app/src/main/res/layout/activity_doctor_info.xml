@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -26,9 +27,11 @@
                     android:id="@+id/civ_head"
                     android:layout_width="@dimen/y137px"
                     android:layout_height="@dimen/y137px"
-                    android:src="@drawable/ic_launcher_background"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x29px"
+                    app:civ_border_color="@color/doctorFrame"
+                    app:civ_border_width="@dimen/x2px"
+                    android:src="@drawable/default_icon_doctor"
                     />
 
                 <LinearLayout

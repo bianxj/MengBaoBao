@@ -133,11 +133,11 @@ public class PersonCenterActivity extends BaseActivity {
     }
 
     private void switchToParentInfo(){
-        if ( BaseApplication.getInstance().isPay() ){
+//        if ( BaseApplication.getInstance().isPay() ){
             startActivity(ParentInfoActivity.class);
-        } else {
-            showNeedBuyDialog();
-        }
+//        } else {
+//            showNeedBuyDialog();
+//        }
     }
 
     private void showNeedBuyDialog(){

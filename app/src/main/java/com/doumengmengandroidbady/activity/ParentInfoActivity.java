@@ -13,7 +13,9 @@ import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.entity.InputUserInfo;
 import com.doumengmengandroidbady.response.ParentInfo;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.view.ParentInfoLayout;
 
 import org.json.JSONException;
@@ -97,6 +99,9 @@ public class ParentInfoActivity extends BaseActivity {
     }
 
     private boolean checkData(){
+        if ( BaseApplication.getInstance().getParentInfo() == null ){
+            return true;
+        }
         if ( ParentInfo.isSamleValue(BaseApplication.getInstance().getParentInfo(),parent_info.getParentInfo()) ){
             return false;
         }
@@ -116,7 +121,7 @@ public class ParentInfoActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-            return UrlAddressList.URL_SAVE_PARENT_INFO;
+            return UrlAddressList.URL_SAVE_USER_INFO;
         }
 
         @Override
@@ -126,28 +131,45 @@ public class ParentInfoActivity extends BaseActivity {
 
         @Override
         public Map<String, String> getContent() {
+            InputUserInfo inputData = new InputUserInfo();
+            inputData.setUserId(BaseApplication.getInstance().getUserData().getUserid());
+
+            InputUserInfo.ParentInfo parentInfo = inputData.getParentInfo();
+
             Map<String,String> map = new HashMap<>();
             ParentInfo info = parent_info.getParentInfo();
-            JSONObject object = new JSONObject();
-            try {
-                object.put("userId",BaseApplication.getInstance().getUserData().getUserid());
-                JSONObject parentInfo = new JSONObject();
-                parentInfo.put("DadName",info.getDadName());
-                parentInfo.put("DadEducation",info.getDadEducation());
-                parentInfo.put("DadHeight",info.getDadHeight());
-                parentInfo.put("DadWeight",info.getDadWeight());
-                parentInfo.put("DadBMI",info.getDadBMI());
-                parentInfo.put("MumName",info.getMumName());
-                parentInfo.put("MumEducation",info.getMumEducation());
-                parentInfo.put("MumHeight",info.getMumHeight());
-                parentInfo.put("MumWeight",info.getMumWeight());
-                parentInfo.put("MumBMI",info.getMumBMI());
+            parentInfo.DadBMI = info.getDadBMI();
+            parentInfo.DadEducation = info.getDadEducation();
+            parentInfo.DadHeight = info.getDadHeight();
+            parentInfo.DadName = info.getDadName();
+            parentInfo.DadWeight = info.getDadWeight();
 
-                object.put("parentInfo",parentInfo);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            map.put(UrlAddressList.PARAM,object.toString());
+            parentInfo.MumBMI = info.getMumBMI();
+            parentInfo.MumEducation = info.getMumEducation();
+            parentInfo.MumHeight = info.getMumHeight();
+            parentInfo.MumName = info.getMumName();
+            parentInfo.MumWeight = info.getMumWeight();
+
+//            JSONObject object = new JSONObject();
+//            try {
+//                object.put("userId",BaseApplication.getInstance().getUserData().getUserid());
+//                JSONObject parentInfo = new JSONObject();
+//                parentInfo.put("DadName",info.getDadName());
+//                parentInfo.put("DadEducation",info.getDadEducation());
+//                parentInfo.put("DadHeight",info.getDadHeight());
+//                parentInfo.put("DadWeight",info.getDadWeight());
+//                parentInfo.put("DadBMI",info.getDadBMI());
+//                parentInfo.put("MumName",info.getMumName());
+//                parentInfo.put("MumEducation",info.getMumEducation());
+//                parentInfo.put("MumHeight",info.getMumHeight());
+//                parentInfo.put("MumWeight",info.getMumWeight());
+//                parentInfo.put("MumBMI",info.getMumBMI());
+//
+//                object.put("parentInfo",parentInfo);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+            map.put(UrlAddressList.PARAM, GsonUtil.getInstance().getGson().toJson(inputData));
             map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
             return map;
         }

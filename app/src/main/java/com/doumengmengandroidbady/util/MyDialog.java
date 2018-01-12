@@ -31,13 +31,17 @@ public class MyDialog {
     private static Object loadingLock = new Object();
     private static Object pictureLock = new Object();
     private static Object notificationLock = new Object();
+    private static Object gifLock = new Object();
     private static Object cityLock = new Object();
+
     private static Dialog updateDialog;
     private static Dialog promptDialog;
     private static Dialog chooseDialog;
     private static Dialog loadingDialog;
     private static Dialog pictureDialog;
     private static Dialog notificationDialog;
+    private static Dialog gifDialog;
+
     private static PopupWindow cityDialog;
 
     public static void showUpdateDialog(Context context,boolean isForce,String content,final UpdateDialogCallback callback){
@@ -260,6 +264,10 @@ public class MyDialog {
             notificationDialog.show();
         }
     }
+
+//    private void showNotificationDialog(){
+//
+//    }
 
     private static void dismissNotificationDialog(){
         synchronized (notificationLock){

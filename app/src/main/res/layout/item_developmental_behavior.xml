@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -33,13 +34,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x46px"
-            android:layout_marginRight="@dimen/x46px"
             android:layout_marginTop="@dimen/y32px"
+            android:layout_marginBottom="@dimen/y32px"
             >
             <RelativeLayout
                 android:id="@+id/rl_checkbox"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/player">
                 <CheckBox
                     android:id="@+id/cb_hebavior"
                     android:layout_width="@dimen/y50px"
@@ -51,29 +53,32 @@
                     />
                 <TextView
                     android:id="@+id/tv_behavior"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y5px"
                     style="@style/BlackText26px"
                     android:layout_toRightOf="@+id/cb_hebavior"
                     android:layout_marginLeft="@dimen/x12px"
-                    android:layout_marginBottom="@dimen/y58px"
-                    android:maxWidth="@dimen/x300px"
+                    android:layout_marginRight="@dimen/x46px"
                     />
             </RelativeLayout>
-            <ImageView
-                android:id="@+id/iv_behavior"
+            <com.doumengmengandroidbady.view.MyGifPlayer
+                android:id="@+id/player"
                 android:layout_width="@dimen/x179px"
-                android:layout_height="@dimen/y120px"
-                android:scaleType="fitXY"
+                android:layout_height="@dimen/y128px"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                app:start_drawable="@drawable/btn_play_small"
+                app:start_side="@dimen/x40px"
+                app:need_share="true"
+                android:layout_marginRight="@dimen/x46px"
                 />
         </RelativeLayout>
 
         <View
             android:id="@+id/view_underline"
             android:layout_width="@dimen/x681px"
-            android:layout_height="@dimen/y1px"
+            android:layout_height="@dimen/y2px"
             android:background="@color/linkLightPink"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center_horizontal"

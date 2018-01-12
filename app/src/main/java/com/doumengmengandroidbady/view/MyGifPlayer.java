@@ -1,6 +1,7 @@
 package com.doumengmengandroidbady.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -16,38 +17,49 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.doumengmengandroidbady.R;
 
-
 public class MyGifPlayer extends FrameLayout {
 
     private Context context;
+    private View share;
     private ImageView image;
     private ImageView start;
     private GifDrawable gif;
 
-    public MyGifPlayer(@NonNull Context context) {
-        super(context);
-        initView(context);
-    }
-
     public MyGifPlayer(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initView(context);
+        this(context, attrs,0);
     }
 
-    private void initView(Context context){
+    public MyGifPlayer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.MyGifPlayer,defStyleAttr,0);
+        int startId = a.getResourceId(R.styleable.MyGifPlayer_start_drawable,0);
+        int side = a.getDimensionPixelOffset(R.styleable.MyGifPlayer_start_side,0);
+        boolean needShare = a.getBoolean(R.styleable.MyGifPlayer_need_share,false);
+        initView(context,startId,side,needShare);
+    }
+
+    private void initView(Context context,int startId , int side , boolean needShare){
         this.context = context;
         image = new ImageView(context);
         image.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         addView(image);
 
+        share = new View(context);
+        share.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        share.setBackgroundColor(context.getResources().getColor(R.color.translucence));
+        if ( needShare ) {
+            addView(share);
+        }
+        share.setOnClickListener(listener);
+
         start = new ImageView(context);
-        int side = context.getResources().getDimensionPixelOffset(R.dimen.x95px);
         LayoutParams params = new LayoutParams(side, side);
         params.gravity = Gravity.CENTER;
         start.setLayoutParams(params);
         start.setOnClickListener(listener);
-        start.setImageResource(R.drawable.btn_play);
+        start.setImageResource(startId);
         addView(start);
+        start.setVisibility(View.GONE);
     }
 
     private OnClickListener listener = new OnClickListener() {
@@ -58,12 +70,27 @@ public class MyGifPlayer extends FrameLayout {
     };
 
 
-    public void setNetWorkUrl(String url){
-        Glide.with(this).asGif().load(url).load(target);
+    public void setDrawable(String url){
+        prepare();
+        Glide.with(this).asBitmap().load(url).into(image);
     }
 
     public void setDrawable(int drawable){
+        prepare();
         Glide.with(this).asGif().load(drawable).into(target);
+    }
+
+    public void clearDrawable(){
+        prepare();
+    }
+
+    private void prepare(){
+        if ( gif != null ){
+            gif.stop();
+        }
+        image.setImageDrawable(null);
+        start.setVisibility(View.GONE);
+        share.setVisibility(View.GONE);
     }
 
     private SimpleTarget<GifDrawable> target = new SimpleTarget<GifDrawable>() {
@@ -71,10 +98,13 @@ public class MyGifPlayer extends FrameLayout {
         public void onResourceReady(@NonNull GifDrawable gifDrawable, @Nullable Transition<? super GifDrawable> transition) {
             gif = gifDrawable;
             image.setImageDrawable(gifDrawable);
+            start.setVisibility(View.VISIBLE);
+            share.setVisibility(View.VISIBLE);
         }
     };
 
     private void startPlay(){
+        share.setVisibility(View.GONE);
         start.setVisibility(View.GONE);
         gif.setLoopCount(1);
         gif.startFromFirstFrame();
@@ -82,6 +112,7 @@ public class MyGifPlayer extends FrameLayout {
     }
 
     private void stopPlay(){
+        share.setVisibility(View.VISIBLE);
         start.setVisibility(View.VISIBLE);
         gif.stop();
     }

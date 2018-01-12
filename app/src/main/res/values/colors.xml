@@ -43,6 +43,9 @@
     <color name="doctorFrame">#A6F5ED</color>
     <color name="hospitalFrame">#A6F5ED</color>
 
+    <color name="bgWeightColor">#FC6DA6</color>
+    <color name="bgHeightColor">#F0A774</color>
+    <color name="bgBMIColor">#23E3F8</color>
 
     <color name="transparent">#00000000</color>
     <color name="translucence">#330e0000</color>

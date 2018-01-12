@@ -1,16 +1,18 @@
 package com.doumengmengandroidbady.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.response.Feature;
+import com.doumengmengandroidbady.view.MyGifPlayer;
 
 import java.util.List;
 
@@ -51,7 +53,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
         private TextView tv_hehavior_title;
         private CheckBox cb_hebavior;
         private TextView tv_behavior;
-        private ImageView iv_behavior;
+        private MyGifPlayer player;
         private View view_underline;
         private android.support.v4.widget.Space space_behavior;
         private Feature feature;
@@ -62,7 +64,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
             tv_hehavior_title = itemView.findViewById(R.id.tv_hehavior_title);
             cb_hebavior = itemView.findViewById(R.id.cb_hebavior);
             tv_behavior = itemView.findViewById(R.id.tv_behavior);
-            iv_behavior = itemView.findViewById(R.id.iv_behavior);
+            player = itemView.findViewById(R.id.player);
             view_underline = itemView.findViewById(R.id.view_underline);
             space_behavior = itemView.findViewById(R.id.space_behavior);
         }
@@ -82,6 +84,14 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
             tv_behavior.setText(feature.getDetaildesc());
             cb_hebavior.setChecked(selection.contains( feature.getId()));
             cb_hebavior.setOnCheckedChangeListener(changeListener);
+            if (TextUtils.isEmpty(feature.getExampleimgurl())) {
+                player.clearDrawable();
+                player.setVisibility(View.GONE);
+            } else {
+                player.setVisibility(View.VISIBLE);
+                player.setDrawable(UrlAddressList.BASE_URL + feature.getExampleimgurl());
+                player.setOnClickListener(listener);
+            }
         }
 
         private CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
@@ -92,6 +102,13 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
                 } else {
                     selection.remove(feature.getId());
                 }
+            }
+        };
+
+        private View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         };
 

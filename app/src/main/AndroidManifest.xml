@@ -48,7 +48,7 @@
         <activity android:name=".activity.SettingActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ChangePwdActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.BabyKnowledegDetailsActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.BabyKnowledgeDetailsActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.HospitalReportActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name=".activity.HeadImageActivity" android:screenOrientation="portrait"></activity>
@@ -79,6 +79,7 @@
         <activity android:name=".activity.DevelopmentalBehaviorActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name=".activity.AssessmentActivity" android:screenOrientation="portrait" ></activity>
+        <activity android:name=".activity.ParentingGuideActivity" android:screenOrientation="portrait"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

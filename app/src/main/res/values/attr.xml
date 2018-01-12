@@ -29,4 +29,15 @@
         <attr name="canLoop" format="boolean"></attr>
     </declare-styleable>
 
+    <declare-styleable name="MyGifPlayer">
+        <attr name="start_drawable" format="reference"></attr>
+        <attr name="start_side" format="dimension"></attr>
+        <attr name="need_share" format="boolean"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="DiagramView">
+        <attr name="origin_x" format="dimension"></attr>
+        <attr name="origin_y" format="dimension"></attr>
+    </declare-styleable>
+
 </resources>

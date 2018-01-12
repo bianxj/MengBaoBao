@@ -282,7 +282,7 @@ public class RecordActivity extends BaseActivity {
                         Intent intent = new Intent(RecordActivity.this, DevelopmentalBehaviorActivity.class);
                         String development = GsonUtil.getInstance().getGson().toJson(developments);
                         intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_DEVELOPMENT, development);
-                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_MONTH_AGE, dayList.getCurrentMonth());
+                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_MONTH_AGE, dayList.getCorrentMonth());
                         intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_RECORD_TIME, FormulaUtil.getCurrentTime());
                         startActivityForResult(intent, REQUEST_DEVELOPMENTAL_ACTION);
                     break;
