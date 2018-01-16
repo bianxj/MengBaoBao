@@ -1,5 +1,7 @@
 package com.doumengmengandroidbady.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,14 +9,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.entity.Record;
+import com.doumengmengandroidbady.activity.AssessmentActivity;
+import com.doumengmengandroidbady.response.Record;
+import com.doumengmengandroidbady.util.GsonUtil;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/21.
+ * 作者: 边贤君
+ * 描述: 记录信息适配器
+ * 创建日期: 2018/1/15 14:37
  */
-
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHolder> {
 
     private List<Record> records;
@@ -33,14 +38,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
     @Override
     public void onBindViewHolder(RecordAdapter.RecordHolder holder, int position) {
         Record record = records.get(position);
-        holder.tv_baby_month.setText(record.getBabyMonth());
-        holder.tv_bmi.setText(record.getBmi());
-        holder.tv_develop.setText(record.getDevelop());
-        holder.tv_height.setText(record.getHeight());
-        holder.tv_read_state.setText(record.getReadState());
-        holder.tv_record_date.setText(record.getRecordDate());
-        holder.tv_weight.setText(record.getWeight());
-        holder.record = record;
+        holder.initView(record);
     }
 
     @Override
@@ -57,10 +55,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
         private TextView tv_height;
         private TextView tv_bmi;
         private TextView tv_develop;
+        private View view;
         private Record record;
 
         public RecordHolder(View itemView) {
             super(itemView);
+            view = itemView;
             tv_read_state = itemView.findViewById(R.id.tv_read_state);
             tv_record_date = itemView.findViewById(R.id.tv_record_date);
             tv_baby_month = itemView.findViewById(R.id.tv_baby_month);
@@ -68,7 +68,34 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
             tv_height = itemView.findViewById(R.id.tv_height);
             tv_bmi = itemView.findViewById(R.id.tv_bmi);
             tv_develop = itemView.findViewById(R.id.tv_develop);
+            view.setOnClickListener(listener);
         }
+
+        private void initView(Record record){
+            tv_baby_month.setText(record.getBabyMonth());
+            tv_bmi.setText(record.getHwResultString());
+            tv_develop.setText(record.getFeatureResultString());
+            tv_height.setText(record.getHeightResultString());
+            if ( record.isShowRecordState() ){
+                tv_read_state.setVisibility(View.VISIBLE);
+            } else {
+                tv_read_state.setVisibility(View.INVISIBLE);
+            }
+            tv_record_date.setText(record.getRecordDay());
+            tv_weight.setText(record.getWeightResultString());
+            this.record = record;
+        }
+
+        private View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, AssessmentActivity.class);
+                intent.putExtra(AssessmentActivity.IN_PARAM_RECORD, GsonUtil.getInstance().getGson().toJson(record));
+                context.startActivity(intent);
+            }
+        };
+
     }
 
 }

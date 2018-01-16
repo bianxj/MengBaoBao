@@ -5,26 +5,38 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.entity.RoleType;
+import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.entity.InputUserInfo;
+import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.view.BaseInfoLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/13.
+ * 作者: 边贤君
+ * 描述: 基本信息
+ * 创建日期: 2018/1/16 10:02
  */
-
 public class BaseInfoActivity extends BaseActivity {
 
     private RelativeLayout rl_back,rl_complete;
     private TextView tv_title,tv_complete;
 
+    private ScrollView sv;
     private BaseInfoLayout base_info;
 
     private RequestTask changeBaseInfo;
@@ -49,6 +61,8 @@ public class BaseInfoActivity extends BaseActivity {
         tv_complete = findViewById(R.id.tv_complete);
         tv_title = findViewById(R.id.tv_title);
         base_info = findViewById(R.id.base_info);
+
+        sv = findViewById(R.id.sv);
     }
 
     private void initView(){
@@ -56,10 +70,15 @@ public class BaseInfoActivity extends BaseActivity {
         rl_complete.setOnClickListener(listener);
 
         tv_title.setText(R.string.base_info);
-        rl_complete.setVisibility(View.VISIBLE);
-        tv_complete.setText(R.string.title_save);
+        sv.scrollTo(0,0);
 
-        base_info.setUserData(BaseApplication.getInstance().getUserData());
+        if (RoleType.PAY_HOSPITAL_USER == BaseApplication.getInstance().getRoleType()){
+            base_info.setType(BaseInfoLayout.TYPE.READ_ONLY);
+        } else {
+            base_info.setType(BaseInfoLayout.TYPE.EDITABLE_NET_USER);
+            rl_complete.setVisibility(View.VISIBLE);
+            tv_complete.setText(R.string.title_save);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -83,39 +102,45 @@ public class BaseInfoActivity extends BaseActivity {
     private void changeBaseInfo(){
         if ( base_info.checkBaseInfo() ){
             try {
-                buildChangeBaseInfo().execute();
+                changeBaseInfo = new RequestTask.Builder(changeBaseInfoCallBack).build();
+                changeBaseInfo.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
+        } else {
+            String errorMsg = base_info.getCheckErrorMsg();
         }
     }
 
-    private RequestTask buildChangeBaseInfo() throws Throwable {
-        changeBaseInfo = new RequestTask.Builder(changeBaseInfoCallBack).build();
-        return changeBaseInfo;
-    }
 
     private RequestCallBack changeBaseInfoCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-            //TODO
         }
 
         @Override
         public String getUrl() {
-            //TODO
-            return null;
+            return UrlAddressList.URL_SAVE_USER_INFO;
         }
 
         @Override
         public Context getContext() {
-            //TODO
             return BaseInfoActivity.this;
         }
 
         @Override
         public Map<String, String> getContent() {
-            return null;
+            InputUserInfo inputUserInfo = new InputUserInfo();
+            UserData userData = BaseApplication.getInstance().getUserData();
+            inputUserInfo.setUserId(userData.getUserid());
+            inputUserInfo.babyInfo = base_info.getBabyInfo();
+
+            String json = GsonUtil.getInstance().getGson().toJson(inputUserInfo);
+
+            Map<String,String> map = new HashMap<>();
+            map.put("paramStr",json);
+            map.put("sesId",userData.getSessionId());
+            return map;
         }
 
         @Override
@@ -125,7 +150,18 @@ public class BaseInfoActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
+            try {
+                JSONObject object =  new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                if ( 1 == res.optInt("isSaveUser") ){
+                    BaseApplication.getInstance().saveBabyInfo(base_info.getBabyInfo());
+                    startActivity(RecordActivity.class);
+                } else {
+                    //TODO ?
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             finish();
         }
 

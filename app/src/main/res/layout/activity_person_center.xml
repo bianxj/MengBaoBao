@@ -22,6 +22,8 @@
             android:layout_height="@dimen/y132px"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x48px"
+            app:civ_border_width="@dimen/x2px"
+            app:civ_border_color="@color/thinPink"
             />
 
         <TextView

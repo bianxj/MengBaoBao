@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.doumengmengandroidbady.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -125,7 +126,7 @@ public class DiagramView extends View {
         float cx = (p.getX()-baseInfo.getLowerLimitX())*xUnit+originX;
         float cy = getHeight()-(p.getY()-baseInfo.getLowerLimitY())*yUnit-originY;
 //        canvas.drawCircle(cx,cy,outerRadius,whitePaint);
-        if ( p.getType() == 0 ){
+        if ( p.getType() != 3 ){
             canvas.drawCircle(cx,cy,radius,paint);
             canvas.drawCircle(cx, cy, innerRadius, whitePaint);
         } else {
@@ -137,6 +138,11 @@ public class DiagramView extends View {
     public static class DiagramParam{
         private List<DiagramPoint> blueLine;
         private List<DiagramPoint> redLine;
+
+        public DiagramParam() {
+            blueLine = new ArrayList<>();
+            redLine = new ArrayList<>();
+        }
 
         public List<DiagramPoint> getBlueLine() {
             return blueLine;
@@ -225,6 +231,12 @@ public class DiagramView extends View {
         private int x;
         private int y;
         private int type;
+
+        public DiagramPoint(int x, int y, int type) {
+            this.x = x;
+            this.y = y;
+            this.type = type;
+        }
 
         public int getX() {
             return x;

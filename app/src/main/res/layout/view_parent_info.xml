@@ -28,14 +28,8 @@
 
             <EditText
                 android:id="@+id/et_father_name"
-                style="@style/GrayText26px"
-                android:layout_width="@dimen/x153px"
-                android:layout_height="@dimen/y56px"
+                style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x53px"
-                android:background="@drawable/bg_circle_edittext"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
                 android:inputType="text"
                 android:text="" />
 
@@ -59,12 +53,21 @@
                 android:visibility="visible">
 
                 <TextView
+                    android:id="@+id/unuse_tv_father_culture"
                     style="@style/BlackText28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:text="@string/culture" />
+                <TextView
+                    style="@style/MarkStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/unuse_tv_father_culture"
+                    android:text="@string/mark"
+                    android:tag="@string/TagMark" />
             </RelativeLayout>
 
             <LinearLayout
@@ -182,14 +185,8 @@
 
             <EditText
                 android:id="@+id/et_father_height"
-                style="@style/BlackText26px"
-                android:layout_width="@dimen/x153px"
-                android:layout_height="@dimen/y56px"
+                style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x53px"
-                android:background="@drawable/bg_circle_edittext"
-                android:gravity="center"
-                android:layout_alignParentRight="true"
                 android:inputType="numberDecimal"
                 android:text="" />
 
@@ -223,15 +220,9 @@
 
             <EditText
                 android:id="@+id/et_father_weight"
-                style="@style/GrayText26px"
-                android:layout_width="@dimen/x153px"
-                android:layout_height="@dimen/y56px"
-                android:layout_marginRight="@dimen/x53px"
-                android:background="@drawable/bg_circle_edittext"
+                style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:inputType="numberDecimal"
-                android:gravity="center"
                 android:text="" />
 
             <TextView
@@ -291,17 +282,12 @@
                 android:layout_centerVertical="true"
                 android:text="@string/mother_name" />
 
+
             <EditText
                 android:id="@+id/et_mother_name"
-                style="@style/GrayText26px"
-                android:layout_width="@dimen/x153px"
-                android:layout_height="@dimen/y56px"
+                style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x53px"
-                android:background="@drawable/bg_circle_edittext"
-                android:layout_alignParentRight="true"
                 android:inputType="text"
-                android:gravity="center"
                 android:text="" />
 
             <View
@@ -324,12 +310,22 @@
                 android:visibility="visible">
 
                 <TextView
+                    android:id="@+id/unuse_tv_mother_culture"
                     style="@style/BlackText28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:text="@string/culture" />
+
+                <TextView
+                    style="@style/MarkStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/unuse_tv_mother_culture"
+                    android:text="@string/mark"
+                    android:tag="@string/TagMark"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -445,16 +441,11 @@
                 android:layout_centerVertical="true"
                 android:text="@string/mother_height" />
 
+
             <EditText
                 android:id="@+id/et_mother_height"
-                style="@style/BlackText26px"
-                android:layout_width="@dimen/x153px"
-                android:layout_height="@dimen/y56px"
+                style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x53px"
-                android:background="@drawable/bg_circle_edittext"
-                android:gravity="center"
-                android:layout_alignParentRight="true"
                 android:inputType="numberDecimal"
                 android:text="" />
 
@@ -486,16 +477,11 @@
                 android:layout_centerVertical="true"
                 android:text="@string/mother_weight" />
 
+
             <EditText
                 android:id="@+id/et_mother_weight"
-                style="@style/BlackText26px"
-                android:layout_width="@dimen/x153px"
-                android:layout_height="@dimen/y56px"
+                style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x53px"
-                android:background="@drawable/bg_circle_edittext"
-                android:gravity="center"
-                android:layout_alignParentRight="true"
                 android:inputType="numberDecimal"
                 android:text="" />
 

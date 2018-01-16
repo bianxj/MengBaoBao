@@ -167,7 +167,9 @@
                 android:layout_width="@dimen/y67px"
                 android:layout_height="@dimen/y67px"
                 android:layout_marginLeft="@dimen/x24px"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                app:civ_border_width="@dimen/x2px"
+                app:civ_border_color="@color/thinPink"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

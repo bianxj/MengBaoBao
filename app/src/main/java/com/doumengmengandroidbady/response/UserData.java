@@ -43,7 +43,7 @@ public class UserData {
     private String bornheight;                  //出生身高
     private String allergichistory;             //家族过敏史
     private String allergichistorydesc;         //家族过敏疾病内容
-    private String roletype;                    //用户角色 0免费,1普通用户,2医院
+    private String roletype;                    //用户角色 0免费,1互联网用户,2医院
     private String hereditaryhistory;           //家族遗传史
     private String hereditaryhistorydesc;       //家族遗传史内容
     private String birthinjury;                 //产伤
@@ -74,6 +74,14 @@ public class UserData {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public String getSexString(){
+        if ( MALE.equals(sex) ){
+            return "男";
+        } else {
+            return "女";
         }
     }
 
@@ -330,6 +338,9 @@ public class UserData {
     }
 
     public String getBabyAge(){
+        if ( TextUtils.isEmpty(weekdvalue) && TextUtils.isEmpty(daydvalue) ){
+            return "";
+        }
         if ( TextUtils.isEmpty(weekdvalue) ){
             weekdvalue = "0";
         }

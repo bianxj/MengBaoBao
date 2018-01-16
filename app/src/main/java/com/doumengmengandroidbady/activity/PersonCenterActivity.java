@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.CircleImageView;
@@ -59,10 +60,11 @@ public class PersonCenterActivity extends BaseActivity {
         tv_title.setText(R.string.person_center);
 
         UserData userData = BaseApplication.getInstance().getUserData();
-        if (!BaseApplication.getInstance().isPay()){
+        if (RoleType.FREE_USER == BaseApplication.getInstance().getRoleType()){
             //免费用户
             tv_baby_age.setVisibility(View.INVISIBLE);
             cb_male.setVisibility(View.INVISIBLE);
+            tv_baby_name.setVisibility(View.INVISIBLE);
             if ( userData.isMale() ){
                 civ_baby_img.setImageResource(R.drawable.default_icon_boy);
             } else {
@@ -72,11 +74,12 @@ public class PersonCenterActivity extends BaseActivity {
             //付费用户
             tv_baby_age.setVisibility(View.VISIBLE);
             cb_male.setVisibility(View.VISIBLE);
+            tv_baby_name.setVisibility(View.VISIBLE);
+            tv_baby_age.setText(userData.getBabyAge());
+            cb_male.setChecked(userData.isMale());
+            tv_baby_name.setText(userData.getTruename());
             loadHeadImg(userData);
         }
-        tv_baby_name.setText(userData.getTruename());
-        tv_baby_age.setText(userData.getBabyAge());
-        cb_male.setChecked(userData.isMale());
 
         rl_back.setOnClickListener(listener);
         rl_child_info.setOnClickListener(listener);
@@ -125,7 +128,7 @@ public class PersonCenterActivity extends BaseActivity {
     }
 
     private void switchToChildInfo(){
-        if ( BaseApplication.getInstance().isPay() ){
+        if ( RoleType.FREE_USER != BaseApplication.getInstance().getRoleType() ){
             startActivity(BaseInfoActivity.class);
         } else {
             showNeedBuyDialog();
@@ -133,11 +136,11 @@ public class PersonCenterActivity extends BaseActivity {
     }
 
     private void switchToParentInfo(){
-//        if ( BaseApplication.getInstance().isPay() ){
+        if ( RoleType.FREE_USER != BaseApplication.getInstance().getRoleType() ){
             startActivity(ParentInfoActivity.class);
-//        } else {
-//            showNeedBuyDialog();
-//        }
+        } else {
+            showNeedBuyDialog();
+        }
     }
 
     private void showNeedBuyDialog(){

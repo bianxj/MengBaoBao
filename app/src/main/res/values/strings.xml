@@ -371,6 +371,12 @@
     <string name="error_exit_message">很抱歉，程序出现异常，即将退出</string>
 
 
+    <!--TAG-->
+    <string name="TagMark">mark</string>
+    <string name="TagEdit">edit</string>
+    <string name="TagReadOnly">readonly</string>
+    <string name="TagNetEdit">netEdit</string>
+
     <string-array name="citys">
         <item>北京市</item>
         <item>天津市</item>

@@ -55,6 +55,8 @@ public class BabyKnowledgeDetailsActivity extends BaseActivity {
 
     private void initWebView(){
         wv = findViewById(R.id.wv);
+        wv.setVerticalScrollBarEnabled(false);
+        wv.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         WebSettings settings = wv.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);

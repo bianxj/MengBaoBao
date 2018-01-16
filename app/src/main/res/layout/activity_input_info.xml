@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     android:orientation="vertical">
 
     <include layout="@layout/include_title_back"></include>
@@ -30,7 +32,7 @@
                     android:text="@string/base_info" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <!--<RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y96px"
                 android:visibility="visible">
@@ -183,7 +185,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y1px"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/lightPink"></View>
+                    android:background="@color/lightPink"
+                    ></View>
             </RelativeLayout>
 
             <RelativeLayout
@@ -1512,7 +1515,16 @@
                     android:layout_centerVertical="true"
                     android:background="@drawable/bg_circle_edittext"
                     android:paddingLeft="@dimen/x25px" />
-            </RelativeLayout>
+            </RelativeLayout>-->
+
+            <com.doumengmengandroidbady.view.BaseInfoLayout
+                android:id="@+id/baby_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            </com.doumengmengandroidbady.view.BaseInfoLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -1529,7 +1541,13 @@
                     android:text="@string/parent_info" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <com.doumengmengandroidbady.view.ParentInfoLayout
+                android:id="@+id/parent_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></com.doumengmengandroidbady.view.ParentInfoLayout>
+
+<!--            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y96px"
                 android:visibility="visible">
@@ -1599,7 +1617,7 @@
                         android:layout_height="@dimen/y96px"
                         android:layout_gravity="right">
 
-<!--                        <RadioButton
+&lt;!&ndash;                        <RadioButton
                             android:id="@+id/rb_father_choose"
                             style="@style/CheckTextStyle"
                             android:layout_width="@dimen/x114px"
@@ -1609,7 +1627,7 @@
                             android:background="@drawable/bg_circle"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="@string/choose" />-->
+                            android:text="@string/choose" />&ndash;&gt;
 
                         <RadioButton
                             android:id="@+id/rb_father_primary"
@@ -1872,7 +1890,7 @@
                         android:layout_height="@dimen/y96px"
                         android:layout_gravity="right"
                         >
-                       <!-- <RadioButton
+                       &lt;!&ndash; <RadioButton
                             android:id="@+id/rb_mother_choose"
                             style="@style/CheckTextStyle"
                             android:layout_width="@dimen/x114px"
@@ -1882,7 +1900,7 @@
                             android:button="@null"
                             android:gravity="center"
                             android:text="@string/choose"
-                            android:layout_centerVertical="true" />-->
+                            android:layout_centerVertical="true" />&ndash;&gt;
                         <RadioButton
                             android:id="@+id/rb_mother_primary"
                             style="@style/CheckTextStyle"
@@ -2070,7 +2088,7 @@
                     android:layout_height="@dimen/y1px"
                     android:layout_alignParentBottom="true"
                     android:background="@color/lightPink"></View>
-            </RelativeLayout>
+            </RelativeLayout>-->
 
         </LinearLayout>
     </ScrollView>

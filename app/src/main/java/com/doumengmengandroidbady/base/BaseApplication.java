@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.util.DisplayMetrics;
 
 import com.doumengmengandroidbady.entity.RoleType;
+import com.doumengmengandroidbady.request.entity.InputUserInfo;
 import com.doumengmengandroidbady.response.DayList;
 import com.doumengmengandroidbady.response.ParentInfo;
 import com.doumengmengandroidbady.response.UserData;
@@ -13,6 +14,8 @@ import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MLog;
 import com.doumengmengandroidbady.util.SharedPreferencesUtil;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -71,12 +74,22 @@ public class BaseApplication extends Application {
         ImageLoaderConfiguration loader =
                 new ImageLoaderConfiguration.Builder(this)
                         .denyCacheImageMultipleSizesInMemory()
+                        .memoryCache(new UsingFreqLimitedMemoryCache(2* 1024 * 1024))
+                        .memoryCacheSize(2 * 1024 * 1024)
+                        .memoryCacheSizePercentage(13)
                         .diskCache(new UnlimitedDiskCache(getDiskCacheDir()))
                         .diskCacheFileCount(100)
-                        .diskCacheSize(50 * 1024 * 1025)
+                        .diskCacheSize(50 * 1024 * 1024)
                         .writeDebugLogs()
                         .build();
         return loader;
+    }
+
+    public DisplayImageOptions.Builder defaultDisplayImage(){
+        DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+        builder.cacheInMemory(true);
+        builder.cacheOnDisk(true);
+        return builder;
     }
 
     private final static String IMAGE_CACHE_DIR = "image";
@@ -123,6 +136,35 @@ public class BaseApplication extends Application {
         SharedPreferencesUtil.clearTable(this,TABLE_USER);
     }
 
+    public void saveBabyInfo(InputUserInfo.BabyInfo babyInfo){
+        UserData userData = getUserData();
+        userData.setTruename(babyInfo.getTrueName());
+        userData.setSex(babyInfo.getSex());
+        userData.setAccountmobile(babyInfo.getAccountMobile());
+        userData.setBirthday(babyInfo.getBirthday());
+        userData.setPregnancyweeks(babyInfo.getPregnancyWeeks());
+        userData.setPregnancydays(babyInfo.getPregnancyDays());
+        userData.setBornheight(babyInfo.getBornHeight());
+        userData.setBornweight(babyInfo.getBornWeight());
+        userData.setPregnancies(babyInfo.getPregnancies());
+        userData.setBirthtimes(babyInfo.getBirthTimes());
+        userData.setMumbearage(babyInfo.getMumBearAge());
+        userData.setBorntype(babyInfo.getBornType());
+        userData.setDeliverymethods(babyInfo.getDeliveryMethods());
+        userData.setAssistedreproductive(babyInfo.getAssistedReproductive());
+        userData.setBirthinjury(babyInfo.getBirthInjury());
+        userData.setNeonatalasphyxia(babyInfo.getNeonatalAsphyxia());
+        userData.setIntracranialhemorrhage(babyInfo.getIntracranialHemorrhage());
+        userData.setHereditaryhistory(babyInfo.getHereditaryHistory());
+        userData.setHereditaryhistorydesc(babyInfo.getHereditaryHistoryDesc());
+        userData.setAllergichistory(babyInfo.getAllergicHistory());
+        userData.setAllergichistorydesc(babyInfo.getAllergicHistoryDesc());
+        userData.setPasthistory(babyInfo.getPastHistory());
+        userData.setPasthistoryother(babyInfo.getPastHistoryOther());
+
+        saveUserData(userData);
+    }
+
     public void saveUserData(UserData userData){
         this.userData = userData;
         String data = GsonUtil.getInstance().getGson().toJson(userData);
@@ -137,6 +179,23 @@ public class BaseApplication extends Application {
             }
         }
         return userData;
+    }
+
+    public void saveParentInfo(InputUserInfo.ParentInfo parentInfo){
+        ParentInfo info = getParentInfo();
+        info.setDadBMI(parentInfo.getDadBMI());
+        info.setDadEducation(parentInfo.getDadEducation());
+        info.setDadWeight(parentInfo.getDadWeight());
+        info.setDadHeight(parentInfo.getDadHeight());
+        info.setDadName(parentInfo.getDadName());
+
+        info.setMumEducation(parentInfo.getMumEducation());
+        info.setMumBMI(parentInfo.getMumBMI());
+        info.setMumWeight(parentInfo.getMumWeight());
+        info.setMumHeight(parentInfo.getMumHeight());
+        info.setMumName(parentInfo.getMumName());
+
+        saveParentInfo(info);
     }
 
     public void saveParentInfo(ParentInfo parentInfo){
@@ -229,12 +288,17 @@ public class BaseApplication extends Application {
         SharedPreferencesUtil.saveBoolean(this,TABLE_CONFIG,COLUMN_IS_ABNORMAL_EXIT,isAbnormalExit);
     }
 
-    public boolean isPay(){
+    public RoleType getRoleType(){
         UserData data = getUserData();
-        if (RoleType.FREE_USER == data.getRoletype() ){
-            return true;
-        }
-        return false;
+        String roleType = data.getRoletype();
+//        if ( "1".equals(roleType) ){
+//            return RoleType.PAY_NET_USER;
+//        } else if ( "2".equals(roleType) ){
+//            return RoleType.PAY_HOSPITAL_USER;
+//        } else {
+//            return RoleType.FREE_USER;
+//        }
+        return RoleType.PAY_HOSPITAL_USER;
     }
 
     public final static String PERSON_DIR = "person";

@@ -28,6 +28,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.PictureAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.net.HttpUtil;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
@@ -734,6 +735,16 @@ public class RecordActivity extends BaseActivity {
 
             map.put(UrlAddressList.PARAM, GsonUtil.getInstance().getGson().toJson(record));
             map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+
+            List<HttpUtil.UploadFile> uploadFiles = new ArrayList<>();
+            List<PictureAdapter.UploadPicture> pictures = adapter.getPictures();
+            for (PictureAdapter.UploadPicture picture:pictures){
+                HttpUtil.UploadFile file = new HttpUtil.UploadFile();
+                file.setFilePath(picture.getPicturePath());
+                file.setFileName("reportImg");
+                uploadFiles.add(file);
+            }
+            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().getGson().toJson(uploadFiles));
             return map;
         }
 

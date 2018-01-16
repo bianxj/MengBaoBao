@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.request.entity.InputUserInfo;
 import com.doumengmengandroidbady.response.ParentInfo;
 import com.doumengmengandroidbady.util.FormulaUtil;
 
@@ -27,17 +30,24 @@ import java.util.List;
 
 public class ParentInfoLayout extends LinearLayout {
 
+    public enum TYPE{
+        EDITABLE_SHOW_MARK,
+        EDITABLE_NO_MARK
+    }
+
     private Context context;
+
+    private List<View> markList;
 
     private EditText et_father_name,et_father_height,et_father_weight;
     private TextView tv_father_BMI;
     private List<RadioButton> fatherButtons = new ArrayList<>();
-    private int[] father_calture_id = new int[]{R.id.rb_father_primary,R.id.rb_father_junior,R.id.rb_father_senior,R.id.rb_father_university,R.id.rb_father_master,R.id.rb_father_doctor};
+    private int[] father_culture_id = new int[]{R.id.rb_father_primary,R.id.rb_father_junior,R.id.rb_father_senior,R.id.rb_father_university,R.id.rb_father_master,R.id.rb_father_doctor};
 
     private EditText et_mother_name,et_mother_height,et_mother_weight;
     private TextView tv_mother_BMI;
     private List<RadioButton> motherButtons = new ArrayList<>();
-    private int[] mother_calture_id = new int[]{R.id.rb_mother_primary,R.id.rb_mother_junior,R.id.rb_mother_senior,R.id.rb_mother_university,R.id.rb_mother_master,R.id.rb_mother_doctor};
+    private int[] mother_culture_id = new int[]{R.id.rb_mother_primary,R.id.rb_mother_junior,R.id.rb_mother_senior,R.id.rb_mother_university,R.id.rb_mother_master,R.id.rb_mother_doctor};
 
     public ParentInfoLayout(Context context) {
         super(context);
@@ -79,16 +89,35 @@ public class ParentInfoLayout extends LinearLayout {
         et_mother_weight.setOnFocusChangeListener(focusChangeListener);
         et_mother_weight.setOnEditorActionListener(editorActionListener);
 
-        for (int i=0;i<father_calture_id.length;i++){
-            RadioButton button = findViewById(father_calture_id[i]);
+        for (int i = 0; i< father_culture_id.length; i++){
+            RadioButton button = findViewById(father_culture_id[i]);
             button.setOnCheckedChangeListener(checkedChangeListener);
             fatherButtons.add(button);
         }
 
-        for (int i=0;i<mother_calture_id.length;i++){
-            RadioButton button = findViewById(mother_calture_id[i]);
+        for (int i = 0; i< mother_culture_id.length; i++){
+            RadioButton button = findViewById(mother_culture_id[i]);
             button.setOnCheckedChangeListener(checkedChangeListener);
             motherButtons.add(button);
+        }
+
+        findAllMarks();
+    }
+
+    private void findAllMarks(){
+        markList = new ArrayList<>();
+        findMark(markList,this);
+    }
+
+    private void findMark(List<View> marks,ViewGroup group){
+        for (int i=0;i<group.getChildCount();i++){
+            View view = group.getChildAt(i);
+            if ( "mark".equals(view.getTag()) ){
+                marks.add(view);
+            }
+            if ( view instanceof ViewGroup ){
+                findMark(marks, (ViewGroup) view);
+            }
         }
     }
 
@@ -168,14 +197,40 @@ public class ParentInfoLayout extends LinearLayout {
         }
     }
 
-    private ParentInfo parentInfo;
-
+    private String errorMessage;
     public boolean checkParentInfo(){
+        int fatherCalture = singleChooseCheck(father_culture_id);
+        if ( UN_CHOOSE == fatherCalture ){
+            errorMessage = "请选择文化程度";
+            return false;
+        }
+
+        int motherCalture = singleChooseCheck(mother_culture_id);
+        if ( UN_CHOOSE == motherCalture ){
+            errorMessage = "请选择文化程度";
+            return false;
+        }
         return true;
     }
 
-    public ParentInfo getParentInfo() {
-        ParentInfo parentInfo = new ParentInfo();
+    public String getErrorMsg(){
+        return errorMessage;
+    }
+
+    private final static int UN_CHOOSE = -1;
+    private int singleChooseCheck(int[] singleId){
+        for (int i=0;i<singleId.length;i++){
+            RadioButton button = findViewById(singleId[i]);
+            if ( button.isChecked() ){
+                return singleId[i];
+            }
+        }
+        return UN_CHOOSE;
+    }
+
+    InputUserInfo.ParentInfo parentInfo = new InputUserInfo.ParentInfo();
+    public InputUserInfo.ParentInfo getParentInfo() {
+        parentInfo.clearData();
         parentInfo.setDadName(et_father_name.getText().toString().trim());
         parentInfo.setDadHeight(et_father_height.getText().toString().trim());
         parentInfo.setDadWeight(et_father_weight.getText().toString().trim());
@@ -190,21 +245,29 @@ public class ParentInfoLayout extends LinearLayout {
         return parentInfo;
     }
 
-    public void setParentInfo(ParentInfo parentInfo) {
-        if ( parentInfo == null ){
-            return;
+    public void setType(TYPE type){
+        if ( TYPE.EDITABLE_NO_MARK == type ) {
+            ParentInfo parentInfo = BaseApplication.getInstance().getParentInfo();
+            if ( parentInfo != null ) {
+                et_father_name.setText(parentInfo.getDadName());
+                et_father_height.setText(parentInfo.getDadHeight());
+                et_father_weight.setText(parentInfo.getDadWeight());
+                tv_father_BMI.setText(parentInfo.getDadBMI());
+                initCalture(fatherButtons, parentInfo.getDadEducation());
+                et_mother_name.setText(parentInfo.getMumName());
+                et_mother_height.setText(parentInfo.getMumHeight());
+                et_mother_weight.setText(parentInfo.getMumWeight());
+                tv_mother_BMI.setText(parentInfo.getMumBMI());
+                initCalture(motherButtons, parentInfo.getMumEducation());
+                hiddenMark();
+            }
         }
-        this.parentInfo = parentInfo;
-        et_father_name.setText(parentInfo.getDadName());
-        et_father_height.setText(parentInfo.getDadHeight());
-        et_father_weight.setText(parentInfo.getDadWeight());
-        tv_father_BMI.setText(parentInfo.getDadBMI());
-        initCalture(fatherButtons,parentInfo.getDadEducation());
-
-        et_mother_name.setText(parentInfo.getMumName());
-        et_mother_height.setText(parentInfo.getMumHeight());
-        et_mother_weight.setText(parentInfo.getMumWeight());
-        tv_mother_BMI.setText(parentInfo.getMumBMI());
-        initCalture(motherButtons,parentInfo.getMumEducation());
     }
+
+    private void hiddenMark(){
+        for (View view: markList){
+            view.setVisibility(View.GONE);
+        }
+    }
+
 }

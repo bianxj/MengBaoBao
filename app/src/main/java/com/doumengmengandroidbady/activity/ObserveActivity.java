@@ -14,6 +14,7 @@ import com.doumengmengandroidbady.adapter.ObserveAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
+import com.doumengmengandroidbady.entity.RoleType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,16 +53,16 @@ public class ObserveActivity extends BaseActivity {
     }
 
     private void initView() {
-        if ( BaseApplication.getInstance().isPay() ){
-            //付费用户
-            bt_buy.setVisibility(View.GONE);
-            contents = DaoManager.getInstance().getGrowthDao().searchGrowth(this);
-        } else {
-            //TODO
+        if ( BaseApplication.getInstance().getRoleType() == RoleType.FREE_USER){
             //免费用户
             contents = new ArrayList<>();
             bt_buy.setVisibility(View.VISIBLE);
+        } else {
+            //付费用户
+            bt_buy.setVisibility(View.GONE);
+            contents = DaoManager.getInstance().getGrowthDao().searchGrowth(this);
         }
+
         rl_back.setOnClickListener(listener);
         bt_buy.setOnClickListener(listener);
         tv_title.setText(R.string.oberve_matter);

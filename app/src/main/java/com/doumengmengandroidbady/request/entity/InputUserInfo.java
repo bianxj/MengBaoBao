@@ -101,6 +101,46 @@ public class InputUserInfo {
         public void setMumBMI(String mumBMI) {
             MumBMI = mumBMI;
         }
+
+        public String getDadName() {
+            return DadName;
+        }
+
+        public String getDadEducation() {
+            return DadEducation;
+        }
+
+        public String getDadHeight() {
+            return DadHeight;
+        }
+
+        public String getDadWeight() {
+            return DadWeight;
+        }
+
+        public String getDadBMI() {
+            return DadBMI;
+        }
+
+        public String getMumName() {
+            return MumName;
+        }
+
+        public String getMumEducation() {
+            return MumEducation;
+        }
+
+        public String getMumHeight() {
+            return MumHeight;
+        }
+
+        public String getMumWeight() {
+            return MumWeight;
+        }
+
+        public String getMumBMI() {
+            return MumBMI;
+        }
     }
 
     public static class BabyInfo {
@@ -155,6 +195,190 @@ public class InputUserInfo {
             HereditaryHistoryDesc = "";
             AllergicHistoryDesc = "";
             PastHistoryOther = "";
+        }
+
+        public String getTrueName() {
+            return TrueName;
+        }
+
+        public void setTrueName(String trueName) {
+            TrueName = trueName;
+        }
+
+        public String getSex() {
+            return Sex;
+        }
+
+        public void setSex(String sex) {
+            Sex = sex;
+        }
+
+        public String getAccountMobile() {
+            return AccountMobile;
+        }
+
+        public void setAccountMobile(String accountMobile) {
+            AccountMobile = accountMobile;
+        }
+
+        public String getBirthday() {
+            return Birthday;
+        }
+
+        public void setBirthday(String birthday) {
+            Birthday = birthday;
+        }
+
+        public String getPregnancyWeeks() {
+            return PregnancyWeeks;
+        }
+
+        public void setPregnancyWeeks(String pregnancyWeeks) {
+            PregnancyWeeks = pregnancyWeeks;
+        }
+
+        public String getPregnancyDays() {
+            return PregnancyDays;
+        }
+
+        public void setPregnancyDays(String pregnancyDays) {
+            PregnancyDays = pregnancyDays;
+        }
+
+        public String getBornWeight() {
+            return BornWeight;
+        }
+
+        public void setBornWeight(String bornWeight) {
+            BornWeight = bornWeight;
+        }
+
+        public String getBornHeight() {
+            return BornHeight;
+        }
+
+        public void setBornHeight(String bornHeight) {
+            BornHeight = bornHeight;
+        }
+
+        public String getPregnancies() {
+            return Pregnancies;
+        }
+
+        public void setPregnancies(String pregnancies) {
+            Pregnancies = pregnancies;
+        }
+
+        public String getBirthTimes() {
+            return BirthTimes;
+        }
+
+        public void setBirthTimes(String birthTimes) {
+            BirthTimes = birthTimes;
+        }
+
+        public String getMumBearAge() {
+            return MumBearAge;
+        }
+
+        public void setMumBearAge(String mumBearAge) {
+            MumBearAge = mumBearAge;
+        }
+
+        public String getBornType() {
+            return BornType;
+        }
+
+        public void setBornType(String bornType) {
+            BornType = bornType;
+        }
+
+        public List<String> getDeliveryMethods() {
+            return DeliveryMethods;
+        }
+
+        public void setDeliveryMethods(List<String> deliveryMethods) {
+            DeliveryMethods = deliveryMethods;
+        }
+
+        public String getAssistedReproductive() {
+            return AssistedReproductive;
+        }
+
+        public void setAssistedReproductive(String assistedReproductive) {
+            AssistedReproductive = assistedReproductive;
+        }
+
+        public String getBirthInjury() {
+            return BirthInjury;
+        }
+
+        public void setBirthInjury(String birthInjury) {
+            BirthInjury = birthInjury;
+        }
+
+        public String getNeonatalAsphyxia() {
+            return NeonatalAsphyxia;
+        }
+
+        public void setNeonatalAsphyxia(String neonatalAsphyxia) {
+            NeonatalAsphyxia = neonatalAsphyxia;
+        }
+
+        public String getIntracranialHemorrhage() {
+            return IntracranialHemorrhage;
+        }
+
+        public void setIntracranialHemorrhage(String intracranialHemorrhage) {
+            IntracranialHemorrhage = intracranialHemorrhage;
+        }
+
+        public String getHereditaryHistory() {
+            return HereditaryHistory;
+        }
+
+        public void setHereditaryHistory(String hereditaryHistory) {
+            HereditaryHistory = hereditaryHistory;
+        }
+
+        public String getHereditaryHistoryDesc() {
+            return HereditaryHistoryDesc;
+        }
+
+        public void setHereditaryHistoryDesc(String hereditaryHistoryDesc) {
+            HereditaryHistoryDesc = hereditaryHistoryDesc;
+        }
+
+        public String getAllergicHistory() {
+            return AllergicHistory;
+        }
+
+        public void setAllergicHistory(String allergicHistory) {
+            AllergicHistory = allergicHistory;
+        }
+
+        public String getAllergicHistoryDesc() {
+            return AllergicHistoryDesc;
+        }
+
+        public void setAllergicHistoryDesc(String allergicHistoryDesc) {
+            AllergicHistoryDesc = allergicHistoryDesc;
+        }
+
+        public List<String> getPastHistory() {
+            return PastHistory;
+        }
+
+        public void setPastHistory(List<String> pastHistory) {
+            PastHistory = pastHistory;
+        }
+
+        public String getPastHistoryOther() {
+            return PastHistoryOther;
+        }
+
+        public void setPastHistoryOther(String pastHistoryOther) {
+            PastHistoryOther = pastHistoryOther;
         }
     }
 

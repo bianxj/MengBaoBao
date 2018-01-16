@@ -38,7 +38,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -250,10 +252,12 @@ public class HeadImageActivity extends BaseActivity {
             map.put("sesId",userData.getSessionId());
             map.put("userId",userData.getUserid());
 
+            List<HttpUtil.UploadFile> uploadFiles = new ArrayList<>();
             HttpUtil.UploadFile uploadFile = new HttpUtil.UploadFile();
             uploadFile.setFileName("userHead");
             uploadFile.setFilePath(BaseApplication.getInstance().getPersonHeadImgPath());
-            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().getGson().toJson(uploadFile));
+            uploadFiles.add(uploadFile);
+            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().getGson().toJson(uploadFiles));
             return map;
         }
 

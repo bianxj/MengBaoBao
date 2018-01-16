@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.response.Feature;
+import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.MyGifPlayer;
 
 import java.util.List;
@@ -90,7 +91,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
             } else {
                 player.setVisibility(View.VISIBLE);
                 player.setDrawable(UrlAddressList.BASE_URL + feature.getExampleimgurl());
-                player.setOnClickListener(listener);
+                player.setCustomerListener(listener);
             }
         }
 
@@ -108,7 +109,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
         private View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                MyDialog.showGifDialog(view.getContext(),UrlAddressList.BASE_URL + feature.getExampleimgurl());
             }
         };
 

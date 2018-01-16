@@ -15,10 +15,12 @@ import android.widget.Toast;
 import com.alipay.sdk.app.PayTask;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.response.Doctor;
 import com.doumengmengandroidbady.response.Hospital;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -111,7 +113,15 @@ public class DoctorInfoActivity extends BaseActivity {
         tv_doctor_introduce.setText(doctor.getDoctordesc());
         tv_doctor_skill.setText(doctor.getSpeciality());
         tv_hospital.setText(hospital.getHospitalname());
-        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_head);
+        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_head,initDisplayImageOptions());
+    }
+
+    private DisplayImageOptions initDisplayImageOptions(){
+        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
+        builder.showImageOnFail(R.drawable.default_icon_doctor);
+        builder.showImageForEmptyUri(R.drawable.default_icon_doctor);
+        builder.showImageOnLoading(R.drawable.default_icon_doctor);
+        return builder.build();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

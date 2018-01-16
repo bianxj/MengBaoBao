@@ -29,6 +29,8 @@ public class UrlAddressList {
 
     public final static String URL_SAVE_USER_INFO = BASE_URL + "babyUser.do?method=SaveUser";
     public final static String URL_UPLOAD_HEAD_IMG = BASE_URL + "babyUser.do?method=UploadUserHead";
+    public final static String URL_GET_ALL_RECORD = BASE_URL + "babyUser.do?method=GetAllRecord";
+    public final static String URL_UPDATE_RECORD_STATE = BASE_URL + "babyUser.do?method=UpdateIsRead";
 //    public final static String URL_SAVE_PARENT_INFO = BASE_URL + "babyUser.do?method=EditParent";
     public final static String URL_SUBMIT_RECORD = BASE_URL + "babyUser.do?method=SubmitRecord";
 

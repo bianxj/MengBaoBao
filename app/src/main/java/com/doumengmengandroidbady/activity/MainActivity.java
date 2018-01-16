@@ -21,6 +21,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.SideMenuAdapter;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragmentActivity;
+import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.entity.SideMenuItem;
 import com.doumengmengandroidbady.fragment.BabyKnowledgeFragment;
 import com.doumengmengandroidbady.fragment.HomePageFragment;
@@ -28,6 +29,7 @@ import com.doumengmengandroidbady.fragment.HospitalReportFragment;
 import com.doumengmengandroidbady.fragment.LessonFragment;
 import com.doumengmengandroidbady.fragment.SpacialistServiceFragment;
 import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -164,14 +166,20 @@ public class MainActivity extends BaseFragmentActivity {
 
     private void initData(){
         UserData userData = BaseApplication.getInstance().getUserData();
-        if ( BaseApplication.getInstance().isPay() ) {
-            loadHeadImg(userData.isMale(),userData.getHeadimg());
-        } else {
+        if (RoleType.FREE_USER == BaseApplication.getInstance().getRoleType()){
             loadHeadImg(userData.isMale(),"");
+            tv_baby_name.setVisibility(View.INVISIBLE);
+            tv_baby_age.setVisibility(View.INVISIBLE);
+            cb_male.setVisibility(View.INVISIBLE);
+        } else {
+            loadHeadImg(userData.isMale(),userData.getHeadimg());
+            tv_baby_name.setVisibility(View.VISIBLE);
+            tv_baby_age.setVisibility(View.VISIBLE);
+            cb_male.setVisibility(View.VISIBLE);
+            tv_baby_age.setText(userData.getBabyAge());
+            cb_male.setChecked(userData.isMale());
+            tv_baby_name.setText(userData.getTruename());
         }
-        tv_baby_age.setText(userData.getBabyAge());
-        tv_baby_name.setText(userData.getTruename());
-        cb_male.setChecked(userData.isMale());
     }
 
     /**
@@ -235,8 +243,12 @@ public class MainActivity extends BaseFragmentActivity {
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
                 case R.id.rl_hospital_report:
-                    switchFragment(PAGE_HOSPITAL_REPORT);
-                    dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    if ( RoleType.PAY_HOSPITAL_USER == BaseApplication.getInstance().getRoleType() ){
+                        switchFragment(PAGE_HOSPITAL_REPORT);
+                        dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    } else {
+                        MyDialog.showPromptDialog(MainActivity.this,"权限不足",null);
+                    }
                     break;
                 case R.id.rl_meng_lesson:
                     switchFragment(PAGE_LESSON);

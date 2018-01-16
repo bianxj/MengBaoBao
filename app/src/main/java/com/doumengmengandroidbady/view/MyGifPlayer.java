@@ -24,6 +24,10 @@ public class MyGifPlayer extends FrameLayout {
     private ImageView image;
     private ImageView start;
     private GifDrawable gif;
+    private StopCallBack callBack;
+    private OnClickListener customerListener;
+    private boolean isAutoPlay = false;
+    private boolean isGif = true;
 
     public MyGifPlayer(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs,0);
@@ -65,18 +69,38 @@ public class MyGifPlayer extends FrameLayout {
     private OnClickListener listener = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            startPlay();
+            if ( customerListener != null ){
+                customerListener.onClick(view);
+            } else {
+                if (isGif) {
+                    startPlay();
+                }
+            }
         }
     };
 
+    public void setCustomerListener(OnClickListener customerListener){
+        this.customerListener = customerListener;
+    }
 
     public void setDrawable(String url){
-        prepare();
+        isGif =false;
+        start.setVisibility(View.VISIBLE);
+        share.setVisibility(View.VISIBLE);
         Glide.with(this).asBitmap().load(url).into(image);
     }
 
-    public void setDrawable(int drawable){
+    public void setGif(String url,StopCallBack callBack){
         prepare();
+        isGif = true;
+        isAutoPlay = true;
+        this.callBack = callBack;
+        Glide.with(this).asGif().load(url).into(target);
+    }
+
+    public void setGif(int drawable){
+        prepare();
+        isGif = true;
         Glide.with(this).asGif().load(drawable).into(target);
     }
 
@@ -98,8 +122,12 @@ public class MyGifPlayer extends FrameLayout {
         public void onResourceReady(@NonNull GifDrawable gifDrawable, @Nullable Transition<? super GifDrawable> transition) {
             gif = gifDrawable;
             image.setImageDrawable(gifDrawable);
-            start.setVisibility(View.VISIBLE);
-            share.setVisibility(View.VISIBLE);
+            if ( isAutoPlay ){
+                startPlay();
+            } else {
+                start.setVisibility(View.VISIBLE);
+                share.setVisibility(View.VISIBLE);
+            }
         }
     };
 
@@ -112,9 +140,14 @@ public class MyGifPlayer extends FrameLayout {
     }
 
     private void stopPlay(){
-        share.setVisibility(View.VISIBLE);
-        start.setVisibility(View.VISIBLE);
+        if ( !isAutoPlay ) {
+            share.setVisibility(View.VISIBLE);
+            start.setVisibility(View.VISIBLE);
+        }
         gif.stop();
+        if ( callBack != null ){
+            callBack.stoped();
+        }
     }
 
     private void keepTime(){
@@ -131,5 +164,9 @@ public class MyGifPlayer extends FrameLayout {
             }
         }
     };
+
+    public interface StopCallBack {
+        public void stoped();
+    }
 
 }

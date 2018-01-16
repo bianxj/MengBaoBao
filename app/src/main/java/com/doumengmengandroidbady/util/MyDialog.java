@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.view.MyGifPlayer;
 
 /**
  * Created by Administrator on 2017/12/14.
@@ -227,6 +228,22 @@ public class MyDialog {
             iv_picture.setImageBitmap(bitmap);
             pictureDialog.setContentView(view);
             pictureDialog.show();
+        }
+    }
+
+    public static void showGifDialog(Context context,String url){
+        synchronized (gifLock){
+            gifDialog = new Dialog(context,R.style.MyDialog);
+            View view = LayoutInflater.from(context).inflate(R.layout.dialog_gif,null);
+            MyGifPlayer player = view.findViewById(R.id.player);
+            gifDialog.setContentView(view);
+            gifDialog.show();
+            player.setGif(url, new MyGifPlayer.StopCallBack() {
+                @Override
+                public void stoped() {
+                    gifDialog.dismiss();
+                }
+            });
         }
     }
 

@@ -21,6 +21,7 @@ import com.doumengmengandroidbady.activity.MainActivity;
 import com.doumengmengandroidbady.activity.ObserveActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragment;
+import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.CircleImageView;
@@ -38,6 +39,7 @@ public class HomePageFragment extends BaseFragment {
 
     private RelativeLayout rl_side_menu;
     private TextView tv_baby_name;
+    private RelativeLayout rl_male;
     private LinearLayout ll_observe_point,ll_doctor_list;
     private TextView tv_observe_point , tv_doctor_list;
     private TextView tv_observe_point_content , tv_doctor_list_content;
@@ -60,6 +62,7 @@ public class HomePageFragment extends BaseFragment {
     private void findView(View view){
         rl_side_menu = view.findViewById(R.id.rl_side_menu);
         tv_baby_name = view.findViewById(R.id.tv_baby_name);
+        rl_male = view.findViewById(R.id.rl_male);
         ll_observe_point = view.findViewById(R.id.ll_observe_point);
         ll_doctor_list = view.findViewById(R.id.ll_doctor_list);
         tv_observe_point_content = view.findViewById(R.id.tv_observe_point_content);
@@ -85,14 +88,19 @@ public class HomePageFragment extends BaseFragment {
 
     private void initData(){
         UserData userData = BaseApplication.getInstance().getUserData();
-        tv_baby_name.setText(userData.getTruename());
-        cb_male.setChecked(userData.isMale());
-        if ( BaseApplication.getInstance().isPay() ) {
+        if ( RoleType.FREE_USER != BaseApplication.getInstance().getRoleType() ) {
+            tv_baby_name.setVisibility(View.VISIBLE);
+            rl_male.setVisibility(View.VISIBLE);
+
+            tv_baby_name.setText(userData.getTruename());
+            cb_male.setChecked(userData.isMale());
+            tv_baby_age.setText(userData.getBabyAge());
             loadHeadImg(userData.isMale(),userData.getHeadimg());
         } else {
+            tv_baby_name.setVisibility(View.INVISIBLE);
+            rl_male.setVisibility(View.INVISIBLE);
             loadHeadImg(userData.isMale(),"");
         }
-        tv_baby_age.setText(userData.getBabyAge());
     }
 
     /**
@@ -102,7 +110,7 @@ public class HomePageFragment extends BaseFragment {
      * 日期: 2018/1/8 10:35
      */
     private void loadHeadImg(boolean isMale,String urlHeadImg){
-        DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
         if ( isMale ){
             builder.showImageOnLoading(R.drawable.default_icon_boy);
             builder.showImageForEmptyUri(R.drawable.default_icon_boy);
@@ -139,7 +147,7 @@ public class HomePageFragment extends BaseFragment {
                     break;
                 case R.id.rl_baby_head:
                     //上传头像
-                    if ( BaseApplication.getInstance().isPay() ) {
+                    if ( RoleType.FREE_USER != BaseApplication.getInstance().getRoleType() ) {
                         startActivity(HeadImageActivity.class);
                     }
                     break;

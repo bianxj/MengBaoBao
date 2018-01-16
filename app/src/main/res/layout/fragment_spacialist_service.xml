@@ -39,6 +39,7 @@
                     android:layout_width="@dimen/x140px"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
+                    android:visibility="gone"
                     >
                     <TextView
                         android:id="@+id/tv_supplement_record"
@@ -67,7 +68,7 @@
                     android:layout_height="wrap_content">
 
                     <com.doumengmengandroidbady.view.CircleImageView
-                        android:id="@+id/cim_baby"
+                        android:id="@+id/civ_baby"
                         android:layout_width="@dimen/y133px"
                         android:layout_height="@dimen/y133px"
                         android:src="@drawable/ic_launcher_background" />
@@ -87,7 +88,7 @@
                         android:layout_centerInParent="true"
                         android:paddingLeft="@dimen/x20px"
                         android:paddingRight="@dimen/x20px"
-                        android:text="您还剩XX次测评"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="@dimen/y26px"
                         android:background="@drawable/bg_rect_circle"

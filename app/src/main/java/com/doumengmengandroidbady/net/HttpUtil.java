@@ -3,8 +3,10 @@ package com.doumengmengandroidbady.net;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.util.GsonUtil;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -32,8 +34,8 @@ public class HttpUtil {
         return util;
     }
 
-    private final static long CONNECTION_TIMEOUT = 30 * 1000;
-    private final static long READ_TIMEOUT = 30 * 1000;
+    private final static long CONNECTION_TIMEOUT = 60 * 1000;
+    private final static long READ_TIMEOUT = 60 * 1000;
     public final static String  TYPE_FILE = "UPLOAD_FILES";
 
     private final OkHttpClient client;
@@ -56,9 +58,13 @@ public class HttpUtil {
                 Set<String> keys = map.keySet();
                 for (String key : keys) {
                     if ( TYPE_FILE.equals(key) ) {
-                        UploadFile uploadFile = GsonUtil.getInstance().getGson().fromJson(map.get(key),UploadFile.class);
-                        File file = new File(uploadFile.getFilePath());
-                        bodyBuilder.addFormDataPart(uploadFile.getFileName(),file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"),file));
+                        List<UploadFile> uploadFiles = GsonUtil.getInstance().getGson().fromJson(map.get(key),new TypeToken<List<UploadFile>>(){}.getType());
+                        if ( uploadFiles != null && uploadFiles.size() > 0 ){
+                            for (UploadFile uploadFile :uploadFiles){
+                                File file = new File(uploadFile.getFilePath());
+                                bodyBuilder.addFormDataPart(uploadFile.getFileName(),file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"),file));
+                            }
+                        }
                     } else {
                         BaseApplication.getInstance().getMLog().info("HttpUtil:value:" + key + ":" + map.get(key));
                         bodyBuilder.addFormDataPart(key, map.get(key));

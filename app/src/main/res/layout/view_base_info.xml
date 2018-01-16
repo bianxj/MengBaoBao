@@ -21,6 +21,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_baby_name"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,13 +30,20 @@
                 android:text="@string/baby_name" />
 
             <TextView
-                android:id="@+id/tv_baby_name"
-                style="@style/GrayText26px"
+                style="@style/MarkStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x75px" />
+                android:layout_toRightOf="@+id/unuse_tv_baby_name"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
+
+            <EditText
+                android:id="@+id/et_baby_name"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="text"
+                android:text=""/>
 
             <View
                 android:layout_width="match_parent"
@@ -50,6 +58,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_baby_gender"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,14 +67,65 @@
                 android:text="@string/baby_gender" />
 
             <TextView
-                android:id="@+id/tv_baby_gender"
-                style="@style/GrayText26px"
+                style="@style/MarkStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x75px"
-                android:text="" />
+                android:layout_toRightOf="@+id/unuse_tv_baby_gender"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
+
+            <RadioGroup
+                android:id="@+id/rg_gender"
+                android:layout_width="@dimen/x241px"
+                android:layout_height="@dimen/y56px"
+                android:layout_marginLeft="@dimen/x382px"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/rb_famale"
+                    android:layout_width="@dimen/y54px"
+                    android:layout_height="@dimen/y54px"
+                    android:background="@drawable/rb_famale"
+                    android:button="@null"
+                    android:checked="true"></RadioButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="女"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x12px"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rb_male"
+                    android:layout_width="@dimen/y54px"
+                    android:layout_height="@dimen/y54px"
+                    android:button="@null"
+                    android:background="@drawable/rb_male"
+                    android:layout_marginLeft="@dimen/x56px"
+                    >
+                </RadioButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x12px"
+                    />
+            </RadioGroup>
+
+
+            <EditText
+                android:id="@+id/et_baby_gender"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="text"
+                android:text=""/>
 
             <View
                 android:layout_width="match_parent"
@@ -80,6 +140,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_baby_birthday"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,14 +149,36 @@
                 android:text="@string/baby_birthday" />
 
             <TextView
-                android:id="@+id/tv_baby_birthday"
-                style="@style/GrayText26px"
+                style="@style/MarkStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x75px"
-                android:text="" />
+                android:layout_toRightOf="@+id/unuse_tv_baby_birthday"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
+
+            <TextView
+                android:id="@+id/tv_calendar"
+                android:layout_width="@dimen/y240px"
+                android:layout_height="@dimen/y54px"
+                android:background="@drawable/bg_calendar"
+                android:layout_marginLeft="@dimen/x382px"
+                android:layout_centerVertical="true"
+                android:text=""
+                android:maxLines="1"
+                android:lines="1"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"
+                android:gravity="center"
+                android:tag="@string/TagEdit"
+                />
+
+            <EditText
+                android:id="@+id/et_baby_birthday"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="text"
+                android:text=""/>
 
             <View
                 android:layout_width="match_parent"
@@ -110,13 +193,21 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_baby_gestational_age_2"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/baby_gestational_age" />
-
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_baby_gestational_age_2"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,17 +216,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_week"
+                <EditText
+                    android:id="@+id/et_week"
                     style="@style/BlackText26px"
-                    android:layout_width="@dimen/x97px"
-                    android:layout_height="@dimen/y65px"
-                    android:gravity="center"
+                    android:layout_width="@dimen/x100px"
+                    android:layout_height="@dimen/y54px"
+                    android:background="@drawable/bg_circle_edittext"
                     android:inputType="number"
-                    android:lines="1"
-                    android:maxLength="2"
-                    android:paddingLeft="@dimen/x10px"
-                    android:paddingRight="@dimen/x10px" />
+                    android:gravity="center"/>
 
                 <TextView
                     style="@style/GrayText26px"
@@ -147,17 +235,14 @@
                     android:layout_marginRight="@dimen/x16px"
                     android:text="周" />
 
-                <TextView
-                    android:id="@+id/tv_day"
+                <EditText
+                    android:id="@+id/et_day"
                     style="@style/BlackText26px"
-                    android:layout_width="@dimen/x97px"
-                    android:layout_height="@dimen/y65px"
-                    android:gravity="center"
+                    android:layout_width="@dimen/x100px"
+                    android:layout_height="@dimen/y54px"
+                    android:background="@drawable/bg_circle_edittext"
                     android:inputType="number"
-                    android:lines="1"
-                    android:maxLength="2"
-                    android:paddingLeft="@dimen/x10px"
-                    android:paddingRight="@dimen/x10px" />
+                    android:gravity="center"/>
 
                 <TextView
                     style="@style/GrayText26px"
@@ -182,6 +267,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_phone"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -190,13 +276,19 @@
                 android:text="@string/phone" />
 
             <TextView
-                android:id="@+id/tv_phone"
-                style="@style/GrayText26px"
+                style="@style/MarkStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x75px"
+                android:layout_toRightOf="@+id/unuse_tv_phone"
+                android:text="@string/mark"
+                />
+
+            <EditText
+                android:id="@+id/et_phone"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="number"
                 android:text="" />
 
             <View
@@ -212,6 +304,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_birth_weight"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,14 +313,19 @@
                 android:text="@string/birth_weight" />
 
             <TextView
-                android:id="@+id/tv_birth_weight"
-                style="@style/GrayText26px"
+                style="@style/MarkStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x75px"
-                android:text="" />
+                android:layout_toRightOf="@+id/unuse_tv_birth_weight"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
+
+            <EditText
+                android:id="@+id/et_baby_weight"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="numberDecimal"/>
 
             <TextView
                 style="@style/GrayText26px"
@@ -250,6 +348,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_birth_height"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -258,13 +357,19 @@
                 android:text="@string/birth_height" />
 
             <TextView
-                android:id="@+id/tv_birth_height"
-                style="@style/GrayText26px"
+                style="@style/MarkStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x75px"
+                android:layout_toRightOf="@+id/unuse_tv_birth_height"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
+
+            <EditText
+                android:id="@+id/et_baby_height"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="numberDecimal"
                 android:text="" />
 
             <TextView
@@ -287,12 +392,22 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_parity_count"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/parity_count" />
+
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_parity_count"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
 
             <EditText
                 android:id="@+id/et_parity_count"
@@ -307,7 +422,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/count" />            <View
+                android:text="@string/count" />
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
@@ -320,12 +436,21 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_birth_count"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/birth_count" />
+
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_birth_count"
+                android:text="@string/mark" />
 
             <EditText
                 android:id="@+id/et_birth_count"
@@ -354,12 +479,22 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_bbirth_age"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/birth_age" />
+
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_bbirth_age"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
 
             <EditText
                 android:id="@+id/et_birth_age"
@@ -375,6 +510,7 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:text="@string/age" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
@@ -388,12 +524,22 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_birth_state"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/birth_state" />
+
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_birth_state"
+                android:text="@string/mark"
+                android:tag="@string/TagMark" />
 
             <RadioGroup
                 android:id="@+id/rg_birth_state"
@@ -411,7 +557,6 @@
                     android:background="@drawable/bg_circle"
                     android:button="@null"
                     android:gravity="center"
-                    
                     android:text="@string/single_birth" />
 
                 <RadioButton
@@ -439,12 +584,22 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_parturition_state"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/parturition_state" />
+
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_parturition_state"
+                android:text="@string/mark"
+                android:tag="@string/TagMark" />
 
             <LinearLayout
                 android:id="@+id/ll_parturition_state"
@@ -522,12 +677,22 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_assisted_reproduction"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/assisted_reproduction" />
+
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_assisted_reproduction"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
 
             <RadioGroup
                 android:id="@+id/rg_assisted_reproduction"
@@ -584,6 +749,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_birth_injury"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -591,6 +757,14 @@
                 android:layout_centerVertical="true"
                 android:text="@string/birth_injury" />
 
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_birth_injury"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
             <RadioGroup
                 android:id="@+id/rg_birth_injury"
                 android:layout_width="wrap_content"
@@ -635,6 +809,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_stifle"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -642,6 +817,14 @@
                 android:layout_centerVertical="true"
                 android:text="@string/stifle" />
 
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_stifle"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
             <RadioGroup
                 android:id="@+id/rg_stifle"
                 android:layout_width="wrap_content"
@@ -651,7 +834,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/rb_stifle_none"
+                    android:id="@+id/rb_istifle_none"
                     style="@style/CheckTextStyle"
                     android:layout_width="@dimen/x68px"
                     android:layout_height="@dimen/y56px"
@@ -662,7 +845,7 @@
                     android:text="@string/none" />
 
                 <RadioButton
-                    android:id="@+id/rb_stifle_has"
+                    android:id="@+id/rb_istifle_has"
                     style="@style/CheckTextStyle"
                     android:layout_width="@dimen/x68px"
                     android:layout_height="@dimen/y56px"
@@ -686,12 +869,22 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/unuse_tv_ICH"
                 style="@style/BlackText28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/ICH" />
+
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_ICH"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
 
             <RadioGroup
                 android:id="@+id/rg_ICH"
@@ -734,6 +927,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px">
             <TextView
+                android:id="@+id/unuse_tv_genetic_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -741,6 +935,15 @@
                 style="@style/BlackText28px"
                 android:text="@string/genetic_history"
                 />
+
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_genetic_history"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
             <RadioGroup
                 android:id="@+id/rg_genetic_history"
                 android:layout_width="wrap_content"
@@ -799,6 +1002,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px">
             <TextView
+                android:id="@+id/unuse_tv_allergy_disease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -806,6 +1010,15 @@
                 style="@style/BlackText28px"
                 android:text="@string/allergy_disease"
                 />
+
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_allergy_disease"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
             <RadioGroup
                 android:id="@+id/rg_allergy_disease"
                 android:layout_width="wrap_content"
@@ -869,12 +1082,21 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px">
             <TextView
+                android:id="@+id/unuse_tv_pervious_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/pervious_history"
                 android:layout_centerVertical="true"
                 style="@style/BlackText28px"
                 />
+            <TextView
+                style="@style/MarkStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/unuse_tv_pervious_history"
+                android:text="@string/mark"
+                android:tag="@string/TagMark"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

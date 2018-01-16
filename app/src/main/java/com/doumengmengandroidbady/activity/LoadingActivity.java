@@ -237,8 +237,8 @@ public class LoadingActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if ( msg.what == MESSAGE_JUMP_TO_MAIN ) {
-//                startActivity(MainActivity.class);
-                startActivity(RecordActivity.class);
+                startActivity(MainActivity.class);
+//                startActivity(RecordActivity.class);
             }
         }
     };
