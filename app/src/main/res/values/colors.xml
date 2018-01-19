@@ -49,4 +49,5 @@
 
     <color name="transparent">#00000000</color>
     <color name="translucence">#330e0000</color>
+    <color name="dark_translucence">#bb000000</color>
 </resources>

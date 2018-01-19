@@ -101,16 +101,15 @@
     <string name="cent">厘米</string>
     <string name="height_reference_value">参考值：85.11~97.33厘米</string>
     <string name="height_title">家庭正确的身长测量方法</string>
-    <string name="height_content">3岁之前的宝宝应采用仰卧位测量，称为身长。 脱去帽、鞋、袜，穿单衣仰卧于量床底板中线上。 助手将头扶正，头顶接触头版，宝宝面</string>
-    <string name="height_suggest">* 建议：身高测量宜在清晨进行；身高测量应在医 院用标准的量床测量。</string>
+    <string name="height_content">3岁之前的宝宝应采用仰卧位测量，称为身长。\n脱去帽、鞋、袜，穿单衣仰卧于量床底板中线上。\n助手将头扶正，头顶接触头版，宝宝面向上。\n测量者位于宝宝右侧，左手握住双膝，使腿伸直，右手移动足板使其接触两侧足跟。\n（图示，此方法较精准的测量请在医院进行）</string>
 
 
     <!--WeightInputActivity信息-->
     <string name="kilograme">公斤</string>
     <string name="weight_reference_value">参考值：10.6~15.31公斤</string>
     <string name="weight_title">家庭正确的体重测量方法</string>
-    <string name="weight_content">测量体重尽量在相同的室温下，尽量在26~28°c。 测量前应检查磅秤的零点。在宝宝空腹、排空大 小便，裸体或穿背心的情况下进</string>
-    <string name="weight_suggest">每一次的测量应该与第一次的测量环境、穿着 情况（裸体或仅穿内衣）尽量相同，才能尽量保证 测量的精准。</string>
+    <string name="weight_content">测量体重尽量在相同的室温下，尽量在26~28°c。\n测量前应检查磅秤的零点。在宝宝空腹、排空大小便，裸体或穿背心的情况下进行。\n如果条件不允许脱成单衣单裤，应设法扣除衣物重量，取得净重。\n称体重时，婴儿可卧位（图示）</string>
+    <string name="weight_suggest">    每一次的测量应该与第一次的测量环境、穿着情况（裸体或仅穿内衣）尽量相同，才能尽量保证测量的精准。</string>
 
     <!--HeadInputActivity信息-->
     <string name="head_reference_value">参考值：48.78厘米</string>
@@ -118,7 +117,7 @@
     <string name="head_diff_value">标准差：1.27厘米</string>
     <string name="head_diff_desc">标准差指的是平均值的上下标准差</string>
     <string name="head_title">家庭正确的头围测量方法</string>
-    <string name="head_content">取坐位或立位。测量者立于被测者之前或右方，用软尺从头部右侧眉弓上缘经枕骨粗隆，从左侧眉弓上缘回至零点，读出头围数字。 测量时</string>
+    <string name="head_content">取坐位或立位。测量者立于被测者之前或右方，用软尺从头部右侧眉弓上缘经枕骨粗隆，从左侧眉弓上缘回至零点，读出头围数字。\n测量时软尺应紧贴皮肤，左右对称。\n测量前要检查软尺刻度是否正确。 头围能够反应宝宝脑和颅骨的发育程度。头部的发育最快为出生后半年。</string>
 
     <!--ChestInputActivity信息-->
     <string name="chest_reference_value">参考值：49.50厘米</string>
@@ -126,7 +125,7 @@
     <string name="chest_diff_value">标准差：1.79厘米</string>
     <string name="chest_diff_desc">标准差指的是平均值的上下标准差</string>
     <string name="chest_title">家庭正确的胸围测量方法</string>
-    <string name="chest_content">采用无伸缩性软尺测量 让宝宝卧位或立位姿势（可扶立时） 测量者于宝宝前方或右侧，左手拇指固定软尺零点于宝宝右侧乳头下</string>
+    <string name="chest_content">采用无伸缩性软尺测量\n让宝宝卧位或立位姿势（可扶立时）\n测量者于宝宝前方或右侧，左手拇指固定软尺零点于宝宝右侧乳头下缘，右手持软尺贴宝宝胸壁，经右侧腋下、肩胛下角下缘、左侧腋下、左侧乳头回至零点，读与零点交叉刻度，取平静呼、吸气的中间读数，精确至0.1厘米 胸围反映胸廓、胸背部肌肉、皮下脂肪和肺的发育 。</string>
 
     <!--InputCacationActivity-->
     <string name="day">天</string>
@@ -287,8 +286,10 @@
     <string name="day_sleep">日间睡眠</string>
 
     <string name="fedding_info">喂养情况</string>
+    <string name="breastfeeding_title">母乳喂养</string>
     <string name="breastfeeding">人乳喂养量</string>
     <string name="breastfeeding_count">人乳喂养次数</string>
+    <string name="formula_milk_title">配方奶喂养</string>
     <string name="formula_milk">配方奶喂养量</string>
     <string name="formula_milk_count">配方奶喂养次数</string>
     <string name="ml_count">毫升/次</string>

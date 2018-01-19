@@ -6,25 +6,32 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseInputDataActivity;
+import com.doumengmengandroidbady.view.MyGifPlayer;
 
 /**
  * 作者: 边贤君
  * 描述: 母乳喂养
  * 创建日期: 2018/1/10 13:27
  */
-public class InputBreastFeedingActivity extends BaseActivity {
-    public final static String RESULT_BREAST_FEEDING = "result_breast_feeding";
-    public final static String RESULT_BREAST_FEEDING_COUNT = "result_breast_feeding_count";
+public class InputBreastFeedingActivity extends BaseInputDataActivity {
+
+    public final static String OUT_PARAM_BREAST_FEEDING = "breast_feeding";
+    public final static String OUT_PARAM_BREAST_FEEDING_COUNT = "breast_feeding_count";
 
     private RelativeLayout rl_back,rl_complete;
     private TextView tv_title,tv_complete;
 
     private EditText et_input_data_one,et_input_data_two;
+    private MyGifPlayer player;
+    private TextView tv_reference;
+    private TextView tv_input_title;
+    private LinearLayout ll_content;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +47,25 @@ public class InputBreastFeedingActivity extends BaseActivity {
 
         et_input_data_one = findViewById(R.id.et_input_data);
         et_input_data_two = findViewById(R.id.et_input_data_two);
+        player = findViewById(R.id.player);
+        tv_reference = findViewById(R.id.tv_reference);
+        tv_input_title = findViewById(R.id.tv_input_title);
+        ll_content = findViewById(R.id.ll_content);
         initView();
     }
 
     private void initView(){
-        tv_title.setText(R.string.cacation);
+        tv_title.setText(R.string.breastfeeding_title);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);
         rl_back.setOnClickListener(listener);
+
+        player.setGif(R.drawable.gif_breast);
+
+        tv_reference.setText(getResources().getStringArray(R.array.milk_reference)[month]);
+        tv_input_title.setText(getResources().getString(R.string.breast_input_title));
+        generateListView(ll_content,getResources().getStringArray(R.array.breast_milk));
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -73,8 +90,8 @@ public class InputBreastFeedingActivity extends BaseActivity {
     private void complete(){
         if ( checkData() ){
             Intent intent = new Intent();
-            intent.putExtra(RESULT_BREAST_FEEDING,et_input_data_one.getText().toString());
-            intent.putExtra(RESULT_BREAST_FEEDING_COUNT,et_input_data_two.getText().toString());
+            intent.putExtra(OUT_PARAM_BREAST_FEEDING,et_input_data_one.getText().toString());
+            intent.putExtra(OUT_PARAM_BREAST_FEEDING_COUNT,et_input_data_two.getText().toString());
             setResult(Activity.RESULT_OK,intent);
             finish();
         }

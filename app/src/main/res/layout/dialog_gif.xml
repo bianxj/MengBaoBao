@@ -5,8 +5,8 @@
 
     <com.doumengmengandroidbady.view.MyGifPlayer
         android:id="@+id/player"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="@dimen/x720px"
+        android:layout_height="@dimen/y1280px">
 
     </com.doumengmengandroidbady.view.MyGifPlayer>
 

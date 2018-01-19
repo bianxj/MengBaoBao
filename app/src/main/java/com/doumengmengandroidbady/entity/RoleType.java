@@ -6,7 +6,8 @@ package com.doumengmengandroidbady.entity;
 
 public enum  RoleType {
 
-    FREE_USER,
+    FREE_NET_USER,
+    FREE_HOSPITAL_USER,
     PAY_NET_USER,
     PAY_HOSPITAL_USER
 

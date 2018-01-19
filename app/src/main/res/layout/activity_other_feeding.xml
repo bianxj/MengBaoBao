@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     >
 
     <include layout="@layout/include_title_back"></include>
@@ -112,22 +115,78 @@
                 ></View>
 
             <TextView
+                android:id="@+id/tv_reference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x64px"
+                android:layout_marginLeft="@dimen/x64px"
+                android:layout_marginTop="@dimen/y24px"
+                style="@style/GrayText26px"/>
+
+            <View
+                android:layout_width="@dimen/x681px"
+                android:layout_height="@dimen/y1px"
+                android:background="@color/linePink"
+                android:layout_marginTop="@dimen/y24px"
+                ></View>
+
+            <TextView
+                android:id="@+id/tv_formula_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/other_fedding_title"
                 style="@style/BlackText34px"
                 android:layout_marginTop="@dimen/y43px"
                 android:includeFontPadding="false"
                 />
 
             <TextView
+                android:id="@+id/tv_formula_content"
                 android:layout_width="@dimen/x574px"
                 android:layout_height="wrap_content"
-                android:text="@string/other_fedding_content"
                 style="@style/BlackText26px"
                 android:layout_marginTop="@dimen/y46px"
                 android:includeFontPadding="false"
                 />
+
+            <View
+                android:layout_width="@dimen/x681px"
+                android:layout_height="@dimen/y1px"
+                android:background="@color/linePink"
+                android:layout_marginTop="@dimen/y24px"
+                ></View>
+
+            <TextView
+                android:id="@+id/tv_other_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BlackText34px"
+                android:layout_marginTop="@dimen/y43px"
+                android:includeFontPadding="false"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_other_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x64px"
+                android:layout_marginLeft="@dimen/x64px"
+                android:layout_marginTop="@dimen/x28px"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <com.doumengmengandroidbady.view.MyGifPlayer
+                android:id="@+id/player"
+                android:layout_width="@dimen/x447px"
+                android:layout_height="@dimen/y311px"
+                android:layout_marginTop="@dimen/y48px"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                app:start_drawable="@drawable/btn_play"
+                app:start_side="@dimen/x94px"
+                app:need_share="false">
+
+            </com.doumengmengandroidbady.view.MyGifPlayer>
 
         </LinearLayout>
     </ScrollView>

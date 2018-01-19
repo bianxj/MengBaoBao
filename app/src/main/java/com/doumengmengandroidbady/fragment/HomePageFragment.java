@@ -21,7 +21,6 @@ import com.doumengmengandroidbady.activity.MainActivity;
 import com.doumengmengandroidbady.activity.ObserveActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragment;
-import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.CircleImageView;
@@ -88,7 +87,7 @@ public class HomePageFragment extends BaseFragment {
 
     private void initData(){
         UserData userData = BaseApplication.getInstance().getUserData();
-        if ( RoleType.FREE_USER != BaseApplication.getInstance().getRoleType() ) {
+        if ( BaseApplication.getInstance().isPay() ) {
             tv_baby_name.setVisibility(View.VISIBLE);
             rl_male.setVisibility(View.VISIBLE);
 
@@ -147,7 +146,7 @@ public class HomePageFragment extends BaseFragment {
                     break;
                 case R.id.rl_baby_head:
                     //上传头像
-                    if ( RoleType.FREE_USER != BaseApplication.getInstance().getRoleType() ) {
+                    if ( BaseApplication.getInstance().isPay() ) {
                         startActivity(HeadImageActivity.class);
                     }
                     break;

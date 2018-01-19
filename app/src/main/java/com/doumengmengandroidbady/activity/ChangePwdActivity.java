@@ -1,6 +1,5 @@
 package com.doumengmengandroidbady.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -101,7 +100,7 @@ public class ChangePwdActivity extends BaseActivity {
     private void changePwd(){
         if ( checkData() ) {
             try {
-                changePwdTask = new RequestTask.Builder(changePwdCallBack).build();
+                changePwdTask = new RequestTask.Builder(this,changePwdCallBack).build();
                 changePwdTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -151,11 +150,6 @@ public class ChangePwdActivity extends BaseActivity {
         }
 
         @Override
-        public Context getContext() {
-            return ChangePwdActivity.this;
-        }
-
-        @Override
         public Map<String, String> getContent() {
             Map<String,String> map = new HashMap<>();
             JSONObject object = new JSONObject();
@@ -178,7 +172,7 @@ public class ChangePwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            MyDialog.showPromptDialog(getContext(), getString(R.string.change_pwd_content), new MyDialog.PromptDialogCallback() {
+            MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.change_pwd_content), new MyDialog.PromptDialogCallback() {
                 @Override
                 public void sure() {
                     back();

@@ -2,7 +2,6 @@ package com.doumengmengandroidbady.activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -34,6 +33,8 @@ import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.entity.SubmitRecord;
 import com.doumengmengandroidbady.response.DayList;
+import com.doumengmengandroidbady.response.Record;
+import com.doumengmengandroidbady.response.RecordResult;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.FormulaUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
@@ -113,6 +114,13 @@ public class RecordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
         findView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTask(currentRecordTask);
+        stopTask(submitRecordTask);
     }
 
     private void findView(){
@@ -330,6 +338,10 @@ public class RecordActivity extends BaseActivity {
         }
     }
 
+    private void startInputDataActivity(Intent intent,int requestCode){
+        startActivityForResult(intent,requestCode);
+    }
+
     /**
      * 作者: 边贤君
      * 描述: 测量身高回调
@@ -344,7 +356,7 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputHeightActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
@@ -370,13 +382,13 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputWeightActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String value = data.getStringExtra(InputWeightActivity.RESULT_WEIGHT);
+                String value = data.getStringExtra(InputWeightActivity.OUT_PARAM_WEIGHT);
                 tv_weight.setText(value);
             }
         }
@@ -396,13 +408,13 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputHeadActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String value = data.getStringExtra(InputHeadActivity.RESULT_HEAD);
+                String value = data.getStringExtra(InputHeadActivity.OUT_PARAM_HEAD);
                 tv_head_circumference.setText(value);
             }
         }
@@ -422,13 +434,13 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputChestActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String value = data.getStringExtra(InputChestActivity.RESULT_CHEST);
+                String value = data.getStringExtra(InputChestActivity.OUT_PARAM_CHEST);
                 tv_chest_circumference.setText(value);
             }
         }
@@ -448,14 +460,14 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputCacationActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String day = data.getStringExtra(InputCacationActivity.RESULT_CACATION_DAY);
-                String count = data.getStringExtra(InputCacationActivity.RESULT_CACATION_COUNT);
+                String day = data.getStringExtra(InputCacationActivity.OUT_PARAM_CACATION_DAY);
+                String count = data.getStringExtra(InputCacationActivity.OUT_PARAM_CACATION_COUNT);
                 tv_cacation_day.setText(day);
                 tv_cacation_count.setText(count);
             }
@@ -476,13 +488,13 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputNightSleepActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String value = data.getStringExtra(InputNightSleepActivity.RESULT_NIGHT_SLEEP);
+                String value = data.getStringExtra(InputNightSleepActivity.OUT_PARAM_NIGHT_SLEEP);
                 tv_night_sleep.setText(value);
             }
         }
@@ -502,13 +514,13 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputDaySleepActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String value = data.getStringExtra(InputDaySleepActivity.RESULT_DAY_SLEEP);
+                String value = data.getStringExtra(InputDaySleepActivity.OUT_PARAM_DAY_SLEEP);
                 tv_day_sleep.setText(value);
             }
         }
@@ -528,14 +540,14 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputBreastFeedingActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String formulaMilk = data.getStringExtra(InputBreastFeedingActivity.RESULT_BREAST_FEEDING);
-                String formulaMilkCount = data.getStringExtra(InputBreastFeedingActivity.RESULT_BREAST_FEEDING_COUNT);
+                String formulaMilk = data.getStringExtra(InputBreastFeedingActivity.OUT_PARAM_BREAST_FEEDING);
+                String formulaMilkCount = data.getStringExtra(InputBreastFeedingActivity.OUT_PARAM_BREAST_FEEDING_COUNT);
                 tv_breastfeeding.setText(formulaMilk);
                 tv_breastfeeding_count.setText(formulaMilkCount);
             }
@@ -556,14 +568,14 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputMilkActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String formulaMilk = data.getStringExtra(InputMilkActivity.RESULT_FORMULA_MILK);
-                String formulaMilkCount = data.getStringExtra(InputMilkActivity.RESULT_FORMULA_MILK_COUNT);
+                String formulaMilk = data.getStringExtra(InputMilkActivity.OUT_PARAM_FORMULA_MILK);
+                String formulaMilkCount = data.getStringExtra(InputMilkActivity.OUT_PARAM_FORMULA_MILK_COUNT);
                 tv_formula_milk.setText(formulaMilk);
                 tv_formula_milk_count.setText(formulaMilkCount);
             }
@@ -579,13 +591,13 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputMicturitionActivity.class);
-            startActivityForResult(intent,requestCode());
+            startInputDataActivity(intent,requestCode());
         }
 
         @Override
         public void response(int resultCode, Intent data) {
             if (Activity.RESULT_OK == resultCode ){
-                String value = data.getStringExtra(InputMicturitionActivity.RESULT_MICTURITION);
+                String value = data.getStringExtra(InputMicturitionActivity.OUT_PARAM_MICTURITION);
                 tv_micturition_count.setText(value);
             }
         }
@@ -670,7 +682,7 @@ public class RecordActivity extends BaseActivity {
 
     public void submitRecord(){
         try {
-            submitRecordTask = new RequestTask.Builder(submitRecordCallBack).build();
+            submitRecordTask = new RequestTask.Builder(this,submitRecordCallBack).build();
             submitRecordTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -686,11 +698,6 @@ public class RecordActivity extends BaseActivity {
         @Override
         public String getUrl() {
             return UrlAddressList.URL_SUBMIT_RECORD;
-        }
-
-        @Override
-        public Context getContext() {
-            return RecordActivity.this;
         }
 
         @Override
@@ -759,8 +766,72 @@ public class RecordActivity extends BaseActivity {
                 JSONObject object = new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
                 if ( 1 == res.getInt("isSuccess") ){
-                    startActivity(AssessmentActivity.class);
+                    getCurrentRecord();
+//                    startActivity(AssessmentActivity.class);
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public String type() {
+            return JSON;
+        }
+    };
+
+    //-------------------------------获取最新的评估记录--------------------------------------------
+    private RequestTask currentRecordTask;
+
+    public void getCurrentRecord(){
+        try {
+            currentRecordTask = new RequestTask.Builder(this,currentRequestCallBack).build();
+            currentRecordTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private RequestCallBack currentRequestCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public String getUrl() {
+            return UrlAddressList.URL_GET_CURRENT_RECORD;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
+            Map<String,String> map = new HashMap<>();
+            map.put(UrlAddressList.PARAM,userData.getUserid());
+            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+            return map;
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                RecordResult recordResult = GsonUtil.getInstance().getGson().fromJson(res.toString(),RecordResult.class);
+                List<Record> list = recordResult.getRecordList();
+
+                for (Record record:list){
+                    record.setImageData(recordResult.getImgList());
+                }
+
+                BaseApplication.getInstance().minusRecordTimes();
+                Intent intent = new Intent(RecordActivity.this, AssessmentActivity.class);
+                intent.putExtra(AssessmentActivity.IN_PARAM_RECORD, GsonUtil.getInstance().getGson().toJson(list.get(0)));
+                RecordActivity.this.startActivity(intent);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

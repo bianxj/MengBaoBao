@@ -18,6 +18,9 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
+import com.doumengmengandroidbady.net.UrlAddressList;
+import com.doumengmengandroidbady.request.RequestCallBack;
+import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.response.Doctor;
 import com.doumengmengandroidbady.response.Hospital;
 import com.doumengmengandroidbady.response.ImageData;
@@ -229,10 +232,10 @@ public class AssessmentActivity extends BaseActivity {
             int type = imageData.getType();
 
             weightParam.getBlueLine().add(new DiagramView.DiagramPoint(currentDayInYear,weight,type));
-            weightParam.getRedLine().add(new DiagramView.DiagramPoint(correntDayInYear,weight,type));
+            weightParam.getRedLine().add(new DiagramView.DiagramPoint(correntDayInYear, weight, type));
 
             heightParam.getBlueLine().add(new DiagramView.DiagramPoint(currentDayInYear,height,type));
-            heightParam.getRedLine().add(new DiagramView.DiagramPoint(correntDayInYear,height,type));
+            heightParam.getRedLine().add(new DiagramView.DiagramPoint(correntDayInYear, height, type));
 
             heightWeightParam.getBlueLine().add(new DiagramView.DiagramPoint(height,weight,type));
         }
@@ -254,7 +257,8 @@ public class AssessmentActivity extends BaseActivity {
      */
     private void initDevelopmentalBehavior(){
         tv_developmental_title.setText("发育行为（"+record.getCorrectMonthAge()+"个月）");
-//        initDevelopment();
+        Map<String,List<String>> maps = DaoManager.getInstance().getFeatureDao().searchFeatureListById(this,record.getFeatureList());
+        initDevelopment(maps);
     }
 
     /**
@@ -342,6 +346,9 @@ public class AssessmentActivity extends BaseActivity {
     };
 
     private void back(){
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra(MainActivity.SHOW_PAGE,MainActivity.PAGE_SPACIALIST_SERVICE);
+        startActivity(intent);
         finish();
     }
 
@@ -364,6 +371,11 @@ public class AssessmentActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 创建发育行为条目
+     * 日期: 2018/1/18 9:44
+     */
     private View createSubItem(String title , List<String> contents){
         RelativeLayout layout = new RelativeLayout(this);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -391,6 +403,11 @@ public class AssessmentActivity extends BaseActivity {
         return layout;
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 创建发育行为条目中的选项
+     * 日期: 2018/1/18 9:44
+     */
     private View createCheckLine(List<String> contents){
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -418,7 +435,7 @@ public class AssessmentActivity extends BaseActivity {
             textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y5px);
             tv_content.setLayoutParams(textParam);
             tv_content.setText(content);
-            tv_content.setTextColor(getResources().getColor(R.color.gray));
+            tv_content.setTextColor(getResources().getColor(R.color.fourthGray));
             tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
             subLayout.addView(tv_content);
 
@@ -486,59 +503,29 @@ public class AssessmentActivity extends BaseActivity {
         baseParamMap.put(PARAM_HEIGHT_DEVIDE_WEIGHT_2_5,bmi2_5Param);
     }
 
-    private void initTestData(){
-        initTestData(PARAM_HEIGHT,45,0);
-        initTestData(PARAM_WEIGHT,0,0);
-        initTestData(PARAM_HEIGHT_DEVIDE_WEIGHT_0_2,0,45);
-    }
-
-    private void initTestData(String type,int yBase,int xBase){
-//        DiagramView.DiagramParam param = new DiagramView.DiagramParam();
-//
-//        List<DiagramView.DiagramPoint> points = new ArrayList<>();
-//        int x = xBase;
-//        int y = yBase;
-//        for (int i = 0;i<8;i++){
-//            DiagramView.DiagramPoint point = new DiagramView.DiagramPoint();
-//            if ( i != 0 ){
-//                x = x +(5);
-//                y = y +(i /2);
-//            }
-//            point.setX(x);
-//            point.setY(y);
-//            point.setType(i%2);
-//            points.add(point);
-//        }
-//        param.setBlueLine(points);
-//
-//        points = new ArrayList<>();
-//        x = xBase;
-//        y = yBase;
-//        for (int i = 0;i<8;i++){
-//            if ( i > 5 ){
-//                points.add(param.getBlueLine().get(i));
-//                continue;
-//            }
-//            DiagramView.DiagramPoint point = new DiagramView.DiagramPoint();
-//            if ( i != 0 ) {
-//                x = x +(5);
-//                y = y +(i /3);
-//            }
-//            point.setX(x);
-//            point.setY(y);
-//            point.setType(i%2);
-//            points.add(point);
-//        }
-//        param.setRedLine(points);
-//
-//        paramMap.put(type,param);
-    }
-
     //曲线图详细界面跳转
     private View.OnClickListener diagramListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             //TODO
+            List<ImageData> data = record.getImageData();
+            if ( data != null ) {
+                String imageData = GsonUtil.getInstance().getGson().toJson(data);
+                int type = 0;
+                if ( rg_height.isChecked() ){
+                    type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_HEIGHT.ordinal();
+                } else if ( rg_weight.isChecked() ){
+                    type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_WEIGHT.ordinal();
+                } else {
+                    type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_HEIGHT_WEIGHT.ordinal();
+                }
+                Intent intent = new Intent(AssessmentActivity.this, DiagramDataActivity.class);
+                intent.putExtra(DiagramDataActivity.IN_PARAM_IMAGE_DATA, imageData);
+                intent.putExtra(DiagramDataActivity.IN_PARAM_TYPE,type);
+                startActivity(intent);
+            } else {
+                //TODO
+            }
         }
     };
 
@@ -618,5 +605,44 @@ public class AssessmentActivity extends BaseActivity {
         }
         return true;
     }
+
+    //------------------------------更新状态--------------------------------------------------------
+
+    private RequestTask updateRequestTask;
+
+    private RequestCallBack callBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public String getUrl() {
+            return UrlAddressList.URL_UPDATE_RECORD_STATE;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
+            Map<String,String> map = new HashMap<>();
+//            map.put(UrlAddressList.PARAM,userData.);
+            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+            return null;
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+
+        }
+
+        @Override
+        public String type() {
+            return null;
+        }
+    };
 
 }

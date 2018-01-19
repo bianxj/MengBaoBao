@@ -243,6 +243,20 @@ public class BaseApplication extends Application {
         return list;
     }
 
+    public void minusRecordTimes(){
+        int recordTimes = Integer.parseInt(userData.getRecordtimes());
+        recordTimes--;
+        userData.setRecordtimes(recordTimes+"");
+        saveUserData(userData);
+    }
+
+    public void addRecordTimes(){
+        int recordTimes = Integer.parseInt(userData.getRecordtimes());
+        recordTimes++;
+        userData.setRecordtimes(recordTimes+"");
+        saveUserData(userData);
+    }
+
     //----------------------------------------------------------------------------------------------
     private final static String TABLE_SEARCH_HISTORY = "history";
     private final static String COLUMN_HISTORY = "histroy_value";
@@ -288,15 +302,24 @@ public class BaseApplication extends Application {
         SharedPreferencesUtil.saveBoolean(this,TABLE_CONFIG,COLUMN_IS_ABNORMAL_EXIT,isAbnormalExit);
     }
 
+    public boolean isPay(){
+        if ( RoleType.PAY_HOSPITAL_USER == getRoleType() || RoleType.PAY_NET_USER == getRoleType() ){
+            return true;
+        }
+        return false;
+    }
+
     public RoleType getRoleType(){
         UserData data = getUserData();
         String roleType = data.getRoletype();
-//        if ( "1".equals(roleType) ){
+//        if ( "3".equals(roleType) ) {
+//            return RoleType.FREE_HOSPITAL_USER;
+//        } else if ( "1".equals(roleType) ){
 //            return RoleType.PAY_NET_USER;
 //        } else if ( "2".equals(roleType) ){
 //            return RoleType.PAY_HOSPITAL_USER;
 //        } else {
-//            return RoleType.FREE_USER;
+//            return RoleType.FREE_NET_USER;
 //        }
         return RoleType.PAY_HOSPITAL_USER;
     }

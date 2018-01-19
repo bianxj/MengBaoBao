@@ -1,6 +1,5 @@
 package com.doumengmengandroidbady.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -105,7 +104,7 @@ public class ParentInfoActivity extends BaseActivity {
     }
 
     private RequestTask buildChangeParentInfoTask() throws Throwable {
-        changeParentInfoTask = new RequestTask.Builder(changeParentInfoCallBack).build();
+        changeParentInfoTask = new RequestTask.Builder(this,changeParentInfoCallBack).build();
         return changeParentInfoTask;
     }
 
@@ -118,11 +117,6 @@ public class ParentInfoActivity extends BaseActivity {
         @Override
         public String getUrl() {
             return UrlAddressList.URL_SAVE_USER_INFO;
-        }
-
-        @Override
-        public Context getContext() {
-            return ParentInfoActivity.this;
         }
 
         @Override

@@ -16,9 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/29.
+ * 作者: 边贤君
+ * 描述: 曲线图控件
+ * 创建日期: 2018/1/19 9:31
  */
-
 public class DiagramView extends View {
 
     private Context context;
@@ -69,7 +70,60 @@ public class DiagramView extends View {
         this.param = param;
         xUnit = baseInfo.getxLength()/baseInfo.getxCount();
         yUnit = baseInfo.getyLength()/baseInfo.getyCount();
+
+        updateLowerPoint(param.getRedLine(),baseInfo);
+        updateLowerPoint(param.getBlueLine(),baseInfo);
         postInvalidate();
+    }
+
+    private void updateLowerPoint(List<DiagramPoint> points , DiagramBaseInfo baseInfo){
+        for ( DiagramPoint point:points ){
+            if ( point.getX() < baseInfo.getLowerLimitX() ){
+                point.setX(baseInfo.getLowerLimitX());
+            }
+            if ( point.getY() < baseInfo.getLowerLimitY() ){
+                point.setY(baseInfo.getLowerLimitY());
+            }
+        }
+    }
+
+    public boolean hasBlueLine(){
+        return hasPointInDiagram(param.getBlueLine());
+    }
+
+    public boolean hasRedLine(){
+        if ( hasPointInDiagram(param.getRedLine()) ){
+            List<DiagramPoint> bluePoints = param.getBlueLine();
+            List<DiagramPoint> redPoints = param.getRedLine();
+            for (int i = 0 ; i< bluePoints.size();i++) {
+                if (!isSamePoint(bluePoints.get(i), redPoints.get(i))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean hasPointInDiagram(List<DiagramPoint> points){
+        if ( points == null || points.size() <= 0 ){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isPointInRange(DiagramPoint point){
+        if ( point.getX() < baseInfo.getLowerLimitX()
+                || point.getY() < baseInfo.getLowerLimitY() ){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isSamePoint(DiagramPoint p1 , DiagramPoint p2){
+        if ( p1.getY() == p2.getY() && p1.getX() == p2.getX() ){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -126,7 +180,7 @@ public class DiagramView extends View {
         float cx = (p.getX()-baseInfo.getLowerLimitX())*xUnit+originX;
         float cy = getHeight()-(p.getY()-baseInfo.getLowerLimitY())*yUnit-originY;
 //        canvas.drawCircle(cx,cy,outerRadius,whitePaint);
-        if ( p.getType() != 3 ){
+        if ( p.getType() != 1 ){
             canvas.drawCircle(cx,cy,radius,paint);
             canvas.drawCircle(cx, cy, innerRadius, whitePaint);
         } else {

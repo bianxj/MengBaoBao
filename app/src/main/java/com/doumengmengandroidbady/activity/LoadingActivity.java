@@ -1,6 +1,7 @@
 package com.doumengmengandroidbady.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import com.doumengmengandroidbady.util.MyDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -117,7 +119,7 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private RequestTask buildCheckVersionTask() throws Throwable {
-        return new RequestTask.Builder(checkVersionCallBack).build();
+        return new RequestTask.Builder(this,checkVersionCallBack).build();
     }
 
     private RequestCallBack checkVersionCallBack = new RequestCallBack() {
@@ -130,11 +132,6 @@ public class LoadingActivity extends BaseActivity {
         public String getUrl() {
             //TODO
             return null;
-        }
-
-        @Override
-        public Context getContext() {
-            return LoadingActivity.this;
         }
 
         @Override
@@ -162,7 +159,7 @@ public class LoadingActivity extends BaseActivity {
     private RequestTask initConfigureTask = null;
     private void initConfigure(){
         try {
-            initConfigureTask = new RequestTask.Builder(initConfigureCallback).build();
+            initConfigureTask = new RequestTask.Builder(this,initConfigureCallback).build();
             initConfigureTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -178,10 +175,6 @@ public class LoadingActivity extends BaseActivity {
             return UrlAddressList.URL_INIT_CONFIGURE;
         }
 
-        @Override
-        public Context getContext() {
-            return LoadingActivity.this;
-        }
 
         @Override
         public Map<String, String> getContent() {
@@ -231,17 +224,24 @@ public class LoadingActivity extends BaseActivity {
         finish();
     }
 
-    private final static int MESSAGE_JUMP_TO_MAIN = 0x01;
-    private Handler handler = new Handler(){
-        @Override
+    private static class LoadingHandler extends Handler{
+        private final static int MESSAGE_JUMP_TO_MAIN = 0x01;
+        private WeakReference<Context> weakReference;
+
+        public LoadingHandler(Context context) {
+            this.weakReference = new WeakReference<Context>(context);
+        }
+
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if ( msg.what == MESSAGE_JUMP_TO_MAIN ) {
-                startActivity(MainActivity.class);
-//                startActivity(RecordActivity.class);
+                Intent intent = new Intent(weakReference.get(),MainActivity.class);
+                weakReference.get().startActivity(intent);
             }
         }
-    };
+    }
+
+    private Handler handler = new LoadingHandler(this);
 
     private class DataBaseRunnable implements Runnable{
 
@@ -274,7 +274,7 @@ public class LoadingActivity extends BaseActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            handler.sendEmptyMessage(MESSAGE_JUMP_TO_MAIN);
+            handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
         }
     }
 

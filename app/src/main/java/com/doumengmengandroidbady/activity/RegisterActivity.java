@@ -1,7 +1,6 @@
 package com.doumengmengandroidbady.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -121,7 +120,7 @@ public class RegisterActivity extends BaseActivity {
     private void getVerificationCode(){
         if ( checkVerificationCode() ) {
             try {
-                getVerificationTask = new RequestTask.Builder(getVerificationCodeCallBack).build();
+                getVerificationTask = new RequestTask.Builder(this,getVerificationCodeCallBack).build();
                 getVerificationTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -137,11 +136,6 @@ public class RegisterActivity extends BaseActivity {
         @Override
         public String getUrl() {
             return UrlAddressList.URL_GET_VC;
-        }
-
-        @Override
-        public Context getContext() {
-            return RegisterActivity.this;
         }
 
         @Override
@@ -209,7 +203,7 @@ public class RegisterActivity extends BaseActivity {
             if ( cb_agreement.isChecked() ){
                 //进入激活流程
                 try {
-                    registerTask = new RequestTask.Builder(registerCallBack).build();
+                    registerTask = new RequestTask.Builder(this,registerCallBack).build();
                     registerTask.execute();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
@@ -229,11 +223,6 @@ public class RegisterActivity extends BaseActivity {
         @Override
         public String getUrl() {
             return UrlAddressList.URL_REGISTER;
-        }
-
-        @Override
-        public Context getContext() {
-            return RegisterActivity.this;
         }
 
         @Override

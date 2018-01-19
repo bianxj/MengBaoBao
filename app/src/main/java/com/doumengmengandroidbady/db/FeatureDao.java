@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.doumengmengandroidbady.response.Feature;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -117,6 +118,36 @@ public class FeatureDao {
         }
 
         return features;
+    }
+
+    public Map<String,List<String>> searchFeatureListById(Context context,List<String> ids){
+        Map<String,List<String>> maps = new HashMap<>();
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("select ");
+        builder.append(FEATURE_TYPE+",");
+        builder.append(DETAIL_DESC);
+        builder.append(" from " + TABLE_NAME);
+        builder.append(" where ");
+        builder.append(generateWhereIn(ID,ids));
+        builder.append(" order by " + FEATURE_ORDER);
+
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(builder.toString(),null);
+
+        while ( cursor.moveToNext() ){
+            List<String> list;
+            String type = cursor.getString(cursor.getColumnIndex(FEATURE_TYPE));
+            if ( !maps.containsKey(type) ){
+                list = new ArrayList<>();
+                maps.put(type,list);
+            } else {
+                list = maps.get(type);
+            }
+            list.add(cursor.getString(cursor.getColumnIndex(DETAIL_DESC)));
+        }
+
+        return maps;
     }
 
     private final static String VERSION_ONE = "2017-06-01 18:00:00";

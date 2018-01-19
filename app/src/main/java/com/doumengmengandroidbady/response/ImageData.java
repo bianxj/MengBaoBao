@@ -1,9 +1,10 @@
 package com.doumengmengandroidbady.response;
 
 /**
- * Created by Administrator on 2018/1/16.
+ * 作者: 边贤君
+ * 描述: 曲线图数据
+ * 创建日期: 2018/1/17 13:44
  */
-
 public class ImageData {
 
     private int monthAge;
@@ -12,6 +13,7 @@ public class ImageData {
     private int correctMonthAge;
     private int monthDay;
     private int correctMonthDay;
+    private String recordtime;
     private int type;
 
     public int getMonthAge() {
@@ -68,5 +70,13 @@ public class ImageData {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getRecordtime() {
+        return recordtime;
+    }
+
+    public void setRecordtime(String recordtime) {
+        this.recordtime = recordtime;
     }
 }

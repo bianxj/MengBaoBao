@@ -6,24 +6,27 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseInputDataActivity;
 
 /**
  * 作者: 边贤君
  * 描述: 排便
  * 创建日期: 2018/1/10 13:20
  */
-public class InputCacationActivity extends BaseActivity {
-    public final static String RESULT_CACATION_DAY = "result_cacation_day";
-    public final static String RESULT_CACATION_COUNT = "result_cacation_count";
+public class InputCacationActivity extends BaseInputDataActivity {
+
+    public final static String OUT_PARAM_CACATION_DAY = "cacation_day";
+    public final static String OUT_PARAM_CACATION_COUNT = "cacation_count";
 
     private RelativeLayout rl_back,rl_complete;
     private TextView tv_title,tv_complete;
 
+    private LinearLayout ll_content;
     private EditText et_input_data_one,et_input_data_two;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class InputCacationActivity extends BaseActivity {
 
         et_input_data_one = findViewById(R.id.et_input_data_one);
         et_input_data_two = findViewById(R.id.et_input_data_two);
+        ll_content = findViewById(R.id.ll_content);
         initView();
     }
 
@@ -49,6 +53,9 @@ public class InputCacationActivity extends BaseActivity {
 
         rl_complete.setOnClickListener(listener);
         rl_back.setOnClickListener(listener);
+
+        String content = getResources().getStringArray(R.array.cacation_content)[month];
+        generateListView(ll_content,content.split("。"));
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -73,8 +80,8 @@ public class InputCacationActivity extends BaseActivity {
     private void complete(){
         if ( checkData() ){
             Intent intent = new Intent();
-            intent.putExtra(RESULT_CACATION_DAY,et_input_data_one.getText().toString());
-            intent.putExtra(RESULT_CACATION_COUNT,et_input_data_two.getText().toString());
+            intent.putExtra(OUT_PARAM_CACATION_DAY,et_input_data_one.getText().toString());
+            intent.putExtra(OUT_PARAM_CACATION_COUNT,et_input_data_two.getText().toString());
             setResult(Activity.RESULT_OK,intent);
             finish();
         }

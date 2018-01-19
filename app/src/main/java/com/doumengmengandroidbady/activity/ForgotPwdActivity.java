@@ -1,7 +1,6 @@
 package com.doumengmengandroidbady.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -122,7 +121,7 @@ public class ForgotPwdActivity extends BaseActivity {
     private void getVerificationCode(){
         if ( checkVerificationCode() ) {
             try {
-                getVerificationCodeTask = new RequestTask.Builder(getVerificationCodeCallBack).build();
+                getVerificationCodeTask = new RequestTask.Builder(this,getVerificationCodeCallBack).build();
                 getVerificationCodeTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -138,11 +137,6 @@ public class ForgotPwdActivity extends BaseActivity {
         @Override
         public String getUrl() {
             return UrlAddressList.URL_RESET_PASSWORD_GET_VC;
-        }
-
-        @Override
-        public Context getContext() {
-            return ForgotPwdActivity.this;
         }
 
         @Override
@@ -198,7 +192,7 @@ public class ForgotPwdActivity extends BaseActivity {
             //检测用户协议是否勾选
             if ( cb_agreement.isChecked() ) {
                 try {
-                    changePwdTask = new RequestTask.Builder(changePwdCallBack).build();
+                    changePwdTask = new RequestTask.Builder(this,changePwdCallBack).build();
                     changePwdTask.execute();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
@@ -260,11 +254,6 @@ public class ForgotPwdActivity extends BaseActivity {
         @Override
         public String getUrl() {
             return UrlAddressList.URL_RESET_PASSWORD;
-        }
-
-        @Override
-        public Context getContext() {
-            return ForgotPwdActivity.this;
         }
 
         @Override

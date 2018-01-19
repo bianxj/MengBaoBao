@@ -144,7 +144,21 @@ public class DoctorInfoActivity extends BaseActivity {
 
     private void choose(){
         //TODO
-        startActivity(InputInfoActivity.class);
+        goNext();
+    }
+
+    /**
+     * 作者: 边贤君
+     * 描述: 跳转至下一个界面
+     * 日期: 2018/1/19 14:30
+     */
+    private void goNext(){
+        BaseApplication.getInstance().addRecordTimes();
+        if ( BaseApplication.getInstance().isPay() ){
+            startActivity(RecordActivity.class);
+        } else {
+            startActivity(InputInfoActivity.class);
+        }
     }
 
     //-----------------------------------支付------------------------------------------------

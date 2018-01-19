@@ -708,7 +708,8 @@ public class BaseInfoLayout extends LinearLayout {
                 year = iyear;
                 month = monthOfYear;
                 day = dayOfMonth;
-                tv_calendar.setText(iyear+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+
+                tv_calendar.setText(String.format("%d-%02d-%02d",year,month+1,day));
             }
         }, year, month, day);
         dp.show();

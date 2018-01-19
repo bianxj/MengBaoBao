@@ -10,19 +10,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseInputDataActivity;
 
 /**
- * Created by Administrator on 2017/12/26.
+ * 作者: 边贤君
+ * 描述: 夜间睡眠
+ * 创建日期: 2018/1/17 13:23
  */
-
-public class InputNightSleepActivity extends BaseActivity {
-    public final static String RESULT_NIGHT_SLEEP = "result_night_sleep";
+public class InputNightSleepActivity extends BaseInputDataActivity {
+    public final static String OUT_PARAM_NIGHT_SLEEP = "night_sleep";
 
     private RelativeLayout rl_back,rl_complete;
     private TextView tv_title,tv_complete;
 
     private EditText et_input_data;
+    private TextView tv_reference;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class InputNightSleepActivity extends BaseActivity {
         tv_complete = findViewById(R.id.tv_complete);
 
         et_input_data = findViewById(R.id.et_input_data_two);
+        tv_reference = findViewById(R.id.tv_reference);
         initView();
     }
 
@@ -46,6 +49,8 @@ public class InputNightSleepActivity extends BaseActivity {
 
         rl_complete.setOnClickListener(listener);
         rl_back.setOnClickListener(listener);
+
+        tv_reference.setText(getResources().getStringArray(R.array.sleep_reference)[month]);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -70,7 +75,7 @@ public class InputNightSleepActivity extends BaseActivity {
     private void complete(){
         if ( checkData() ){
             Intent intent = new Intent();
-            intent.putExtra(RESULT_NIGHT_SLEEP,et_input_data.getText().toString());
+            intent.putExtra(OUT_PARAM_NIGHT_SLEEP,et_input_data.getText().toString());
             setResult(Activity.RESULT_OK,intent);
             finish();
         }

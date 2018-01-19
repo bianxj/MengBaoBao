@@ -53,7 +53,7 @@ public class ObserveActivity extends BaseActivity {
     }
 
     private void initView() {
-        if ( BaseApplication.getInstance().getRoleType() == RoleType.FREE_USER){
+        if ( BaseApplication.getInstance().getRoleType() == RoleType.FREE_NET_USER || BaseApplication.getInstance().getRoleType() == RoleType.FREE_HOSPITAL_USER){
             //免费用户
             contents = new ArrayList<>();
             bt_buy.setVisibility(View.VISIBLE);

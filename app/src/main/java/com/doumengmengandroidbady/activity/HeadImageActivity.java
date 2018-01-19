@@ -2,7 +2,6 @@ package com.doumengmengandroidbady.activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -220,7 +219,7 @@ public class HeadImageActivity extends BaseActivity {
 
     private void uploadHeadImg(){
         try {
-            uploadHeadImageTask = new RequestTask.Builder(uploadHeadImageCallBack).build();
+            uploadHeadImageTask = new RequestTask.Builder(this,uploadHeadImageCallBack).build();
             uploadHeadImageTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -240,10 +239,6 @@ public class HeadImageActivity extends BaseActivity {
             return UrlAddressList.URL_UPLOAD_HEAD_IMG;
         }
 
-        @Override
-        public Context getContext() {
-            return HeadImageActivity.this;
-        }
 
         @Override
         public Map<String, String> getContent() {

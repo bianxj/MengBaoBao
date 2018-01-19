@@ -44,6 +44,7 @@ public class LoginActivity extends BaseActivity {
         super.onDestroy();
         if( loginTask != null ) {
             stopTask(loginTask.getTask());
+            loginTask = null;
         }
     }
 

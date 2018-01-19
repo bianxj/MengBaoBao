@@ -1,7 +1,5 @@
 package com.doumengmengandroidbady.request;
 
-import android.content.Context;
-
 import java.util.Map;
 
 /**
@@ -15,7 +13,7 @@ public interface RequestCallBack {
 
     public void onPreExecute();
     public String getUrl();
-    public Context getContext();
+//    public WeakReference<Context> getContext();
     public Map<String,String> getContent();
     public void onError(String result);
     public void onPostExecute(String result);

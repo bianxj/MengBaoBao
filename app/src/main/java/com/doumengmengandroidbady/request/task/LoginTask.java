@@ -22,18 +22,16 @@ import java.util.Map;
 
 public class LoginTask {
 
-    private Context context;
     private RequestTask task;
     private LoginCallBack loginCallBack;
     private String accountMobile;
     private String loginPwd;
 
     public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack) throws Throwable {
-        this.context = context;
         this.accountMobile = accountMobile;
         this.loginPwd = loginPwd;
         this.loginCallBack = loginCallBack;
-        task = new RequestTask.Builder(callBack).build();
+        task = new RequestTask.Builder(context,callBack).build();
     }
 
     public void execute(){
@@ -57,10 +55,6 @@ public class LoginTask {
             return UrlAddressList.URL_LOGIN;
         }
 
-        @Override
-        public Context getContext() {
-            return context;
-        }
 
         @Override
         public Map<String, String> getContent() {

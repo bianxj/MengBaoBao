@@ -2,10 +2,12 @@ package com.doumengmengandroidbady.request;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
 
 import com.doumengmengandroidbady.net.HttpUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
+import java.lang.ref.WeakReference;
 import java.util.Map;
 
 /**
@@ -17,6 +19,8 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     private final static boolean isTest = false;
 
     private Builder builder;
+    private Handler handler;
+    private Runnable runnable;
 
     private RequestTask(Builder builder) {
         this.builder = builder;
@@ -26,7 +30,14 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     protected void onPreExecute() {
         super.onPreExecute();
         if ( null != builder.getCallBack() ){
-            MyDialog.showLoadingDialog(builder.getCallBack().getContext());
+            handler = new Handler();
+            runnable = new Runnable() {
+                @Override
+                public void run() {
+                    MyDialog.showLoadingDialog(builder.getWeakReference().get());
+                }
+            };
+            handler.postDelayed(runnable,2000);
             builder.getCallBack().onPreExecute();
         }
     }
@@ -45,10 +56,13 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        if ( handler != null ){
+            handler.removeCallbacks(runnable);
+        }
+        MyDialog.dismissLoadingDialog();
         if ( isTest ){
             builder.getCallBack().onPostExecute(s);
         } else {
-            MyDialog.dismissLoadingDialog();
             if (!isError(s)) {
                 builder.getCallBack().onPostExecute(s);
             } else {
@@ -56,6 +70,8 @@ public class RequestTask extends AsyncTask<String,Void,String> {
             }
         }
     }
+
+
 
     private boolean isError(String json){
         String errorMsg = null;
@@ -71,18 +87,20 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     }
 
     private void errorDispose(String errorMsg){
-        Context context = builder.getCallBack().getContext();
+        Context context = builder.getWeakReference().get();
         if ( null != context ) {
-            MyDialog.showPromptDialog(builder.getCallBack().getContext(), errorMsg, null);
+            MyDialog.showPromptDialog(builder.getWeakReference().get(), errorMsg, null);
         }
     }
 
     public static class Builder{
 
+        private WeakReference<Context> weakReference;
         private RequestCallBack callBack;
 
-        public Builder(RequestCallBack callBack) {
+        public Builder(Context context,RequestCallBack callBack) {
             this.callBack = callBack;
+            this.weakReference = new WeakReference<Context>(context);
         }
 
         public void setCallBack(RequestCallBack callBack) {
@@ -91,6 +109,14 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
         private RequestCallBack getCallBack() {
             return callBack;
+        }
+
+        public WeakReference<Context> getWeakReference() {
+            return weakReference;
+        }
+
+        public void setWeakReference(Context context) {
+            this.weakReference = new WeakReference<Context>(context);
         }
 
         public RequestTask build() throws Throwable {

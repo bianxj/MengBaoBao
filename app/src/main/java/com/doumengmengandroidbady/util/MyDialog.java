@@ -8,6 +8,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -22,7 +25,9 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.view.MyGifPlayer;
 
 /**
- * Created by Administrator on 2017/12/14.
+ * 作者: 边贤君
+ * 描述: Dialog工具类
+ * 创建日期: 2018/1/17 15:03
  */
 public class MyDialog {
 
@@ -282,10 +287,6 @@ public class MyDialog {
         }
     }
 
-//    private void showNotificationDialog(){
-//
-//    }
-
     private static void dismissNotificationDialog(){
         synchronized (notificationLock){
             if ( notificationDialog != null){
@@ -369,7 +370,20 @@ public class MyDialog {
 
     public static void showLoadingDialog(Context context){
         synchronized (loadingLock){
+            loadingDialog = new Dialog(context,R.style.LoadingDialog);
+            View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading,null);
 
+            RotateAnimation animation = new RotateAnimation(0,36000,RotateAnimation.RELATIVE_TO_SELF,0.5F,RotateAnimation.RELATIVE_TO_SELF,0.5F);
+//            Animation animation = AnimationUtils.loadAnimation(context,R.anim.loading_rotate);
+            animation.setInterpolator(new LinearInterpolator());
+            animation.setRepeatCount(Animation.INFINITE);
+            animation.setDuration(100000);
+            ImageView loading = view.findViewById(R.id.loading);
+            loadingDialog.setCancelable(false);
+            loadingDialog.setCanceledOnTouchOutside(false);
+            loadingDialog.setContentView(view);
+            loadingDialog.show();
+            loading.startAnimation(animation);
         }
     }
 

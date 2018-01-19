@@ -86,13 +86,14 @@ public class MainActivity extends BaseFragmentActivity {
         findView();
         initView();
         initFragment();
-        showDefaultFragment();
+        switchFragment(PAGE_HOME);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         initData();
+        showDefaultFragment();
     }
 
     @Override
@@ -166,7 +167,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     private void initData(){
         UserData userData = BaseApplication.getInstance().getUserData();
-        if (RoleType.FREE_USER == BaseApplication.getInstance().getRoleType()){
+        if (RoleType.FREE_NET_USER == BaseApplication.getInstance().getRoleType() || RoleType.FREE_HOSPITAL_USER == BaseApplication.getInstance().getRoleType()){
             loadHeadImg(userData.isMale(),"");
             tv_baby_name.setVisibility(View.INVISIBLE);
             tv_baby_age.setVisibility(View.INVISIBLE);
@@ -207,8 +208,6 @@ public class MainActivity extends BaseFragmentActivity {
         if ( intent != null && intent.getStringExtra(SHOW_PAGE) != null ){
             String page = intent.getStringExtra(SHOW_PAGE);
             switchFragment(page);
-        } else {
-            switchFragment(PAGE_HOME);
         }
     }
 
@@ -243,7 +242,7 @@ public class MainActivity extends BaseFragmentActivity {
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
                 case R.id.rl_hospital_report:
-                    if ( RoleType.PAY_HOSPITAL_USER == BaseApplication.getInstance().getRoleType() ){
+                    if ( RoleType.PAY_HOSPITAL_USER == BaseApplication.getInstance().getRoleType() || RoleType.FREE_HOSPITAL_USER == BaseApplication.getInstance().getRoleType() ){
                         switchFragment(PAGE_HOSPITAL_REPORT);
                         dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     } else {

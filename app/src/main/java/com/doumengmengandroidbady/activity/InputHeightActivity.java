@@ -4,27 +4,36 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseInputDataActivity;
+import com.doumengmengandroidbady.util.EditTextUtil;
+import com.doumengmengandroidbady.view.MyGifPlayer;
 
 /**
  * 作者: 边贤君
  * 描述: 测量升高页面
  * 创建日期: 2018/1/10 11:43
  */
-public class InputHeightActivity extends BaseActivity {
+public class InputHeightActivity extends BaseInputDataActivity {
 
-    public final static String OUT_PARAM_HEIGHT = "result_height";
+    private String suggest = "<p><font color=\"#EF4399\">* 建议：</font>身高测量宜在清晨进行；身高测量应在医 院用标准的量床测量。</p>";
 
+    public final static String OUT_PARAM_HEIGHT = "height";
+
+    private MyGifPlayer player;
     private RelativeLayout rl_back,rl_complete;
     private TextView tv_title,tv_complete;
 
     private EditText et_input_data;
+    private TextView tv_reference,tv_increase,tv_input_title;
+    private LinearLayout ll_content , ll_remark;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +48,14 @@ public class InputHeightActivity extends BaseActivity {
         tv_title = findViewById(R.id.tv_title);
         tv_complete = findViewById(R.id.tv_complete);
 
+        player = findViewById(R.id.player);
         et_input_data = findViewById(R.id.et_input_data);
+
+        tv_reference = findViewById(R.id.tv_reference);
+        tv_increase = findViewById(R.id.tv_increase);
+        tv_input_title = findViewById(R.id.tv_input_title);
+        ll_content = findViewById(R.id.ll_content);
+        ll_remark = findViewById(R.id.ll_remark);
         initView();
     }
 
@@ -49,6 +65,28 @@ public class InputHeightActivity extends BaseActivity {
 
         rl_complete.setOnClickListener(listener);
         rl_back.setOnClickListener(listener);
+        new EditTextUtil(et_input_data);
+        player.setGif(R.drawable.gif_height);
+
+        //参考值
+        if ( isBoy ) {
+            tv_reference.setText(getResources().getStringArray(R.array.height_reference_boy)[month]);
+        } else {
+            tv_reference.setText(getResources().getStringArray(R.array.height_reference_girl)[month]);
+        }
+        //增长
+        String increase = getResources().getStringArray(R.array.height_increase)[month];
+        if (TextUtils.isEmpty(increase) ){
+            tv_increase.setVisibility(View.GONE);
+        } else {
+            tv_increase.setText(increase);
+        }
+        //标题
+        tv_input_title.setText(getResources().getString(R.string.height_input_title));
+        //内容
+        generateListView(ll_content,getResources().getStringArray(R.array.height_content));
+        //备注
+        generateListView(ll_remark,getResources().getStringArray(R.array.height_remark));
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

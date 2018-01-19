@@ -1,6 +1,5 @@
 package com.doumengmengandroidbady.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -19,7 +18,6 @@ import com.doumengmengandroidbady.activity.SupplementRecordActivity;
 import com.doumengmengandroidbady.adapter.RecordAdapter;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragment;
-import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
@@ -100,7 +98,7 @@ public class SpacialistServiceFragment extends BaseFragment {
 
     private void initView(){
         userData = BaseApplication.getInstance().getUserData();
-        if (RoleType.FREE_USER != BaseApplication.getInstance().getRoleType()){
+        if (BaseApplication.getInstance().isPay()){
             getRecord();
             ll_buy.setVisibility(View.VISIBLE);
             rl_unbuy.setVisibility(View.GONE);
@@ -170,7 +168,6 @@ public class SpacialistServiceFragment extends BaseFragment {
                     startActivity(SpacialistServiceActivity.class);
                     break;
                 case R.id.rl_add_record:
-                    //TODO
                     startActivity(RecordActivity.class);
                     break;
             }
@@ -182,13 +179,15 @@ public class SpacialistServiceFragment extends BaseFragment {
         super.onHiddenChanged(hidden);
         if ( !hidden ){
             initView();
+        } else {
+            stopTask(recordTask);
         }
     }
 
     private RequestTask recordTask;
     private void getRecord(){
         try {
-            recordTask = new RequestTask.Builder(getRecordCallBack).build();
+            recordTask = new RequestTask.Builder(getActivity(),getRecordCallBack).build();
             recordTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -204,11 +203,6 @@ public class SpacialistServiceFragment extends BaseFragment {
         @Override
         public String getUrl() {
             return UrlAddressList.URL_GET_ALL_RECORD;
-        }
-
-        @Override
-        public Context getContext() {
-            return getActivity();
         }
 
         @Override

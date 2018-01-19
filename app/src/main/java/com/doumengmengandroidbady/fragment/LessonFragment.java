@@ -73,17 +73,11 @@ public class LessonFragment extends BaseFragment {
 
     @Override
     public void onResume() {
-        if ( wv != null ) {
-            wv.onResume();
-        }
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        if ( wv != null ) {
-            wv.onPause();
-        }
         super.onPause();
     }
 
@@ -104,7 +98,7 @@ public class LessonFragment extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if ( !hidden ){
-            wv.loadUrl("https://www.baidu.com");
+            wv.reload();
         }
     }
 }

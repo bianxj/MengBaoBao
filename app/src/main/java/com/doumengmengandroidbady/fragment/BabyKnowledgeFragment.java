@@ -31,6 +31,7 @@ public class BabyKnowledgeFragment extends BaseFragment {
     private GridView gv;
     private BabyKnowledgeAdapter adapter;
     private List<String> infos = null;
+    private List<String> pages = null;
 
     @Nullable
     @Override
@@ -54,14 +55,15 @@ public class BabyKnowledgeFragment extends BaseFragment {
     }
 
     private void initGridView(){
-        infos = genTimeQuantum();
+        infos = new ArrayList<>();
+        pages = new ArrayList<>();
+        genTimeQuantum(infos,pages);
         adapter = new BabyKnowledgeAdapter(getContext(),infos);
         gv.setAdapter(adapter);
         gv.setOnItemClickListener(itemClickListener);
     }
 
-    private List<String> genTimeQuantum(){
-        List<String> infos = new ArrayList<String>();
+    private void genTimeQuantum(List<String> infos , List<String> pages){
         infos.add("0~1个月");
         infos.add("1~3个月");
         infos.add("4~6个月");
@@ -70,7 +72,15 @@ public class BabyKnowledgeFragment extends BaseFragment {
         infos.add("12~18个月");
         infos.add("18~24个月");
         infos.add("24~36个月");
-        return infos;
+
+        pages.add("file:///android_asset/babyknowledge0-1.html");
+        pages.add("file:///android_asset/babyknowledge1-3.html");
+        pages.add("file:///android_asset/babyknowledge4-6.html");
+        pages.add("file:///android_asset/babyknowledge6-9.html");
+        pages.add("file:///android_asset/babyknowledge9-12.html");
+        pages.add("file:///android_asset/babyknowledge12-18.html");
+        pages.add("file:///android_asset/babyknowledge18-24.html");
+        pages.add("file:///android_asset/babyknowledge24-36.html");
     }
 
     private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
@@ -78,7 +88,8 @@ public class BabyKnowledgeFragment extends BaseFragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String title = (String) adapter.getItem(position);
             Intent intent = new Intent(getContext(), BabyKnowledgeDetailsActivity.class);
-            intent.putExtra(BabyKnowledgeDetailsActivity.TITLE,title);
+            intent.putExtra(BabyKnowledgeDetailsActivity.IN_PARAM_TITLE,title);
+            intent.putExtra(BabyKnowledgeDetailsActivity.IN_PARAM_PAGE,pages.get(position));
             startActivity(intent);
         }
     };

@@ -23,12 +23,15 @@ import com.doumengmengandroidbady.base.BaseActivity;
  */
 public class BabyKnowledgeDetailsActivity extends BaseActivity {
 
-    public static final String TITLE = "title";
+    public static final String IN_PARAM_TITLE = "title";
+    public static final String IN_PARAM_PAGE = "page";
 
     private RelativeLayout rl_back;
     private TextView tv_title;
 
+    private RelativeLayout rl_content;
     private WebView wv;
+    private String page;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,9 +40,23 @@ public class BabyKnowledgeDetailsActivity extends BaseActivity {
         findView();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if ( wv != null ){
+            wv.removeAllViews();
+            wv.destroy();
+            wv = null;
+            rl_content.removeAllViews();
+            rl_content = null;
+        }
+    }
+
     private void findView(){
         rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);
+
+        rl_content =findViewById(R.id.rl_content);
         initView();
     }
 
@@ -47,8 +64,9 @@ public class BabyKnowledgeDetailsActivity extends BaseActivity {
         rl_back.setOnClickListener(listener);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra(TITLE);
+        String title = intent.getStringExtra(IN_PARAM_TITLE);
         tv_title.setText(title);
+        page = intent.getStringExtra(IN_PARAM_PAGE);
 
         initWebView();
     }
@@ -76,7 +94,7 @@ public class BabyKnowledgeDetailsActivity extends BaseActivity {
                 handler.proceed();
             }
         });
-        wv.loadUrl("file:///android_asset/baby_knowledge_0-1.html");
+        wv.loadUrl(page);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

@@ -6,24 +6,27 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseInputDataActivity;
 
 /**
  * 作者: 边贤君
  * 描述: 排尿
  * 创建日期: 2018/1/10 13:33
  */
-public class InputMicturitionActivity extends BaseActivity {
-    public final static String RESULT_MICTURITION = "result_micturition";
+public class InputMicturitionActivity extends BaseInputDataActivity {
+
+    public final static String OUT_PARAM_MICTURITION = "micturition";
 
     private RelativeLayout rl_back,rl_complete;
     private TextView tv_title,tv_complete;
 
     private EditText et_input_data;
+    private LinearLayout ll_content;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,7 @@ public class InputMicturitionActivity extends BaseActivity {
         tv_complete = findViewById(R.id.tv_complete);
 
         et_input_data = findViewById(R.id.et_input_data_two);
+        ll_content = findViewById(R.id.ll_content);
         initView();
     }
 
@@ -47,6 +51,8 @@ public class InputMicturitionActivity extends BaseActivity {
 
         rl_complete.setOnClickListener(listener);
         rl_back.setOnClickListener(listener);
+
+        generateListView(ll_content,getResources().getStringArray(R.array.micturition_content));
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -71,7 +77,7 @@ public class InputMicturitionActivity extends BaseActivity {
     private void complete(){
         if ( checkData() ){
             Intent intent = new Intent();
-            intent.putExtra(RESULT_MICTURITION,et_input_data.getText().toString());
+            intent.putExtra(OUT_PARAM_MICTURITION,et_input_data.getText().toString());
             setResult(Activity.RESULT_OK,intent);
             finish();
         }

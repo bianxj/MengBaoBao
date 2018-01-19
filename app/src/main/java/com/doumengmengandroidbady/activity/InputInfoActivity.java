@@ -1,6 +1,5 @@
 package com.doumengmengandroidbady.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -122,7 +121,7 @@ public class InputInfoActivity extends BaseActivity {
 
     private void submitInfo(){
         try {
-            submitInfoTask = new RequestTask.Builder(submitInfoCallBack).build();
+            submitInfoTask = new RequestTask.Builder(this,submitInfoCallBack).build();
             submitInfoTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -139,11 +138,6 @@ public class InputInfoActivity extends BaseActivity {
         @Override
         public String getUrl() {
             return UrlAddressList.URL_SAVE_USER_INFO;
-        }
-
-        @Override
-        public Context getContext() {
-            return InputInfoActivity.this;
         }
 
         @Override

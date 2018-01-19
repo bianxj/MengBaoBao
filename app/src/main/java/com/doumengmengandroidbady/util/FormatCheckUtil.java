@@ -35,4 +35,10 @@ public class FormatCheckUtil {
         return false;
     }
 
+    public static boolean isOnlyPointNumber(String number) {//保留两位小数正则
+        Pattern pattern = Pattern.compile("^\\d+\\.?\\d{0,2}$");
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
+    }
+
 }

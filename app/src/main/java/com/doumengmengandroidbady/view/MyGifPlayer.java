@@ -19,7 +19,6 @@ import com.doumengmengandroidbady.R;
 
 public class MyGifPlayer extends FrameLayout {
 
-    private Context context;
     private View share;
     private ImageView image;
     private ImageView start;
@@ -43,7 +42,6 @@ public class MyGifPlayer extends FrameLayout {
     }
 
     private void initView(Context context,int startId , int side , boolean needShare){
-        this.context = context;
         image = new ImageView(context);
         image.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         addView(image);
@@ -168,5 +166,7 @@ public class MyGifPlayer extends FrameLayout {
     public interface StopCallBack {
         public void stoped();
     }
+
+
 
 }

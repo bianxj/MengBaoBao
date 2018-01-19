@@ -1,0 +1,55 @@
+*{
+    padding: 0px;
+}
+body {
+    width: 90%;
+    margin: auto;
+}
+
+h1 {
+    font-size: 130%;
+}
+span.color{
+    color: #F37CB7;
+}
+span.red-color{
+    color: RED;
+}
+span.bold{
+    font-weight: bold;
+}
+h2 {
+    font-size: 100%;
+    font-weight: bold;
+}
+
+p {
+    font-size: 100%;
+    text-indent: 2em;
+}
+
+img {
+    position: center;
+    text-align: center;
+    max-width: 100%;
+}
+
+ol,ul {
+    font-size: 100%;
+    margin-left: 2em;
+    list-style-position: inside;
+}
+
+li {
+}
+div.img{
+    text-align: center;
+}
+
+.center{
+    text-align: center;
+}
+
+.under-line{
+    text-decoration: underline;
+}

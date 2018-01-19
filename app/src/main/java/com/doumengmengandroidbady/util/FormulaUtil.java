@@ -1,5 +1,8 @@
 package com.doumengmengandroidbady.util;
 
+import android.text.Html;
+import android.text.Spanned;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -105,6 +108,14 @@ public class FormulaUtil {
         if (dayOfMonth == calendar.getActualMaximum(Calendar.DAY_OF_MONTH))
             return true;
         return false;
+    }
+
+    public static Spanned convertHtmlToSpanned(String content){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            return Html.fromHtml(content,Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(content);
+        }
     }
 
 }

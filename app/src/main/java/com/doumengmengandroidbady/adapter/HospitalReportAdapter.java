@@ -32,6 +32,8 @@ public class HospitalReportAdapter extends RecyclerView.Adapter<HospitalReportAd
         return vh;
     }
 
+
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         HospitalReport report = reports.get(position);

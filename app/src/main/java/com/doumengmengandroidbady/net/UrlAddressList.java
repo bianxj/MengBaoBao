@@ -33,6 +33,7 @@ public class UrlAddressList {
     public final static String URL_UPDATE_RECORD_STATE = BASE_URL + "babyUser.do?method=UpdateIsRead";
 //    public final static String URL_SAVE_PARENT_INFO = BASE_URL + "babyUser.do?method=EditParent";
     public final static String URL_SUBMIT_RECORD = BASE_URL + "babyUser.do?method=SubmitRecord";
+    public final static String URL_GET_CURRENT_RECORD = BASE_URL  + "babyUser.do?method=GetCurrentRecord";
 
     public final static String URL_MENG_LESSION = "https://www.baidu.com";
 

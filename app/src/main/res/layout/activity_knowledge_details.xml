@@ -8,14 +8,13 @@
     <include layout="@layout/include_title_back"></include>
 
     <RelativeLayout
+        android:id="@+id/rl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <WebView
             android:id="@+id/wv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x48px"
-            android:layout_marginRight="@dimen/x48px"
             android:layout_above="@+id/iv_ad">
 
         </WebView>

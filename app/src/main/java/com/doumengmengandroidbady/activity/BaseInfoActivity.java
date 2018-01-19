@@ -1,6 +1,5 @@
 package com.doumengmengandroidbady.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -102,7 +101,7 @@ public class BaseInfoActivity extends BaseActivity {
     private void changeBaseInfo(){
         if ( base_info.checkBaseInfo() ){
             try {
-                changeBaseInfo = new RequestTask.Builder(changeBaseInfoCallBack).build();
+                changeBaseInfo = new RequestTask.Builder(this,changeBaseInfoCallBack).build();
                 changeBaseInfo.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -121,11 +120,6 @@ public class BaseInfoActivity extends BaseActivity {
         @Override
         public String getUrl() {
             return UrlAddressList.URL_SAVE_USER_INFO;
-        }
-
-        @Override
-        public Context getContext() {
-            return BaseInfoActivity.this;
         }
 
         @Override

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 
     <include layout="@layout/include_title_back"></include>
@@ -45,6 +48,15 @@
                     android:layout_marginLeft="@dimen/x490px"
                     />
             </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_increase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BlackText26px"
+                android:layout_marginTop="@dimen/y32px"
+                android:includeFontPadding="false"
+                android:visibility="gone"
+                />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_reference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chest_reference_value"
@@ -83,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y32px">
                 <TextView
+                    android:id="@+id/tv_std"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chest_diff_value"
@@ -117,6 +131,7 @@
                 ></View>
 
             <TextView
+                android:id="@+id/tv_input_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/chest_title"
@@ -125,29 +140,38 @@
                 android:includeFontPadding="false"
                 />
 
-            <TextView
-                android:layout_width="@dimen/x574px"
+            <LinearLayout
+                android:id="@+id/ll_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/chest_content"
-                style="@style/BlackText26px"
-                android:layout_marginTop="@dimen/y28px"
-                android:includeFontPadding="false"
-                />
+                android:layout_marginRight="@dimen/x64px"
+                android:layout_marginLeft="@dimen/x64px"
+                android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/rl_play_move"
+            </LinearLayout>
+
+            <com.doumengmengandroidbady.view.MyGifPlayer
+                android:id="@+id/player"
                 android:layout_width="@dimen/x447px"
                 android:layout_height="@dimen/y311px"
-                android:background="@drawable/bg_baby_height"
                 android:layout_marginTop="@dimen/y48px"
-                >
-                <ImageView
-                    android:layout_width="@dimen/y94px"
-                    android:layout_height="@dimen/y94px"
-                    android:src="@drawable/btn_play"
-                    android:layout_centerInParent="true"
-                    />
-            </RelativeLayout>
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                app:start_drawable="@drawable/btn_play"
+                app:start_side="@dimen/x94px"
+                app:need_share="false">
+
+            </com.doumengmengandroidbady.view.MyGifPlayer>
+
+            <LinearLayout
+                android:id="@+id/ll_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x64px"
+                android:layout_marginLeft="@dimen/x64px"
+                android:orientation="vertical">
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

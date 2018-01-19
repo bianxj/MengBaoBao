@@ -5,6 +5,8 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 
     <include layout="@layout/include_title_back"></include>
@@ -28,7 +30,7 @@
                             android:layout_height="@dimen/y86px"
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
-                            android:inputType="numberDecimal"
+                            android:inputType="number"
                             />
                 <TextView
                     android:layout_width="wrap_content"
@@ -48,15 +50,16 @@
                 android:layout_marginTop="@dimen/y48px"
                 ></View>
 
-            <TextView
-                android:layout_width="@dimen/x574px"
-                android:layout_height="wrap_content"
-                android:text="@string/cacation_content"
-                style="@style/BlackText26px"
-                android:layout_marginTop="@dimen/y28px"
-                android:includeFontPadding="false"
-                />
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x64px"
+            android:layout_marginLeft="@dimen/x64px"
+            android:layout_marginTop="@dimen/x28px"
+            android:orientation="vertical">
 
+        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

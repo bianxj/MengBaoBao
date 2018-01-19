@@ -5,6 +5,8 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 
     <include layout="@layout/include_title_back"></include>
@@ -58,9 +60,9 @@
                 ></View>
 
             <TextView
+                android:id="@+id/tv_reference"
                 android:layout_width="@dimen/x574px"
                 android:layout_height="wrap_content"
-                android:text="@string/day_sleep_content"
                 style="@style/BlackText26px"
                 android:layout_marginTop="@dimen/y46px"
                 android:includeFontPadding="false"

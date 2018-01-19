@@ -46,9 +46,12 @@ public class HttpUtil {
     }
 
     public String httpsRequestPost(String url, Map<String,String> map){
+        Response response = null;
+        Request request = null;
+        Request.Builder builder = null;
         String result = null;
         try {
-            Request.Builder builder  = new Request.Builder();
+            builder  = new Request.Builder();
             builder.url(url);
             builder.addHeader("content-type","text/html;charset:utf-8");
             MultipartBody.Builder bodyBuilder = new MultipartBody.Builder();
@@ -70,9 +73,10 @@ public class HttpUtil {
                         bodyBuilder.addFormDataPart(key, map.get(key));
                     }
                 }
+                map.clear();
             }
-            Request request = builder.post(bodyBuilder.build()).build();
-            Response response = client.newCall(request).execute();
+            request = builder.post(bodyBuilder.build()).build();
+            response = client.newCall(request).execute();
             BaseApplication.getInstance().getMLog().info("HttpUtil:code:"+response.code());
             if (response.code() == 200) {
                 result = response.body().string();
@@ -82,6 +86,18 @@ public class HttpUtil {
         } catch (Exception e) {
             e.printStackTrace();
             result = ResponseErrorCode.ERROR_REQUEST_FAILED_MSG;
+        } finally {
+            if ( builder != null ){
+                builder.delete();
+                builder = null;
+            }
+            if ( request != null ){
+                request = null;
+            }
+            if ( response != null ){
+                response.close();
+                response = null;
+            }
         }
         BaseApplication.getInstance().getMLog().info("HttpUtil:result:"+result);
         return result;

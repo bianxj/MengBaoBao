@@ -37,7 +37,7 @@
         <activity android:name=".activity.ForgotPwdActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.AgreementActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.LoadingActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".activity.PersonCenterActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.BaseInfoActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ParentInfoActivity" android:screenOrientation="portrait"></activity>
@@ -80,6 +80,8 @@
 
         <activity android:name=".activity.AssessmentActivity" android:screenOrientation="portrait" ></activity>
         <activity android:name=".activity.ParentingGuideActivity" android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.DiagramDataActivity" android:screenOrientation="portrait"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
