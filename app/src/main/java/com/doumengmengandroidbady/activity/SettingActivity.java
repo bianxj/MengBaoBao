@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.util.SystemUtil;
+import com.doumengmengandroidbady.util.AppUtil;
 
 /**
  * 作者: 边贤君
@@ -43,7 +43,7 @@ public class SettingActivity extends BaseActivity {
         tv_title.setText(R.string.setting);
         String version = null;
         try {
-            version = SystemUtil.getVersionName(this);
+            version = AppUtil.getVersionName(this);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

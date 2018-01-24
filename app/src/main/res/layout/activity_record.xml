@@ -1097,7 +1097,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/x180px"
                         android:inputType="text"
-                        android:gravity="left"
+                        android:gravity="left|center_vertical"
                         android:lines="1" />
 
                     <View
@@ -1244,6 +1244,7 @@
                     android:gravity="top|left"
                     android:inputType="textMultiLine"
                     android:lines="@null"
+                    android:maxLength="100"
                     android:background="@drawable/bg_circle_parent_message" />
 
             </LinearLayout>

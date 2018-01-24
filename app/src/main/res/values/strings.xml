@@ -333,9 +333,12 @@
     <string name="assessment">评估</string>
     
     <!--Dialog-->
-    <string name="location_content">定位服务为开启,请在系统中开启定位服务</string>
-    <string name="later">暂不</string>
-    <string name="go_setting">去设置</string>
+    <string name="camera_permission">请打开相机权限</string>
+    <string name="storage_permission">请打开存储权限</string>
+    <string name="location_permission">定位服务为开启,请在系统中开启定位服务</string>
+    <string name="read_phone_permission">请打开电话权限</string>
+    <string name="btn_prompt_later">暂不</string>
+    <string name="btn_prompt_go_setting">去设置</string>
     
     <string name="update_content">的用户正在使用新版本</string>
     <string name="change_pwd_content">修改密码成功</string>
@@ -351,6 +354,8 @@
     <string name="prompt_bt_cancel">取消</string>
     <string name="prompt_bt_sure">确认</string>
     <string name="prompt_bt_buy">购买</string>
+    <string name="prompt_bt_allow">允许</string>
+    <string name="prompt_bt_not_allow">不允许</string>
 
     <string name="prompt_no_account">请输入帐号</string>
     <string name="prompt_error_phone">请输入11位正确的手机号码</string>

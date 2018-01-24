@@ -1,9 +1,11 @@
 package com.doumengmengandroidbady.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,8 +19,14 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
+import com.doumengmengandroidbady.net.UrlAddressList;
+import com.doumengmengandroidbady.request.RequestCallBack;
+import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.response.Doctor;
 import com.doumengmengandroidbady.response.Hospital;
+import com.doumengmengandroidbady.util.AppUtil;
+import com.doumengmengandroidbady.util.MyDialog;
+import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -30,12 +38,17 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/12.
+ * 作者: 边贤君
+ * 描述: 医生详情界面
+ * 创建日期: 2018/1/23 15:23
  */
-
 public class DoctorInfoActivity extends BaseActivity {
 
     private final static boolean isTest = false;
@@ -45,6 +58,7 @@ public class DoctorInfoActivity extends BaseActivity {
 
 //    private DoctorEntity doctor;
 
+    private RelativeLayout rl_parent;
     private RelativeLayout rl_back;
     private TextView tv_title;
     private CircleImageView civ_head;
@@ -61,6 +75,51 @@ public class DoctorInfoActivity extends BaseActivity {
         setContentView(R.layout.activity_doctor_info);
         getNeedInfo();
         findView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTask(aliPayTask);
+        stopTask(aliPayResponseTask);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults, new PermissionUtil.RequestPermissionSuccess() {
+            @Override
+            public void success(String permission) {
+                choose();
+            }
+
+            @Override
+            public void denied(String permission) {
+
+            }
+
+            @Override
+            public void alwaysDenied(String permission) {
+                String prompt = null;
+                if ( Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission) ){
+                    prompt = getResources().getString(R.string.storage_permission);
+                }
+                if ( Manifest.permission.READ_PHONE_STATE.equals(permission) ){
+                    prompt = getResources().getString(R.string.read_phone_permission);
+                }
+                MyDialog.showPermissionDialog(DoctorInfoActivity.this, prompt, new MyDialog.ChooseDialogCallback() {
+                    @Override
+                    public void sure() {
+                        AppUtil.openPrimession(DoctorInfoActivity.this);
+                    }
+
+                    @Override
+                    public void cancel() {
+
+                    }
+                });
+            }
+        });
     }
 
     private void getNeedInfo(){
@@ -90,6 +149,7 @@ public class DoctorInfoActivity extends BaseActivity {
     }
 
     private void findView(){
+        rl_parent = findViewById(R.id.rl_parent);
         rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);
         civ_head = findViewById(R.id.civ_head);
@@ -104,6 +164,12 @@ public class DoctorInfoActivity extends BaseActivity {
     }
 
     private void initView(){
+        if ( BaseApplication.getInstance().isUpperThan37Month() ){
+            bt_choose.setVisibility(View.GONE);
+        } else {
+            bt_choose.setVisibility(View.VISIBLE);
+        }
+
         rl_back.setOnClickListener(listener);
         bt_choose.setOnClickListener(listener);
         tv_title.setText(R.string.introduce);
@@ -143,8 +209,30 @@ public class DoctorInfoActivity extends BaseActivity {
     }
 
     private void choose(){
-        //TODO
-        goNext();
+        if (PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.READ_PHONE_STATE)){
+                MyDialog.showPayDialog(this, rl_parent, new MyDialog.PayCallBack() {
+                    @Override
+                    public void alipay() {
+                        aliPay();
+                    }
+
+                    @Override
+                    public void iwxpay() {
+
+                    }
+                },doctor.getCost(),15*60);
+            }
+        }
+    }
+
+    private void aliPay(){
+        try {
+            aliPayTask = new RequestTask.Builder(this,aliPayCallBack).build();
+            aliPayTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     /**
@@ -153,7 +241,6 @@ public class DoctorInfoActivity extends BaseActivity {
      * 日期: 2018/1/19 14:30
      */
     private void goNext(){
-        BaseApplication.getInstance().addRecordTimes();
         if ( BaseApplication.getInstance().isPay() ){
             startActivity(RecordActivity.class);
         } else {
@@ -163,16 +250,98 @@ public class DoctorInfoActivity extends BaseActivity {
 
     //-----------------------------------支付------------------------------------------------
 
+    private RequestTask aliPayTask = null;
+    private RequestTask aliPayResponseTask = null;
+
+    private RequestCallBack aliPayCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public String getUrl() {
+            return UrlAddressList.URL_ALI_PAY;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
+            Map<String,String> map = new HashMap<>();
+            map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
+            return map;
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            alipay(result);
+        }
+
+        @Override
+        public String type() {
+            return NOT_JSON;
+        }
+    };
+
+    private RequestCallBack aliPayResponseCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public String getUrl() {
+            return UrlAddressList.URL_ALI_PAY_RESPONCE;
+        }
+
+        @Override
+        public Map<String, String> getContent() {
+            Map<String,String> map = new HashMap<>();
+            JSONObject object = new JSONObject();
+            try {
+                object.put("body","");
+                object.put("","");
+                object.put("totalAmount","30");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
+            return map;
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            goNext();
+        }
+
+        @Override
+        public String type() {
+            return JSON;
+        }
+    };
+
     private final static int MESSAGE_ALI_PAY = 0x01;
+    private Map<String,String> result = null;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
                 case MESSAGE_ALI_PAY: {
-                    Map<String,String> result = (Map<String, String>) msg.obj;
+                    result = (Map<String, String>) msg.obj;
                     if ( TextUtils.equals("9000",result.get("resultStatus")) ){
-                        Toast.makeText(DoctorInfoActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        BaseApplication.getInstance().addRecordTimes();
+                        alipayResponse();
+                        goNext();
                     } else {
                         Toast.makeText(DoctorInfoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                     }
@@ -182,27 +351,12 @@ public class DoctorInfoActivity extends BaseActivity {
         }
     };
 
-    private void alipay(){
-        final String orderInfo = null;   // 订单信息
-//        /**
-//         * 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
-//         * 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
-//         * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
-//         *
-//         * orderInfo的获取必须来自服务端；
-//         */
-//        boolean rsa2 = (RSA2_PRIVATE.length() > 0);
-//        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID, rsa2);
-//        String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-//
-//        String privateKey = rsa2 ? RSA2_PRIVATE : RSA_PRIVATE;
-//        String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
-//        final String orderInfo = orderParam + "&" + sign;
-
+    private void alipay(final String orderInfo){
         Runnable payRunnable = new Runnable() {
 
             @Override
             public void run() {
+
                 PayTask alipay = new PayTask(DoctorInfoActivity.this);
                 Map<String, String> result = alipay.payV2(orderInfo,true);
 
@@ -217,7 +371,22 @@ public class DoctorInfoActivity extends BaseActivity {
         payThread.start();
     }
 
+    /**
+     * 作者: 边贤君
+     * 描述: 支付宝成功回调
+     * 日期: 2018/1/23 16:10
+     */
+    private void alipayResponse(){
+        try {
+            aliPayResponseTask = new RequestTask.Builder(this,aliPayResponseCallBack).build();
+            aliPayResponseTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
 
+
+    //-----------------------------------微信支付---------------------------------------------------
     private final static String APP_ID = "";
     private void iwxPay(){
         IWXAPI api = WXAPIFactory.createWXAPI(this, APP_ID, false);

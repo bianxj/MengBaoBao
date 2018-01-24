@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="@dimen/x720px"
+        android:layout_height="@dimen/x575px"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/y40px"
+                android:textColor="#4D4D4D"
+                android:textSize="@dimen/x26px"
+                android:text="支付剩余时间"/>
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="@dimen/x29px"
+                android:layout_height="@dimen/x27px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x40px"
+                android:src="@drawable/btn_pay_close"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/BlackText24px"
+            android:gravity="center"
+            android:text="14:36"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y46px"
+            android:layout_marginRight="@dimen/x40px"
+            android:layout_marginLeft="@dimen/x72px">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#191919"
+                android:textSize="@dimen/y26px"
+                android:text="一次试用套餐"/>
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                style="@style/LinkPinkText32px"
+                android:text="￥30.00"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1px"
+            android:layout_marginTop="@dimen/y32px"
+            android:background="#CCCCCC"></View>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/y43px"
+                android:divider="@null"
+                android:overScrollMode="never"
+                android:layout_above="@+id/tv_pay"></ListView>
+
+            <TextView
+                android:id="@+id/tv_pay"
+                android:layout_width="@dimen/x596px"
+                android:layout_height="@dimen/y85px"
+                android:text="确认支付"
+                android:textColor="#EF4399"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/y20px"
+                android:layout_marginBottom="@dimen/y20px"
+                android:background="@drawable/bg_pay_text_pink"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.util.NotificationUtil;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.DiagramView;
 
@@ -35,7 +36,7 @@ public class GuideActivity extends BaseActivity {
     }
 
     private void findView(){
-        asvp = findViewById(R.id.asvp);
+//        asvp = findViewById(R.id.asvp);
         bt_guide_register = findViewById(R.id.bt_guide_register);
         bt_guide_login = findViewById(R.id.bt_guide_login);
     }
@@ -44,8 +45,9 @@ public class GuideActivity extends BaseActivity {
         bt_guide_register.setOnClickListener(listener);
         bt_guide_login.setOnClickListener(listener);
 
-        int[] images = new int[]{R.drawable.v1,R.drawable.v2,R.drawable.v3};
-        asvp.setImageList(images);
+
+//        int[] images = new int[]{R.drawable.v1,R.drawable.v2,R.drawable.v3};
+//        asvp.setImageList(images);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -53,7 +55,19 @@ public class GuideActivity extends BaseActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.bt_guide_register:
-                    startActivity(RegisterActivity.class);
+                    NotificationUtil.showNotification(GuideActivity.this);
+//                    MyDialog.showPayDialog(GuideActivity.this, findViewById(R.id.rl_parent), new MyDialog.PayCallBack() {
+//                        @Override
+//                        public void alipay() {
+//
+//                        }
+//
+//                        @Override
+//                        public void iwxpay() {
+//
+//                        }
+//                    },30.00F,15*60);
+//                    startActivity(RegisterActivity.class);
                     break;
                 case R.id.bt_guide_login:
                     startActivity(LoginActivity.class);

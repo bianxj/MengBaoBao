@@ -3,7 +3,6 @@ package com.doumengmengandroidbady.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -11,14 +10,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
@@ -28,7 +25,10 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
+import com.doumengmengandroidbady.util.MyDialog;
+import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.util.PictureUtils;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -48,9 +48,6 @@ import java.util.Map;
  * 创建日期: 2018/1/8 13:53
  */
 public class HeadImageActivity extends BaseActivity {
-
-    private final static int REQUEST_PERMISSION_CAMERA = 0x10;
-    private final static int REQUEST_PERMISSION_STORAGE = 0x02;
 
     private final static int REQUEST_CAMERA = 0x01;
     private final static int REQUEST_IMAGE = 0x02;
@@ -111,7 +108,7 @@ public class HeadImageActivity extends BaseActivity {
     }
 
     private void openCamera(){
-        if ( checkCameraPermission()) {
+        if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.CAMERA)){
             File picture = new File(BaseApplication.getInstance().getPersonHeadImgPath());
             if ( picture.exists() ){
                 picture.delete();
@@ -129,57 +126,55 @@ public class HeadImageActivity extends BaseActivity {
         }
     }
 
-    private boolean checkCameraPermission(){
-        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED ){
-            return true;
-        } else {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},REQUEST_PERMISSION_CAMERA);
-            return false;
-        }
-    }
-
     private void tackPicture(){
-        if ( checkExternalStoragePermission() ){
+        if ( PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) ){
             Intent intent = new Intent(Intent.ACTION_PICK) ;
             intent.setType("image/*") ;
             startActivityForResult(intent , REQUEST_IMAGE) ;
         }
     }
 
-    private boolean checkExternalStoragePermission(){
-        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ){
-            return true;
-        } else {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_PERMISSION_STORAGE);
-            return false;
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if ( REQUEST_PERMISSION_CAMERA == requestCode ){
-            if ( PackageManager.PERMISSION_GRANTED == grantResults[0] ){
-                openCamera();
-            } else {
-                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
-                    checkCameraPermission();
-                } else {
-                    Toast.makeText(this,"请打开照相机权限",Toast.LENGTH_LONG).show();
+        PermissionUtil.onRequestPermissionsResult(this,requestCode, permissions, grantResults, new PermissionUtil.RequestPermissionSuccess() {
+            @Override
+            public void success(String permission) {
+                if ( Manifest.permission.CAMERA.equals(permission) ){
+                    openCamera();
+                }
+                if ( Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission) ){
+                    tackPicture();
                 }
             }
-        }
-        if ( REQUEST_PERMISSION_STORAGE == requestCode ){
-            if ( PackageManager.PERMISSION_GRANTED == grantResults[0] ){
-                tackPicture();
-            } else {
-                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
-                    checkExternalStoragePermission();
-                } else {
-                    Toast.makeText(this,"请打开存储权限",Toast.LENGTH_LONG).show();
-                }
+
+            @Override
+            public void denied(String permission) {
+
             }
-        }
+
+            @Override
+            public void alwaysDenied(String permission) {
+                String prompt = null;
+                if ( Manifest.permission.CAMERA.equals(permission) ){
+                    prompt = getResources().getString(R.string.camera_permission);
+                }
+                if ( Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission) ){
+                    prompt = getResources().getString(R.string.storage_permission);
+                }
+                MyDialog.showPermissionDialog(HeadImageActivity.this, prompt, new MyDialog.ChooseDialogCallback() {
+                    @Override
+                    public void sure() {
+                        AppUtil.openPrimession(HeadImageActivity.this);
+                    }
+
+                    @Override
+                    public void cancel() {
+
+                    }
+                });
+            }
+        });
     }
 
     private Bitmap headImg = null;
@@ -196,7 +191,6 @@ public class HeadImageActivity extends BaseActivity {
             Uri uri = data.getData();
             int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
             if (sdkVersion >= 19) {
-                source = uri.getPath();
                 source = PictureUtils.getPath_above19(HeadImageActivity.this, uri);
             } else {
                 source = PictureUtils.getFilePath_below19(HeadImageActivity.this,uri);

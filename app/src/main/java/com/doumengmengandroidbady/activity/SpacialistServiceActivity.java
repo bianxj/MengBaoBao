@@ -3,15 +3,11 @@ package com.doumengmengandroidbady.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -33,7 +29,9 @@ import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.entity.DoctorEntity;
 import com.doumengmengandroidbady.entity.HospitalEntity;
+import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.MyDialog;
+import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -41,9 +39,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/12.
+ * 作者: 边贤君
+ * 描述: 专家服务界面
+ * 创建日期: 2018/1/23 14:55
  */
-
 public class SpacialistServiceActivity extends BaseActivity {
 
     private final static int REQUEST_QR = 0x01;
@@ -65,12 +64,14 @@ public class SpacialistServiceActivity extends BaseActivity {
 
     private HospitalDoctorAdapter adapter;
 
+    private boolean isSkipToApp = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spacialist_service);
         findView();
-        checkPermission();
+        checkLocationPermission();
     }
 
     @Override
@@ -165,7 +166,8 @@ public class SpacialistServiceActivity extends BaseActivity {
                     startActivityForResult(intent,REQUEST_QR);
                     break;
                 case R.id.tv_location_failed:
-                    checkPermissionTwice();
+                    isSkipToApp = true;
+                    checkLocationPermission();
                     break;
             }
         }
@@ -255,82 +257,43 @@ public class SpacialistServiceActivity extends BaseActivity {
     }
 
     //---------------------------------检查权限------------------------------------------------
-    private final static String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
-    private final static int REQUEST_PERMISSION = 0x01;
-    private final static int REQUEST_PERMISSIN_TWICE = 0x02;
-    private void checkPermission(){
-        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ){
+    private void checkLocationPermission(){
+        if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.ACCESS_FINE_LOCATION)){
             initLocation();
-        } else {
-            ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSION);
         }
-    }
-
-    private void checkPermissionTwice(){
-        MyDialog.showChooseDialog(SpacialistServiceActivity.this, getString(R.string.location_content), R.string.later, R.string.go_setting, new MyDialog.ChooseDialogCallback() {
-            @Override
-            public void sure() {
-                //TODO
-                //跳转到权限设置界面
-                skipToSetPermission();
-            }
-
-            @Override
-            public void cancel() {}
-        });
-//        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ){
-//            initLocation();
-//        } else {
-//            ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSIN_TWICE);
-//        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if ( REQUEST_PERMISSION == requestCode ){
-            if (PackageManager.PERMISSION_GRANTED != grantResults[0] ){
-                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
-                    checkPermission();
-                } else {
-//                    Toast.makeText(this,"请打开照相机权限",Toast.LENGTH_LONG).show();
-                }
-            } else {
+        PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults, new PermissionUtil.RequestPermissionSuccess() {
+            @Override
+            public void success(String permission) {
                 initLocation();
             }
-        }
 
-        if ( REQUEST_PERMISSIN_TWICE == requestCode ){
-            if (PackageManager.PERMISSION_GRANTED != grantResults[0] ) {
-                if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
-                    MyDialog.showChooseDialog(SpacialistServiceActivity.this, getString(R.string.location_content), R.string.later, R.string.go_setting, new MyDialog.ChooseDialogCallback() {
+            @Override
+            public void denied(String permission) {
+
+            }
+
+            @Override
+            public void alwaysDenied(String permission) {
+                if ( isSkipToApp ) {
+                    MyDialog.showPermissionDialog(SpacialistServiceActivity.this, getResources().getString(R.string.location_permission), new MyDialog.ChooseDialogCallback() {
                         @Override
                         public void sure() {
-                            //TODO
-                            //跳转到权限设置界面
-                            skipToSetPermission();
+                            AppUtil.openPrimession(SpacialistServiceActivity.this);
                         }
 
                         @Override
-                        public void cancel() {}
+                        public void cancel() {
+
+                        }
                     });
                 }
             }
-        }
-    }
-
-    private void skipToSetPermission(){
-        Intent localIntent = new Intent();
-        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (Build.VERSION.SDK_INT >= 9) {
-            localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-            localIntent.setData(Uri.fromParts("package", getPackageName(), null));
-        } else if (Build.VERSION.SDK_INT <= 8) {
-            localIntent.setAction(Intent.ACTION_VIEW);
-            localIntent.setClassName("com.android.settings","com.android.settings.InstalledAppDetails");
-            localIntent.putExtra("com.android.settings.ApplicationPkgName", getPackageName());
-        }
-        startActivity(localIntent);
+        }, isSkipToApp);
     }
 
     //---------------------------------定位模块分割线---------------------------------------------

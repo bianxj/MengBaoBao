@@ -154,6 +154,8 @@ public class BaseInfoLayout extends LinearLayout {
         netEditList.add(et_phone);
         netEditList.add(et_baby_weight);
         netEditList.add(et_baby_height);
+        netEditList.add(et_week);
+        netEditList.add(et_day);
     }
 
     private void findEditText(){
@@ -164,6 +166,8 @@ public class BaseInfoLayout extends LinearLayout {
         editList.add(et_phone);
         editList.add(et_baby_weight);
         editList.add(et_baby_height);
+        editList.add(et_week);
+        editList.add(et_day);
         editList.add(et_parity_count);
         editList.add(et_birth_count);
         editList.add(et_birth_age);
@@ -307,7 +311,10 @@ public class BaseInfoLayout extends LinearLayout {
         for (EditText editText:netEditList){
             editText.setEnabled(false);
             editText.setBackground(null);
-            editText.setGravity(Gravity.CENTER_VERTICAL|Gravity.RIGHT);
+            if ( editText != et_week
+                    && editText != et_day ) {
+                editText.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+            }
         }
         hiddenMark();
     }
@@ -317,9 +324,14 @@ public class BaseInfoLayout extends LinearLayout {
         tv_calendar.setVisibility(View.GONE);
         for (EditText editText:editList){
             editText.setEnabled(false);
-            if ( editText != et_allergy && editText != et_genetic_history && editText != et_other_disease ){
+            if ( editText != et_allergy
+                    && editText != et_genetic_history
+                    && editText != et_other_disease){
                 editText.setBackground(null);
-                editText.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+                if ( editText != et_week
+                        && editText != et_day ) {
+                    editText.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+                }
             }
         }
         for (CheckBox checkBox:checkBoxList){

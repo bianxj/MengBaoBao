@@ -10,6 +10,7 @@ public interface RequestCallBack {
 
     public final static String JSON = "json";
     public final static String JSON_NO_PROMPT = "json_no_prompt";
+    public final static String NOT_JSON = "not_json";
 
     public void onPreExecute();
     public String getUrl();

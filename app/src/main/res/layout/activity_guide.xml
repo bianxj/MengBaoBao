@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/rl_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -25,7 +26,10 @@
         </LinearLayout>
     </FrameLayout>-->
 
-    <com.doumengmengandroidbady.view.AutoScrollViewPager
+
+
+
+<!--    <com.doumengmengandroidbady.view.AutoScrollViewPager
         android:id="@+id/asvp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,9 +45,9 @@
         android:visibility="gone"
         >
 
-    </com.doumengmengandroidbady.view.AutoScrollViewPager>
+    </com.doumengmengandroidbady.view.AutoScrollViewPager>-->
 
-    <RelativeLayout
+<!--    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/x716px">
         <FrameLayout
@@ -61,7 +65,7 @@
                 app:origin_x="@dimen/x41px"
                 app:origin_y="@dimen/x53px"/>
         </FrameLayout>
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <RelativeLayout
         android:id="@+id/ll_guide_botttom"

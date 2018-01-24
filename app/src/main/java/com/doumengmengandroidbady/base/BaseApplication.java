@@ -243,6 +243,16 @@ public class BaseApplication extends Application {
         return list;
     }
 
+    public boolean isUpperThan37Month(){
+        DayList list = getDayList();
+        int month = Integer.parseInt(list.getCurrentMonth());
+        int day = Integer.parseInt(list.getCurrentDay());
+        if ( month >= 37 ){
+            return true;
+        }
+        return false;
+    }
+
     public void minusRecordTimes(){
         int recordTimes = Integer.parseInt(userData.getRecordtimes());
         recordTimes--;
@@ -287,7 +297,7 @@ public class BaseApplication extends Application {
     public final static String COLUMN_IS_FIRST = "isFirstLogin";
     public final static String COLUMN_IS_ABNORMAL_EXIT = "isAbnormalExit";
     public boolean isFistLogin(){
-        return SharedPreferencesUtil.loadBoolean(this,TABLE_CONFIG,COLUMN_IS_FIRST,false);
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_CONFIG,COLUMN_IS_FIRST,true);
     }
 
     public void saveLoginCount(){
@@ -295,7 +305,7 @@ public class BaseApplication extends Application {
     }
 
     public boolean isAbnormalExit(){
-        return SharedPreferencesUtil.loadBoolean(this,TABLE_CONFIG,COLUMN_IS_FIRST,false);
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_CONFIG,COLUMN_IS_ABNORMAL_EXIT,false);
     }
 
     public void saveAbnormalExit(boolean isAbnormalExit){
@@ -321,7 +331,7 @@ public class BaseApplication extends Application {
 //        } else {
 //            return RoleType.FREE_NET_USER;
 //        }
-        return RoleType.PAY_HOSPITAL_USER;
+        return RoleType.PAY_NET_USER;
     }
 
     public final static String PERSON_DIR = "person";

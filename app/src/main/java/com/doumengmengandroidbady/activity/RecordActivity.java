@@ -3,13 +3,11 @@ package com.doumengmengandroidbady.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.PictureAdapter;
@@ -36,8 +33,11 @@ import com.doumengmengandroidbady.response.DayList;
 import com.doumengmengandroidbady.response.Record;
 import com.doumengmengandroidbady.response.RecordResult;
 import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.FormulaUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
+import com.doumengmengandroidbady.util.MyDialog;
+import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.util.PictureUtils;
 import com.google.gson.reflect.TypeToken;
 
@@ -610,7 +610,6 @@ public class RecordActivity extends BaseActivity {
     }
     //--------------------------------------调用相册-----------------------------------------------
     private final static int REQUEST_IMAGE = 0x99;
-    private final static int REQUEST_PERMISSION_STORAGE = 0x99;
     private PictureAdapter.TackPictureCallBack tackPictureCallBack = new PictureAdapter.TackPictureCallBack() {
         @Override
         public void tackPicture() {
@@ -619,36 +618,44 @@ public class RecordActivity extends BaseActivity {
     };
 
     private void tackPicture(){
-        if ( checkExternalStoragePermission() ){
+        if ( PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) ){
             Intent intent = new Intent(Intent.ACTION_PICK) ;
             intent.setType("image/*") ;
             startActivityForResult(intent , REQUEST_IMAGE) ;
         }
     }
 
-    private boolean checkExternalStoragePermission(){
-        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ){
-            return true;
-        } else {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_PERMISSION_STORAGE);
-            return false;
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if ( REQUEST_PERMISSION_STORAGE == requestCode ){
-            if ( PackageManager.PERMISSION_GRANTED == grantResults[0] ){
+        PermissionUtil.onRequestPermissionsResult(this,requestCode,permissions,grantResults,new PermissionUtil.RequestPermissionSuccess(){
+
+            @Override
+            public void success(String permission) {
                 tackPicture();
-            } else {
-                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
-                    checkExternalStoragePermission();
-                } else {
-                    Toast.makeText(this,"请打开存储权限",Toast.LENGTH_LONG).show();
-                }
             }
-        }
+
+            @Override
+            public void denied(String permission) {
+
+            }
+
+            @Override
+            public void alwaysDenied(String permission) {
+                String prompt = getResources().getString(R.string.storage_permission);
+                MyDialog.showPermissionDialog(RecordActivity.this, prompt, new MyDialog.ChooseDialogCallback() {
+                    @Override
+                    public void sure() {
+                        AppUtil.openPrimession(RecordActivity.this);
+                    }
+
+                    @Override
+                    public void cancel() {
+
+                    }
+                });
+            }
+        });
     }
 
     public void setGridViewHeight(GridView gridview) {

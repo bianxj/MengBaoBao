@@ -3,6 +3,7 @@ package com.doumengmengandroidbady.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.Space;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class HomePageFragment extends BaseFragment {
     private RelativeLayout rl_side_menu;
     private TextView tv_baby_name;
     private RelativeLayout rl_male;
+    private Space space_observ_point;
     private LinearLayout ll_observe_point,ll_doctor_list;
     private TextView tv_observe_point , tv_doctor_list;
     private TextView tv_observe_point_content , tv_doctor_list_content;
@@ -62,6 +64,7 @@ public class HomePageFragment extends BaseFragment {
         rl_side_menu = view.findViewById(R.id.rl_side_menu);
         tv_baby_name = view.findViewById(R.id.tv_baby_name);
         rl_male = view.findViewById(R.id.rl_male);
+        space_observ_point = view.findViewById(R.id.space_observ_point);
         ll_observe_point = view.findViewById(R.id.ll_observe_point);
         ll_doctor_list = view.findViewById(R.id.ll_doctor_list);
         tv_observe_point_content = view.findViewById(R.id.tv_observe_point_content);
@@ -74,6 +77,13 @@ public class HomePageFragment extends BaseFragment {
     }
 
     private void initView(){
+        if ( BaseApplication.getInstance().isUpperThan37Month() ){
+            space_observ_point.setVisibility(View.GONE);
+            ll_observe_point.setVisibility(View.GONE);
+        } else {
+            space_observ_point.setVisibility(View.VISIBLE);
+            ll_observe_point.setVisibility(View.VISIBLE);
+        }
         rl_side_menu.setOnClickListener(listener);
         ll_observe_point.setOnClickListener(listener);
         ll_doctor_list.setOnClickListener(listener);

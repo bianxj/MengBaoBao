@@ -45,7 +45,7 @@ public class InputDaySleepActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.night_sleep);
+        tv_title.setText(R.string.day_sleep);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);

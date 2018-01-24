@@ -99,24 +99,28 @@ public class SpacialistServiceFragment extends BaseFragment {
     private void initView(){
         userData = BaseApplication.getInstance().getUserData();
         if (BaseApplication.getInstance().isPay()){
-            getRecord();
             ll_buy.setVisibility(View.VISIBLE);
             rl_unbuy.setVisibility(View.GONE);
 
-            tv_baby_name.setText(userData.getTruename());
-            loadHeadImg(userData.isMale(),userData.getHeadimg());
+            getRecord();
             String recordTimes = userData.getRecordtimes();
-            tv_appraisal_count.setText("您还剩"+recordTimes+"次测评");
-
-            if (TextUtils.isEmpty(recordTimes) || Integer.parseInt(recordTimes) <= 0 ){
-                rl_add_record.setVisibility(View.GONE);
-            } else {
-                rl_add_record.setVisibility(View.VISIBLE);
-            }
-
+            tv_appraisal_count.setText("您还剩" + recordTimes + "次测评");
+            tv_baby_name.setText(userData.getTruename());
+            loadHeadImg(userData.isMale(), userData.getHeadimg());
             rl_supplement_record.setOnClickListener(listener);
             tv_buy.setOnClickListener(listener);
             rl_add_record.setOnClickListener(listener);
+
+            if ( BaseApplication.getInstance().isUpperThan37Month() ){
+                rl_add_record.setVisibility(View.GONE);
+                tv_buy.setVisibility(View.GONE);
+            } else {
+                if (TextUtils.isEmpty(recordTimes) || Integer.parseInt(recordTimes) <= 0) {
+                    rl_add_record.setVisibility(View.GONE);
+                } else {
+                    rl_add_record.setVisibility(View.VISIBLE);
+                }
+            }
         } else {
             ll_buy.setVisibility(View.GONE);
             rl_unbuy.setVisibility(View.VISIBLE);

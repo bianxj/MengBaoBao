@@ -63,10 +63,14 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         if ( isTest ){
             builder.getCallBack().onPostExecute(s);
         } else {
-            if (!isError(s)) {
+            if ( RequestCallBack.NOT_JSON == builder.getCallBack().type() ){
                 builder.getCallBack().onPostExecute(s);
             } else {
-                builder.getCallBack().onError(s);
+                if (!isError(s)) {
+                    builder.getCallBack().onPostExecute(s);
+                } else {
+                    builder.getCallBack().onError(s);
+                }
             }
         }
     }

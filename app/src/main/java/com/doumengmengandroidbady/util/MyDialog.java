@@ -22,7 +22,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.adapter.PayAdapter;
 import com.doumengmengandroidbady.view.MyGifPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者: 边贤君
@@ -39,6 +43,7 @@ public class MyDialog {
     private static Object notificationLock = new Object();
     private static Object gifLock = new Object();
     private static Object cityLock = new Object();
+    private static Object payLock = new Object();
 
     private static Dialog updateDialog;
     private static Dialog promptDialog;
@@ -48,6 +53,7 @@ public class MyDialog {
     private static Dialog notificationDialog;
     private static Dialog gifDialog;
 
+    private static PopupWindow payDialog;
     private static PopupWindow cityDialog;
 
     public static void showUpdateDialog(Context context,boolean isForce,String content,final UpdateDialogCallback callback){
@@ -150,6 +156,10 @@ public class MyDialog {
         showChooseDialog(context,content,R.string.prompt_bt_cancel,R.string.prompt_bt_sure,callback);
     }
 
+    public static void showPermissionDialog(Context context,String content,ChooseDialogCallback callback){
+        showChooseDialog(context,content,R.string.btn_prompt_later,R.string.btn_prompt_go_setting,callback);
+    }
+
     public static void showChooseDialog(Context context,String content,int cancel,int sure,final ChooseDialogCallback callback){
         synchronized (chooseLock){
             if ( chooseDialog != null ){
@@ -225,6 +235,104 @@ public class MyDialog {
         }
     }
 
+    public static void showPayDialog(Context context,View parent,final PayCallBack callBack,String price,int timeOut){
+        synchronized (payLock){
+            if ( payDialog != null && payDialog.isShowing() ) {
+                payDialog.dismiss();
+                payDialog = null;
+            }
+
+            payDialog = new PopupWindow(context);
+            payDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));
+            payDialog.getBackground().setAlpha(50);
+            View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_pay, null);
+            contentView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            payDialog.setContentView(contentView);
+            payDialog.setAnimationStyle(R.style.PayAnimation);
+
+            ImageView iv_close = contentView.findViewById(R.id.iv_close);
+            iv_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismissPayDialog();
+                }
+            });
+
+            final TextView tv_time = contentView.findViewById(R.id.tv_time);
+            tv_time.setText(String.format("%d:%02d",timeOut / 60,timeOut % 60));
+            tv_time.setTag(timeOut);
+
+            TextView tv_price = contentView.findViewById(R.id.tv_price);
+            tv_price.setText("￥"+price);
+
+            ListView lv = contentView.findViewById(R.id.lv);
+            List<PayAdapter.PayData> datas = new ArrayList<>();
+            datas.add(new PayAdapter.PayData(R.drawable.alipay_logo_60,"支付宝",false));
+            datas.add(new PayAdapter.PayData(R.drawable.alipay_logo_60,"微信",false));
+            final PayAdapter adapter = new PayAdapter(datas);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    adapter.setClickPosition(i);
+                }
+            });
+
+            TextView tv_pay = contentView.findViewById(R.id.tv_pay);
+            tv_pay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int chooseId = adapter.getChoosePosition();
+                    if ( chooseId != -1 ){
+                        if ( chooseId == 0 ){
+                            callBack.alipay();
+                        } else {
+                            callBack.iwxpay();
+                        }
+                        dismissPayDialog();
+                    } else {
+                        //TODO
+                    }
+                }
+            });
+
+            payDialog.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+//                    tv_time.removeCallbacks()
+                }
+            });
+            payDialog.showAtLocation(parent,Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,0,0);
+            calcuteTimeOut(tv_time);
+        }
+    }
+
+    private static void calcuteTimeOut(final TextView tv){
+        tv.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int time = (int) tv.getTag();
+                time--;
+                if ( time <= 0 ){
+                    dismissPayDialog();
+                } else {
+                    tv.setText(String.format("%d:%02d",time / 60,time % 60));
+                    tv.setTag(time);
+                    calcuteTimeOut(tv);
+                }
+            }
+        },1000);
+    }
+
+    private static void dismissPayDialog(){
+        synchronized (payLock){
+            if ( payDialog != null && payDialog.isShowing() ) {
+                payDialog.dismiss();
+                payDialog = null;
+            }
+        }
+    }
+
     public static void showPictureDialog(Context context, Bitmap bitmap){
         synchronized (pictureLock){
             pictureDialog = new Dialog(context,R.style.MyDialog);
@@ -252,7 +360,7 @@ public class MyDialog {
         }
     }
 
-    private static void showNotificationDialog(Context context, final NotificationCallback callback){
+    public static void showNotificationDialog(Context context, final NotificationCallback callback){
         synchronized (notificationLock){
             notificationDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_notification,null);
@@ -417,6 +525,13 @@ public class MyDialog {
     public interface NotificationCallback{
         public void sure();
         public void cancel();
+    }
+
+    public interface PayCallBack{
+        //支付宝
+        public void alipay();
+        //微信
+        public void iwxpay();
     }
 
 }

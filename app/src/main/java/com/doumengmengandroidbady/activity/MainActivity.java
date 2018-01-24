@@ -29,7 +29,9 @@ import com.doumengmengandroidbady.fragment.HospitalReportFragment;
 import com.doumengmengandroidbady.fragment.LessonFragment;
 import com.doumengmengandroidbady.fragment.SpacialistServiceFragment;
 import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.MyDialog;
+import com.doumengmengandroidbady.util.NotificationUtil;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -87,6 +89,7 @@ public class MainActivity extends BaseFragmentActivity {
         initView();
         initFragment();
         switchFragment(PAGE_HOME);
+        checkNotification();
     }
 
     @Override
@@ -148,6 +151,35 @@ public class MainActivity extends BaseFragmentActivity {
         lv_side_menu.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         lv_side_menu.setOnItemClickListener(itemClickListener);
+    }
+
+    private void checkNotification(){
+        if ( BaseApplication.getInstance().isFistLogin() ){
+            BaseApplication.getInstance().saveLoginCount();
+            MyDialog.showNotificationDialog(this, new MyDialog.NotificationCallback() {
+                @Override
+                public void sure() {
+                    if (!NotificationUtil.isNotificationEnable()){
+                        MyDialog.showChooseDialog(MainActivity.this, "萌宝宝想给您发送的通知", R.string.prompt_bt_not_allow, R.string.prompt_bt_allow, new MyDialog.ChooseDialogCallback() {
+                            @Override
+                            public void sure() {
+                                AppUtil.openPrimession(MainActivity.this);
+                            }
+
+                            @Override
+                            public void cancel() {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void cancel() {
+
+                }
+            });
+        }
     }
 
     /**

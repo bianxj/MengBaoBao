@@ -126,6 +126,7 @@
     </com.doumengmengandroidbady.view.AutoScrollViewPager>
 
     <android.support.v4.widget.Space
+        android:id="@+id/space_observ_point"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y8px" />
     <LinearLayout

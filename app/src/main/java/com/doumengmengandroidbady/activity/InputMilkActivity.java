@@ -58,7 +58,7 @@ public class InputMilkActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.cacation);
+        tv_title.setText(R.string.formula_milk_title);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);

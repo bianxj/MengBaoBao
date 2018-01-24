@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_alipay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y84px">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/x40px"
+            android:layout_height="@dimen/x40px"
+            android:src="@drawable/alipay_logo_60"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x72px"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="支付宝"
+            android:textColor="#191919"
+            android:textSize="@dimen/y24px"
+            android:layout_marginLeft="@dimen/x146px"/>
+
+        <CheckBox
+            android:id="@+id/cb_choose"
+            android:layout_width="@dimen/x42px"
+            android:layout_height="@dimen/x42px"
+            android:button="@null"
+            android:background="@drawable/btn_pay_checkbox"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x40px"
+            android:focusable="false"
+            android:clickable="false"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

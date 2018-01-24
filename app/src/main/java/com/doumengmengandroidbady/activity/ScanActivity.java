@@ -79,7 +79,6 @@ public class ScanActivity extends BaseActivity {
         hasSurface = false;
         findView();
         initView();
-        checkCameraPermission();
     }
 
     @Override

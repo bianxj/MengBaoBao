@@ -279,6 +279,16 @@
         <item name="android:textColor">@color/dialogPink</item>
         <item name="android:lineSpacingExtra">@dimen/y10px</item>
     </style>
+    <style name="LinkPinkText32px">
+        <item name="android:textSize">@dimen/y32px</item>
+        <item name="android:textColor">@color/linkPink</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+    <style name="LinkPinkText26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:textColor">@color/linkPink</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
     <style name="LinkPinkText23px">
         <item name="android:textSize">@dimen/y23px</item>
         <item name="android:textColor">@color/linkPink</item>
@@ -289,7 +299,10 @@
         <item name="android:textColor">@color/linkPink</item>
         <item name="android:lineSpacingExtra">@dimen/y10px</item>
     </style>
-
+    <style name="BlackText24px">
+        <item name="android:textSize">@dimen/y24px</item>
+        <item name="android:textColor">@color/colorBlackText</item>
+    </style>
     <style name="BlackText23px">
         <item name="android:textSize">@dimen/y23px</item>
         <item name="android:textColor">@color/colorBlackText</item>
@@ -334,6 +347,11 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="PayAnimation">
+        <item name="android:windowEnterAnimation">@anim/bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_out</item>
     </style>
 
 </resources>
