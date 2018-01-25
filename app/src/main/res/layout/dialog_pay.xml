@@ -53,7 +53,7 @@
                 android:layout_centerVertical="true"
                 android:textColor="#191919"
                 android:textSize="@dimen/y26px"
-                android:text="一次试用套餐"/>
+                android:text="单次套餐"/>
 
             <TextView
                 android:id="@+id/tv_price"

@@ -111,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/x64px"
                 android:layout_marginLeft="@dimen/x64px"
+                android:layout_marginBottom="@dimen/y48px"
                 android:orientation="vertical">
             </LinearLayout>
 

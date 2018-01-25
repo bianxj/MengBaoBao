@@ -16,9 +16,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Administrator on 2018/1/5.
- */
 
 public class LoginTask {
 
@@ -26,12 +23,18 @@ public class LoginTask {
     private LoginCallBack loginCallBack;
     private String accountMobile;
     private String loginPwd;
+    private int type = RequestCallBack.NO_PROMPT;
 
-    public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack) throws Throwable {
+    public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack,int type) throws Throwable{
         this.accountMobile = accountMobile;
         this.loginPwd = loginPwd;
         this.loginCallBack = loginCallBack;
         task = new RequestTask.Builder(context,callBack).build();
+        type = RequestCallBack.NO_PROMPT;
+    }
+
+    public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack) throws Throwable {
+        this(context,accountMobile,loginPwd,loginCallBack,RequestCallBack.NO_PROMPT);
     }
 
     public void execute(){
@@ -88,6 +91,7 @@ public class LoginTask {
 
                 JSONObject user = res.getJSONObject("User");
                 UserData userData = GsonUtil.getInstance().getGson().fromJson(user.toString(),UserData.class);
+                userData.setPasswd(loginPwd);
                 userData.setSessionId(sessionId);
                 BaseApplication.getInstance().saveUserData(userData);
                 if ( loginCallBack != null ){
@@ -102,8 +106,8 @@ public class LoginTask {
         }
 
         @Override
-        public String type() {
-            return JSON_NO_PROMPT;
+        public int type() {
+            return type;
         }
     };
 

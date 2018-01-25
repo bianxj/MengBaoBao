@@ -25,7 +25,7 @@
                 android:id="@+id/cb_agreement"
                 android:layout_width="@dimen/y34px"
                 android:layout_height="@dimen/y34px"
-                android:button="@drawable/btn_checkbox"
+                android:button="@drawable/cb_agreement"
                 android:clickable="false"
                 />
             <TextView

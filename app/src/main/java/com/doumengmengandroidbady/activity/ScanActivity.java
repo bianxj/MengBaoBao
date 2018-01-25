@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.net.Uri;
@@ -16,7 +17,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.util.DisplayMetrics;
+import android.text.TextUtils;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -30,12 +31,13 @@ import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.camera.CameraManager;
 import com.doumengmengandroidbady.util.PictureUtils;
 import com.doumengmengandroidbady.view.ViewfinderView;
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.FormatException;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.RGBLuminanceSource;
@@ -45,6 +47,7 @@ import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 
 import java.io.IOException;
+import java.util.Hashtable;
 
 /**
  * 作者: 边贤君
@@ -265,7 +268,7 @@ public class ScanActivity extends BaseActivity {
             width = height;
             height = tmp;
             int top = getResources().getDimensionPixelOffset(R.dimen.SelfActionBarHeight);
-            Rect rect = cameraManager.getDecodeArea(vfv_scan.getScanRect(top,0));
+            Rect rect = cameraManager.getDecodeArea(vfv_scan.getScanRect(0,0));
 
             Result result = cameraManager.decode(rect,rotatedData,width,height);
             if ( result != null ){
@@ -297,6 +300,7 @@ public class ScanActivity extends BaseActivity {
         }
     };
 
+    //---------------------------------二维码图片解析---------------------------------------------------
     private final static int MESSAGE_DECODE_RESULT = 0x01;
     private Handler handler = new Handler(){
         @Override
@@ -326,38 +330,97 @@ public class ScanActivity extends BaseActivity {
         public void run() {
 //            Hashtable<DecodeHintType, String> hints = new Hashtable<DecodeHintType, String>();
 //            hints.put(DecodeHintType.CHARACTER_SET, "utf-8"); // 设置二维码内容的编码
-            DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
-            Bitmap bitmap = PictureUtils.getSmallBitmap(picturePath, metrics.widthPixels,metrics.heightPixels);
+//            DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
+//            Bitmap bitmap = PictureUtils.getSmallBitmap(picturePath, metrics.widthPixels,metrics.heightPixels);
+//
+//            int width = bitmap.getWidth();
+//            int height = bitmap.getHeight();
+//            int[] pixels = new int[width*height];
+//            bitmap.getPixels(pixels,0,width,0,0,width,height);
+//
+//            // 最新的库中，RGBLuminanceSource 的构造器参数不只是bitmap了
+//            RGBLuminanceSource source = new RGBLuminanceSource(width,height,pixels);
+//            BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
+//            if ( reader == null ){
+//                reader = new QRCodeReader();
+//            }
+//
+//            Result result = null;
+//
+//            // 尝试解析此bitmap，！！注意！！ 这个部分一定写到外层的try之中，因为只有在bitmap获取到之后才能解析。写外部可能会有异步的问题。（开始解析时bitmap为空）
+//            try {
+//                result = reader.decode(binaryBitmap);
+//            } catch (NotFoundException e) {
+//                e.printStackTrace();
+//            } catch (ChecksumException e) {
+//                e.printStackTrace();
+//            } catch (FormatException e) {
+//                e.printStackTrace();
+//            }
+//            Message message = handler.obtainMessage();
+//            message.what = MESSAGE_DECODE_RESULT;
+//            message.obj = result;
+//            handler.sendMessage(message);
 
-            int width = bitmap.getWidth();
-            int height = bitmap.getHeight();
-            int[] pixels = new int[width*height];
-            bitmap.getPixels(pixels,0,width,0,0,width,height);
-
-            // 最新的库中，RGBLuminanceSource 的构造器参数不只是bitmap了
-            RGBLuminanceSource source = new RGBLuminanceSource(width,height,pixels);
-            BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
-            if ( reader == null ){
-                reader = new QRCodeReader();
-            }
-
-            Result result = null;
-
-            // 尝试解析此bitmap，！！注意！！ 这个部分一定写到外层的try之中，因为只有在bitmap获取到之后才能解析。写外部可能会有异步的问题。（开始解析时bitmap为空）
-            try {
-                result = reader.decode(binaryBitmap);
-            } catch (NotFoundException e) {
-                e.printStackTrace();
-            } catch (ChecksumException e) {
-                e.printStackTrace();
-            } catch (FormatException e) {
-                e.printStackTrace();
-            }
+            Result result = decodeBarcodeRGB(picturePath);
             Message message = handler.obtainMessage();
             message.what = MESSAGE_DECODE_RESULT;
             message.obj = result;
             handler.sendMessage(message);
         }
+    }
+
+    /**
+     * 解析二维码（使用解析RGB编码数据的方式）
+     *
+     * @param path
+     * @return
+     */
+    public static Result decodeBarcodeRGB(String path) {
+        if (TextUtils.isEmpty(path)) {
+            return null;
+        }
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inSampleSize = 1;
+        Bitmap barcode = BitmapFactory.decodeFile(path, opts);
+        Result result = decodeBarcodeRGB(barcode);
+//        barcode.recycle();
+        barcode = null;
+        return result;
+    }
+
+    /**
+     * 解析二维码 （使用解析RGB编码数据的方式）
+     *
+     * @param barcode
+     * @return
+     */
+    public static Result decodeBarcodeRGB(Bitmap barcode) {
+        int width = barcode.getWidth();
+        int height = barcode.getHeight();
+        int[] data = new int[width * height];
+        barcode.getPixels(data, 0, width, 0, 0, width, height);
+        RGBLuminanceSource source = new RGBLuminanceSource(width, height, data);
+        BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
+
+        Hashtable<DecodeHintType, Object> hints = new Hashtable<DecodeHintType, Object>();
+        hints.put(DecodeHintType.CHARACTER_SET, "utf-8");
+        hints.put(DecodeHintType.TRY_HARDER,Boolean.TRUE);
+        hints.put(DecodeHintType.POSSIBLE_FORMATS, BarcodeFormat.QR_CODE);
+        QRCodeReader reader = new QRCodeReader();
+        Result result = null;
+        try {
+            result = reader.decode(bitmap1,hints);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        } catch (ChecksumException e) {
+            e.printStackTrace();
+        } catch (FormatException e) {
+            e.printStackTrace();
+        }
+        barcode.recycle();
+        barcode = null;
+        return result;
     }
 
 }

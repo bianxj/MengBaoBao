@@ -782,8 +782,8 @@ public class RecordActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return JSON;
+        public int type() {
+            return DEFAULT;
         }
     };
 
@@ -845,8 +845,8 @@ public class RecordActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return JSON;
+        public int type() {
+            return DEFAULT;
         }
     };
 

@@ -181,8 +181,8 @@ public class ChangePwdActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return JSON_NO_PROMPT;
+        public int type() {
+            return NO_PROMPT;
         }
     };
 

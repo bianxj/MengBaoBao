@@ -160,8 +160,8 @@ public class BaseInfoActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return RequestCallBack.JSON;
+        public int type() {
+            return DEFAULT;
         }
     };
 

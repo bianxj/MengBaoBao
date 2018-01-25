@@ -163,8 +163,8 @@ public class RegisterActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return RequestCallBack.JSON_NO_PROMPT;
+        public int type() {
+            return NO_PROMPT;
         }
     };
 
@@ -263,8 +263,8 @@ public class RegisterActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return RequestCallBack.JSON_NO_PROMPT;
+        public int type() {
+            return NO_PROMPT;
         }
     };
 

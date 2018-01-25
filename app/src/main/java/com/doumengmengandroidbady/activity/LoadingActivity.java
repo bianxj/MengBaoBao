@@ -25,6 +25,7 @@ import com.doumengmengandroidbady.db.MengClassDao;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.task.LoginTask;
 import com.doumengmengandroidbady.response.InitConfigure;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.GsonUtil;
@@ -46,6 +47,8 @@ import java.util.Map;
  * 创建日期: 2018/1/8 10:06
  */
 public class LoadingActivity extends BaseActivity {
+
+    public final static String IN_PARAM_IS_TIME_OUT = "is_time_out";
 
     private final static boolean isTest = true;
 
@@ -88,6 +91,17 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private void loading(){
+        Intent intent = getIntent();
+        boolean isTimeOut = intent.getBooleanExtra(IN_PARAM_IS_TIME_OUT,false);
+        if ( isTimeOut ){
+            login();
+        } else {
+            checkVersionAndWifi();
+        }
+    }
+
+
+    private void checkVersionAndWifi(){
         if ( isWifi() ){
             checkVersion();
         } else {
@@ -151,8 +165,8 @@ public class LoadingActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return null;
+        public int type() {
+            return DEFAULT;
         }
     };
 
@@ -204,10 +218,40 @@ public class LoadingActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return JSON;
+        public int type() {
+            return DEFAULT;
         }
     };
+
+    private LoginTask loginTask = null;
+    /**
+     * 作者: 边贤君
+     * 描述: 登录
+     * 日期: 2018/1/8 9:51
+     */
+    private void login(){
+        UserData userData = BaseApplication.getInstance().getUserData();
+            try {
+                loginTask = new LoginTask(LoadingActivity.this, userData.getAccountmobile(), userData.getPasswd(), new LoginTask.LoginCallBack() {
+                    @Override
+                    public void onPreExecute() {
+
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                    }
+
+                    @Override
+                    public void onPostExecute(String result) {
+                        checkVersionAndWifi();
+                    }
+                },RequestCallBack.DEFAULT);
+                loginTask.execute();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+    }
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override

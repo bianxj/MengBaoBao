@@ -164,8 +164,8 @@ public class ForgotPwdActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return RequestCallBack.JSON_NO_PROMPT;
+        public int type() {
+            return NO_PROMPT;
         }
     };
 
@@ -283,11 +283,12 @@ public class ForgotPwdActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return RequestCallBack.JSON_NO_PROMPT;
+        public int type() {
+            return NO_PROMPT;
         }
     };
 
+    //---------------------------------登录------------------------------------------------------
     private LoginTask loginTask;
     private void login(){
         try {
@@ -315,6 +316,7 @@ public class ForgotPwdActivity extends BaseActivity {
         }
     }
 
+    //---------------------------------使用协议-----------------------------------------------------
     private void clickAgreement(){
         cb_agreement.setChecked(!cb_agreement.isChecked());
     }

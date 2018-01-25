@@ -8,9 +8,14 @@ import java.util.Map;
 
 public interface RequestCallBack {
 
-    public final static String JSON = "json";
-    public final static String JSON_NO_PROMPT = "json_no_prompt";
-    public final static String NOT_JSON = "not_json";
+    public final static int JSON = 0x001;
+    public final static int PROMPT = 0x010;
+    public final static int LOADING = 0x100;
+
+    public final static int DEFAULT = JSON|PROMPT|LOADING;
+    public final static int NO_PROMPT = JSON|LOADING;
+    public final static int NO_LOADING = JSON|PROMPT;
+    public final static int NO_JSON = LOADING|PROMPT;
 
     public void onPreExecute();
     public String getUrl();
@@ -18,6 +23,6 @@ public interface RequestCallBack {
     public Map<String,String> getContent();
     public void onError(String result);
     public void onPostExecute(String result);
-    public String type();
+    public int type();
 
 }

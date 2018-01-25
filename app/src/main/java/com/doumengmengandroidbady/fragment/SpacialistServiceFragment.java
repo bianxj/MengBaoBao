@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.RecordActivity;
 import com.doumengmengandroidbady.activity.SpacialistServiceActivity;
-import com.doumengmengandroidbady.activity.SupplementRecordActivity;
 import com.doumengmengandroidbady.adapter.RecordAdapter;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragment;
@@ -165,9 +164,6 @@ public class SpacialistServiceFragment extends BaseFragment {
                 case R.id.bt_buy:
                     startActivity(SpacialistServiceActivity.class);
                     break;
-                case R.id.rl_supplement_record:
-                    startActivity(SupplementRecordActivity.class);
-                    break;
                 case R.id.tv_buy:
                     startActivity(SpacialistServiceActivity.class);
                     break;
@@ -243,8 +239,8 @@ public class SpacialistServiceFragment extends BaseFragment {
         }
 
         @Override
-        public String type() {
-            return JSON;
+        public int type() {
+            return DEFAULT;
         }
     };
 

@@ -18,6 +18,8 @@ import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemor
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.utils.DiskCacheUtils;
+import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,6 +85,16 @@ public class BaseApplication extends Application {
                         .writeDebugLogs()
                         .build();
         return loader;
+    }
+
+    public void removeImageFromImageLoader(String url){
+        MemoryCacheUtils.removeFromCache(url,ImageLoader.getInstance().getMemoryCache());
+        DiskCacheUtils.removeFromCache(url,ImageLoader.getInstance().getDiskCache());
+    }
+
+    public void clearImageLoaderCache(){
+        ImageLoader.getInstance().clearMemoryCache();
+        ImageLoader.getInstance().clearDiskCache();
     }
 
     public DisplayImageOptions.Builder defaultDisplayImage(){

@@ -24,6 +24,7 @@ import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.response.Doctor;
 import com.doumengmengandroidbady.response.Hospital;
+import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.util.PermissionUtil;
@@ -55,8 +56,6 @@ public class DoctorInfoActivity extends BaseActivity {
 
     public final static String IN_PARAM_DOCTOR_ID = "doctor_id";
     public final static String IN_PARAM_DOCTOR_NAME = "doctor_name";
-
-//    private DoctorEntity doctor;
 
     private RelativeLayout rl_parent;
     private RelativeLayout rl_back;
@@ -226,21 +225,13 @@ public class DoctorInfoActivity extends BaseActivity {
         }
     }
 
-    private void aliPay(){
-        try {
-            aliPayTask = new RequestTask.Builder(this,aliPayCallBack).build();
-            aliPayTask.execute();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
     /**
      * 作者: 边贤君
      * 描述: 跳转至下一个界面
      * 日期: 2018/1/19 14:30
      */
     private void goNext(){
+        BaseApplication.getInstance().addRecordTimes();
         if ( BaseApplication.getInstance().isPay() ){
             startActivity(RecordActivity.class);
         } else {
@@ -252,6 +243,15 @@ public class DoctorInfoActivity extends BaseActivity {
 
     private RequestTask aliPayTask = null;
     private RequestTask aliPayResponseTask = null;
+
+    private void aliPay(){
+        try {
+            aliPayTask = new RequestTask.Builder(this,aliPayCallBack).build();
+            aliPayTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
 
     private RequestCallBack aliPayCallBack = new RequestCallBack() {
         @Override
@@ -266,8 +266,19 @@ public class DoctorInfoActivity extends BaseActivity {
 
         @Override
         public Map<String, String> getContent() {
+            UserData userData = BaseApplication.getInstance().getUserData();
+            JSONObject object = new JSONObject();
+            try {
+                object.put("userId",userData.getUserid());
+//                object.put("totalamout",doctor.getCost());
+                object.put("totalamout","0.01");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
+            map.put(UrlAddressList.PARAM,object.toString());
+            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
             return map;
         }
 
@@ -278,14 +289,36 @@ public class DoctorInfoActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            alipay(result);
+            System.out.println(result);
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                //调用支付宝支付
+                alipay(res.getString("aLiPayBody"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
-        public String type() {
-            return NOT_JSON;
+        public int type() {
+            return DEFAULT;
         }
     };
+
+    /**
+     * 作者: 边贤君
+     * 描述: 支付宝成功回调
+     * 日期: 2018/1/23 16:10
+     */
+    private void alipayResponse(){
+        try {
+            aliPayResponseTask = new RequestTask.Builder(this,aliPayResponseCallBack).build();
+            aliPayResponseTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
 
     private RequestCallBack aliPayResponseCallBack = new RequestCallBack() {
         @Override
@@ -300,15 +333,28 @@ public class DoctorInfoActivity extends BaseActivity {
 
         @Override
         public Map<String, String> getContent() {
+            UserData userData = BaseApplication.getInstance().getUserData();
             Map<String,String> map = new HashMap<>();
             JSONObject object = new JSONObject();
             try {
-                object.put("body","");
-                object.put("","");
-                object.put("totalAmount","30");
+                object.put("accountmobile",userData.getAccountmobile());
+                object.put("userId",userData.getUserid());
+                object.put("doctorid",doctor.getDoctorid());
+                object.put("orderdevice","1");
+
+                JSONObject result = new JSONObject(aliResult.get("result"));
+                JSONObject response = result.getJSONObject("alipay_trade_app_pay_response");
+
+                JSONObject aLiInfo = new JSONObject();
+                aLiInfo.put("tradeno",response.getString("trade_no"));
+                aLiInfo.put("outtradeno",response.getString("out_trade_no"));
+                aLiInfo.put("totalamount",response.getString("total_amount"));
+
+                object.put("aLiInfo",aLiInfo);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            map.put(UrlAddressList.PARAM,object.toString());
             map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
             return map;
         }
@@ -320,28 +366,37 @@ public class DoctorInfoActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            goNext();
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                int isSuccess = res.getInt("isSuccess");
+                if ( isSuccess == 1 ){
+                    goNext();
+                } else {
+                    Toast.makeText(DoctorInfoActivity.this,"支付失败",Toast.LENGTH_LONG).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
-        public String type() {
-            return JSON;
+        public int type() {
+            return DEFAULT;
         }
     };
 
     private final static int MESSAGE_ALI_PAY = 0x01;
-    private Map<String,String> result = null;
+    private Map<String,String> aliResult = null;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
                 case MESSAGE_ALI_PAY: {
-                    result = (Map<String, String>) msg.obj;
-                    if ( TextUtils.equals("9000",result.get("resultStatus")) ){
-                        BaseApplication.getInstance().addRecordTimes();
+                    aliResult = (Map<String, String>) msg.obj;
+                    if ( TextUtils.equals("9000", aliResult.get("resultStatus")) ){
                         alipayResponse();
-                        goNext();
                     } else {
                         Toast.makeText(DoctorInfoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                     }
@@ -369,20 +424,6 @@ public class DoctorInfoActivity extends BaseActivity {
         // 必须异步调用
         Thread payThread = new Thread(payRunnable);
         payThread.start();
-    }
-
-    /**
-     * 作者: 边贤君
-     * 描述: 支付宝成功回调
-     * 日期: 2018/1/23 16:10
-     */
-    private void alipayResponse(){
-        try {
-            aliPayResponseTask = new RequestTask.Builder(this,aliPayResponseCallBack).build();
-            aliPayResponseTask.execute();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
     }
 
 

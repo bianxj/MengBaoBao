@@ -46,7 +46,7 @@
                     android:id="@+id/cb_hebavior"
                     android:layout_width="@dimen/y50px"
                     android:layout_height="@dimen/y50px"
-                    android:button="@drawable/cb_selector"
+                    android:button="@drawable/cb_development"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:gravity="center"

@@ -180,6 +180,7 @@
                 android:layout_width="@dimen/x447px"
                 android:layout_height="@dimen/y311px"
                 android:layout_marginTop="@dimen/y48px"
+                android:layout_marginBottom="@dimen/y48px"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 app:start_drawable="@drawable/btn_play"

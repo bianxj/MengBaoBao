@@ -36,8 +36,8 @@ public class UrlAddressList {
     public final static String URL_GET_CURRENT_RECORD = BASE_URL  + "babyUser.do?method=GetCurrentRecord";
 
 //    public final static String URL_ALI_PAY = BASE_URL + "system/mbbGeneratingOrder.do";
-    public final static String URL_ALI_PAY = BASE_URL + "system/mbbGeneratingOrder.do";
-    public final static String URL_ALI_PAY_RESPONCE = BASE_URL + "system/mbbPay.do";
+    public final static String URL_ALI_PAY = BASE_URL + "system.do?method=MbbAliPayGeneratingOrder";
+    public final static String URL_ALI_PAY_RESPONCE = BASE_URL + "system.do?method=MbbALiPay";
 
     public final static String URL_MENG_LESSION = "https://www.baidu.com";
 

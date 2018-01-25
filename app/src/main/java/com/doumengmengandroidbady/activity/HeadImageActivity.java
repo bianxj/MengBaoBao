@@ -263,14 +263,15 @@ public class HeadImageActivity extends BaseActivity {
                 JSONObject res = object.getJSONObject("result");
                 userData.setHeadimg(res.getString("headimg"));
                 BaseApplication.getInstance().saveUserData(userData);
+                BaseApplication.getInstance().removeImageFromImageLoader(userData.getHeadimg());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
         @Override
-        public String type() {
-            return JSON;
+        public int type() {
+            return DEFAULT;
         }
     };
 

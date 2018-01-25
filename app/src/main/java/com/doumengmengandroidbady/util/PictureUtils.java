@@ -172,6 +172,16 @@ public class PictureUtils {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 
+//    public static Bitmap zoomBitmap(String path,float zoom){
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+//        Bitmap bitmap = BitmapFactory.decodeFile(path,options);
+//        int outHeight = (int) (options.outHeight);
+//        int outWidth = (int) (options.outWidth);
+//        options.inJustDecodeBounds = false;
+//        return bitmap.createBitmap(BitmapFactory.decodeFile(path,options),0,0,outWidth,outHeight);
+//    }
+
     /**
      * 图片的压缩
      *

@@ -640,8 +640,8 @@ public class AssessmentActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return null;
+        public int type() {
+            return 0;
         }
     };
 

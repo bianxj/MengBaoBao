@@ -2,7 +2,10 @@ package com.doumengmengandroidbady.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -10,6 +13,10 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.view.ScaleplateView;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 作者: 边贤君
@@ -117,6 +124,112 @@ public class HospitalReportActivity extends BaseActivity {
             }
         }
     };
+
+    //------------------------------------发育行为--------------------------------------------------
+    //初始化发行为
+    private void initDevelopment(Map<String,List<DevelopmentalItem>> maps){
+        Set<String> keys = maps.keySet();
+        for (String key:keys){
+            ll_develop_behavior.addView(createSubItem(key,maps.get(key)),0);
+        }
+    }
+
+    /**
+     * 作者: 边贤君
+     * 描述: 创建发育行为条目
+     * 日期: 2018/1/18 9:44
+     */
+    private View createSubItem(String title , List<DevelopmentalItem> contents){
+        RelativeLayout layout = new RelativeLayout(this);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layout.setLayoutParams(layoutParams);
+
+        View divider = new View(this);
+        divider.setBackgroundColor(getResources().getColor(R.color.linkLightPink));
+        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelOffset(R.dimen.y2px)));
+        layout.addView(divider);
+
+        TextView tv_title = new TextView(this);
+        tv_title.setText(title);
+        tv_title.setTextColor(getResources().getColor(R.color.colorBlackText));
+        tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
+        tv_title.setLayoutParams(params);
+        layout.addView(tv_title);
+
+        View right = createCheckLine(contents);
+        layout.addView(right);
+
+        return layout;
+    }
+
+    /**
+     * 作者: 边贤君
+     * 描述: 创建发育行为条目中的选项
+     * 日期: 2018/1/18 9:44
+     */
+    private View createCheckLine(List<DevelopmentalItem> contents){
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y24px);
+        params.addRule(RelativeLayout.ALIGN_PARENT_TOP|RelativeLayout.ALIGN_PARENT_LEFT);
+        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
+        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.x139px);
+        layout.setLayoutParams(params);
+
+        for (DevelopmentalItem content:contents){
+            LinearLayout subLayout = new LinearLayout(this);
+            LinearLayout.LayoutParams layoutParams = (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+            layoutParams.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
+            subLayout.setOrientation(LinearLayout.HORIZONTAL);
+            subLayout.setLayoutParams(layoutParams);
+
+            CheckBox checkBox = new CheckBox(this);
+            checkBox.setButtonDrawable(null);
+            checkBox.setBackgroundResource(R.drawable.cb_hospital_report);
+            checkBox.setLayoutParams(new LinearLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x34px),getResources().getDimensionPixelOffset(R.dimen.x34px)));
+            checkBox.setChecked(content.isCheck());
+            subLayout.addView(checkBox);
+
+            TextView tv_content = new TextView(this);
+            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y5px);
+            tv_content.setLayoutParams(textParam);
+            tv_content.setText(content.getValue());
+            tv_content.setTextColor(getResources().getColor(R.color.fourthGray));
+            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
+            subLayout.addView(tv_content);
+
+            layout.addView(subLayout);
+        }
+
+        return layout;
+    }
+
+    public static class DevelopmentalItem{
+        private String value;
+        private boolean isCheck;
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public boolean isCheck() {
+            return isCheck;
+        }
+
+        public void setCheck(boolean check) {
+            isCheck = check;
+        }
+    }
 
     private void back(){
         finish();

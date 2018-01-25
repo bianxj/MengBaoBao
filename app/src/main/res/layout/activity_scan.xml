@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/include_title_back"></include>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -29,7 +27,7 @@
             app:border_color="@color/colorPrimary"
             app:border_size="@dimen/x5px"
             app:cent_x="@dimen/x360px"
-            app:cent_y="@dimen/y450px"
+            app:cent_y="@dimen/y600px"
             app:mask_color="@color/scanMask"
             app:side_size="@dimen/x400px"/>
 
@@ -37,7 +35,7 @@
             android:id="@+id/cb_flash"
             android:layout_width="@dimen/y40px"
             android:layout_height="@dimen/y59px"
-            android:layout_marginTop="@dimen/y563px"
+            android:layout_marginTop="@dimen/y713px"
             android:background="@drawable/icon_flash"
             android:button="@null"
             android:checked="false"
@@ -49,7 +47,7 @@
             android:layout_height="wrap_content"
             style="@style/WhiteText26px"
             android:text="@string/scan_hint"
-            android:layout_marginTop="@dimen/y660px"
+            android:layout_marginTop="@dimen/y810px"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
@@ -65,5 +63,6 @@
             />
         </FrameLayout>
 
+        <include layout="@layout/include_title_back"></include>
     </FrameLayout>
-</LinearLayout>
+</FrameLayout>

@@ -1,9 +1,12 @@
 package com.doumengmengandroidbady.request;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 
+import com.doumengmengandroidbady.activity.LoadingActivity;
 import com.doumengmengandroidbady.net.HttpUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
@@ -29,7 +32,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        if ( null != builder.getCallBack() ){
+        if ( isSelectFlag(builder.getCallBack().type(),RequestCallBack.LOADING) ) {
             handler = new Handler();
             runnable = new Runnable() {
                 @Override
@@ -37,9 +40,9 @@ public class RequestTask extends AsyncTask<String,Void,String> {
                     MyDialog.showLoadingDialog(builder.getWeakReference().get());
                 }
             };
-            handler.postDelayed(runnable,2000);
-            builder.getCallBack().onPreExecute();
+            handler.postDelayed(runnable, 2000);
         }
+        builder.getCallBack().onPreExecute();
     }
 
     @Override
@@ -59,23 +62,41 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         if ( handler != null ){
             handler.removeCallbacks(runnable);
         }
-        MyDialog.dismissLoadingDialog();
+        if ( isSelectFlag(builder.getCallBack().type(),RequestCallBack.LOADING) ) {
+            MyDialog.dismissLoadingDialog();
+        }
         if ( isTest ){
             builder.getCallBack().onPostExecute(s);
         } else {
-            if ( RequestCallBack.NOT_JSON == builder.getCallBack().type() ){
+            if ( !isSelectFlag(builder.getCallBack().type(),RequestCallBack.JSON) ){
                 builder.getCallBack().onPostExecute(s);
             } else {
                 if (!isError(s)) {
                     builder.getCallBack().onPostExecute(s);
                 } else {
-                    builder.getCallBack().onError(s);
+                    if ( isLoginTimeOut(s) ){
+                        skipToLoading();
+                    } else {
+                        builder.getCallBack().onError(s);
+                    }
                 }
             }
         }
     }
 
+    private void skipToLoading(){
+        Context context = builder.getWeakReference().get();
+        Intent intent = new Intent(context, LoadingActivity.class);
+        intent.putExtra(LoadingActivity.IN_PARAM_IS_TIME_OUT,true);
+        context.startActivity(intent);
+    }
 
+    private boolean isLoginTimeOut(String json){
+        if ( ResponseErrorCode.ERROR_LOGIN_ROLE_EXIST == ResponseErrorCode.getErrorCode(json) ){
+            return true;
+        }
+        return false;
+    }
 
     private boolean isError(String json){
         String errorMsg = null;
@@ -83,8 +104,10 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         if ( null == errorMsg ){
             return false;
         } else {
-            if ( RequestCallBack.JSON == builder.getCallBack().type() ) {
-                errorDispose(errorMsg);
+            if ( !isLoginTimeOut(json) ) {
+                if (isSelectFlag(builder.getCallBack().type(), RequestCallBack.PROMPT)) {
+                    errorDispose(errorMsg);
+                }
             }
             return true;
         }
@@ -97,17 +120,24 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         }
     }
 
+    private boolean isSelectFlag(int value,int flag){
+        if ( (flag&value) == flag ){
+            return true;
+        }
+        return false;
+    }
+
     public static class Builder{
 
         private WeakReference<Context> weakReference;
         private RequestCallBack callBack;
 
-        public Builder(Context context,RequestCallBack callBack) {
+        public Builder(Context context,@NonNull RequestCallBack callBack) {
             this.callBack = callBack;
             this.weakReference = new WeakReference<Context>(context);
         }
 
-        public void setCallBack(RequestCallBack callBack) {
+        public void setCallBack(@NonNull RequestCallBack callBack) {
             this.callBack = callBack;
         }
 

@@ -152,11 +152,12 @@ public class ViewfinderView extends View {
 
     public Rect getScanRect(int top,int left){
         if ( scanRect == null ) {
+            int extendSide = getResources().getDimensionPixelOffset(R.dimen.x40px);
             scanRect = new Rect();
-            scanRect.top = rect.top + top;
-            scanRect.bottom = rect.bottom + top;
-            scanRect.left = rect.left + left;
-            scanRect.right = rect.right + left;
+            scanRect.top = rect.top + top - extendSide;
+            scanRect.bottom = rect.bottom + top+ extendSide;
+            scanRect.left = rect.left + left- extendSide;
+            scanRect.right = rect.right + left+ extendSide;
         }
         return scanRect;
     }

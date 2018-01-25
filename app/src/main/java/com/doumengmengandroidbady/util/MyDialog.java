@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.PayAdapter;
@@ -209,6 +210,7 @@ public class MyDialog {
             }
             final String[] citys = context.getResources().getStringArray(R.array.citys);
             cityDialog = new PopupWindow(context);
+            cityDialog.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
             cityDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));
             cityDialog.setBackgroundDrawable(null);
             View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_choose_city, null);
@@ -235,7 +237,7 @@ public class MyDialog {
         }
     }
 
-    public static void showPayDialog(Context context,View parent,final PayCallBack callBack,String price,int timeOut){
+    public static void showPayDialog(final Context context,View parent,final PayCallBack callBack,String price,int timeOut){
         synchronized (payLock){
             if ( payDialog != null && payDialog.isShowing() ) {
                 payDialog.dismiss();
@@ -245,6 +247,8 @@ public class MyDialog {
             payDialog = new PopupWindow(context);
             payDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));
             payDialog.getBackground().setAlpha(50);
+            payDialog.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+            payDialog.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
             View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_pay, null);
             contentView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             payDialog.setContentView(contentView);
@@ -291,7 +295,7 @@ public class MyDialog {
                         }
                         dismissPayDialog();
                     } else {
-                        //TODO
+                        Toast.makeText(context,"请选择支付渠道",Toast.LENGTH_SHORT).show();
                     }
                 }
             });

@@ -6,6 +6,6 @@
         android:topLeftRadius="@dimen/y56px"
         android:topRightRadius="@dimen/y56px"
         ></corners>
-    <stroke android:color="@color/editFrame" android:width="@dimen/y1px"></stroke>
+    <stroke android:color="@color/editFrame" android:width="@dimen/y2px"></stroke>
     <size android:height="@dimen/y56px"></size>
 </shape>

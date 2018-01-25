@@ -174,8 +174,8 @@ public class InputInfoActivity extends BaseActivity {
         }
 
         @Override
-        public String type() {
-            return JSON;
+        public int type() {
+            return DEFAULT;
         }
     };
 
