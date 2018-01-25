@@ -22,6 +22,7 @@ import com.doumengmengandroidbady.view.MyGifPlayer;
 
 public class InputWeightActivity extends BaseInputDataActivity {
 
+    public final static String IN_PARAM_WEIGHT = "in_weight";
     public final static String OUT_PARAM_WEIGHT = "weight";
 
     private MyGifPlayer player;
@@ -82,6 +83,12 @@ public class InputWeightActivity extends BaseInputDataActivity {
         generateListView(ll_content,getResources().getStringArray(R.array.weight_content));
         //备注
         generateListView(ll_remark,getResources().getStringArray(R.array.weight_remark));
+
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String weight = intent.getStringExtra(IN_PARAM_WEIGHT);
+            et_input_data.setText(weight);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

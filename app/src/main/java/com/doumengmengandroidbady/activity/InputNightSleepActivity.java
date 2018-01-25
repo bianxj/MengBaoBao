@@ -18,6 +18,7 @@ import com.doumengmengandroidbady.base.BaseInputDataActivity;
  * 创建日期: 2018/1/17 13:23
  */
 public class InputNightSleepActivity extends BaseInputDataActivity {
+    public final static String IN_PARAM_NIGHT_SLEEP = "in_night_sleep";
     public final static String OUT_PARAM_NIGHT_SLEEP = "night_sleep";
 
     private RelativeLayout rl_back,rl_complete;
@@ -51,6 +52,12 @@ public class InputNightSleepActivity extends BaseInputDataActivity {
         rl_back.setOnClickListener(listener);
 
         tv_reference.setText(getResources().getStringArray(R.array.sleep_reference)[month]);
+
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String night = intent.getStringExtra(IN_PARAM_NIGHT_SLEEP);
+            et_input_data.setText(night);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

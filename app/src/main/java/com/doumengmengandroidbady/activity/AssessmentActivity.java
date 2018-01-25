@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
@@ -32,6 +33,9 @@ import com.doumengmengandroidbady.view.CircleImageView;
 import com.doumengmengandroidbady.view.DiagramView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,6 +93,12 @@ public class AssessmentActivity extends BaseActivity {
         setContentView(R.layout.activity_assessment);
         findView();
         initData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTask(updateRequestTask);
     }
 
     private void findView(){
@@ -187,6 +197,7 @@ public class AssessmentActivity extends BaseActivity {
         initParentingGuide();
         initPromptMessage();
         refreshDiagram(currentIndex);
+        updateReadState();
     }
 
     private void initDoctorData(){
@@ -524,7 +535,7 @@ public class AssessmentActivity extends BaseActivity {
                 intent.putExtra(DiagramDataActivity.IN_PARAM_TYPE,type);
                 startActivity(intent);
             } else {
-                //TODO
+                Toast.makeText(AssessmentActivity.this,"暂无数据",Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -600,13 +611,21 @@ public class AssessmentActivity extends BaseActivity {
 
     private boolean isLowerThanTwoYear(){
         int month = Integer.parseInt(record.getMonthAge());
-        if ( month > 24 ){
-            return false;
-        }
-        return true;
+        return month <= 24;
     }
 
     //------------------------------更新状态--------------------------------------------------------
+
+    private void updateReadState(){
+        if ( "3".equals(record.getRecordStatus()) ) {
+            try {
+                updateRequestTask = new RequestTask.Builder(this, callBack).build();
+                updateRequestTask.execute();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        }
+    }
 
     private RequestTask updateRequestTask;
 
@@ -624,9 +643,15 @@ public class AssessmentActivity extends BaseActivity {
         @Override
         public Map<String, String> getContent() {
             Map<String,String> map = new HashMap<>();
-//            map.put(UrlAddressList.PARAM,userData.);
+            JSONObject object = new JSONObject();
+            try {
+                object.put("recordid",record.getRecordId());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            map.put(UrlAddressList.PARAM,object.toString());
             map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
-            return null;
+            return map;
         }
 
         @Override
@@ -641,7 +666,7 @@ public class AssessmentActivity extends BaseActivity {
 
         @Override
         public int type() {
-            return 0;
+            return JSON;
         }
     };
 

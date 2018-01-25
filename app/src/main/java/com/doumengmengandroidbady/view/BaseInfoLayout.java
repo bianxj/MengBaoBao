@@ -146,7 +146,7 @@ public class BaseInfoLayout extends LinearLayout {
         initView();
     }
 
-    public void findNetEditText(){
+    private void findNetEditText(){
         netEditList = new ArrayList<>();
         netEditList.add(et_baby_name);
         netEditList.add(et_baby_gender);
@@ -349,7 +349,7 @@ public class BaseInfoLayout extends LinearLayout {
         }
     }
 
-    public void initData(){
+    private void initData(){
         UserData userData = BaseApplication.getInstance().getUserData();
         et_baby_name.setText(userData.getTruename());
         et_baby_gender.setText("1".equals(userData.getSex())?"男":"女");
@@ -395,7 +395,7 @@ public class BaseInfoLayout extends LinearLayout {
         et_other_disease.setText(userData.getPasthistoryother());
     }
 
-    public void selectRadioButton(String value , int none , int has){
+    private void selectRadioButton(String value, int none, int has){
         if ( "0".equals(value) ){
             selectRadioButton(none);
         } else {
@@ -428,7 +428,7 @@ public class BaseInfoLayout extends LinearLayout {
         }
     }
 
-    public boolean checkEditableNetType(){
+    private boolean checkEditableNetType(){
         //胎次
         String parityCount = et_parity_count.getText().toString().trim();
         if (TextUtils.isEmpty(parityCount)){
@@ -571,10 +571,10 @@ public class BaseInfoLayout extends LinearLayout {
     }
 
     private int singleChooseCheck(int[] singleId){
-        for (int i=0;i<singleId.length;i++){
-            RadioButton button = findViewById(singleId[i]);
-            if ( button.isChecked() ){
-                return singleId[i];
+        for (int aSingleId : singleId) {
+            RadioButton button = findViewById(aSingleId);
+            if (button.isChecked()) {
+                return aSingleId;
             }
         }
         return UN_CHOOSE;
@@ -604,7 +604,7 @@ public class BaseInfoLayout extends LinearLayout {
         return errorMessage;
     }
 
-    InputUserInfo.BabyInfo babyInfo = new InputUserInfo.BabyInfo();
+    private InputUserInfo.BabyInfo babyInfo = new InputUserInfo.BabyInfo();
     public InputUserInfo.BabyInfo getBabyInfo(){
         babyInfo.clearData();
         if ( type == TYPE.EDITABLE ) {

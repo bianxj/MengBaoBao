@@ -273,7 +273,7 @@ public class LoadingActivity extends BaseActivity {
         private WeakReference<Context> weakReference;
 
         public LoadingHandler(Context context) {
-            this.weakReference = new WeakReference<Context>(context);
+            this.weakReference = new WeakReference<>(context);
         }
 
         public void handleMessage(Message msg) {

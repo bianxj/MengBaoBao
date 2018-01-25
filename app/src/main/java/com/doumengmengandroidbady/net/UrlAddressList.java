@@ -2,8 +2,6 @@ package com.doumengmengandroidbady.net;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * 作者:边贤君
@@ -51,13 +49,13 @@ public class UrlAddressList {
         return result;
     }
 
-    public static String mergUrlAndParam(String url, Map<String,String> map){
-        StringBuilder builder = new StringBuilder(url);
-        Set<String> keys = map.keySet();
-        for (String key:keys) {
-                builder.append("&"+key+"="+map.get(key));
-        }
-        return builder.toString();
-    }
+//    public static String mergUrlAndParam(String url, Map<String,String> map){
+//        StringBuilder builder = new StringBuilder(url);
+//        Set<String> keys = map.keySet();
+//        for (String key:keys) {
+//                builder.append("&").append(key).append("=").append(map.get(key));
+//        }
+//        return builder.toString();
+//    }
 
 }

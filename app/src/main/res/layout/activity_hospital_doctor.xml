@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/lightSky"
     >
 
     <include layout="@layout/include_title_back"></include>
@@ -11,7 +12,8 @@
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrv_doctor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/lightSky">
 
     </com.jcodecraeer.xrecyclerview.XRecyclerView>
 

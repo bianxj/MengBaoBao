@@ -89,14 +89,14 @@ public class ParentInfoLayout extends LinearLayout {
         et_mother_weight.setOnFocusChangeListener(focusChangeListener);
         et_mother_weight.setOnEditorActionListener(editorActionListener);
 
-        for (int i = 0; i< father_culture_id.length; i++){
-            RadioButton button = findViewById(father_culture_id[i]);
+        for (int aFather_culture_id : father_culture_id) {
+            RadioButton button = findViewById(aFather_culture_id);
             button.setOnCheckedChangeListener(checkedChangeListener);
             fatherButtons.add(button);
         }
 
-        for (int i = 0; i< mother_culture_id.length; i++){
-            RadioButton button = findViewById(mother_culture_id[i]);
+        for (int aMother_culture_id : mother_culture_id) {
+            RadioButton button = findViewById(aMother_culture_id);
             button.setOnCheckedChangeListener(checkedChangeListener);
             motherButtons.add(button);
         }
@@ -219,16 +219,16 @@ public class ParentInfoLayout extends LinearLayout {
 
     private final static int UN_CHOOSE = -1;
     private int singleChooseCheck(int[] singleId){
-        for (int i=0;i<singleId.length;i++){
-            RadioButton button = findViewById(singleId[i]);
-            if ( button.isChecked() ){
-                return singleId[i];
+        for (int aSingleId : singleId) {
+            RadioButton button = findViewById(aSingleId);
+            if (button.isChecked()) {
+                return aSingleId;
             }
         }
         return UN_CHOOSE;
     }
 
-    InputUserInfo.ParentInfo parentInfo = new InputUserInfo.ParentInfo();
+    private InputUserInfo.ParentInfo parentInfo = new InputUserInfo.ParentInfo();
     public InputUserInfo.ParentInfo getParentInfo() {
         parentInfo.clearData();
         parentInfo.setDadName(et_father_name.getText().toString().trim());

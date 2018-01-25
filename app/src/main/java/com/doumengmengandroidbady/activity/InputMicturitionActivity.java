@@ -20,6 +20,7 @@ import com.doumengmengandroidbady.base.BaseInputDataActivity;
  */
 public class InputMicturitionActivity extends BaseInputDataActivity {
 
+    public final static String IN_PARAM_MICTURITION = "in_micturition";
     public final static String OUT_PARAM_MICTURITION = "micturition";
 
     private RelativeLayout rl_back,rl_complete;
@@ -53,6 +54,12 @@ public class InputMicturitionActivity extends BaseInputDataActivity {
         rl_back.setOnClickListener(listener);
 
         generateListView(ll_content,getResources().getStringArray(R.array.micturition_content));
+
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String micturition = intent.getStringExtra(IN_PARAM_MICTURITION);
+            et_input_data.setText(micturition);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

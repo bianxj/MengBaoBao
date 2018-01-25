@@ -129,13 +129,13 @@ public class BaseApplication extends Application {
 
 
     //----------------------------------------------------------------------------------------------
-    public final static String TABLE_USER = "user";
-    public final static String COLUMN_USER = "user";
-    public final static String COLUMN_PARENT = "parent";
-    public final static String COLUMN_REGISTER_VC = "register_vc";
-    public final static String COLUMN_FORGET_VC = "forget_vc";
+    private final static String TABLE_USER = "user";
+    private final static String COLUMN_USER = "user";
+    private final static String COLUMN_PARENT = "parent";
+    private final static String COLUMN_REGISTER_VC = "register_vc";
+    private final static String COLUMN_FORGET_VC = "forget_vc";
 
-    public final static String COLUMN_DAY_LIST = "day_list";
+    private final static String COLUMN_DAY_LIST = "day_list";
 
     public final static String COLUMN_CORRENT_DAY = "corrent_day";
     public final static String COLUMN_CORRENT_MONTH = "corrent_month";
@@ -259,10 +259,7 @@ public class BaseApplication extends Application {
         DayList list = getDayList();
         int month = Integer.parseInt(list.getCurrentMonth());
         int day = Integer.parseInt(list.getCurrentDay());
-        if ( month >= 37 ){
-            return true;
-        }
-        return false;
+        return month >= 37;
     }
 
     public void minusRecordTimes(){
@@ -305,9 +302,9 @@ public class BaseApplication extends Application {
 
 
     //----------------------------------------------------------------------------------------------
-    public final static String TABLE_CONFIG = "config";
-    public final static String COLUMN_IS_FIRST = "isFirstLogin";
-    public final static String COLUMN_IS_ABNORMAL_EXIT = "isAbnormalExit";
+    private final static String TABLE_CONFIG = "config";
+    private final static String COLUMN_IS_FIRST = "isFirstLogin";
+    private final static String COLUMN_IS_ABNORMAL_EXIT = "isAbnormalExit";
     public boolean isFistLogin(){
         return SharedPreferencesUtil.loadBoolean(this,TABLE_CONFIG,COLUMN_IS_FIRST,true);
     }
@@ -325,10 +322,7 @@ public class BaseApplication extends Application {
     }
 
     public boolean isPay(){
-        if ( RoleType.PAY_HOSPITAL_USER == getRoleType() || RoleType.PAY_NET_USER == getRoleType() ){
-            return true;
-        }
-        return false;
+        return RoleType.PAY_HOSPITAL_USER == getRoleType() || RoleType.PAY_NET_USER == getRoleType();
     }
 
     public RoleType getRoleType(){
@@ -346,8 +340,8 @@ public class BaseApplication extends Application {
         return RoleType.PAY_NET_USER;
     }
 
-    public final static String PERSON_DIR = "person";
-    public final static String PERSON_HEAD_IMG = "headimg.jpg";
+    private final static String PERSON_DIR = "person";
+    private final static String PERSON_HEAD_IMG = "headimg.jpg";
     public String getPersonHeadImgPath(){
         String dirPath = getFilesDir().getPath()+File.separator+PERSON_DIR;
 //        String dirPath = Environment.getExternalStorageDirectory().getPath()+File.separator+PERSON_DIR;
@@ -358,7 +352,7 @@ public class BaseApplication extends Application {
         return dirPath + File.separator + PERSON_HEAD_IMG;
     }
 
-    public final static String PICTURE_DIR = "picture";
+    private final static String PICTURE_DIR = "picture";
     public String getUploadPicture(){
         String dirPath = getFilesDir().getPath()+File.separator+PICTURE_DIR;
         File dir = new File(dirPath);

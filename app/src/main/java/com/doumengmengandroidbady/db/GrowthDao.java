@@ -24,13 +24,12 @@ public class GrowthDao {
     private final static String OBSERVE_ORDER = "observeorder";
 
     public static void createTable(SQLiteDatabase db){
-        StringBuilder builder = new StringBuilder("CREATE TABLE IF NOT EXISTS "+TABLE_NAME+"(");
-        builder.append(AGE+" varchar,");
-        builder.append(OBSERVE_CONTENT + " varchar,");
-        builder.append(OBSERVE_ID+" varchar,");
-        builder.append(OBSERVE_ORDER+" varchar");
-        builder.append(")");
-        db.execSQL(builder.toString());
+        String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + AGE + " varchar," +
+                OBSERVE_CONTENT + " varchar," +
+                OBSERVE_ID + " varchar," +
+                OBSERVE_ORDER + " varchar" +
+                ")";
+        db.execSQL(builder);
     }
 
     public static void updateTable(SQLiteDatabase db , int oldVersion, int newVersion){

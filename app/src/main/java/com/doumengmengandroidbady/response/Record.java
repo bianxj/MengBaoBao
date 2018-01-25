@@ -246,10 +246,7 @@ public class Record {
     }
 
     public boolean isShowRecordState(){
-        if ( "3".equals(recordStatus) ){
-            return true;
-        }
-        return false;
+        return "3".equals(recordStatus);
     }
 
     public List<String> getFeatureList() {

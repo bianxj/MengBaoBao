@@ -50,7 +50,7 @@ public class CameraManager {
     private void initFormatReader(){
         this.multiFormatReader = new MultiFormatReader();
         Collection<BarcodeFormat> decodeFormats = EnumSet.of(BarcodeFormat.QR_CODE);
-        Map<DecodeHintType,Object> hints = new EnumMap<DecodeHintType, Object>(DecodeHintType.class);
+        Map<DecodeHintType,Object> hints = new EnumMap<>(DecodeHintType.class);
         hints.put(DecodeHintType.POSSIBLE_FORMATS,decodeFormats);
         multiFormatReader.setHints(hints);
     }
@@ -206,21 +206,19 @@ public class CameraManager {
 
         PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top,
                 rect.width(), rect.height(), true);
-        if ( source != null ){
-            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-            try {
-                result = multiFormatReader.decodeWithState(bitmap);
-            } catch (ReaderException re){
-
-            } finally {
-                multiFormatReader.reset();
-            }
+        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+        try {
+            result = multiFormatReader.decodeWithState(bitmap);
+        } catch (ReaderException re) {
+            re.printStackTrace();
+        } finally {
+            multiFormatReader.reset();
         }
         return result;
     }
 
     public interface PreviewCallback{
-        public void onPreviewFrame(byte[] data, Camera camera,int height , int width);
+        void onPreviewFrame(byte[] data, Camera camera, int height, int width);
     }
 
 }

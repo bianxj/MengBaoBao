@@ -21,6 +21,9 @@ import com.doumengmengandroidbady.view.MyGifPlayer;
  */
 public class InputBreastFeedingActivity extends BaseInputDataActivity {
 
+    public final static String IN_PARAM_BREAST_FEEDING = "in_breast_feeding";
+    public final static String IN_PARAM_BREAST_FEEDING_COUNT = "in_breast_feeding_count";
+
     public final static String OUT_PARAM_BREAST_FEEDING = "breast_feeding";
     public final static String OUT_PARAM_BREAST_FEEDING_COUNT = "breast_feeding_count";
 
@@ -66,6 +69,15 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
         tv_reference.setText(getResources().getStringArray(R.array.milk_reference)[month]);
         tv_input_title.setText(getResources().getString(R.string.breast_input_title));
         generateListView(ll_content,getResources().getStringArray(R.array.breast_milk));
+
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String breast = intent.getStringExtra(IN_PARAM_BREAST_FEEDING);
+            String breast_count = intent.getStringExtra(IN_PARAM_BREAST_FEEDING_COUNT);
+
+            et_input_data_one.setText(breast);
+            et_input_data_two.setText(breast_count);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

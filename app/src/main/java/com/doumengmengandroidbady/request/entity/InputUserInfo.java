@@ -8,7 +8,7 @@ import java.util.List;
 
 public class InputUserInfo {
 
-    public String userId;
+    private String userId;
     public BabyInfo babyInfo;
     public ParentInfo parentInfo;
 

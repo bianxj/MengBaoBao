@@ -119,10 +119,7 @@ public class ParentInfo {
     }
 
     public static boolean isSamleValue(ParentInfo p1 , ParentInfo p2){
-        if ( FormatCheckUtil.isSameString(p1.toString(),p2.toString()) ){
-            return true;
-        }
-        return false;
+        return FormatCheckUtil.isSameString(p1.toString(), p2.toString());
     }
 
 }

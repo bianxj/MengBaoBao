@@ -23,37 +23,36 @@ public class HospitalDao {
     private final static String HOSPITAL_ADDRESS = "hospitaladdress";
     private final static String HOSPITAL_DESC = "hospitaldesc";
     private final static String HOSPITAL_ICON = "hospitalicon";
-    protected final static String HOSPITAL_ID = "hospitalid";
+    final static String HOSPITAL_ID = "hospitalid";
     private final static String HOSPITAL_MAP = "hospitalmap";
-    protected final static String HOSPITAL_NAME = "hospitalname";
+    final static String HOSPITAL_NAME = "hospitalname";
     private final static String HOSPITAL_ORDER = "hospitalorder";
     private final static String HOSPITAL_PHONE = "hospitalphone";
     private final static String HOSPITAL_TYPE = "hospitaltype";
     private final static String HOSPITAL_URL = "hospitalurl";
     private final static String PEDIATRICS_DESC = "pediatricsdesc";
-    private final static String PROVINCE = "province";
+    final static String PROVINCE = "province";
     private final static String SHOW_TAG = "showtag";
     private final static String STATE = "state";
 
     public static void createTable(SQLiteDatabase db){
-        StringBuilder builder = new StringBuilder("CREATE TABLE IF NOT EXISTS "+TABLE_NAME+"(");
-        builder.append(AREA+" varchar,");
-        builder.append(HOSPITAL_ADDRESS + " varchar,");
-        builder.append(STATE+" varchar,");
-        builder.append(HOSPITAL_DESC+" varchar,");
-        builder.append(HOSPITAL_ICON+" varchar,");
-        builder.append(HOSPITAL_MAP+" varchar,");
-        builder.append(HOSPITAL_NAME+" varchar,");
-        builder.append(HOSPITAL_ORDER+" varchar,");
-        builder.append(HOSPITAL_PHONE+" varchar,");
-        builder.append(HOSPITAL_TYPE+" varchar,");
-        builder.append(HOSPITAL_URL+" varchar,");
-        builder.append(HOSPITAL_ID+" varchar,");
-        builder.append(PEDIATRICS_DESC+" varchar,");
-        builder.append(PROVINCE+" varchar,");
-        builder.append(SHOW_TAG+" varchar");
-        builder.append(")");
-        db.execSQL(builder.toString());
+        String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + AREA + " varchar," +
+                HOSPITAL_ADDRESS + " varchar," +
+                STATE + " varchar," +
+                HOSPITAL_DESC + " varchar," +
+                HOSPITAL_ICON + " varchar," +
+                HOSPITAL_MAP + " varchar," +
+                HOSPITAL_NAME + " varchar," +
+                HOSPITAL_ORDER + " varchar," +
+                HOSPITAL_PHONE + " varchar," +
+                HOSPITAL_TYPE + " varchar," +
+                HOSPITAL_URL + " varchar," +
+                HOSPITAL_ID + " varchar," +
+                PEDIATRICS_DESC + " varchar," +
+                PROVINCE + " varchar," +
+                SHOW_TAG + " varchar" +
+                ")";
+        db.execSQL(builder);
     }
 
     public static void updateTable(SQLiteDatabase db , int oldVersion, int newVersion){
@@ -89,21 +88,73 @@ public class HospitalDao {
         DataBaseUtil.closeDataBase();
     }
 
+    public boolean hasHospitalInCity(Context context, String city){
+        boolean has = false;
+
+        String builder = "select " +
+                HOSPITAL_ID + "," +
+                HOSPITAL_ICON + "," +
+                HOSPITAL_NAME + "," +
+                HOSPITAL_ADDRESS +
+                " from " + TABLE_NAME +
+                " where " + PROVINCE + " = '" + city + "' " +
+                " order by " + HOSPITAL_ORDER;
+
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(builder,null);
+
+        if ( cursor.moveToNext() ){
+            has = true;
+        }
+
+        DataBaseUtil.closeDataBase();
+        return has;
+    }
+
+    public List<HospitalEntity> searchHospitalListByNameAndCity(Context context,String name , String city){
+        List<HospitalEntity> entities = new ArrayList<>();
+
+        String builder = "select " +
+                HOSPITAL_ID + "," +
+                HOSPITAL_ICON + "," +
+                HOSPITAL_NAME + "," +
+                HOSPITAL_ADDRESS +
+                " from " + TABLE_NAME +
+                " where " + HOSPITAL_NAME + " like '%" + name + "%'" +
+                " and " + PROVINCE + " = '" + city + "' " +
+                " order by " + HOSPITAL_ORDER;
+
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(builder,null);
+
+        if ( cursor != null ){
+            while(cursor.moveToNext()){
+                HospitalEntity entity = new HospitalEntity();
+                entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
+                entity.setHospitaladdress(cursor.getString(cursor.getColumnIndex(HOSPITAL_ADDRESS)));
+                entity.setHospitalicon(cursor.getString(cursor.getColumnIndex(HOSPITAL_ICON)));
+                entity.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
+                entities.add(entity);
+            }
+        }
+        DataBaseUtil.closeDataBase();
+        return entities;
+    }
+
     public List<HospitalEntity> searchHospitalListByName(Context context,String name){
         List<HospitalEntity> entities = new ArrayList<>();
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("select ");
-        builder.append(HOSPITAL_ID+",");
-        builder.append(HOSPITAL_ICON+",");
-        builder.append(HOSPITAL_NAME+",");
-        builder.append(HOSPITAL_ADDRESS);
-        builder.append(" from " + TABLE_NAME);
-        builder.append(" where " + HOSPITAL_NAME + " like '%"+name+"%'");
-        builder.append(" order by " + HOSPITAL_ORDER);
+        String builder = "select " +
+                HOSPITAL_ID + "," +
+                HOSPITAL_ICON + "," +
+                HOSPITAL_NAME + "," +
+                HOSPITAL_ADDRESS +
+                " from " + TABLE_NAME +
+                " where " + HOSPITAL_NAME + " like '%" + name + "%'" +
+                " order by " + HOSPITAL_ORDER;
 
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
-        Cursor cursor = db.rawQuery(builder.toString(),null);
+        Cursor cursor = db.rawQuery(builder,null);
 
         if ( cursor != null ){
             while(cursor.moveToNext()){
@@ -122,19 +173,18 @@ public class HospitalDao {
     public List<HospitalEntity> searchHospitalList(Context context , int offset , int limit){
         List<HospitalEntity> entities = new ArrayList<>();
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("select ");
-        builder.append(HOSPITAL_ID+",");
-        builder.append(HOSPITAL_ICON+",");
-        builder.append(HOSPITAL_NAME+",");
-        builder.append(HOSPITAL_ADDRESS);
-        builder.append(" from " + TABLE_NAME);
-        builder.append(" order by " + HOSPITAL_ORDER);
-        builder.append(" limit " + limit);
-        builder.append(" offset " + offset*limit);
+        String builder = "select " +
+                HOSPITAL_ID + "," +
+                HOSPITAL_ICON + "," +
+                HOSPITAL_NAME + "," +
+                HOSPITAL_ADDRESS +
+                " from " + TABLE_NAME +
+                " order by " + HOSPITAL_ORDER +
+                " limit " + limit +
+                " offset " + offset * limit;
 
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
-        Cursor cursor = db.rawQuery(builder.toString(),null);
+        Cursor cursor = db.rawQuery(builder,null);
 
         if ( cursor != null ){
             while(cursor.moveToNext()){
@@ -153,17 +203,16 @@ public class HospitalDao {
     public List<HospitalEntity> searchHospitalList(Context context){
         List<HospitalEntity> entities = new ArrayList<>();
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("select ");
-        builder.append(HOSPITAL_ID+",");
-        builder.append(HOSPITAL_ICON+",");
-        builder.append(HOSPITAL_NAME+",");
-        builder.append(HOSPITAL_ADDRESS);
-        builder.append(" from " + TABLE_NAME);
-        builder.append(" order by " + HOSPITAL_ORDER);
+        String builder = "select " +
+                HOSPITAL_ID + "," +
+                HOSPITAL_ICON + "," +
+                HOSPITAL_NAME + "," +
+                HOSPITAL_ADDRESS +
+                " from " + TABLE_NAME +
+                " order by " + HOSPITAL_ORDER;
 
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
-        Cursor cursor = db.rawQuery(builder.toString(),null);
+        Cursor cursor = db.rawQuery(builder,null);
 
         if ( cursor != null ){
             while(cursor.moveToNext()){

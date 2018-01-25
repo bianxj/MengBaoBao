@@ -41,7 +41,7 @@
 
     <!--AgreementActivity信息-->
     <string name="agreement_name">使用协议</string>
-    <string name="readed">我已阅读</string>
+    <string name="mark_read">我已阅读</string>
     <string name="fast_registe">快速注册</string>
     <string name="forgot_pwd">忘记密码</string>
 

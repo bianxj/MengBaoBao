@@ -23,6 +23,7 @@ import com.doumengmengandroidbady.view.MyGifPlayer;
  */
 public class InputHeadActivity extends BaseInputDataActivity {
 
+    public final static String IN_PARAM_HEAD = "in_head";
     public final static String OUT_PARAM_HEAD = "head";
 
     private RelativeLayout rl_back,rl_complete;
@@ -89,6 +90,12 @@ public class InputHeadActivity extends BaseInputDataActivity {
         generateListView(ll_content,getResources().getStringArray(R.array.head_content));
         //备注
         generateListView(ll_remark,getResources().getStringArray(R.array.head_remark));
+
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String head = intent.getStringExtra(IN_PARAM_HEAD);
+            et_input_data.setText(head);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

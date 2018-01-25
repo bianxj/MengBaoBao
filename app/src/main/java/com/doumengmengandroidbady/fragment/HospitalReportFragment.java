@@ -52,7 +52,7 @@ public class HospitalReportFragment extends BaseFragment {
         rl_back.setVisibility(View.GONE);
         tv_title.setText(R.string.hospital_report);
 
-        reports = new ArrayList<HospitalReport>();
+        reports = new ArrayList<>();
         if (Config.isTest){
             for (int i = 0; i <10 ; i++) {
                 HospitalReport report = new HospitalReport();

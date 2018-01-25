@@ -20,6 +20,9 @@ import com.doumengmengandroidbady.base.BaseInputDataActivity;
  */
 public class InputCacationActivity extends BaseInputDataActivity {
 
+    public final static String IN_PARAM_CACATION_DAY = "in_cacation_day";
+    public final static String IN_PARAM_CACATION_COUNT = "in_cacation_count";
+
     public final static String OUT_PARAM_CACATION_DAY = "cacation_day";
     public final static String OUT_PARAM_CACATION_COUNT = "cacation_count";
 
@@ -56,6 +59,14 @@ public class InputCacationActivity extends BaseInputDataActivity {
 
         String content = getResources().getStringArray(R.array.cacation_content)[month];
         generateListView(ll_content,content.split("。"));
+
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String day = intent.getStringExtra(IN_PARAM_CACATION_DAY);
+            String count = intent.getStringExtra(IN_PARAM_CACATION_COUNT);
+            et_input_data_one.setText(day);
+            et_input_data_two.setText(count);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

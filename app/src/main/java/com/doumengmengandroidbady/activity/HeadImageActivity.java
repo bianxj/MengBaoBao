@@ -187,7 +187,6 @@ public class HeadImageActivity extends BaseActivity {
         }
 
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
-            if (data == null) return;
             Uri uri = data.getData();
             int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
             if (sdkVersion >= 19) {

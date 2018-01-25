@@ -9,13 +9,15 @@ import android.database.sqlite.SQLiteOpenHelper;
  * 描述:
  * 创建日期:2017/12/2 19:49
  */
-public class DataBaseUtil extends SQLiteOpenHelper {
+class DataBaseUtil extends SQLiteOpenHelper {
 
     private final static String DB_NAME = "MENG_BAOBAO_DB";
     private final static int DB_VERSION = 1;
     private static DataBaseUtil dbUtil;
     private static SQLiteDatabase db;
     private static Integer openCout = 0;
+
+    private final static Object lock = new Object();
 
 
     private DataBaseUtil(Context context) {
@@ -41,7 +43,7 @@ public class DataBaseUtil extends SQLiteOpenHelper {
     }
 
     public static SQLiteDatabase openDataBase(Context context){
-        synchronized (openCout){
+        synchronized (lock){
             if ( openCout < 0 ){
                 openCout = 1;
             } else {
@@ -58,7 +60,7 @@ public class DataBaseUtil extends SQLiteOpenHelper {
     }
 
     public static synchronized void closeDataBase(){
-        synchronized (openCout) {
+        synchronized (lock) {
             openCout--;
             if ( 0 == openCout && null != db && db.isOpen() ) {
                 db.close();

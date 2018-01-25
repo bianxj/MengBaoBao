@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.doumengmengandroidbady.util.MyDialog;
+
 /**
  * 作者:边贤君
  * 描述:
@@ -12,7 +14,7 @@ import android.os.AsyncTask;
 
 public class BaseActivity extends Activity {
 
-    public static final int REQUEST_AGREEMENT = 0x01;
+    protected static final int REQUEST_AGREEMENT = 0x01;
 
     public BaseApplication getBaseApplication(){
         return (BaseApplication) getApplication();
@@ -35,6 +37,10 @@ public class BaseActivity extends Activity {
                 task = null;
             }
         }
+    }
+
+    public void showPromptDialog(String message){
+        MyDialog.showPromptDialog(this,message,null);
     }
 
 }

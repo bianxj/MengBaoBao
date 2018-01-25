@@ -32,19 +32,18 @@ public class FeatureDao {
     private final static String IS_USE = "isuse";
 
     public static void createTable(SQLiteDatabase db){
-        StringBuilder builder = new StringBuilder("CREATE TABLE IF NOT EXISTS "+TABLE_NAME+"(");
-        builder.append(ID+" varchar,");
-        builder.append(FEATURE_TYPE_ID + " varchar,");
-        builder.append(FEATURE_ORDER+" varchar,");
-        builder.append(POINT_TAG+" varchar,");
-        builder.append(DETAIL_DESC+" varchar,");
-        builder.append(EXAMPLE_IMG_URL+" varchar,");
-        builder.append(AGE+" varchar,");
-        builder.append(FEATURE_TYPE+" varchar,");
-        builder.append(FEATURE_CODE+" varchar,");
-        builder.append(IS_USE +" varchar");
-        builder.append(")");
-        db.execSQL(builder.toString());
+        String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + ID + " varchar," +
+                FEATURE_TYPE_ID + " varchar," +
+                FEATURE_ORDER + " varchar," +
+                POINT_TAG + " varchar," +
+                DETAIL_DESC + " varchar," +
+                EXAMPLE_IMG_URL + " varchar," +
+                AGE + " varchar," +
+                FEATURE_TYPE + " varchar," +
+                FEATURE_CODE + " varchar," +
+                IS_USE + " varchar" +
+                ")";
+        db.execSQL(builder);
     }
 
     public static void updateTable(SQLiteDatabase db , int oldVersion, int newVersion){
@@ -79,25 +78,24 @@ public class FeatureDao {
         List<Feature> features = new ArrayList<>();
         List<String> isUse = conculateIsUse(recordTime);
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("select ");
-        builder.append(ID+",");
-        builder.append(FEATURE_TYPE_ID+",");
-        builder.append(POINT_TAG+",");
-        builder.append(EXAMPLE_IMG_URL+",");
-        builder.append(AGE+",");
-        builder.append(FEATURE_TYPE+",");
-        builder.append(FEATURE_CODE+",");
-        builder.append(DETAIL_DESC);
-        builder.append(" from " + TABLE_NAME);
-        builder.append(" where ");
-        builder.append(generateWhereIn(AGE,ages));
-        builder.append(" and ");
-        builder.append(generateWhereIn(IS_USE,isUse));
-        builder.append(" order by " + FEATURE_ORDER);
+        String builder = "select " +
+                ID + "," +
+                FEATURE_TYPE_ID + "," +
+                POINT_TAG + "," +
+                EXAMPLE_IMG_URL + "," +
+                AGE + "," +
+                FEATURE_TYPE + "," +
+                FEATURE_CODE + "," +
+                DETAIL_DESC +
+                " from " + TABLE_NAME +
+                " where " +
+                generateWhereIn(AGE, ages) +
+                " and " +
+                generateWhereIn(IS_USE, isUse) +
+                " order by " + FEATURE_ORDER;
 
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
-        Cursor cursor = db.rawQuery(builder.toString(),null);
+        Cursor cursor = db.rawQuery(builder,null);
 
         String title = "";
         while(cursor.moveToNext()){
@@ -123,17 +121,16 @@ public class FeatureDao {
     public Map<String,List<String>> searchFeatureListById(Context context,List<String> ids){
         Map<String,List<String>> maps = new HashMap<>();
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("select ");
-        builder.append(FEATURE_TYPE+",");
-        builder.append(DETAIL_DESC);
-        builder.append(" from " + TABLE_NAME);
-        builder.append(" where ");
-        builder.append(generateWhereIn(ID,ids));
-        builder.append(" order by " + FEATURE_ORDER);
+        String builder = "select " +
+                FEATURE_TYPE + "," +
+                DETAIL_DESC +
+                " from " + TABLE_NAME +
+                " where " +
+                generateWhereIn(ID, ids) +
+                " order by " + FEATURE_ORDER;
 
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
-        Cursor cursor = db.rawQuery(builder.toString(),null);
+        Cursor cursor = db.rawQuery(builder,null);
 
         while ( cursor.moveToNext() ){
             List<String> list;
@@ -184,12 +181,12 @@ public class FeatureDao {
 
     private String generateWhereIn(String columnName,List<String> list){
         StringBuffer buffer = new StringBuffer();
-        buffer.append(columnName + " in (");
+        buffer.append(columnName).append(" in (");
         for (int i=0;i<list.size();i++){
             if ( i == 0 ){
                 buffer.append(list.get(i));
             } else {
-                buffer.append(","+list.get(i));
+                buffer.append(",").append(list.get(i));
             }
         }
         buffer.append(")");

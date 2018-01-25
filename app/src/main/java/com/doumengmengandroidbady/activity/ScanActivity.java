@@ -133,7 +133,6 @@ public class ScanActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if ( REQUEST_ALBUM == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             String source = null;
-            if (data == null) return;
             Uri uri = data.getData();
             int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
             if (sdkVersion >= 19) {
@@ -376,7 +375,7 @@ public class ScanActivity extends BaseActivity {
      * @param path
      * @return
      */
-    public static Result decodeBarcodeRGB(String path) {
+    private static Result decodeBarcodeRGB(String path) {
         if (TextUtils.isEmpty(path)) {
             return null;
         }
@@ -395,7 +394,7 @@ public class ScanActivity extends BaseActivity {
      * @param barcode
      * @return
      */
-    public static Result decodeBarcodeRGB(Bitmap barcode) {
+    private static Result decodeBarcodeRGB(Bitmap barcode) {
         int width = barcode.getWidth();
         int height = barcode.getHeight();
         int[] data = new int[width * height];
@@ -403,7 +402,7 @@ public class ScanActivity extends BaseActivity {
         RGBLuminanceSource source = new RGBLuminanceSource(width, height, data);
         BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
 
-        Hashtable<DecodeHintType, Object> hints = new Hashtable<DecodeHintType, Object>();
+        Hashtable<DecodeHintType, Object> hints = new Hashtable<>();
         hints.put(DecodeHintType.CHARACTER_SET, "utf-8");
         hints.put(DecodeHintType.TRY_HARDER,Boolean.TRUE);
         hints.put(DecodeHintType.POSSIBLE_FORMATS, BarcodeFormat.QR_CODE);
@@ -411,11 +410,7 @@ public class ScanActivity extends BaseActivity {
         Result result = null;
         try {
             result = reader.decode(bitmap1,hints);
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        } catch (ChecksumException e) {
-            e.printStackTrace();
-        } catch (FormatException e) {
+        } catch (NotFoundException | FormatException | ChecksumException e) {
             e.printStackTrace();
         }
         barcode.recycle();

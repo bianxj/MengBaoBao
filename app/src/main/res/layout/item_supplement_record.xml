@@ -41,6 +41,7 @@
                     android:gravity="center"
                     android:background="@null"
                     style="@style/FourthGrayText28px"
+                    android:inputType="numberDecimal"
                     />
             </RelativeLayout>
         </RelativeLayout>
@@ -63,6 +64,7 @@
                     android:gravity="center"
                     android:background="@null"
                     style="@style/FourthGrayText28px"
+                    android:inputType="numberDecimal"
                     />
             </RelativeLayout>
         </RelativeLayout>

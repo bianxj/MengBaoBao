@@ -32,7 +32,7 @@ public class EditTextUtil {
         public void afterTextChanged(Editable editable) {
             selectionStart = editText.getSelectionStart();
             selectionEnd = editText.getSelectionEnd();
-            if (!FormatCheckUtil.isOnlyPointNumber(editText.getText().toString())){
+            if (!FormatCheckUtil.isOnlyPointNumber(editText.getText().toString()) && selectionStart > 0){
                 //删除多余输入的字（不会显示出来）
                 editable.delete(selectionStart - 1, selectionEnd);
                 editText.setText(editable);

@@ -8,21 +8,21 @@ import java.util.Map;
 
 public interface RequestCallBack {
 
-    public final static int JSON = 0x001;
-    public final static int PROMPT = 0x010;
-    public final static int LOADING = 0x100;
+    int JSON = 0x001;
+    int PROMPT = 0x010;
+    int LOADING = 0x100;
 
-    public final static int DEFAULT = JSON|PROMPT|LOADING;
-    public final static int NO_PROMPT = JSON|LOADING;
-    public final static int NO_LOADING = JSON|PROMPT;
-    public final static int NO_JSON = LOADING|PROMPT;
+    int DEFAULT = JSON|PROMPT|LOADING;
+    int NO_PROMPT = JSON|LOADING;
+    int NO_LOADING = JSON|PROMPT;
+    int NO_JSON = LOADING|PROMPT;
 
-    public void onPreExecute();
-    public String getUrl();
+    void onPreExecute();
+    String getUrl();
 //    public WeakReference<Context> getContext();
-    public Map<String,String> getContent();
-    public void onError(String result);
-    public void onPostExecute(String result);
-    public int type();
+Map<String,String> getContent();
+    void onError(String result);
+    void onPostExecute(String result);
+    int type();
 
 }

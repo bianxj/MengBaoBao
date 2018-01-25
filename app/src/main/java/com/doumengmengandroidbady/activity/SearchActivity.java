@@ -21,11 +21,13 @@ import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.entity.DoctorEntity;
 import com.doumengmengandroidbady.entity.HospitalEntity;
+import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,12 +52,21 @@ public class SearchActivity extends BaseActivity {
     private List<DoctorEntity> doctors = new ArrayList<>();
     private List<HospitalEntity> hospitals = new ArrayList<>();
     private HospitalDoctorAdapter adapter;
+    private SearchHandler handler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         findView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if ( handler != null ){
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 
     private void findView(){
@@ -104,12 +115,15 @@ public class SearchActivity extends BaseActivity {
 
             }
         });
+
+        handler = new SearchHandler(this);
         initSearchList();
         initSearchHistory();
     }
 
     private void initSearchList(){
-        xrv_search.setLoadingMoreEnabled(false);
+        xrv_search.setLoadingMoreEnabled(true);
+        xrv_search.setFootView(new XLoadMoreFooter(this));
 
         adapter = new HospitalDoctorAdapter(hospitals,doctors);
         xrv_search.setAdapter(adapter);
@@ -142,7 +156,7 @@ public class SearchActivity extends BaseActivity {
                     rl_close.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.ll_search:
-                    if ( getString(R.string.cancel) == tv_search.getText().toString() ){
+                    if ( getString(R.string.cancel).equals(tv_search.getText().toString()) ){
                         back();
                     } else {
                         search();
@@ -156,31 +170,45 @@ public class SearchActivity extends BaseActivity {
     };
 
     //-----------------------------------------查询----------------------------------------------
-    private final static int MESSAGE_SEARCH = 0x01;
-    private Handler handler = new Handler(){
+    private static class SearchHandler extends Handler{
+        private final static int MESSAGE_SEARCH = 0x01;
+        private WeakReference<SearchActivity> weakReference;
+
+        public SearchHandler(SearchActivity activity) {
+            weakReference = new WeakReference<SearchActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if ( msg.what == MESSAGE_SEARCH ) {
-                if (tempDoctors != null || tempHospitals != null) {
-                    if (tempHospitals.size() > 0 || tempDoctors.size() > 0) {
-                        hospitals.clear();
-                        doctors.clear();
-                        hospitals.addAll(tempHospitals);
-                        doctors.addAll(tempDoctors);
-
-                        adapter.notifyDataSetChanged();
-                        try {
-                            putSearchHistory((String) msg.obj);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        ll_history.setVisibility(View.GONE);
-                    }
-                }
+            if(msg.what == MESSAGE_SEARCH){
+                String history = (String) msg.obj;
+                weakReference.get().updateList(history);
             }
         }
-    };
+    }
+
+    private void updateList(String history){
+        xrv_search.setNoMore(true);
+        hospitals.clear();
+        doctors.clear();
+        if (tempDoctors != null || tempHospitals != null) {
+            hospitals.addAll(tempHospitals);
+            doctors.addAll(tempDoctors);
+        }
+        adapter.notifyDataSetChanged();
+
+        if (tempDoctors != null || tempHospitals != null) {
+            if (tempHospitals.size() > 0 || tempDoctors.size() > 0) {
+                try {
+                    putSearchHistory(history);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ll_history.setVisibility(View.GONE);
+            }
+        }
+    }
 
     private void search(){
         new Thread(searchRunnable).start();
@@ -196,7 +224,7 @@ public class SearchActivity extends BaseActivity {
             tempHospitals = DaoManager.getInstance().getHospitalDao().searchHospitalListByName(SearchActivity.this,search);
 
             Message message = handler.obtainMessage();
-            message.what = MESSAGE_SEARCH;
+            message.what = SearchHandler.MESSAGE_SEARCH;
             message.obj = search;
             handler.sendMessage(message);
         }
@@ -210,7 +238,7 @@ public class SearchActivity extends BaseActivity {
     //--------------------------------------搜索历史处理--------------------------------------------
     private JSONArray array = null;
     private List<View> historyItem = new ArrayList<>();
-    public final static int HISTORY_ITEM_COUNT = 3;
+    private final static int HISTORY_ITEM_COUNT = 3;
 
     private void putSearchHistory(String keyword) throws JSONException {
         for (int i = 0; i < array.length(); i++) {

@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  * @author Sean Owen
  */
 @SuppressWarnings("deprecation") // camera APIs
-public final class CameraConfigurationUtils {
+final class CameraConfigurationUtils {
 
   private static final String TAG = "CameraConfiguration";
 
@@ -136,7 +136,7 @@ public final class CameraConfigurationUtils {
     setBestPreviewFPS(parameters, MIN_FPS, MAX_FPS);
   }
 
-  public static void setBestPreviewFPS(Camera.Parameters parameters, int minFPS, int maxFPS) {
+  private static void setBestPreviewFPS(Camera.Parameters parameters, int minFPS, int maxFPS) {
     List<int[]> supportedPreviewFpsRanges = parameters.getSupportedPreviewFpsRange();
     Log.i(TAG, "Supported FPS ranges: " + toString(supportedPreviewFpsRanges));
     if (supportedPreviewFpsRanges != null && !supportedPreviewFpsRanges.isEmpty()) {
@@ -393,7 +393,7 @@ public final class CameraConfigurationUtils {
     return collectStats(parameters.flatten());
   }
 
-  public static String collectStats(CharSequence flattenedParams) {
+  private static String collectStats(CharSequence flattenedParams) {
     StringBuilder result = new StringBuilder(1000);
 
     result.append("BOARD=").append(Build.BOARD).append('\n');

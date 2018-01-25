@@ -164,7 +164,7 @@ public class MyGifPlayer extends FrameLayout {
     };
 
     public interface StopCallBack {
-        public void stoped();
+        void stoped();
     }
 
 

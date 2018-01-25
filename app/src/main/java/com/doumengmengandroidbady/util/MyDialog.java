@@ -36,15 +36,15 @@ import java.util.List;
  */
 public class MyDialog {
 
-    private static Object updateLock = new Object();
-    private static Object promptLock = new Object();
-    private static Object chooseLock = new Object();
-    private static Object loadingLock = new Object();
-    private static Object pictureLock = new Object();
-    private static Object notificationLock = new Object();
-    private static Object gifLock = new Object();
-    private static Object cityLock = new Object();
-    private static Object payLock = new Object();
+    private final static Object updateLock = new Object();
+    private final static Object promptLock = new Object();
+    private final static Object chooseLock = new Object();
+    private final static Object loadingLock = new Object();
+    private final static Object pictureLock = new Object();
+    private final static Object notificationLock = new Object();
+    private final static Object gifLock = new Object();
+    private final static Object cityLock = new Object();
+    private final static Object payLock = new Object();
 
     private static Dialog updateDialog;
     private static Dialog promptDialog;
@@ -101,7 +101,7 @@ public class MyDialog {
         }
     }
 
-    public static void dismissUpdateDialog(){
+    private static void dismissUpdateDialog(){
         synchronized (updateLock){
             if ( updateDialog != null ){
                 updateDialog.dismiss();
@@ -114,7 +114,7 @@ public class MyDialog {
         showPromptDialog(context,content,R.string.go_on,callback);
     }
 
-    public static void showPromptDialog(Context context, String content, int sure, final PromptDialogCallback callback){
+    private static void showPromptDialog(Context context, String content, int sure, final PromptDialogCallback callback){
         synchronized (promptLock){
             if ( promptDialog != null ){
                 promptDialog.dismiss();
@@ -409,11 +409,8 @@ public class MyDialog {
     }
 
     public static boolean isShowingChooseCityDialog(){
-        synchronized (cityLock){
-            if ( cityDialog != null ){
-                return cityDialog.isShowing();
-            }
-            return false;
+        synchronized (cityLock) {
+            return cityDialog != null && cityDialog.isShowing();
         }
     }
 
@@ -509,33 +506,33 @@ public class MyDialog {
     }
 
     public interface UpdateDialogCallback{
-        public void update();
-        public void cancel();
+        void update();
+        void cancel();
     }
 
     public interface PromptDialogCallback{
-        public void sure();
+        void sure();
     }
 
     public interface ChooseDialogCallback{
-        public void sure();
-        public void cancel();
+        void sure();
+        void cancel();
     }
 
     public interface ChooseCityCallback{
-        public void choose(String city);
+        void choose(String city);
     }
 
     public interface NotificationCallback{
-        public void sure();
-        public void cancel();
+        void sure();
+        void cancel();
     }
 
     public interface PayCallBack{
         //支付宝
-        public void alipay();
+        void alipay();
         //微信
-        public void iwxpay();
+        void iwxpay();
     }
 
 }

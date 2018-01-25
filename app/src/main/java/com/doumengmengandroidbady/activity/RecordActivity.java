@@ -315,7 +315,6 @@ public class RecordActivity extends BaseActivity {
         //照片返回
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             String source = null;
-            if (data == null) return;
             Uri uri = data.getData();
             int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
             if (sdkVersion >= 19) {
@@ -356,6 +355,7 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputHeightActivity.class);
+            intent.putExtra(InputHeightActivity.IN_PARAM_HEIGHT,tv_height.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -382,6 +382,7 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputWeightActivity.class);
+            intent.putExtra(InputWeightActivity.IN_PARAM_WEIGHT,tv_weight.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -408,6 +409,7 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputHeadActivity.class);
+            intent.putExtra(InputHeadActivity.IN_PARAM_HEAD,tv_head_circumference.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -434,6 +436,7 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputChestActivity.class);
+            intent.putExtra(InputChestActivity.IN_PARAM_CHEST,tv_chest_circumference.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -460,6 +463,8 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputCacationActivity.class);
+            intent.putExtra(InputCacationActivity.IN_PARAM_CACATION_DAY,tv_cacation_day.getText().toString().trim());
+            intent.putExtra(InputCacationActivity.IN_PARAM_CACATION_COUNT,tv_cacation_count.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -488,6 +493,7 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputNightSleepActivity.class);
+            intent.putExtra(InputNightSleepActivity.IN_PARAM_NIGHT_SLEEP,tv_night_sleep.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -514,6 +520,7 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputDaySleepActivity.class);
+            intent.putExtra(InputDaySleepActivity.IN_PARAM_DAY_SLEEP,tv_day_sleep.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -540,6 +547,8 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputBreastFeedingActivity.class);
+            intent.putExtra(InputBreastFeedingActivity.IN_PARAM_BREAST_FEEDING,tv_breastfeeding.getText().toString().trim());
+            intent.putExtra(InputBreastFeedingActivity.IN_PARAM_BREAST_FEEDING_COUNT,tv_breastfeeding_count.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -568,6 +577,8 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputMilkActivity.class);
+            intent.putExtra(InputMilkActivity.IN_PARAM_FORMULA_MILK,tv_formula_milk.getText().toString().trim());
+            intent.putExtra(InputMilkActivity.IN_PARAM_FORMULA_MILK_COUNT,tv_formula_milk_count.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -591,6 +602,7 @@ public class RecordActivity extends BaseActivity {
         @Override
         public void request() {
             Intent intent = new Intent(getBaseContext(),InputMicturitionActivity.class);
+            intent.putExtra(InputMicturitionActivity.IN_PARAM_MICTURITION,tv_micturition_count.getText().toString().trim());
             startInputDataActivity(intent,requestCode());
         }
 
@@ -604,9 +616,9 @@ public class RecordActivity extends BaseActivity {
     };
 
     private interface InputActivityCallBack{
-        public int requestCode();
-        public void request();
-        public void response(int resultCode,Intent data);
+        int requestCode();
+        void request();
+        void response(int resultCode, Intent data);
     }
     //--------------------------------------调用相册-----------------------------------------------
     private final static int REQUEST_IMAGE = 0x99;
@@ -658,7 +670,7 @@ public class RecordActivity extends BaseActivity {
         });
     }
 
-    public void setGridViewHeight(GridView gridview) {
+    private void setGridViewHeight(GridView gridview) {
         // 获取gridview的adapter
         ListAdapter listAdapter = gridview.getAdapter();
         if (listAdapter == null) {
@@ -682,12 +694,14 @@ public class RecordActivity extends BaseActivity {
     }
 
     //---------------------------------提交记录------------------------------------------------
-    public RequestTask submitRecordTask;
+    private RequestTask submitRecordTask;
     private void submit(){
-        submitRecord();
+        if ( checkData() ) {
+            submitRecord();
+        }
     }
 
-    public void submitRecord(){
+    private void submitRecord(){
         try {
             submitRecordTask = new RequestTask.Builder(this,submitRecordCallBack).build();
             submitRecordTask.execute();
@@ -787,10 +801,15 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
+    private boolean checkData(){
+
+        return true;
+    }
+
     //-------------------------------获取最新的评估记录--------------------------------------------
     private RequestTask currentRecordTask;
 
-    public void getCurrentRecord(){
+    private void getCurrentRecord(){
         try {
             currentRecordTask = new RequestTask.Builder(this,currentRequestCallBack).build();
             currentRecordTask.execute();
@@ -852,7 +871,7 @@ public class RecordActivity extends BaseActivity {
 
     //-------------------------------OTHERS--------------------------------------------------------
 
-    public void clearEditTextFocus(){
+    private void clearEditTextFocus(){
         for (EditText editText:editTexts){
             editText.clearFocus();
         }

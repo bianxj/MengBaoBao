@@ -34,7 +34,7 @@
                 android:layout_marginLeft="@dimen/x32px"
                 style="@style/CheckBoxAgreement"
                 android:textColor="@color/colorEditTextHint"
-                android:text="@string/readed"/>
+                android:text="@string/mark_read"/>
         </LinearLayout>
 
         <Button

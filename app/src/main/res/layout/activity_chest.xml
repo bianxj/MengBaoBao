@@ -37,6 +37,7 @@
                         android:layout_centerInParent="true"
                         style="@style/InputDataStyle"
                         android:text=""
+                        android:inputType="numberDecimal"
                         />
                 </RelativeLayout>
                 <TextView

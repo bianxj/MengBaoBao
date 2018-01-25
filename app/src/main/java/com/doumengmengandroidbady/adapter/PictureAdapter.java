@@ -169,7 +169,7 @@ public class PictureAdapter extends BaseAdapter {
     }
 
     public interface TackPictureCallBack{
-        public void tackPicture();
+        void tackPicture();
     }
 
 }

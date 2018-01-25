@@ -33,9 +33,8 @@ public class BabyKnowledgeFragment extends BaseFragment {
     private List<String> infos = null;
     private List<String> pages = null;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_baby_knowledge,null);
         findView(view);
         configView();

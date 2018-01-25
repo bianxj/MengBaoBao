@@ -92,10 +92,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     }
 
     private boolean isLoginTimeOut(String json){
-        if ( ResponseErrorCode.ERROR_LOGIN_ROLE_EXIST == ResponseErrorCode.getErrorCode(json) ){
-            return true;
-        }
-        return false;
+        return ResponseErrorCode.ERROR_LOGIN_ROLE_EXIST == ResponseErrorCode.getErrorCode(json);
     }
 
     private boolean isError(String json){
@@ -121,10 +118,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     }
 
     private boolean isSelectFlag(int value,int flag){
-        if ( (flag&value) == flag ){
-            return true;
-        }
-        return false;
+        return (flag & value) == flag;
     }
 
     public static class Builder{
@@ -134,7 +128,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
         public Builder(Context context,@NonNull RequestCallBack callBack) {
             this.callBack = callBack;
-            this.weakReference = new WeakReference<Context>(context);
+            this.weakReference = new WeakReference<>(context);
         }
 
         public void setCallBack(@NonNull RequestCallBack callBack) {
@@ -150,7 +144,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         }
 
         public void setWeakReference(Context context) {
-            this.weakReference = new WeakReference<Context>(context);
+            this.weakReference = new WeakReference<>(context);
         }
 
         public RequestTask build() throws Throwable {

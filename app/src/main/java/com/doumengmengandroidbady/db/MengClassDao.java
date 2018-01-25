@@ -22,13 +22,12 @@ public class MengClassDao {
     private final static String CLASS_TITLE = "classtitle";
 
     public static void createTable(SQLiteDatabase db){
-        StringBuilder builder = new StringBuilder("CREATE TABLE IF NOT EXISTS "+TABLE_NAME+"(");
-        builder.append(CLASS_CONTEXT+" varchar,");
-        builder.append(CLASS_ID + " varchar,");
-        builder.append(CLASS_TIME+" varchar,");
-        builder.append(CLASS_TITLE+" varchar");
-        builder.append(")");
-        db.execSQL(builder.toString());
+        String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + CLASS_CONTEXT + " varchar," +
+                CLASS_ID + " varchar," +
+                CLASS_TIME + " varchar," +
+                CLASS_TITLE + " varchar" +
+                ")";
+        db.execSQL(builder);
     }
 
     public static void updateTable(SQLiteDatabase db , int oldVersion, int newVersion){

@@ -36,24 +36,23 @@ public class DoctorDao {
     private final static String DOCTOR_ORDER = "doctororder";
 
     public static void createTable(SQLiteDatabase db){
-        StringBuilder builder = new StringBuilder("CREATE TABLE IF NOT EXISTS "+TABLE_NAME+"(");
-        builder.append(DOCTOR_ID+" varchar,");
-        builder.append(DOCTOR_CODE + " varchar,");
-        builder.append(STATE+" varchar,");
-        builder.append(CERTIFICATE_A+" varchar,");
-        builder.append(CERTIFICATE_B+" varchar,");
-        builder.append(DOCTOR_PHONE+" varchar,");
-        builder.append(COST+" varchar,");
-        builder.append(LOGIN_PWD+" varchar,");
-        builder.append(DOCTOR_IMG+" varchar,");
-        builder.append(DOCTOR_NAME+" varchar,");
-        builder.append(POSITIONAL_TITLES+" varchar,");
-        builder.append(HOSPITAL_ID+" varchar,");
-        builder.append(SPECIALITY+" varchar,");
-        builder.append(DOCTOR_ORDER+" varchar,");
-        builder.append(DOCTOR_DESC+" varchar");
-        builder.append(")");
-        db.execSQL(builder.toString());
+        String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + DOCTOR_ID + " varchar," +
+                DOCTOR_CODE + " varchar," +
+                STATE + " varchar," +
+                CERTIFICATE_A + " varchar," +
+                CERTIFICATE_B + " varchar," +
+                DOCTOR_PHONE + " varchar," +
+                COST + " varchar," +
+                LOGIN_PWD + " varchar," +
+                DOCTOR_IMG + " varchar," +
+                DOCTOR_NAME + " varchar," +
+                POSITIONAL_TITLES + " varchar," +
+                HOSPITAL_ID + " varchar," +
+                SPECIALITY + " varchar," +
+                DOCTOR_ORDER + " varchar," +
+                DOCTOR_DESC + " varchar" +
+                ")";
+        db.execSQL(builder);
     }
 
     public static void updateTable(SQLiteDatabase db , int oldVersion, int newVersion){
@@ -89,25 +88,62 @@ public class DoctorDao {
         DataBaseUtil.closeDataBase();
     }
 
-    public List<DoctorEntity> searchDoctorListByName(Context context , String name){
+    public List<DoctorEntity> searchDoctorListByNameAndCity(Context context,String name,String city){
         List<DoctorEntity> doctorEntities = new ArrayList<>();
-        StringBuilder builder = new StringBuilder();
-        builder.append("select ");
-        builder.append("a."+DOCTOR_ID+",");
-        builder.append("a."+DOCTOR_IMG+",");
-        builder.append("a."+DOCTOR_NAME+",");
-        builder.append("a."+POSITIONAL_TITLES+",");
-        builder.append("a."+SPECIALITY+",");
-        builder.append("a."+DOCTOR_DESC+",");
-        builder.append("b."+HospitalDao.HOSPITAL_ID+",");
-        builder.append("b."+HospitalDao.HOSPITAL_NAME);
-        builder.append(" from "+ TABLE_NAME + " a ," + HospitalDao.TABLE_NAME +" b ");
-        builder.append(" where a." + HOSPITAL_ID + " = " + "b."+HospitalDao.HOSPITAL_ID);
-        builder.append(" and a."+DOCTOR_NAME + " like '%" + name+"%' ");
-        builder.append(" order by a." + DOCTOR_ORDER);
+        String builder = "select " +
+                "a." + DOCTOR_ID + "," +
+                "a." + DOCTOR_IMG + "," +
+                "a." + DOCTOR_NAME + "," +
+                "a." + POSITIONAL_TITLES + "," +
+                "a." + SPECIALITY + "," +
+                "a." + DOCTOR_DESC + "," +
+                "b." + HospitalDao.HOSPITAL_ID + "," +
+                "b." + HospitalDao.HOSPITAL_NAME +
+                " from " + TABLE_NAME + " a ," + HospitalDao.TABLE_NAME + " b " +
+                " where a." + HOSPITAL_ID + " = " + "b." + HospitalDao.HOSPITAL_ID +
+                " and a." + DOCTOR_NAME + " like '%" + name + "%' " +
+                " and b." + HospitalDao.PROVINCE + " = '" + city + "' " +
+                " order by a." + DOCTOR_ORDER;
 
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
-        Cursor cursor = db.rawQuery(builder.toString(),null);
+        Cursor cursor = db.rawQuery(builder,null);
+
+        if ( cursor != null ){
+            while(cursor.moveToNext()){
+                DoctorEntity entity = new DoctorEntity();
+                entity.setDoctorid(cursor.getString(cursor.getColumnIndex(DOCTOR_ID)));
+                entity.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
+                entity.setDoctorimg(cursor.getString(cursor.getColumnIndex(DOCTOR_IMG)));
+                entity.setDoctorname(cursor.getString(cursor.getColumnIndex(DOCTOR_NAME)));
+                entity.setHospital(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_NAME)));
+                entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
+                entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
+                entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
+                doctorEntities.add(entity);
+            }
+        }
+        DataBaseUtil.closeDataBase();
+        return doctorEntities;
+    }
+
+    public List<DoctorEntity> searchDoctorListByName(Context context , String name){
+        List<DoctorEntity> doctorEntities = new ArrayList<>();
+        String builder = "select " +
+                "a." + DOCTOR_ID + "," +
+                "a." + DOCTOR_IMG + "," +
+                "a." + DOCTOR_NAME + "," +
+                "a." + POSITIONAL_TITLES + "," +
+                "a." + SPECIALITY + "," +
+                "a." + DOCTOR_DESC + "," +
+                "b." + HospitalDao.HOSPITAL_ID + "," +
+                "b." + HospitalDao.HOSPITAL_NAME +
+                " from " + TABLE_NAME + " a ," + HospitalDao.TABLE_NAME + " b " +
+                " where a." + HOSPITAL_ID + " = " + "b." + HospitalDao.HOSPITAL_ID +
+                " and a." + DOCTOR_NAME + " like '%" + name + "%' " +
+                " order by a." + DOCTOR_ORDER;
+
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(builder,null);
 
         if ( cursor != null ){
             while(cursor.moveToNext()){
@@ -130,23 +166,22 @@ public class DoctorDao {
     public List<DoctorEntity> searchDoctorList(Context context , int offset , int limit ){
         List<DoctorEntity> doctorEntities = new ArrayList<>();
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
-        StringBuilder builder = new StringBuilder();
-        builder.append("select ");
-        builder.append("a."+DOCTOR_ID+",");
-        builder.append("a."+DOCTOR_IMG+",");
-        builder.append("a."+DOCTOR_NAME+",");
-        builder.append("a."+POSITIONAL_TITLES+",");
-        builder.append("a."+SPECIALITY+",");
-        builder.append("a."+DOCTOR_DESC+",");
-        builder.append("b."+HospitalDao.HOSPITAL_ID+",");
-        builder.append("b."+HospitalDao.HOSPITAL_NAME);
-        builder.append(" from "+ TABLE_NAME + " a ," + HospitalDao.TABLE_NAME +" b ");
-        builder.append(" where a." + HOSPITAL_ID + " = " + "b."+HospitalDao.HOSPITAL_ID);
-        builder.append(" order by a." + DOCTOR_ORDER);
-        builder.append(" limit " + limit);
-        builder.append(" offset "+ offset*limit);
+        String builder = "select " +
+                "a." + DOCTOR_ID + "," +
+                "a." + DOCTOR_IMG + "," +
+                "a." + DOCTOR_NAME + "," +
+                "a." + POSITIONAL_TITLES + "," +
+                "a." + SPECIALITY + "," +
+                "a." + DOCTOR_DESC + "," +
+                "b." + HospitalDao.HOSPITAL_ID + "," +
+                "b." + HospitalDao.HOSPITAL_NAME +
+                " from " + TABLE_NAME + " a ," + HospitalDao.TABLE_NAME + " b " +
+                " where a." + HOSPITAL_ID + " = " + "b." + HospitalDao.HOSPITAL_ID +
+                " order by a." + DOCTOR_ORDER +
+                " limit " + limit +
+                " offset " + offset * limit;
 
-        Cursor cursor = db.rawQuery(builder.toString(),null);
+        Cursor cursor = db.rawQuery(builder,null);
 
         if ( cursor != null ){
             while(cursor.moveToNext()){
@@ -170,21 +205,20 @@ public class DoctorDao {
     public List<DoctorEntity> searchDoctorList(Context context){
         List<DoctorEntity> doctorEntities = new ArrayList<>();
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
-        StringBuilder builder = new StringBuilder();
-        builder.append("select ");
-        builder.append("a."+DOCTOR_ID+",");
-        builder.append("a."+DOCTOR_IMG+",");
-        builder.append("a."+DOCTOR_NAME+",");
-        builder.append("a."+POSITIONAL_TITLES+",");
-        builder.append("a."+SPECIALITY+",");
-        builder.append("a."+DOCTOR_DESC+",");
-        builder.append("b."+HospitalDao.HOSPITAL_ID+",");
-        builder.append("b."+HospitalDao.HOSPITAL_NAME);
-        builder.append(" from "+ TABLE_NAME + " a ," + HospitalDao.TABLE_NAME +" b ");
-        builder.append(" where a." + HOSPITAL_ID + " = " + "b."+HospitalDao.HOSPITAL_ID);
-        builder.append(" order by a." + DOCTOR_ORDER);
+        String builder = "select " +
+                "a." + DOCTOR_ID + "," +
+                "a." + DOCTOR_IMG + "," +
+                "a." + DOCTOR_NAME + "," +
+                "a." + POSITIONAL_TITLES + "," +
+                "a." + SPECIALITY + "," +
+                "a." + DOCTOR_DESC + "," +
+                "b." + HospitalDao.HOSPITAL_ID + "," +
+                "b." + HospitalDao.HOSPITAL_NAME +
+                " from " + TABLE_NAME + " a ," + HospitalDao.TABLE_NAME + " b " +
+                " where a." + HOSPITAL_ID + " = " + "b." + HospitalDao.HOSPITAL_ID +
+                " order by a." + DOCTOR_ORDER;
 
-        Cursor cursor = db.rawQuery(builder.toString(),null);
+        Cursor cursor = db.rawQuery(builder,null);
 
         if ( cursor != null ){
             while(cursor.moveToNext()){

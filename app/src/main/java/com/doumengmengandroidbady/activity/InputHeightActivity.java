@@ -25,6 +25,7 @@ public class InputHeightActivity extends BaseInputDataActivity {
 
     private String suggest = "<p><font color=\"#EF4399\">* 建议：</font>身高测量宜在清晨进行；身高测量应在医 院用标准的量床测量。</p>";
 
+    public final static String IN_PARAM_HEIGHT = "in_height";
     public final static String OUT_PARAM_HEIGHT = "height";
 
     private MyGifPlayer player;
@@ -87,6 +88,12 @@ public class InputHeightActivity extends BaseInputDataActivity {
         generateListView(ll_content,getResources().getStringArray(R.array.height_content));
         //备注
         generateListView(ll_remark,getResources().getStringArray(R.array.height_remark));
+
+        Intent intent = getIntent();
+        if ( intent != null ) {
+            String height = intent.getStringExtra(IN_PARAM_HEIGHT);
+            et_input_data.setText(height);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

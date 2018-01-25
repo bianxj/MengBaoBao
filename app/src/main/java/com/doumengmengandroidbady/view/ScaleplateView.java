@@ -18,15 +18,15 @@ import java.util.List;
 
 public class ScaleplateView extends View {
 
-    public final static int TOTLE_WEIGHT = 267;
-    public final static int TOTLE_HEIGHT = 27;
-    public final static int MARGIN_SIDE = 7;
+    private final static int TOTLE_WEIGHT = 267;
+    private final static int TOTLE_HEIGHT = 27;
+    private final static int MARGIN_SIDE = 7;
     public final static int HORIZONTAL_LENGHT = 253;
-    public final static int TRIANGLE_WIDTH = 14;
-    public final static int SIDE_SPITE_LINE = 18;
-    public final static int MIDDLE_SPITE_LINE = 16;
-    public final static int LINE_WIDTH = 2;
-    public final static String COLOR = "#77D2F7";
+    private final static int TRIANGLE_WIDTH = 14;
+    private final static int SIDE_SPITE_LINE = 18;
+    private final static int MIDDLE_SPITE_LINE = 16;
+    private final static int LINE_WIDTH = 2;
+    private final static String COLOR = "#77D2F7";
 
     private List<Float> splitX = new ArrayList<>();
 
@@ -71,7 +71,7 @@ public class ScaleplateView extends View {
         splitX.add(splitX.get(splitX.size()-1)+23*unitWeight);
     }
 
-    public void drawSplitLine(Canvas canvas,Paint paint,float unitHeight){
+    private void drawSplitLine(Canvas canvas, Paint paint, float unitHeight){
         for (int i = 0;i<splitX.size();i++){
             if ( i == 0 || i == splitX.size()-1 ){
                 canvas.drawLine(splitX.get(i),getBottom()-(SIDE_SPITE_LINE*unitHeight),splitX.get(i),getBottom(),paint);
@@ -81,7 +81,7 @@ public class ScaleplateView extends View {
         }
     }
 
-    public void drawTriangle(Canvas canvas,Paint paint){
+    private void drawTriangle(Canvas canvas, Paint paint){
         if ( paragraph == -1 ){
             return;
         }

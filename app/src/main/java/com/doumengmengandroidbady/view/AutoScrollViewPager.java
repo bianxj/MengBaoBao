@@ -46,35 +46,37 @@ public class AutoScrollViewPager extends FrameLayout {
     private ViewPager viewPager;
     private RadioGroup dotLayout;
 
-    private int pageCount = 0;
+    private int index = 0;
     private ScrollPagerAdapter adapter;
     private Timer timer;
     private OnClickCallBack callBack;
 
-    private final static int SCROLL_NEXT = 0x31;
-    private final static int SCROLL_NEXT_NOSCROLL = 0x32;
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if ( msg.what == SCROLL_NEXT ){
-                int currentItem = viewPager.getCurrentItem();
-                if(currentItem == viewPager.getAdapter().getCount() - 1){
-                    currentItem = 0 ;
-                }else {
-                    currentItem++ ;
-                }
-                viewPager.setCurrentItem(currentItem);
-            } else {
-                int position = viewPager.getCurrentItem();
-                if ( position == 0 ){
-                    viewPager.setCurrentItem(pageCount,false);
-                } else if ( position == pageCount + 1 ){
-                    viewPager.setCurrentItem(1,false);
-                }
-            }
-        }
-    };
+    private ScrollViewHandler handler;
+
+//    private final static int SCROLL_NEXT = 0x31;
+//    private final static int SCROLL_NEXT_NOSCROLL = 0x32;
+//    private Handler handler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            if ( msg.what == SCROLL_NEXT ){
+//                int currentItem = viewPager.getCurrentItem();
+//                if(currentItem == viewPager.getAdapter().getCount() - 1){
+//                    currentItem = 0 ;
+//                }else {
+//                    currentItem++ ;
+//                }
+//                viewPager.setCurrentItem(currentItem);
+//            } else {
+//                int position = viewPager.getCurrentItem();
+//                if ( position == 0 ){
+//                    viewPager.setCurrentItem(index,false);
+//                } else if ( position == index + 1 ){
+//                    viewPager.setCurrentItem(1,false);
+//                }
+//            }
+//        }
+//    };
 
     public AutoScrollViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -117,8 +119,10 @@ public class AutoScrollViewPager extends FrameLayout {
             field.set(viewPager, scroller);
             scroller.setmDuration(500);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
+
+        handler = new ScrollViewHandler(viewPager);
     }
 
     private void initDotLayout(){
@@ -149,8 +153,8 @@ public class AutoScrollViewPager extends FrameLayout {
                 }
                 imageViews.add(imageView);
             }
-            pageCount = imageList.length;
-            initDotList(pageCount);
+            index = imageList.length;
+            initDotList(index);
             this.adapter = new ScrollPagerAdapter(imageViews);
             viewPager.setAdapter(this.adapter);
             viewPager.addOnPageChangeListener(pageChangeListener);
@@ -160,12 +164,12 @@ public class AutoScrollViewPager extends FrameLayout {
             startLoop();
         } else {
             List<ImageView> imageViews = new ArrayList<>();
-            for (int i = 0; i < imageList.length; i++) {
-                ImageView imageView =  createImageView(imageList[i]);
+            for (int anImageList : imageList) {
+                ImageView imageView = createImageView(anImageList);
                 imageViews.add(imageView);
             }
-            pageCount = imageList.length;
-            initDotList(pageCount);
+            index = imageList.length;
+            initDotList(index);
             this.adapter = new ScrollPagerAdapter(imageViews);
             viewPager.setAdapter(this.adapter);
             viewPager.addOnPageChangeListener(pageChangeListener);
@@ -231,7 +235,7 @@ public class AutoScrollViewPager extends FrameLayout {
             @Override
             public void run() {
                 if ( isLoop ) {
-                    handler.sendEmptyMessage(SCROLL_NEXT);
+                    handler.sendEmptyMessage(ScrollViewHandler.SCROLL_NEXT);
                 }
             }
         }, 3000, 3000);
@@ -253,8 +257,8 @@ public class AutoScrollViewPager extends FrameLayout {
             if ( canLoop() ) {
                 RadioButton botton = null;
                 if ( position == 0 ){
-                    botton = (RadioButton) dotLayout.getChildAt(pageCount-1);
-                } else if ( position == pageCount + 1 ){
+                    botton = (RadioButton) dotLayout.getChildAt(index -1);
+                } else if ( position == index + 1 ){
                     botton = (RadioButton) dotLayout.getChildAt(0);
                 } else {
                     botton = (RadioButton) dotLayout.getChildAt(position-1);
@@ -270,7 +274,10 @@ public class AutoScrollViewPager extends FrameLayout {
         public void onPageScrollStateChanged(int state) {
             if ( canLoop() ) {
                 if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    handler.sendEmptyMessage(SCROLL_NEXT_NOSCROLL);
+                    Message message = handler.obtainMessage();
+                    message.what = ScrollViewHandler.SCROLL_NEXT_NOSCROLL;
+                    message.arg1 = index;
+                    handler.sendMessage(message);
                 }
             }
         }
@@ -315,8 +322,8 @@ public class AutoScrollViewPager extends FrameLayout {
             int position = (int) view.getTag();
             if ( callBack != null ){
                 if ( position == 0 ) {
-                    callBack.onClick(pageCount - 1);
-                } else if ( position == pageCount +1 ) {
+                    callBack.onClick(index - 1);
+                } else if ( position == index +1 ) {
                     callBack.onClick(0);
                 } else {
                     callBack.onClick(position);
@@ -327,7 +334,7 @@ public class AutoScrollViewPager extends FrameLayout {
 
     public interface OnClickCallBack{
 
-        public void onClick(int position);
+        void onClick(int position);
 
     }
 
@@ -362,5 +369,38 @@ public class AutoScrollViewPager extends FrameLayout {
             return mDuration;
         }
     }
+
+    private static class ScrollViewHandler extends Handler{
+        public final static int SCROLL_NEXT = 0x31;
+        public final static int SCROLL_NEXT_NOSCROLL = 0x32;
+
+        private ViewPager viewPager;
+
+        public ScrollViewHandler(ViewPager viewPager) {
+            this.viewPager = viewPager;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( msg.what == SCROLL_NEXT ){
+                int currentItem = viewPager.getCurrentItem();
+                if(currentItem == viewPager.getAdapter().getCount() - 1){
+                    currentItem = 0 ;
+                }else {
+                    currentItem++ ;
+                }
+                viewPager.setCurrentItem(currentItem);
+            } else {
+                int position = viewPager.getCurrentItem();
+                if ( position == 0 ){
+                    viewPager.setCurrentItem(msg.arg1,false);
+                } else if ( position == msg.arg1 + 1 ){
+                    viewPager.setCurrentItem(1,false);
+                }
+            }
+        }
+    }
+
 
 }

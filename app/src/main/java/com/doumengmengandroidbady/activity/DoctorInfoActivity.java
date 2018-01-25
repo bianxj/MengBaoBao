@@ -42,6 +42,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,6 +82,9 @@ public class DoctorInfoActivity extends BaseActivity {
         super.onDestroy();
         stopTask(aliPayTask);
         stopTask(aliPayResponseTask);
+        if ( handler != null ){
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 
     @Override
@@ -311,8 +315,9 @@ public class DoctorInfoActivity extends BaseActivity {
      * 描述: 支付宝成功回调
      * 日期: 2018/1/23 16:10
      */
-    private void alipayResponse(){
+    private void alipayResponse(Map<String,String> map){
         try {
+            aliResult = map;
             aliPayResponseTask = new RequestTask.Builder(this,aliPayResponseCallBack).build();
             aliPayResponseTask.execute();
         } catch (Throwable throwable) {
@@ -386,9 +391,15 @@ public class DoctorInfoActivity extends BaseActivity {
         }
     };
 
-    private final static int MESSAGE_ALI_PAY = 0x01;
-    private Map<String,String> aliResult = null;
-    private Handler handler = new Handler(){
+    private static class AlipayHandler extends Handler{
+        private final static int MESSAGE_ALI_PAY = 0x01;
+        private WeakReference<DoctorInfoActivity> weakReference;
+        private Map<String,String> aliResult = null;
+
+        public AlipayHandler(DoctorInfoActivity activity) {
+            weakReference = new WeakReference<DoctorInfoActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -396,17 +407,27 @@ public class DoctorInfoActivity extends BaseActivity {
                 case MESSAGE_ALI_PAY: {
                     aliResult = (Map<String, String>) msg.obj;
                     if ( TextUtils.equals("9000", aliResult.get("resultStatus")) ){
-                        alipayResponse();
+                        weakReference.get().alipayResponse(aliResult);
                     } else {
-                        Toast.makeText(DoctorInfoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(weakReference.get(), "支付失败", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 }
             }
         }
-    };
+
+        public Map<String, String> getAliResult() {
+            return aliResult;
+        }
+    }
+
+    private Map<String,String> aliResult = null;
+    private AlipayHandler handler = null;
 
     private void alipay(final String orderInfo){
+        if ( handler == null ){
+            handler = new AlipayHandler(this);
+        }
         Runnable payRunnable = new Runnable() {
 
             @Override
@@ -416,7 +437,7 @@ public class DoctorInfoActivity extends BaseActivity {
                 Map<String, String> result = alipay.payV2(orderInfo,true);
 
                 Message msg = new Message();
-                msg.what = MESSAGE_ALI_PAY;
+                msg.what = AlipayHandler.MESSAGE_ALI_PAY;
                 msg.obj = result;
                 handler.sendMessage(msg);
             }

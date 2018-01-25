@@ -112,9 +112,9 @@ public class LoginTask {
     };
 
     public interface LoginCallBack{
-        public void onPreExecute();
-        public void onError(String result);
-        public void onPostExecute(String result);
+        void onPreExecute();
+        void onError(String result);
+        void onPostExecute(String result);
     }
 
 }

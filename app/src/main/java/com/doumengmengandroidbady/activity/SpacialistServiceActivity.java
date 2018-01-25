@@ -35,6 +35,7 @@ import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +79,9 @@ public class SpacialistServiceActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         destoryLocation();
+        if ( handler != null ){
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 
     @Override
@@ -116,7 +120,11 @@ public class SpacialistServiceActivity extends BaseActivity {
 
         tv_title.setText(R.string.spacialist_service);
 
+        tv_location.setText("北京市");
+        tv_location.setTag("北京市");
         et_search.setOnEditorActionListener(onEditorActionListener);
+
+        handler = new SpacialistServiceHandler(this);
     }
 
     private void initListView(){
@@ -127,6 +135,12 @@ public class SpacialistServiceActivity extends BaseActivity {
 
         adapter = new HospitalDoctorAdapter(hospitals,doctors);
         xrv_search.setAdapter(adapter);
+    }
+
+    private void setCity(String city){
+        System.out.println("setCity:"+city);
+        tv_location.setText(city);
+        tv_location.setTag(city);
     }
 
     private XRecyclerView.LoadingListener searchLoadingListener = new XRecyclerView.LoadingListener() {
@@ -155,7 +169,11 @@ public class SpacialistServiceActivity extends BaseActivity {
                         MyDialog.showChooseCityDialog(SpacialistServiceActivity.this, rl_location_area, new MyDialog.ChooseCityCallback() {
                             @Override
                             public void choose(String city) {
-                                tv_location.setText(city);
+                                if ( DaoManager.getInstance().getHospitalDao().hasHospitalInCity(SpacialistServiceActivity.this,city) ) {
+                                    setCity(city);
+                                } else {
+                                    Toast.makeText(SpacialistServiceActivity.this,"该地区还在开发中",Toast.LENGTH_SHORT).show();
+                                }
                                 MyDialog.dismissChooseCityDialog();
                             }
                         });
@@ -223,27 +241,35 @@ public class SpacialistServiceActivity extends BaseActivity {
 
     //---------------------------------查询模块--------------------------------------------------
 
-    private final static int UPDATAE_LIST = 0x01;
-    private Handler handler = new Handler(){
+    private SpacialistServiceHandler handler = null;
+    private static class SpacialistServiceHandler extends Handler{
+        private final static int UPDATAE_LIST = 0x01;
+        private WeakReference<SpacialistServiceActivity> weakReference;
+
+        public SpacialistServiceHandler(SpacialistServiceActivity activity) {
+            weakReference = new WeakReference<SpacialistServiceActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if ( UPDATAE_LIST == msg.what ){
-                updateList();
+                weakReference.get().updateList();
             }
         }
-    };
+    }
 
-    List<DoctorEntity> tempDoctors;
-    List<HospitalEntity> tempHospitals;
+    private List<DoctorEntity> tempDoctors;
+    private List<HospitalEntity> tempHospitals;
     private void search(){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 String name = et_search.getText().toString();
-                tempDoctors = DaoManager.getInstance().getDaotorDao().searchDoctorListByName(SpacialistServiceActivity.this,name);
-                tempHospitals = DaoManager.getInstance().getHospitalDao().searchHospitalListByName(SpacialistServiceActivity.this,name);
-                handler.sendEmptyMessage(UPDATAE_LIST);
+                String city = (String) tv_location.getTag();
+                tempDoctors = DaoManager.getInstance().getDaotorDao().searchDoctorListByNameAndCity(SpacialistServiceActivity.this,name,city);
+                tempHospitals = DaoManager.getInstance().getHospitalDao().searchHospitalListByNameAndCity(SpacialistServiceActivity.this,name,city);
+                handler.sendEmptyMessage(SpacialistServiceHandler.UPDATAE_LIST);
             }
         }).start();
     }
@@ -323,8 +349,8 @@ public class SpacialistServiceActivity extends BaseActivity {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             if ( bdLocation != null ){
-                String city = bdLocation.getCity();
-                tv_location.setText(city);
+                String city = bdLocation.getProvince();
+                setCity(city);
             } else {
                 //TODO
             }

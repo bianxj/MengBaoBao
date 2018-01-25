@@ -21,6 +21,7 @@ import com.doumengmengandroidbady.entity.HospitalEntity;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class DoctorListActivity extends BaseActivity {
 
     private DoctorAdapter doctorAdapter;
     private HospitalAdapter hospitalAdapter;
+    private DoctorListHandler handler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +62,9 @@ public class DoctorListActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if ( handler != null ){
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 
     private void findView(){
@@ -80,8 +85,10 @@ public class DoctorListActivity extends BaseActivity {
         rb_doctor.setOnCheckedChangeListener(changeListener);
         rb_hospital.setOnCheckedChangeListener(changeListener);
 
-        doctors = new ArrayList<DoctorEntity>();
-        hospitals = new ArrayList<HospitalEntity>();
+        handler = new DoctorListHandler(this);
+
+        doctors = new ArrayList<>();
+        hospitals = new ArrayList<>();
         initDoctorListView();
         initHospitalListView();
     }
@@ -165,54 +172,68 @@ public class DoctorListActivity extends BaseActivity {
     }
 
     //------------------------------------数据获取------------------------------------------------
-    public final static int MESSAGE_SEARCH_DOCTOR = 0x01;
-    public final static int MESSAGE_SEARCH_HOSPITAL = 0x02;
-    private Handler handler = new Handler(){
+
+    private static class DoctorListHandler extends Handler{
+        private final static int MESSAGE_SEARCH_DOCTOR = 0x01;
+        private final static int MESSAGE_SEARCH_HOSPITAL = 0x02;
+        private WeakReference<DoctorListActivity> weakReference;
+
+        public DoctorListHandler(DoctorListActivity activity) {
+            weakReference = new WeakReference<DoctorListActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            DoctorListActivity activity = weakReference.get();
             if ( msg.what == MESSAGE_SEARCH_DOCTOR ) {
-                doctor_page++;
-                if ( tempDoctors != null ){
-                    if ( tempDoctors.size() < PAGE_SIZE ){
-                        xrv_doctor.setNoMore(true);
-                    }
-                    for (DoctorEntity doctorEntity:tempDoctors){
-                        doctors.add(doctorEntity);
-                    }
-                    doctorAdapter.notifyDataSetChanged();
-                } else {
-                    xrv_doctor.setNoMore(true);
-                }
+                List<DoctorEntity> doctors = (List<DoctorEntity>) msg.obj;
+                activity.searchDoctor(doctors);
             }
             if ( msg.what == MESSAGE_SEARCH_HOSPITAL ) {
-                hospital_page++;
-                if ( tempHospital != null ){
-                    if ( tempHospital.size() < PAGE_SIZE ){
-                        xrv_hospital.setNoMore(true);
-                    }
-                    for (HospitalEntity hospitalEntity:tempHospital){
-                        hospitals.add(hospitalEntity);
-                    }
-                    doctorAdapter.notifyDataSetChanged();
-                } else {
-                    xrv_hospital.setNoMore(true);
-                }
+                List<HospitalEntity> hospitals = (List<HospitalEntity>) msg.obj;
+                activity.searchHospital(hospitals);
             }
         }
-    };
+    }
+
+    protected void searchDoctor(List<DoctorEntity> datas){
+        doctor_page++;
+        if ( datas != null ){
+            if ( datas.size() < PAGE_SIZE ){
+                xrv_doctor.setNoMore(true);
+            }
+            doctors.addAll(datas);
+            doctorAdapter.notifyDataSetChanged();
+        } else {
+            xrv_doctor.setNoMore(true);
+        }
+    }
+
+    protected void searchHospital(List<HospitalEntity> datas){
+        hospital_page++;
+        if ( datas != null ){
+            if ( datas.size() < PAGE_SIZE ){
+                xrv_hospital.setNoMore(true);
+            }
+            hospitals.addAll(datas);
+            doctorAdapter.notifyDataSetChanged();
+        } else {
+            xrv_hospital.setNoMore(true);
+        }
+    }
 
     private void searchDoctorData(){
         new Thread(searchDoctorRunnable).start();
     }
 
-    private List<DoctorEntity> tempDoctors = new ArrayList<>();
     private Runnable searchDoctorRunnable = new Runnable() {
         @Override
         public void run() {
-            tempDoctors.clear();
+            List<DoctorEntity> doctorList = null;
             if ( isTest ){
                 for (int i = 0; i <10 ; i++) {
+                    doctorList = new ArrayList<>();
                     DoctorEntity doctor = new DoctorEntity();
                     doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
                     doctor.setDoctordesc("Describe1");
@@ -220,15 +241,15 @@ public class DoctorListActivity extends BaseActivity {
                     doctor.setHospital("HospitalEntity"+i);
                     doctor.setPositionaltitles("Position"+i);
                     doctor.setSpeciality("Skill"+i);
-                    tempDoctors.add(doctor);
+                    doctorList.add(doctor);
                 }
             } else {
-                List<DoctorEntity> doctorList = DaoManager.getInstance().getDaotorDao().searchDoctorList(DoctorListActivity.this,doctor_page,PAGE_SIZE);
-                if ( doctorList != null && doctorList.size() > 0 ){
-                    tempDoctors.addAll(doctorList);
-                }
+                doctorList = DaoManager.getInstance().getDaotorDao().searchDoctorList(DoctorListActivity.this,doctor_page,PAGE_SIZE);
             }
-            handler.sendEmptyMessage(MESSAGE_SEARCH_DOCTOR);
+            Message message = handler.obtainMessage();
+            message.what = DoctorListHandler.MESSAGE_SEARCH_DOCTOR;
+            message.obj = doctorList;
+            handler.sendMessage(message);
         }
     };
 
@@ -236,26 +257,26 @@ public class DoctorListActivity extends BaseActivity {
         new Thread(searchHospitalRunnable).start();
     }
 
-    private List<HospitalEntity> tempHospital = new ArrayList<>();
     private Runnable searchHospitalRunnable = new Runnable() {
         @Override
         public void run() {
-            tempHospital.clear();
+            List<HospitalEntity> hospitalList = null;
             if ( isTest ){
+                hospitalList = new ArrayList<>();
                 for (int i = 0; i <10 ; i++) {
                     HospitalEntity hospital = new HospitalEntity();
                     hospital.setHospitalicon("http://www.qqzhi.com/uploadpic/2014-10-04/013617459.jpg");
                     hospital.setHospitalname("HospitalName"+i);
                     hospital.setHospitaladdress("HospitalAddress"+i);
-                    tempHospital.add(hospital);
+                    hospitalList.add(hospital);
                 }
             } else {
-                List<HospitalEntity> hospitalList = DaoManager.getInstance().getHospitalDao().searchHospitalList(DoctorListActivity.this,hospital_page,PAGE_SIZE);
-                if ( hospitalList != null && hospitalList.size() > 0 ){
-                    tempHospital.addAll(hospitalList);
-                }
+                hospitalList = DaoManager.getInstance().getHospitalDao().searchHospitalList(DoctorListActivity.this,hospital_page,PAGE_SIZE);
             }
-            handler.sendEmptyMessage(MESSAGE_SEARCH_HOSPITAL);
+            Message message = handler.obtainMessage();
+            message.what = DoctorListHandler.MESSAGE_SEARCH_HOSPITAL;
+            message.obj = hospitalList;
+            handler.sendMessage(message);
         }
     };
 

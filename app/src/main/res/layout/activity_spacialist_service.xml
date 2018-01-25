@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 style="@style/BigWhiteText"
-                android:text="江苏省"
+                android:text="北京市"
                 android:layout_marginLeft="@dimen/x28px"
                 android:maxLength="3"
                 />

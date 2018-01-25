@@ -150,13 +150,13 @@ public class BaseInfoActivity extends BaseActivity {
                 if ( 1 == res.optInt("isSaveUser") ){
                     BaseApplication.getInstance().saveBabyInfo(base_info.getBabyInfo());
                     startActivity(RecordActivity.class);
+                    back();
                 } else {
                     //TODO ?
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            finish();
         }
 
         @Override

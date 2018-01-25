@@ -38,7 +38,7 @@ import java.util.Map;
  */
 public class ForgotPwdActivity extends BaseActivity {
 
-    public final static boolean isTest = Config.isTest;
+    private final static boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private Button bt_sure;

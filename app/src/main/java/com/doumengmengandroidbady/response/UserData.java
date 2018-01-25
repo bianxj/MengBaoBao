@@ -71,11 +71,7 @@ public class UserData {
     }
 
     public boolean isMale(){
-        if ( MALE.equals(sex) ){
-            return true;
-        } else {
-            return false;
-        }
+        return MALE.equals(sex);
     }
 
     public String getSexString(){

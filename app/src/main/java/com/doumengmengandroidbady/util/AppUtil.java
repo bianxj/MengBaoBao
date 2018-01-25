@@ -56,10 +56,10 @@ public class AppUtil {
         }
     }
 
-    public static boolean isAvilible(Context context, String packageName) {
+    private static boolean isAvilible(Context context, String packageName) {
         final PackageManager packageManager = context.getPackageManager();// 获取packagemanager
         List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);// 获取所有已安装程序的包信息
-        List<String> pName = new ArrayList<String>();// 用于存储所有已安装程序的包名
+        List<String> pName = new ArrayList<>();// 用于存储所有已安装程序的包名
         if (pinfo != null) {
             for (int i = 0; i < pinfo.size(); i++) {
                 String pn = pinfo.get(i).packageName;

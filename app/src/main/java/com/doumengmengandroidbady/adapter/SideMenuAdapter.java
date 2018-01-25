@@ -26,7 +26,7 @@ public class SideMenuAdapter extends BaseAdapter {
     public SideMenuAdapter(Context context,List<SideMenuItem> items) {
         this.context = context;
         if ( null == items ){
-            items = new ArrayList<SideMenuItem>();
+            items = new ArrayList<>();
         } else {
             this.items = items;
         }

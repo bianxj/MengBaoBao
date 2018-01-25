@@ -52,15 +52,15 @@ public class MainActivity extends BaseFragmentActivity {
     public static final String SHOW_PAGE = "show_page";
 
     //首页
-    public static final String PAGE_HOME = "home_page";
+    private static final String PAGE_HOME = "home_page";
     //育儿知识
-    public static final String PAGE_BABY_KNOWLEDGE = "baby_knowledge_page";
+    private static final String PAGE_BABY_KNOWLEDGE = "baby_knowledge_page";
     //专家服务
     public static final String PAGE_SPACIALIST_SERVICE = "spacialist_service_page";
     //医院报告
-    public static final String PAGE_HOSPITAL_REPORT = "hospital_report_page";
+    private static final String PAGE_HOSPITAL_REPORT = "hospital_report_page";
     //萌课堂
-    public static final String PAGE_LESSON = "lesson_page";
+    private static final String PAGE_LESSON = "lesson_page";
 
     //抽屉
     private DrawerLayout dl_main;
@@ -81,6 +81,8 @@ public class MainActivity extends BaseFragmentActivity {
     private CheckBox cb_male;
     private TextView tv_baby_name , tv_baby_age;
 
+    private String page;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +90,8 @@ public class MainActivity extends BaseFragmentActivity {
         findView();
         initView();
         initFragment();
-        switchFragment(PAGE_HOME);
+        page = PAGE_HOME;
+        switchFragment(page);
         checkNotification();
     }
 
@@ -139,7 +142,7 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     private void initSideMenu(){
-        List<SideMenuItem> items = new ArrayList<SideMenuItem>();
+        List<SideMenuItem> items = new ArrayList<>();
         items.add(new SideMenuItem(R.drawable.icon_person_center,R.string.person_center,PersonCenterActivity.class));
         items.add(new SideMenuItem(R.drawable.icon_shop,R.string.shop,SpacialistServiceActivity.class));
         items.add(new SideMenuItem(R.drawable.icon_contact,R.string.contact,ContactActivity.class));
@@ -189,7 +192,7 @@ public class MainActivity extends BaseFragmentActivity {
      */
     private void initFragment(){
         fm = getSupportFragmentManager();
-        fragmentMap = new HashMap<String,Fragment>();
+        fragmentMap = new HashMap<>();
         fragmentMap.put(PAGE_HOME,new HomePageFragment());
         fragmentMap.put(PAGE_BABY_KNOWLEDGE,new BabyKnowledgeFragment());
         fragmentMap.put(PAGE_LESSON,new LessonFragment());
@@ -238,9 +241,9 @@ public class MainActivity extends BaseFragmentActivity {
     private void showDefaultFragment(){
         Intent intent = getIntent();
         if ( intent != null && intent.getStringExtra(SHOW_PAGE) != null ){
-            String page = intent.getStringExtra(SHOW_PAGE);
-            switchFragment(page);
+            page = intent.getStringExtra(SHOW_PAGE);
         }
+        switchFragment(page);
     }
 
     private DrawerLayout.DrawerListener drawerListener = new DrawerLayout.DrawerListener() {
@@ -262,19 +265,23 @@ public class MainActivity extends BaseFragmentActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.rl_home_page:
+                    page = PAGE_HOME;
                     switchFragment(PAGE_HOME);
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                     break;
                 case R.id.rl_baby_knowledge:
+                    page = PAGE_BABY_KNOWLEDGE;
                     switchFragment(PAGE_BABY_KNOWLEDGE);
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
                 case R.id.rl_spacialist_service:
+                    page = PAGE_SPACIALIST_SERVICE;
                     switchFragment(PAGE_SPACIALIST_SERVICE);
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
                 case R.id.rl_hospital_report:
                     if ( RoleType.PAY_HOSPITAL_USER == BaseApplication.getInstance().getRoleType() || RoleType.FREE_HOSPITAL_USER == BaseApplication.getInstance().getRoleType() ){
+                        page = PAGE_HOSPITAL_REPORT;
                         switchFragment(PAGE_HOSPITAL_REPORT);
                         dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     } else {
@@ -282,6 +289,7 @@ public class MainActivity extends BaseFragmentActivity {
                     }
                     break;
                 case R.id.rl_meng_lesson:
+                    page = PAGE_LESSON;
                     switchFragment(PAGE_LESSON);
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;

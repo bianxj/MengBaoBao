@@ -105,25 +105,16 @@ public class DiagramView extends View {
     }
 
     private boolean hasPointInDiagram(List<DiagramPoint> points){
-        if ( points == null || points.size() <= 0 ){
-            return false;
-        }
-        return true;
+        return !(points == null || points.size() <= 0);
     }
 
     private boolean isPointInRange(DiagramPoint point){
-        if ( point.getX() < baseInfo.getLowerLimitX()
-                || point.getY() < baseInfo.getLowerLimitY() ){
-            return false;
-        }
-        return true;
+        return !(point.getX() < baseInfo.getLowerLimitX()
+                || point.getY() < baseInfo.getLowerLimitY());
     }
 
     private boolean isSamePoint(DiagramPoint p1 , DiagramPoint p2){
-        if ( p1.getY() == p2.getY() && p1.getX() == p2.getX() ){
-            return true;
-        }
-        return false;
+        return p1.getY() == p2.getY() && p1.getX() == p2.getX();
     }
 
     @Override

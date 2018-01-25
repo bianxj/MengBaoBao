@@ -21,6 +21,9 @@ import com.doumengmengandroidbady.view.MyGifPlayer;
  */
 public class InputMilkActivity extends BaseInputDataActivity {
 
+    public final static String IN_PARAM_FORMULA_MILK = "in_formula_milk";
+    public final static String IN_PARAM_FORMULA_MILK_COUNT = "in_formula_milk_count";
+
     public final static String OUT_PARAM_FORMULA_MILK = "formula_milk";
     public final static String OUT_PARAM_FORMULA_MILK_COUNT = "formula_milk_count";
 
@@ -75,6 +78,14 @@ public class InputMilkActivity extends BaseInputDataActivity {
             tv_formula_content.setText(getResources().getString(R.string.formula_milk_lower_4));
         }
         generateListView(ll_other_content,getResources().getStringArray(R.array.other_milk));
+
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String milk = intent.getStringExtra(IN_PARAM_FORMULA_MILK);
+            String milk_count = intent.getStringExtra(IN_PARAM_FORMULA_MILK_COUNT);
+            et_input_data_one.setText(milk);
+            et_input_data_two.setText(milk_count);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

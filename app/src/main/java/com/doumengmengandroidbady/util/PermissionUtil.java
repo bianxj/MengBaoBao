@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class PermissionUtil {
 
-    public static Map<String,Integer> requestCodeMap;
+    private static Map<String,Integer> requestCodeMap;
 
     static {
         requestCodeMap = new HashMap<>();
@@ -63,10 +63,10 @@ public class PermissionUtil {
         }
     }
 
-    public static interface RequestPermissionSuccess{
-        public void success(String permission);
-        public void denied(String permission);
-        public void alwaysDenied(String permission);
+    public interface RequestPermissionSuccess{
+        void success(String permission);
+        void denied(String permission);
+        void alwaysDenied(String permission);
     }
 
 }

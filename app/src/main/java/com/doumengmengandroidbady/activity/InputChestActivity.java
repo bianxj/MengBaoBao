@@ -22,6 +22,7 @@ import com.doumengmengandroidbady.view.MyGifPlayer;
 
 public class InputChestActivity extends BaseInputDataActivity {
 
+    public final static String IN_PARAM_CHEST = "in_chest";
     public final static String OUT_PARAM_CHEST = "chest";
 
     private RelativeLayout rl_back,rl_complete;
@@ -89,6 +90,12 @@ public class InputChestActivity extends BaseInputDataActivity {
         generateListView(ll_content,getResources().getStringArray(R.array.chest_content));
         //备注
         generateListView(ll_remark,getResources().getStringArray(R.array.chest_remark));
+
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String chest = intent.getStringExtra(IN_PARAM_CHEST);
+            et_input_data.setText(chest);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

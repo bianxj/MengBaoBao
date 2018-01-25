@@ -19,6 +19,7 @@ import com.doumengmengandroidbady.base.BaseInputDataActivity;
  */
 public class InputDaySleepActivity extends BaseInputDataActivity {
 
+    public final static String IN_PARAM_DAY_SLEEP = "in_day_sleep";
     public final static String OUT_PARAM_DAY_SLEEP = "day_sleep";
 
     private RelativeLayout rl_back,rl_complete;
@@ -52,6 +53,12 @@ public class InputDaySleepActivity extends BaseInputDataActivity {
         rl_back.setOnClickListener(listener);
 
         tv_reference.setText(getResources().getStringArray(R.array.sleep_reference)[month]);
+
+        Intent intent = getIntent();
+        if ( intent != null ){
+            String day = intent.getStringExtra(IN_PARAM_DAY_SLEEP);
+            et_input_data.setText(day);
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

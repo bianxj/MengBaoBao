@@ -282,6 +282,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/unuse_tv_phone"
                 android:text="@string/mark"
+                android:tag="@string/TagMark"
                 />
 
             <EditText
@@ -450,7 +451,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/unuse_tv_birth_count"
-                android:text="@string/mark" />
+                android:text="@string/mark"
+                android:tag="@string/TagMark" />
 
             <EditText
                 android:id="@+id/et_birth_count"
@@ -990,6 +992,7 @@
                 style="@style/BlackText26px"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/x25px"
+                android:inputType="text"
                 />
         </RelativeLayout>
         <View
@@ -1065,6 +1068,7 @@
             style="@style/BlackText26px"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/x25px"
+            android:inputType="text"
             />
         </RelativeLayout>
         <View
@@ -1498,6 +1502,7 @@
                 style="@style/BlackText26px"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/x25px"
+                android:inputType="text"
                 />
         </RelativeLayout>
     </LinearLayout>
