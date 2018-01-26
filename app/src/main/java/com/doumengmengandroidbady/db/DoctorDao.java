@@ -60,6 +60,9 @@ public class DoctorDao {
     }
 
     public void saveDoctorList(Context context,List<Doctor> doctors){
+        if ( doctors == null ){
+            return;
+        }
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         db.beginTransaction();
 
@@ -122,6 +125,7 @@ public class DoctorDao {
                 doctorEntities.add(entity);
             }
         }
+        cursor.close();
         DataBaseUtil.closeDataBase();
         return doctorEntities;
     }
@@ -159,6 +163,7 @@ public class DoctorDao {
                 doctorEntities.add(entity);
             }
         }
+        cursor.close();
         DataBaseUtil.closeDataBase();
         return doctorEntities;
     }
@@ -197,6 +202,7 @@ public class DoctorDao {
                 doctorEntities.add(entity);
             }
         }
+        cursor.close();
         DataBaseUtil.closeDataBase();
 
         return doctorEntities;
@@ -234,6 +240,7 @@ public class DoctorDao {
                 doctorEntities.add(entity);
             }
         }
+        cursor.close();
         DataBaseUtil.closeDataBase();
         return doctorEntities;
     }
@@ -256,6 +263,7 @@ public class DoctorDao {
                 entities.add(entity);
             }
         }
+        cursor.close();
         DataBaseUtil.closeDataBase();
         return entities;
     }
@@ -283,6 +291,7 @@ public class DoctorDao {
             doctor.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
             doctor.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
         }
+        cursor.close();
         DataBaseUtil.closeDataBase();
         return doctor;
     }
@@ -310,6 +319,7 @@ public class DoctorDao {
             doctor.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
             doctor.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
         }
+        cursor.close();
         DataBaseUtil.closeDataBase();
         return doctor;
     }

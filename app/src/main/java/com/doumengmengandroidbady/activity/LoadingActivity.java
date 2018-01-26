@@ -279,8 +279,13 @@ public class LoadingActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if ( msg.what == MESSAGE_JUMP_TO_MAIN ) {
-                Intent intent = new Intent(weakReference.get(),MainActivity.class);
-                weakReference.get().startActivity(intent);
+                if ( BaseApplication.getInstance().isAbnormalExit() ){
+                    Intent intent = new Intent(weakReference.get(), InputInfoActivity.class);
+                    weakReference.get().startActivity(intent);
+                } else {
+                    Intent intent = new Intent(weakReference.get(), MainActivity.class);
+                    weakReference.get().startActivity(intent);
+                }
             }
         }
     }

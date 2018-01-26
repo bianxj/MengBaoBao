@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/lightSky">
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,16 +35,17 @@
             android:gravity="center"/>
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1px"
-        android:background="@color/lineGray"></View>
+        android:background="@color/lineGray" />
 
     <ListView
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null"></ListView>
+        android:divider="@null" />
 
 
 </LinearLayout>

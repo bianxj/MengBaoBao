@@ -69,22 +69,22 @@ public class DiagramDataActivity extends BaseActivity {
         datas = GsonUtil.getInstance().getGson().fromJson(param,new TypeToken<List<ImageData>>(){}.getType());
 
         DIAGRAM_TYPE tt;
-        tv_title_left.setText("日期");
+        tv_title_left.setText(getResources().getString(R.string.diagram_data_date));
         if ( type == DIAGRAM_TYPE.TYPE_HEIGHT.ordinal() ){
-            tv_title.setText("身高记录");
+            tv_title.setText(getResources().getString(R.string.diagram_data_height_record));
             tt = DIAGRAM_TYPE.TYPE_HEIGHT;
-            tv_title_center.setText("宝宝年龄");
-            tv_title_right.setText("身高cm");
+            tv_title_center.setText(getResources().getString(R.string.diagram_data_baby_age));
+            tv_title_right.setText(getResources().getString(R.string.diagram_data_height));
         } else if ( type == DIAGRAM_TYPE.TYPE_WEIGHT.ordinal() ){
-            tv_title.setText("体重记录");
+            tv_title.setText(getResources().getString(R.string.diagram_data_weight_record));
             tt = DIAGRAM_TYPE.TYPE_WEIGHT;
-            tv_title_center.setText("宝宝年龄");
-            tv_title_right.setText("体重kg");
+            tv_title_center.setText(getResources().getString(R.string.diagram_data_baby_age));
+            tv_title_right.setText(getResources().getString(R.string.diagram_data_weight));
         } else {
-            tv_title.setText("身长体重比");
+            tv_title.setText(getResources().getString(R.string.diagram_data_height_weight_ratio));
             tt = DIAGRAM_TYPE.TYPE_HEIGHT_WEIGHT;
-            tv_title_center.setText("身高cm");
-            tv_title_right.setText("体重kg");
+            tv_title_center.setText(getResources().getString(R.string.diagram_data_height));
+            tv_title_right.setText(getResources().getString(R.string.diagram_data_weight));
         }
         adapter = new DiagramDataAdapter(this,datas,tt);
         lv.setAdapter(adapter);

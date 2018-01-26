@@ -44,7 +44,7 @@
                     android:id="@+id/tv_doctor_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="马骏"
+                    android:text=""
                     android:textSize="@dimen/y30px"
                     android:textColor="@color/colorBlackText"
                     android:layout_alignParentLeft="true"
@@ -53,26 +53,26 @@
                     android:id="@+id/tv_doctor_position"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="副主任医师"
+                    android:text=""
                     android:textSize="@dimen/y23px"
                     android:textColor="@color/thinPink"
                     android:layout_alignParentRight="true"
                     android:layout_alignBottom="@+id/tv_doctor_name"
                     />
             </RelativeLayout>
+
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y1px"
                 android:background="@color/linkPink"
-                android:layout_marginTop="@dimen/y10px"
-                ></View>
+                android:layout_marginTop="@dimen/y10px" />
 
             <TextView
                 android:id="@+id/tv_doctor_hospital"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y12px"
-                android:text="上海儿童医学中心（上海交通…"
+                android:text=""
                 android:textSize="@dimen/y23px"
                 android:textColor="#808080"
                 android:includeFontPadding="false"
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y10px"
-                android:text="语言障碍、注意缺陷多动障碍、学习障碍、抽…"
+                android:text=""
                 android:textSize="@dimen/y23px"
                 android:textColor="#808080"
                 android:includeFontPadding="false"

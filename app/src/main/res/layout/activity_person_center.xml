@@ -8,7 +8,7 @@
     android:background="@color/lightSky"
     >
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/MoreItemText"
-            android:text="妮妮"
+            android:text=""
             android:layout_toRightOf="@+id/civ_baby_img"
             android:layout_marginLeft="@dimen/x30px"
             android:layout_marginTop="@dimen/y60px"
@@ -65,7 +65,7 @@
                 android:layout_marginLeft="@dimen/x10px"
                 android:layout_toRightOf="@+id/cb_male"
                 android:includeFontPadding="false"
-                android:text="28月20天"
+                android:text=""
                 style="@style/GrayText24px"/>
         </RelativeLayout>
 

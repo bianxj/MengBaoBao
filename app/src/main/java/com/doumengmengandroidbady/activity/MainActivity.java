@@ -28,6 +28,7 @@ import com.doumengmengandroidbady.fragment.HomePageFragment;
 import com.doumengmengandroidbady.fragment.HospitalReportFragment;
 import com.doumengmengandroidbady.fragment.LessonFragment;
 import com.doumengmengandroidbady.fragment.SpacialistServiceFragment;
+import com.doumengmengandroidbady.response.DayList;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.MyDialog;
@@ -201,6 +202,7 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     private void initData(){
+        DayList dayList = BaseApplication.getInstance().getDayList();
         UserData userData = BaseApplication.getInstance().getUserData();
         if (RoleType.FREE_NET_USER == BaseApplication.getInstance().getRoleType() || RoleType.FREE_HOSPITAL_USER == BaseApplication.getInstance().getRoleType()){
             loadHeadImg(userData.isMale(),"");
@@ -212,7 +214,7 @@ public class MainActivity extends BaseFragmentActivity {
             tv_baby_name.setVisibility(View.VISIBLE);
             tv_baby_age.setVisibility(View.VISIBLE);
             cb_male.setVisibility(View.VISIBLE);
-            tv_baby_age.setText(userData.getBabyAge());
+            tv_baby_age.setText(String.format(getResources().getString(R.string.home_page_month_age),dayList.getCurrentMonth(),dayList.getCurrentDay()));
             cb_male.setChecked(userData.isMale());
             tv_baby_name.setText(userData.getTruename());
         }

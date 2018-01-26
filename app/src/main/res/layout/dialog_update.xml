@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/LinkPinkText23px"
-                android:text="82%"
+                android:text=""
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/LinkPinkText23px"
-                android:text="V1.2.0"/>
+                android:text=""/>
         </LinearLayout>
 
         <TextView

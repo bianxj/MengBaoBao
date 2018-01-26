@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include layout="@layout/include_title_back"></include>
+
+    <include layout="@layout/include_title_back" />
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrv_behavior"

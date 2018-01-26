@@ -61,7 +61,7 @@ public class InputHeightActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.height);
+        tv_title.setText(R.string.assessment_height);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);

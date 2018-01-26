@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -43,13 +44,14 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="text"
-                android:text=""/>
+                android:text=""
+                tools:ignore="LabelFor" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -90,12 +92,12 @@
                     android:layout_height="@dimen/y54px"
                     android:background="@drawable/rb_famale"
                     android:button="@null"
-                    android:checked="true"></RadioButton>
+                    android:checked="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="女"
+                    android:text=""
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/x12px"
                     />
@@ -113,7 +115,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="男"
+                    android:text=""
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/x12px"
                     />
@@ -125,13 +127,14 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="text"
-                android:text=""/>
+                android:text=""
+                tools:ignore="LabelFor" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -178,13 +181,14 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="text"
-                android:text=""/>
+                android:text=""
+                tools:ignore="LabelFor" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -209,10 +213,11 @@
                 android:text="@string/mark"
                 android:tag="@string/TagMark"/>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x382px"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -223,7 +228,7 @@
                     android:layout_height="@dimen/y54px"
                     android:background="@drawable/bg_circle_edittext"
                     android:inputType="number"
-                    android:gravity="center"/>
+                    android:gravity="center" />
 
                 <TextView
                     style="@style/GrayText26px"
@@ -242,7 +247,8 @@
                     android:layout_height="@dimen/y54px"
                     android:background="@drawable/bg_circle_edittext"
                     android:inputType="number"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    tools:ignore="LabelFor" />
 
                 <TextView
                     style="@style/GrayText26px"
@@ -258,7 +264,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -290,13 +296,14 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="number"
-                android:text="" />
+                android:text=""
+                tools:ignore="LabelFor" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -326,7 +333,8 @@
                 android:id="@+id/et_baby_weight"
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                tools:ignore="LabelFor" />
 
             <TextView
                 style="@style/GrayText26px"
@@ -340,7 +348,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -371,7 +379,8 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="numberDecimal"
-                android:text="" />
+                android:text=""
+                tools:ignore="LabelFor" />
 
             <TextView
                 style="@style/GrayText26px"
@@ -380,11 +389,12 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:text="@string/cm" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -415,7 +425,8 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="number"
-                android:text="" />
+                android:text=""
+                tools:ignore="LabelFor" />
 
             <TextView
                 style="@style/GrayText26px"
@@ -424,11 +435,12 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:text="@string/count" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -459,7 +471,8 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="number"
-                android:text="" />
+                android:text=""
+                tools:ignore="LabelFor" />
 
             <TextView
                 style="@style/GrayText26px"
@@ -468,11 +481,12 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:text="@string/count" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -503,7 +517,8 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="number"
-                android:text="" />
+                android:text=""
+                tools:ignore="LabelFor" />
 
             <TextView
                 style="@style/GrayText26px"
@@ -517,7 +532,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -577,7 +592,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -670,7 +685,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -742,7 +757,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -802,7 +817,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -862,7 +877,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -923,7 +938,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/lightPink"></View>
+                android:background="@color/lightPink" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -992,15 +1007,16 @@
                 style="@style/BlackText26px"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/x25px"
+                android:paddingRight="@dimen/x25px"
                 android:inputType="text"
-                />
+                tools:ignore="LabelFor" />
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y1px"
             android:background="@color/lightPink"
-            android:layout_alignParentBottom="true"
-            ></View>
+            android:layout_alignParentBottom="true" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px">
@@ -1068,15 +1084,16 @@
             style="@style/BlackText26px"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/x25px"
+            android:paddingRight="@dimen/x25px"
             android:inputType="text"
-            />
+            tools:ignore="LabelFor" />
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y1px"
             android:background="@color/lightPink"
-            android:layout_alignParentBottom="true"
-            ></View>
+            android:layout_alignParentBottom="true" />
         <LinearLayout
             android:id="@+id/ll_past_history"
             android:layout_width="wrap_content"
@@ -1502,8 +1519,9 @@
                 style="@style/BlackText26px"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/x25px"
+                android:paddingRight="@dimen/x25px"
                 android:inputType="text"
-                />
+                tools:ignore="LabelFor" />
         </RelativeLayout>
     </LinearLayout>
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.response.DayList;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.CircleImageView;
@@ -58,13 +59,14 @@ public class PersonCenterActivity extends BaseActivity {
     private void initView(){
         tv_title.setText(R.string.person_center);
 
+        DayList dayList = BaseApplication.getInstance().getDayList();
         UserData userData = BaseApplication.getInstance().getUserData();
         if (BaseApplication.getInstance().isPay()){
             //付费用户
             tv_baby_age.setVisibility(View.VISIBLE);
             cb_male.setVisibility(View.VISIBLE);
             tv_baby_name.setVisibility(View.VISIBLE);
-            tv_baby_age.setText(userData.getBabyAge());
+            tv_baby_age.setText(String.format(getResources().getString(R.string.home_page_month_age),dayList.getCurrentMonth(),dayList.getCurrentDay()));
             cb_male.setChecked(userData.isMale());
             tv_baby_name.setText(userData.getTruename());
             loadHeadImg(userData);

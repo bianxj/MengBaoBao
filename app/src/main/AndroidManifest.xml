@@ -21,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".base.BaseApplication">
+        android:name=".base.BaseApplication"
+        android:fullBackupContent="false">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="FfGPctd4m1kK0zTOF9el2C5fepRDLYZ9" />
@@ -60,7 +61,6 @@
         <activity android:name=".activity.HospitalDoctorActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name=".activity.SpacialistServiceActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.SupplementRecordActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name=".activity.ScanActivity" android:screenOrientation="portrait"></activity>
 

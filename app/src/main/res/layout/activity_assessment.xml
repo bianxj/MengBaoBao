@@ -7,14 +7,15 @@
     android:layout_height="match_parent"
     android:background="@color/lightSky">
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -41,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x166px"
                     android:layout_marginTop="@dimen/y34px"
-                    android:includeFontPadding="false"/>
+                    android:includeFontPadding="false" />
 
                 <TextView
                     android:id="@+id/tv_doctor_hospital"
@@ -99,7 +100,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -127,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -155,7 +156,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -167,7 +168,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/realy_age" />
+                        android:text="@string/assessment_realy_age" />
 
                     <TextView
                         android:id="@+id/tv_realy_age"
@@ -183,7 +184,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -195,7 +196,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/correct_age" />
+                        android:text="@string/assessment_correct_age" />
 
                     <TextView
                         android:id="@+id/tv_correct_age"
@@ -211,7 +212,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -223,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/height" />
+                        android:text="@string/assessment_height" />
 
                     <TextView
                         android:id="@+id/tv_height"
@@ -239,7 +240,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -251,7 +252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/weight" />
+                        android:text="@string/assessment_weight" />
 
                     <TextView
                         android:id="@+id/tv_weight"
@@ -267,7 +268,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -279,7 +280,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/BMI" />
+                        android:text="@string/assessment_BMI" />
 
                     <TextView
                         android:id="@+id/tv_BMI"
@@ -295,7 +296,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -313,7 +314,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/y30px"
-                    android:text="来源：WHO儿童成长标准，世界卫生组织" />
+                    android:text="@string/assessment_source" />
             </LinearLayout>
 
             <LinearLayout
@@ -398,24 +399,27 @@
 
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_developmental_behavior"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="@dimen/y20px"
+                android:background="@color/white"
+                android:orientation="vertical"
                 android:paddingLeft="@dimen/x24px"
-                android:paddingRight="@dimen/x24px"
-                android:background="@color/white">
+                android:paddingRight="@dimen/x24px">
+
                 <TextView
                     android:id="@+id/tv_developmental_title"
+                    style="@style/BlackText28px"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y96px"
                     android:gravity="center_vertical"
-                    android:text="发育行为（28个月）"
-                    style="@style/BlackText28px">
+                    android:text="">
 
                 </TextView>
+
                 <LinearLayout
                     android:id="@+id/ll_developmental_content"
                     android:layout_width="match_parent"
@@ -430,51 +434,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y20px"
+                android:background="@color/white"
+                android:orientation="horizontal"
                 android:paddingLeft="@dimen/x24px"
                 android:paddingRight="@dimen/x24px"
-                android:orientation="horizontal"
-                android:background="@color/white">
+                android:visibility="visible">
+
                 <TextView
+                    style="@style/BlackText28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="评估结果："
                     android:layout_marginTop="@dimen/y34px"
-                    style="@style/BlackText28px"/>
+                    android:text="@string/assessment_result" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y28px"
                     android:layout_marginLeft="@dimen/x52px"
                     android:layout_marginTop="@dimen/y34px"
-                    android:layout_marginBottom="@dimen/y28px"
                     android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/tv_weight_content"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="正常范围内。"
-                            style="@style/GrayText26px"
-                            />
-                        <TextView
-                            android:id="@+id/tv_height_content"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="正常范围内。"
-                            style="@style/GrayText26px"
-                            />
-                        <TextView
-                            android:id="@+id/tv_bmi_content"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="正常"
-                            style="@style/GrayText26px"
-                            />
-                        <TextView
-                            android:id="@+id/tv_other_content"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="正常"
-                            style="@style/GrayText26px"
-                            />
+
+                    <TextView
+                        android:id="@+id/tv_weight_content"
+                        style="@style/GrayText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/tv_height_content"
+                        style="@style/GrayText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/tv_bmi_content"
+                        style="@style/GrayText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/tv_other_content"
+                        style="@style/GrayText26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -483,100 +490,112 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y20px"
+                android:background="@color/white"
+                android:orientation="vertical"
                 android:paddingLeft="@dimen/x24px"
                 android:paddingRight="@dimen/x24px"
-                android:orientation="vertical"
-                android:background="@color/white"
-                >
+                android:visibility="visible">
 
                 <TextView
+                    style="@style/BlackText28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="报告解读："
                     android:layout_marginTop="@dimen/y34px"
-                    style="@style/BlackText28px"/>
+                    android:text="@string/assessment_analysis" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x72px"
                     android:layout_marginBottom="@dimen/y32px"
+                    android:layout_marginLeft="@dimen/x72px"
                     android:layout_marginTop="@dimen/x10px"
                     android:orientation="vertical">
+
                     <TextView
+                        style="@style/GrayText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="一、体格生长评价："
-                        style="@style/GrayText26px"/>
+                        android:text="@string/assessment_body_growth" />
+
                     <TextView
+                        style="@style/GrayText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1.生长趋势（从出生位置水平到现在）"
-                        style="@style/GrayText26px"/>
+                        android:text="@string/assessment_growth_tendency" />
+
                     <TextView
                         android:id="@+id/tv_report_content_1"
+                        style="@style/FourthGrayText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="孩子比较瘦小，体重在P3-10之间，身高情况良好。"
-                        style="@style/FourthGrayText26px"/>
+                        android:text="" />
+
                     <TextView
+                        style="@style/GrayText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2.生长水平（本次测量的水平）"
-                        style="@style/GrayText26px"/>
+                        android:text="@string/assessment_growth_level" />
+
                     <TextView
                         android:id="@+id/tv_report_content_2"
+                        style="@style/FourthGrayText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="孩子比较瘦小，体重在P3-10之间，身高情况良好。"
-                        style="@style/FourthGrayText26px"/>
+                        android:text="" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x2px"
-                    android:background="@color/linkLightPink"></View>
+                    android:background="@color/linkLightPink" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x72px"
                     android:layout_marginBottom="@dimen/y32px"
+                    android:layout_marginLeft="@dimen/x72px"
                     android:layout_marginTop="@dimen/y32px"
                     android:orientation="vertical">
+
                     <TextView
+                        style="@style/GrayText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="二、发育评价："
-                        style="@style/GrayText26px"/>
+                        android:text="@string/assessment_growth_result" />
+
                     <TextView
                         android:id="@+id/tv_report_content_3"
+                        style="@style/FourthGrayText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="孩子比较瘦小，体重在P3-10之间，身高情况良好。"
-                        style="@style/FourthGrayText26px"/>
+                        android:text="" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x2px"
-                    android:background="@color/linkLightPink"></View>
+                    android:background="@color/linkLightPink" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x72px"
                     android:layout_marginBottom="@dimen/y32px"
+                    android:layout_marginLeft="@dimen/x72px"
                     android:layout_marginTop="@dimen/y32px"
                     android:orientation="vertical">
+
                     <TextView
+                        style="@style/GrayText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="三、医生的指导建议（包含对家长留言回复）"
-                        style="@style/GrayText26px"/>
+                        android:text="@string/assessment_doctor_suggest" />
+
                     <TextView
                         android:id="@+id/tv_report_content_4"
+                        style="@style/FourthGrayText26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="孩子比较瘦小，体重在P3-10之间，身高情况良好。"
-                        style="@style/FourthGrayText26px"/>
+                        android:text="" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -584,27 +603,29 @@
                 android:id="@+id/rl_prompt_message"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y153px">
+
                 <TextView
                     android:id="@+id/tv_prompt_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="@dimen/x480px"
-                    android:lineSpacingExtra="@dimen/y10px"
-                    android:gravity="center"
                     android:layout_centerInParent="true"
-                    android:textColor="@color/colorPrimary"
-                    />
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/y10px"
+                    android:maxWidth="@dimen/x480px"
+                    android:textColor="@color/colorPrimary" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rl_parenting_guide"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y153px">
+
                 <ImageView
                     android:id="@+id/iv_parenting_guide"
                     android:layout_width="@dimen/x408px"
                     android:layout_height="@dimen/x107px"
-                    android:background="@drawable/btn_parenting_guide"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_parenting_guide" />
             </RelativeLayout>
         </LinearLayout>
 

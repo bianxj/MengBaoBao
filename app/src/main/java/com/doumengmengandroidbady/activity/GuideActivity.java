@@ -7,7 +7,6 @@ import android.widget.Button;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.util.NotificationUtil;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.DiagramView;
 
@@ -55,7 +54,7 @@ public class GuideActivity extends BaseActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.bt_guide_register:
-                    NotificationUtil.showNotification(GuideActivity.this);
+//                    NotificationUtil.showNotification(GuideActivity.this);
 //                    MyDialog.showPayDialog(GuideActivity.this, findViewById(R.id.rl_parent), new MyDialog.PayCallBack() {
 //                        @Override
 //                        public void alipay() {
@@ -67,7 +66,7 @@ public class GuideActivity extends BaseActivity {
 //
 //                        }
 //                    },30.00F,15*60);
-//                    startActivity(RegisterActivity.class);
+                    startActivity(RegisterActivity.class);
                     break;
                 case R.id.bt_guide_login:
                     startActivity(LoginActivity.class);

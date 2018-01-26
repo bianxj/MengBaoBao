@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x127px"
-            android:text="36777447" />
+            android:text="" />
 
         <ImageView
             android:layout_width="@dimen/x21px"
@@ -32,12 +32,12 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x48px"
             android:src="@drawable/right_allow" />
+
         <View
             android:layout_width="@dimen/x596px"
             android:layout_height="@dimen/y1px"
             android:background="@color/lineGray"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            ></View>
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </RelativeLayout>

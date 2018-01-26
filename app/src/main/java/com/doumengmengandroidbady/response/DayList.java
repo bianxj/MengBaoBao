@@ -1,6 +1,8 @@
 package com.doumengmengandroidbady.response;
 
 
+import android.text.TextUtils;
+
 public class DayList {
 
     private String correntDay;
@@ -39,4 +41,12 @@ public class DayList {
     public void setCorrentMonth(String correntMonth) {
         this.correntMonth = correntMonth;
     }
+
+    public boolean notNull(){
+        if (!TextUtils.isEmpty(currentDay) && !TextUtils.isEmpty(currentMonth)){
+            return true;
+        }
+        return false;
+    }
+
 }

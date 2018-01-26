@@ -4,8 +4,9 @@
         android:bottomLeftRadius="@dimen/y56px"
         android:bottomRightRadius="@dimen/y56px"
         android:topLeftRadius="@dimen/y56px"
-        android:topRightRadius="@dimen/y56px"
-        ></corners>
-    <stroke android:color="@color/editFrame" android:width="@dimen/y2px"></stroke>
-    <size android:height="@dimen/y56px"></size>
+        android:topRightRadius="@dimen/y56px" />
+    <stroke
+        android:color="@color/editFrame"
+        android:width="@dimen/y2px" />
+    <size android:height="@dimen/y56px" />
 </shape>

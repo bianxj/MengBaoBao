@@ -37,6 +37,9 @@ public class GrowthDao {
     }
 
     public void saveGrowthList(Context context, List<Growth> growths){
+        if ( growths == null ){
+            return;
+        }
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         db.beginTransaction();
         for (int i = 0; i < growths.size() ;i++){
@@ -61,6 +64,7 @@ public class GrowthDao {
         while ( cursor.moveToNext() ){
             contents.add(cursor.getString(0));
         }
+        cursor.close();
         DataBaseUtil.closeDataBase();
         return contents;
     }

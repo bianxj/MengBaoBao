@@ -60,6 +60,9 @@ public class HospitalDao {
     }
 
     public void saveHospitalList(Context context, List<Hospital> hospitals){
+        if ( hospitals == null ){
+            return;
+        }
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         db.beginTransaction();
 
@@ -107,6 +110,7 @@ public class HospitalDao {
             has = true;
         }
 
+        cursor.close();
         DataBaseUtil.closeDataBase();
         return has;
     }
@@ -136,6 +140,7 @@ public class HospitalDao {
                 entity.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
                 entities.add(entity);
             }
+            cursor.close();
         }
         DataBaseUtil.closeDataBase();
         return entities;
@@ -165,6 +170,7 @@ public class HospitalDao {
                 entity.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
                 entities.add(entity);
             }
+            cursor.close();
         }
         DataBaseUtil.closeDataBase();
         return entities;

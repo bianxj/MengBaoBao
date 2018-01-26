@@ -124,8 +124,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y1px"
-            android:background="@color/lineGray"
-            ></View>
+            android:background="@color/lineGray" />
 
         <Button
             android:id="@+id/bt_clear_history"
@@ -142,11 +141,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:overScrollMode="never"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+            android:overScrollMode="never" />
     </FrameLayout>
 
 </LinearLayout>

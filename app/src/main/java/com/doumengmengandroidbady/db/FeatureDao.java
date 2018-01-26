@@ -51,6 +51,9 @@ public class FeatureDao {
     }
 
     public void saveFeatureList(Context context, List<Feature> features){
+        if ( features == null ){
+            return;
+        }
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         db.beginTransaction();
 
@@ -115,6 +118,8 @@ public class FeatureDao {
             features.add(feature);
         }
 
+        cursor.close();
+        DataBaseUtil.closeDataBase();
         return features;
     }
 
@@ -144,6 +149,8 @@ public class FeatureDao {
             list.add(cursor.getString(cursor.getColumnIndex(DETAIL_DESC)));
         }
 
+        cursor.close();
+        DataBaseUtil.closeDataBase();
         return maps;
     }
 

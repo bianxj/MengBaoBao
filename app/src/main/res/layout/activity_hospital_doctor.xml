@@ -7,7 +7,7 @@
     android:background="@color/lightSky"
     >
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrv_doctor"

@@ -40,7 +40,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/y24px"
                 android:includeFontPadding="false"
-                android:text="妮妮"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/y52px" />
 
@@ -97,7 +97,7 @@
                     android:layout_marginRight="@dimen/x25px"
                     android:layout_toRightOf="@+id/cb_male"
                     android:includeFontPadding="false"
-                    android:text="28月20天"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="@dimen/y26px" />
             </RelativeLayout>
@@ -153,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/MainPageItemTitle"
-                android:text="观察要点"
+                android:text="@string/home_page_observe_point"
                 android:layout_marginLeft="@dimen/x11px"/>
         </LinearLayout>
         <TextView
@@ -161,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/MainPageItemText"
-            android:text="宝妈，您有注意到宝宝的这些变化吗？"
+            android:text="@string/home_page_observe_point_content"
             android:layout_marginLeft="@dimen/x40px"
             android:layout_marginTop="@dimen/y10px"/>
     </LinearLayout>
@@ -192,7 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/MainPageItemTitle"
-                android:text="萌宝宝医生"
+                android:text="@string/home_page_doctor_list"
                 android:layout_marginLeft="@dimen/x11px"/>
         </LinearLayout>
         <TextView
@@ -200,7 +200,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/MainPageItemText"
-            android:text="宝妈，你可以为您的宝宝选择专属医生"
+            android:text="@string/home_page_doctor_list_content"
             android:layout_marginLeft="@dimen/x40px"
             android:layout_marginTop="@dimen/y10px"/>
     </LinearLayout>

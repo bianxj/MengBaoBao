@@ -6,7 +6,7 @@
     android:focusable="true"
     android:orientation="vertical">
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:overScrollMode="never">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -1545,7 +1545,7 @@
                 android:id="@+id/parent_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></com.doumengmengandroidbady.view.ParentInfoLayout>
+                android:orientation="vertical" />
 
 <!--            <RelativeLayout
                 android:layout_width="match_parent"

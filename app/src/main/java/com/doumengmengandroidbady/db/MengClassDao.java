@@ -35,6 +35,9 @@ public class MengClassDao {
     }
 
     public void saveMengClassList(Context context, List<MengClass> mengClasses){
+        if ( mengClasses == null ){
+            return;
+        }
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         db.beginTransaction();
         for (int i = 0; i < mengClasses.size() ;i++){

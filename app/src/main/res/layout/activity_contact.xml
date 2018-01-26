@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     >
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <ImageView
         android:layout_width="@dimen/y318px"

@@ -211,6 +211,9 @@ public class BaseApplication extends Application {
     }
 
     public void saveParentInfo(ParentInfo parentInfo){
+        if ( parentInfo == null ){
+            return;
+        }
         this.parentInfo = parentInfo;
         String data = GsonUtil.getInstance().getGson().toJson(parentInfo);
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_PARENT,data);
@@ -257,6 +260,9 @@ public class BaseApplication extends Application {
 
     public boolean isUpperThan37Month(){
         DayList list = getDayList();
+        if ( list == null || !list.notNull() ){
+            return false;
+        }
         int month = Integer.parseInt(list.getCurrentMonth());
         int day = Integer.parseInt(list.getCurrentDay());
         return month >= 37;
@@ -274,6 +280,16 @@ public class BaseApplication extends Application {
         recordTimes++;
         userData.setRecordtimes(recordTimes+"");
         saveUserData(userData);
+    }
+
+    public void payRoleType(){
+        RoleType roleType = getRoleType();
+        UserData userData = getUserData();
+        if ( roleType == RoleType.FREE_NET_USER ){
+            setRoleType(RoleType.PAY_NET_USER);
+        } else if ( roleType == RoleType.FREE_HOSPITAL_USER ){
+            setRoleType(RoleType.PAY_HOSPITAL_USER);
+        }
     }
 
     //----------------------------------------------------------------------------------------------
@@ -325,19 +341,33 @@ public class BaseApplication extends Application {
         return RoleType.PAY_HOSPITAL_USER == getRoleType() || RoleType.PAY_NET_USER == getRoleType();
     }
 
+    private void setRoleType(RoleType roleType){
+        UserData userData = getUserData();
+        if ( roleType == RoleType.PAY_NET_USER ){
+            userData.setRoletype("1");
+        } else if ( roleType == RoleType.FREE_HOSPITAL_USER ){
+            userData.setRoletype("3");
+        } else if ( roleType == RoleType.PAY_HOSPITAL_USER ){
+            userData.setRoletype("2");
+        } else {
+            userData.setRoletype("0");
+        }
+        saveUserData(userData);
+    }
+
     public RoleType getRoleType(){
         UserData data = getUserData();
         String roleType = data.getRoletype();
-//        if ( "3".equals(roleType) ) {
-//            return RoleType.FREE_HOSPITAL_USER;
-//        } else if ( "1".equals(roleType) ){
-//            return RoleType.PAY_NET_USER;
-//        } else if ( "2".equals(roleType) ){
-//            return RoleType.PAY_HOSPITAL_USER;
-//        } else {
-//            return RoleType.FREE_NET_USER;
-//        }
-        return RoleType.PAY_NET_USER;
+        if ( "3".equals(roleType) ) {
+            return RoleType.FREE_HOSPITAL_USER;
+        } else if ( "1".equals(roleType) ){
+            return RoleType.PAY_NET_USER;
+        } else if ( "2".equals(roleType) ){
+            return RoleType.PAY_HOSPITAL_USER;
+        } else {
+            return RoleType.FREE_NET_USER;
+        }
+//        return RoleType.PAY_NET_USER;
     }
 
     private final static String PERSON_DIR = "person";

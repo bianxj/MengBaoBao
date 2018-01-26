@@ -14,6 +14,7 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
+import com.doumengmengandroidbady.response.DayList;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
@@ -164,6 +165,8 @@ public class InputInfoActivity extends BaseActivity {
                 JSONObject object =  new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
                 if ( 1 == res.optInt("isSaveUser") ){
+                    DayList dayList = GsonUtil.getInstance().getGson().fromJson(res.getJSONObject("DayList").toString(),DayList.class);
+                    BaseApplication.getInstance().saveDayList(dayList);
                     startActivity(RecordActivity.class);
                 } else {
                     //TODO ?

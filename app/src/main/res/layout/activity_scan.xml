@@ -63,6 +63,6 @@
             />
         </FrameLayout>
 
-        <include layout="@layout/include_title_back"></include>
+        <include layout="@layout/include_title_back" />
     </FrameLayout>
 </FrameLayout>

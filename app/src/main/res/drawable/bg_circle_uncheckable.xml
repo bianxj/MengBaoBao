@@ -4,8 +4,7 @@
         android:bottomLeftRadius="@dimen/y56px"
         android:bottomRightRadius="@dimen/y56px"
         android:topLeftRadius="@dimen/y56px"
-        android:topRightRadius="@dimen/y56px"
-        ></corners>
-    <solid android:color="@color/fourthGray"></solid>
-    <size android:height="@dimen/y56px"></size>
+        android:topRightRadius="@dimen/y56px" />
+    <solid android:color="@color/fourthGray" />
+    <size android:height="@dimen/y56px" />
 </shape>

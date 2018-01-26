@@ -21,7 +21,7 @@
             android:layout_height="@dimen/y156px"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            >
+            android:baselineAligned="false">
             <RelativeLayout
                 android:id="@+id/rl_home_page"
                 android:layout_width="0dp"
@@ -181,7 +181,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/BlackText30px"
-                    android:text="测试"/>
+                    android:text=""/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x5px"
                         style="@style/GrayText24px"
-                        android:text="28月22天"
+                        android:text=""
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -209,15 +209,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y1px"
-            android:background="@color/lineGray"
-            ></View>
+            android:background="@color/lineGray" />
 
         <ListView
             android:id="@+id/lv_side_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/transparent"
-            ></ListView>
+            android:divider="@color/transparent" />
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

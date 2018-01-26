@@ -57,14 +57,14 @@ public class DiagramDataAdapter extends BaseAdapter {
 
         tv_left.setText(data.getRecordtime().split(" ")[0]);
         if ( type == DiagramDataActivity.DIAGRAM_TYPE.TYPE_HEIGHT){
-            tv_center.setText(data.getMonthAge()+"个月"+data.getMonthDay()+"天");
-            tv_right.setText(data.getHeight()+"");
+            tv_center.setText(String.format(context.getResources().getString(R.string.diagram_data_month_day),data.getMonthAge(),data.getMonthDay()));
+            tv_right.setText(String.valueOf(data.getHeight()));
         } else if ( type == DiagramDataActivity.DIAGRAM_TYPE.TYPE_WEIGHT){
-            tv_center.setText(data.getMonthAge()+"个月"+data.getMonthDay()+"天");
-            tv_right.setText(data.getWeight()+"");
+            tv_center.setText(String.format(context.getResources().getString(R.string.diagram_data_month_day),data.getMonthAge(),data.getMonthDay()));
+            tv_right.setText(String.valueOf(data.getWeight()));
         } else {
-            tv_center.setText(data.getHeight()+"");
-            tv_right.setText(data.getWeight()+"");
+            tv_center.setText(String.valueOf(data.getHeight()));
+            tv_right.setText(String.valueOf(data.getWeight()));
         }
         return view;
     }

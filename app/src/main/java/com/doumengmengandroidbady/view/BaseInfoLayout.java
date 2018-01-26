@@ -354,8 +354,8 @@ public class BaseInfoLayout extends LinearLayout {
         et_baby_name.setText(userData.getTruename());
         et_baby_gender.setText("1".equals(userData.getSex())?"男":"女");
         et_baby_birthday.setText(userData.getBirthday());
-        et_week.setText(userData.getWeekdvalue());
-        et_day.setText(userData.getDaydvalue());
+        et_week.setText(userData.getPregnancyweeks());
+        et_day.setText(userData.getPregnancydays());
         et_phone.setText(userData.getAccountmobile());
         et_baby_height.setText(userData.getBornheight());
         et_baby_weight.setText(userData.getBornweight());

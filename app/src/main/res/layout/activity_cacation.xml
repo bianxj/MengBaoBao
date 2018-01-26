@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -9,14 +10,14 @@
     android:focusableInTouchMode="true"
     >
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             >
@@ -37,7 +38,7 @@
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
                             android:inputType="number"
-                            />
+                            tools:ignore="LabelFor" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -53,7 +54,7 @@
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
                             android:inputType="number"
-                            />
+                            tools:ignore="LabelFor" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -68,8 +69,7 @@
                 android:layout_width="@dimen/x681px"
                 android:layout_height="@dimen/y1px"
                 android:background="@color/linePink"
-                android:layout_marginTop="@dimen/y48px"
-                ></View>
+                android:layout_marginTop="@dimen/y48px" />
 
             <LinearLayout
                 android:id="@+id/ll_content"

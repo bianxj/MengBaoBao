@@ -44,7 +44,7 @@
                 android:layout_weight="1"
                 style="@style/DialogPinkText34px"
                 android:gravity="center"
-                android:text="@string/go_on"/>
+                android:text="@string/dialog_btn_go_on"/>
             <View
                 android:layout_width="@dimen/y1px"
                 android:layout_height="match_parent"
@@ -57,7 +57,7 @@
                 android:layout_weight="1"
                 style="@style/DialogPinkText34px"
                 android:gravity="center"
-                android:text="@string/go_on"/>
+                android:text="@string/dialog_btn_go_on"/>
         </LinearLayout>
     </LinearLayout>
 

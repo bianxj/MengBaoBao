@@ -39,6 +39,20 @@
     <string name="hospital_report">医院报告</string>
     <string name="meng_lesson">萌课堂</string>
 
+    <!--HomePageFragment-->
+    <string name="home_page_observe_point">观察要点</string>
+    <string name="home_page_observe_point_content">宝妈，您有注意到宝宝的这些变化吗？</string>
+    <string name="home_page_doctor_list">萌宝宝医生</string>
+    <string name="home_page_doctor_list_content">宝妈，你可以为您的宝宝选择专属医生</string>
+    <string name="home_page_month_age">%s周%s日</string>
+
+    <!--SpacialistServiceFragment-->
+    <string name="spacialist_service_buy">购买</string>
+    <string name="spacialist_service_count">您还剩%s次测评</string>
+
+    <!--ItemRecord-->
+    <string name="item_record_unread">未读</string>
+
     <!--AgreementActivity信息-->
     <string name="agreement_name">使用协议</string>
     <string name="mark_read">我已阅读</string>
@@ -71,6 +85,7 @@
     <!--SettingActivity信息-->
     <string name="change_pwd">修改密码</string>
     <string name="agreement">使用协议</string>
+    <string name="setting_version">版本号%s</string>
 
     <!--ChangePwdActivity信息-->
     <string name="old_pwd">旧密码</string>
@@ -253,13 +268,6 @@
     <string name="kg">kg</string>
     <string name="age">岁</string>
 
-    <!--AssessmentActivity-->
-    <string name="realy_age">实足年龄</string>
-    <string name="correct_age">矫正月龄</string>
-    <string name="height">身长</string>
-    <string name="weight">体重</string>
-    <string name="BMI">BMI</string>
-
     <!--ObserveActivity-->
     <string name="oberve_matter">观察要点</string>
 
@@ -273,6 +281,7 @@
 
     <!--RecordActivity-->
     <string name="record">记录</string>
+    <string name="record_month_age">%s个月%s天</string>
 
     <string name="really_month">实际月龄:</string>
     <string name="correct_month">矫正月龄</string>
@@ -330,22 +339,62 @@
     <string name="input_info">填写信息</string>
 
     <!--AssessmentActivity-->
+    <string name="assessment_realy_age">实足年龄</string>
+    <string name="assessment_correct_age">矫正月龄</string>
+    <string name="assessment_height">身长</string>
+    <string name="assessment_weight">体重</string>
+    <string name="assessment_BMI">BMI</string>
+    <string name="assessment_develop_month">发育行为（%s个月）</string>
     <string name="assessment">评估</string>
-    
+    <string name="assessment_source">来源：WHO儿童成长标准，世界卫生组织</string>
+    <string name="assessment_result">评估结果：</string>
+    <string name="assessment_analysis">报告解读：</string>
+    <string name="assessment_body_growth">一、体格生长评价：</string>
+    <string name="assessment_growth_tendency">1.生长趋势（从出生位置水平到现在）</string>
+    <string name="assessment_growth_level">2.生长水平（本次测量的水平）</string>
+    <string name="assessment_growth_result">二、发育评价：</string>
+    <string name="assessment_doctor_suggest">三、医生的指导建议（包含对家长留言回复）</string>
+    <string name="assessment_wait_message">72小时内看到医生的养育指导和评估</string>
+    <string name="assessment_refund_message">抱歉，医生未能按约给予评估及指导，
+已为您退款或在途中！</string>
+
+    <!--HospitalReportActivity-->
+    <string name="hospital_report_title">婴幼儿生长发育监测评估报告单</string>
+
+    <!--DiagramDataActivity-->
+    <string name="diagram_data_date">日期</string>
+
+    <string name="diagram_data_height_record">身高记录</string>
+    <string name="diagram_data_baby_age">宝宝年龄</string>
+    <string name="diagram_data_height">身高cm</string>
+    <string name="diagram_data_weight_record">体重记录</string>
+    <string name="diagram_data_weight">体重kg</string>
+    <string name="diagram_data_height_weight_ratio">身长体重比</string>
+    <string name="diagram_data_month_day">%d个月%d天</string>
+
     <!--Dialog-->
-    <string name="camera_permission">请打开相机权限</string>
-    <string name="storage_permission">请打开存储权限</string>
-    <string name="location_permission">定位服务为开启,请在系统中开启定位服务</string>
-    <string name="read_phone_permission">请打开电话权限</string>
-    <string name="btn_prompt_later">暂不</string>
-    <string name="btn_prompt_go_setting">去设置</string>
+    <string name="dialog_content_camera_permission">请打开相机权限</string>
+    <string name="dialog_content_storage_permission">请打开存储权限</string>
+    <string name="dialog_content_location_permission">定位服务为开启,请在系统中开启定位服务</string>
+    <string name="dialog_content_read_phone_permission">请打开电话权限</string>
+    <string name="dialog_price">￥%s</string>
+    <string name="dialog_btn_prompt_later">暂不</string>
+    <string name="dialog_btn_prompt_go_setting">去设置</string>
     
     <string name="update_content">的用户正在使用新版本</string>
     <string name="change_pwd_content">修改密码成功</string>
-    <string name="go_on">继续</string>
+    <string name="dialog_btn_go_on">继续</string>
     
-    <string name="notification_message">请允许我们向您发送通知</string>
-    <string name="notification_message_2">让您不错过每一条育儿知识</string>
+    <string name="dialog_title_notification">请允许我们向您发送通知</string>
+    <string name="dialog_content_notification">让您不错过每一条育儿知识</string>
+    <string name="dialog_updating">正在更新...</string>
+
+    <string name="dialog_lost_pay_time">支付剩余时间</string>
+    <string name="dialog_once_package">单次套餐</string>
+    <string name="dialog_btn_pay">确认支付</string>
+
+    <!--Footer-->
+    <string name="footer_load_more">……正在载入</string>
 
     <!--ErrorMsg-->
     <string name="prompt_bt_edit">返回修改</string>
@@ -383,6 +432,7 @@
     <string name="TagReadOnly">readonly</string>
     <string name="TagNetEdit">netEdit</string>
 
+    <string name="default_city">北京市</string>
     <string-array name="citys">
         <item>北京市</item>
         <item>天津市</item>

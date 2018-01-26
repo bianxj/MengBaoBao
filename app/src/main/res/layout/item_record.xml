@@ -21,7 +21,7 @@
             android:background="@drawable/bg_circle_read"
             style="@style/WhiteText22px"
             android:gravity="center"
-            android:text="未读"
+            android:text="@string/item_record_unread"
             />
 
         <ImageView
@@ -39,7 +39,7 @@
             android:layout_marginLeft="@dimen/x133px"
             android:layout_marginTop="@dimen/y22px"
             android:includeFontPadding="false"
-            android:text="2017.11.11"
+            android:text=""
             style="@style/SmallBlackText"
             android:textSize="@dimen/y26px"
             />
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/SmallGrayText"
-            android:text="正常范围"
+            android:text=""
             android:layout_marginLeft="@dimen/x304px"
             android:layout_marginTop="@dimen/y76px"
             android:includeFontPadding="false"
@@ -123,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/SmallGrayText"
-            android:text="正常范围"
+            android:text=""
             android:layout_marginLeft="@dimen/x304px"
             android:layout_marginTop="@dimen/y125px"
             android:includeFontPadding="false"
@@ -134,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/SmallGrayText"
-            android:text="正常范围"
+            android:text=""
             android:layout_marginLeft="@dimen/x488px"
             android:layout_marginTop="@dimen/y76px"
             android:includeFontPadding="false"
@@ -145,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/SmallGrayText"
-            android:text="正常范围"
+            android:text=""
             android:layout_marginLeft="@dimen/x488px"
             android:layout_marginTop="@dimen/y125px"
             android:includeFontPadding="false"

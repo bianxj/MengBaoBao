@@ -76,7 +76,6 @@ public class BabyKnowledgeDetailsActivity extends BaseActivity {
         wv.setVerticalScrollBarEnabled(false);
         wv.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         WebSettings settings = wv.getSettings();
-        settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
         settings.setLoadsImagesAutomatically(true);
         settings.setDomStorageEnabled(true);

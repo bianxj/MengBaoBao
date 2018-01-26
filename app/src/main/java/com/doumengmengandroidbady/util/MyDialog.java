@@ -111,7 +111,7 @@ public class MyDialog {
     }
 
     public static void showPromptDialog(Context context, String content, final PromptDialogCallback callback){
-        showPromptDialog(context,content,R.string.go_on,callback);
+        showPromptDialog(context,content,R.string.dialog_btn_go_on,callback);
     }
 
     private static void showPromptDialog(Context context, String content, int sure, final PromptDialogCallback callback){
@@ -158,7 +158,7 @@ public class MyDialog {
     }
 
     public static void showPermissionDialog(Context context,String content,ChooseDialogCallback callback){
-        showChooseDialog(context,content,R.string.btn_prompt_later,R.string.btn_prompt_go_setting,callback);
+        showChooseDialog(context,content,R.string.dialog_btn_prompt_later,R.string.dialog_btn_prompt_go_setting,callback);
     }
 
     public static void showChooseDialog(Context context,String content,int cancel,int sure,final ChooseDialogCallback callback){
@@ -267,7 +267,7 @@ public class MyDialog {
             tv_time.setTag(timeOut);
 
             TextView tv_price = contentView.findViewById(R.id.tv_price);
-            tv_price.setText("￥"+price);
+            tv_price.setText(String.format(context.getResources().getString(R.string.dialog_price),price));
 
             ListView lv = contentView.findViewById(R.id.lv);
             List<PayAdapter.PayData> datas = new ArrayList<>();

@@ -13,6 +13,7 @@ import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * 作者:边贤君
@@ -30,8 +31,8 @@ public class MLog {
     private SimpleDateFormat fileFormat;
     private Builder builder;
     private MLog(Builder builder){
-        format = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
-        fileFormat = new SimpleDateFormat("yyyy-MM-DD");
+        format = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss", Locale.CHINA);
+        fileFormat = new SimpleDateFormat("yyyy-MM-DD", Locale.CHINA);
         this.builder = builder;
     }
 

@@ -22,6 +22,7 @@ import com.doumengmengandroidbady.activity.MainActivity;
 import com.doumengmengandroidbady.activity.ObserveActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragment;
+import com.doumengmengandroidbady.response.DayList;
 import com.doumengmengandroidbady.response.UserData;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.CircleImageView;
@@ -96,6 +97,7 @@ public class HomePageFragment extends BaseFragment {
     }
 
     private void initData(){
+        DayList dayList = BaseApplication.getInstance().getDayList();
         UserData userData = BaseApplication.getInstance().getUserData();
         if ( BaseApplication.getInstance().isPay() ) {
             tv_baby_name.setVisibility(View.VISIBLE);
@@ -103,7 +105,7 @@ public class HomePageFragment extends BaseFragment {
 
             tv_baby_name.setText(userData.getTruename());
             cb_male.setChecked(userData.isMale());
-            tv_baby_age.setText(userData.getBabyAge());
+            tv_baby_age.setText(String.format(getResources().getString(R.string.home_page_month_age),dayList.getCurrentMonth(),dayList.getCurrentDay()));
             loadHeadImg(userData.isMale(),userData.getHeadimg());
         } else {
             tv_baby_name.setVisibility(View.INVISIBLE);

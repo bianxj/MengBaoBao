@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <ScrollView
         android:id="@+id/sv"
@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y26px"
                 android:gravity="center"
-                android:text="上海交通大学医学院附属上海儿童医学中心" />
+                android:text="" />
 
             <TextView
                 style="@style/BlackText28px"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y18px"
                 android:gravity="center"
-                android:text="婴幼儿生长发育监测评估报告单" />
+                android:text="@string/hospital_report_title" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -230,7 +230,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -260,7 +260,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -290,7 +290,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -320,7 +320,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -350,7 +350,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -461,7 +461,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -490,7 +490,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -537,7 +537,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -566,7 +566,7 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink"></View>
+                android:background="@color/linePink" />
 
             <TextView
                 android:layout_width="match_parent"

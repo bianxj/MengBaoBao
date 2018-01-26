@@ -8,6 +8,7 @@
     <RelativeLayout
         android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/y100px">
+
         <View
             android:id="@+id/line1"
             android:layout_width="@dimen/x201px"
@@ -16,16 +17,16 @@
             android:background="@color/lineGray"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/x48px"
-            android:visibility="gone"
-            ></View>
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/tv_loading_text"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             style="@style/GrayText24px"
             android:text="……正在载入"
-            android:layout_centerInParent="true"
-            ></TextView>
+            android:layout_centerInParent="true" />
+
         <View
             android:id="@+id/line2"
             android:layout_width="@dimen/x201px"
@@ -34,8 +35,7 @@
             android:background="@color/lineGray"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x48px"
-            android:visibility="gone"
-            ></View>
+            android:visibility="gone" />
     </RelativeLayout>
 
 </LinearLayout>

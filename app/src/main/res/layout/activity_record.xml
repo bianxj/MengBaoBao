@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightSky"
@@ -7,14 +8,14 @@
     android:focusableInTouchMode="true"
     >
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/lightSky">
 
@@ -25,7 +26,8 @@
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/Record_Padding_Left"
                 android:paddingRight="@dimen/Record_Padding_Right"
-                android:visibility="visible">
+                android:visibility="visible"
+                android:baselineAligned="false">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -48,7 +50,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/x10px"
                         android:layout_toRightOf="@+id/unuse_really_month"
-                        android:text="24个月5天" />
+                        android:text="" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -73,7 +75,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/x10px"
                         android:layout_toRightOf="@+id/unuse_correct_month"
-                        android:text="24个月5天" />
+                        android:text="" />
                 </RelativeLayout>
             </LinearLayout>
             
@@ -119,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_SubTitle_Margin_Left"
-                        android:text="@string/height" />
+                        android:text="@string/assessment_height" />
 
                     <TextView
                         android:id="@+id/tv_height"
@@ -144,7 +146,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_SubTitle_Margin_Right"
-                        android:text="@string/weight" />
+                        android:text="@string/assessment_weight" />
 
                     <TextView
                         android:id="@+id/tv_weight"
@@ -167,7 +169,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -291,7 +293,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -335,7 +337,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -379,7 +381,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -485,7 +487,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -522,7 +524,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -559,7 +561,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -644,7 +646,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -661,7 +664,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -683,7 +686,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -710,7 +714,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -727,7 +732,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -749,7 +754,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -776,7 +782,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -793,7 +800,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -815,7 +822,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -832,7 +840,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -854,7 +862,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -871,7 +880,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -893,7 +902,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -920,7 +930,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -937,7 +948,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -958,7 +969,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -985,7 +997,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
 
                     <TextView
@@ -1002,7 +1015,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -1023,7 +1036,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Dosage_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
                     <TextView
                         style="@style/LinkPinkText21px"
@@ -1039,7 +1053,7 @@
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -1060,7 +1074,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Dosage_Input_Margin_Left"
                         android:inputType="number"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
                     <TextView
                         style="@style/LinkPinkText21px"
@@ -1070,12 +1085,13 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
                         android:text="@string/mg_day" />
+
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -1098,14 +1114,15 @@
                         android:layout_marginLeft="@dimen/x180px"
                         android:inputType="text"
                         android:gravity="left|center_vertical"
-                        android:lines="1" />
+                        android:lines="1"
+                        tools:ignore="LabelFor" />
 
                     <View
                         android:layout_width="@dimen/x637px"
                         android:layout_height="@dimen/y1px"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/linePink"></View>
+                        android:background="@color/linePink" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -1245,7 +1262,8 @@
                     android:inputType="textMultiLine"
                     android:lines="@null"
                     android:maxLength="100"
-                    android:background="@drawable/bg_circle_parent_message" />
+                    android:background="@drawable/bg_circle_parent_message"
+                    tools:ignore="LabelFor" />
 
             </LinearLayout>
             <Space
@@ -1289,7 +1307,7 @@
                     android:layout_marginTop="@dimen/y22px"
                     android:layout_marginBottom="@dimen/y46px"
                     android:listSelector="@color/transparent"
-                    android:numColumns="3"></GridView>
+                    android:numColumns="3" />
 
             </LinearLayout>
         </LinearLayout>

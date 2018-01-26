@@ -56,7 +56,7 @@ public class InputWeightActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.weight);
+        tv_title.setText(R.string.assessment_weight);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);

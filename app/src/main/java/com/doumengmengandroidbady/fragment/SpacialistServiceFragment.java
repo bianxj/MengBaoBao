@@ -103,7 +103,7 @@ public class SpacialistServiceFragment extends BaseFragment {
 
             getRecord();
             String recordTimes = userData.getRecordtimes();
-            tv_appraisal_count.setText("您还剩" + recordTimes + "次测评");
+            tv_appraisal_count.setText(String.format(getResources().getString(R.string.spacialist_service_count),recordTimes));
             tv_baby_name.setText(userData.getTruename());
             loadHeadImg(userData.isMale(), userData.getHeadimg());
             rl_supplement_record.setOnClickListener(listener);

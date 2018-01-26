@@ -29,14 +29,16 @@ public class ScaleplateView extends View {
     private final static String COLOR = "#77D2F7";
 
     private List<Float> splitX = new ArrayList<>();
+    private Paint paint;
 
 
     public ScaleplateView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs,0);
     }
 
     public ScaleplateView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        paint = new Paint();
     }
 
     @Override
@@ -49,7 +51,6 @@ public class ScaleplateView extends View {
         float unitWeight = ((float)currentWeight)/TOTLE_WEIGHT;
         float unitHeight = ((float)currentHeight)/TOTLE_HEIGHT;
 
-        Paint paint = new Paint();
         paint.setStrokeWidth(unitHeight*2);
         paint.setColor(Color.parseColor(COLOR));
 

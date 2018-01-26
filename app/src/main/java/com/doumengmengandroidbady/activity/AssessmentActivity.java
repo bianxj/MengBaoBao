@@ -226,7 +226,7 @@ public class AssessmentActivity extends BaseActivity {
         String weight = record.getWeight();
         tv_height.setText(height);
         tv_weight.setText(weight);
-        tv_BMI.setText(FormulaUtil.formulaBMI(Float.parseFloat(height),Float.parseFloat(weight))+"");
+        tv_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(height),Float.parseFloat(weight))));
     }
 
     private void initDiagram(){
@@ -267,7 +267,7 @@ public class AssessmentActivity extends BaseActivity {
      * 日期: 2018/1/16 16:37
      */
     private void initDevelopmentalBehavior(){
-        tv_developmental_title.setText("发育行为（"+record.getCorrectMonthAge()+"个月）");
+        tv_developmental_title.setText(String.format(getResources().getString(R.string.assessment_develop_month),record.getCorrectMonthAge()));
         Map<String,List<String>> maps = DaoManager.getInstance().getFeatureDao().searchFeatureListById(this,record.getFeatureList());
         initDevelopment(maps);
     }
@@ -318,11 +318,10 @@ public class AssessmentActivity extends BaseActivity {
     private void initPromptMessage(){
         if ( "1".equals(record.getRecordStatus()) || "2".equals(record.getRecordStatus()) ){
             rl_prompt_message.setVisibility(View.VISIBLE);
-            tv_prompt_message.setText("72小时内看到医生的养育指导和评估");
+            tv_prompt_message.setText(getResources().getString(R.string.assessment_wait_message));
         } else if ( "5".equals(record.getRecordStatus()) ){
             rl_prompt_message.setVisibility(View.VISIBLE);
-            tv_prompt_message.setText("抱歉，医生未能按约给予评估及指导，\n" +
-                    "已为您退款或在途中！");
+            tv_prompt_message.setText(getResources().getString(R.string.assessment_refund_message));
         } else {
             rl_prompt_message.setVisibility(View.GONE);
         }

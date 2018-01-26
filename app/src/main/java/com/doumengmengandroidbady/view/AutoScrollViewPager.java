@@ -101,6 +101,7 @@ public class AutoScrollViewPager extends FrameLayout {
         pageHeight = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_page_height,0);
         pageMarginTop = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_page_margin_top,0);
         canLoop = array.getBoolean(R.styleable.AutoScrollViewPager_canLoop,false);
+        array.recycle();
     }
 
     private void initViewPager(){
@@ -402,5 +403,8 @@ public class AutoScrollViewPager extends FrameLayout {
         }
     }
 
-
+    @Override
+    public boolean performClick() {
+        return super.performClick();
+    }
 }

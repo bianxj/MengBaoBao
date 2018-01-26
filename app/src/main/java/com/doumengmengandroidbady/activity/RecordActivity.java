@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -101,7 +102,8 @@ public class RecordActivity extends BaseActivity {
     private PictureAdapter adapter;
 
     //-----------------------------------------------------------------------------------------
-    private Map<Integer,InputActivityCallBack> requestMap;
+    private SparseArray<InputActivityCallBack> requestArray;
+//    private Map<Integer,InputActivityCallBack> requestMap;
     //用户信息
     private UserData userData = BaseApplication.getInstance().getUserData();
     //发育行为
@@ -192,17 +194,29 @@ public class RecordActivity extends BaseActivity {
      * 日期: 2018/1/10 13:58
      */
     private void initRequestMap(){
-        requestMap = new HashMap<>();
-        requestMap.put(inputHeightCallBack.requestCode(),inputHeightCallBack);
-        requestMap.put(inputBreastFeedingCallBack.requestCode(),inputBreastFeedingCallBack);
-        requestMap.put(inputCacationCallBack.requestCode(),inputCacationCallBack);
-        requestMap.put(inputChestCircumferenceCallBack.requestCode(),inputChestCircumferenceCallBack);
-        requestMap.put(inputWeightCallBack.requestCode(),inputWeightCallBack);
-        requestMap.put(inputNightSleepCallBack.requestCode(),inputNightSleepCallBack);
-        requestMap.put(inputDaySleepCallBack.requestCode(),inputDaySleepCallBack);
-        requestMap.put(inputMilkCallBack.requestCode(),inputMilkCallBack);
-        requestMap.put(inputHeadCircumferenceCallBack.requestCode(),inputHeadCircumferenceCallBack);
-        requestMap.put(inputMicturitionCallBack.requestCode(),inputMicturitionCallBack);
+        requestArray = new SparseArray<>();
+        requestArray.put(inputHeightCallBack.requestCode(),inputHeightCallBack);
+        requestArray.put(inputBreastFeedingCallBack.requestCode(),inputBreastFeedingCallBack);
+        requestArray.put(inputCacationCallBack.requestCode(),inputCacationCallBack);
+        requestArray.put(inputChestCircumferenceCallBack.requestCode(),inputChestCircumferenceCallBack);
+        requestArray.put(inputWeightCallBack.requestCode(),inputWeightCallBack);
+        requestArray.put(inputNightSleepCallBack.requestCode(),inputNightSleepCallBack);
+        requestArray.put(inputDaySleepCallBack.requestCode(),inputDaySleepCallBack);
+        requestArray.put(inputMilkCallBack.requestCode(),inputMilkCallBack);
+        requestArray.put(inputHeadCircumferenceCallBack.requestCode(),inputHeadCircumferenceCallBack);
+        requestArray.put(inputMicturitionCallBack.requestCode(),inputMicturitionCallBack);
+
+//        requestMap = new HashMap<>();
+//        requestMap.put(inputHeightCallBack.requestCode(),inputHeightCallBack);
+//        requestMap.put(inputBreastFeedingCallBack.requestCode(),inputBreastFeedingCallBack);
+//        requestMap.put(inputCacationCallBack.requestCode(),inputCacationCallBack);
+//        requestMap.put(inputChestCircumferenceCallBack.requestCode(),inputChestCircumferenceCallBack);
+//        requestMap.put(inputWeightCallBack.requestCode(),inputWeightCallBack);
+//        requestMap.put(inputNightSleepCallBack.requestCode(),inputNightSleepCallBack);
+//        requestMap.put(inputDaySleepCallBack.requestCode(),inputDaySleepCallBack);
+//        requestMap.put(inputMilkCallBack.requestCode(),inputMilkCallBack);
+//        requestMap.put(inputHeadCircumferenceCallBack.requestCode(),inputHeadCircumferenceCallBack);
+//        requestMap.put(inputMicturitionCallBack.requestCode(),inputMicturitionCallBack);
     }
 
     private void initView(){
@@ -236,8 +250,8 @@ public class RecordActivity extends BaseActivity {
         if ( dayList == null ){
             //TODO
         } else {
-            tv_really_month.setText(dayList.getCurrentMonth()+"个月"+dayList.getCurrentDay()+"天");
-            tv_correct_month.setText(dayList.getCorrentMonth()+"个月"+dayList.getCorrentDay()+"天");
+            tv_really_month.setText(String.format(getResources().getString(R.string.record_month_age),dayList.getCurrentMonth(),dayList.getCurrentDay()));
+            tv_correct_month.setText(String.format(getResources().getString(R.string.record_month_age),dayList.getCorrentMonth(),dayList.getCorrentDay()));
             if ( tv_correct_month.getText().toString().trim().equals(tv_correct_month.getText().toString().trim()) ){
                 rl_correct_month.setVisibility(View.INVISIBLE);
             }
@@ -307,9 +321,10 @@ public class RecordActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //测量页面返回
-        if ( requestMap.containsKey(requestCode) ){
+        requestArray.get(requestCode);
+        if ( requestArray.get(requestCode) != null ){
             clearEditTextFocus();
-            requestMap.get(requestCode).response(resultCode,data);
+            requestArray.get(requestCode).response(resultCode,data);
         }
 
         //照片返回
@@ -654,7 +669,7 @@ public class RecordActivity extends BaseActivity {
 
             @Override
             public void alwaysDenied(String permission) {
-                String prompt = getResources().getString(R.string.storage_permission);
+                String prompt = getResources().getString(R.string.dialog_content_storage_permission);
                 MyDialog.showPermissionDialog(RecordActivity.this, prompt, new MyDialog.ChooseDialogCallback() {
                     @Override
                     public void sure() {

@@ -105,10 +105,10 @@ public class DoctorInfoActivity extends BaseActivity {
             public void alwaysDenied(String permission) {
                 String prompt = null;
                 if ( Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission) ){
-                    prompt = getResources().getString(R.string.storage_permission);
+                    prompt = getResources().getString(R.string.dialog_content_storage_permission);
                 }
                 if ( Manifest.permission.READ_PHONE_STATE.equals(permission) ){
-                    prompt = getResources().getString(R.string.read_phone_permission);
+                    prompt = getResources().getString(R.string.dialog_content_read_phone_permission);
                 }
                 MyDialog.showPermissionDialog(DoctorInfoActivity.this, prompt, new MyDialog.ChooseDialogCallback() {
                     @Override
@@ -239,6 +239,7 @@ public class DoctorInfoActivity extends BaseActivity {
         if ( BaseApplication.getInstance().isPay() ){
             startActivity(RecordActivity.class);
         } else {
+            BaseApplication.getInstance().payRoleType();
             startActivity(InputInfoActivity.class);
         }
     }
@@ -274,6 +275,9 @@ public class DoctorInfoActivity extends BaseActivity {
             JSONObject object = new JSONObject();
             try {
                 object.put("userId",userData.getUserid());
+                object.put("accountmobile",userData.getAccountmobile());
+                object.put("orderdevice","1");
+                object.put("doctorid",doctor.getDoctorid());
 //                object.put("totalamout",doctor.getCost());
                 object.put("totalamout","0.01");
             } catch (JSONException e) {
@@ -310,87 +314,6 @@ public class DoctorInfoActivity extends BaseActivity {
         }
     };
 
-    /**
-     * 作者: 边贤君
-     * 描述: 支付宝成功回调
-     * 日期: 2018/1/23 16:10
-     */
-    private void alipayResponse(Map<String,String> map){
-        try {
-            aliResult = map;
-            aliPayResponseTask = new RequestTask.Builder(this,aliPayResponseCallBack).build();
-            aliPayResponseTask.execute();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
-    private RequestCallBack aliPayResponseCallBack = new RequestCallBack() {
-        @Override
-        public void onPreExecute() {
-
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_ALI_PAY_RESPONCE;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            UserData userData = BaseApplication.getInstance().getUserData();
-            Map<String,String> map = new HashMap<>();
-            JSONObject object = new JSONObject();
-            try {
-                object.put("accountmobile",userData.getAccountmobile());
-                object.put("userId",userData.getUserid());
-                object.put("doctorid",doctor.getDoctorid());
-                object.put("orderdevice","1");
-
-                JSONObject result = new JSONObject(aliResult.get("result"));
-                JSONObject response = result.getJSONObject("alipay_trade_app_pay_response");
-
-                JSONObject aLiInfo = new JSONObject();
-                aLiInfo.put("tradeno",response.getString("trade_no"));
-                aLiInfo.put("outtradeno",response.getString("out_trade_no"));
-                aLiInfo.put("totalamount",response.getString("total_amount"));
-
-                object.put("aLiInfo",aLiInfo);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            map.put(UrlAddressList.PARAM,object.toString());
-            map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
-            return map;
-        }
-
-        @Override
-        public void onError(String result) {
-
-        }
-
-        @Override
-        public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                int isSuccess = res.getInt("isSuccess");
-                if ( isSuccess == 1 ){
-                    goNext();
-                } else {
-                    Toast.makeText(DoctorInfoActivity.this,"支付失败",Toast.LENGTH_LONG).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
-        }
-    };
-
     private static class AlipayHandler extends Handler{
         private final static int MESSAGE_ALI_PAY = 0x01;
         private WeakReference<DoctorInfoActivity> weakReference;
@@ -407,7 +330,7 @@ public class DoctorInfoActivity extends BaseActivity {
                 case MESSAGE_ALI_PAY: {
                     aliResult = (Map<String, String>) msg.obj;
                     if ( TextUtils.equals("9000", aliResult.get("resultStatus")) ){
-                        weakReference.get().alipayResponse(aliResult);
+                        weakReference.get().goNext();
                     } else {
                         Toast.makeText(weakReference.get(), "支付失败", Toast.LENGTH_SHORT).show();
                     }

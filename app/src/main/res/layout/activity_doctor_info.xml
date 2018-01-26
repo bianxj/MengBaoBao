@@ -5,7 +5,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include android:id="@+id/head" layout="@layout/include_title_back" ></include>
+    <include
+        android:id="@+id/head"
+        layout="@layout/include_title_back" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,7 +18,7 @@
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             >
             <RelativeLayout
@@ -47,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/BlackText34px"
-                        android:text="马骏"
+                        android:text=""
                         android:textStyle="bold"
                         android:includeFontPadding="false"
                         />
@@ -56,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/BlackText26px"
-                        android:text="副主任医师"
+                        android:text=""
                         android:includeFontPadding="false"
                         android:layout_marginTop="@dimen/y18px"
                         />
@@ -65,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/LightGrayText23px"
-                        android:text="上海儿童医学中心（上海交通大学医学院附 属上海儿童医学中心）"
+                        android:text=""
                         android:textStyle="bold"
                         android:includeFontPadding="false"
                         android:layout_marginTop="@dimen/y18px"
@@ -111,7 +113,7 @@
                         android:layout_marginBottom="@dimen/y34px"
                         android:lineSpacingExtra="@dimen/y10px"
                         style="@style/ThirdBlackText26px"
-                        android:text="儿童排泄障碍、注意缺陷-多动障碍、脑发育障碍、情绪障碍、社会适应障碍以及各种儿童发育行为问题的诊断、评估和治疗。"
+                        android:text=""
                         />
                 </LinearLayout>
             </RelativeLayout>
@@ -154,7 +156,7 @@
                         android:layout_marginBottom="@dimen/y34px"
                         android:lineSpacingExtra="@dimen/y10px"
                         style="@style/ThirdBlackText26px"
-                        android:text="马骏，男，医学博士，副主任医师，长期专注于儿童排泄障碍、注意缺陷—多动障碍及各种儿童发育行为障碍的研究和临床诊治。近年来发表中英文主流专业期刊论文30 余篇，主持及参与多项国家级、省市级发育行为儿科学专业研究课题。曾以211 工程优秀博士身份赴澳大利亚悉尼大学学习大脑功能成像技术，并在美国耶鲁大学、丹麦奥胡斯大学等地学习。"
+                        android:text=""
                         />
                 </LinearLayout>
             </RelativeLayout>

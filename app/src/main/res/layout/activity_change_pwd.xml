@@ -6,7 +6,7 @@
     android:background="@color/lightSky"
     >
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <RelativeLayout
         android:layout_width="@dimen/x606px"
@@ -86,7 +86,7 @@
         android:includeFontPadding="false"
         android:layout_centerHorizontal="true"
         android:textColor="@color/gray"
-        android:text="原密码输入错误"/>
+        android:text=""/>
 
     <Button
         android:id="@+id/bt_sure"

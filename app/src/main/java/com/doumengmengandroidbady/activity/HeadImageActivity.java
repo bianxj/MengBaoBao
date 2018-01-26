@@ -157,10 +157,10 @@ public class HeadImageActivity extends BaseActivity {
             public void alwaysDenied(String permission) {
                 String prompt = null;
                 if ( Manifest.permission.CAMERA.equals(permission) ){
-                    prompt = getResources().getString(R.string.camera_permission);
+                    prompt = getResources().getString(R.string.dialog_content_camera_permission);
                 }
                 if ( Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission) ){
-                    prompt = getResources().getString(R.string.storage_permission);
+                    prompt = getResources().getString(R.string.dialog_content_storage_permission);
                 }
                 MyDialog.showPermissionDialog(HeadImageActivity.this, prompt, new MyDialog.ChooseDialogCallback() {
                     @Override

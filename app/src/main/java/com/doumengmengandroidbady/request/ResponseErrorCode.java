@@ -1,10 +1,9 @@
 package com.doumengmengandroidbady.request;
 
+import android.util.SparseArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/15.
@@ -12,7 +11,8 @@ import java.util.Map;
 
 public class ResponseErrorCode {
 
-    private static Map<Integer,String> errorCodeMap;
+    private static SparseArray<String> errorCodeArray;
+//    private static Map<Integer,String> errorCodeMap;
     public static final int SUCCESS = 0;								//成功
 
     public static final String ERROR_REQUEST_FAILED_MSG = "{\"errorId\":-10000}";
@@ -93,79 +93,143 @@ public class ResponseErrorCode {
     public static final int ERROR_ANALYSIS_FAILED = -10001;
 
     static {
-        errorCodeMap = new HashMap<>();
-        errorCodeMap.put(ERROR_SERVER_MAINTENANCE,"服务器正在维护");
-        errorCodeMap.put(ERROR_SERVER_NOT_RESPONDING,"服务器没有响应");
-        errorCodeMap.put(ERROR_SERVER_BUSY,"服务器繁忙");
-        errorCodeMap.put(ERROR_SERVER_FULL,"服务器人数已满");
+        errorCodeArray = new SparseArray<>();
+        errorCodeArray.put(ERROR_SERVER_MAINTENANCE,"服务器正在维护");
+        errorCodeArray.put(ERROR_SERVER_NOT_RESPONDING,"服务器没有响应");
+        errorCodeArray.put(ERROR_SERVER_BUSY,"服务器繁忙");
+        errorCodeArray.put(ERROR_SERVER_FULL,"服务器人数已满");
 
-        errorCodeMap.put(ERROR_TWO_INPUTS,"新密码和老密码一样");
-        errorCodeMap.put(ERROR_ROLE_NAME_ILLEGAL,"非法的角色名");
-        errorCodeMap.put(ERROR_ROLE_NAME_SHORT,"角色名太短");
-        errorCodeMap.put(ERROR_ROLE_NAME_LONG,"角色名太长");
-        errorCodeMap.put(ERROR_PASSWORD_ILLEGAL,"非法的密码");
-        errorCodeMap.put(ERROR_PASSWORD_SHORT,"密码太短");
-        errorCodeMap.put(ERROR_PASSWORD_LONG,"密码太长");
-        errorCodeMap.put(ERROR_REGISTER_LOGINNAME_EXIST,"账号已存在");
-        errorCodeMap.put(ERROR_REGISTER_INIT_MISSION,"账号已存在");
+        errorCodeArray.put(ERROR_TWO_INPUTS,"新密码和老密码一样");
+        errorCodeArray.put(ERROR_ROLE_NAME_ILLEGAL,"非法的角色名");
+        errorCodeArray.put(ERROR_ROLE_NAME_SHORT,"角色名太短");
+        errorCodeArray.put(ERROR_ROLE_NAME_LONG,"角色名太长");
+        errorCodeArray.put(ERROR_PASSWORD_ILLEGAL,"非法的密码");
+        errorCodeArray.put(ERROR_PASSWORD_SHORT,"密码太短");
+        errorCodeArray.put(ERROR_PASSWORD_LONG,"密码太长");
+        errorCodeArray.put(ERROR_REGISTER_LOGINNAME_EXIST,"账号已存在");
+        errorCodeArray.put(ERROR_REGISTER_INIT_MISSION,"账号已存在");
 
-        errorCodeMap.put(ERROR_LOGIN_WRONG_PASSWORD,"密码错误");
-        errorCodeMap.put(ERROR_LOGIN_ROLE_NOT_EXIST,"账号不存在");
-        errorCodeMap.put(ERROR_LOGIN_ROLE_NAME_EMPTY,"账号名为空");
-        errorCodeMap.put(ERROR_LOGIN_ROLE_PWD_EMPTY,"密码为空");
-        errorCodeMap.put(ERROR_LOGIN_STOP,"账号禁用");
-        errorCodeMap.put(ERROR_LOGIN_LIMIT,"账号合同已到期");
-        errorCodeMap.put(ERROR_LOGIN_START,"账号合同未开始");
-        errorCodeMap.put(ERROR_LOGIN_NORECORD,"账号合同未开始");
-        errorCodeMap.put(ERROR_LOGIN_ROLE_EXIST,"登陆超时，角色需重新登录");
+        errorCodeArray.put(ERROR_LOGIN_WRONG_PASSWORD,"密码错误");
+        errorCodeArray.put(ERROR_LOGIN_ROLE_NOT_EXIST,"账号不存在");
+        errorCodeArray.put(ERROR_LOGIN_ROLE_NAME_EMPTY,"账号名为空");
+        errorCodeArray.put(ERROR_LOGIN_ROLE_PWD_EMPTY,"密码为空");
+        errorCodeArray.put(ERROR_LOGIN_STOP,"账号禁用");
+        errorCodeArray.put(ERROR_LOGIN_LIMIT,"账号合同已到期");
+        errorCodeArray.put(ERROR_LOGIN_START,"账号合同未开始");
+        errorCodeArray.put(ERROR_LOGIN_NORECORD,"账号合同未开始");
+        errorCodeArray.put(ERROR_LOGIN_ROLE_EXIST,"登陆超时，角色需重新登录");
 
-        errorCodeMap.put(ERROR_ROLE_GET,"角色获得失败");
-        errorCodeMap.put(ERROR_ROLE_RECORD,"角色获取当月在线记录数据错误");
-        errorCodeMap.put(ERROR_ROLE_RECORD_TIME,"角色提交记录时间已超过,需联系客服");
-        errorCodeMap.put(ERROR_ROLE_SUBMIT_FEEDBACK,"角色提交反馈失败");
-        errorCodeMap.put(ERROR_ROLE_SUBMIT_PWD,"角色提交密码错误");
-        errorCodeMap.put(ERROR_ROLE_ACCOUNT_EMAIL,"角色提交绑定邮箱错误");
-        errorCodeMap.put(ERROR_ROLE_UPDATE_PARENT,"角色修改父母信息错误");
-        errorCodeMap.put(ERROR_ROLE_UPDATE_CARER,"角色修改照养人信息错误");
-        errorCodeMap.put(ERROR_ROLE_RECORD_STATUS,"角色记录状态为已提交,不能重复提交");
-        errorCodeMap.put(ERROR_ROLE_UPLOAD_HEAD,"角色头像上传失败");
-        errorCodeMap.put(ERROR_ROLE_BODYCHECK_MAX,"角色体检次数到达上限");
-        errorCodeMap.put(ERROR_ROLE_TREAT_MAX,"角色治疗次数到达上限");
-        errorCodeMap.put(ERROR_ROLE_SALON_MAX,"角色沙龙次数到达上限");
-        errorCodeMap.put(ERROR_ROLE_MENU,"角色套餐信息获得失败");
-        errorCodeMap.put(ERROR_ROLE_MENU_LIMIT,"角色套餐即将失效");
-        errorCodeMap.put(ERROR_ROLE_MENU_OVER,"角色套餐结束");
-        errorCodeMap.put(ERROR_ROLE_UPDATE_LINKMAN,"角色修改联系人信息错误");
+        errorCodeArray.put(ERROR_ROLE_GET,"角色获得失败");
+        errorCodeArray.put(ERROR_ROLE_RECORD,"角色获取当月在线记录数据错误");
+        errorCodeArray.put(ERROR_ROLE_RECORD_TIME,"角色提交记录时间已超过,需联系客服");
+        errorCodeArray.put(ERROR_ROLE_SUBMIT_FEEDBACK,"角色提交反馈失败");
+        errorCodeArray.put(ERROR_ROLE_SUBMIT_PWD,"角色提交密码错误");
+        errorCodeArray.put(ERROR_ROLE_ACCOUNT_EMAIL,"角色提交绑定邮箱错误");
+        errorCodeArray.put(ERROR_ROLE_UPDATE_PARENT,"角色修改父母信息错误");
+        errorCodeArray.put(ERROR_ROLE_UPDATE_CARER,"角色修改照养人信息错误");
+        errorCodeArray.put(ERROR_ROLE_RECORD_STATUS,"角色记录状态为已提交,不能重复提交");
+        errorCodeArray.put(ERROR_ROLE_UPLOAD_HEAD,"角色头像上传失败");
+        errorCodeArray.put(ERROR_ROLE_BODYCHECK_MAX,"角色体检次数到达上限");
+        errorCodeArray.put(ERROR_ROLE_TREAT_MAX,"角色治疗次数到达上限");
+        errorCodeArray.put(ERROR_ROLE_SALON_MAX,"角色沙龙次数到达上限");
+        errorCodeArray.put(ERROR_ROLE_MENU,"角色套餐信息获得失败");
+        errorCodeArray.put(ERROR_ROLE_MENU_LIMIT,"角色套餐即将失效");
+        errorCodeArray.put(ERROR_ROLE_MENU_OVER,"角色套餐结束");
+        errorCodeArray.put(ERROR_ROLE_UPDATE_LINKMAN,"角色修改联系人信息错误");
 
-        errorCodeMap.put(ERROR_VCODE_WRONG,"输入的校验码与发送验证码不一致");
-        errorCodeMap.put(ERROR_CHECKCODE_EMPTY,"校验码为空");
-        errorCodeMap.put(ERROR_VCODE_SEND,"未发送验证码");
-        errorCodeMap.put(ERROR_PHONENUMBER,"手机号格式有误");
-        errorCodeMap.put(ERROR_REGISTER_ROLE_EXIST,"注册账号已存在");
+        errorCodeArray.put(ERROR_VCODE_WRONG,"输入的校验码与发送验证码不一致");
+        errorCodeArray.put(ERROR_CHECKCODE_EMPTY,"校验码为空");
+        errorCodeArray.put(ERROR_VCODE_SEND,"未发送验证码");
+        errorCodeArray.put(ERROR_PHONENUMBER,"手机号格式有误");
+        errorCodeArray.put(ERROR_REGISTER_ROLE_EXIST,"注册账号已存在");
 
-        errorCodeMap.put(ERROR_CLIENT_PARAMS_EMPTY,"空参数");
-        errorCodeMap.put(ERROR_CLIENT_PARAM_FORMAT,"客户端参数格式错误");
-        errorCodeMap.put(ERROR_CLIENT_PARAM_COUNT,"客户端参数数目错误");
+        errorCodeArray.put(ERROR_CLIENT_PARAMS_EMPTY,"空参数");
+        errorCodeArray.put(ERROR_CLIENT_PARAM_FORMAT,"客户端参数格式错误");
+        errorCodeArray.put(ERROR_CLIENT_PARAM_COUNT,"客户端参数数目错误");
 
-        errorCodeMap.put(ERROR_UNKNOWN,"未知错误");
-        errorCodeMap.put(ERROR_MEMCACHE_DATA_NOT_EXIST,"没有相应的缓存数据");
-        errorCodeMap.put(ERROR_ILLEGAL_OPERATION,"非法操作");
-        errorCodeMap.put(ERROR_COULD_NOT_CONNECT_TO_HOST,"网络延迟");
-        errorCodeMap.put(ERROR_WRONG_DATA_STRUCT,"错误的数据结构");
-        errorCodeMap.put(ERROR_SENDCODE_UPPERLIMIT,"错误的数据结构");
+        errorCodeArray.put(ERROR_UNKNOWN,"未知错误");
+        errorCodeArray.put(ERROR_MEMCACHE_DATA_NOT_EXIST,"没有相应的缓存数据");
+        errorCodeArray.put(ERROR_ILLEGAL_OPERATION,"非法操作");
+        errorCodeArray.put(ERROR_COULD_NOT_CONNECT_TO_HOST,"网络延迟");
+        errorCodeArray.put(ERROR_WRONG_DATA_STRUCT,"错误的数据结构");
+        errorCodeArray.put(ERROR_SENDCODE_UPPERLIMIT,"错误的数据结构");
 
-        errorCodeMap.put(ERROR_DB_INSERT,"数据库插入数据失败");
-        errorCodeMap.put(ERROR_DB_RECORD_HELP,"数据库获取在线月记录规则失败");
+        errorCodeArray.put(ERROR_DB_INSERT,"数据库插入数据失败");
+        errorCodeArray.put(ERROR_DB_RECORD_HELP,"数据库获取在线月记录规则失败");
 
-        errorCodeMap.put(ERROR_REQUEST_FAILED,"请求失败");
-        errorCodeMap.put(ERROR_ANALYSIS_FAILED,"解析失败");
+        errorCodeArray.put(ERROR_REQUEST_FAILED,"请求失败");
+        errorCodeArray.put(ERROR_ANALYSIS_FAILED,"解析失败");
+
+//        errorCodeMap = new HashMap<>();
+//        errorCodeMap.put(ERROR_SERVER_MAINTENANCE,"服务器正在维护");
+//        errorCodeMap.put(ERROR_SERVER_NOT_RESPONDING,"服务器没有响应");
+//        errorCodeMap.put(ERROR_SERVER_BUSY,"服务器繁忙");
+//        errorCodeMap.put(ERROR_SERVER_FULL,"服务器人数已满");
+//
+//        errorCodeMap.put(ERROR_TWO_INPUTS,"新密码和老密码一样");
+//        errorCodeMap.put(ERROR_ROLE_NAME_ILLEGAL,"非法的角色名");
+//        errorCodeMap.put(ERROR_ROLE_NAME_SHORT,"角色名太短");
+//        errorCodeMap.put(ERROR_ROLE_NAME_LONG,"角色名太长");
+//        errorCodeMap.put(ERROR_PASSWORD_ILLEGAL,"非法的密码");
+//        errorCodeMap.put(ERROR_PASSWORD_SHORT,"密码太短");
+//        errorCodeMap.put(ERROR_PASSWORD_LONG,"密码太长");
+//        errorCodeMap.put(ERROR_REGISTER_LOGINNAME_EXIST,"账号已存在");
+//        errorCodeMap.put(ERROR_REGISTER_INIT_MISSION,"账号已存在");
+//
+//        errorCodeMap.put(ERROR_LOGIN_WRONG_PASSWORD,"密码错误");
+//        errorCodeMap.put(ERROR_LOGIN_ROLE_NOT_EXIST,"账号不存在");
+//        errorCodeMap.put(ERROR_LOGIN_ROLE_NAME_EMPTY,"账号名为空");
+//        errorCodeMap.put(ERROR_LOGIN_ROLE_PWD_EMPTY,"密码为空");
+//        errorCodeMap.put(ERROR_LOGIN_STOP,"账号禁用");
+//        errorCodeMap.put(ERROR_LOGIN_LIMIT,"账号合同已到期");
+//        errorCodeMap.put(ERROR_LOGIN_START,"账号合同未开始");
+//        errorCodeMap.put(ERROR_LOGIN_NORECORD,"账号合同未开始");
+//        errorCodeMap.put(ERROR_LOGIN_ROLE_EXIST,"登陆超时，角色需重新登录");
+//
+//        errorCodeMap.put(ERROR_ROLE_GET,"角色获得失败");
+//        errorCodeMap.put(ERROR_ROLE_RECORD,"角色获取当月在线记录数据错误");
+//        errorCodeMap.put(ERROR_ROLE_RECORD_TIME,"角色提交记录时间已超过,需联系客服");
+//        errorCodeMap.put(ERROR_ROLE_SUBMIT_FEEDBACK,"角色提交反馈失败");
+//        errorCodeMap.put(ERROR_ROLE_SUBMIT_PWD,"角色提交密码错误");
+//        errorCodeMap.put(ERROR_ROLE_ACCOUNT_EMAIL,"角色提交绑定邮箱错误");
+//        errorCodeMap.put(ERROR_ROLE_UPDATE_PARENT,"角色修改父母信息错误");
+//        errorCodeMap.put(ERROR_ROLE_UPDATE_CARER,"角色修改照养人信息错误");
+//        errorCodeMap.put(ERROR_ROLE_RECORD_STATUS,"角色记录状态为已提交,不能重复提交");
+//        errorCodeMap.put(ERROR_ROLE_UPLOAD_HEAD,"角色头像上传失败");
+//        errorCodeMap.put(ERROR_ROLE_BODYCHECK_MAX,"角色体检次数到达上限");
+//        errorCodeMap.put(ERROR_ROLE_TREAT_MAX,"角色治疗次数到达上限");
+//        errorCodeMap.put(ERROR_ROLE_SALON_MAX,"角色沙龙次数到达上限");
+//        errorCodeMap.put(ERROR_ROLE_MENU,"角色套餐信息获得失败");
+//        errorCodeMap.put(ERROR_ROLE_MENU_LIMIT,"角色套餐即将失效");
+//        errorCodeMap.put(ERROR_ROLE_MENU_OVER,"角色套餐结束");
+//        errorCodeMap.put(ERROR_ROLE_UPDATE_LINKMAN,"角色修改联系人信息错误");
+//
+//        errorCodeMap.put(ERROR_VCODE_WRONG,"输入的校验码与发送验证码不一致");
+//        errorCodeMap.put(ERROR_CHECKCODE_EMPTY,"校验码为空");
+//        errorCodeMap.put(ERROR_VCODE_SEND,"未发送验证码");
+//        errorCodeMap.put(ERROR_PHONENUMBER,"手机号格式有误");
+//        errorCodeMap.put(ERROR_REGISTER_ROLE_EXIST,"注册账号已存在");
+//
+//        errorCodeMap.put(ERROR_CLIENT_PARAMS_EMPTY,"空参数");
+//        errorCodeMap.put(ERROR_CLIENT_PARAM_FORMAT,"客户端参数格式错误");
+//        errorCodeMap.put(ERROR_CLIENT_PARAM_COUNT,"客户端参数数目错误");
+//
+//        errorCodeMap.put(ERROR_UNKNOWN,"未知错误");
+//        errorCodeMap.put(ERROR_MEMCACHE_DATA_NOT_EXIST,"没有相应的缓存数据");
+//        errorCodeMap.put(ERROR_ILLEGAL_OPERATION,"非法操作");
+//        errorCodeMap.put(ERROR_COULD_NOT_CONNECT_TO_HOST,"网络延迟");
+//        errorCodeMap.put(ERROR_WRONG_DATA_STRUCT,"错误的数据结构");
+//        errorCodeMap.put(ERROR_SENDCODE_UPPERLIMIT,"错误的数据结构");
+//
+//        errorCodeMap.put(ERROR_DB_INSERT,"数据库插入数据失败");
+//        errorCodeMap.put(ERROR_DB_RECORD_HELP,"数据库获取在线月记录规则失败");
+//
+//        errorCodeMap.put(ERROR_REQUEST_FAILED,"请求失败");
+//        errorCodeMap.put(ERROR_ANALYSIS_FAILED,"解析失败");
     }
 
     public static String getErrorMsg(int code){
-        if ( errorCodeMap.containsKey(code)) {
-            return errorCodeMap.get(code);
-        }
-        return null;
+        return errorCodeArray.get(code);
     }
 
     public static String getErrorMsg(String errorMsg){

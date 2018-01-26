@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/x68px"
                 style="@style/WhiteText26px"
-                android:text="正在更新..."
+                android:text="@string/dialog_updating"
                 android:layout_marginLeft="@dimen/x10px"
                 android:gravity="center_vertical"
                 />

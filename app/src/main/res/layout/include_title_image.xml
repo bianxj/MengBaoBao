@@ -32,7 +32,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/y24px"
             android:includeFontPadding="false"
-            android:text="妮妮"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/y52px" />
 
@@ -51,7 +51,7 @@
                 android:layout_marginRight="@dimen/x27px"
                 android:layout_marginTop="@dimen/y39px"
                 android:includeFontPadding="false"
-                android:text="补充记录"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/y28px"
                 />
@@ -100,7 +100,7 @@
                 android:layout_marginRight="@dimen/x25px"
                 android:layout_toRightOf="@+id/iv_sex"
                 android:includeFontPadding="false"
-                android:text="28月20天"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/y26px" />
         </RelativeLayout>

@@ -47,6 +47,7 @@ public class DiagramView extends View {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DiagramView,defStyleAttr,0);
         originX = a.getDimension(R.styleable.DiagramView_origin_x,0);
         originY = a.getDimension(R.styleable.DiagramView_origin_y,0);
+        a.recycle();
     }
 
     private void init(){

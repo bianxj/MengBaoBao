@@ -143,14 +143,14 @@ public class ParentInfoLayout extends LinearLayout {
                     String height = et_father_height.getText().toString().trim();
                     String weight = et_father_weight.getText().toString().trim();
                     if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
-                        tv_father_BMI.setText(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))+"");
+                        tv_father_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
                     }
                 }
                 if ( R.id.et_mother_height == view.getId() || R.id.et_mother_weight == view.getId() ){
                     String height = et_mother_height.getText().toString().trim();
                     String weight = et_mother_weight.getText().toString().trim();
                     if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
-                        tv_mother_BMI.setText(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))+"");
+                        tv_mother_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
                     }
                 }
             }
@@ -164,7 +164,7 @@ public class ParentInfoLayout extends LinearLayout {
                 String height = et_mother_height.getText().toString().trim();
                 String weight = et_mother_weight.getText().toString().trim();
                 if (!TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight)) {
-                    tv_mother_BMI.setText(FormulaUtil.formulaBMI(Float.parseFloat(weight), Float.parseFloat(height)) + "");
+                    tv_mother_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight), Float.parseFloat(height))));
                 }
             }
             return false;

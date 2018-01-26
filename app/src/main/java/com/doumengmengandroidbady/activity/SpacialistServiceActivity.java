@@ -306,7 +306,7 @@ public class SpacialistServiceActivity extends BaseActivity {
             @Override
             public void alwaysDenied(String permission) {
                 if ( isSkipToApp ) {
-                    MyDialog.showPermissionDialog(SpacialistServiceActivity.this, getResources().getString(R.string.location_permission), new MyDialog.ChooseDialogCallback() {
+                    MyDialog.showPermissionDialog(SpacialistServiceActivity.this, getResources().getString(R.string.dialog_content_location_permission), new MyDialog.ChooseDialogCallback() {
                         @Override
                         public void sure() {
                             AppUtil.openPrimession(SpacialistServiceActivity.this);

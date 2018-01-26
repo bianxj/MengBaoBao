@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/y32px"
             android:layout_marginLeft="@dimen/x46px"
             style="@style/BlackTitle34px"
-            android:text="Hahaha"/>
+            android:text=""/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -81,8 +81,7 @@
             android:layout_height="@dimen/y2px"
             android:background="@color/linkLightPink"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="center_horizontal"
-            ></View>
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
     </LinearLayout>

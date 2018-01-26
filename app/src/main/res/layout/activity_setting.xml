@@ -7,7 +7,7 @@
     android:background="@color/lightSky"
     >
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <RelativeLayout
         android:layout_width="match_parent"

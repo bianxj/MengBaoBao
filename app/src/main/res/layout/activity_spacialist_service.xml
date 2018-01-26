@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     >
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_back" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 style="@style/BigWhiteText"
-                android:text="北京市"
+                android:text="@string/default_city"
                 android:layout_marginLeft="@dimen/x28px"
                 android:maxLength="3"
                 />

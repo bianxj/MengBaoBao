@@ -14,7 +14,8 @@ public class UrlAddressList {
     public final static String PARAM = "paramStr";
     public final static String SESSION_ID = "sesId";
 
-    public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneServerV2/";
+//    public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneServerV2/";
+    public final static String BASE_URL = "http://app.mengbaobao.com/mbbPhoneServerV2/";
 
     public final static String URL_GET_VC = BASE_URL + "babyUser.do?method=SendMessage";
 //    public final static String URL_REGISTER_CHECT = BASE_URL + "babyUser.do?method=RegisterCheck";
@@ -33,7 +34,6 @@ public class UrlAddressList {
     public final static String URL_SUBMIT_RECORD = BASE_URL + "babyUser.do?method=SubmitRecord";
     public final static String URL_GET_CURRENT_RECORD = BASE_URL  + "babyUser.do?method=GetCurrentRecord";
 
-//    public final static String URL_ALI_PAY = BASE_URL + "system/mbbGeneratingOrder.do";
     public final static String URL_ALI_PAY = BASE_URL + "system.do?method=MbbAliPayGeneratingOrder";
     public final static String URL_ALI_PAY_RESPONCE = BASE_URL + "system.do?method=MbbALiPay";
 

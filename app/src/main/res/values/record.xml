@@ -78,7 +78,7 @@
         <item>参考值：93.00~107.60厘米</item>
     </string-array>
     <string-array name="height_increase">
-        <item></item>
+        <item />
         <item>平均每月增长约4厘米</item>
         <item>比初生时平均增长约11-13厘米 </item>
         <item>平均每月增长约2厘米</item>
@@ -90,30 +90,30 @@
         <item>平均每月增长约1厘米</item>
         <item>平均每月增长约1厘米</item>
         <item>第12个月比初生时增长约25-27厘米</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
     </string-array>
     <string name="height_input_title">家庭正确的身长测量方法</string>
     <string-array name="height_content">
@@ -205,7 +205,7 @@
         <item>参考值：12.50~20.15公斤</item>
     </string-array>
     <string-array name="weight_increase">
-        <item></item>
+        <item />
         <item>平均每个月增长1000-1200克</item>
         <item>平均每个月增长1000-1200克     满3个月体重约等于出生体重的2倍</item>
         <item>平均每个月增长500-600克</item>
@@ -217,30 +217,30 @@
         <item>平均每个月增长200-250克</item>
         <item>平均每个月增长200-250克</item>
         <item>平均每个月增长200-250克，第12个月体重约相当于出生时的3倍</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
     </string-array>
     <string name="weight_input_title">家庭正确的身长测量方法</string>
     <string-array name="weight_content">
@@ -555,36 +555,36 @@
         <item>0-6个月，增长9厘米。</item>
         <item>0-6个月，增长9厘米。</item>
         <item>0-6个月，增长9厘米。</item>
-        <item></item>
-        <item></item>
+        <item />
+        <item />
         <item>到第9个月增长3厘米。</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
         <item>头围增长约2厘米。\n2岁时头围约为47-49厘米。</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
     </string-array>
     <string name="head_input_title">家庭正确的身长测量方法</string>
     <string-array name="head_content">
@@ -753,39 +753,39 @@
     <string-array name="chest_increase">
         <item>新生儿胸围平均32厘米。</item>
         <item>新生儿胸围平均32厘米。</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
         <item>1岁时,胸围约等于头围。</item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
+        <item />
         <item>参考值为2015年上海市平均标准。标准差指的是平均值的上下标准差。</item>
     </string-array>
     <string name="chest_input_title">家庭正确的身长测量方法</string>

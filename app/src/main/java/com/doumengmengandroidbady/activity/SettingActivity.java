@@ -47,7 +47,7 @@ public class SettingActivity extends BaseActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        tv_version.setText("版本号"+version);
+        tv_version.setText(String.format(getResources().getString(R.string.setting_version),version));
         rl_back.setOnClickListener(listener);
         rl_change_pwd.setOnClickListener(listener);
         rl_agreement.setOnClickListener(listener);

@@ -9,7 +9,7 @@
         android:layout_height="@dimen/y67px"
         android:layout_marginLeft="@dimen/x48px"
         style="@style/BlackText26px"
-        android:text="上海"
+        android:text=""
         android:gravity="center_vertical"
         />
 

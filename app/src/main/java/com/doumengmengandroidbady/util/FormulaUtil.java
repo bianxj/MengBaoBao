@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2018/1/5.
@@ -13,7 +14,7 @@ import java.util.Date;
 public class FormulaUtil {
 
     public static String getCurrentTime(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.CHINA);
         return format.format(System.currentTimeMillis());
     }
 
@@ -23,7 +24,7 @@ public class FormulaUtil {
 
     public static int[] getBabyMonthAge(String birthday) throws ParseException {
         Date date = new Date();
-        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
         date = sdf.parse(birthday);
         Calendar c1 = Calendar.getInstance();
         c1.setTime(date);
