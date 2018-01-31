@@ -43,10 +43,7 @@ public class DayList {
     }
 
     public boolean notNull(){
-        if (!TextUtils.isEmpty(currentDay) && !TextUtils.isEmpty(currentMonth)){
-            return true;
-        }
-        return false;
+        return !TextUtils.isEmpty(currentDay) && !TextUtils.isEmpty(currentMonth);
     }
 
 }

@@ -21,7 +21,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
     private final static boolean isTest = false;
 
-    private Builder builder;
+    private final Builder builder;
     private Handler handler;
     private Runnable runnable;
 
@@ -47,7 +47,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        String result = null;
+        String result;
         if (!isTest) {
             String url = builder.getCallBack().getUrl();
             Map<String,String> map = builder.getCallBack().getContent();
@@ -96,7 +96,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     }
 
     private boolean isError(String json){
-        String errorMsg = null;
+        String errorMsg;
         errorMsg = ResponseErrorCode.getErrorMsg(json);
         if ( null == errorMsg ){
             return false;

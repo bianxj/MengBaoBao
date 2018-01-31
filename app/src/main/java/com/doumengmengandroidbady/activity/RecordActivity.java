@@ -90,7 +90,7 @@ public class RecordActivity extends BaseActivity {
             et_calcium_dosage,
             et_other;
 
-    private List<EditText> editTexts = new ArrayList<>();
+    private final List<EditText> editTexts = new ArrayList<>();
 
     private RadioGroup rg_appetite;
 
@@ -105,7 +105,7 @@ public class RecordActivity extends BaseActivity {
     private SparseArray<InputActivityCallBack> requestArray;
 //    private Map<Integer,InputActivityCallBack> requestMap;
     //用户信息
-    private UserData userData = BaseApplication.getInstance().getUserData();
+    private final UserData userData = BaseApplication.getInstance().getUserData();
     //发育行为
     private List<String> developments = new ArrayList<>();
     //月龄信息
@@ -258,7 +258,7 @@ public class RecordActivity extends BaseActivity {
         }
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
@@ -303,7 +303,7 @@ public class RecordActivity extends BaseActivity {
                     break;
                 case R.id.iv_develop_action:
                         Intent intent = new Intent(RecordActivity.this, DevelopmentalBehaviorActivity.class);
-                        String development = GsonUtil.getInstance().getGson().toJson(developments);
+                        String development = GsonUtil.getInstance().toJson(developments);
                         intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_DEVELOPMENT, development);
                         intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_MONTH_AGE, dayList.getCorrentMonth());
                         intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_RECORD_TIME, FormulaUtil.getCurrentTime());
@@ -329,9 +329,9 @@ public class RecordActivity extends BaseActivity {
 
         //照片返回
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
-            String source = null;
+            String source;
             Uri uri = data.getData();
-            int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
+            int sdkVersion = Build.VERSION.SDK_INT;
             if (sdkVersion >= 19) {
                 source = PictureUtils.getPath_above19(RecordActivity.this, uri);
             } else {
@@ -348,7 +348,7 @@ public class RecordActivity extends BaseActivity {
         //发育行为返回
         if ( REQUEST_DEVELOPMENTAL_ACTION == requestCode && Activity.RESULT_OK == resultCode && data != null ){
             String result = data.getStringExtra(DevelopmentalBehaviorActivity.OUT_PARAM_DEVELOPMENT);
-            developments = GsonUtil.getInstance().getGson().fromJson(result,new TypeToken<List<String>>(){}.getType());
+            developments = GsonUtil.getInstance().fromJson(result,new TypeToken<List<String>>(){}.getType());
         }
     }
 
@@ -361,7 +361,7 @@ public class RecordActivity extends BaseActivity {
      * 描述: 测量身高回调
      * 创建日期: 2018/1/10 11:43
      */
-    private InputActivityCallBack inputHeightCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputHeightCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_HEIGHT;
@@ -388,7 +388,7 @@ public class RecordActivity extends BaseActivity {
      * 描述: 测量体重回调
      * 创建日期: 2018/1/10 11:46
      */
-    private InputActivityCallBack inputWeightCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputWeightCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_WEIGHT;
@@ -415,7 +415,7 @@ public class RecordActivity extends BaseActivity {
      * 描述: 测量头围回调
      * 创建日期: 2018/1/10 11:47
      */
-    private InputActivityCallBack inputHeadCircumferenceCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputHeadCircumferenceCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_HEAD_CIRCUMFERENCE;
@@ -442,7 +442,7 @@ public class RecordActivity extends BaseActivity {
      * 描述: 测量胸围回调
      * 创建日期: 2018/1/10 13:20
      */
-    private InputActivityCallBack inputChestCircumferenceCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputChestCircumferenceCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_CHEST_CIRCUMFERENCE;
@@ -469,7 +469,7 @@ public class RecordActivity extends BaseActivity {
      * 描述: 排便回调
      * 创建日期: 2018/1/10 13:21
      */
-    private InputActivityCallBack inputCacationCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputCacationCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_CACATION;
@@ -499,7 +499,7 @@ public class RecordActivity extends BaseActivity {
      * 描述: 夜间睡眠回调
      * 创建日期: 2018/1/10 13:23
      */
-    private InputActivityCallBack inputNightSleepCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputNightSleepCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_NIGHT_SLEEP;
@@ -526,7 +526,7 @@ public class RecordActivity extends BaseActivity {
      * 描述: 日间睡眠回调
      * 创建日期: 2018/1/10 13:23
      */
-    private InputActivityCallBack inputDaySleepCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputDaySleepCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_DAY_SLEEP;
@@ -553,7 +553,7 @@ public class RecordActivity extends BaseActivity {
      * 描述: 母乳喂养回调
      * 创建日期: 2018/1/10 13:27
      */
-    private InputActivityCallBack inputBreastFeedingCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputBreastFeedingCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_BREASTFEEDING;
@@ -583,7 +583,7 @@ public class RecordActivity extends BaseActivity {
      * 描述: 配方奶喂养回调
      * 创建日期: 2018/1/10 13:31
      */
-    private InputActivityCallBack inputMilkCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputMilkCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_MILK;
@@ -608,7 +608,7 @@ public class RecordActivity extends BaseActivity {
         }
     };
 
-    private InputActivityCallBack inputMicturitionCallBack = new InputActivityCallBack() {
+    private final InputActivityCallBack inputMicturitionCallBack = new InputActivityCallBack() {
         @Override
         public int requestCode() {
             return REQUEST_MICTURITION;
@@ -637,7 +637,7 @@ public class RecordActivity extends BaseActivity {
     }
     //--------------------------------------调用相册-----------------------------------------------
     private final static int REQUEST_IMAGE = 0x99;
-    private PictureAdapter.TackPictureCallBack tackPictureCallBack = new PictureAdapter.TackPictureCallBack() {
+    private final PictureAdapter.TackPictureCallBack tackPictureCallBack = new PictureAdapter.TackPictureCallBack() {
         @Override
         public void tackPicture() {
             RecordActivity.this.tackPicture();
@@ -725,7 +725,7 @@ public class RecordActivity extends BaseActivity {
         }
     }
 
-    private RequestCallBack submitRecordCallBack = new RequestCallBack() {
+    private final RequestCallBack submitRecordCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
@@ -776,7 +776,7 @@ public class RecordActivity extends BaseActivity {
 
             record.setFeature(developments);
 
-            map.put(UrlAddressList.PARAM, GsonUtil.getInstance().getGson().toJson(record));
+            map.put(UrlAddressList.PARAM, GsonUtil.getInstance().toJson(record));
             map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
 
             List<HttpUtil.UploadFile> uploadFiles = new ArrayList<>();
@@ -787,7 +787,7 @@ public class RecordActivity extends BaseActivity {
                 file.setFileName("reportImg");
                 uploadFiles.add(file);
             }
-            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().getGson().toJson(uploadFiles));
+            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().toJson(uploadFiles));
             return map;
         }
 
@@ -833,7 +833,7 @@ public class RecordActivity extends BaseActivity {
         }
     }
 
-    private RequestCallBack currentRequestCallBack = new RequestCallBack() {
+    private final RequestCallBack currentRequestCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
@@ -862,7 +862,7 @@ public class RecordActivity extends BaseActivity {
             try {
                 JSONObject object = new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
-                RecordResult recordResult = GsonUtil.getInstance().getGson().fromJson(res.toString(),RecordResult.class);
+                RecordResult recordResult = GsonUtil.getInstance().fromJson(res.toString(),RecordResult.class);
                 List<Record> list = recordResult.getRecordList();
 
                 for (Record record:list){
@@ -871,7 +871,7 @@ public class RecordActivity extends BaseActivity {
 
                 BaseApplication.getInstance().minusRecordTimes();
                 Intent intent = new Intent(RecordActivity.this, AssessmentActivity.class);
-                intent.putExtra(AssessmentActivity.IN_PARAM_RECORD, GsonUtil.getInstance().getGson().toJson(list.get(0)));
+                intent.putExtra(AssessmentActivity.IN_PARAM_RECORD, GsonUtil.getInstance().toJson(list.get(0)));
                 RecordActivity.this.startActivity(intent);
             } catch (JSONException e) {
                 e.printStackTrace();

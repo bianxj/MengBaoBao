@@ -37,7 +37,7 @@ import java.util.Map;
  * 萌宝宝用户注册界面
  */
 public class RegisterActivity extends BaseActivity {
-    private static boolean isTest = Config.isTest;
+    private static final boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private Button bt_sure;
@@ -86,7 +86,7 @@ public class RegisterActivity extends BaseActivity {
         ll_agreement.setOnClickListener(listener);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -128,7 +128,7 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    private RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
+    private final RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
         }
@@ -216,7 +216,7 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    private RequestCallBack registerCallBack = new RequestCallBack() {
+    private final RequestCallBack registerCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {}
 

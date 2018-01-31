@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y162px"
                 android:layout_marginTop="@dimen/y18px"
-                android:background="@color/white"
+                android:background="@color/first_white"
                 android:visibility="visible">
 
                 <com.doumengmengandroidbady.view.CircleImageView
@@ -37,7 +37,7 @@
 
                 <TextView
                     android:id="@+id/tv_doctor_name"
-                    style="@style/BlackText30px"
+                    style="@style/SecondBlack.Text30px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x166px"
@@ -46,7 +46,7 @@
 
                 <TextView
                     android:id="@+id/tv_doctor_hospital"
-                    style="@style/LightGrayText23px"
+                    style="@style/SecondGray.Text23px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x166px"
@@ -58,7 +58,7 @@
 
                 <TextView
                     android:id="@+id/tv_doctor_position"
-                    style="@style/LinkPinkText23px"
+                    style="@style/FirstPink.Text23px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x558px"
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y18px"
-                android:background="@color/white"
+                android:background="@color/first_white"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:visibility="visible">
@@ -80,7 +80,7 @@
                     android:layout_height="@dimen/y96px">
 
                     <TextView
-                        style="@style/BlackText28px"
+                        style="@style/SecondBlack.Text28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -88,7 +88,7 @@
 
                     <TextView
                         android:id="@+id/tv_baby_name"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -108,7 +108,7 @@
                     android:layout_height="@dimen/y96px">
 
                     <TextView
-                        style="@style/BlackText28px"
+                        style="@style/SecondBlack.Text28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -116,7 +116,7 @@
 
                     <TextView
                         android:id="@+id/tv_baby_gender"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -136,7 +136,7 @@
                     android:layout_height="@dimen/y96px">
 
                     <TextView
-                        style="@style/BlackText28px"
+                        style="@style/SecondBlack.Text28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -144,7 +144,7 @@
 
                     <TextView
                         android:id="@+id/tv_baby_birthday"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -164,7 +164,7 @@
                     android:layout_height="@dimen/y96px">
 
                     <TextView
-                        style="@style/BlackText28px"
+                        style="@style/SecondBlack.Text28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -172,7 +172,7 @@
 
                     <TextView
                         android:id="@+id/tv_realy_age"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -192,7 +192,7 @@
                     android:layout_height="@dimen/y96px">
 
                     <TextView
-                        style="@style/BlackText28px"
+                        style="@style/SecondBlack.Text28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -200,7 +200,7 @@
 
                     <TextView
                         android:id="@+id/tv_correct_age"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -220,7 +220,7 @@
                     android:layout_height="@dimen/y96px">
 
                     <TextView
-                        style="@style/BlackText28px"
+                        style="@style/SecondBlack.Text28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -228,7 +228,7 @@
 
                     <TextView
                         android:id="@+id/tv_height"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -248,7 +248,7 @@
                     android:layout_height="@dimen/y96px">
 
                     <TextView
-                        style="@style/BlackText28px"
+                        style="@style/SecondBlack.Text28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -256,7 +256,7 @@
 
                     <TextView
                         android:id="@+id/tv_weight"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -276,7 +276,7 @@
                     android:layout_height="@dimen/y96px">
 
                     <TextView
-                        style="@style/BlackText28px"
+                        style="@style/SecondBlack.Text28px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -284,7 +284,7 @@
 
                     <TextView
                         android:id="@+id/tv_BMI"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -304,12 +304,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y96px"
                 android:layout_marginTop="@dimen/y19px"
-                android:background="@color/white"
+                android:background="@color/first_white"
                 android:orientation="vertical"
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/BlackText28px"
+                    style="@style/SecondBlack.Text28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -323,9 +323,6 @@
                 android:orientation="vertical"
                 android:visibility="visible">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x716px">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -335,7 +332,8 @@
                             android:id="@+id/iv_details"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/x716px"
-                            android:src="@drawable/bg_boy_weight_data" />
+                            android:src="@drawable/bg_boy_weight_data"
+                            android:contentDescription="@string/contentDescription" />
 
                         <com.doumengmengandroidbady.view.DiagramView
                             android:id="@+id/diagram_view"
@@ -344,7 +342,6 @@
                             app:origin_x="@dimen/x41px"
                             app:origin_y="@dimen/x53px" />
                     </FrameLayout>
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/rl_data"
@@ -364,7 +361,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y134px"
-                    android:background="@color/white"
+                    android:background="@color/first_white"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -405,14 +402,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y20px"
-                android:background="@color/white"
+                android:background="@color/first_white"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/x24px"
                 android:paddingRight="@dimen/x24px">
 
                 <TextView
                     android:id="@+id/tv_developmental_title"
-                    style="@style/BlackText28px"
+                    style="@style/SecondBlack.Text28px"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y96px"
                     android:gravity="center_vertical"
@@ -434,14 +431,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y20px"
-                android:background="@color/white"
+                android:background="@color/first_white"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/x24px"
                 android:paddingRight="@dimen/x24px"
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/BlackText28px"
+                    style="@style/SecondBlack.Text28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y34px"
@@ -457,28 +454,28 @@
 
                     <TextView
                         android:id="@+id/tv_weight_content"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
 
                     <TextView
                         android:id="@+id/tv_height_content"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
 
                     <TextView
                         android:id="@+id/tv_bmi_content"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
 
                     <TextView
                         android:id="@+id/tv_other_content"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
@@ -490,14 +487,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y20px"
-                android:background="@color/white"
+                android:background="@color/first_white"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/x24px"
                 android:paddingRight="@dimen/x24px"
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/BlackText28px"
+                    style="@style/SecondBlack.Text28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y34px"
@@ -512,33 +509,33 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/assessment_body_growth" />
 
                     <TextView
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/assessment_growth_tendency" />
 
                     <TextView
                         android:id="@+id/tv_report_content_1"
-                        style="@style/FourthGrayText26px"
+                        style="@style/FourthGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
 
                     <TextView
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/assessment_growth_level" />
 
                     <TextView
                         android:id="@+id/tv_report_content_2"
-                        style="@style/FourthGrayText26px"
+                        style="@style/FourthGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
@@ -558,14 +555,14 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/assessment_growth_result" />
 
                     <TextView
                         android:id="@+id/tv_report_content_3"
-                        style="@style/FourthGrayText26px"
+                        style="@style/FourthGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
@@ -585,14 +582,14 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/assessment_doctor_suggest" />
 
                     <TextView
                         android:id="@+id/tv_report_content_4"
-                        style="@style/FourthGrayText26px"
+                        style="@style/FourthGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="" />
@@ -625,7 +622,8 @@
                     android:layout_width="@dimen/x408px"
                     android:layout_height="@dimen/x107px"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/btn_parenting_guide" />
+                    android:background="@drawable/btn_parenting_guide"
+                    android:contentDescription="@string/contentDescription" />
             </RelativeLayout>
         </LinearLayout>
 

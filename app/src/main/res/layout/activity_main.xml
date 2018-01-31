@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/home_page"
-                    style="@style/BtmMenuText"
+                    style="@style/SevenGray.Text24px"
                     android:layout_marginTop="@dimen/BtmMenuTextMarginTop"
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/baby_knowledge"
-                    style="@style/BtmMenuText"
+                    style="@style/SevenGray.Text24px"
                     android:layout_marginTop="@dimen/BtmMenuTextMarginTop"
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
@@ -93,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spacialist_service"
-                    style="@style/BtmMenuText"
+                    style="@style/SevenGray.Text24px"
                     android:layout_marginTop="@dimen/BtmMenuTextMarginTop"
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/hospital_report"
-                    style="@style/BtmMenuText"
+                    style="@style/SevenGray.Text24px"
                     android:layout_marginTop="@dimen/BtmMenuTextMarginTop"
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
@@ -143,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/meng_lesson"
-                    style="@style/BtmMenuText"
+                    style="@style/SevenGray.Text24px"
                     android:layout_marginTop="@dimen/BtmMenuTextMarginTop"
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
@@ -156,7 +156,7 @@
         android:layout_width="@dimen/x642px"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -180,7 +180,7 @@
                     android:id="@+id/tv_baby_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/BlackText30px"
+                    style="@style/SecondBlack.Text30px"
                     android:text=""/>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -199,7 +199,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x5px"
-                        style="@style/GrayText24px"
+                        style="@style/FirstGray.Text24px"
                         android:text=""
                         />
                 </LinearLayout>

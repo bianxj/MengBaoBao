@@ -29,8 +29,8 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private final static int TYPE_HOSPITAL = 0x10;
     private final static int TYPE_DOCTOR = 0x11;
 
-    private List<HospitalEntity> hospitals;
-    private List<DoctorEntity> doctors;
+    private final List<HospitalEntity> hospitals;
+    private final List<DoctorEntity> doctors;
     private List<Object> objects = new ArrayList<>();
 
     public HospitalDoctorAdapter(List<HospitalEntity> hospitals , List<DoctorEntity> doctors) {
@@ -84,8 +84,9 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public static class HospitalHolder extends RecyclerView.ViewHolder{
-        private CircleImageView civ_hospital;
-        private TextView tv_hospital_name , tv_hospital_address;
+        private final CircleImageView civ_hospital;
+        private final TextView tv_hospital_name;
+        private final TextView tv_hospital_address;
         private HospitalEntity hospital;
 
         public HospitalHolder(View itemView) {
@@ -103,7 +104,7 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             tv_hospital_name.setText(hospital.getHospitalname());
         }
 
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
@@ -128,9 +129,11 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public static class DoctorHolder extends  RecyclerView.ViewHolder{
-        private CircleImageView civ_head;
-        private TextView tv_doctor_name , tv_doctor_position;
-        private TextView tv_doctor_hospital , tv_doctor_skill;
+        private final CircleImageView civ_head;
+        private final TextView tv_doctor_name;
+        private final TextView tv_doctor_position;
+        private final TextView tv_doctor_hospital;
+        private final TextView tv_doctor_skill;
         private DoctorEntity doctor;
 
         public DoctorHolder(View itemView) {
@@ -143,7 +146,7 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             itemView.setOnClickListener(listener);
         }
 
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();

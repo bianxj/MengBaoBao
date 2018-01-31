@@ -17,21 +17,21 @@
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="@style/GrayText28px"
+            style="@style/FirstGray.Text28px"
             android:gravity="center"/>
         <TextView
             android:id="@+id/tv_title_center"
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="@style/GrayText28px"
+            style="@style/FirstGray.Text28px"
             android:gravity="center"/>
         <TextView
             android:id="@+id/tv_title_right"
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="@style/GrayText28px"
+            style="@style/FirstGray.Text28px"
             android:gravity="center"/>
 
     </LinearLayout>

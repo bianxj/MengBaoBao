@@ -34,7 +34,6 @@ public class BaseActivity extends Activity {
         if ( task != null ){
             if ( AsyncTask.Status.FINISHED != task.getStatus() ){
                 task.cancel(false);
-                task = null;
             }
         }
     }

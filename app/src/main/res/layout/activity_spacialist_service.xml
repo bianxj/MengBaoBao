@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                style="@style/BigWhiteText"
+                style="@style/FirstWhite.Text34px"
                 android:text="@string/default_city"
                 android:layout_marginLeft="@dimen/x28px"
                 android:maxLength="3"
@@ -36,7 +36,7 @@
                 android:src="@drawable/icon_down_arrow"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x134px"
-                />
+                android:contentDescription="@string/contentDescription" />
 
         </RelativeLayout>
 
@@ -44,9 +44,9 @@
             android:id="@+id/tv_location_failed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="定位失败，请点击重试GPS定位"
+            android:text="@string/spacialist_location_failed"
             android:layout_alignParentBottom="true"
-            style="@style/WhiteText22px"
+            style="@style/FirstWhite.Text22px"
             />
 
 
@@ -63,7 +63,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x30px"
                 android:src="@drawable/icon_red_search"
-                />
+                android:contentDescription="@string/contentDescription" />
 
             <EditText
                 android:id="@+id/et_search"
@@ -85,7 +85,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x34px"
-            >
+            android:contentDescription="@string/contentDescription">
 
         </ImageView>
 

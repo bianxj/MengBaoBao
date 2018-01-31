@@ -53,7 +53,7 @@ public class SettingActivity extends BaseActivity {
         rl_agreement.setOnClickListener(listener);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){

@@ -19,7 +19,7 @@
 
             <TextView
                 android:id="@+id/tv_hospital_name"
-                style="@style/BlackText23px"
+                style="@style/SecondBlack.Text23px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y26px"
@@ -27,7 +27,7 @@
                 android:text="" />
 
             <TextView
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y18px"
@@ -50,7 +50,7 @@
 
                     <TextView
                         android:id="@+id/tv_department"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -58,7 +58,7 @@
 
                     <TextView
                         android:id="@+id/tv_child_code"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -73,7 +73,7 @@
 
                     <TextView
                         android:id="@+id/tv_name"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -81,7 +81,7 @@
 
                     <TextView
                         android:id="@+id/tv_gender"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -96,7 +96,7 @@
 
                     <TextView
                         android:id="@+id/tv_birthday"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -104,7 +104,7 @@
 
                     <TextView
                         android:id="@+id/tv_current_month"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -119,14 +119,14 @@
 
                     <TextView
                         android:id="@+id/tv_corrent_month"
-                        style="@style/LinkPinkText26px"
+                        style="@style/FirstPink.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="矫正月龄：2个月25天" />
 
                     <TextView
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -150,7 +150,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="测量信息"
@@ -164,7 +164,7 @@
 
                     <TextView
                         android:id="@+id/tv_height"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -172,7 +172,7 @@
 
                     <TextView
                         android:id="@+id/tv_weight"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -187,7 +187,7 @@
 
                     <TextView
                         android:id="@+id/tv_head"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -195,7 +195,7 @@
 
                     <TextView
                         android:id="@+id/tv_chest"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -210,14 +210,14 @@
 
                     <TextView
                         android:id="@+id/tv_BMI"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="BMI：14.77" />
 
                     <TextView
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -241,7 +241,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="喂养方式"
@@ -249,7 +249,7 @@
 
                 <TextView
                     android:id="@+id/tv_feeding_type"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y10px" />
@@ -271,7 +271,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="发育史"
@@ -279,7 +279,7 @@
 
                 <TextView
                     android:id="@+id/tv_develop_history"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y10px" />
@@ -301,7 +301,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="疾病史"
@@ -309,7 +309,7 @@
 
                 <TextView
                     android:id="@+id/tv_disease_history"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y10px" />
@@ -331,7 +331,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="现病史"
@@ -339,7 +339,7 @@
 
                 <TextView
                     android:id="@+id/tv_current_history"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y10px" />
@@ -358,10 +358,10 @@
                 android:layout_marginLeft="@dimen/x20px"
                 android:layout_marginRight="@dimen/x20px"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="生长评价均数标准差结果（WHO）"
@@ -373,7 +373,7 @@
                     android:layout_marginTop="@dimen/y26px">
 
                     <TextView
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
@@ -395,7 +395,7 @@
                     android:layout_marginTop="@dimen/y26px">
 
                     <TextView
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
@@ -417,7 +417,7 @@
                     android:layout_marginTop="@dimen/y26px">
 
                     <TextView
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
@@ -439,7 +439,7 @@
                     android:layout_marginTop="@dimen/y26px">
 
                     <TextView
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
@@ -461,7 +461,8 @@
                 android:layout_height="@dimen/y1px"
                 android:layout_marginBottom="@dimen/y28px"
                 android:layout_marginTop="@dimen/y28px"
-                android:background="@color/linePink" />
+                android:background="@color/linePink"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -469,7 +470,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/tv_develop_behavior"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="发育行为（3个月）"
@@ -499,7 +500,7 @@
                 android:layout_marginLeft="@dimen/x20px"
                 android:layout_marginRight="@dimen/x20px">
                 <TextView
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="评价结果"
@@ -507,26 +508,26 @@
 
                 <TextView
                     android:id="@+id/tv_result_weight"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y26px"
                     android:text="体重：正常范围内"/>
                 <TextView
                     android:id="@+id/tv_result_height"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="身长：正常范围内"/>
                 <TextView
                     android:id="@+id/tv_result_height_weight"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="身长体重比：正常"/>
                 <TextView
                     android:id="@+id/tv_result_other"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="神经心理、发育行为评估：可疑，请结合临床。"/>
@@ -546,7 +547,7 @@
                 android:layout_marginLeft="@dimen/x20px"
                 android:layout_marginRight="@dimen/x20px">
                 <TextView
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="医生建议"
@@ -554,7 +555,7 @@
 
                 <TextView
                     android:id="@+id/tv_suggest"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y26px"
@@ -573,7 +574,7 @@
                 android:layout_height="wrap_content"
                 android:text="本报告仅供临床参考"
                 android:gravity="center"
-                style="@style/GrayText26px"/>
+                style="@style/FirstGray.Text26px"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -585,7 +586,7 @@
 
                 <TextView
                     android:id="@+id/tv_doctor_name"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -593,7 +594,7 @@
 
                 <TextView
                     android:id="@+id/tv_report_name"
-                    style="@style/BlackText26px"
+                    style="@style/SecondBlack.Text26px"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -603,7 +604,7 @@
 
             <TextView
                 android:id="@+id/tv_report_time"
-                style="@style/BlackText26px"
+                style="@style/SecondBlack.Text26px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/x20px"

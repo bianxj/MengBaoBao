@@ -26,13 +26,13 @@ public class Record {
     private String hwEvaluation;
 
     @SerializedName("monthage")
-    private String monthAge;
+    private int monthAge;
     @SerializedName("monthday")
-    private String monthDay;
+    private int monthDay;
     @SerializedName("correctmonthage")
-    private String correctMonthAge;
+    private int correctMonthAge;
     @SerializedName("correctmonthday")
-    private String correctMonthDay;
+    private int correctMonthDay;
 
     @SerializedName("recordstatus")
     private String recordStatus;
@@ -117,35 +117,35 @@ public class Record {
         this.hwEvaluation = hwEvaluation;
     }
 
-    public String getMonthAge() {
+    public int getMonthAge() {
         return monthAge;
     }
 
-    public void setMonthAge(String monthAge) {
+    public void setMonthAge(int monthAge) {
         this.monthAge = monthAge;
     }
 
-    public String getMonthDay() {
+    public int getMonthDay() {
         return monthDay;
     }
 
-    public void setMonthDay(String monthDay) {
+    public void setMonthDay(int monthDay) {
         this.monthDay = monthDay;
     }
 
-    public String getCorrectMonthAge() {
+    public int getCorrectMonthAge() {
         return correctMonthAge;
     }
 
-    public void setCorrectMonthAge(String correctMonthAge) {
+    public void setCorrectMonthAge(int correctMonthAge) {
         this.correctMonthAge = correctMonthAge;
     }
 
-    public String getCorrectMonthDay() {
+    public int getCorrectMonthDay() {
         return correctMonthDay;
     }
 
-    public void setCorrectMonthDay(String correctMonthDay) {
+    public void setCorrectMonthDay(int correctMonthDay) {
         this.correctMonthDay = correctMonthDay;
     }
 

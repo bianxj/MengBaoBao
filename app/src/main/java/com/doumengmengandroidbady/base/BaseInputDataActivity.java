@@ -40,7 +40,7 @@ public class BaseInputDataActivity extends BaseActivity {
         }
         for (String content:contents){
             TextView tv = new TextView(this);
-            tv.setTextColor(getResources().getColor(R.color.colorBlackText));
+            tv.setTextColor(getResources().getColor(R.color.second_black));
             tv.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y28px);

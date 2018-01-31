@@ -86,14 +86,14 @@ public class MyMediaPlayer extends FrameLayout {
         }
     }
 
-    private OnClickListener listener = new OnClickListener() {
+    private final OnClickListener listener = new OnClickListener() {
         @Override
         public void onClick(View view) {
             startPlay();
         }
     };
 
-    private SurfaceHolder.Callback callback = new SurfaceHolder.Callback() {
+    private final SurfaceHolder.Callback callback = new SurfaceHolder.Callback() {
         @Override
         public void surfaceCreated(SurfaceHolder surfaceHolder) {
             player.setDisplay(surfaceHolder);
@@ -110,7 +110,7 @@ public class MyMediaPlayer extends FrameLayout {
         }
     };
 
-    private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
+    private final MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
             completePlay();

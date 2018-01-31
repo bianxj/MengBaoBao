@@ -193,7 +193,7 @@ public class DoctorInfoActivity extends BaseActivity {
         return builder.build();
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
@@ -247,7 +247,7 @@ public class DoctorInfoActivity extends BaseActivity {
     //-----------------------------------支付------------------------------------------------
 
     private RequestTask aliPayTask = null;
-    private RequestTask aliPayResponseTask = null;
+    private final RequestTask aliPayResponseTask = null;
 
     private void aliPay(){
         try {
@@ -258,7 +258,7 @@ public class DoctorInfoActivity extends BaseActivity {
         }
     }
 
-    private RequestCallBack aliPayCallBack = new RequestCallBack() {
+    private final RequestCallBack aliPayCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
@@ -316,7 +316,7 @@ public class DoctorInfoActivity extends BaseActivity {
 
     private static class AlipayHandler extends Handler{
         private final static int MESSAGE_ALI_PAY = 0x01;
-        private WeakReference<DoctorInfoActivity> weakReference;
+        private final WeakReference<DoctorInfoActivity> weakReference;
         private Map<String,String> aliResult = null;
 
         public AlipayHandler(DoctorInfoActivity activity) {
@@ -388,7 +388,7 @@ public class DoctorInfoActivity extends BaseActivity {
         api.sendReq(request);
     }
 
-    private IWXAPIEventHandler eventHandler = new IWXAPIEventHandler() {
+    private final IWXAPIEventHandler eventHandler = new IWXAPIEventHandler() {
         @Override
         public void onReq(BaseReq baseReq) {
         }
@@ -396,7 +396,7 @@ public class DoctorInfoActivity extends BaseActivity {
         @Override
         public void onResp(BaseResp resp) {
             if(resp.getType()== ConstantsAPI.COMMAND_PAY_BY_WX){
-                if( "0".equals(resp.errCode) ){
+                if( 0 == resp.errCode ){
                     Toast.makeText(DoctorInfoActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(DoctorInfoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();

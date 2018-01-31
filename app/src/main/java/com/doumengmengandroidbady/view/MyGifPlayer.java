@@ -38,6 +38,7 @@ public class MyGifPlayer extends FrameLayout {
         int startId = a.getResourceId(R.styleable.MyGifPlayer_start_drawable,0);
         int side = a.getDimensionPixelOffset(R.styleable.MyGifPlayer_start_side,0);
         boolean needShare = a.getBoolean(R.styleable.MyGifPlayer_need_share,false);
+        a.recycle();
         initView(context,startId,side,needShare);
     }
 
@@ -64,7 +65,7 @@ public class MyGifPlayer extends FrameLayout {
         start.setVisibility(View.GONE);
     }
 
-    private OnClickListener listener = new OnClickListener() {
+    private final OnClickListener listener = new OnClickListener() {
         @Override
         public void onClick(View view) {
             if ( customerListener != null ){
@@ -115,7 +116,7 @@ public class MyGifPlayer extends FrameLayout {
         share.setVisibility(View.GONE);
     }
 
-    private SimpleTarget<GifDrawable> target = new SimpleTarget<GifDrawable>() {
+    private final SimpleTarget<GifDrawable> target = new SimpleTarget<GifDrawable>() {
         @Override
         public void onResourceReady(@NonNull GifDrawable gifDrawable, @Nullable Transition<? super GifDrawable> transition) {
             gif = gifDrawable;
@@ -152,7 +153,7 @@ public class MyGifPlayer extends FrameLayout {
         image.postDelayed(stopRunnable,200);
     }
 
-    private Runnable stopRunnable = new Runnable() {
+    private final Runnable stopRunnable = new Runnable() {
         @Override
         public void run() {
             if ( !gif.isRunning() ) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/first_white"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:focusable="true"
@@ -40,7 +40,6 @@
                             android:labelFor="@+id/et_input_data"
                             android:layout_width="@dimen/x233px"
                             android:layout_height="@dimen/y86px"
-                            android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
                             android:inputType="number"
                             android:imeOptions="actionNext"
@@ -50,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/milliliter"
-                    style="@style/GrayText26px"
+                    style="@style/FirstGray.Text26px"
                     android:layout_marginLeft="@dimen/x18px"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/ll_input_data"
@@ -61,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/brest_reference_value"
-                style="@style/LinkPinkText23px"
+                style="@style/FirstPink.Text23px"
                 android:layout_marginTop="@dimen/y32px"
                 android:includeFontPadding="false"
                 />
@@ -83,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/brest_fedding_count"
-                    style="@style/GrayText26px"
+                    style="@style/FirstGray.Text26px"
                     />
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -97,7 +96,6 @@
                             android:labelFor="@+id/et_input_data_two"
                             android:layout_width="@dimen/x182px"
                             android:layout_height="@dimen/y57px"
-                            android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
                             android:inputType="number"
                             android:imeOptions="actionDone"
@@ -106,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/count_day"
-                        style="@style/GrayText26px"
+                        style="@style/FirstGray.Text26px"
                         android:layout_marginLeft="@dimen/x18px"
                         />
                 </LinearLayout>
@@ -125,7 +123,7 @@
                 android:layout_marginRight="@dimen/x64px"
                 android:layout_marginLeft="@dimen/x64px"
                 android:layout_marginTop="@dimen/y24px"
-                style="@style/GrayText26px"/>
+                style="@style/FirstGray.Text26px"/>
 
             <View
                 android:layout_width="@dimen/x681px"
@@ -138,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/brest_fedding_title"
-                style="@style/BlackText34px"
+                style="@style/SecondBlack.Text34px"
                 android:layout_marginTop="@dimen/y43px"
                 android:includeFontPadding="false"
                 />
@@ -159,8 +157,6 @@
                 android:layout_height="@dimen/y311px"
                 android:layout_marginTop="@dimen/y48px"
                 android:layout_marginBottom="@dimen/y48px"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
                 app:start_drawable="@drawable/btn_play"
                 app:start_side="@dimen/x94px"
                 app:need_share="false">

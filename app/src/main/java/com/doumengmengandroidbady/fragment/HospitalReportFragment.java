@@ -2,6 +2,7 @@ package com.doumengmengandroidbady.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.entity.HospitalReport;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +35,25 @@ public class HospitalReportFragment extends BaseFragment {
     private List<HospitalReport> reports;
     private HospitalReportAdapter hospitalReportAdapter;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospital_report,null);
         findView(view);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(getClass().getSimpleName());
+        MobclickAgent.onResume(getContext());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(getContext());
+        MobclickAgent.onPageEnd(getClass().getSimpleName());
     }
 
     private void findView(View view){
@@ -77,7 +92,7 @@ public class HospitalReportFragment extends BaseFragment {
         hospitalReportAdapter.notifyDataSetChanged();
     }
 
-    private XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
+    private final XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
         @Override
         public void onRefresh() {}
 

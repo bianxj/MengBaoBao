@@ -17,7 +17,7 @@
 
             <TextView
                 android:id="@+id/tv_prompt"
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -29,36 +29,37 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y1px"
-            android:background="@color/dialogPink">
+            android:background="@color/second_pink">
         </View>
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
             >
             <TextView
                 android:id="@+id/tv_cancel"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/x264px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/DialogPinkText34px"
+                style="@style/SecondPink.Text34px"
                 android:gravity="center"
+                android:layout_alignParentLeft="true"
                 android:text="@string/dialog_btn_go_on"/>
             <View
                 android:layout_width="@dimen/y1px"
                 android:layout_height="match_parent"
-                android:background="@color/dialogPink">
+                android:background="@color/second_pink"
+                android:layout_centerInParent="true">
             </View>
             <TextView
                 android:id="@+id/tv_sure"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/x264px"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/DialogPinkText34px"
+                style="@style/SecondPink.Text34px"
                 android:gravity="center"
+                android:layout_alignParentRight="true"
                 android:text="@string/dialog_btn_go_on"/>
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

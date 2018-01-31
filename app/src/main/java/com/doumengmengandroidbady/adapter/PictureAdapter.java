@@ -23,9 +23,9 @@ import java.util.List;
 
 public class PictureAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<UploadPicture> pictures;
-    private TackPictureCallBack callBack;
+    private final Context context;
+    private final List<UploadPicture> pictures;
+    private final TackPictureCallBack callBack;
 
     public PictureAdapter(Context context,TackPictureCallBack callBack) {
         pictures = new ArrayList<>();
@@ -54,7 +54,7 @@ public class PictureAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        ViewHolder holder = null;
+        ViewHolder holder;
         if ( view == null ){
             view = LayoutInflater.from(context).inflate(R.layout.item_upload_picture,null);
             holder = new ViewHolder(view);
@@ -96,10 +96,10 @@ public class PictureAdapter extends BaseAdapter {
             iv_delete.setOnClickListener(listener);
         }
 
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = 0;
+                int position;
                 switch (view.getId()){
                     case R.id.iv_picture:
                         position = (int) view.getTag();

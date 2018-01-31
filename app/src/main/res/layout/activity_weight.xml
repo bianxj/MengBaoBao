@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/first_white"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:focusable="true"
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/kilograme"
                     android:layout_centerVertical="true"
-                    style="@style/GrayText26px"
+                    style="@style/FirstGray.Text26px"
                     android:layout_marginLeft="@dimen/x490px"
                     />
             </RelativeLayout>
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/weight_reference_value"
-                style="@style/LinkPinkText23px"
+                style="@style/FirstPink.Text23px"
                 android:layout_marginTop="@dimen/y32px"
                 android:includeFontPadding="false"
                 />
@@ -59,7 +59,7 @@
                 android:id="@+id/tv_increase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/BlackText26px"
+                style="@style/SecondBlack.Text26px"
                 android:layout_marginTop="@dimen/y32px"
                 android:includeFontPadding="false"
                 android:visibility="gone"
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/weight_title"
-                style="@style/BlackText34px"
+                style="@style/SecondBlack.Text34px"
                 android:layout_marginTop="@dimen/y43px"
                 android:includeFontPadding="false"
                 />
@@ -97,8 +97,6 @@
                 android:layout_width="@dimen/x447px"
                 android:layout_height="@dimen/y311px"
                 android:layout_marginTop="@dimen/y48px"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
                 app:start_drawable="@drawable/btn_play"
                 app:start_side="@dimen/x94px"
                 app:need_share="false">

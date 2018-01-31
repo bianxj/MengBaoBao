@@ -41,13 +41,13 @@ public class ParentInfoLayout extends LinearLayout {
 
     private EditText et_father_name,et_father_height,et_father_weight;
     private TextView tv_father_BMI;
-    private List<RadioButton> fatherButtons = new ArrayList<>();
-    private int[] father_culture_id = new int[]{R.id.rb_father_primary,R.id.rb_father_junior,R.id.rb_father_senior,R.id.rb_father_university,R.id.rb_father_master,R.id.rb_father_doctor};
+    private final List<CompoundButton> fatherButtons = new ArrayList<>();
+    private final int[] father_culture_id = new int[]{R.id.rb_father_primary,R.id.rb_father_junior,R.id.rb_father_senior,R.id.rb_father_university,R.id.rb_father_master,R.id.rb_father_doctor};
 
     private EditText et_mother_name,et_mother_height,et_mother_weight;
     private TextView tv_mother_BMI;
-    private List<RadioButton> motherButtons = new ArrayList<>();
-    private int[] mother_culture_id = new int[]{R.id.rb_mother_primary,R.id.rb_mother_junior,R.id.rb_mother_senior,R.id.rb_mother_university,R.id.rb_mother_master,R.id.rb_mother_doctor};
+    private final List<CompoundButton> motherButtons = new ArrayList<>();
+    private final int[] mother_culture_id = new int[]{R.id.rb_mother_primary,R.id.rb_mother_junior,R.id.rb_mother_senior,R.id.rb_mother_university,R.id.rb_mother_master,R.id.rb_mother_doctor};
 
     public ParentInfoLayout(Context context) {
         super(context);
@@ -121,7 +121,7 @@ public class ParentInfoLayout extends LinearLayout {
         }
     }
 
-    private CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+    private final CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isCheck) {
             if ( isCheck ) {
@@ -135,7 +135,7 @@ public class ParentInfoLayout extends LinearLayout {
         }
     };
 
-    private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
+    private final View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View view, boolean hasFocus) {
             if ( !hasFocus ){
@@ -157,7 +157,7 @@ public class ParentInfoLayout extends LinearLayout {
         }
     };
 
-    private TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
+    private final TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView textView, int event, KeyEvent keyEvent) {
             if ( event == EditorInfo.IME_ACTION_DONE) {
@@ -171,8 +171,8 @@ public class ParentInfoLayout extends LinearLayout {
         }
     };
 
-    private String getCurrentCalture(List<RadioButton> radioButtons){
-        for (RadioButton button:radioButtons){
+    private String getCurrentCalture(List<? extends CompoundButton> radioButtons){
+        for (CompoundButton button:radioButtons){
             if ( button.isChecked() ){
                 return button.getText().toString().trim();
             }
@@ -180,16 +180,16 @@ public class ParentInfoLayout extends LinearLayout {
         return null;
     }
 
-    private void updateCalture(List<RadioButton> radioButtons, CompoundButton compoundButton){
-        for (RadioButton button:radioButtons){
+    private void updateCalture(List<CompoundButton> radioButtons, CompoundButton compoundButton){
+        for (CompoundButton button:radioButtons){
             if ( button.getId() != compoundButton.getId() ){
                 button.setChecked(false);
             }
         }
     }
 
-    private void initCalture(List<RadioButton> radioButtons,String selectContent){
-        for (RadioButton button:radioButtons){
+    private void initCalture(List<? extends CompoundButton> radioButtons,String selectContent){
+        for (CompoundButton button:radioButtons){
             if ( selectContent.equals(button.getText().toString()) ){
                 button.setChecked(true);
                 break;
@@ -228,7 +228,7 @@ public class ParentInfoLayout extends LinearLayout {
         return UN_CHOOSE;
     }
 
-    private InputUserInfo.ParentInfo parentInfo = new InputUserInfo.ParentInfo();
+    private final InputUserInfo.ParentInfo parentInfo = new InputUserInfo.ParentInfo();
     public InputUserInfo.ParentInfo getParentInfo() {
         parentInfo.clearData();
         parentInfo.setDadName(et_father_name.getText().toString().trim());

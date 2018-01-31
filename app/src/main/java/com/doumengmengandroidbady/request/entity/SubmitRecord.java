@@ -8,8 +8,8 @@ import java.util.List;
  * 创建日期: 2018/1/9 10:19
  */
 public class SubmitRecord {
-    private String userId;
-    private BabyRecord babyRecord;
+    private final String userId;
+    private final BabyRecord babyRecord;
 
     public SubmitRecord(String userId) {
         this.userId = userId;

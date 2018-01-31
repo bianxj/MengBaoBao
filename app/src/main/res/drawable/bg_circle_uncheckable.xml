@@ -5,6 +5,6 @@
         android:bottomRightRadius="@dimen/y56px"
         android:topLeftRadius="@dimen/y56px"
         android:topRightRadius="@dimen/y56px" />
-    <solid android:color="@color/fourthGray" />
+    <solid android:color="@color/fourth_gray" />
     <size android:height="@dimen/y56px" />
 </shape>

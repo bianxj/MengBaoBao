@@ -18,7 +18,7 @@ import java.util.List;
 
 public class PayAdapter extends BaseAdapter {
 
-    private List<PayData> datas;
+    private final List<PayData> datas;
 
     public PayAdapter(List<PayData> datas) {
         this.datas = datas;
@@ -41,7 +41,7 @@ public class PayAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        ViewHolder holder = null;
+        ViewHolder holder;
         if ( view == null ){
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_dialog_pay,null);
             holder = new ViewHolder();

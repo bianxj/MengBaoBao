@@ -49,8 +49,8 @@ public class SearchActivity extends BaseActivity {
 
     private XRecyclerView xrv_search;
 
-    private List<DoctorEntity> doctors = new ArrayList<>();
-    private List<HospitalEntity> hospitals = new ArrayList<>();
+    private final List<DoctorEntity> doctors = new ArrayList<>();
+    private final List<HospitalEntity> hospitals = new ArrayList<>();
     private HospitalDoctorAdapter adapter;
     private SearchHandler handler;
 
@@ -144,7 +144,7 @@ public class SearchActivity extends BaseActivity {
         }
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -172,7 +172,7 @@ public class SearchActivity extends BaseActivity {
     //-----------------------------------------查询----------------------------------------------
     private static class SearchHandler extends Handler{
         private final static int MESSAGE_SEARCH = 0x01;
-        private WeakReference<SearchActivity> weakReference;
+        private final WeakReference<SearchActivity> weakReference;
 
         public SearchHandler(SearchActivity activity) {
             weakReference = new WeakReference<SearchActivity>(activity);
@@ -216,7 +216,7 @@ public class SearchActivity extends BaseActivity {
 
     private List<DoctorEntity> tempDoctors = null;
     private List<HospitalEntity> tempHospitals = null;
-    private Runnable searchRunnable = new Runnable() {
+    private final Runnable searchRunnable = new Runnable() {
         @Override
         public void run() {
             String search = et_search.getText().toString().trim();
@@ -237,7 +237,7 @@ public class SearchActivity extends BaseActivity {
 
     //--------------------------------------搜索历史处理--------------------------------------------
     private JSONArray array = null;
-    private List<View> historyItem = new ArrayList<>();
+    private final List<View> historyItem = new ArrayList<>();
     private final static int HISTORY_ITEM_COUNT = 3;
 
     private void putSearchHistory(String keyword) throws JSONException {
@@ -300,7 +300,7 @@ public class SearchActivity extends BaseActivity {
         return view;
     }
 
-    private View.OnClickListener historyClickListener = new View.OnClickListener() {
+    private final View.OnClickListener historyClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             String keyword = ((TextView)view).getText().toString();

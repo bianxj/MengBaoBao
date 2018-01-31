@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.view.ScaleplateView;
 
 import java.util.List;
 import java.util.Map;
@@ -43,8 +42,8 @@ public class HospitalReportActivity extends BaseActivity {
     private TextView tv_feeding_type,tv_develop_history,
             tv_disease_history,tv_current_history;
 
-    //标尺
-    private ScaleplateView sv_weight,sv_height,sv_height_weight,sv_BMI;
+//    //标尺
+//    private ScaleplateView sv_weight,sv_height,sv_height_weight,sv_BMI;
 
     //发育行为
     private LinearLayout ll_develop_behavior;
@@ -88,10 +87,10 @@ public class HospitalReportActivity extends BaseActivity {
         tv_disease_history = findViewById(R.id.tv_disease_history);
         tv_current_history = findViewById(R.id.tv_current_history);
 
-        sv_weight = findViewById(R.id.sv_weight);
-        sv_height = findViewById(R.id.sv_height);
-        sv_height_weight = findViewById(R.id.sv_height_weight);
-        sv_BMI = findViewById(R.id.sv_BMI);
+//        sv_weight = findViewById(R.id.sv_weight);
+//        sv_height = findViewById(R.id.sv_height);
+//        sv_height_weight = findViewById(R.id.sv_height_weight);
+//        sv_BMI = findViewById(R.id.sv_BMI);
 
         ll_develop_behavior = findViewById(R.id.ll_develop_behavior);
 
@@ -114,7 +113,7 @@ public class HospitalReportActivity extends BaseActivity {
         rl_back.setOnClickListener(listener);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -151,7 +150,7 @@ public class HospitalReportActivity extends BaseActivity {
 
         TextView tv_title = new TextView(this);
         tv_title.setText(title);
-        tv_title.setTextColor(getResources().getColor(R.color.colorBlackText));
+        tv_title.setTextColor(getResources().getColor(R.color.second_black));
         tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -200,7 +199,7 @@ public class HospitalReportActivity extends BaseActivity {
             textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y5px);
             tv_content.setLayoutParams(textParam);
             tv_content.setText(content.getValue());
-            tv_content.setTextColor(getResources().getColor(R.color.fourthGray));
+            tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
             tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
             subLayout.addView(tv_content);
 

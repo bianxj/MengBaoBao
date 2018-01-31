@@ -45,15 +45,15 @@ public class ViewfinderView extends View {
 
     private static final int LASER_LANDSCAPE_BORDER = 40;
 
-    private Bitmap lazer;
+    private final Bitmap lazer;
     private final int laserMove;
     private final int laserTopBorder;
     private final int laserBottomBorder;
     private final int laserHeight;
-    private Rect laserSrcRect;
-    private Rect laserDesRect;
+    private final Rect laserSrcRect;
+    private final Rect laserDesRect;
 
-    private Paint paint;
+    private final Paint paint;
 
     public ViewfinderView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs , 0);
@@ -94,6 +94,8 @@ public class ViewfinderView extends View {
         laserBottomBorder = rect.bottom-laserMove*3;
         laserSrcRect = new Rect(0,0,lazer.getWidth(),lazer.getHeight());
         laserDesRect = new Rect(rect.left+LASER_LANDSCAPE_BORDER,laserTopBorder,rect.right-LASER_LANDSCAPE_BORDER,laserTopBorder+ laserHeight);
+
+        a.recycle();
     }
 
 

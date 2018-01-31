@@ -25,7 +25,7 @@
                 android:layout_marginLeft="@dimen/x48px"
                 android:layout_marginTop="@dimen/y29px"
                 android:scaleType="fitXY"
-                />
+                android:contentDescription="@string/contentDescription" />
         </RelativeLayout>
 
 

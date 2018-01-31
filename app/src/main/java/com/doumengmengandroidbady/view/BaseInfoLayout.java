@@ -78,17 +78,17 @@ public class BaseInfoLayout extends LinearLayout {
     private TextView tv_calendar;
 
     private LinearLayout ll_parturition_state;
-    private List<CheckBox> parturitionCheckBox = new ArrayList<>();
+    private final List<CompoundButton> parturitionCheckBox = new ArrayList<>();
     private RadioGroup rg_genetic_history , rg_allergy_disease;
     private RelativeLayout rl_genetic_history , rl_allergy;
     private EditText et_genetic_history , et_allergy;
 
     private LinearLayout ll_past_history;
-    private List<CheckBox> pastHistoryCheckBox = new ArrayList<>();
+    private final List<CompoundButton> pastHistoryCheckBox = new ArrayList<>();
     private RelativeLayout rl_other_disease;
     private EditText et_other_disease;
 
-    private List<CheckBox> checkBoxList = null;
+    private List<CompoundButton> checkBoxList = null;
     private List<RadioButton> radioButtonList = null;
     private List<EditText> netEditList = null;
     private List<EditText> editList = null;
@@ -97,13 +97,13 @@ public class BaseInfoLayout extends LinearLayout {
     private RadioGroup rg_gender;
 
     //单选按钮
-    private int[] rb_birth_state = new int[]{R.id.rb_single_birth,R.id.rb_spolyembryony};
-    private int[] rb_assisted_reproduction = new int[]{R.id.rb_assisted_none,R.id.rb_artificial_insemination,R.id.rb_tube_baby};
-    private int[] rb_birth_injury = new int[]{R.id.rb_injury_none,R.id.rb_injury_has};
-    private int[] rb_stifle = new int[]{R.id.rb_istifle_none,R.id.rb_istifle_has};
-    private int[] rb_ICH = new int[]{R.id.rb_ICH_none,R.id.rb_ICH_has};
-    private int[] rb_genetic_history = new int[]{R.id.rb_genetic_none,R.id.rb_genetic_has};
-    private int[] rb_allergy_disease = new int[]{R.id.rb_allergy_none,R.id.rb_allergy_has};
+    private final int[] rb_birth_state = new int[]{R.id.rb_single_birth,R.id.rb_spolyembryony};
+    private final int[] rb_assisted_reproduction = new int[]{R.id.rb_assisted_none,R.id.rb_artificial_insemination,R.id.rb_tube_baby};
+    private final int[] rb_birth_injury = new int[]{R.id.rb_injury_none,R.id.rb_injury_has};
+    private final int[] rb_stifle = new int[]{R.id.rb_istifle_none,R.id.rb_istifle_has};
+    private final int[] rb_ICH = new int[]{R.id.rb_ICH_none,R.id.rb_ICH_has};
+    private final int[] rb_genetic_history = new int[]{R.id.rb_genetic_none,R.id.rb_genetic_has};
+    private final int[] rb_allergy_disease = new int[]{R.id.rb_allergy_none,R.id.rb_allergy_has};
 
     private void findView(){
         et_baby_name = findViewById(R.id.et_baby_name);
@@ -214,7 +214,7 @@ public class BaseInfoLayout extends LinearLayout {
         }
     }
 
-    private void findCheckBox(List<CheckBox> list , ViewGroup group){
+    private void findCheckBox(List<CompoundButton> list , ViewGroup group){
         for (int i=0;i<group.getChildCount();i++){
             View view = group.getChildAt(i);
             if ( view instanceof ViewGroup ){
@@ -235,12 +235,12 @@ public class BaseInfoLayout extends LinearLayout {
         rg_allergy_disease.setOnCheckedChangeListener(radioGroupChangeListener);
         rg_genetic_history.setOnCheckedChangeListener(radioGroupChangeListener);
 
-        for (CheckBox checkBox:pastHistoryCheckBox){
+        for (CompoundButton checkBox:pastHistoryCheckBox){
             checkBox.setOnCheckedChangeListener(checkBoxChangeListener);
         }
     }
 
-    private RadioGroup.OnCheckedChangeListener radioGroupChangeListener = new RadioGroup.OnCheckedChangeListener() {
+    private final RadioGroup.OnCheckedChangeListener radioGroupChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
             if ( checkedId == R.id.rb_genetic_none ){
@@ -258,12 +258,12 @@ public class BaseInfoLayout extends LinearLayout {
         }
     };
 
-    private CompoundButton.OnCheckedChangeListener checkBoxChangeListener = new CompoundButton.OnCheckedChangeListener() {
+    private final CompoundButton.OnCheckedChangeListener checkBoxChangeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
             if ( R.id.cb_none == compoundButton.getId() ){
                 if ( isChecked ){
-                    for (CheckBox checkBox:pastHistoryCheckBox){
+                    for (CompoundButton checkBox:pastHistoryCheckBox){
                         if ( !checkBox.equals(compoundButton) ){
                             checkBox.setChecked(false);
                         }
@@ -334,7 +334,7 @@ public class BaseInfoLayout extends LinearLayout {
                 }
             }
         }
-        for (CheckBox checkBox:checkBoxList){
+        for (CompoundButton checkBox:checkBoxList){
             checkBox.setEnabled(false);
         }
         for (RadioButton button:radioButtonList){
@@ -403,9 +403,9 @@ public class BaseInfoLayout extends LinearLayout {
         }
     }
 
-    private void selectCheckBox(List<CheckBox> checkBoxes , List<String> value ){
+    private void selectCheckBox(List<CompoundButton> checkBoxes , List<String> value ){
         for (int i=0;i<checkBoxes.size();i++){
-            CheckBox checkBox = checkBoxes.get(i);
+            CompoundButton checkBox = checkBoxes.get(i);
             if ( value.contains(checkBox.getText().toString().trim()) ){
                 checkBox.setChecked(true);
             }
@@ -580,8 +580,8 @@ public class BaseInfoLayout extends LinearLayout {
         return UN_CHOOSE;
     }
 
-    private boolean isCheckBoxChoose(List<CheckBox> checkBoxes){
-        for (CheckBox checkBox:checkBoxes){
+    private boolean isCheckBoxChoose(List<CompoundButton> checkBoxes){
+        for (CompoundButton checkBox:checkBoxes){
             if ( checkBox.isChecked() ){
                 return true;
             }
@@ -589,10 +589,10 @@ public class BaseInfoLayout extends LinearLayout {
         return false;
     }
 
-    private List<String> multipleChooseCheck(List<CheckBox> checkBoxes){
+    private List<String> multipleChooseCheck(List<CompoundButton> checkBoxes){
         List<String> list = new ArrayList<>();
         for (int i=0;i<checkBoxes.size();i++){
-            CheckBox button = checkBoxes.get(i);
+            CompoundButton button = checkBoxes.get(i);
             if ( button.isChecked() ){
                 list.add(button.getText().toString().trim());
             }
@@ -604,7 +604,7 @@ public class BaseInfoLayout extends LinearLayout {
         return errorMessage;
     }
 
-    private InputUserInfo.BabyInfo babyInfo = new InputUserInfo.BabyInfo();
+    private final InputUserInfo.BabyInfo babyInfo = new InputUserInfo.BabyInfo();
     public InputUserInfo.BabyInfo getBabyInfo(){
         babyInfo.clearData();
         if ( type == TYPE.EDITABLE ) {

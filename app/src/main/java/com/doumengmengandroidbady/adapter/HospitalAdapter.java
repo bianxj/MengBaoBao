@@ -23,7 +23,7 @@ import java.util.List;
 
 public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHolder> {
 
-    private List<HospitalEntity> hospitals;
+    private final List<HospitalEntity> hospitals;
 
     public HospitalAdapter(List<HospitalEntity> hospitals) {
         this.hospitals = hospitals;
@@ -49,8 +49,9 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        private CircleImageView civ_hospital;
-        private TextView tv_hospital_name , tv_hospital_address;
+        private final CircleImageView civ_hospital;
+        private final TextView tv_hospital_name;
+        private final TextView tv_hospital_address;
         private HospitalEntity hospital;
 
         public ViewHolder(View itemView) {
@@ -68,7 +69,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
             tv_hospital_name.setText(hospital.getHospitalname());
         }
 
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();

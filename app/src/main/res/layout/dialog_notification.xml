@@ -18,14 +18,15 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/x23px"
             android:layout_marginTop="@dimen/x123px"
-            android:src="@drawable/icon_close"/>
+            android:src="@drawable/icon_close"
+            android:contentDescription="@string/contentDescription" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            style="@style/DialogPinkText34px"
+            style="@style/SecondPink.Text34px"
             android:text="@string/dialog_title_notification"
             android:layout_marginTop="@dimen/x337px"/>
 
@@ -33,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            style="@style/BlackText28px"
+            style="@style/SecondBlack.Text28px"
             android:text="@string/dialog_content_notification"
             android:layout_marginTop="@dimen/x397px"/>
 

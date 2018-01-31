@@ -10,14 +10,14 @@ import android.widget.EditText;
 public class EditTextUtil {
     private int selectionStart;
     private int selectionEnd;
-    private EditText editText;
+    private final EditText editText;
 
     public EditTextUtil(EditText editText) {
         this.editText = editText;
         editText.addTextChangedListener(watcher);
     }
 
-    private TextWatcher watcher = new TextWatcher() {
+    private final TextWatcher watcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -38,8 +38,10 @@ public class EditTextUtil {
                 editText.setText(editable);
                 //隐藏软键盘
                 InputMethodManager imm = (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(editText,InputMethodManager.SHOW_FORCED);
-                imm.hideSoftInputFromWindow(editText.getWindowToken(),0);
+                if ( imm != null ) {
+                    imm.showSoftInput(editText, InputMethodManager.SHOW_FORCED);
+                    imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                }
             }
         }
     };

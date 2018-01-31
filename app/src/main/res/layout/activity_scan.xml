@@ -4,11 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <SurfaceView
             android:id="@+id/sv_scan"
             android:layout_width="match_parent"
@@ -45,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/WhiteText26px"
+            style="@style/FirstWhite.Text26px"
             android:text="@string/scan_hint"
             android:layout_marginTop="@dimen/y810px"
             android:layout_gravity="center_horizontal"/>
@@ -57,12 +52,11 @@
             android:text="@string/photo_album"
             android:layout_gravity="bottom|right"
             android:gravity="center"
-            style="@style/WhiteText34px"
+            style="@style/FirstWhite.Text34px"
             android:layout_marginRight="@dimen/x40px"
             android:layout_marginBottom="@dimen/y60px"
             />
         </FrameLayout>
 
         <include layout="@layout/include_title_back" />
-    </FrameLayout>
 </FrameLayout>

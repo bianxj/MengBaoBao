@@ -12,7 +12,7 @@
         android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/y163px"
         android:layout_marginTop="@dimen/y19px"
-        android:background="@color/white"
+        android:background="@color/first_white"
         >
 
         <com.doumengmengandroidbady.view.CircleImageView
@@ -43,7 +43,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:text=""
-                    android:textColor="@color/colorBlackText"
+                    android:textColor="@color/second_black"
                     android:includeFontPadding="false"
                     android:textSize="@dimen/y30px" />
             </RelativeLayout>

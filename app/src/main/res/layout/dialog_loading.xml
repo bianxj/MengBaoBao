@@ -23,13 +23,13 @@
                 android:layout_width="@dimen/x68px"
                 android:layout_height="@dimen/x68px"
                 android:src="@drawable/icon_loading"
-                />
+                android:contentDescription="@string/contentDescription" />
 
             <TextView
                 android:id="@+id/iv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/x68px"
-                style="@style/WhiteText26px"
+                style="@style/FirstWhite.Text26px"
                 android:text="@string/dialog_updating"
                 android:layout_marginLeft="@dimen/x10px"
                 android:gravity="center_vertical"

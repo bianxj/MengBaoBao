@@ -124,8 +124,8 @@ public class DoctorDao {
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
                 doctorEntities.add(entity);
             }
+            cursor.close();
         }
-        cursor.close();
         DataBaseUtil.closeDataBase();
         return doctorEntities;
     }
@@ -162,8 +162,8 @@ public class DoctorDao {
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
                 doctorEntities.add(entity);
             }
+            cursor.close();
         }
-        cursor.close();
         DataBaseUtil.closeDataBase();
         return doctorEntities;
     }
@@ -201,8 +201,8 @@ public class DoctorDao {
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
                 doctorEntities.add(entity);
             }
+            cursor.close();
         }
-        cursor.close();
         DataBaseUtil.closeDataBase();
 
         return doctorEntities;
@@ -239,8 +239,8 @@ public class DoctorDao {
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
                 doctorEntities.add(entity);
             }
+            cursor.close();
         }
-        cursor.close();
         DataBaseUtil.closeDataBase();
         return doctorEntities;
     }
@@ -262,8 +262,8 @@ public class DoctorDao {
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
                 entities.add(entity);
             }
+            cursor.close();
         }
-        cursor.close();
         DataBaseUtil.closeDataBase();
         return entities;
     }

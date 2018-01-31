@@ -6,6 +6,7 @@
     android:orientation="vertical"
     >
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/y100px">
 
@@ -23,8 +24,8 @@
             android:id="@+id/tv_loading_text"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            style="@style/GrayText24px"
-            android:text="……正在载入"
+            style="@style/FirstGray.Text24px"
+            android:text="@string/footer_load_more"
             android:layout_centerInParent="true" />
 
         <View

@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y192px"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:layout_marginTop="@dimen/y124px"
         >
         <ImageView
@@ -22,7 +22,7 @@
             android:src="@drawable/icon_version"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x90px"
-            />
+            android:contentDescription="@string/contentDescription" />
 
         <TextView
             android:id="@+id/tv_version"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x270px"
-            style="@style/SettingTextGray"
+            style="@style/FourthGray.Text28px"
             />
 
     </RelativeLayout>
@@ -39,7 +39,7 @@
         android:id="@+id/rl_change_pwd"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y144px"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:layout_marginTop="@dimen/y336px"
         >
 
@@ -50,12 +50,12 @@
             android:scaleType="fitXY"
             android:src="@drawable/icon_lock"
             android:layout_marginLeft="@dimen/x91px"
-            />
+            android:contentDescription="@string/contentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/MoreItemText"
+            style="@style/SecondBlack.Text30px"
             android:text="@string/change_pwd"
             android:layout_marginLeft="@dimen/x210px"
             android:includeFontPadding="false"
@@ -68,7 +68,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x48px"
-            android:src="@drawable/right_allow"/>
+            android:src="@drawable/right_allow"
+            android:contentDescription="@string/contentDescription" />
 
     </RelativeLayout>
 
@@ -76,7 +77,7 @@
         android:id="@+id/rl_agreement"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y144px"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:layout_marginTop="@dimen/y489px"
         >
 
@@ -87,12 +88,12 @@
             android:scaleType="fitXY"
             android:src="@drawable/icon_agreement"
             android:layout_marginLeft="@dimen/x91px"
-            />
+            android:contentDescription="@string/contentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/MoreItemText"
+            style="@style/SecondBlack.Text30px"
             android:text="@string/agreement"
             android:layout_marginLeft="@dimen/x210px"
             android:includeFontPadding="false"
@@ -105,7 +106,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x48px"
-            android:src="@drawable/right_allow"/>
+            android:src="@drawable/right_allow"
+            android:contentDescription="@string/contentDescription" />
 
     </RelativeLayout>
 

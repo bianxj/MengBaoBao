@@ -20,6 +20,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.DiskCacheUtils;
 import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.MsgConstant;
+import com.umeng.message.PushAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +50,7 @@ public class BaseApplication extends Application {
         initImageLoader();
         initMLog();
         initCrashHandler();
+        initPush();
         application = this;
     }
 
@@ -63,6 +69,28 @@ public class BaseApplication extends Application {
         return application;
     }
 
+    private void initPush(){
+        UMConfigure.setLogEnabled(true);
+
+        UMConfigure.init(this,"5a6e8ad4f43e4803e300008d","Umeng",UMConfigure.DEVICE_TYPE_PHONE,"5aa0b627542b2f3d0a297401addd6ee1");
+
+        PushAgent mPushAgent = PushAgent.getInstance(this);
+        mPushAgent.setNotificationPlaySound(MsgConstant.NOTIFICATION_PLAY_SDK_ENABLE);
+
+        //注册推送服务 每次调用register都会回调该接口
+        mPushAgent.register(new IUmengRegisterCallback() {
+            @Override
+            public void onSuccess(String deviceToken) {
+            }
+
+            @Override
+            public void onFailure(String s, String s1) {
+            }
+        });
+
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+    }
+
     public MLog getMLog(){
         return log;
     }
@@ -72,19 +100,21 @@ public class BaseApplication extends Application {
         imageLoader.init(configImageLoader());
     }
 
+    private ImageLoaderConfiguration.Builder builder;
+
     private ImageLoaderConfiguration configImageLoader(){
-        ImageLoaderConfiguration loader =
-                new ImageLoaderConfiguration.Builder(this)
-                        .denyCacheImageMultipleSizesInMemory()
-                        .memoryCache(new UsingFreqLimitedMemoryCache(2* 1024 * 1024))
-                        .memoryCacheSize(2 * 1024 * 1024)
-                        .memoryCacheSizePercentage(13)
-                        .diskCache(new UnlimitedDiskCache(getDiskCacheDir()))
-                        .diskCacheFileCount(100)
-                        .diskCacheSize(50 * 1024 * 1024)
-                        .writeDebugLogs()
-                        .build();
-        return loader;
+        if ( builder == null ){
+            builder = new ImageLoaderConfiguration.Builder(this);
+            builder .denyCacheImageMultipleSizesInMemory()
+                    .memoryCache(new UsingFreqLimitedMemoryCache(2* 1024 * 1024))
+                    .memoryCacheSize(2 * 1024 * 1024)
+                    .memoryCacheSizePercentage(13)
+                    .diskCache(new UnlimitedDiskCache(getDiskCacheDir()))
+                    .diskCacheFileCount(100)
+                    .diskCacheSize(50 * 1024 * 1024)
+                    .writeDebugLogs();
+        }
+        return builder.build();
     }
 
     public void removeImageFromImageLoader(String url){
@@ -107,7 +137,11 @@ public class BaseApplication extends Application {
     private final static String IMAGE_CACHE_DIR = "image";
     private File getDiskCacheDir(){
         File file = new File(getFilesDir()+File.separator+IMAGE_CACHE_DIR);
-        file.mkdirs();
+        if ( !file.exists() || !file.isDirectory() ) {
+            if ( !file.mkdirs() ){
+                //TODO
+            }
+        }
         return file;
     }
 
@@ -179,7 +213,7 @@ public class BaseApplication extends Application {
 
     public void saveUserData(UserData userData){
         this.userData = userData;
-        String data = GsonUtil.getInstance().getGson().toJson(userData);
+        String data = GsonUtil.getInstance().toJson(userData);
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_USER,data);
     }
 
@@ -187,7 +221,7 @@ public class BaseApplication extends Application {
         if ( userData == null ) {
             String data = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_USER,null);
             if (data != null) {
-                userData = GsonUtil.getInstance().getGson().fromJson(data, UserData.class);
+                userData = GsonUtil.getInstance().fromJson(data, UserData.class);
             }
         }
         return userData;
@@ -215,7 +249,7 @@ public class BaseApplication extends Application {
             return;
         }
         this.parentInfo = parentInfo;
-        String data = GsonUtil.getInstance().getGson().toJson(parentInfo);
+        String data = GsonUtil.getInstance().toJson(parentInfo);
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_PARENT,data);
     }
 
@@ -223,7 +257,7 @@ public class BaseApplication extends Application {
         if ( parentInfo == null ) {
             String data = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_PARENT,null);
             if (data != null) {
-                parentInfo = GsonUtil.getInstance().getGson().fromJson(data, ParentInfo.class);
+                parentInfo = GsonUtil.getInstance().fromJson(data, ParentInfo.class);
             }
         }
         return parentInfo;
@@ -246,14 +280,14 @@ public class BaseApplication extends Application {
     }
 
     public void saveDayList(DayList dayList){
-        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_DAY_LIST,GsonUtil.getInstance().getGson().toJson(dayList));
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_DAY_LIST,GsonUtil.getInstance().toJson(dayList));
     }
 
     public DayList getDayList(){
         DayList list = null;
         String value = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_DAY_LIST,null);
         if ( value != null ){
-            list = GsonUtil.getInstance().getGson().fromJson(value,DayList.class);
+            list = GsonUtil.getInstance().fromJson(value,DayList.class);
         }
         return list;
     }
@@ -377,7 +411,9 @@ public class BaseApplication extends Application {
 //        String dirPath = Environment.getExternalStorageDirectory().getPath()+File.separator+PERSON_DIR;
         File dir = new File(dirPath);
         if ( !dir.exists() || !dir.isDirectory() ){
-            dir.mkdirs();
+            if ( !dir.mkdirs() ){
+                //TODO
+            }
         }
         return dirPath + File.separator + PERSON_HEAD_IMG;
     }
@@ -387,7 +423,9 @@ public class BaseApplication extends Application {
         String dirPath = getFilesDir().getPath()+File.separator+PICTURE_DIR;
         File dir = new File(dirPath);
         if ( !dir.exists() || !dir.isDirectory() ){
-            dir.mkdirs();
+            if ( !dir.mkdirs() ){
+                //TODO
+            }
         }
         return dirPath + File.separator + "picture_" + System.currentTimeMillis();
     }

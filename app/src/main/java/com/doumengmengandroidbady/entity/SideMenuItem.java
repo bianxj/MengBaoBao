@@ -8,9 +8,9 @@ import android.app.Activity;
 
 public class SideMenuItem {
 
-    private int drawable;
-    private int content;
-    private Class<? extends Activity> switchActivity;
+    private final int drawable;
+    private final int content;
+    private final Class<? extends Activity> switchActivity;
 
     public SideMenuItem(int drawable, int content, Class<? extends Activity> switchActivity) {
         this.drawable = drawable;

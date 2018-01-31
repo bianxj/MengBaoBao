@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/first_white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,21 +15,21 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            style="@style/GrayText28px"/>
+            style="@style/FirstGray.Text28px"/>
         <TextView
             android:id="@+id/tv_center"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            style="@style/GrayText28px"/>
+            style="@style/FirstGray.Text28px"/>
         <TextView
             android:id="@+id/tv_right"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            style="@style/GrayText28px"/>
+            style="@style/FirstGray.Text28px"/>
 
     </LinearLayout>
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/first_white"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
@@ -20,7 +20,7 @@
             android:visibility="visible">
 
             <TextView
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -56,14 +56,14 @@
 
                 <TextView
                     android:id="@+id/unuse_tv_father_culture"
-                    style="@style/BlackText28px"
+                    style="@style/SecondBlack.Text28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:text="@string/culture" />
                 <TextView
-                    style="@style/MarkStyle"
+                    style="@style/FirstPink.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -85,7 +85,7 @@
                     >
                     <RadioButton
                         android:id="@+id/rb_father_primary"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x172px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -97,7 +97,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_father_junior"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -115,7 +115,7 @@
                     android:layout_gravity="right">
                     <RadioButton
                         android:id="@+id/rb_father_senior"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -126,7 +126,7 @@
                         android:layout_centerVertical="true" />
                     <RadioButton
                         android:id="@+id/rb_father_university"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -139,7 +139,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_father_master"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -152,7 +152,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_father_doctor"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -178,7 +178,7 @@
             android:visibility="visible">
 
             <TextView
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -195,7 +195,7 @@
 
             <TextView
                 android:id="@+id/tv_father_height_unit"
-                style="@style/GrayText26px"
+                style="@style/FirstGray.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -214,7 +214,7 @@
             android:visibility="visible">
 
             <TextView
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -231,7 +231,7 @@
 
             <TextView
                 android:id="@+id/tv_father_weight_unit"
-                style="@style/GrayText26px"
+                style="@style/FirstGray.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -251,7 +251,7 @@
             android:visibility="visible">
 
             <TextView
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -260,7 +260,7 @@
 
             <TextView
                 android:id="@+id/tv_father_BMI"
-                style="@style/GrayText26px"
+                style="@style/FirstGray.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -279,7 +279,7 @@
             android:visibility="visible">
 
             <TextView
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -316,7 +316,7 @@
 
                 <TextView
                     android:id="@+id/unuse_tv_mother_culture"
-                    style="@style/BlackText28px"
+                    style="@style/SecondBlack.Text28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -324,7 +324,7 @@
                     android:text="@string/culture" />
 
                 <TextView
-                    style="@style/MarkStyle"
+                    style="@style/FirstPink.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -346,7 +346,7 @@
                     >
                     <RadioButton
                         android:id="@+id/rb_mother_primary"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x172px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -358,7 +358,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_mother_junior"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -376,7 +376,7 @@
                     android:layout_gravity="right">
                     <RadioButton
                         android:id="@+id/rb_mother_senior"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -387,7 +387,7 @@
                         android:layout_centerVertical="true" />
                     <RadioButton
                         android:id="@+id/rb_mother_university"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -400,7 +400,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_mother_master"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -413,7 +413,7 @@
                         />
                     <RadioButton
                         android:id="@+id/rb_mother_doctor"
-                        style="@style/CheckTextStyle"
+                        style="@style/CheckText.Checked"
                         android:layout_width="@dimen/x96px"
                         android:layout_height="@dimen/y56px"
                         android:layout_marginLeft="@dimen/x8px"
@@ -439,7 +439,7 @@
             android:visibility="visible">
 
             <TextView
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -457,7 +457,7 @@
 
             <TextView
                 android:id="@+id/tv_mother_height_unit"
-                style="@style/GrayText26px"
+                style="@style/FirstGray.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -476,7 +476,7 @@
             android:visibility="visible">
 
             <TextView
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -494,7 +494,7 @@
 
             <TextView
                 android:id="@+id/tv_mother_weight_unit"
-                style="@style/GrayText26px"
+                style="@style/FirstGray.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -514,7 +514,7 @@
             android:visibility="visible">
 
             <TextView
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -523,7 +523,7 @@
 
             <TextView
                 android:id="@+id/tv_mother_BMI"
-                style="@style/GrayText26px"
+                style="@style/FirstGray.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

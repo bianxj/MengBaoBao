@@ -434,8 +434,8 @@ public class MyDialog {
 
     private static class CityAdapter extends BaseAdapter{
 
-        private Context context;
-        private String[] citys;
+        private final Context context;
+        private final String[] citys;
 
         public CityAdapter(Context context,String[] citys) {
             this.context = context;

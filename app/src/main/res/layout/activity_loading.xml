@@ -13,7 +13,8 @@
         android:scaleType="fitXY"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y227px"
-        android:id="@+id/imageView" />
+        android:id="@+id/imageView"
+        android:contentDescription="@string/contentDescription" />
 
 
     <FrameLayout
@@ -28,15 +29,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/loading"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:contentDescription="@string/contentDescription" />
         <TextView
             android:id="@+id/tv_loading_percent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/GrayText28px"
-            android:textColor="@color/white"
+            style="@style/FirstGray.Text28px"
+            android:textColor="@color/first_white"
             android:gravity="center"
-            android:text="40%"
             />
     </FrameLayout>
 
@@ -45,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="@string/loading_message"
         android:layout_centerHorizontal="true"
-        style="@style/NormalTextView"
+        style="@style/SecondWhite.Text30px"
         android:layout_marginTop="@dimen/y926px"/>
 
 </RelativeLayout>

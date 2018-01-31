@@ -21,12 +21,12 @@ import java.util.List;
 public class SideMenuAdapter extends BaseAdapter {
 
     private List<SideMenuItem> items;
-    private Context context;
+    private final Context context;
 
     public SideMenuAdapter(Context context,List<SideMenuItem> items) {
         this.context = context;
         if ( null == items ){
-            items = new ArrayList<>();
+            this.items = new ArrayList<>();
         } else {
             this.items = items;
         }

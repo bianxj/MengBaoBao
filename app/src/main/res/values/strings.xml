@@ -49,6 +49,12 @@
     <!--SpacialistServiceFragment-->
     <string name="spacialist_service_buy">购买</string>
     <string name="spacialist_service_count">您还剩%s次测评</string>
+    <string name="slogan">宝宝生长发育好不好，\n可以请儿保专家来评估一下哦！</string>
+    <string name="add_record">增加新记录</string>
+    <string name="appraisal_result">测评结果</string>
+
+    <!--SpacialistServiceActivity-->
+    <string name="spacialist_location_failed">定位失败，请点击重试GPS定位</string>
 
     <!--ItemRecord-->
     <string name="item_record_unread">未读</string>
@@ -72,13 +78,13 @@
 
     <!--ContactActivity信息-->
     <string name="hotline">客服热线</string>
-    <string name="hotline_phone">021-64335531</string>
+    <string name="hotline_phone">021–64335531</string>
     <string name="work_time">周一至周五9:00~17:00</string>
 
     <!--AboutActivity信息-->
     <string name="company_name">上海豆蒙萌健康管理咨询有限公司</string>
     <string name="company_location">上海市漕溪北路737弄1号楼3202室</string>
-    <string name="company_phone">400-876-6060</string>
+    <string name="company_phone">400–876-6060</string>
     <string name="company_mail">customerservice@mengbaobao.com</string>
     <string name="company_website">www.mengbaobao.com</string>
 
@@ -101,11 +107,6 @@
     <string name="cancel">取消</string>
     <string name="search_hint">搜索医院、医生</string>
     <string name="history_search">历史搜索</string>
-
-    <!--FragmentSpacialistService-->
-    <string name="slogan">宝宝生长发育好不好，\n可以请儿保专家来评估一下哦！</string>
-    <string name="add_record">增加新记录</string>
-    <string name="appraisal_result">测评结果</string>
 
     <!--DoctorInfoActivity信息-->
     <string name="choose_me">选我</string>
@@ -149,7 +150,7 @@
 
     <!--MicturitionInputActivity-->
     <string name="day_count">天/次</string>
-    <string name="micturition_content">宝宝每1-3小时就可能需要排尿，母乳喂养的宝宝 每日6-7次，次数较少时可能每天4-6次。 如果生病了或是发热以及天气炎热时</string>
+    <string name="micturition_content">宝宝每1–3小时就可能需要排尿，母乳喂养的宝宝 每日6-7次，次数较少时可能每天4-6次。 如果生病了或是发热以及天气炎热时</string>
 
     <!--NightSleepInputActivity-->
     <string name="hour_day">小时/天</string>
@@ -280,6 +281,7 @@
     <string name="scan_hint">对准二维码</string>
 
     <!--RecordActivity-->
+    <string name="week">周</string>
     <string name="record">记录</string>
     <string name="record_month_age">%s个月%s天</string>
 
@@ -344,7 +346,7 @@
     <string name="assessment_height">身长</string>
     <string name="assessment_weight">体重</string>
     <string name="assessment_BMI">BMI</string>
-    <string name="assessment_develop_month">发育行为（%s个月）</string>
+    <string name="assessment_develop_month">发育行为（%d个月）</string>
     <string name="assessment">评估</string>
     <string name="assessment_source">来源：WHO儿童成长标准，世界卫生组织</string>
     <string name="assessment_result">评估结果：</string>
@@ -387,7 +389,7 @@
     
     <string name="dialog_title_notification">请允许我们向您发送通知</string>
     <string name="dialog_content_notification">让您不错过每一条育儿知识</string>
-    <string name="dialog_updating">正在更新...</string>
+    <string name="dialog_updating">正在更新…</string>
 
     <string name="dialog_lost_pay_time">支付剩余时间</string>
     <string name="dialog_once_package">单次套餐</string>
@@ -409,8 +411,8 @@
     <string name="prompt_no_account">请输入帐号</string>
     <string name="prompt_error_phone">请输入11位正确的手机号码</string>
     <string name="prompt_no_vc">请输入验证码</string>
-    <string name="prompt_no_password">请输入6-16位由数字、字母组成的密码</string>
-    <string name="prompt_error_password">请输入6-16位由数字、字母组成的密码</string>
+    <string name="prompt_no_password">请输入6–16位由数字、字母组成的密码</string>
+    <string name="prompt_error_password">请输入6–16位由数字、字母组成的密码</string>
 
     <string name="prompt_no_wifi">当前不在wifi状态下，可能会产生流量费用</string>
     <string name="prompt_need_buy">只有付费用户才能填写</string>
@@ -421,7 +423,10 @@
     <string name="prompt_confirm_passwd_empty">请确认密码</string>
     <string name="prompt_confirm_passwd_error">两次输入的面膜不一致</string>
 
-    
+
+    <!--Other-->
+    <string name="contentDescription">image</string>
+
     <!--异常退出提示-->
     <string name="error_exit_message">很抱歉，程序出现异常，即将退出</string>
 

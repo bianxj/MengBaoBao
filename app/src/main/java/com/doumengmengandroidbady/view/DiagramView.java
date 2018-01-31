@@ -3,9 +3,12 @@ package com.doumengmengandroidbady.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -22,7 +25,7 @@ import java.util.List;
  */
 public class DiagramView extends View {
 
-    private Context context;
+    private final Context context;
     private DiagramBaseInfo baseInfo;
     private DiagramParam param;
     private Paint paint;
@@ -121,10 +124,23 @@ public class DiagramView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if ( baseInfo.getBackground() != -1 ){
+            drawBackground(canvas);
+        }
         if ( param != null ){
             drawRedLine(canvas);
             drawBlueLine(canvas);
         }
+    }
+
+    private void drawBackground(Canvas canvas){
+        canvas.save();
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),baseInfo.background);
+        Rect src = new Rect(0,0,bitmap.getWidth(),bitmap.getHeight());
+        Rect dest = new Rect(0,0,canvas.getWidth(),canvas.getHeight());
+        canvas.drawBitmap(bitmap,src,dest,paint);
+        bitmap.recycle();
+        canvas.restore();
     }
 
     private void drawRedLine(Canvas canvas){
@@ -214,6 +230,15 @@ public class DiagramView extends View {
         private int upperLimitY;
         private float xLength;
         private float yLength;
+        private int background = -1;
+
+        public int getBackground() {
+            return background;
+        }
+
+        public void setBackground(int background) {
+            this.background = background;
+        }
 
         public int getLowerLimitX() {
             return lowerLimitX;

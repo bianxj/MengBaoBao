@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/frame_baby_knowledge"
-        />
+        android:contentDescription="@string/contentDescription" />
 
     <TextView
         android:id="@+id/tv_baby_month"
@@ -19,7 +19,7 @@
         android:text=""
         android:layout_marginTop="@dimen/y26px"
         android:layout_gravity="center_horizontal"
-        style="@style/BabyKnowledgeItemText"/>
+        style="@style/FirstPink.Text28px"/>
 
     <ImageView
         android:layout_width="@dimen/y52px"
@@ -28,7 +28,7 @@
         android:src="@drawable/icon_baby_knowledge1"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/y79px"
-        />
+        android:contentDescription="@string/contentDescription" />
     
 
 </FrameLayout>

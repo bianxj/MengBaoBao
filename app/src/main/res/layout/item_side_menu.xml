@@ -14,11 +14,12 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x45px"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:contentDescription="@string/contentDescription" />
 
         <TextView
             android:id="@+id/tv_content"
-            style="@style/SideMenuText"
+            style="@style/FirstGray.Text29px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -31,7 +32,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x48px"
-            android:src="@drawable/right_allow" />
+            android:src="@drawable/right_allow"
+            android:contentDescription="@string/contentDescription" />
 
         <View
             android:layout_width="@dimen/x596px"

@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class ResponseErrorCode {
 
-    private static SparseArray<String> errorCodeArray;
+    private static final SparseArray<String> errorCodeArray;
 //    private static Map<Integer,String> errorCodeMap;
     public static final int SUCCESS = 0;								//成功
 
@@ -241,7 +241,7 @@ public class ResponseErrorCode {
     }
 
     public static int getErrorCode(String errorMsg){
-        int errorCode = 0;
+        int errorCode;
         try {
             JSONObject object = new JSONObject(errorMsg);
             errorCode = object.getInt("errorId");

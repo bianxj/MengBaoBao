@@ -88,7 +88,7 @@ public class ForgotPwdActivity extends BaseActivity {
         ll_agreement.setOnClickListener(listener);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -129,7 +129,7 @@ public class ForgotPwdActivity extends BaseActivity {
         }
     }
 
-    private RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
+    private final RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
         }
@@ -246,7 +246,7 @@ public class ForgotPwdActivity extends BaseActivity {
     }
 
     private RequestTask changePwdTask;
-    private RequestCallBack changePwdCallBack = new RequestCallBack() {
+    private final RequestCallBack changePwdCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
         }

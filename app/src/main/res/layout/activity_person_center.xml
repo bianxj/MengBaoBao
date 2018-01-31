@@ -13,7 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y192px"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:layout_marginTop="@dimen/y18px"
         >
         <com.doumengmengandroidbady.view.CircleImageView
@@ -30,7 +30,7 @@
             android:id="@+id/tv_baby_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/MoreItemText"
+            style="@style/SecondBlack.Text30px"
             android:text=""
             android:layout_toRightOf="@+id/civ_baby_img"
             android:layout_marginLeft="@dimen/x30px"
@@ -66,7 +66,7 @@
                 android:layout_toRightOf="@+id/cb_male"
                 android:includeFontPadding="false"
                 android:text=""
-                style="@style/GrayText24px"/>
+                style="@style/FirstGray.Text24px"/>
         </RelativeLayout>
 
         <!--        <RelativeLayout
@@ -102,7 +102,7 @@
         android:id="@+id/rl_child_info"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y144px"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:layout_marginTop="@dimen/y19px"
         >
 
@@ -113,12 +113,12 @@
             android:scaleType="fitXY"
             android:src="@drawable/icon_child_info"
             android:layout_marginLeft="@dimen/x91px"
-            />
+            android:contentDescription="@string/contentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/MoreItemText"
+            style="@style/SecondBlack.Text30px"
             android:text="@string/base_info"
             android:layout_marginLeft="@dimen/x210px"
             android:includeFontPadding="false"
@@ -131,7 +131,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x48px"
-            android:src="@drawable/right_allow"/>
+            android:src="@drawable/right_allow"
+            android:contentDescription="@string/contentDescription" />
 
     </RelativeLayout>
 
@@ -139,7 +140,7 @@
         android:id="@+id/rl_parent_info"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y144px"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:layout_marginTop="@dimen/y19px"
         >
 
@@ -151,13 +152,13 @@
             android:src="@drawable/icon_parent_info"
             android:layout_alignBottom="@+id/tv_parent_info"
             android:layout_marginLeft="@dimen/x91px"
-            />
+            android:contentDescription="@string/contentDescription" />
 
         <TextView
             android:id="@+id/tv_parent_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/MoreItemText"
+            style="@style/SecondBlack.Text30px"
             android:text="@string/parent_info"
             android:layout_marginLeft="@dimen/x210px"
             android:includeFontPadding="false"
@@ -170,7 +171,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x48px"
-            android:src="@drawable/right_allow"/>
+            android:src="@drawable/right_allow"
+            android:contentDescription="@string/contentDescription" />
 
     </RelativeLayout>
 

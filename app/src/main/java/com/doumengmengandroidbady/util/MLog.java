@@ -27,9 +27,9 @@ public class MLog {
     private final static String DEFAULT_TAG = "DEFAULT";
 //    private final static long ONE_DAY = 24 * 60 * 60 * 1000;
 
-    private SimpleDateFormat format;
-    private SimpleDateFormat fileFormat;
-    private Builder builder;
+    private final SimpleDateFormat format;
+    private final SimpleDateFormat fileFormat;
+    private final Builder builder;
     private MLog(Builder builder){
         format = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss", Locale.CHINA);
         fileFormat = new SimpleDateFormat("yyyy-MM-DD", Locale.CHINA);
@@ -183,7 +183,7 @@ public class MLog {
      * 描述:获取日志文件保存目录
      */
     private String getLogDir(){
-        String dir = null;
+        String dir;
         if ( builder.isInner() ){
             dir = builder.getContext().getFilesDir().getPath()+File.separator+LOG_DIR_NAME;
         } else {
@@ -227,7 +227,7 @@ public class MLog {
 
         ByteArrayOutputStream os = null;
         PrintStream stream = null;
-        String content = null;
+        String content;
         try {
             os = new ByteArrayOutputStream();
             stream = new PrintStream(os);
@@ -253,7 +253,7 @@ public class MLog {
 
     public static class Builder{
 
-        private Context context;
+        private final Context context;
         private boolean isShow = true;
         private boolean isInner = true;
         private boolean isSaveLog = false;

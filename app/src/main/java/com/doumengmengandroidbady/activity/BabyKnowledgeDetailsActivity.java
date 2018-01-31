@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 作者: 边贤君
@@ -38,6 +39,21 @@ public class BabyKnowledgeDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_knowledge_details);
         findView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println(getClass().getSimpleName());
+        MobclickAgent.onPageStart(getClass().getSimpleName());
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+        MobclickAgent.onPageEnd(getClass().getSimpleName());
     }
 
     @Override
@@ -96,7 +112,7 @@ public class BabyKnowledgeDetailsActivity extends BaseActivity {
         wv.loadUrl(page);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){

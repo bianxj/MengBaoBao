@@ -10,6 +10,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -60,8 +63,8 @@ public class SpacialistServiceActivity extends BaseActivity {
     private ImageView iv_arrow;
     private TextView tv_location_failed;
 
-    private List<DoctorEntity> doctors = new ArrayList<>();
-    private List<HospitalEntity> hospitals = new ArrayList<>();
+    private final List<DoctorEntity> doctors = new ArrayList<>();
+    private final List<HospitalEntity> hospitals = new ArrayList<>();
 
     private HospitalDoctorAdapter adapter;
 
@@ -117,6 +120,7 @@ public class SpacialistServiceActivity extends BaseActivity {
         rl_location_area.setOnClickListener(listener);
         iv_scan.setOnClickListener(listener);
         tv_location_failed.setOnClickListener(listener);
+        tv_location_failed.setVisibility(View.GONE);
 
         tv_title.setText(R.string.spacialist_service);
 
@@ -138,12 +142,11 @@ public class SpacialistServiceActivity extends BaseActivity {
     }
 
     private void setCity(String city){
-        System.out.println("setCity:"+city);
         tv_location.setText(city);
         tv_location.setTag(city);
     }
 
-    private XRecyclerView.LoadingListener searchLoadingListener = new XRecyclerView.LoadingListener() {
+    private final XRecyclerView.LoadingListener searchLoadingListener = new XRecyclerView.LoadingListener() {
         @Override
         public void onRefresh() {}
 
@@ -153,7 +156,7 @@ public class SpacialistServiceActivity extends BaseActivity {
         }
     };
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -161,14 +164,14 @@ public class SpacialistServiceActivity extends BaseActivity {
                     back();
                     break;
                 case R.id.rl_location_area:
-                    rotateCount++;
-                    iv_arrow.setRotation(180F*rotateCount%360);
+                    executeRotateAnimation();
                     if ( MyDialog.isShowingChooseCityDialog() ){
                         MyDialog.dismissChooseCityDialog();
                     } else {
                         MyDialog.showChooseCityDialog(SpacialistServiceActivity.this, rl_location_area, new MyDialog.ChooseCityCallback() {
                             @Override
                             public void choose(String city) {
+                                executeRotateAnimation();
                                 if ( DaoManager.getInstance().getHospitalDao().hasHospitalInCity(SpacialistServiceActivity.this,city) ) {
                                     setCity(city);
                                 } else {
@@ -195,56 +198,69 @@ public class SpacialistServiceActivity extends BaseActivity {
         finish();
     }
 
-    private TextView.OnEditorActionListener onEditorActionListener = new TextView.OnEditorActionListener() {
+    private final TextView.OnEditorActionListener onEditorActionListener = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
             if ( i == EditorInfo.IME_ACTION_SEARCH) {
-                ((InputMethodManager) textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
-                        .hideSoftInputFromWindow(
-                                SpacialistServiceActivity.this
-                                        .getCurrentFocus()
-                                        .getWindowToken(),
-                                InputMethodManager.HIDE_NOT_ALWAYS);
+                InputMethodManager imm = (InputMethodManager) textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if ( imm != null ){
+                    imm.hideSoftInputFromWindow(
+                            SpacialistServiceActivity.this
+                                    .getCurrentFocus()
+                                    .getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                }
                 search();
             }
             return false;
         }
     };
 
-//    private RotateAnimation animation;
+    //-------------------------------------Animation start------------------------------------------
+    private RotateAnimation rotateAnimation0To180;
+    private RotateAnimation rotateAnimation180To360;
     private int rotateCount = 0;
-//    private RotateAnimation buildRotateAnimation(){
-//        if ( animation == null ) {
-//            animation = new RotateAnimation(0F, 180F, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
-//            animation.setFillBefore(true);
-//            animation.setInterpolator(new LinearInterpolator());
-//            animation.setDuration(500);
-//            animation.setAnimationListener(new Animation.AnimationListener() {
-//                @Override
-//                public void onAnimationStart(Animation animation) {
-//                    rotateCount++;
-//                }
-//
-//                @Override
-//                public void onAnimationEnd(Animation animation) {
-//                    iv_arrow.setRotation(180F*rotateCount%360);
-//                }
-//
-//                @Override
-//                public void onAnimationRepeat(Animation animation) {
-//
-//                }
-//            });
-//        }
-//        return animation;
-//    }
+
+    private void executeRotateAnimation(){
+        iv_arrow.startAnimation(buildRotateAnimation());
+        rotateCount++;
+    }
+
+    private RotateAnimation buildRotateAnimation(){
+        if ( rotateCount%2 == 0 ) {
+            return buildRotateAnimation0To180();
+        } else {
+            return buildRotateAnimation180To360();
+        }
+    }
+
+    private RotateAnimation buildRotateAnimation0To180(){
+        if (rotateAnimation0To180 == null) {
+            rotateAnimation0To180 = new RotateAnimation(0F, 180F, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+            rotateAnimation0To180.setInterpolator(new LinearInterpolator());
+            rotateAnimation0To180.setDuration(300);
+        }
+        rotateAnimation0To180.setFillAfter(true);
+        return rotateAnimation0To180;
+    }
+
+    private RotateAnimation buildRotateAnimation180To360(){
+        if (rotateAnimation180To360 == null) {
+            rotateAnimation180To360 = new RotateAnimation(180F, 360F, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+            rotateAnimation180To360.setInterpolator(new LinearInterpolator());
+            rotateAnimation180To360.setDuration(300);
+        }
+        rotateAnimation180To360.setFillAfter(false);
+        return rotateAnimation180To360;
+    }
+    //-------------------------------------Animation end--------------------------------------------
 
     //---------------------------------查询模块--------------------------------------------------
 
     private SpacialistServiceHandler handler = null;
     private static class SpacialistServiceHandler extends Handler{
         private final static int UPDATAE_LIST = 0x01;
-        private WeakReference<SpacialistServiceActivity> weakReference;
+        private final WeakReference<SpacialistServiceActivity> weakReference;
 
         public SpacialistServiceHandler(SpacialistServiceActivity activity) {
             weakReference = new WeakReference<SpacialistServiceActivity>(activity);
@@ -322,7 +338,7 @@ public class SpacialistServiceActivity extends BaseActivity {
         }, isSkipToApp);
     }
 
-    //---------------------------------定位模块分割线---------------------------------------------
+    //---------------------------------定位模块 start---------------------------------------------
 
     private LocationClient client;
     private LocationClientOption option;
@@ -345,14 +361,14 @@ public class SpacialistServiceActivity extends BaseActivity {
         return  option;
     }
 
-    private BDAbstractLocationListener locationListener = new BDAbstractLocationListener() {
+    private final BDAbstractLocationListener locationListener = new BDAbstractLocationListener() {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             if ( bdLocation != null ){
                 String city = bdLocation.getProvince();
                 setCity(city);
             } else {
-                //TODO
+                tv_location_failed.setVisibility(View.VISIBLE);
             }
             rl_location_area.setEnabled(true);
         }
@@ -366,7 +382,7 @@ public class SpacialistServiceActivity extends BaseActivity {
             }
         }
     }
-
+    //---------------------------------定位模块 end---------------------------------------------
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ( keyCode == KeyEvent.KEYCODE_BACK ){

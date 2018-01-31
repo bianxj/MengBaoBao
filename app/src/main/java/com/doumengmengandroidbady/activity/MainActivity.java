@@ -2,6 +2,7 @@ package com.doumengmengandroidbady.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -73,7 +74,7 @@ public class MainActivity extends BaseFragmentActivity {
     private FragmentManager fm;
     private Fragment currentFragment;
     private Map<String,Fragment> fragmentMap;
-    private Map<String,RelativeLayout> bottomMap = new HashMap<>();
+    private final Map<String,RelativeLayout> bottomMap = new HashMap<>();
 
     private ListView lv_side_menu;
     private SideMenuAdapter adapter;
@@ -248,21 +249,21 @@ public class MainActivity extends BaseFragmentActivity {
         switchFragment(page);
     }
 
-    private DrawerLayout.DrawerListener drawerListener = new DrawerLayout.DrawerListener() {
+    private final DrawerLayout.DrawerListener drawerListener = new DrawerLayout.DrawerListener() {
         @Override
-        public void onDrawerSlide(View drawerView, float slideOffset) {}
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {}
 
         @Override
-        public void onDrawerOpened(View drawerView) {}
+        public void onDrawerOpened(@NonNull View drawerView) {}
 
         @Override
-        public void onDrawerClosed(View drawerView) {}
+        public void onDrawerClosed(@NonNull View drawerView) {}
 
         @Override
         public void onDrawerStateChanged(int newState) {}
     };
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -299,7 +300,7 @@ public class MainActivity extends BaseFragmentActivity {
         }
     };
 
-    private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+    private final AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             SideMenuItem item = (SideMenuItem) adapter.getItem(position);
@@ -361,7 +362,7 @@ public class MainActivity extends BaseFragmentActivity {
                 textView.setTextColor(ContextCompat.getColor(this,R.color.btmMenuColor));
             } else {
                 button.setChecked(false);
-                textView.setTextColor(ContextCompat.getColor(this,R.color.btmMenuUnColor));
+                textView.setTextColor(ContextCompat.getColor(this,R.color.seven_gray));
             }
         }
     }

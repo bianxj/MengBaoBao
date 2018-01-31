@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class PermissionUtil {
 
-    private static Map<String,Integer> requestCodeMap;
+    private static final Map<String,Integer> requestCodeMap;
 
     static {
         requestCodeMap = new HashMap<>();

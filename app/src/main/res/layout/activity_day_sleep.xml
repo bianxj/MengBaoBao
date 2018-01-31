@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/first_white"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:focusable="true"
@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:text="@string/day_sleep_time"
                 android:layout_marginTop="@dimen/y50px"
                 />
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/hour_day"
-                    style="@style/GrayText26px"
+                    style="@style/FirstGray.Text26px"
                     android:layout_marginLeft="@dimen/x18px"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/et_input_data_two"
@@ -63,7 +63,7 @@
                 android:id="@+id/tv_reference"
                 android:layout_width="@dimen/x574px"
                 android:layout_height="wrap_content"
-                style="@style/BlackText26px"
+                style="@style/SecondBlack.Text26px"
                 android:layout_marginTop="@dimen/y46px"
                 android:includeFontPadding="false"
                 />

@@ -55,14 +55,13 @@ public class SpacialistServiceFragment extends BaseFragment {
     private RelativeLayout rl_unbuy;
     private Button bt_buy;
 
-    private List<Record> records = new ArrayList<>();
+    private final List<Record> records = new ArrayList<>();
     private RecordAdapter adapter;
 
     private UserData userData;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_spacialist_service,null);
         findView(view);
         return view;
@@ -157,7 +156,7 @@ public class SpacialistServiceFragment extends BaseFragment {
         xrv_record.setAdapter(adapter);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -194,7 +193,7 @@ public class SpacialistServiceFragment extends BaseFragment {
         }
     }
 
-    private RequestCallBack getRecordCallBack = new RequestCallBack() {
+    private final RequestCallBack getRecordCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
@@ -223,7 +222,7 @@ public class SpacialistServiceFragment extends BaseFragment {
             try {
                 JSONObject object = new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
-                RecordResult recordResult = GsonUtil.getInstance().getGson().fromJson(res.toString(),RecordResult.class);
+                RecordResult recordResult = GsonUtil.getInstance().fromJson(res.toString(),RecordResult.class);
                 List<Record> list = recordResult.getRecordList();
 
                 records.clear();
@@ -244,7 +243,7 @@ public class SpacialistServiceFragment extends BaseFragment {
         }
     };
 
-    private XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
+    private final XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
         @Override
         public void onRefresh() {}
 

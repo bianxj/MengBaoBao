@@ -44,7 +44,7 @@ public class DevelopmentalBehaviorActivity extends BaseActivity {
     private BehaviorAdapter adapter;
 
     private String recordTime;
-    private List<String> ages = new ArrayList<>();
+    private final List<String> ages = new ArrayList<>();
     private List<String> selections = new ArrayList<>();
 
     @Override
@@ -63,7 +63,7 @@ public class DevelopmentalBehaviorActivity extends BaseActivity {
         recordTime = intent.getStringExtra(IN_PARAM_RECORD_TIME);
         String developments = intent.getStringExtra(IN_PARAM_DEVELOPMENT);
         if (!TextUtils.isEmpty(developments)){
-            selections = GsonUtil.getInstance().getGson().fromJson(developments,new TypeToken<List<String>>(){}.getType());
+            selections = GsonUtil.getInstance().fromJson(developments,new TypeToken<List<String>>(){}.getType());
         }
         if ( selections == null ){
             selections = new ArrayList<>();
@@ -107,7 +107,7 @@ public class DevelopmentalBehaviorActivity extends BaseActivity {
         tv_complete.setText(R.string.complete);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch(view.getId()){
@@ -128,7 +128,7 @@ public class DevelopmentalBehaviorActivity extends BaseActivity {
 
     private void submit(){
         Intent intent = new Intent();
-        intent.putExtra(OUT_PARAM_DEVELOPMENT,GsonUtil.getInstance().getGson().toJson(selections));
+        intent.putExtra(OUT_PARAM_DEVELOPMENT,GsonUtil.getInstance().toJson(selections));
         setResult(Activity.RESULT_OK,intent);
         finish();
     }

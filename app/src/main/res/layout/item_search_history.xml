@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/x49px"
-            style="@style/BlackText23px"
+            style="@style/SecondBlack.Text23px"
             android:text=""
             />
     </RelativeLayout>

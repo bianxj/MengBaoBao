@@ -24,7 +24,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/SixthGray23px"
+                    style="@style/SixthGray.Text23px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -1533,7 +1533,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/SixthGray23px"
+                    style="@style/SixthGray.Text23px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

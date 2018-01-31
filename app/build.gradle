@@ -1,22 +1,36 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'mengbaobao'
+            keyPassword 'mengbaobao'
+            storeFile file('F:/WorkSpace/AndroidStudioSpace/MengBaoBao/mengbaobao_sign.jks')
+            storePassword 'mengbaobao'
+        }
+    }
     compileSdkVersion 27
-    sourceSets{
-        main{
+    sourceSets {
+        main {
             jniLibs.srcDir 'libs'
         }
     }
     defaultConfig {
         applicationId "com.doumengmengandroidbady"
+        multiDexEnabled true
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
+            debuggable true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -44,4 +58,7 @@ dependencies {
     implementation files('libs/alipaySdk-20170922.jar')
     implementation files('libs/wechat-sdk-android-with-mta-5.1.0.jar')
     implementation files('libs/glide-full-4.5.0.jar')
+    implementation files('libs/umeng-common-1.4.3.jar')
+    implementation project(':PushSDK')
+    implementation files('libs/umeng-analytics-7.4.1.jar')
 }

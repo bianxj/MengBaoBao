@@ -26,7 +26,7 @@
             android:lines="1"
             android:inputType="textPassword"
             android:maxLength="16"
-            android:textColorHint="@color/colorBlackText"
+            android:textColorHint="@color/second_black"
             android:hint="@string/old_pwd"
             />
     </RelativeLayout>
@@ -49,7 +49,7 @@
             android:lines="1"
             android:inputType="textPassword"
             android:maxLength="16"
-            android:textColorHint="@color/colorBlackText"
+            android:textColorHint="@color/second_black"
             android:hint="@string/new_pwd"
             />
     </RelativeLayout>
@@ -72,7 +72,7 @@
             android:inputType="textPassword"
             android:maxLength="16"
             style="@style/EditTextView"
-            android:textColorHint="@color/colorBlackText"
+            android:textColorHint="@color/second_black"
             android:hint="@string/confirm_pwd"
             />
     </RelativeLayout>
@@ -82,10 +82,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/y562px"
-        style="@style/PropmtTextStyle"
+        style="@style/SecondWhite.Text30px"
         android:includeFontPadding="false"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/gray"
+        android:textColor="@color/first_gray"
         android:text=""/>
 
     <Button

@@ -28,8 +28,8 @@ public class ScaleplateView extends View {
     private final static int LINE_WIDTH = 2;
     private final static String COLOR = "#77D2F7";
 
-    private List<Float> splitX = new ArrayList<>();
-    private Paint paint;
+    private final List<Float> splitX = new ArrayList<>();
+    private final Paint paint;
 
 
     public ScaleplateView(Context context, @Nullable AttributeSet attrs) {

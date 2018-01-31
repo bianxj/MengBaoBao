@@ -115,7 +115,7 @@ public class DoctorListActivity extends BaseActivity {
         searchHospitalData();
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -129,7 +129,7 @@ public class DoctorListActivity extends BaseActivity {
         }
     };
 
-    private CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
+    private final CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if ( isChecked ){
@@ -146,7 +146,7 @@ public class DoctorListActivity extends BaseActivity {
         }
     };
 
-    private XRecyclerView.LoadingListener doctorLoadingListener = new XRecyclerView.LoadingListener(){
+    private final XRecyclerView.LoadingListener doctorLoadingListener = new XRecyclerView.LoadingListener(){
 
         @Override
         public void onRefresh() {}
@@ -157,7 +157,7 @@ public class DoctorListActivity extends BaseActivity {
         }
     };
 
-    private XRecyclerView.LoadingListener hospitalLoadingListener = new XRecyclerView.LoadingListener() {
+    private final XRecyclerView.LoadingListener hospitalLoadingListener = new XRecyclerView.LoadingListener() {
         @Override
         public void onRefresh() {}
 
@@ -176,7 +176,7 @@ public class DoctorListActivity extends BaseActivity {
     private static class DoctorListHandler extends Handler{
         private final static int MESSAGE_SEARCH_DOCTOR = 0x01;
         private final static int MESSAGE_SEARCH_HOSPITAL = 0x02;
-        private WeakReference<DoctorListActivity> weakReference;
+        private final WeakReference<DoctorListActivity> weakReference;
 
         public DoctorListHandler(DoctorListActivity activity) {
             weakReference = new WeakReference<DoctorListActivity>(activity);
@@ -197,7 +197,7 @@ public class DoctorListActivity extends BaseActivity {
         }
     }
 
-    protected void searchDoctor(List<DoctorEntity> datas){
+    private void searchDoctor(List<DoctorEntity> datas){
         doctor_page++;
         if ( datas != null ){
             if ( datas.size() < PAGE_SIZE ){
@@ -210,7 +210,7 @@ public class DoctorListActivity extends BaseActivity {
         }
     }
 
-    protected void searchHospital(List<HospitalEntity> datas){
+    private void searchHospital(List<HospitalEntity> datas){
         hospital_page++;
         if ( datas != null ){
             if ( datas.size() < PAGE_SIZE ){
@@ -227,10 +227,10 @@ public class DoctorListActivity extends BaseActivity {
         new Thread(searchDoctorRunnable).start();
     }
 
-    private Runnable searchDoctorRunnable = new Runnable() {
+    private final Runnable searchDoctorRunnable = new Runnable() {
         @Override
         public void run() {
-            List<DoctorEntity> doctorList = null;
+            List<DoctorEntity> doctorList;
             if ( isTest ){
                 for (int i = 0; i <10 ; i++) {
                     doctorList = new ArrayList<>();
@@ -257,10 +257,10 @@ public class DoctorListActivity extends BaseActivity {
         new Thread(searchHospitalRunnable).start();
     }
 
-    private Runnable searchHospitalRunnable = new Runnable() {
+    private final Runnable searchHospitalRunnable = new Runnable() {
         @Override
         public void run() {
-            List<HospitalEntity> hospitalList = null;
+            List<HospitalEntity> hospitalList;
             if ( isTest ){
                 hospitalList = new ArrayList<>();
                 for (int i = 0; i <10 ; i++) {

@@ -80,7 +80,7 @@ public class BaseInfoActivity extends BaseActivity {
         }
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -112,7 +112,7 @@ public class BaseInfoActivity extends BaseActivity {
     }
 
 
-    private RequestCallBack changeBaseInfoCallBack = new RequestCallBack() {
+    private final RequestCallBack changeBaseInfoCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
         }
@@ -129,7 +129,7 @@ public class BaseInfoActivity extends BaseActivity {
             inputUserInfo.setUserId(userData.getUserid());
             inputUserInfo.babyInfo = base_info.getBabyInfo();
 
-            String json = GsonUtil.getInstance().getGson().toJson(inputUserInfo);
+            String json = GsonUtil.getInstance().toJson(inputUserInfo);
 
             Map<String,String> map = new HashMap<>();
             map.put("paramStr",json);

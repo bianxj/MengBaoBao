@@ -33,7 +33,7 @@ public class CameraManager {
     private final Context context;
     private final CameraConfigurationManager configManager;
 
-    private int requestedCameraId = OpenCameraInterface.NO_REQUESTED_CAMERA;
+    private final int requestedCameraId = OpenCameraInterface.NO_REQUESTED_CAMERA;
     private OpenCamera camera;
     private boolean initialized;
     private boolean previewing;
@@ -181,7 +181,7 @@ public class CameraManager {
     }
 
     private PreviewCallback callback;
-    private Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
+    private final Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
         @Override
         public void onPreviewFrame(byte[] bytes, Camera camera) {
             Point cameraResolution = configManager.getCameraResolution();

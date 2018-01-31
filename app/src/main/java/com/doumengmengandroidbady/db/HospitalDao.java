@@ -201,6 +201,7 @@ public class HospitalDao {
                 entity.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
                 entities.add(entity);
             }
+            cursor.close();
         }
         DataBaseUtil.closeDataBase();
         return entities;
@@ -229,6 +230,7 @@ public class HospitalDao {
                 entity.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
                 entities.add(entity);
             }
+            cursor.close();
         }
         DataBaseUtil.closeDataBase();
         return entities;
@@ -256,6 +258,7 @@ public class HospitalDao {
             hospital.setProvince(cursor.getString(cursor.getColumnIndex(PROVINCE)));
             hospital.setShowtag(cursor.getString(cursor.getColumnIndex(SHOW_TAG)));
             hospital.setState(cursor.getString(cursor.getColumnIndex(STATE)));
+            cursor.close();
         }
         DataBaseUtil.closeDataBase();
         return hospital;

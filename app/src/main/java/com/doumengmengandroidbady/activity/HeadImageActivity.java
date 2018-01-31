@@ -86,7 +86,7 @@ public class HeadImageActivity extends BaseActivity {
         }
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -188,7 +188,7 @@ public class HeadImageActivity extends BaseActivity {
 
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             Uri uri = data.getData();
-            int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
+            int sdkVersion = Build.VERSION.SDK_INT;
             if (sdkVersion >= 19) {
                 source = PictureUtils.getPath_above19(HeadImageActivity.this, uri);
             } else {
@@ -221,7 +221,7 @@ public class HeadImageActivity extends BaseActivity {
 
     private RequestTask uploadHeadImageTask = null;
 
-    private RequestCallBack uploadHeadImageCallBack = new RequestCallBack() {
+    private final RequestCallBack uploadHeadImageCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
@@ -245,7 +245,7 @@ public class HeadImageActivity extends BaseActivity {
             uploadFile.setFileName("userHead");
             uploadFile.setFilePath(BaseApplication.getInstance().getPersonHeadImgPath());
             uploadFiles.add(uploadFile);
-            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().getGson().toJson(uploadFiles));
+            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().toJson(uploadFiles));
             return map;
         }
 

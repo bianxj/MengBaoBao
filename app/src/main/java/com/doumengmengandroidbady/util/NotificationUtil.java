@@ -16,7 +16,7 @@ import com.doumengmengandroidbady.base.BaseApplication;
 
 public class NotificationUtil {
 
-    private static String channelId = "TEST";
+    private static final String channelId = "TEST";
 
     public static void showNotification(Context context){
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

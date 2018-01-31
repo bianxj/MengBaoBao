@@ -184,7 +184,7 @@ public class AssessmentActivity extends BaseActivity {
         Intent intent = getIntent();
         String recordString = intent.getStringExtra(IN_PARAM_RECORD);
         userData = BaseApplication.getInstance().getUserData();
-        record = GsonUtil.getInstance().getGson().fromJson(recordString,Record.class);
+        record = GsonUtil.getInstance().fromJson(recordString,Record.class);
         doctor = DaoManager.getInstance().getDaotorDao().searchDoctorById(this,record.getDoctorid());
         hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this,doctor.getDoctorid());
 
@@ -344,7 +344,7 @@ public class AssessmentActivity extends BaseActivity {
         return dayInYear;
     }
 
-    private View.OnClickListener actionListener = new View.OnClickListener() {
+    private final View.OnClickListener actionListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
@@ -363,10 +363,12 @@ public class AssessmentActivity extends BaseActivity {
     }
 
     //------------------------------------------养育指导--------------------------------------------
-    private View.OnClickListener parentingGuideListener = new View.OnClickListener() {
+    private final View.OnClickListener parentingGuideListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //TODO 跳转至养育指导
+            Intent intent = new Intent(AssessmentActivity.this,ParentingGuideActivity.class);
+            intent.putExtra(ParentingGuideActivity.IN_PARAM_RECORD_ID,record.getRecordId());
+            startActivity(intent);
         }
     };
 
@@ -398,7 +400,7 @@ public class AssessmentActivity extends BaseActivity {
 
         TextView tv_title = new TextView(this);
         tv_title.setText(title);
-        tv_title.setTextColor(getResources().getColor(R.color.colorBlackText));
+        tv_title.setTextColor(getResources().getColor(R.color.second_black));
         tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -445,7 +447,7 @@ public class AssessmentActivity extends BaseActivity {
             textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y5px);
             tv_content.setLayoutParams(textParam);
             tv_content.setText(content);
-            tv_content.setTextColor(getResources().getColor(R.color.fourthGray));
+            tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
             tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
             subLayout.addView(tv_content);
 
@@ -469,9 +471,9 @@ public class AssessmentActivity extends BaseActivity {
     //根据实际月龄判断
     private final static String PARAM_HEIGHT_DEVIDE_WEIGHT_0_2 = "bmi_0_2";
     private final static String PARAM_HEIGHT_DEVIDE_WEIGHT_2_5 = "bmi_2_5";
-    private Map<String,DiagramView.DiagramBaseInfo> baseParamMap = new HashMap<>();
-    private Map<String,DiagramView.DiagramParam> paramMap = new HashMap<>();
-    private List<RadioButton> diagramButtons = new ArrayList<>();
+    private final Map<String,DiagramView.DiagramBaseInfo> baseParamMap = new HashMap<>();
+    private final Map<String,DiagramView.DiagramParam> paramMap = new HashMap<>();
+    private final List<RadioButton> diagramButtons = new ArrayList<>();
     private void initDiagramViewParam(){
         currentIndex = R.id.rg_weight;
 
@@ -514,14 +516,14 @@ public class AssessmentActivity extends BaseActivity {
     }
 
     //曲线图详细界面跳转
-    private View.OnClickListener diagramListener = new View.OnClickListener() {
+    private final View.OnClickListener diagramListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             //TODO
             List<ImageData> data = record.getImageData();
             if ( data != null ) {
-                String imageData = GsonUtil.getInstance().getGson().toJson(data);
-                int type = 0;
+                String imageData = GsonUtil.getInstance().toJson(data);
+                int type;
                 if ( rg_height.isChecked() ){
                     type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_HEIGHT.ordinal();
                 } else if ( rg_weight.isChecked() ){
@@ -539,7 +541,7 @@ public class AssessmentActivity extends BaseActivity {
         }
     };
 
-    private CompoundButton.OnCheckedChangeListener diagramOnChangeListener = new CompoundButton.OnCheckedChangeListener() {
+    private final CompoundButton.OnCheckedChangeListener diagramOnChangeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
             if ( isChecked ){
@@ -609,8 +611,7 @@ public class AssessmentActivity extends BaseActivity {
     }
 
     private boolean isLowerThanTwoYear(){
-        int month = Integer.parseInt(record.getMonthAge());
-        return month <= 24;
+        return record.getMonthAge() <= 24;
     }
 
     //------------------------------更新状态--------------------------------------------------------
@@ -628,7 +629,7 @@ public class AssessmentActivity extends BaseActivity {
 
     private RequestTask updateRequestTask;
 
-    private RequestCallBack callBack = new RequestCallBack() {
+    private final RequestCallBack callBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 

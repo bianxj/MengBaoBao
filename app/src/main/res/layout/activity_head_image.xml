@@ -22,7 +22,7 @@
         android:layout_marginTop="@dimen/y847px"
         android:layout_marginLeft="@dimen/x156px"
         android:layout_alignParentLeft="true"
-        />
+        android:contentDescription="@string/contentDescription" />
 
     <ImageView
         android:id="@+id/iv_picture"
@@ -32,5 +32,5 @@
         android:layout_marginTop="@dimen/y847px"
         android:layout_marginRight="@dimen/x156px"
         android:layout_alignParentRight="true"
-        />
+        android:contentDescription="@string/contentDescription" />
 </RelativeLayout>

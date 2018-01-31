@@ -68,7 +68,7 @@ public class ParentInfoActivity extends BaseActivity {
         parent_info.setType(ParentInfoLayout.TYPE.EDITABLE_NO_MARK);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -98,7 +98,7 @@ public class ParentInfoActivity extends BaseActivity {
 
     private boolean checkData(){
         if ( BaseApplication.getInstance().getParentInfo() == null ){
-            return true;
+            return false;
         }
         return true;
     }
@@ -108,7 +108,7 @@ public class ParentInfoActivity extends BaseActivity {
         return changeParentInfoTask;
     }
 
-    private RequestCallBack changeParentInfoCallBack = new RequestCallBack() {
+    private final RequestCallBack changeParentInfoCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
             //TODO
@@ -127,7 +127,7 @@ public class ParentInfoActivity extends BaseActivity {
             inputData.parentInfo = parent_info.getParentInfo();
 
             Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM, GsonUtil.getInstance().getGson().toJson(inputData));
+            map.put(UrlAddressList.PARAM, GsonUtil.getInstance().toJson(inputData));
             map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
             return map;
         }

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class HospitalReportAdapter extends RecyclerView.Adapter<HospitalReportAdapter.ViewHolder> {
 
-    private List<HospitalReport> reports;
+    private final List<HospitalReport> reports;
 
     public HospitalReportAdapter(List<HospitalReport> reports) {
         this.reports = reports;
@@ -55,8 +55,13 @@ public class HospitalReportAdapter extends RecyclerView.Adapter<HospitalReportAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tv_hospital_name , tv_record_date , tv_baby_month;
-        private TextView tv_weight , tv_height , tv_develop , tv_bmi;
+        private final TextView tv_hospital_name;
+        private final TextView tv_record_date;
+        private final TextView tv_baby_month;
+        private final TextView tv_weight;
+        private final TextView tv_height;
+        private final TextView tv_develop;
+        private final TextView tv_bmi;
         private int position;
         private HospitalReport report;
 
@@ -71,7 +76,7 @@ public class HospitalReportAdapter extends RecyclerView.Adapter<HospitalReportAd
             tv_bmi = itemView.findViewById(R.id.tv_bmi);
             itemView.setOnClickListener(listener);
         }
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), HospitalReportActivity.class);

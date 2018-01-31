@@ -26,6 +26,8 @@ import java.util.List;
  */
 public class ObserveActivity extends BaseActivity {
 
+    public final static String IN_PARAM_MONTH = "IN_PARAM_MONTH";
+
     private RelativeLayout rl_back;
     private TextView tv_title;
     private ImageView iv_ad;
@@ -59,8 +61,9 @@ public class ObserveActivity extends BaseActivity {
             bt_buy.setVisibility(View.VISIBLE);
         } else {
             //付费用户
+            String month = getIntent().getStringExtra(IN_PARAM_MONTH);
             bt_buy.setVisibility(View.GONE);
-            contents = DaoManager.getInstance().getGrowthDao().searchGrowth(this);
+            contents = DaoManager.getInstance().getGrowthDao().searchGrowth(this,month);
         }
 
         rl_back.setOnClickListener(listener);
@@ -72,7 +75,7 @@ public class ObserveActivity extends BaseActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){

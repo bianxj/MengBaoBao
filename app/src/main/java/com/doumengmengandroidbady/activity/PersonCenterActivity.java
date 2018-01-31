@@ -107,7 +107,7 @@ public class PersonCenterActivity extends BaseActivity {
         ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_baby_img,builder.build());
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){

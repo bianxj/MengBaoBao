@@ -20,17 +20,16 @@ import java.util.Map;
 public class LoginTask {
 
     private RequestTask task;
-    private LoginCallBack loginCallBack;
-    private String accountMobile;
-    private String loginPwd;
-    private int type = RequestCallBack.NO_PROMPT;
+    private final LoginCallBack loginCallBack;
+    private final String accountMobile;
+    private final String loginPwd;
+    private final int type = RequestCallBack.NO_PROMPT;
 
     public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack,int type) throws Throwable{
         this.accountMobile = accountMobile;
         this.loginPwd = loginPwd;
         this.loginCallBack = loginCallBack;
         task = new RequestTask.Builder(context,callBack).build();
-        type = RequestCallBack.NO_PROMPT;
     }
 
     public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack) throws Throwable {
@@ -45,7 +44,7 @@ public class LoginTask {
         return task;
     }
 
-    private RequestCallBack callBack = new RequestCallBack() {
+    private final RequestCallBack callBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
             if ( loginCallBack != null ){
@@ -90,7 +89,7 @@ public class LoginTask {
                 BaseApplication.getInstance().saveAbnormalExit(isAbnormalExit != 0);
 
                 JSONObject user = res.getJSONObject("User");
-                UserData userData = GsonUtil.getInstance().getGson().fromJson(user.toString(),UserData.class);
+                UserData userData = GsonUtil.getInstance().fromJson(user.toString(),UserData.class);
                 userData.setPasswd(loginPwd);
                 userData.setSessionId(sessionId);
                 BaseApplication.getInstance().saveUserData(userData);

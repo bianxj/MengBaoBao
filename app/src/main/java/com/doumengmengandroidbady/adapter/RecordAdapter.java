@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHolder> {
 
-    private List<Record> records;
+    private final List<Record> records;
 
     public RecordAdapter(List<Record> records) {
         this.records = records;
@@ -48,14 +48,14 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
 
     public static class RecordHolder extends RecyclerView.ViewHolder{
 
-        private TextView tv_read_state;
-        private TextView tv_record_date;
-        private TextView tv_baby_month;
-        private TextView tv_weight;
-        private TextView tv_height;
-        private TextView tv_bmi;
-        private TextView tv_develop;
-        private View view;
+        private final TextView tv_read_state;
+        private final TextView tv_record_date;
+        private final TextView tv_baby_month;
+        private final TextView tv_weight;
+        private final TextView tv_height;
+        private final TextView tv_bmi;
+        private final TextView tv_develop;
+        private final View view;
         private Record record;
 
         public RecordHolder(View itemView) {
@@ -86,12 +86,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
             this.record = record;
         }
 
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, AssessmentActivity.class);
-                intent.putExtra(AssessmentActivity.IN_PARAM_RECORD, GsonUtil.getInstance().getGson().toJson(record));
+                intent.putExtra(AssessmentActivity.IN_PARAM_RECORD, GsonUtil.getInstance().toJson(record));
                 context.startActivity(intent);
             }
         };

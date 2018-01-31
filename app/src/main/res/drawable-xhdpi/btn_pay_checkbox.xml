@@ -2,6 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@drawable/btn_pay_choose" android:state_checked="true" />
-    <item android:drawable="@color/white" />
+    <item android:drawable="@color/first_white" />
 
 </selector>

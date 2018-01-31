@@ -60,7 +60,7 @@ public class ScanActivity extends BaseActivity {
     private final static int REQUEST_CAMERA_PERMISSION = 0x02;
 
     private final static int REQUEST_ALBUM = 0x11;
-    private String[] permissions = new String[]{Manifest.permission.CAMERA};
+    private final String[] permissions = new String[]{Manifest.permission.CAMERA};
 
     public final static String RESULT_QR_VALUE = "result_rq";
 
@@ -132,9 +132,9 @@ public class ScanActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ( REQUEST_ALBUM == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
-            String source = null;
+            String source;
             Uri uri = data.getData();
-            int sdkVersion = Integer.valueOf(Build.VERSION.SDK);
+            int sdkVersion = Build.VERSION.SDK_INT;
             if (sdkVersion >= 19) {
                 source = PictureUtils.getPath_above19(ScanActivity.this, uri);
             } else {
@@ -166,7 +166,7 @@ public class ScanActivity extends BaseActivity {
         cameraManager = new CameraManager(getApplicationContext());
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
@@ -180,7 +180,7 @@ public class ScanActivity extends BaseActivity {
         }
     };
 
-    private CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
+    private final CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
             cameraManager.setTorch(isChecked);
@@ -254,7 +254,7 @@ public class ScanActivity extends BaseActivity {
         }
     }
 
-    private CameraManager.PreviewCallback previewCallback = new CameraManager.PreviewCallback() {
+    private final CameraManager.PreviewCallback previewCallback = new CameraManager.PreviewCallback() {
 
         @Override
         public void onPreviewFrame(byte[] data, Camera camera, int height, int width) {
@@ -279,7 +279,7 @@ public class ScanActivity extends BaseActivity {
         }
     };
 
-    private SurfaceHolder.Callback holderCallback = new SurfaceHolder.Callback() {
+    private final SurfaceHolder.Callback holderCallback = new SurfaceHolder.Callback() {
         @Override
         public void surfaceCreated(SurfaceHolder surfaceHolder) {
             hasSurface = true;
@@ -301,7 +301,7 @@ public class ScanActivity extends BaseActivity {
 
     //---------------------------------二维码图片解析---------------------------------------------------
     private final static int MESSAGE_DECODE_RESULT = 0x01;
-    private Handler handler = new Handler(){
+    private final Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -319,7 +319,7 @@ public class ScanActivity extends BaseActivity {
     private Reader reader;
     private class DecodeRunnable implements Runnable{
 
-        private String picturePath;
+        private final String picturePath;
 
         public DecodeRunnable(String picturePath) {
             this.picturePath = picturePath;
@@ -384,7 +384,6 @@ public class ScanActivity extends BaseActivity {
         Bitmap barcode = BitmapFactory.decodeFile(path, opts);
         Result result = decodeBarcodeRGB(barcode);
 //        barcode.recycle();
-        barcode = null;
         return result;
     }
 
@@ -414,7 +413,6 @@ public class ScanActivity extends BaseActivity {
             e.printStackTrace();
         }
         barcode.recycle();
-        barcode = null;
         return result;
     }
 

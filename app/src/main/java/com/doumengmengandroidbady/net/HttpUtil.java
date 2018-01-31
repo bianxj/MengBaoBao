@@ -49,7 +49,7 @@ public class HttpUtil {
         Response response = null;
         Request request = null;
         Request.Builder builder = null;
-        String result = null;
+        String result;
         try {
             builder  = new Request.Builder();
             builder.url(url);
@@ -61,7 +61,7 @@ public class HttpUtil {
                 Set<String> keys = map.keySet();
                 for (String key : keys) {
                     if ( TYPE_FILE.equals(key) ) {
-                        List<UploadFile> uploadFiles = GsonUtil.getInstance().getGson().fromJson(map.get(key),new TypeToken<List<UploadFile>>(){}.getType());
+                        List<UploadFile> uploadFiles = GsonUtil.getInstance().fromJson(map.get(key),new TypeToken<List<UploadFile>>(){}.getType());
                         if ( uploadFiles != null && uploadFiles.size() > 0 ){
                             for (UploadFile uploadFile :uploadFiles){
                                 File file = new File(uploadFile.getFilePath());
@@ -78,7 +78,7 @@ public class HttpUtil {
             request = builder.post(bodyBuilder.build()).build();
             response = client.newCall(request).execute();
             BaseApplication.getInstance().getMLog().info("HttpUtil:code:"+response.code());
-            if (response.code() == 200) {
+            if (response.code() == 200 && response.body() != null) {
                 result = response.body().string();
             } else {
                 result = ResponseErrorCode.ERROR_REQUEST_FAILED_MSG;
@@ -89,14 +89,9 @@ public class HttpUtil {
         } finally {
             if ( builder != null ){
                 builder.delete();
-                builder = null;
-            }
-            if ( request != null ){
-                request = null;
             }
             if ( response != null ){
                 response.close();
-                response = null;
             }
         }
         BaseApplication.getInstance().getMLog().info("HttpUtil:result:"+result);
@@ -172,10 +167,6 @@ public class HttpUtil {
 //            e.printStackTrace();
 //        }
 //    }
-
-    public Response uploadFile(File file){
-        return null;
-    }
 
 //    private void defineHeader(Request.Builder builder){
 //

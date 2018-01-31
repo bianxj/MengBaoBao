@@ -82,7 +82,7 @@ public class BabyKnowledgeFragment extends BaseFragment {
         pages.add("file:///android_asset/babyknowledge24-36.html");
     }
 
-    private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+    private final AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String title = (String) adapter.getItem(position);

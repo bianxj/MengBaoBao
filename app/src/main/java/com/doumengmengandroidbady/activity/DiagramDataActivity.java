@@ -66,7 +66,7 @@ public class DiagramDataActivity extends BaseActivity {
         Intent intent = getIntent();
         String param = intent.getStringExtra(IN_PARAM_IMAGE_DATA);
         int type = intent.getIntExtra(IN_PARAM_TYPE,DIAGRAM_TYPE.TYPE_HEIGHT.ordinal());
-        datas = GsonUtil.getInstance().getGson().fromJson(param,new TypeToken<List<ImageData>>(){}.getType());
+        datas = GsonUtil.getInstance().fromJson(param,new TypeToken<List<ImageData>>(){}.getType());
 
         DIAGRAM_TYPE tt;
         tv_title_left.setText(getResources().getString(R.string.diagram_data_date));
@@ -90,7 +90,7 @@ public class DiagramDataActivity extends BaseActivity {
         lv.setAdapter(adapter);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){

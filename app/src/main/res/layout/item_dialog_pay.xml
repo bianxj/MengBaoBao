@@ -14,7 +14,8 @@
             android:layout_height="@dimen/x40px"
             android:src="@drawable/alipay_logo_60"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x72px"/>
+            android:layout_marginLeft="@dimen/x72px"
+            android:contentDescription="@string/contentDescription" />
 
         <TextView
             android:id="@+id/tv_name"

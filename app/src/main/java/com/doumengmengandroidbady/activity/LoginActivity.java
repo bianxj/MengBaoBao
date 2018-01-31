@@ -23,7 +23,7 @@ import com.doumengmengandroidbady.util.FormatCheckUtil;
  */
 public class LoginActivity extends BaseActivity {
 
-    private static boolean isTest = Config.isTest;
+    private static final boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private EditText et_phone,et_login_pwd;
@@ -66,7 +66,7 @@ public class LoginActivity extends BaseActivity {
         tv_forgot_pwd.setOnClickListener(listener);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){

@@ -23,8 +23,8 @@ import java.util.List;
 
 public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHolder> {
 
-    private List<String> selection;
-    private List<Feature> features;
+    private final List<String> selection;
+    private final List<Feature> features;
 
     public BehaviorAdapter(List<Feature> features,List<String> selection) {
         this.features = features;
@@ -51,12 +51,12 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tv_hehavior_title;
-        private CheckBox cb_hebavior;
-        private TextView tv_behavior;
-        private MyGifPlayer player;
-        private View view_underline;
-        private android.support.v4.widget.Space space_behavior;
+        private final TextView tv_hehavior_title;
+        private final CheckBox cb_hebavior;
+        private final TextView tv_behavior;
+        private final MyGifPlayer player;
+        private final View view_underline;
+        private final android.support.v4.widget.Space space_behavior;
         private Feature feature;
         private List<String> selection;
 
@@ -95,7 +95,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
             }
         }
 
-        private CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
+        private final CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if ( b ){
@@ -106,7 +106,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
             }
         };
 
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyDialog.showGifDialog(view.getContext(),UrlAddressList.BASE_URL + feature.getExampleimgurl());

@@ -42,7 +42,7 @@ public class AutoScrollViewPager extends FrameLayout {
     private int pageMarginTop;
     private boolean canLoop = false;
 
-    private Context context;
+    private final Context context;
     private ViewPager viewPager;
     private RadioGroup dotLayout;
 
@@ -144,7 +144,7 @@ public class AutoScrollViewPager extends FrameLayout {
         if ( canLoop() ){
             List<ImageView> imageViews = new ArrayList<>();
             for (int i = 0; i < imageList.length+2; i++) {
-                ImageView imageView = null;
+                ImageView imageView;
                 if ( i == 0 ) {
                     imageView = createImageView(imageList[imageList.length-1]);
                 } else if ( i == imageList.length+1 ){
@@ -217,7 +217,7 @@ public class AutoScrollViewPager extends FrameLayout {
         return radioButton;
     }
 
-    private OnTouchListener onTouchListener = new OnTouchListener() {
+    private final OnTouchListener onTouchListener = new OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if ( motionEvent.getAction() == MotionEvent.ACTION_DOWN ){
@@ -248,7 +248,7 @@ public class AutoScrollViewPager extends FrameLayout {
         }
     }
 
-    private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+    private final ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
@@ -285,7 +285,7 @@ public class AutoScrollViewPager extends FrameLayout {
     };
 
     private class ScrollPagerAdapter extends PagerAdapter{
-        private List<ImageView> imageViews;
+        private final List<ImageView> imageViews;
 
         public ScrollPagerAdapter(List<ImageView> imageViews) {
             this.imageViews = imageViews;
@@ -317,7 +317,7 @@ public class AutoScrollViewPager extends FrameLayout {
         }
     }
 
-    private OnClickListener listener = new OnClickListener() {
+    private final OnClickListener listener = new OnClickListener() {
         @Override
         public void onClick(View view) {
             int position = (int) view.getTag();
@@ -375,7 +375,7 @@ public class AutoScrollViewPager extends FrameLayout {
         public final static int SCROLL_NEXT = 0x31;
         public final static int SCROLL_NEXT_NOSCROLL = 0x32;
 
-        private ViewPager viewPager;
+        private final ViewPager viewPager;
 
         public ScrollViewHandler(ViewPager viewPager) {
             this.viewPager = viewPager;

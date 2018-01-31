@@ -2,6 +2,7 @@ package com.doumengmengandroidbady.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.Space;
 import android.view.LayoutInflater;
@@ -51,9 +52,8 @@ public class HomePageFragment extends BaseFragment {
     private TextView tv_baby_age;
     private AutoScrollViewPager asvp;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         activity = (MainActivity) getActivity();
         View view = inflater.inflate(R.layout.fragment_home_page,null);
         findView(view);
@@ -140,7 +140,7 @@ public class HomePageFragment extends BaseFragment {
         initData();
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -150,7 +150,9 @@ public class HomePageFragment extends BaseFragment {
                     break;
                 case R.id.ll_observe_point:
                     //观察要点
-                    startActivity(ObserveActivity.class);
+                    Intent intent = new Intent(getContext(),ObserveActivity.class);
+                    intent.putExtra(ObserveActivity.IN_PARAM_MONTH,BaseApplication.getInstance().getDayList().getCurrentMonth());
+                    startActivity(intent);
                     break;
                 case R.id.ll_doctor_list:
                     //医院医生列表
@@ -166,7 +168,7 @@ public class HomePageFragment extends BaseFragment {
         }
     };
 
-    private AutoScrollViewPager.OnClickCallBack onClickCallBack = new AutoScrollViewPager.OnClickCallBack() {
+    private final AutoScrollViewPager.OnClickCallBack onClickCallBack = new AutoScrollViewPager.OnClickCallBack() {
         @Override
         public void onClick(int position) {
             Toast.makeText(getContext(),position+"",Toast.LENGTH_SHORT).show();

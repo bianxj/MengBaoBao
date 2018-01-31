@@ -24,7 +24,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y227px"
-                android:background="@color/white"
+                android:background="@color/first_white"
                 >
                 <com.doumengmengandroidbady.view.CircleImageView
                     android:id="@+id/civ_head"
@@ -48,7 +48,7 @@
                         android:id="@+id/tv_doctor_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/BlackText34px"
+                        style="@style/SecondBlack.Text34px"
                         android:text=""
                         android:textStyle="bold"
                         android:includeFontPadding="false"
@@ -57,7 +57,7 @@
                         android:id="@+id/tv_doctor_position"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/BlackText26px"
+                        style="@style/SecondBlack.Text26px"
                         android:text=""
                         android:includeFontPadding="false"
                         android:layout_marginTop="@dimen/y18px"
@@ -66,7 +66,7 @@
                         android:id="@+id/tv_hospital"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/LightGrayText23px"
+                        style="@style/SecondGray.Text23px"
                         android:text=""
                         android:textStyle="bold"
                         android:includeFontPadding="false"
@@ -74,17 +74,14 @@
                         />
                 </LinearLayout>
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:layout_marginTop="@dimen/y13px"
-                >
                 <LinearLayout
-                    android:layout_width="@dimen/x566px"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/x70px"
+                    android:layout_marginTop="@dimen/y13px"
+                    android:paddingLeft="@dimen/x70px"
+                    android:paddingRight="@dimen/x70px"
+                    android:background="@color/first_white"
                     >
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -95,12 +92,12 @@
                             android:layout_height="@dimen/y43px"
                             android:src="@drawable/icon_skill"
                             android:scaleType="fitXY"
-                            />
+                            android:contentDescription="@string/contentDescription" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/speciality"
-                            style="@style/SecondBlackText28px"
+                            style="@style/ThirdBlack.Text28px"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x55px"
                             />
@@ -112,22 +109,18 @@
                         android:layout_marginTop="@dimen/y22px"
                         android:layout_marginBottom="@dimen/y34px"
                         android:lineSpacingExtra="@dimen/y10px"
-                        style="@style/ThirdBlackText26px"
+                        style="@style/FourthBlack.Text26px"
                         android:text=""
                         />
                 </LinearLayout>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:layout_marginTop="@dimen/y13px"
-                >
                 <LinearLayout
-                    android:layout_width="@dimen/x566px"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/x70px"
+                    android:background="@color/first_white"
+                    android:layout_marginTop="@dimen/y13px"
+                    android:paddingLeft="@dimen/x70px"
+                    android:paddingRight="@dimen/x70px"
                     >
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -138,12 +131,12 @@
                             android:layout_height="@dimen/y43px"
                             android:src="@drawable/icon_introduce"
                             android:scaleType="fitXY"
-                            />
+                            android:contentDescription="@string/contentDescription" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/introduce"
-                            style="@style/SecondBlackText28px"
+                            style="@style/ThirdBlack.Text28px"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x55px"
                             />
@@ -155,11 +148,10 @@
                         android:layout_marginTop="@dimen/y22px"
                         android:layout_marginBottom="@dimen/y34px"
                         android:lineSpacingExtra="@dimen/y10px"
-                        style="@style/ThirdBlackText26px"
+                        style="@style/FourthBlack.Text26px"
                         android:text=""
                         />
                 </LinearLayout>
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -170,7 +162,7 @@
         android:background="@color/linkPink"
         android:layout_alignParentBottom="true"
         android:text="@string/choose_me"
-        style="@style/BigWhiteText"
+        style="@style/FirstWhite.Text34px"
         />
 
 </RelativeLayout>

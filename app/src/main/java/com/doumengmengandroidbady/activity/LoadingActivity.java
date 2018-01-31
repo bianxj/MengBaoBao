@@ -85,7 +85,7 @@ public class LoadingActivity extends BaseActivity {
 
     private void initView(){
         rl_back.setOnClickListener(listener);
-
+        tv_loading_percent.setText("40%");
         AnimationDrawable drawable = (AnimationDrawable) iv_loading_icon.getDrawable();
         drawable.start();
     }
@@ -136,7 +136,7 @@ public class LoadingActivity extends BaseActivity {
         return new RequestTask.Builder(this,checkVersionCallBack).build();
     }
 
-    private RequestCallBack checkVersionCallBack = new RequestCallBack() {
+    private final RequestCallBack checkVersionCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
             //TODO
@@ -180,7 +180,7 @@ public class LoadingActivity extends BaseActivity {
         }
     }
 
-    private RequestCallBack initConfigureCallback = new RequestCallBack() {
+    private final RequestCallBack initConfigureCallback = new RequestCallBack() {
         @Override
         public void onPreExecute() {}
 
@@ -197,11 +197,11 @@ public class LoadingActivity extends BaseActivity {
             JSONObject object = new JSONObject();
             try {
                 object.put("userId",userData.getUserid());
-                map.put("paramStr",object.toString());
+                map.put(UrlAddressList.PARAM,object.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            map.put("sesId",userData.getSessionId());
+            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
             return map;
         }
 
@@ -253,7 +253,7 @@ public class LoadingActivity extends BaseActivity {
             }
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -270,7 +270,7 @@ public class LoadingActivity extends BaseActivity {
 
     private static class LoadingHandler extends Handler{
         private final static int MESSAGE_JUMP_TO_MAIN = 0x01;
-        private WeakReference<Context> weakReference;
+        private final WeakReference<Context> weakReference;
 
         public LoadingHandler(Context context) {
             this.weakReference = new WeakReference<>(context);
@@ -290,11 +290,11 @@ public class LoadingActivity extends BaseActivity {
         }
     }
 
-    private Handler handler = new LoadingHandler(this);
+    private final Handler handler = new LoadingHandler(this);
 
     private class DataBaseRunnable implements Runnable{
 
-        private String result;
+        private final String result;
 
         public DataBaseRunnable(String result) {
             this.result = result;
@@ -308,11 +308,11 @@ public class LoadingActivity extends BaseActivity {
             DaoManager.getInstance().deleteTable(LoadingActivity.this, MengClassDao.TABLE_NAME);
             DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
 
-            JSONObject object = null;
+            JSONObject object;
             try {
                 object = new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
-                InitConfigure configure = GsonUtil.getInstance().getGson().fromJson(res.toString(), InitConfigure.class);
+                InitConfigure configure = GsonUtil.getInstance().fromJson(res.toString(), InitConfigure.class);
                 DaoManager.getInstance().getDaotorDao().saveDoctorList(LoadingActivity.this, configure.getDoctorList());
                 DaoManager.getInstance().getGrowthDao().saveGrowthList(LoadingActivity.this, configure.getGrowthList());
                 DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, configure.getHospitalList());

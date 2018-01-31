@@ -17,14 +17,14 @@
             android:layout_marginLeft="@dimen/x48px"
             android:layout_marginTop="@dimen/y29px"
             android:scaleType="fitXY"
-            />
+            android:contentDescription="@string/contentDescription" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TitleTextView"
+        style="@style/SecondWhite.Text48px"
         android:layout_centerInParent="true"
         android:maxLines="1"
         android:ellipsize="end"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/complete"
-            style="@style/TextColor28px"
+            style="@style/SecondWhite.Text28px"
             />
     </RelativeLayout>
 

@@ -2,6 +2,7 @@ package com.doumengmengandroidbady.base;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 
 /**
@@ -19,6 +20,14 @@ public class BaseFragmentActivity extends FragmentActivity {
     protected void startActivity(Class<? extends Activity> act){
         Intent intent = new Intent(this,act);
         startActivity(intent);
+    }
+
+    protected void stopTask(AsyncTask task){
+        if ( task != null ){
+            if ( AsyncTask.Status.FINISHED != task.getStatus() ){
+                task.cancel(false);
+            }
+        }
     }
 
 }

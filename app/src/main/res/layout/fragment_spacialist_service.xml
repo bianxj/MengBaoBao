@@ -31,7 +31,7 @@
                     android:layout_marginTop="@dimen/y24px"
                     android:includeFontPadding="false"
                     android:text=""
-                    android:textColor="@color/white"
+                    android:textColor="@color/first_white"
                     android:textSize="@dimen/y52px" />
 
                 <RelativeLayout
@@ -50,7 +50,7 @@
                         android:layout_marginTop="@dimen/y39px"
                         android:includeFontPadding="false"
                         android:text=""
-                        android:textColor="@color/white"
+                        android:textColor="@color/first_white"
                         android:textSize="@dimen/y28px"
                         />
                 </RelativeLayout>
@@ -89,14 +89,14 @@
                         android:paddingLeft="@dimen/x20px"
                         android:paddingRight="@dimen/x20px"
                         android:text=""
-                        android:textColor="@color/white"
+                        android:textColor="@color/first_white"
                         android:textSize="@dimen/y26px"
                         android:background="@drawable/bg_rect_circle"
                         android:gravity="center"/>
 
                     <TextView
                         android:id="@+id/tv_buy"
-                        style="@style/WhiteText22px"
+                        style="@style/FirstWhite.Text22px"
                         android:layout_width="@dimen/y62px"
                         android:layout_height="@dimen/y40px"
                         android:layout_centerVertical="true"
@@ -114,7 +114,7 @@
             android:id="@+id/rl_add_record"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y115px"
-            android:background="@color/white"
+            android:background="@color/first_white"
             >
 
             <ImageView
@@ -123,13 +123,13 @@
                 android:src="@drawable/icon_add"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x39px"
-                />
+                android:contentDescription="@string/contentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_record"
-                style="@style/SmallBlackText"
+                style="@style/SecondBlack.Text28px"
                 android:layout_centerInParent="true"
                 />
             <ImageView
@@ -138,7 +138,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/x48px"
-                android:src="@drawable/right_allow"/>
+                android:src="@drawable/right_allow"
+                android:contentDescription="@string/contentDescription" />
 
         </RelativeLayout>
 
@@ -169,7 +170,7 @@
 
             <TextView
                 android:id="@+id/tv_title"
-                style="@style/TitleTextView"
+                style="@style/SecondWhite.Text48px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -182,7 +183,7 @@
             android:src="@drawable/icon_unbuy"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/y307px"
-            />
+            android:contentDescription="@string/contentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -192,7 +193,7 @@
             android:includeFontPadding="true"
             android:layout_marginTop="@dimen/y611px"
             android:layout_centerHorizontal="true"
-            style="@style/SmallBlackText"
+            style="@style/SecondBlack.Text28px"
             />
 
         <Button

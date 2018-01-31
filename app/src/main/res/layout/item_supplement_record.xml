@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                style="@style/FourthGrayText28px"
+                style="@style/FourthGray.Text28px"
                 android:text=""
                 />
         </RelativeLayout>
@@ -42,7 +42,7 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:background="@null"
-                    style="@style/FourthGrayText28px"
+                    style="@style/FourthGray.Text28px"
                     android:inputType="numberDecimal"
                     tools:ignore="LabelFor" />
             </RelativeLayout>
@@ -65,7 +65,7 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:background="@null"
-                    style="@style/FourthGrayText28px"
+                    style="@style/FourthGray.Text28px"
                     android:inputType="numberDecimal"
                     tools:ignore="LabelFor" />
             </RelativeLayout>

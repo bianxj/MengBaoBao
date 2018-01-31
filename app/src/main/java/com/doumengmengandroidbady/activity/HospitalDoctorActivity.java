@@ -32,7 +32,7 @@ public class HospitalDoctorActivity extends BaseActivity {
 
     private XRecyclerView xrv_doctor;
     private DoctorAdapter doctorAdapter;
-    private List<DoctorEntity> doctors = new ArrayList<>();
+    private final List<DoctorEntity> doctors = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,7 +81,7 @@ public class HospitalDoctorActivity extends BaseActivity {
         doctorAdapter.notifyDataSetChanged();
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){

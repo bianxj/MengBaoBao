@@ -8,6 +8,7 @@
         android:id="@+id/iv_picture"
         android:layout_width="@dimen/x648px"
         android:layout_height="@dimen/y1125px"
-        android:scaleType="centerInside"/>
+        android:scaleType="centerInside"
+        android:contentDescription="@string/contentDescription" />
 
 </LinearLayout>

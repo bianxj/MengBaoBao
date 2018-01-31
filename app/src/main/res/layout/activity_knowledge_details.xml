@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/first_white">
 
     <include layout="@layout/include_title_back" />
 
@@ -24,7 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y156px"
             android:layout_alignParentBottom="true"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:contentDescription="@string/contentDescription" />
     </RelativeLayout>
 
 </LinearLayout>

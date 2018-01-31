@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/first_white"
     >
 
     <include layout="@layout/include_title_back" />
@@ -15,14 +15,14 @@
         android:src="@drawable/logo_about"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y207px"
-        />
+        android:contentDescription="@string/contentDescription" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/company_name"
         android:textSize="@dimen/y34px"
-        android:textColor="@color/colorBlackText"
+        android:textColor="@color/second_black"
         android:layout_centerHorizontal="true"
         android:includeFontPadding="false"
         android:layout_marginTop="@dimen/y500px"
@@ -34,43 +34,43 @@
         android:layout_height="@dimen/y31px"
         android:scaleType="fitXY"
         android:src="@drawable/icon_location"
-        android:layout_marginLeft="@dimen/x102px"
+        android:layout_marginStart="@dimen/x102px"
         android:layout_marginTop="@dimen/y592px"
-        />
+        android:contentDescription="@string/contentDescription" />
     <ImageView
         android:id="@+id/iv_tel"
         android:layout_width="@dimen/y31px"
         android:layout_height="@dimen/y31px"
         android:scaleType="fitXY"
         android:src="@drawable/icon_tel"
-        android:layout_marginLeft="@dimen/x102px"
+        android:layout_marginStart="@dimen/x102px"
         android:layout_marginTop="@dimen/y663px"
-        />
+        android:contentDescription="@string/contentDescription" />
     <ImageView
         android:id="@+id/iv_mail"
         android:layout_width="@dimen/y31px"
         android:layout_height="@dimen/y31px"
         android:scaleType="fitXY"
         android:src="@drawable/icon_mail"
-        android:layout_marginLeft="@dimen/x102px"
+        android:layout_marginStart="@dimen/x102px"
         android:layout_marginTop="@dimen/y735px"
-        />
+        android:contentDescription="@string/contentDescription" />
     <ImageView
         android:id="@+id/iv_website"
         android:layout_width="@dimen/y31px"
         android:layout_height="@dimen/y31px"
         android:scaleType="fitXY"
         android:src="@drawable/icon_website"
-        android:layout_marginLeft="@dimen/x102px"
+        android:layout_marginStart="@dimen/x102px"
         android:layout_marginTop="@dimen/y802px"
-        />
+        android:contentDescription="@string/contentDescription" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/AboutText"
+        style="@style/FirstGray.Text28px"
         android:text="@string/company_location"
-        android:layout_marginLeft="@dimen/x148px"
+        android:layout_marginStart="@dimen/x148px"
         android:layout_alignBottom="@+id/iv_location"
         android:includeFontPadding="true"
         />
@@ -78,9 +78,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/AboutText"
+        style="@style/FirstGray.Text28px"
         android:text="@string/company_phone"
-        android:layout_marginLeft="@dimen/x148px"
+        android:layout_marginStart="@dimen/x148px"
         android:layout_alignBottom="@+id/iv_tel"
         android:includeFontPadding="true"
         />
@@ -88,9 +88,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/AboutText"
+        style="@style/FirstGray.Text28px"
         android:text="@string/company_mail"
-        android:layout_marginLeft="@dimen/x148px"
+        android:layout_marginStart="@dimen/x148px"
         android:layout_alignBottom="@+id/iv_mail"
         android:includeFontPadding="true"
         />
@@ -98,9 +98,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/AboutText"
+        style="@style/FirstGray.Text28px"
         android:text="@string/company_website"
-        android:layout_marginLeft="@dimen/x148px"
+        android:layout_marginStart="@dimen/x148px"
         android:layout_alignBottom="@+id/iv_website"
         android:includeFontPadding="true"
         />

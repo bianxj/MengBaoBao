@@ -7,7 +7,7 @@
         android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/x575px"
         android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/first_white">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
                 android:layout_marginTop="@dimen/y40px"
                 android:textColor="#4D4D4D"
                 android:textSize="@dimen/x26px"
-                android:text="支付剩余时间"/>
+                android:text="@string/dialog_lost_pay_time"/>
 
             <ImageView
                 android:id="@+id/iv_close"
@@ -28,7 +28,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/x40px"
-                android:src="@drawable/btn_pay_close"/>
+                android:src="@drawable/btn_pay_close"
+                android:contentDescription="@string/contentDescription" />
 
         </RelativeLayout>
 
@@ -36,7 +37,7 @@
             android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/BlackText24px"
+            style="@style/SecondBlack.Text24px"
             android:gravity="center"
             android:text=""/>
 
@@ -61,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                style="@style/LinkPinkText32px"
+                style="@style/FirstPink.Text32px"
                 android:text=""/>
         </RelativeLayout>
 

@@ -60,7 +60,7 @@ public class InputNightSleepActivity extends BaseInputDataActivity {
         }
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){

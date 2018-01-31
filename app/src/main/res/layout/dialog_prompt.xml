@@ -17,7 +17,7 @@
 
             <TextView
                 android:id="@+id/tv_prompt"
-                style="@style/BlackText28px"
+                style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -29,14 +29,14 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/y1px"
-            android:background="@color/dialogPink">
+            android:background="@color/second_pink">
         </View>
         <TextView
             android:id="@+id/tv_sure"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            style="@style/DialogPinkText34px"
+            style="@style/SecondPink.Text34px"
             android:gravity="center"
             android:text="@string/dialog_btn_go_on"/>
     </LinearLayout>

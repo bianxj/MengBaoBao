@@ -22,7 +22,8 @@
                 android:layout_marginLeft="@dimen/x41px"
                 android:layout_marginTop="@dimen/y32px"
                 android:scaleType="fitXY"
-                android:src="@drawable/btn_more" />
+                android:src="@drawable/btn_more"
+                android:contentDescription="@string/contentDescription" />
         </RelativeLayout>
 
         <TextView
@@ -33,7 +34,7 @@
             android:layout_marginTop="@dimen/y24px"
             android:includeFontPadding="false"
             android:text=""
-            android:textColor="@color/white"
+            android:textColor="@color/first_white"
             android:textSize="@dimen/y52px" />
 
         <RelativeLayout
@@ -52,7 +53,7 @@
                 android:layout_marginTop="@dimen/y39px"
                 android:includeFontPadding="false"
                 android:text=""
-                android:textColor="@color/white"
+                android:textColor="@color/first_white"
                 android:textSize="@dimen/y28px"
                 />
         </RelativeLayout>
@@ -89,7 +90,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x32px"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_white_famale" />
+                android:src="@drawable/icon_white_famale"
+                android:contentDescription="@string/contentDescription" />
 
             <TextView
                 android:id="@+id/tv_baby_age"
@@ -101,7 +103,7 @@
                 android:layout_toRightOf="@+id/iv_sex"
                 android:includeFontPadding="false"
                 android:text=""
-                android:textColor="@color/white"
+                android:textColor="@color/first_white"
                 android:textSize="@dimen/y26px" />
         </RelativeLayout>
     </LinearLayout>

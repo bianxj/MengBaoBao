@@ -17,7 +17,8 @@
                 android:layout_height="@dimen/x139px"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@drawable/icon_add_picture"/>
+                android:src="@drawable/icon_add_picture"
+                android:contentDescription="@string/contentDescription" />
 
             <ImageView
                 android:id="@+id/iv_delete"
@@ -26,7 +27,8 @@
                 android:layout_gravity="right|bottom"
                 android:layout_marginRight="@dimen/x5px"
                 android:layout_marginBottom="@dimen/x5px"
-                android:src="@drawable/icon_delete_picture"/>
+                android:src="@drawable/icon_delete_picture"
+                android:contentDescription="@string/contentDescription" />
         </FrameLayout>
         
     </RelativeLayout>

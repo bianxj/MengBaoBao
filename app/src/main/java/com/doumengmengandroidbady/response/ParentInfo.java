@@ -114,7 +114,7 @@ public class ParentInfo {
 
     @Override
     public String toString() {
-        String value = GsonUtil.getInstance().getGson().toJson(this);
+        String value = GsonUtil.getInstance().toJson(this);
         return value;
     }
 

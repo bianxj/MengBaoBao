@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHolder> {
 
-    private List<DoctorEntity> doctors;
+    private final List<DoctorEntity> doctors;
 
     public DoctorAdapter(List<DoctorEntity> doctors) {
         this.doctors = doctors;
@@ -55,9 +55,11 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
 
     public static class DoctorHolder extends  RecyclerView.ViewHolder{
 
-        private CircleImageView civ_head;
-        private TextView tv_doctor_name , tv_doctor_position;
-        private TextView tv_doctor_hospital , tv_doctor_skill;
+        private final CircleImageView civ_head;
+        private final TextView tv_doctor_name;
+        private final TextView tv_doctor_position;
+        private final TextView tv_doctor_hospital;
+        private final TextView tv_doctor_skill;
         private DoctorEntity doctor;
 
         public DoctorHolder(View itemView) {
@@ -70,7 +72,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
             itemView.setOnClickListener(listener);
         }
 
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();

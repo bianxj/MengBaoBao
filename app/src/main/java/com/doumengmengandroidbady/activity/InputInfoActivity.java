@@ -82,7 +82,7 @@ public class InputInfoActivity extends BaseActivity {
         tv_title.setText(R.string.input_info);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
@@ -129,8 +129,8 @@ public class InputInfoActivity extends BaseActivity {
         }
     }
 
-    private InputUserInfo inputData = new InputUserInfo();
-    private RequestCallBack submitInfoCallBack = new RequestCallBack() {
+    private final InputUserInfo inputData = new InputUserInfo();
+    private final RequestCallBack submitInfoCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
@@ -148,7 +148,7 @@ public class InputInfoActivity extends BaseActivity {
             inputData.parentInfo = parent_info.getParentInfo();
             inputData.babyInfo = baby_info.getBabyInfo();
             Map<String,String> map = new HashMap<>();
-            String json = GsonUtil.getInstance().getGson().toJson(inputData);
+            String json = GsonUtil.getInstance().toJson(inputData);
             map.put("paramStr",json);
             map.put("sesId",userData.getSessionId());
             return map;
@@ -165,7 +165,7 @@ public class InputInfoActivity extends BaseActivity {
                 JSONObject object =  new JSONObject(result);
                 JSONObject res = object.getJSONObject("result");
                 if ( 1 == res.optInt("isSaveUser") ){
-                    DayList dayList = GsonUtil.getInstance().getGson().fromJson(res.getJSONObject("DayList").toString(),DayList.class);
+                    DayList dayList = GsonUtil.getInstance().fromJson(res.getJSONObject("DayList").toString(),DayList.class);
                     BaseApplication.getInstance().saveDayList(dayList);
                     startActivity(RecordActivity.class);
                 } else {

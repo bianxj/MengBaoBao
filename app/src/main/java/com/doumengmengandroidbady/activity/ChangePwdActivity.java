@@ -74,7 +74,7 @@ public class ChangePwdActivity extends BaseActivity {
         rl_back.setOnClickListener(listener);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
@@ -139,7 +139,7 @@ public class ChangePwdActivity extends BaseActivity {
         return true;
     }
 
-    private RequestCallBack changePwdCallBack = new RequestCallBack() {
+    private final RequestCallBack changePwdCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
         }

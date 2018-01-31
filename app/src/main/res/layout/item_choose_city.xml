@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/y67px"
         android:layout_marginLeft="@dimen/x48px"
-        style="@style/BlackText26px"
+        style="@style/SecondBlack.Text26px"
         android:text=""
         android:gravity="center_vertical"
         />

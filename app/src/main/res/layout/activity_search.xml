@@ -21,12 +21,12 @@
             <ImageView
                 android:layout_width="@dimen/x31px"
                 android:layout_height="@dimen/y50px"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/x48px"
                 android:layout_marginTop="@dimen/y29px"
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_back"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:contentDescription="@string/contentDescription" />
         </LinearLayout>
         
         <RelativeLayout
@@ -43,7 +43,7 @@
                 android:src="@drawable/icon_red_search"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x24px"
-                />
+                android:contentDescription="@string/contentDescription" />
 
             <EditText
                 android:id="@+id/et_search"
@@ -68,7 +68,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/x21px"
-                    />
+                    android:contentDescription="@string/contentDescription" />
             </RelativeLayout>
         </RelativeLayout>
         <LinearLayout
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/search"
                 android:textSize="@dimen/y28px"
-                android:textColor="@color/white"
+                android:textColor="@color/first_white"
                 android:layout_marginRight="@dimen/x30px"
                 android:layout_marginTop="@dimen/y43px"
                 android:includeFontPadding="false"
@@ -97,7 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:layout_marginTop="@dimen/y19px"
         android:visibility="gone"
         >
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:text="@string/history_search"
             android:textSize="@dimen/y28px"
-            android:textColor="@color/colorBlackText"
+            android:textColor="@color/second_black"
             android:textStyle="bold"
             android:layout_marginLeft="@dimen/x48px"
             android:layout_marginTop="@dimen/y14px"

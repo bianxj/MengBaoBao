@@ -1,6 +1,7 @@
 package com.doumengmengandroidbady.adapter;
 
 import android.content.Context;
+import android.support.v4.widget.Space;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,8 @@ import java.util.List;
 
 public class ObserveAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<String> contents;
+    private final Context context;
+    private final List<String> contents;
 
     public ObserveAdapter(Context context,List<String> contents) {
         this.contents = contents;
@@ -46,6 +47,12 @@ public class ObserveAdapter extends BaseAdapter {
             view = LayoutInflater.from(context).inflate(R.layout.item_observe,null);
         }
         TextView tv_content = view.findViewById(R.id.tv_content);
+        Space space = view.findViewById(R.id.space);
+        if ( i == contents.size()-1 ){
+            space.setVisibility(View.VISIBLE);
+        } else {
+            space.setVisibility(View.GONE);
+        }
         tv_content.setText(contents.get(i));
         return view;
     }

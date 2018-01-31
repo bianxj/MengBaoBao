@@ -49,7 +49,7 @@ public class GuideActivity extends BaseActivity {
 //        asvp.setImageList(images);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){

@@ -25,7 +25,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_close"
                 android:layout_centerInParent="true"
-                />
+                android:contentDescription="@string/contentDescription" />
         </RelativeLayout>
 
         <LinearLayout
@@ -39,19 +39,19 @@
                 android:id="@+id/tv_use_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/LinkPinkText23px"
+                style="@style/FirstPink.Text23px"
                 android:text=""
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/BlackText23px"
+                style="@style/SecondBlack.Text23px"
                 android:text="@string/update_content"/>
             <TextView
                 android:id="@+id/tv_update_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/LinkPinkText23px"
+                style="@style/FirstPink.Text23px"
                 android:text=""/>
         </LinearLayout>
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x58px"
             android:layout_marginTop="@dimen/y277px"
-            style="@style/BlackText23px"/>
+            style="@style/SecondBlack.Text23px"/>
 
         <ImageView
             android:id="@+id/iv_update"
@@ -70,7 +70,7 @@
             android:src="@drawable/btn_update"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/y453px"
-            />
+            android:contentDescription="@string/contentDescription" />
     </RelativeLayout>
 
 </LinearLayout>

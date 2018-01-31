@@ -30,7 +30,8 @@
                     android:layout_marginLeft="@dimen/x41px"
                     android:layout_marginTop="@dimen/y32px"
                     android:scaleType="fitXY"
-                    android:src="@drawable/btn_more" />
+                    android:src="@drawable/btn_more"
+                    android:contentDescription="@string/contentDescription" />
             </RelativeLayout>
 
             <TextView
@@ -41,7 +42,7 @@
                 android:layout_marginTop="@dimen/y24px"
                 android:includeFontPadding="false"
                 android:text=""
-                android:textColor="@color/white"
+                android:textColor="@color/first_white"
                 android:textSize="@dimen/y52px" />
 
         </RelativeLayout>
@@ -61,7 +62,8 @@
                 <ImageView
                     android:layout_width="@dimen/y133px"
                     android:layout_height="@dimen/y133px"
-                    android:src="@drawable/icon_head"/>
+                    android:src="@drawable/icon_head"
+                    android:contentDescription="@string/contentDescription" />
 
                 <com.doumengmengandroidbady.view.CircleImageView
                     android:id="@+id/civ_baby"
@@ -98,7 +100,7 @@
                     android:layout_toRightOf="@+id/cb_male"
                     android:includeFontPadding="false"
                     android:text=""
-                    android:textColor="@color/white"
+                    android:textColor="@color/first_white"
                     android:textSize="@dimen/y26px" />
             </RelativeLayout>
         </LinearLayout>
@@ -112,7 +114,6 @@
         android:id="@+id/asvp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y476px"
-        android:layout_above="@+id/ll_guide_botttom"
         app:dot_src="@drawable/icon_dot"
         app:dot_gap="@dimen/x8px"
         app:dot_size="@dimen/x16px"
@@ -120,7 +121,7 @@
         app:page_height="@dimen/y477px"
         app:page_margin_top="@dimen/y1px"
         app:canLoop="true"
-        android:background="@color/white"
+        android:background="@color/first_white"
         >
 
     </com.doumengmengandroidbady.view.AutoScrollViewPager>
@@ -133,7 +134,7 @@
         android:id="@+id/ll_observe_point"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y124px"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,12 +148,12 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_bud"
                 android:layout_marginLeft="@dimen/x40px"
-                />
+                android:contentDescription="@string/contentDescription" />
             <TextView
                 android:id="@+id/tv_observe_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/MainPageItemTitle"
+                style="@style/FirstPink.Text28px"
                 android:text="@string/home_page_observe_point"
                 android:layout_marginLeft="@dimen/x11px"/>
         </LinearLayout>
@@ -160,7 +161,7 @@
             android:id="@+id/tv_observe_point_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/MainPageItemText"
+            style="@style/SecondBlack.Text32px"
             android:text="@string/home_page_observe_point_content"
             android:layout_marginLeft="@dimen/x40px"
             android:layout_marginTop="@dimen/y10px"/>
@@ -172,7 +173,7 @@
         android:id="@+id/ll_doctor_list"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y124px"
-        android:background="@color/white"
+        android:background="@color/first_white"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -186,12 +187,12 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_bud"
                 android:layout_marginLeft="@dimen/x40px"
-                />
+                android:contentDescription="@string/contentDescription" />
             <TextView
                 android:id="@+id/tv_doctor_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/MainPageItemTitle"
+                style="@style/FirstPink.Text28px"
                 android:text="@string/home_page_doctor_list"
                 android:layout_marginLeft="@dimen/x11px"/>
         </LinearLayout>
@@ -199,7 +200,7 @@
             android:id="@+id/tv_doctor_list_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/MainPageItemText"
+            style="@style/SecondBlack.Text32px"
             android:text="@string/home_page_doctor_list_content"
             android:layout_marginLeft="@dimen/x40px"
             android:layout_marginTop="@dimen/y10px"/>

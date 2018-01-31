@@ -17,8 +17,8 @@ import java.util.List;
 
 public class BabyKnowledgeAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<String> infos;
+    private final Context context;
+    private final List<String> infos;
 
     public BabyKnowledgeAdapter(Context context,List<String> infos) {
         this.context = context;

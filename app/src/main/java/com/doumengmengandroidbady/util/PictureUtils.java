@@ -33,13 +33,17 @@ public class PictureUtils {
         //这里开始的第二部分，获取图片的路径：低版本的是没问题的，但是sdk>19会获取不到
         String[] proj = {MediaStore.Images.Media.DATA};
         //好像是android多媒体数据库的封装接口，具体的看Android文档
+        String path = null;
         Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
-        //获得用户选择的图片的索引值
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        //将光标移至开头 ，这个很重要，不小心很容易引起越界
-        cursor.moveToFirst();
-        //最后根据索引值获取图片路径   结果类似：/mnt/sdcard/DCIM/Camera/IMG_20151124_013332.jpg
-        String path = cursor.getString(column_index);
+        if ( cursor != null ) {
+            //获得用户选择的图片的索引值
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            //将光标移至开头 ，这个很重要，不小心很容易引起越界
+            cursor.moveToFirst();
+            //最后根据索引值获取图片路径   结果类似：/mnt/sdcard/DCIM/Camera/IMG_20151124_013332.jpg
+            path = cursor.getString(column_index);
+            cursor.close();
+        }
         return path;
     }
 
@@ -247,21 +251,21 @@ public class PictureUtils {
         mediaScanIntent.setData(contentUri);
         context.sendBroadcast(mediaScanIntent);
     }
-    /**
-     * 创建临时图片存储的路径
-     *
-     * @return
-     * @throws IOException
-     */
-    public static File createPublicImageFile() throws IOException {
-        File appDir = new File(Environment.getExternalStorageDirectory() + "/自定义相册的名字");
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        }
-        String fileName = System.currentTimeMillis() + ".jpg";
-        File file = new File(appDir, fileName);
-        return file;
-    }
+//    /**
+//     * 创建临时图片存储的路径
+//     *
+//     * @return
+//     * @throws IOException
+//     */
+//    public static File createPublicImageFile() throws IOException {
+//        File appDir = new File(Environment.getExternalStorageDirectory() + "/自定义相册的名字");
+//        if (!appDir.exists()) {
+//            appDir.mkdir();
+//        }
+//        String fileName = System.currentTimeMillis() + ".jpg";
+//        File file = new File(appDir, fileName);
+//        return file;
+//    }
 
     /**
      * 图片转成string

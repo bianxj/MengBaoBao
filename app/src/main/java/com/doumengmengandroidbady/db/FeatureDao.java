@@ -157,9 +157,9 @@ public class FeatureDao {
     private final static String VERSION_ONE = "2017-06-01 18:00:00";
     private final static String VERSION_TWO = "2017-11-10 18:00:00";
 
-    private static List<String> versionOne;
-    private static List<String> versionTwo;
-    private static List<String> versionThree;
+    private static final List<String> versionOne;
+    private static final List<String> versionTwo;
+    private static final List<String> versionThree;
 
     private static Map<String,List<String>> versionMap;
 

@@ -19,9 +19,9 @@ import java.util.List;
  * 创建日期: 2018/1/17 14:23
  */
 public class DiagramDataAdapter extends BaseAdapter {
-    private Context context;
-    private DiagramDataActivity.DIAGRAM_TYPE type;
-    private List<ImageData> datas;
+    private final Context context;
+    private final DiagramDataActivity.DIAGRAM_TYPE type;
+    private final List<ImageData> datas;
 
     public DiagramDataAdapter(Context context,List<ImageData> datas,DiagramDataActivity.DIAGRAM_TYPE type) {
         this.datas = datas;
