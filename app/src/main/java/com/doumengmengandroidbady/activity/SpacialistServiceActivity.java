@@ -394,6 +394,7 @@ public class SpacialistServiceActivity extends BaseActivity {
                 tv_location_failed.setVisibility(View.VISIBLE);
             }
             rl_location_area.setEnabled(true);
+            destoryLocation();
         }
     };
 

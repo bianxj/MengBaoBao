@@ -40,16 +40,16 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        if ( isSelectFlag(builder.getType(),LOADING) ) {
-            handler = new Handler();
-            runnable = new Runnable() {
-                @Override
-                public void run() {
-                    MyDialog.showLoadingDialog(builder.getWeakReference().get());
-                }
-            };
-            handler.postDelayed(runnable, 2000);
-        }
+//        if ( isSelectFlag(builder.getType(),LOADING) ) {
+//            handler = new Handler();
+//            runnable = new Runnable() {
+//                @Override
+//                public void run() {
+//                    MyDialog.showLoadingDialog(builder.getWeakReference().get());
+//                }
+//            };
+//            handler.postDelayed(runnable, 2000);
+//        }
         builder.getCallBack().onPreExecute();
     }
 
@@ -70,9 +70,9 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         if ( handler != null ){
             handler.removeCallbacks(runnable);
         }
-        if ( isSelectFlag(builder.getType(),LOADING) ) {
-            MyDialog.dismissLoadingDialog();
-        }
+//        if ( isSelectFlag(builder.getType(),LOADING) ) {
+//            MyDialog.dismissLoadingDialog();
+//        }
         if ( isTest ){
             builder.getCallBack().onPostExecute(s);
         } else {

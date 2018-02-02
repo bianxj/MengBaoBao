@@ -134,7 +134,7 @@ public class InputHeadActivity extends BaseInputDataActivity {
             return false;
         }
         float head = Float.parseFloat(et_input_data.getText().toString().trim());
-        if ( head <= 0 || head > 250 ){
+        if ( head <= 0 || head > 70 ){
             showPromptDialog("头围数据需要在0~70cm之间");
             return false;
         }

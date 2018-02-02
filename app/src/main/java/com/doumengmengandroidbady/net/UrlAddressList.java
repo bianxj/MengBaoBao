@@ -1,8 +1,5 @@
 package com.doumengmengandroidbady.net;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 /**
  * 作者:边贤君
  * 描述:
@@ -43,16 +40,16 @@ public class UrlAddressList {
 
     public final static String URL_MENG_LESSION = "http://app.mengbaobao.com/class/index.html";
 
-    public static String mergeUrlAndParam(String url , String value){
-        String result = null;
-        try {
-            result = url+"&paramStr="+ URLEncoder.encode(value,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
+//    public static String mergeUrlAndParam(String url , String value){
+//        String result = null;
+//        try {
+//            result = url+"&paramStr="+ URLEncoder.encode(value,"UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//        return result;
+//    }
+//
 //    public static String mergUrlAndParam(String url, Map<String,String> map){
 //        StringBuilder builder = new StringBuilder(url);
 //        Set<String> keys = map.keySet();

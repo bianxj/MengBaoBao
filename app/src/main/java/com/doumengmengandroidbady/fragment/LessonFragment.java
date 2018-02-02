@@ -68,12 +68,12 @@ public class LessonFragment extends BaseFragment {
                 handler.proceed();
             }
         });
-        wv.loadUrl(UrlAddressList.URL_MENG_LESSION);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        wv.loadUrl(UrlAddressList.URL_MENG_LESSION);
     }
 
     @Override

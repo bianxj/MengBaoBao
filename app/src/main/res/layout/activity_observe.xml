@@ -6,10 +6,9 @@
 
     <include layout="@layout/include_title_back" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/lv_observe"
@@ -17,22 +16,33 @@
             android:layout_height="match_parent"
             android:divider="#00000000"
             android:dividerHeight="0dip"
-            android:overScrollMode="never" />
+            android:overScrollMode="never"
+            android:layout_above="@+id/ll"/>
 
-        <Button
-            android:id="@+id/bt_buy"
-            android:layout_width="@dimen/x418px"
-            android:layout_height="@dimen/y118px"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/btn_buy"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/iv_ad"
+        <LinearLayout
+            android:id="@+id/ll"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y156px"
-            android:visibility="gone"
-            android:contentDescription="@string/contentDescription" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/bt_buy"
+                android:layout_width="@dimen/x418px"
+                android:layout_height="@dimen/y118px"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_buy"
+                android:layout_above="@+id/iv_ad"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_ad"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y156px"
+                android:visibility="gone"
+                android:contentDescription="@string/contentDescription" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

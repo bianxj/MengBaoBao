@@ -158,6 +158,8 @@ public class InputInfoActivity extends BaseActivity {
         public void onPostExecute(String result) {
             SubmitInfoResponse response = GsonUtil.getInstance().fromJson(result,SubmitInfoResponse.class);
             if ( 1 == response.getResult().getIsSaveUser() ){
+                BaseApplication.getInstance().saveBabyInfo(baby_info.getBabyInfo());
+                BaseApplication.getInstance().saveParentInfo(parent_info.getParentInfo());
                 BaseApplication.getInstance().saveDayList(response.getResult().getDayList());
                 startActivity(RecordActivity.class);
             } else {

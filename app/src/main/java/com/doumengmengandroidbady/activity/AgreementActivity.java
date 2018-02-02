@@ -2,9 +2,15 @@ package com.doumengmengandroidbady.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -14,9 +20,6 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 
-/**
- * Created by Administrator on 2017/12/7.
- */
 public class AgreementActivity extends BaseActivity {
 
     public static final String HIDE_BOTTOM = "hide_bottom";
@@ -27,6 +30,8 @@ public class AgreementActivity extends BaseActivity {
     private LinearLayout ll_agreement;
     private Button bt_agree;
     private CheckBox cb_agreement;
+
+    private WebView wv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +44,10 @@ public class AgreementActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if ( wv != null ){
+            wv.destroy();
+            wv = null;
+        }
     }
 
     private void findView(){
@@ -48,6 +57,7 @@ public class AgreementActivity extends BaseActivity {
         ll_agreement = findViewById(R.id.ll_agreement);
         bt_agree = findViewById(R.id.bt_agree);
         cb_agreement = findViewById(R.id.cb_agreement);
+        wv = findViewById(R.id.wv);
     }
 
     private void configView(){
@@ -60,6 +70,32 @@ public class AgreementActivity extends BaseActivity {
         }
         tv_title.setText(R.string.agreement_name);
         rl_back.setOnClickListener(listener);
+        initWebView();
+    }
+
+    private void initWebView(){
+        wv = findViewById(R.id.wv);
+        wv.setVerticalScrollBarEnabled(false);
+        wv.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        WebSettings settings = wv.getSettings();
+        settings.setSupportZoom(true);
+        settings.setLoadsImagesAutomatically(true);
+        settings.setDomStorageEnabled(true);
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setSupportZoom(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            settings.setMixedContentMode(settings.getMixedContentMode());
+        }
+
+        wv.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                super.onReceivedSslError(view, handler, error);
+                handler.proceed();
+            }
+        });
+        wv.loadUrl("file:///android_asset/agreement.html");
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
