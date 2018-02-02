@@ -1,10 +1,9 @@
-package com.doumengmengandroidbady.activity;
+package com.doumengmengandroidbady.test;
 
 import android.app.Activity;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.SurfaceView;
+import android.view.View;
 
 import com.doumengmengandroidbady.R;
 
@@ -14,29 +13,20 @@ import com.doumengmengandroidbady.R;
 //just test
 public class TestActivity extends Activity {
 
-    //1、Camera
-    private SurfaceView sv;
+    private TestView test;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        findView();
+        test = findViewById(R.id.test);
     }
 
-    private void findView(){
-        sv = findViewById(R.id.sv);
+    public void onFirstImage(View view){
+        test.setBackGround(R.drawable.bg_boy_height_weight_0_2);
     }
 
-    private static class CameraUtil{
-
-        private Camera camera;
-
-        private void openCamera(){
-            Camera.getNumberOfCameras();
-        }
-
+    public void onSecondImage(View view){
+        test.setBackGround(R.drawable.bg_boy_weight_data);
     }
-
-
 }

@@ -22,15 +22,16 @@ import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
-import com.doumengmengandroidbady.response.Doctor;
-import com.doumengmengandroidbady.response.Hospital;
-import com.doumengmengandroidbady.response.ImageData;
-import com.doumengmengandroidbady.response.Record;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.Doctor;
+import com.doumengmengandroidbady.response.entity.Hospital;
+import com.doumengmengandroidbady.response.entity.ImageData;
+import com.doumengmengandroidbady.response.entity.Record;
+import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.util.FormulaUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.view.CircleImageView;
-import com.doumengmengandroidbady.view.DiagramView;
+import com.doumengmengandroidbady.view.GraphModule;
+import com.doumengmengandroidbady.view.GraphView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -59,6 +60,9 @@ public class AssessmentActivity extends BaseActivity {
     private TextView tv_doctor_name,tv_doctor_hospital,tv_doctor_position;
     private TextView tv_baby_name,tv_baby_gender,tv_baby_birthday,tv_realy_age,tv_correct_age,
             tv_height,tv_weight,tv_BMI;
+
+    //曲线图
+    private GraphModule graph_module;
 
     //发育行为
     private LinearLayout ll_developmental_behavior;
@@ -121,19 +125,8 @@ public class AssessmentActivity extends BaseActivity {
         tv_weight = findViewById(R.id.tv_weight);
         tv_BMI = findViewById(R.id.tv_BMI);
 
-        //图标信息
-        iv_details = findViewById(R.id.iv_details);
-        diagram_view = findViewById(R.id.diagram_view);
-        rl_data = findViewById(R.id.rl_data);
-        bt_details = findViewById(R.id.bt_details);
-
-        rg_weight = findViewById(R.id.rg_weight);
-        rg_height = findViewById(R.id.rg_height);
-        rg_BMI = findViewById(R.id.rg_BMI);
-
-        diagramButtons.add(rg_weight);
-        diagramButtons.add(rg_height);
-        diagramButtons.add(rg_BMI);
+        //曲线图
+        graph_module = findViewById(R.id.graph_module);
 
         //发育行为
         ll_developmental_behavior = findViewById(R.id.ll_developmental_behavior);
@@ -169,17 +162,12 @@ public class AssessmentActivity extends BaseActivity {
     }
 
     private void initListener(){
-        rg_weight.setOnCheckedChangeListener(diagramOnChangeListener);
-        rg_height.setOnCheckedChangeListener(diagramOnChangeListener);
-        rg_BMI.setOnCheckedChangeListener(diagramOnChangeListener);
-        bt_details.setOnClickListener(diagramListener);
         iv_parenting_guide.setOnClickListener(parentingGuideListener);
         rl_back.setOnClickListener(actionListener);
     }
 
     private void initData(){
         tv_title.setText(R.string.assessment);
-        initDiagramViewParam();
 
         Intent intent = getIntent();
         String recordString = intent.getStringExtra(IN_PARAM_RECORD);
@@ -230,35 +218,7 @@ public class AssessmentActivity extends BaseActivity {
     }
 
     private void initDiagram(){
-        DiagramView.DiagramParam weightParam = new DiagramView.DiagramParam();
-        DiagramView.DiagramParam heightParam = new DiagramView.DiagramParam();
-        DiagramView.DiagramParam heightWeightParam = new DiagramView.DiagramParam();
-
-        List<ImageData> list = record.getImageData();
-        for (ImageData imageData:list){
-            int currentDayInYear = getDayInYear(imageData.getMonthAge(),imageData.getMonthDay());
-            int correntDayInYear = getDayInYear(imageData.getCorrectMonthAge(),imageData.getCorrectMonthDay());
-            int height = (int) (Float.parseFloat(imageData.getHeight()) * 100);
-            int weight = (int) (Float.parseFloat(imageData.getWeight()) * 100);
-            int type = imageData.getType();
-
-            weightParam.getBlueLine().add(new DiagramView.DiagramPoint(currentDayInYear,weight,type));
-            weightParam.getRedLine().add(new DiagramView.DiagramPoint(correntDayInYear, weight, type));
-
-            heightParam.getBlueLine().add(new DiagramView.DiagramPoint(currentDayInYear,height,type));
-            heightParam.getRedLine().add(new DiagramView.DiagramPoint(correntDayInYear, height, type));
-
-            heightWeightParam.getBlueLine().add(new DiagramView.DiagramPoint(height,weight,type));
-        }
-
-        paramMap.put(PARAM_WEIGHT,weightParam);
-        paramMap.put(PARAM_HEIGHT,heightParam);
-
-        if ( isLowerThanTwoYear() ) {
-            paramMap.put(PARAM_HEIGHT_DEVIDE_WEIGHT_0_2, heightWeightParam);
-        } else {
-            paramMap.put(PARAM_HEIGHT_DEVIDE_WEIGHT_2_5, heightWeightParam);
-        }
+        graph_module.setData(record.getImageData(),record.getMonthAge(),userData.isMale(), true);
     }
 
     /**
@@ -325,23 +285,6 @@ public class AssessmentActivity extends BaseActivity {
         } else {
             rl_prompt_message.setVisibility(View.GONE);
         }
-    }
-
-    /**
-     * 作者: 边贤君
-     * 描述: 获取实际天数
-     * 参数:
-     * 返回:
-     * 日期: 2018/1/16 15:54
-     */
-    private int getDayInYear(int month , int day){
-        int dayInYear = month * 30;
-        if ( day > 30 ){
-            dayInYear += 30;
-        } else {
-            dayInYear += day;
-        }
-        return dayInYear;
     }
 
     private final View.OnClickListener actionListener = new View.OnClickListener() {
@@ -461,7 +404,7 @@ public class AssessmentActivity extends BaseActivity {
     private int currentIndex;
 
     private ImageView iv_details;
-    private DiagramView diagram_view;
+    private GraphView diagram_view;
     private RelativeLayout rl_data;
     private Button bt_details;
     private RadioButton rg_weight,rg_height,rg_BMI;
@@ -471,13 +414,13 @@ public class AssessmentActivity extends BaseActivity {
     //根据实际月龄判断
     private final static String PARAM_HEIGHT_DEVIDE_WEIGHT_0_2 = "bmi_0_2";
     private final static String PARAM_HEIGHT_DEVIDE_WEIGHT_2_5 = "bmi_2_5";
-    private final Map<String,DiagramView.DiagramBaseInfo> baseParamMap = new HashMap<>();
-    private final Map<String,DiagramView.DiagramParam> paramMap = new HashMap<>();
+    private final Map<String, GraphView.GraphBaseInfo> baseParamMap = new HashMap<>();
+    private final Map<String, GraphView.GraphLine> paramMap = new HashMap<>();
     private final List<RadioButton> diagramButtons = new ArrayList<>();
     private void initDiagramViewParam(){
         currentIndex = R.id.rg_weight;
 
-        DiagramView.DiagramBaseInfo weightParam = new DiagramView.DiagramBaseInfo();
+        GraphView.GraphBaseInfo weightParam = new GraphView.GraphBaseInfo();
         weightParam.setLowerLimitX(0);
         weightParam.setLowerLimitY(0);
         weightParam.setUpperLimitX(1080);
@@ -486,7 +429,7 @@ public class AssessmentActivity extends BaseActivity {
         weightParam.setyLength(getResources().getDimension(R.dimen.x622px));
         baseParamMap.put(PARAM_WEIGHT,weightParam);
 
-        DiagramView.DiagramBaseInfo heightParam = new DiagramView.DiagramBaseInfo();
+        GraphView.GraphBaseInfo heightParam = new GraphView.GraphBaseInfo();
         heightParam.setLowerLimitX(0);
         heightParam.setUpperLimitX(1080);
         heightParam.setLowerLimitY(4500);
@@ -496,7 +439,7 @@ public class AssessmentActivity extends BaseActivity {
         baseParamMap.put(PARAM_HEIGHT,heightParam);
 
 
-        DiagramView.DiagramBaseInfo bmi0_2Param = new DiagramView.DiagramBaseInfo();
+        GraphView.GraphBaseInfo bmi0_2Param = new GraphView.GraphBaseInfo();
         bmi0_2Param.setLowerLimitX(4500);
         bmi0_2Param.setUpperLimitX(11000);
         bmi0_2Param.setLowerLimitY(0);
@@ -505,7 +448,7 @@ public class AssessmentActivity extends BaseActivity {
         bmi0_2Param.setyLength(getResources().getDimension(R.dimen.x622px));
         baseParamMap.put(PARAM_HEIGHT_DEVIDE_WEIGHT_0_2,bmi0_2Param);
 
-        DiagramView.DiagramBaseInfo bmi2_5Param = new DiagramView.DiagramBaseInfo();
+        GraphView.GraphBaseInfo bmi2_5Param = new GraphView.GraphBaseInfo();
         bmi2_5Param.setLowerLimitX(6500);
         bmi2_5Param.setUpperLimitX(12000);
         bmi2_5Param.setLowerLimitY(0);
@@ -616,10 +559,15 @@ public class AssessmentActivity extends BaseActivity {
 
     //------------------------------更新状态--------------------------------------------------------
 
+    private RequestTask updateRequestTask;
     private void updateReadState(){
         if ( "3".equals(record.getRecordStatus()) ) {
             try {
-                updateRequestTask = new RequestTask.Builder(this, callBack).build();
+                updateRequestTask = new RequestTask.Builder(this, callBack)
+                        .setUrl(UrlAddressList.URL_UPDATE_RECORD_STATE)
+                        .setType(RequestTask.JSON)
+                        .setContent(buildUpdateRequestContent())
+                        .build();
                 updateRequestTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -627,31 +575,10 @@ public class AssessmentActivity extends BaseActivity {
         }
     }
 
-    private RequestTask updateRequestTask;
-
     private final RequestCallBack callBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_UPDATE_RECORD_STATE;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            Map<String,String> map = new HashMap<>();
-            JSONObject object = new JSONObject();
-            try {
-                object.put("recordid",record.getRecordId());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            map.put(UrlAddressList.PARAM,object.toString());
-            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
-            return map;
         }
 
         @Override
@@ -661,13 +588,21 @@ public class AssessmentActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-
-        }
-
-        @Override
-        public int type() {
-            return JSON;
+            //TODO
         }
     };
+
+    private Map<String, String> buildUpdateRequestContent() {
+        Map<String,String> map = new HashMap<>();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("recordid",record.getRecordId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.PARAM,object.toString());
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        return map;
+    }
 
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96px"
+        android:background="@color/first_white"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            style="@style/SecondBlack.Text28px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y30px"
+            android:text="@string/assessment_source" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x716px">
+
+            <ImageView
+                android:id="@+id/iv_details"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x716px"
+                android:src="@drawable/bg_boy_weight_data"
+                android:contentDescription="@string/contentDescription" />
+
+            <com.doumengmengandroidbady.view.GraphView
+                android:id="@+id/diagram_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:origin_x="@dimen/x41px"
+                app:origin_y="@dimen/x53px" />
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_data"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y80px"
+            android:background="@color/bgWeightColor">
+
+            <Button
+                android:id="@+id/bt_details"
+                android:layout_width="@dimen/x151px"
+                android:layout_height="@dimen/x50px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/y12px"
+                android:background="@drawable/btn_details"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y134px"
+            android:background="@color/first_white"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rg_weight"
+                android:layout_width="@dimen/x152px"
+                android:layout_height="@dimen/x113px"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x49px"
+                android:background="@drawable/btn_weight"
+                android:button="@null"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/rg_height"
+                android:layout_width="@dimen/x152px"
+                android:layout_height="@dimen/x113px"
+                android:layout_centerInParent="true"
+                android:background="@drawable/btn_height"
+                android:button="@null" />
+
+            <RadioButton
+                android:id="@+id/rg_BMI"
+                android:layout_width="@dimen/x152px"
+                android:layout_height="@dimen/x113px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/x49px"
+                android:background="@drawable/btn_bmi"
+                android:button="@null" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

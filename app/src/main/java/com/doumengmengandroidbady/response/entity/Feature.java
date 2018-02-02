@@ -1,4 +1,4 @@
-package com.doumengmengandroidbady.response;
+package com.doumengmengandroidbady.response.entity;
 
 /**
  * Created by Administrator on 2018/1/9.

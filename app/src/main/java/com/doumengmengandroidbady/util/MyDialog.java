@@ -26,7 +26,6 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.PayAdapter;
 import com.doumengmengandroidbady.view.MyGifPlayer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -237,7 +236,7 @@ public class MyDialog {
         }
     }
 
-    public static void showPayDialog(final Context context,View parent,final PayCallBack callBack,String price,int timeOut){
+    public static void showPayDialog(final Context context,View parent,final PayCallBack callBack,List<PayAdapter.PayData> datas,String price,int timeOut){
         synchronized (payLock){
             if ( payDialog != null && payDialog.isShowing() ) {
                 payDialog.dismiss();
@@ -270,9 +269,6 @@ public class MyDialog {
             tv_price.setText(String.format(context.getResources().getString(R.string.dialog_price),price));
 
             ListView lv = contentView.findViewById(R.id.lv);
-            List<PayAdapter.PayData> datas = new ArrayList<>();
-            datas.add(new PayAdapter.PayData(R.drawable.alipay_logo_60,"支付宝",false));
-            datas.add(new PayAdapter.PayData(R.drawable.alipay_logo_60,"微信",false));
             final PayAdapter adapter = new PayAdapter(datas);
             lv.setAdapter(adapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

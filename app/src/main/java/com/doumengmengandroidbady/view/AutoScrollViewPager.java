@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -43,7 +44,7 @@ public class AutoScrollViewPager extends FrameLayout {
     private boolean canLoop = false;
 
     private final Context context;
-    private ViewPager viewPager;
+    private CustomViewPager viewPager;
     private RadioGroup dotLayout;
 
     private int index = 0;
@@ -105,7 +106,7 @@ public class AutoScrollViewPager extends FrameLayout {
     }
 
     private void initViewPager(){
-        viewPager = new ViewPager(context);
+        viewPager = new CustomViewPager(context);
         viewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,pageHeight);
         params.topMargin = pageMarginTop;
@@ -159,7 +160,7 @@ public class AutoScrollViewPager extends FrameLayout {
             this.adapter = new ScrollPagerAdapter(imageViews);
             viewPager.setAdapter(this.adapter);
             viewPager.addOnPageChangeListener(pageChangeListener);
-            viewPager.setOnTouchListener(onTouchListener);
+            viewPager.setCustomOnTouchListener(onTouchListener);
             this.adapter.notifyDataSetChanged();
             viewPager.setCurrentItem(1);
             startLoop();
@@ -221,30 +222,46 @@ public class AutoScrollViewPager extends FrameLayout {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if ( motionEvent.getAction() == MotionEvent.ACTION_DOWN ){
-                isLoop = false;
+                System.out.println("MotionEvent.ACTION_DOWN");
+                pauseLoop();
             } else if (motionEvent.getAction() == MotionEvent.ACTION_UP){
-                isLoop = true;
+                System.out.println("MotionEvent.ACTION_UP");
+                startLoop();
             }
             return false;
         }
     };
 
-    private boolean isLoop = true;
+//    private boolean isLoop = true;
+    private TimerTask task;
     private void startLoop(){
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if ( isLoop ) {
+        if ( timer == null ) {
+            timer = new Timer();
+        }
+        if ( task == null ) {
+            task = new TimerTask() {
+                @Override
+                public void run() {
                     handler.sendEmptyMessage(ScrollViewHandler.SCROLL_NEXT);
                 }
-            }
-        }, 3000, 3000);
+
+            };
+        }
+        timer.schedule(task, 3000, 3000);
+    }
+
+    private void pauseLoop(){
+        if ( timer != null && task != null ){
+            task.cancel();
+            task = null;
+        }
     }
 
     private void stopLoop(){
         if ( timer != null ){
+            timer.purge();
             timer.cancel();
+            timer = null;
         }
     }
 
@@ -407,4 +424,36 @@ public class AutoScrollViewPager extends FrameLayout {
     public boolean performClick() {
         return super.performClick();
     }
+
+
+    private static class CustomViewPager extends ViewPager{
+
+        private OnTouchListener listener;
+
+        public CustomViewPager(@NonNull Context context) {
+            super(context);
+        }
+
+        public CustomViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent ev) {
+            switch (ev.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                case MotionEvent.ACTION_UP:
+                    if (listener != null) {
+                        listener.onTouch(this,ev);
+                    }
+                    break;
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+
+        public void setCustomOnTouchListener(OnTouchListener listener){
+            this.listener = listener;
+        }
+    }
+
 }

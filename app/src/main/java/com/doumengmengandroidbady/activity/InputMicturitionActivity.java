@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -91,6 +92,17 @@ public class InputMicturitionActivity extends BaseInputDataActivity {
     }
 
     private boolean checkData(){
+        String hourString = et_input_data.getText().toString();
+        if (TextUtils.isEmpty(hourString)){
+            showPromptDialog("睡眠时间不能为空");
+            return false;
+        }
+
+        float hour = Float.parseFloat(hourString);
+        if ( hour <= 0 || hour >= 24 ){
+            showPromptDialog("睡眠时间范围为0~24");
+            return false;
+        }
         return true;
     }
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.doumengmengandroidbady.response.Feature;
+import com.doumengmengandroidbady.response.entity.Feature;
 
 import java.util.ArrayList;
 import java.util.HashMap;

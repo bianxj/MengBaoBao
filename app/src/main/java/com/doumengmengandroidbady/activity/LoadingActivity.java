@@ -26,8 +26,8 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.task.LoginTask;
-import com.doumengmengandroidbady.response.InitConfigure;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.response.InitConfigureResponse;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
@@ -57,7 +57,6 @@ public class LoadingActivity extends BaseActivity {
     private ImageView iv_loading_icon;
     private AnimationDrawable drawable;
 
-    private RequestTask checkVersionTask;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,12 +118,17 @@ public class LoadingActivity extends BaseActivity {
         return manager.isWifiEnabled();
     }
 
+    private RequestTask checkVersionTask;
     private void checkVersion(){
         if ( isTest ){
             initConfigure();
         } else {
             try {
-                checkVersionTask = buildCheckVersionTask();
+                checkVersionTask = new RequestTask.Builder(this,checkVersionCallBack)
+//                        .setUrl()
+//                        .setType()
+//                        .setContent()
+                        .build();
                 checkVersionTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -132,25 +136,10 @@ public class LoadingActivity extends BaseActivity {
         }
     }
 
-    private RequestTask buildCheckVersionTask() throws Throwable {
-        return new RequestTask.Builder(this,checkVersionCallBack).build();
-    }
-
     private final RequestCallBack checkVersionCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
             //TODO
-        }
-
-        @Override
-        public String getUrl() {
-            //TODO
-            return null;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            return null;
         }
 
         @Override
@@ -163,21 +152,34 @@ public class LoadingActivity extends BaseActivity {
             //TODO
             startActivity(MainActivity.class);
         }
-
-        @Override
-        public int type() {
-            return DEFAULT;
-        }
     };
 
     private RequestTask initConfigureTask = null;
     private void initConfigure(){
         try {
-            initConfigureTask = new RequestTask.Builder(this,initConfigureCallback).build();
+            initConfigureTask = new RequestTask.Builder(this,initConfigureCallback)
+                    .setUrl(UrlAddressList.URL_INIT_CONFIGURE)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildInitConfigureContent())
+                    .build();
             initConfigureTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+    }
+
+    private Map<String, String> buildInitConfigureContent() {
+        UserData userData = BaseApplication.getInstance().getUserData();
+        Map<String,String> map = new HashMap<>();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("userId",userData.getUserid());
+            map.put(UrlAddressList.PARAM,object.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        return map;
     }
 
     private final RequestCallBack initConfigureCallback = new RequestCallBack() {
@@ -185,41 +187,12 @@ public class LoadingActivity extends BaseActivity {
         public void onPreExecute() {}
 
         @Override
-        public String getUrl() {
-            return UrlAddressList.URL_INIT_CONFIGURE;
-        }
-
-
-        @Override
-        public Map<String, String> getContent() {
-            UserData userData = BaseApplication.getInstance().getUserData();
-            Map<String,String> map = new HashMap<>();
-            JSONObject object = new JSONObject();
-            try {
-                object.put("userId",userData.getUserid());
-                map.put(UrlAddressList.PARAM,object.toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
-            return map;
-        }
-
-        @Override
         public void onError(String result) {}
 
         @Override
         public void onPostExecute(String result) {
-//            if ( isTest ) {
-//                startActivity(MainActivity.class);
-//            } else {
-                new Thread(new DataBaseRunnable(result)).start();
-//            }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
+            InitConfigureResponse response = GsonUtil.getInstance().fromJson(result,InitConfigureResponse.class);
+            new Thread(new DataBaseRunnable(response)).start();
         }
     };
 
@@ -246,7 +219,7 @@ public class LoadingActivity extends BaseActivity {
                     public void onPostExecute(String result) {
                         checkVersionAndWifi();
                     }
-                },RequestCallBack.DEFAULT);
+                },RequestTask.DEFAULT);
                 loginTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -294,10 +267,10 @@ public class LoadingActivity extends BaseActivity {
 
     private class DataBaseRunnable implements Runnable{
 
-        private final String result;
+        private final InitConfigureResponse response;
 
-        public DataBaseRunnable(String result) {
-            this.result = result;
+        public DataBaseRunnable(InitConfigureResponse response) {
+            this.response = response;
         }
 
         @Override
@@ -308,21 +281,15 @@ public class LoadingActivity extends BaseActivity {
             DaoManager.getInstance().deleteTable(LoadingActivity.this, MengClassDao.TABLE_NAME);
             DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
 
-            JSONObject object;
-            try {
-                object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                InitConfigure configure = GsonUtil.getInstance().fromJson(res.toString(), InitConfigure.class);
-                DaoManager.getInstance().getDaotorDao().saveDoctorList(LoadingActivity.this, configure.getDoctorList());
-                DaoManager.getInstance().getGrowthDao().saveGrowthList(LoadingActivity.this, configure.getGrowthList());
-                DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, configure.getHospitalList());
-                DaoManager.getInstance().getMengClassDao().saveMengClassList(LoadingActivity.this, configure.getMengClassList());
-                DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,configure.getFeatureList());
-                BaseApplication.getInstance().saveParentInfo(configure.getParentInfo());
-                BaseApplication.getInstance().saveDayList(configure.getDayList());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            InitConfigureResponse.Result result = response.getResult();
+
+            DaoManager.getInstance().getDaotorDao().saveDoctorList(LoadingActivity.this, result.getDoctorList());
+            DaoManager.getInstance().getGrowthDao().saveGrowthList(LoadingActivity.this, result.getGrowthList());
+            DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, result.getHospitalList());
+            DaoManager.getInstance().getMengClassDao().saveMengClassList(LoadingActivity.this, result.getMengClassList());
+            DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,result.getFeatureList());
+            BaseApplication.getInstance().saveParentInfo(result.getParentInfo());
+            BaseApplication.getInstance().saveDayList(result.getDayList());
             handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
         }
     }

@@ -13,7 +13,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.BehaviorAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.db.DaoManager;
-import com.doumengmengandroidbady.response.Feature;
+import com.doumengmengandroidbady.response.entity.Feature;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;

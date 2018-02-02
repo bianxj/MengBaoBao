@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.doumengmengandroidbady.entity.HospitalEntity;
-import com.doumengmengandroidbady.response.Hospital;
+import com.doumengmengandroidbady.response.entity.Hospital;
 
 import java.util.ArrayList;
 import java.util.List;

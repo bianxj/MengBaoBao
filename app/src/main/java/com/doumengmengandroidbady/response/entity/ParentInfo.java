@@ -1,4 +1,4 @@
-package com.doumengmengandroidbady.response;
+package com.doumengmengandroidbady.response.entity;
 
 import com.doumengmengandroidbady.util.FormatCheckUtil;
 import com.doumengmengandroidbady.util.GsonUtil;

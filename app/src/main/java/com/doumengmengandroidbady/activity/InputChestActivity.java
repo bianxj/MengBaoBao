@@ -127,6 +127,17 @@ public class InputChestActivity extends BaseInputDataActivity {
     }
 
     private boolean checkData(){
+        String chestString = et_input_data.getText().toString().trim();
+
+        if ( TextUtils.isEmpty(chestString) ) {
+            showPromptDialog("胸围数据不能为空");
+            return false;
+        }
+        float chest = Float.parseFloat(et_input_data.getText().toString().trim());
+        if ( chest <= 0 || chest > 120 ){
+            showPromptDialog("胸围数据需要在0~120cm之间");
+            return false;
+        }
         return true;
     }
 }

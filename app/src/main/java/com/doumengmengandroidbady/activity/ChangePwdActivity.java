@@ -16,7 +16,9 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.ResponseErrorCode;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.response.ChangePwdResponse;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
 import org.json.JSONException;
@@ -37,7 +39,6 @@ public class ChangePwdActivity extends BaseActivity {
     private EditText et_old_pwd , et_new_pwd , et_confirm_pwd;
     private Button bt_sure;
 
-    private RequestTask changePwdTask;
     private UserData userData;
 
     @Override
@@ -92,6 +93,8 @@ public class ChangePwdActivity extends BaseActivity {
         finish();
     }
 
+
+    private RequestTask changePwdTask;
     /**
      * 作者: 边贤君
      * 描述: 修改密码
@@ -100,7 +103,11 @@ public class ChangePwdActivity extends BaseActivity {
     private void changePwd(){
         if ( checkData() ) {
             try {
-                changePwdTask = new RequestTask.Builder(this,changePwdCallBack).build();
+                changePwdTask = new RequestTask.Builder(this,changePwdCallBack)
+                        .setUrl(UrlAddressList.URL_EIDT_PASSWORD)
+                        .setType(RequestTask.NO_PROMPT)
+                        .setContent(buildChangePwdContent())
+                        .build();
                 changePwdTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -139,30 +146,24 @@ public class ChangePwdActivity extends BaseActivity {
         return true;
     }
 
+    private Map<String, String> buildChangePwdContent() {
+        Map<String,String> map = new HashMap<>();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("oldPwd",et_old_pwd.getText().toString().trim());
+            object.put("newPwd",et_new_pwd.getText().toString().trim());
+            object.put("userId",userData.getUserid());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.PARAM,object.toString());
+        map.put("sesId",userData.getSessionId());
+        return map;
+    }
+
     private final RequestCallBack changePwdCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_EIDT_PASSWORD;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            Map<String,String> map = new HashMap<>();
-            JSONObject object = new JSONObject();
-            try {
-                object.put("oldPwd",et_old_pwd.getText().toString().trim());
-                object.put("newPwd",et_new_pwd.getText().toString().trim());
-                object.put("userId",userData.getUserid());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            map.put(UrlAddressList.PARAM,object.toString());
-            map.put("sesId",userData.getSessionId());
-            return map;
         }
 
         @Override
@@ -172,17 +173,17 @@ public class ChangePwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.change_pwd_content), new MyDialog.PromptDialogCallback() {
-                @Override
-                public void sure() {
-                    back();
-                }
-            });
-        }
-
-        @Override
-        public int type() {
-            return NO_PROMPT;
+            ChangePwdResponse response = GsonUtil.getInstance().fromJson(result,ChangePwdResponse.class);
+            if ( 1 == response.getResult().getIsEditPwd() ){
+                MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.change_pwd_content), new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        back();
+                    }
+                });
+            } else {
+                //TODO
+            }
         }
     };
 

@@ -35,7 +35,7 @@
         <attr name="need_share" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="DiagramView">
+    <declare-styleable name="GraphView">
         <attr name="origin_x" format="dimension" />
         <attr name="origin_y" format="dimension" />
     </declare-styleable>

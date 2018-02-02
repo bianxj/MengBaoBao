@@ -111,7 +111,7 @@ public class HospitalDoctorActivity extends BaseActivity {
 //                            DoctorEntity doctor = new DoctorEntity();
 //                            doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
 //                            doctor.setDoctordesc("Describe1");
-//                            doctor.setDoctorname("Name"+i);
+//                            doctor.setDoctorName("Name"+i);
 //                            doctor.setHospital("HospitalEntity"+i);
 //                            doctor.setPositionaltitles("Position"+i);
 //                            doctor.setSpeciality("Skill"+i);
@@ -132,7 +132,7 @@ public class HospitalDoctorActivity extends BaseActivity {
 //                DoctorEntity doctor = new DoctorEntity();
 //                doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
 //                doctor.setDoctordesc("Describe1");
-//                doctor.setDoctorname("Name"+i);
+//                doctor.setDoctorName("Name"+i);
 //                doctor.setHospital("HospitalEntity"+i);
 //                doctor.setPositionaltitles("Position"+i);
 //                doctor.setSpeciality("Skill"+i);

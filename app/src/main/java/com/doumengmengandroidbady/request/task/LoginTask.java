@@ -6,42 +6,63 @@ import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
-import com.doumengmengandroidbady.request.ResponseErrorCode;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.response.LoginResponse;
 import com.doumengmengandroidbady.util.GsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class LoginTask {
 
+    private WeakReference<Context> weakReference;
     private RequestTask task;
     private final LoginCallBack loginCallBack;
     private final String accountMobile;
     private final String loginPwd;
-    private final int type = RequestCallBack.NO_PROMPT;
+    private int type = RequestTask.NO_PROMPT;
 
-    public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack,int type) throws Throwable{
+    public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack,int type){
         this.accountMobile = accountMobile;
         this.loginPwd = loginPwd;
         this.loginCallBack = loginCallBack;
-        task = new RequestTask.Builder(context,callBack).build();
+        this.type = type;
+        this.weakReference = new WeakReference<Context>(context);
     }
 
-    public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack) throws Throwable {
-        this(context,accountMobile,loginPwd,loginCallBack,RequestCallBack.NO_PROMPT);
+    public LoginTask(Context context,String accountMobile, String loginPwd , LoginCallBack loginCallBack){
+        this(context,accountMobile,loginPwd,loginCallBack,RequestTask.NO_PROMPT);
     }
 
-    public void execute(){
+    public void execute() throws Throwable{
+        task = new RequestTask.Builder(weakReference.get(),callBack)
+                .setUrl(UrlAddressList.URL_LOGIN)
+                .setType(type)
+                .setContent(buildLoginContent())
+                .build();
         task.execute();
     }
 
     public RequestTask getTask(){
         return task;
+    }
+
+    public Map<String, String> buildLoginContent() {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("accountMobile",accountMobile);
+            object.put("loginPwd",loginPwd);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,object.toString());
+        return map;
     }
 
     private final RequestCallBack callBack = new RequestCallBack() {
@@ -53,26 +74,6 @@ public class LoginTask {
         }
 
         @Override
-        public String getUrl() {
-            return UrlAddressList.URL_LOGIN;
-        }
-
-
-        @Override
-        public Map<String, String> getContent() {
-            JSONObject object = new JSONObject();
-            try {
-                object.put("accountMobile",accountMobile);
-                object.put("loginPwd",loginPwd);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM,object.toString());
-            return map;
-        }
-
-        @Override
         public void onError(String result) {
             if ( loginCallBack != null ){
                 loginCallBack.onError(result);
@@ -81,32 +82,17 @@ public class LoginTask {
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                String sessionId = res.getString("SessionId");
-                int isAbnormalExit = res.getInt("isAbnormalExit");
-                BaseApplication.getInstance().saveAbnormalExit(isAbnormalExit != 0);
+            LoginResponse response = GsonUtil.getInstance().fromJson(result, LoginResponse.class);
 
-                JSONObject user = res.getJSONObject("User");
-                UserData userData = GsonUtil.getInstance().fromJson(user.toString(),UserData.class);
-                userData.setPasswd(loginPwd);
-                userData.setSessionId(sessionId);
-                BaseApplication.getInstance().saveUserData(userData);
-                if ( loginCallBack != null ){
-                    loginCallBack.onPostExecute(result);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-                if ( loginCallBack != null ){
-                    loginCallBack.onError(ResponseErrorCode.getErrorMsg(ResponseErrorCode.ERROR_ANALYSIS_FAILED));
-                }
+            UserData userData = response.getResult().getUser();
+            userData.setPasswd(loginPwd);
+            userData.setSessionId(response.getResult().getSessionId());
+            BaseApplication.getInstance().saveUserData(userData);
+
+            BaseApplication.getInstance().saveAbnormalExit(response.getResult().getIsAbnormalExit() != 0);
+            if (loginCallBack != null) {
+                loginCallBack.onPostExecute(result);
             }
-        }
-
-        @Override
-        public int type() {
-            return type;
         }
     };
 

@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.response.DayList;
+import com.doumengmengandroidbady.response.entity.DayList;
 
 /**
  * Created by Administrator on 2018/1/18.

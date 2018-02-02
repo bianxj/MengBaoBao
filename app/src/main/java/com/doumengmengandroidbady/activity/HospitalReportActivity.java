@@ -12,7 +12,14 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.db.DaoManager;
+import com.doumengmengandroidbady.response.entity.Feature;
+import com.doumengmengandroidbady.response.entity.HospitalReport;
+import com.doumengmengandroidbady.util.GsonUtil;
+import com.doumengmengandroidbady.view.GraphModule;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,6 +31,8 @@ import java.util.Set;
  */
 public class HospitalReportActivity extends BaseActivity {
 
+    public final static String IN_PARAM_REPORT_DATA = "report";
+
     private RelativeLayout rl_back;
     private TextView tv_title;
 
@@ -33,6 +42,7 @@ public class HospitalReportActivity extends BaseActivity {
             tv_name,tv_gender,
             tv_birthday,tv_current_month,
             tv_corrent_month;
+    private LinearLayout ll_corrent_month;
 
     //测量信息
     private TextView tv_height,tv_weight,
@@ -42,10 +52,13 @@ public class HospitalReportActivity extends BaseActivity {
     private TextView tv_feeding_type,tv_develop_history,
             tv_disease_history,tv_current_history;
 
+    //曲线图
+
 //    //标尺
 //    private ScaleplateView sv_weight,sv_height,sv_height_weight,sv_BMI;
 
     //发育行为
+    private TextView tv_develop_behavior;
     private LinearLayout ll_develop_behavior;
 
     //评价结果
@@ -55,6 +68,7 @@ public class HospitalReportActivity extends BaseActivity {
     //表单底部
     private TextView tv_doctor_name,tv_report_name,tv_report_time;
 
+    private HospitalReport report;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +90,8 @@ public class HospitalReportActivity extends BaseActivity {
         tv_current_month = findViewById(R.id.tv_current_month);
         tv_corrent_month = findViewById(R.id.tv_corrent_month);
 
+        ll_corrent_month = findViewById(R.id.ll_corrent_month);
+
         tv_height = findViewById(R.id.tv_height);
         tv_weight = findViewById(R.id.tv_weight);
         tv_head = findViewById(R.id.tv_head);
@@ -87,11 +103,13 @@ public class HospitalReportActivity extends BaseActivity {
         tv_disease_history = findViewById(R.id.tv_disease_history);
         tv_current_history = findViewById(R.id.tv_current_history);
 
+//        findDiagramView();
 //        sv_weight = findViewById(R.id.sv_weight);
 //        sv_height = findViewById(R.id.sv_height);
 //        sv_height_weight = findViewById(R.id.sv_height_weight);
 //        sv_BMI = findViewById(R.id.sv_BMI);
 
+        tv_develop_behavior = findViewById(R.id.tv_develop_behavior);
         ll_develop_behavior = findViewById(R.id.ll_develop_behavior);
 
         tv_result_weight = findViewById(R.id.tv_result_weight);
@@ -104,13 +122,67 @@ public class HospitalReportActivity extends BaseActivity {
         tv_doctor_name = findViewById(R.id.tv_doctor_name);
         tv_report_name = findViewById(R.id.tv_report_name);
         tv_report_time = findViewById(R.id.tv_report_time);
+        getReport();
+    }
 
-        initView();
+    private void getReport(){
+        report = GsonUtil.getInstance().fromJson(getIntent().getStringExtra(IN_PARAM_REPORT_DATA),HospitalReport.class);
+        if ( report != null ) {
+            initView();
+        }
     }
 
     private void initView(){
         tv_title.setText(R.string.hospital_report);
         rl_back.setOnClickListener(listener);
+
+        tv_hospital_name.setText(report.getHospitalName());
+        tv_department.setText(String.format(getString(R.string.hospital_report_department),report.getDepartmentName()));
+        tv_child_code.setText(String.format(getString(R.string.hospital_report_child_code),report.getFileCode()));
+        tv_name.setText(String.format(getString(R.string.hospital_report_name),report.getTrueName()));
+        tv_gender.setText(String.format(getString(R.string.hospital_report_gender),report.getGender()));
+        tv_birthday.setText(String.format(getString(R.string.hospital_report_birthday),report.getBirthday()));
+
+        tv_current_month.setText(String.format(getString(R.string.hospital_report_current_month),report.getCurrentMonthAgeString()));
+        if ( report.getCurrentMonthAgeString().equals(report.getCorrectMonthAgeString()) ){
+            ll_corrent_month.setVisibility(View.GONE);
+        } else {
+            ll_corrent_month.setVisibility(View.VISIBLE);
+            tv_corrent_month.setText(String.format(getString(R.string.hospital_report_corrent_month),report.getCorrectMonthAgeString()));
+        }
+
+        tv_height.setText(String.format(getString(R.string.hospital_report_height),report.getHeight()));
+        tv_weight.setText(String.format(getString(R.string.hospital_report_weight),report.getWeight()));
+        tv_head.setText(String.format(getString(R.string.hospital_report_head),report.getHeadCircumference()));
+        tv_chest.setText(String.format(getString(R.string.hospital_report_chest),report.getChestCircumference()));
+        tv_BMI.setText(String.format(getString(R.string.hospital_report_bmi),report.getBmi()));
+
+        tv_feeding_type.setText(report.getFoodType());
+        tv_current_history.setText(report.getPresentIllnessHistory());
+
+        tv_result_weight.setText(String.format(getString(R.string.hospital_report_weight_result),report.getWeightEvaluation()));
+        tv_result_height.setText(String.format(getString(R.string.hospital_report_height_result),report.getHeightEvaluation()));
+        tv_result_height_weight.setText(String.format(getString(R.string.hospital_report_hw_result),report.getHwEvaluation()));
+        tv_result_other.setText(String.format(getString(R.string.hospital_report_other_result),report.getFeatureEvaluation()));
+
+        tv_suggest.setText(report.getDoctorAdvice());
+
+        tv_doctor_name.setText(String.format(getString(R.string.hospital_report_doctor_name),report.getDoctorName()));
+        tv_report_name.setText(String.format(getString(R.string.hospital_report_reporter_name),report.getCureDoctor()));
+        tv_report_time.setText(String.format(getString(R.string.hospital_report_time),report.getRecordDay()));
+
+        initDevelopBehavior();
+        initGraphView();
+    }
+
+    private void initDevelopBehavior(){
+        tv_develop_behavior.setText(String.format(getString(R.string.hospital_report_develop),report.getCorrectMonthDay()));
+        initDevelopment(generateDevelopmentData(report.getCorrectMonthAge(),report.getRecordTime(),report.getFeatures()));
+    }
+
+    private void initGraphView(){
+        GraphModule graph_module = findViewById(R.id.graph_module);
+        graph_module.setData(report.getImageData(),Integer.parseInt(report.getMonthAge()),report.isMale(),false);
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -125,6 +197,34 @@ public class HospitalReportActivity extends BaseActivity {
     };
 
     //------------------------------------发育行为--------------------------------------------------
+
+    private Map<String,List<DevelopmentalItem>> generateDevelopmentData(String correntMonth , String recordTime,List<String> selected){
+        Map<String,List<DevelopmentalItem>> map = new HashMap<>();
+
+        List<String> ages = new ArrayList<>();
+        ages.add(correntMonth);
+        List<Feature> features = DaoManager.getInstance().getFeatureDao().searchFeatureList(this,ages,recordTime);
+
+        for (Feature feature:features){
+            List<DevelopmentalItem> developmentalItems;
+            if ( !map.containsKey(feature.getFeaturetype()) ){
+                developmentalItems = new ArrayList<>();
+                map.put(feature.getFeaturetype(),developmentalItems);
+            } else {
+                developmentalItems = map.get(feature.getFeaturetype());
+            }
+            DevelopmentalItem item = new DevelopmentalItem();
+            item.setValue(feature.getDetaildesc());
+            if ( selected != null ) {
+                item.setCheck(selected.contains(feature.getId()));
+            } else {
+                item.setCheck(false);
+            }
+            developmentalItems.add(item);
+        }
+        return map;
+    }
+
     //初始化发行为
     private void initDevelopment(Map<String,List<DevelopmentalItem>> maps){
         Set<String> keys = maps.keySet();
@@ -144,18 +244,19 @@ public class HospitalReportActivity extends BaseActivity {
         layout.setLayoutParams(layoutParams);
 
         View divider = new View(this);
-        divider.setBackgroundColor(getResources().getColor(R.color.linkLightPink));
-        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelOffset(R.dimen.y2px)));
+        divider.setBackgroundColor(getResources().getColor(R.color.linePink));
+        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelOffset(R.dimen.y1px)));
         layout.addView(divider);
 
         TextView tv_title = new TextView(this);
         tv_title.setText(title);
         tv_title.setTextColor(getResources().getColor(R.color.second_black));
-        tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
+        tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
+        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y20px);
         tv_title.setLayoutParams(params);
         layout.addView(tv_title);
 
@@ -177,7 +278,8 @@ public class HospitalReportActivity extends BaseActivity {
         params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y24px);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP|RelativeLayout.ALIGN_PARENT_LEFT);
         params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
-        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.x139px);
+        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.x159px);
+        params.rightMargin = getResources().getDimensionPixelOffset(R.dimen.x20px);
         layout.setLayoutParams(params);
 
         for (DevelopmentalItem content:contents){
@@ -196,11 +298,12 @@ public class HospitalReportActivity extends BaseActivity {
 
             TextView tv_content = new TextView(this);
             LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y5px);
+            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
+            textParam.topMargin = -1*getResources().getDimensionPixelOffset(R.dimen.y5px);
             tv_content.setLayoutParams(textParam);
             tv_content.setText(content.getValue());
             tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
-            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
+            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
             subLayout.addView(tv_content);
 
             layout.addView(subLayout);

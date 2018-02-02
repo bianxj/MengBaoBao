@@ -16,16 +16,19 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.doumengmengandroidbady.R;
+import com.doumengmengandroidbady.adapter.PayAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
-import com.doumengmengandroidbady.response.Doctor;
-import com.doumengmengandroidbady.response.Hospital;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.Doctor;
+import com.doumengmengandroidbady.response.entity.Hospital;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.response.AliPayResponse;
 import com.doumengmengandroidbady.util.AppUtil;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.view.CircleImageView;
@@ -43,7 +46,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -73,15 +78,16 @@ public class DoctorInfoActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_info);
-        getNeedInfo();
         findView();
+        getNeedInfo();
+        registerIWXApi();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopTask(aliPayTask);
-        stopTask(aliPayResponseTask);
+        stopTask(preAliPayTask);
+        stopTask(preIwxPayTask);
         if ( handler != null ){
             handler.removeCallbacksAndMessages(null);
         }
@@ -147,6 +153,14 @@ public class DoctorInfoActivity extends BaseActivity {
             }
             if (doctor != null) {
                 hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this, doctor.getDoctorid());
+                initView();
+            } else {
+                MyDialog.showPromptDialog(this, "查无此人", new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        back();
+                    }
+                });
             }
         }
     }
@@ -162,8 +176,6 @@ public class DoctorInfoActivity extends BaseActivity {
         tv_doctor_introduce = findViewById(R.id.tv_doctor_introduce);
         tv_doctor_skill = findViewById(R.id.tv_doctor_skill);
         bt_choose = findViewById(R.id.bt_choose);
-
-        initView();
     }
 
     private void initView(){
@@ -213,18 +225,24 @@ public class DoctorInfoActivity extends BaseActivity {
 
     private void choose(){
         if (PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+
+            List<PayAdapter.PayData> datas = new ArrayList<>();
+            datas.add(new PayAdapter.PayData(R.drawable.alipay_logo_60,"支付宝",false));
+            if (api.isWXAppInstalled()) {
+                datas.add(new PayAdapter.PayData(R.drawable.iwx_logo, "微信", false));
+            }
             if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.READ_PHONE_STATE)){
                 MyDialog.showPayDialog(this, rl_parent, new MyDialog.PayCallBack() {
                     @Override
                     public void alipay() {
-                        aliPay();
+                        preAliPay();
                     }
 
                     @Override
                     public void iwxpay() {
-
+                        preIwxPay();
                     }
-                },doctor.getCost(),15*60);
+                },datas,doctor.getCost(),15*60);
             }
         }
     }
@@ -246,48 +264,46 @@ public class DoctorInfoActivity extends BaseActivity {
 
     //-----------------------------------支付------------------------------------------------
 
-    private RequestTask aliPayTask = null;
-    private final RequestTask aliPayResponseTask = null;
+    //-----------------------------------支付宝----------------------------------------------
+    private RequestTask preAliPayTask = null;
 
-    private void aliPay(){
+    private void preAliPay(){
         try {
-            aliPayTask = new RequestTask.Builder(this,aliPayCallBack).build();
-            aliPayTask.execute();
+            preAliPayTask = new RequestTask.Builder(this, preAliPayCallBack)
+                    .setUrl(UrlAddressList.URL_PRE_ALI_PAY)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildPreAliPayContent())
+                    .build();
+            preAliPayTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
     }
 
-    private final RequestCallBack aliPayCallBack = new RequestCallBack() {
+    private Map<String, String> buildPreAliPayContent() {
+        UserData userData = BaseApplication.getInstance().getUserData();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("userId",userData.getUserid());
+            object.put("accountmobile",userData.getAccountmobile());
+            object.put("orderdevice","1");
+            object.put("doctorid",doctor.getDoctorid());
+//                object.put("totalamout",doctor.getCost());
+            object.put("totalamout","0.01");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,object.toString());
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        return map;
+    }
+
+    private final RequestCallBack preAliPayCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_ALI_PAY;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            UserData userData = BaseApplication.getInstance().getUserData();
-            JSONObject object = new JSONObject();
-            try {
-                object.put("userId",userData.getUserid());
-                object.put("accountmobile",userData.getAccountmobile());
-                object.put("orderdevice","1");
-                object.put("doctorid",doctor.getDoctorid());
-//                object.put("totalamout",doctor.getCost());
-                object.put("totalamout","0.01");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM,object.toString());
-            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
-            return map;
         }
 
         @Override
@@ -297,20 +313,8 @@ public class DoctorInfoActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            System.out.println(result);
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                //调用支付宝支付
-                alipay(res.getString("aLiPayBody"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
+            AliPayResponse response = GsonUtil.getInstance().fromJson(result, AliPayResponse.class);
+            aliPay(response.getResult().getaLiPayBody());
         }
     };
 
@@ -338,16 +342,11 @@ public class DoctorInfoActivity extends BaseActivity {
                 }
             }
         }
-
-        public Map<String, String> getAliResult() {
-            return aliResult;
-        }
     }
 
-    private Map<String,String> aliResult = null;
     private AlipayHandler handler = null;
 
-    private void alipay(final String orderInfo){
+    private void aliPay(final String orderInfo){
         if ( handler == null ){
             handler = new AlipayHandler(this);
         }
@@ -373,12 +372,71 @@ public class DoctorInfoActivity extends BaseActivity {
 
     //-----------------------------------微信支付---------------------------------------------------
     private final static String APP_ID = "";
+    private IWXAPI api;
+
+    private void registerIWXApi(){
+        if ( api == null ){
+            api = WXAPIFactory.createWXAPI(this,APP_ID,false);
+        }
+        api.registerApp(APP_ID);
+    }
+
+    private RequestTask preIwxPayTask;
+    private void preIwxPay(){
+        try {
+            preIwxPayTask = new RequestTask.Builder(this,preIwxPayCallBack)
+                    .setUrl("")
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildPreIwxPayContent())
+                    .build();
+            preIwxPayTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private Map<String, String> buildPreIwxPayContent() {
+        UserData userData = BaseApplication.getInstance().getUserData();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("userId",userData.getUserid());
+            object.put("accountmobile",userData.getAccountmobile());
+            object.put("orderdevice","1");
+            object.put("doctorid",doctor.getDoctorid());
+//                object.put("totalamout",doctor.getCost());
+            object.put("totalamout","0.01");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,object.toString());
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        return map;
+    }
+
+    private RequestCallBack preIwxPayCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            iwxPay();
+        }
+    };
+
     private void iwxPay(){
-        IWXAPI api = WXAPIFactory.createWXAPI(this, APP_ID, false);
         api.handleIntent(getIntent(),eventHandler);
 
         PayReq request = new PayReq();
-        request.appId = "wxd930ea5d5a258f4f";
+        request.appId = APP_ID;
         request.partnerId = "1900000109";
         request.prepayId= "1101000000140415649af9fc314aa427";
         request.packageValue = "Sign=WXPay";
@@ -397,7 +455,7 @@ public class DoctorInfoActivity extends BaseActivity {
         public void onResp(BaseResp resp) {
             if(resp.getType()== ConstantsAPI.COMMAND_PAY_BY_WX){
                 if( 0 == resp.errCode ){
-                    Toast.makeText(DoctorInfoActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                    goNext();
                 } else {
                     Toast.makeText(DoctorInfoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                 }

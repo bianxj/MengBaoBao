@@ -24,7 +24,8 @@ import com.doumengmengandroidbady.net.HttpUtil;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.response.UploadHeadImageResponse;
 import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
@@ -32,9 +33,6 @@ import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.util.PictureUtils;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -210,43 +208,39 @@ public class HeadImageActivity extends BaseActivity {
         }
     }
 
+    private RequestTask uploadHeadImageTask = null;
     private void uploadHeadImg(){
         try {
-            uploadHeadImageTask = new RequestTask.Builder(this,uploadHeadImageCallBack).build();
+            uploadHeadImageTask = new RequestTask.Builder(this,uploadHeadImageCallBack)
+                    .setUrl(UrlAddressList.URL_UPLOAD_HEAD_IMG)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildUploadHeadImageContent())
+                    .build();
             uploadHeadImageTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
     }
 
-    private RequestTask uploadHeadImageTask = null;
+    private Map<String, String> buildUploadHeadImageContent() {
+        UserData userData = BaseApplication.getInstance().getUserData();
+        Map<String,String> map = new HashMap<>();
+        map.put("sesId",userData.getSessionId());
+        map.put("userId",userData.getUserid());
+
+        List<HttpUtil.UploadFile> uploadFiles = new ArrayList<>();
+        HttpUtil.UploadFile uploadFile = new HttpUtil.UploadFile();
+        uploadFile.setFileName("userHead");
+        uploadFile.setFilePath(BaseApplication.getInstance().getPersonHeadImgPath());
+        uploadFiles.add(uploadFile);
+        map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().toJson(uploadFiles));
+        return map;
+    }
 
     private final RequestCallBack uploadHeadImageCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_UPLOAD_HEAD_IMG;
-        }
-
-
-        @Override
-        public Map<String, String> getContent() {
-            UserData userData = BaseApplication.getInstance().getUserData();
-            Map<String,String> map = new HashMap<>();
-            map.put("sesId",userData.getSessionId());
-            map.put("userId",userData.getUserid());
-
-            List<HttpUtil.UploadFile> uploadFiles = new ArrayList<>();
-            HttpUtil.UploadFile uploadFile = new HttpUtil.UploadFile();
-            uploadFile.setFileName("userHead");
-            uploadFile.setFilePath(BaseApplication.getInstance().getPersonHeadImgPath());
-            uploadFiles.add(uploadFile);
-            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().toJson(uploadFiles));
-            return map;
         }
 
         @Override
@@ -256,21 +250,10 @@ public class HeadImageActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //修改用户头像数据
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                userData.setHeadimg(res.getString("headimg"));
-                BaseApplication.getInstance().saveUserData(userData);
-                BaseApplication.getInstance().removeImageFromImageLoader(userData.getHeadimg());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
+            UploadHeadImageResponse response = GsonUtil.getInstance().fromJson(result,UploadHeadImageResponse.class);
+            userData.setHeadimg(response.getResult().getHeadimg());
+            BaseApplication.getInstance().saveUserData(userData);
+            BaseApplication.getInstance().removeImageFromImageLoader(userData.getHeadimg());
         }
     };
 

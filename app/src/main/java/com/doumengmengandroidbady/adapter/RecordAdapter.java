@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.AssessmentActivity;
-import com.doumengmengandroidbady.response.Record;
+import com.doumengmengandroidbady.response.entity.Record;
 import com.doumengmengandroidbady.util.GsonUtil;
 
 import java.util.List;

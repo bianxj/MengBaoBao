@@ -17,6 +17,7 @@ import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.entity.RoleType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,6 +59,7 @@ public class ObserveActivity extends BaseActivity {
         if ( BaseApplication.getInstance().getRoleType() == RoleType.FREE_NET_USER || BaseApplication.getInstance().getRoleType() == RoleType.FREE_HOSPITAL_USER){
             //免费用户
             contents = new ArrayList<>();
+            contents.addAll(Arrays.asList(getResources().getStringArray(R.array.free_observe_content)));
             bt_buy.setVisibility(View.VISIBLE);
         } else {
             //付费用户

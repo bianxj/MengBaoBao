@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.HospitalReportActivity;
-import com.doumengmengandroidbady.entity.HospitalReport;
+import com.doumengmengandroidbady.response.entity.HospitalReport;
+import com.doumengmengandroidbady.util.GsonUtil;
 
 import java.util.List;
 
@@ -32,20 +33,10 @@ public class HospitalReportAdapter extends RecyclerView.Adapter<HospitalReportAd
         return vh;
     }
 
-
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         HospitalReport report = reports.get(position);
-        holder.position = position;
-        holder.tv_hospital_name.setText(report.getHospitalName());
-        holder.tv_baby_month.setText(report.getMonthAge());
-        holder.tv_record_date.setText(report.getReportTime());
-        holder.tv_weight.setText(report.getWeight());
-        holder.tv_height.setText(report.getHeight());
-        holder.tv_bmi.setText(report.getBmi());
-        holder.tv_develop.setText(report.getDevelop());
-        holder.report = report;
+        holder.initView(report);
     }
 
     @Override
@@ -76,10 +67,23 @@ public class HospitalReportAdapter extends RecyclerView.Adapter<HospitalReportAd
             tv_bmi = itemView.findViewById(R.id.tv_bmi);
             itemView.setOnClickListener(listener);
         }
+
+        public void initView(HospitalReport report){
+            tv_hospital_name.setText(report.getHospitalName());
+            tv_baby_month.setText(report.getBabyMonth());
+            tv_bmi.setText(report.getHwResultString());
+            tv_develop.setText(report.getFeatureResultString());
+            tv_height.setText(report.getHeightResultString());
+            tv_record_date.setText(report.getRecordDay());
+            tv_weight.setText(report.getWeightResultString());
+            this.report = report;
+        }
+
         private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), HospitalReportActivity.class);
+                intent.putExtra(HospitalReportActivity.IN_PARAM_REPORT_DATA, GsonUtil.getInstance().toJson(report));
                 v.getContext().startActivity(intent);
             }
         };

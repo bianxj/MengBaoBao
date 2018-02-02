@@ -28,6 +28,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="FfGPctd4m1kK0zTOF9el2C5fepRDLYZ9" />
 
+        <!--android:name=".activity.GuideActivity"-->
         <activity
             android:name=".activity.GuideActivity"
             android:screenOrientation="portrait"
@@ -96,7 +97,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
 
         <!--百度地图-->
         <service android:name="com.baidu.location.f" android:process=":remote" android:enabled="true"> </service>

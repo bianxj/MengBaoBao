@@ -11,7 +11,7 @@ import android.widget.ListView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.ParentingGuideAdapter;
 import com.doumengmengandroidbady.base.BaseFragment;
-import com.doumengmengandroidbady.response.ParentingGuidanceData;
+import com.doumengmengandroidbady.response.ParentingGuidanceResponse;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ import java.util.List;
 public class ParentingGuideFragment extends BaseFragment {
 
     private ListView lv;
-    private List<ParentingGuidanceData.ParentingGuideItem> items;
+    private List<ParentingGuidanceResponse.Result.ParentingGuideItem> items;
     private ParentingGuideAdapter adapter;
 
-    public void setParentingGuideItem(List<ParentingGuidanceData.ParentingGuideItem> items) {
+    public void setParentingGuideItem(List<ParentingGuidanceResponse.Result.ParentingGuideItem> items) {
         this.items = items;
     }
 

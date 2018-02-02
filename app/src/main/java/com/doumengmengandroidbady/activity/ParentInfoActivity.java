@@ -13,11 +13,10 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
+import com.doumengmengandroidbady.response.SubmitInfoResponse;
 import com.doumengmengandroidbady.util.GsonUtil;
+import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.ParentInfoLayout;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,7 +88,12 @@ public class ParentInfoActivity extends BaseActivity {
     private void changeParentInfo(){
         if ( checkData() ){
             try {
-                buildChangeParentInfoTask().execute();
+                changeParentInfoTask = new RequestTask.Builder(this,changeParentInfoCallBack)
+                        .setUrl(UrlAddressList.URL_SAVE_USER_INFO)
+                        .setType(RequestTask.DEFAULT)
+                        .setContent(buildChangeParentContent())
+                        .build();
+                changeParentInfoTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
@@ -97,15 +101,22 @@ public class ParentInfoActivity extends BaseActivity {
     }
 
     private boolean checkData(){
-        if ( BaseApplication.getInstance().getParentInfo() == null ){
-            return false;
+        if ( !parent_info.checkParentInfo() ){
+            //TODO
         }
         return true;
     }
 
-    private RequestTask buildChangeParentInfoTask() throws Throwable {
-        changeParentInfoTask = new RequestTask.Builder(this,changeParentInfoCallBack).build();
-        return changeParentInfoTask;
+    private Map<String, String> buildChangeParentContent() {
+        InputUserInfo inputData = new InputUserInfo();
+        inputData.setUserId(BaseApplication.getInstance().getUserData().getUserid());
+
+        inputData.parentInfo = parent_info.getParentInfo();
+
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM, GsonUtil.getInstance().toJson(inputData));
+        map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
+        return map;
     }
 
     private final RequestCallBack changeParentInfoCallBack = new RequestCallBack() {
@@ -115,45 +126,24 @@ public class ParentInfoActivity extends BaseActivity {
         }
 
         @Override
-        public String getUrl() {
-            return UrlAddressList.URL_SAVE_USER_INFO;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            InputUserInfo inputData = new InputUserInfo();
-            inputData.setUserId(BaseApplication.getInstance().getUserData().getUserid());
-
-            inputData.parentInfo = parent_info.getParentInfo();
-
-            Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM, GsonUtil.getInstance().toJson(inputData));
-            map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
-            return map;
-        }
-
-        @Override
         public void onError(String result) {
             //TODO
         }
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                if ( 1 == res.getInt("isEditParent") ){
-                    BaseApplication.getInstance().saveParentInfo(parent_info.getParentInfo());
-                    back();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            SubmitInfoResponse response = GsonUtil.getInstance().fromJson(result,SubmitInfoResponse.class);
+            if ( 1 == response.getResult().getIsSaveUser() ){
+                BaseApplication.getInstance().saveParentInfo(parent_info.getParentInfo());
+                MyDialog.showPromptDialog(ParentInfoActivity.this, getString(R.string.change_parent_info_content), new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        back();
+                    }
+                });
+            } else {
+                //TODO
             }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
         }
     };
 

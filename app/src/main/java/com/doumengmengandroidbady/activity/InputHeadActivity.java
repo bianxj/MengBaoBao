@@ -127,6 +127,17 @@ public class InputHeadActivity extends BaseInputDataActivity {
     }
 
     private boolean checkData(){
+        String headString = et_input_data.getText().toString().trim();
+
+        if ( TextUtils.isEmpty(headString) ) {
+            showPromptDialog("头围数据不能为空");
+            return false;
+        }
+        float head = Float.parseFloat(et_input_data.getText().toString().trim());
+        if ( head <= 0 || head > 250 ){
+            showPromptDialog("头围数据需要在0~70cm之间");
+            return false;
+        }
         return true;
     }
 }

@@ -1,4 +1,4 @@
-package com.doumengmengandroidbady.response;
+package com.doumengmengandroidbady.response.entity;
 
 /**
  * 作者: 边贤君

@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
-import com.doumengmengandroidbady.response.ParentInfo;
+import com.doumengmengandroidbady.response.entity.ParentInfo;
 import com.doumengmengandroidbady.util.FormulaUtil;
 
 import java.util.ArrayList;

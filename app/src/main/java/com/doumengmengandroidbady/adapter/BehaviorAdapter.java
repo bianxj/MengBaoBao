@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.net.UrlAddressList;
-import com.doumengmengandroidbady.response.Feature;
+import com.doumengmengandroidbady.response.entity.Feature;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.MyGifPlayer;
 

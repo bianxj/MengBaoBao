@@ -3,11 +3,14 @@ package com.doumengmengandroidbady.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -50,6 +53,7 @@ import java.util.List;
 public class SpacialistServiceActivity extends BaseActivity {
 
     private final static int REQUEST_QR = 0x01;
+    private final static int REQUEST_LOCATION = 0x02;
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -95,6 +99,9 @@ public class SpacialistServiceActivity extends BaseActivity {
                 String value = data.getStringExtra(ScanActivity.RESULT_QR_VALUE);
                 Toast.makeText(SpacialistServiceActivity.this,value,Toast.LENGTH_LONG).show();
             }
+        }
+        if ( requestCode == REQUEST_LOCATION ){
+            checkLocationPermission();
         }
     }
 
@@ -300,9 +307,25 @@ public class SpacialistServiceActivity extends BaseActivity {
 
     //---------------------------------检查权限------------------------------------------------
     private void checkLocationPermission(){
-        if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.ACCESS_FINE_LOCATION)){
-            initLocation();
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if ( manager.isProviderEnabled(LocationManager.GPS_PROVIDER) ) {
+            if (PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                initLocation();
+            }
+        } else {
+            skipToLocationService();
         }
+    }
+
+    private void skipToLocationService(){
+        MyDialog.showPromptDialog(this, getString(R.string.dialog_content_open_location_service), new MyDialog.PromptDialogCallback() {
+            @Override
+            public void sure() {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(intent, REQUEST_LOCATION);
+            }
+        });
     }
 
     @Override
@@ -364,7 +387,7 @@ public class SpacialistServiceActivity extends BaseActivity {
     private final BDAbstractLocationListener locationListener = new BDAbstractLocationListener() {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
-            if ( bdLocation != null ){
+            if ( bdLocation != null && !TextUtils.isEmpty(bdLocation.getProvince())){
                 String city = bdLocation.getProvince();
                 setCity(city);
             } else {

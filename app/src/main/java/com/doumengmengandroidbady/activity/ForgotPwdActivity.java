@@ -22,7 +22,10 @@ import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.request.task.LoginTask;
+import com.doumengmengandroidbady.response.ForgotPwdResponse;
+import com.doumengmengandroidbady.response.VCResponse;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
 import org.json.JSONException;
@@ -121,7 +124,10 @@ public class ForgotPwdActivity extends BaseActivity {
     private void getVerificationCode(){
         if ( checkVerificationCode() ) {
             try {
-                getVerificationCodeTask = new RequestTask.Builder(this,getVerificationCodeCallBack).build();
+                getVerificationCodeTask = new RequestTask.Builder(this,getVerificationCodeCallBack)
+                        .setUrl(UrlAddressList.URL_RESET_PASSWORD_GET_VC)
+                        .setType(RequestTask.NO_PROMPT)
+                        .setContent(buildVcContent()).build();
                 getVerificationCodeTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -129,21 +135,15 @@ public class ForgotPwdActivity extends BaseActivity {
         }
     }
 
+    private Map<String, String> buildVcContent() {
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,et_phone.getText().toString());
+        return map;
+    }
+
     private final RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_RESET_PASSWORD_GET_VC;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM,et_phone.getText().toString());
-            return map;
         }
 
         @Override
@@ -153,19 +153,8 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                String verificationCode = res.optString("code");
-                BaseApplication.getInstance().saveForgetVc(verificationCode);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public int type() {
-            return NO_PROMPT;
+            VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
+            BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
         }
     };
 
@@ -187,12 +176,17 @@ public class ForgotPwdActivity extends BaseActivity {
         return true;
     }
 
+    private RequestTask changePwdTask;
     private void changePwd(){
         if (checkChangePwd()) {
             //检测用户协议是否勾选
             if ( cb_agreement.isChecked() ) {
                 try {
-                    changePwdTask = new RequestTask.Builder(this,changePwdCallBack).build();
+                    changePwdTask = new RequestTask.Builder(this,changePwdCallBack)
+                            .setUrl(UrlAddressList.URL_RESET_PASSWORD)
+                            .setType(RequestTask.NO_PROMPT)
+                            .setContent(buildChangePwdContent())
+                            .build();
                     changePwdTask.execute();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
@@ -245,31 +239,24 @@ public class ForgotPwdActivity extends BaseActivity {
         return true;
     }
 
-    private RequestTask changePwdTask;
+    private Map<String, String> buildChangePwdContent() {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("accountMobile",et_phone.getText().toString().trim());
+            object.put("loginPwd",et_login_pwd.getText().toString().trim());
+            object.put("code", BaseApplication.getInstance().getForgetVc());
+            object.put("checkCode",et_vc.getText().toString().trim());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,object.toString());
+        return map;
+    }
+
     private final RequestCallBack changePwdCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_RESET_PASSWORD;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            JSONObject object = new JSONObject();
-            try {
-                object.put("accountMobile",et_phone.getText().toString().trim());
-                object.put("loginPwd",et_login_pwd.getText().toString().trim());
-                object.put("code", BaseApplication.getInstance().getForgetVc());
-                object.put("checkCode",et_vc.getText().toString().trim());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM,object.toString());
-            return map;
         }
 
         @Override
@@ -279,13 +266,14 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            login();
+            ForgotPwdResponse response = GsonUtil.getInstance().fromJson(result,ForgotPwdResponse.class);
+            if ( 1 == response.getResult().getIsEditPwd() ) {
+                login();
+            } else {
+                //TODO
+            }
         }
 
-        @Override
-        public int type() {
-            return NO_PROMPT;
-        }
     };
 
     //---------------------------------登录------------------------------------------------------

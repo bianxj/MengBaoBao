@@ -14,15 +14,12 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
-import com.doumengmengandroidbady.response.DayList;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.response.SubmitInfoResponse;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.BaseInfoLayout;
 import com.doumengmengandroidbady.view.ParentInfoLayout;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -102,7 +99,6 @@ public class InputInfoActivity extends BaseActivity {
 
     //----------------------------------------数据提交-----------------------------------------------
 
-    private RequestTask submitInfoTask;
 
     private void complete(){
         if ( checkData() ){
@@ -120,13 +116,30 @@ public class InputInfoActivity extends BaseActivity {
         }
     }
 
+    private RequestTask submitInfoTask;
     private void submitInfo(){
         try {
-            submitInfoTask = new RequestTask.Builder(this,submitInfoCallBack).build();
+            submitInfoTask = new RequestTask.Builder(this,submitInfoCallBack)
+                    .setUrl(UrlAddressList.URL_SAVE_USER_INFO)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildSubmitInfoContent())
+                    .build();
             submitInfoTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+    }
+
+    private Map<String, String> buildSubmitInfoContent() {
+        UserData userData = BaseApplication.getInstance().getUserData();
+        inputData.setUserId(userData.getUserid());
+        inputData.parentInfo = parent_info.getParentInfo();
+        inputData.babyInfo = baby_info.getBabyInfo();
+        Map<String,String> map = new HashMap<>();
+        String json = GsonUtil.getInstance().toJson(inputData);
+        map.put("paramStr",json);
+        map.put("sesId",userData.getSessionId());
+        return map;
     }
 
     private final InputUserInfo inputData = new InputUserInfo();
@@ -137,48 +150,19 @@ public class InputInfoActivity extends BaseActivity {
         }
 
         @Override
-        public String getUrl() {
-            return UrlAddressList.URL_SAVE_USER_INFO;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            UserData userData = BaseApplication.getInstance().getUserData();
-            inputData.setUserId(userData.getUserid());
-            inputData.parentInfo = parent_info.getParentInfo();
-            inputData.babyInfo = baby_info.getBabyInfo();
-            Map<String,String> map = new HashMap<>();
-            String json = GsonUtil.getInstance().toJson(inputData);
-            map.put("paramStr",json);
-            map.put("sesId",userData.getSessionId());
-            return map;
-        }
-
-        @Override
         public void onError(String result) {
 
         }
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object =  new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                if ( 1 == res.optInt("isSaveUser") ){
-                    DayList dayList = GsonUtil.getInstance().fromJson(res.getJSONObject("DayList").toString(),DayList.class);
-                    BaseApplication.getInstance().saveDayList(dayList);
-                    startActivity(RecordActivity.class);
-                } else {
-                    //TODO ?
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            SubmitInfoResponse response = GsonUtil.getInstance().fromJson(result,SubmitInfoResponse.class);
+            if ( 1 == response.getResult().getIsSaveUser() ){
+                BaseApplication.getInstance().saveDayList(response.getResult().getDayList());
+                startActivity(RecordActivity.class);
+            } else {
+                //TODO
             }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
         }
     };
 

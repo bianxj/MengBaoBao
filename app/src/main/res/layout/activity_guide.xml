@@ -67,6 +67,13 @@
         </FrameLayout>
     </RelativeLayout>-->
 
+    <ImageView
+        android:id="@+id/iv_qr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:layout_above="@+id/ll_guide_botttom"/>
+
     <RelativeLayout
         android:id="@+id/ll_guide_botttom"
         android:layout_width="match_parent"

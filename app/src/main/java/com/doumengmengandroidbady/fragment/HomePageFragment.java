@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.DoctorInfoActivity;
@@ -23,8 +22,8 @@ import com.doumengmengandroidbady.activity.MainActivity;
 import com.doumengmengandroidbady.activity.ObserveActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragment;
-import com.doumengmengandroidbady.response.DayList;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.DayList;
+import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -171,7 +170,6 @@ public class HomePageFragment extends BaseFragment {
     private final AutoScrollViewPager.OnClickCallBack onClickCallBack = new AutoScrollViewPager.OnClickCallBack() {
         @Override
         public void onClick(int position) {
-            Toast.makeText(getContext(),position+"",Toast.LENGTH_SHORT).show();
             String doctorName = "马骏";
             if ( 1 == position ) {
                 doctorName = "金星明";

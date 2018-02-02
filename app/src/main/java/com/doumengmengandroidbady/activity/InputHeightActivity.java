@@ -125,6 +125,17 @@ public class InputHeightActivity extends BaseInputDataActivity {
     }
 
     private boolean checkData(){
+        String heightString = et_input_data.getText().toString().trim();
+
+        if ( TextUtils.isEmpty(heightString) ) {
+            showPromptDialog("身高数据不能为空");
+            return false;
+        }
+        float height = Float.parseFloat(et_input_data.getText().toString().trim());
+        if ( height <= 0 || height > 250 ){
+            showPromptDialog("身高数据需要在0~250cm之间");
+            return false;
+        }
         return true;
     }
 

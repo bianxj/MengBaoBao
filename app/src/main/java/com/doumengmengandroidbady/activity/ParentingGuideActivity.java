@@ -17,8 +17,8 @@ import com.doumengmengandroidbady.fragment.ParentingGuideFragment;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
-import com.doumengmengandroidbady.response.ParentingGuidanceData;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.ParentingGuidanceResponse;
+import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.util.GsonUtil;
 
 import org.json.JSONException;
@@ -41,7 +41,6 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
     private ParentingGuideViewPagerAdapter adapter;
 
     private String recordId;
-    private ParentingGuidanceData data;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,43 +117,40 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
         recordId = intent.getStringExtra(IN_PARAM_RECORD_ID);
     }
 
+    private RequestTask PGTask;
     private void getParentingGuideData(){
         try {
-            PGTask = new RequestTask.Builder(this,PGCallBack).build();
+            PGTask = new RequestTask.Builder(this,PGCallBack)
+                    .setUrl(UrlAddressList.URL_PARENTING_GUIDANCE)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildPgContent())
+                    .build();
             PGTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
     }
 
-    private RequestTask PGTask;
+    private Map<String, String> buildPgContent() {
+        Map<String,String> map = new HashMap<>();
+        UserData userData = BaseApplication.getInstance().getUserData();
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("userId",userData.getUserid());
+            object.put("recordId",recordId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.PARAM,object.toString());
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        return map;
+    }
 
     private RequestCallBack PGCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_PARENTING_GUIDANCE;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            Map<String,String> map = new HashMap<>();
-            UserData userData = BaseApplication.getInstance().getUserData();
-
-            JSONObject object = new JSONObject();
-            try {
-                object.put("userId",userData.getUserid());
-                object.put("recordId",recordId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            map.put(UrlAddressList.PARAM,object.toString());
-            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
-            return map;
         }
 
         @Override
@@ -164,27 +160,15 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-
-                data = GsonUtil.getInstance().fromJson(res.toString(),ParentingGuidanceData.class);
-                initData();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
+            ParentingGuidanceResponse response = GsonUtil.getInstance().fromJson(result,ParentingGuidanceResponse.class);
+            initData(response.getResult());
         }
     };
 
-    private void initData(){
-        List<ParentingGuidanceData.ParentingGuideClass> list = data.getParentingGuidanceList();
+    private void initData(ParentingGuidanceResponse.Result result){
+        List<ParentingGuidanceResponse.Result.ParentingGuideClass> list = result.getParentingGuidanceList();
         for (int i = 0;i<list.size();i++){
-            ParentingGuidanceData.ParentingGuideClass cls = list.get(i);
+            ParentingGuidanceResponse.Result.ParentingGuideClass cls = list.get(i);
 
             TabLayout.Tab subTab = tab.newTab();
             subTab.setText(cls.getGuidanceType());

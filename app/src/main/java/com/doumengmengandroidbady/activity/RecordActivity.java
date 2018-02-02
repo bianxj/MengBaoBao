@@ -30,10 +30,12 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.entity.SubmitRecord;
-import com.doumengmengandroidbady.response.DayList;
-import com.doumengmengandroidbady.response.Record;
-import com.doumengmengandroidbady.response.RecordResult;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.DayList;
+import com.doumengmengandroidbady.response.entity.Record;
+import com.doumengmengandroidbady.response.entity.RecordResult;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.response.CurrentRecordResponse;
+import com.doumengmengandroidbady.response.SubmitRecordResponse;
 import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.FormulaUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
@@ -41,9 +43,6 @@ import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.util.PictureUtils;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -718,11 +717,69 @@ public class RecordActivity extends BaseActivity {
 
     private void submitRecord(){
         try {
-            submitRecordTask = new RequestTask.Builder(this,submitRecordCallBack).build();
+            submitRecordTask = new RequestTask.Builder(this,submitRecordCallBack)
+                    .setUrl(UrlAddressList.URL_SUBMIT_RECORD)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildSubmitRecordContent())
+                    .build();
             submitRecordTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+    }
+
+    private Map<String, String> buildSubmitRecordContent() {
+        Map<String,String> map = new HashMap<>();
+
+        SubmitRecord record  = new SubmitRecord(userData.getUserid());
+        record.setHeight(tv_height.getText().toString().trim());
+        record.setWeight(tv_weight.getText().toString().trim());
+        record.setHeadcircumference(tv_head_circumference.getText().toString().trim());
+        record.setChestcircumference(tv_chest_circumference.getText().toString().trim());
+        record.setCacation(tv_cacation_count.getText().toString().trim());
+        record.setCacationdays(tv_cacation_day.getText().toString().trim());
+        record.setUrinate(tv_micturition_count.getText().toString().trim());
+        record.setNighttimeSleep(tv_night_sleep.getText().toString().trim());
+        record.setDaytimesleep(tv_day_sleep.getText().toString().trim());
+        record.setBreastfeedingml(tv_breastfeeding.getText().toString().trim());
+        record.setBreastfeedingcount(tv_breastfeeding_count.getText().toString().trim());
+        record.setMilkfeedingml(tv_formula_milk.getText().toString().trim());
+        record.setMilkfeedingcount(tv_formula_milk_count.getText().toString().trim());
+
+        record.setMilk(et_milk.getText().toString().trim());
+        record.setRiceflour(et_flour.getText().toString().trim());
+        record.setPasta(et_food.getText().toString().trim());
+        record.setCongee(et_porridge.getText().toString().trim());
+        record.setRice(et_rice.getText().toString().trim());
+        record.setMeat(et_meat.getText().toString().trim());
+        record.setEggs(et_egg.getText().toString().trim());
+        record.setSoyproducts(et_bean.getText().toString().trim());
+        record.setVegetables(et_vegetables.getText().toString().trim());
+        record.setFruit(et_fruit.getText().toString().trim());
+        record.setWater(et_water.getText().toString().trim());
+        record.setVitaminaddose(et_vitamin_dosage.getText().toString().trim());
+        record.setCalciumdose(et_calcium_dosage.getText().toString().trim());
+        record.setOther(et_parent_message.getText().toString().trim());
+        record.setOtherfood(et_other.getText().toString().trim());
+
+        RadioButton button = findViewById(rg_appetite.getCheckedRadioButtonId());
+        record.setOrexia(button.getText().toString().trim());
+
+        record.setFeature(developments);
+
+        map.put(UrlAddressList.PARAM, GsonUtil.getInstance().toJson(record));
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+
+        List<HttpUtil.UploadFile> uploadFiles = new ArrayList<>();
+        List<PictureAdapter.UploadPicture> pictures = adapter.getPictures();
+        for (PictureAdapter.UploadPicture picture:pictures){
+            HttpUtil.UploadFile file = new HttpUtil.UploadFile();
+            file.setFilePath(picture.getPicturePath());
+            file.setFileName("reportImg");
+            uploadFiles.add(file);
+        }
+        map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().toJson(uploadFiles));
+        return map;
     }
 
     private final RequestCallBack submitRecordCallBack = new RequestCallBack() {
@@ -732,87 +789,18 @@ public class RecordActivity extends BaseActivity {
         }
 
         @Override
-        public String getUrl() {
-            return UrlAddressList.URL_SUBMIT_RECORD;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            Map<String,String> map = new HashMap<>();
-
-            SubmitRecord record  = new SubmitRecord(userData.getUserid());
-            record.setHeight(tv_height.getText().toString().trim());
-            record.setWeight(tv_weight.getText().toString().trim());
-            record.setHeadcircumference(tv_head_circumference.getText().toString().trim());
-            record.setChestcircumference(tv_chest_circumference.getText().toString().trim());
-            record.setCacation(tv_cacation_count.getText().toString().trim());
-            record.setCacationdays(tv_cacation_day.getText().toString().trim());
-            record.setUrinate(tv_micturition_count.getText().toString().trim());
-            record.setNighttimeSleep(tv_night_sleep.getText().toString().trim());
-            record.setDaytimesleep(tv_day_sleep.getText().toString().trim());
-            record.setBreastfeedingml(tv_breastfeeding.getText().toString().trim());
-            record.setBreastfeedingcount(tv_breastfeeding_count.getText().toString().trim());
-            record.setMilkfeedingml(tv_formula_milk.getText().toString().trim());
-            record.setMilkfeedingcount(tv_formula_milk_count.getText().toString().trim());
-
-            record.setMilk(et_milk.getText().toString().trim());
-            record.setRiceflour(et_flour.getText().toString().trim());
-            record.setPasta(et_food.getText().toString().trim());
-            record.setCongee(et_porridge.getText().toString().trim());
-            record.setRice(et_rice.getText().toString().trim());
-            record.setMeat(et_meat.getText().toString().trim());
-            record.setEggs(et_egg.getText().toString().trim());
-            record.setSoyproducts(et_bean.getText().toString().trim());
-            record.setVegetables(et_vegetables.getText().toString().trim());
-            record.setFruit(et_fruit.getText().toString().trim());
-            record.setWater(et_water.getText().toString().trim());
-            record.setVitaminaddose(et_vitamin_dosage.getText().toString().trim());
-            record.setCalciumdose(et_calcium_dosage.getText().toString().trim());
-            record.setOther(et_parent_message.getText().toString().trim());
-            record.setOtherfood(et_other.getText().toString().trim());
-
-            RadioButton button = findViewById(rg_appetite.getCheckedRadioButtonId());
-            record.setOrexia(button.getText().toString().trim());
-
-            record.setFeature(developments);
-
-            map.put(UrlAddressList.PARAM, GsonUtil.getInstance().toJson(record));
-            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
-
-            List<HttpUtil.UploadFile> uploadFiles = new ArrayList<>();
-            List<PictureAdapter.UploadPicture> pictures = adapter.getPictures();
-            for (PictureAdapter.UploadPicture picture:pictures){
-                HttpUtil.UploadFile file = new HttpUtil.UploadFile();
-                file.setFilePath(picture.getPicturePath());
-                file.setFileName("reportImg");
-                uploadFiles.add(file);
-            }
-            map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().toJson(uploadFiles));
-            return map;
-        }
-
-        @Override
         public void onError(String result) {
 
         }
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                if ( 1 == res.getInt("isSuccess") ){
-                    getCurrentRecord();
-//                    startActivity(AssessmentActivity.class);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            SubmitRecordResponse response = GsonUtil.getInstance().fromJson(result,SubmitRecordResponse.class);
+            if ( 1 == response.getResult().getIsSuccess() ){
+                getCurrentRecord();
+            } else {
+                //TODO
             }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
         }
     };
 
@@ -826,11 +814,22 @@ public class RecordActivity extends BaseActivity {
 
     private void getCurrentRecord(){
         try {
-            currentRecordTask = new RequestTask.Builder(this,currentRequestCallBack).build();
+            currentRecordTask = new RequestTask.Builder(this,currentRequestCallBack)
+                    .setUrl(UrlAddressList.URL_GET_CURRENT_RECORD)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildCurrentRecordContent())
+                    .build();
             currentRecordTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+    }
+
+    private Map<String, String> buildCurrentRecordContent() {
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,userData.getUserid());
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        return map;
     }
 
     private final RequestCallBack currentRequestCallBack = new RequestCallBack() {
@@ -840,47 +839,25 @@ public class RecordActivity extends BaseActivity {
         }
 
         @Override
-        public String getUrl() {
-            return UrlAddressList.URL_GET_CURRENT_RECORD;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM,userData.getUserid());
-            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
-            return map;
-        }
-
-        @Override
         public void onError(String result) {
 
         }
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                RecordResult recordResult = GsonUtil.getInstance().fromJson(res.toString(),RecordResult.class);
-                List<Record> list = recordResult.getRecordList();
+            CurrentRecordResponse response = GsonUtil.getInstance().fromJson(result, CurrentRecordResponse.class);
+            RecordResult result1 = response.getResult();
 
-                for (Record record:list){
-                    record.setImageData(recordResult.getImgList());
-                }
+            List<Record> list = result1.getRecordList();
 
-                BaseApplication.getInstance().minusRecordTimes();
-                Intent intent = new Intent(RecordActivity.this, AssessmentActivity.class);
-                intent.putExtra(AssessmentActivity.IN_PARAM_RECORD, GsonUtil.getInstance().toJson(list.get(0)));
-                RecordActivity.this.startActivity(intent);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            for (Record record : list) {
+                record.setImageData(result1.getImgList());
             }
-        }
 
-        @Override
-        public int type() {
-            return DEFAULT;
+            BaseApplication.getInstance().minusRecordTimes();
+            Intent intent = new Intent(RecordActivity.this, AssessmentActivity.class);
+            intent.putExtra(AssessmentActivity.IN_PARAM_RECORD, GsonUtil.getInstance().toJson(list.get(0)));
+            RecordActivity.this.startActivity(intent);
         }
     };
 

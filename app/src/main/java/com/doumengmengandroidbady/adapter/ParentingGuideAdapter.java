@@ -8,16 +8,16 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.response.ParentingGuidanceData;
+import com.doumengmengandroidbady.response.ParentingGuidanceResponse;
 
 import java.util.List;
 
 
 public class ParentingGuideAdapter extends BaseAdapter {
 
-    private List<ParentingGuidanceData.ParentingGuideItem> items;
+    private List<ParentingGuidanceResponse.Result.ParentingGuideItem> items;
 
-    public ParentingGuideAdapter(List<ParentingGuidanceData.ParentingGuideItem> items) {
+    public ParentingGuideAdapter(List<ParentingGuidanceResponse.Result.ParentingGuideItem> items) {
         this.items = items;
     }
 
@@ -45,7 +45,7 @@ public class ParentingGuideAdapter extends BaseAdapter {
         TextView tv_title = view.findViewById(R.id.tv_title);
         TextView tv_content = view.findViewById(R.id.tv_content);
 
-        ParentingGuidanceData.ParentingGuideItem item = items.get(i);
+        ParentingGuidanceResponse.Result.ParentingGuideItem item = items.get(i);
         if (TextUtils.isEmpty(item.getCustomnurturetitle())){
             tv_title.setText(item.getNurturetitle());
             tv_content.setText(item.getNurturedesc());

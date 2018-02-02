@@ -15,12 +15,11 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.response.SubmitInfoResponse;
 import com.doumengmengandroidbady.util.GsonUtil;
+import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.view.BaseInfoLayout;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +37,6 @@ public class BaseInfoActivity extends BaseActivity {
     private ScrollView sv;
     private BaseInfoLayout base_info;
 
-    private RequestTask changeBaseInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,10 +96,15 @@ public class BaseInfoActivity extends BaseActivity {
         finish();
     }
 
+    private RequestTask changeBaseInfo;
     private void changeBaseInfo(){
         if ( base_info.checkBaseInfo() ){
             try {
-                changeBaseInfo = new RequestTask.Builder(this,changeBaseInfoCallBack).build();
+                changeBaseInfo = new RequestTask.Builder(this,changeBaseInfoCallBack)
+                        .setUrl(UrlAddressList.URL_SAVE_USER_INFO)
+                        .setType(RequestTask.DEFAULT)
+                        .setContent(buildChangeBaseInfoContent())
+                        .build();
                 changeBaseInfo.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -111,30 +114,23 @@ public class BaseInfoActivity extends BaseActivity {
         }
     }
 
+    private Map<String, String> buildChangeBaseInfoContent() {
+        InputUserInfo inputUserInfo = new InputUserInfo();
+        UserData userData = BaseApplication.getInstance().getUserData();
+        inputUserInfo.setUserId(userData.getUserid());
+        inputUserInfo.babyInfo = base_info.getBabyInfo();
+
+        String json = GsonUtil.getInstance().toJson(inputUserInfo);
+
+        Map<String,String> map = new HashMap<>();
+        map.put("paramStr",json);
+        map.put("sesId",userData.getSessionId());
+        return map;
+    }
 
     private final RequestCallBack changeBaseInfoCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_SAVE_USER_INFO;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            InputUserInfo inputUserInfo = new InputUserInfo();
-            UserData userData = BaseApplication.getInstance().getUserData();
-            inputUserInfo.setUserId(userData.getUserid());
-            inputUserInfo.babyInfo = base_info.getBabyInfo();
-
-            String json = GsonUtil.getInstance().toJson(inputUserInfo);
-
-            Map<String,String> map = new HashMap<>();
-            map.put("paramStr",json);
-            map.put("sesId",userData.getSessionId());
-            return map;
         }
 
         @Override
@@ -144,24 +140,18 @@ public class BaseInfoActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object =  new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                if ( 1 == res.optInt("isSaveUser") ){
-                    BaseApplication.getInstance().saveBabyInfo(base_info.getBabyInfo());
-                    startActivity(RecordActivity.class);
-                    back();
-                } else {
-                    //TODO ?
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            SubmitInfoResponse response = GsonUtil.getInstance().fromJson(result,SubmitInfoResponse.class);
+            if ( 1 == response.getResult().getIsSaveUser() ){
+                BaseApplication.getInstance().saveBabyInfo(base_info.getBabyInfo());
+                MyDialog.showPromptDialog(BaseInfoActivity.this, getString(R.string.change_base_info_content), new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        back();
+                    }
+                });
+            } else {
+                //TODO
             }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
         }
     };
 

@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
         <ImageView
             android:layout_width="@dimen/x31px"
-            android:layout_height="@dimen/y50px"
+            android:layout_height="@dimen/x50px"
             android:layout_alignParentLeft="true"
             android:background="@drawable/btn_back"
             android:layout_marginLeft="@dimen/x48px"

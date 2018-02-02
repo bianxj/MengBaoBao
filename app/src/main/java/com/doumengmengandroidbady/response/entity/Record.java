@@ -1,4 +1,4 @@
-package com.doumengmengandroidbady.response;
+package com.doumengmengandroidbady.response.entity;
 
 import com.google.gson.annotations.SerializedName;
 

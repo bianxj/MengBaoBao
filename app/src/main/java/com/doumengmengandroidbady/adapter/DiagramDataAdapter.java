@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.activity.DiagramDataActivity;
-import com.doumengmengandroidbady.response.ImageData;
+import com.doumengmengandroidbady.response.entity.ImageData;
 
 import java.util.List;
 

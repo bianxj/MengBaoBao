@@ -20,18 +20,16 @@ import com.doumengmengandroidbady.base.BaseFragment;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
-import com.doumengmengandroidbady.response.Record;
-import com.doumengmengandroidbady.response.RecordResult;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.Record;
+import com.doumengmengandroidbady.response.entity.RecordResult;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.response.AllRecordResponse;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -186,11 +184,22 @@ public class SpacialistServiceFragment extends BaseFragment {
     private RequestTask recordTask;
     private void getRecord(){
         try {
-            recordTask = new RequestTask.Builder(getActivity(),getRecordCallBack).build();
+            recordTask = new RequestTask.Builder(getActivity(),getRecordCallBack)
+                    .setUrl(UrlAddressList.URL_GET_ALL_RECORD)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildRecordContent())
+                    .build();
             recordTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+    }
+
+    private Map<String, String> buildRecordContent() {
+        Map<String ,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,userData.getUserid());
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        return map;
     }
 
     private final RequestCallBack getRecordCallBack = new RequestCallBack() {
@@ -200,46 +209,23 @@ public class SpacialistServiceFragment extends BaseFragment {
         }
 
         @Override
-        public String getUrl() {
-            return UrlAddressList.URL_GET_ALL_RECORD;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            Map<String ,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM,userData.getUserid());
-            map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
-            return map;
-        }
-
-        @Override
         public void onError(String result) {
 
         }
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                RecordResult recordResult = GsonUtil.getInstance().fromJson(res.toString(),RecordResult.class);
-                List<Record> list = recordResult.getRecordList();
+            AllRecordResponse response = GsonUtil.getInstance().fromJson(result, AllRecordResponse.class);
+            RecordResult result1 = response.getResult();
+            List<Record> list = result1.getRecordList();
 
-                records.clear();
-                for (Record record:list){
-                    record.setImageData(recordResult.getImgList());
-                    records.add(record);
-                }
-                adapter.notifyDataSetChanged();
-                xrv_record.setNoMore(true);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            records.clear();
+            for (Record record : list) {
+                record.setImageData(result1.getImgList());
+                records.add(record);
             }
-        }
-
-        @Override
-        public int type() {
-            return DEFAULT;
+            adapter.notifyDataSetChanged();
+            xrv_record.setNoMore(true);
         }
     };
 

@@ -3,13 +3,14 @@ package com.doumengmengandroidbady.base;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 
 import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
-import com.doumengmengandroidbady.response.DayList;
-import com.doumengmengandroidbady.response.ParentInfo;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.DayList;
+import com.doumengmengandroidbady.response.entity.ParentInfo;
+import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MLog;
 import com.doumengmengandroidbady.util.SharedPreferencesUtil;
@@ -36,7 +37,6 @@ import java.io.File;
  * 描述:
  * 创建日期:2017/12/2 12:55
  */
-
 public class BaseApplication extends Application {
 
     private static BaseApplication application;
@@ -98,6 +98,7 @@ public class BaseApplication extends Application {
     private void initImageLoader(){
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(configImageLoader());
+        clearImageLoaderCache();
     }
 
     private ImageLoaderConfiguration.Builder builder;
@@ -229,6 +230,9 @@ public class BaseApplication extends Application {
 
     public void saveParentInfo(InputUserInfo.ParentInfo parentInfo){
         ParentInfo info = getParentInfo();
+        if ( info == null ){
+            info = new ParentInfo();
+        }
         info.setDadBMI(parentInfo.getDadBMI());
         info.setDadEducation(parentInfo.getDadEducation());
         info.setDadWeight(parentInfo.getDadWeight());
@@ -390,25 +394,26 @@ public class BaseApplication extends Application {
     }
 
     public RoleType getRoleType(){
-        UserData data = getUserData();
-        String roleType = data.getRoletype();
-        if ( "3".equals(roleType) ) {
-            return RoleType.FREE_HOSPITAL_USER;
-        } else if ( "1".equals(roleType) ){
-            return RoleType.PAY_NET_USER;
-        } else if ( "2".equals(roleType) ){
-            return RoleType.PAY_HOSPITAL_USER;
-        } else {
-            return RoleType.FREE_NET_USER;
-        }
-//        return RoleType.PAY_NET_USER;
+//        UserData data = getUserData();
+//        String roleType = data.getRoletype();
+//        if ( "3".equals(roleType) ) {
+//            return RoleType.FREE_HOSPITAL_USER;
+//        } else if ( "1".equals(roleType) ){
+//            return RoleType.PAY_NET_USER;
+//        } else if ( "2".equals(roleType) ){
+//            return RoleType.PAY_HOSPITAL_USER;
+//        } else {
+//            return RoleType.FREE_NET_USER;
+//        }
+        return RoleType.FREE_HOSPITAL_USER;
     }
 
     private final static String PERSON_DIR = "person";
+    private final static String EXTERNAL_STORAGE_DIR = Environment.getExternalStorageDirectory().getPath() + File.separator + "doumegmeng";
     private final static String PERSON_HEAD_IMG = "headimg.jpg";
     public String getPersonHeadImgPath(){
-        String dirPath = getFilesDir().getPath()+File.separator+PERSON_DIR;
-//        String dirPath = Environment.getExternalStorageDirectory().getPath()+File.separator+PERSON_DIR;
+//        String dirPath = getFilesDir().getPath()+File.separator+PERSON_DIR;
+        String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
         File dir = new File(dirPath);
         if ( !dir.exists() || !dir.isDirectory() ){
             if ( !dir.mkdirs() ){

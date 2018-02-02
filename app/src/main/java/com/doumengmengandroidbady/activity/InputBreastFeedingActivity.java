@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -110,6 +111,25 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
     }
 
     private boolean checkData(){
+        String ml = et_input_data_one.getText().toString().trim();
+        String count = et_input_data_two.getText().toString().trim();
+
+        if ( TextUtils.isEmpty(ml) ) {
+            showPromptDialog("母乳喂养量不能为空");
+            return false;
+        }
+        if ( TextUtils.isEmpty(count) ) {
+            showPromptDialog("喂养次数不能为空");
+            return false;
+        }
+        if ( Float.parseFloat(ml) < 0  ){
+            showPromptDialog("母乳喂养量不能小于0");
+            return false;
+        }
+        if ( Float.parseFloat(count) < 0  ){
+            showPromptDialog("喂养次数不能小于0");
+            return false;
+        }
         return true;
     }
 }

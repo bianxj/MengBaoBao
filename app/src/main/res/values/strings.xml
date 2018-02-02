@@ -362,6 +362,26 @@
 
     <!--HospitalReportActivity-->
     <string name="hospital_report_title">婴幼儿生长发育监测评估报告单</string>
+    <string name="hospital_report_department">科室：%s</string>
+    <string name="hospital_report_child_code">儿童编号：%s</string>
+    <string name="hospital_report_name">姓名：%s</string>
+    <string name="hospital_report_gender">性别：%s</string>
+    <string name="hospital_report_birthday">出生日期：%s</string>
+    <string name="hospital_report_current_month">实足月龄：%s</string>
+    <string name="hospital_report_corrent_month">矫正月龄：%s</string>
+    <string name="hospital_report_height">身长：%scm</string>
+    <string name="hospital_report_weight">体重：%skg</string>
+    <string name="hospital_report_head">头围：%scm</string>
+    <string name="hospital_report_chest">胸围：%scm</string>
+    <string name="hospital_report_bmi">BMI：%scm</string>
+    <string name="hospital_report_weight_result">体重：%s</string>
+    <string name="hospital_report_height_result">身长：%s</string>
+    <string name="hospital_report_hw_result">身长体重比：%s</string>
+    <string name="hospital_report_other_result">神经心理、发育行为评估：%s</string>
+    <string name="hospital_report_doctor_name">送检医师：%s</string>
+    <string name="hospital_report_reporter_name">报告人：%s</string>
+    <string name="hospital_report_time">测量日期：%s</string>
+    <string name="hospital_report_develop">发育行为（%s个月）</string>
 
     <!--DiagramDataActivity-->
     <string name="diagram_data_date">日期</string>
@@ -386,7 +406,12 @@
     <string name="update_content">的用户正在使用新版本</string>
     <string name="change_pwd_content">修改密码成功</string>
     <string name="dialog_btn_go_on">继续</string>
-    
+
+    <string name="change_base_info_content">修改成功</string>
+    <string name="change_parent_info_content">修改成功</string>
+
+    <string name="dialog_content_open_location_service">请打开定位服务</string>
+
     <string name="dialog_title_notification">请允许我们向您发送通知</string>
     <string name="dialog_content_notification">让您不错过每一条育儿知识</string>
     <string name="dialog_updating">正在更新…</string>
@@ -473,6 +498,11 @@
         <item>香港特别行政区省</item>
         <item>澳门特别行政区</item>
         <item>台湾省</item>
+    </string-array>
+
+    <!--Observer-->
+    <string-array name="free_observe_content">
+        <item>0-3岁是孩子生长发育的高峰期，日长夜大。宝妈需要了解孩子的发育进程，对孩子可能出现的问题做到“早发现、早干预、早治疗”，让孩子健康成长。</item>
     </string-array>
 
 </resources>

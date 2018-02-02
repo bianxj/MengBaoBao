@@ -35,10 +35,13 @@ public class UrlAddressList {
     public final static String URL_GET_CURRENT_RECORD = BASE_URL  + "babyUser.do?method=GetCurrentRecord";
     public final static String URL_PARENTING_GUIDANCE = BASE_URL + "babyUser.do?method=ParentingGuidance";
 
-    public final static String URL_ALI_PAY = BASE_URL + "system.do?method=MbbAliPayGeneratingOrder";
-    public final static String URL_ALI_PAY_RESPONCE = BASE_URL + "system.do?method=MbbALiPay";
+    public final static String URL_PRE_ALI_PAY = BASE_URL + "system.do?method=MbbAliPayGeneratingOrder";
+    public final static String URL_PRE_IWX_PAY = BASE_URL + "";
+//    public final static String URL_ALI_PAY_RESPONCE = BASE_URL + "system.do?method=MbbALiPay";
 
-    public final static String URL_MENG_LESSION = "https://www.baidu.com";
+    public final static String URL_SEARCH_HOSPITAL_RECODR = BASE_URL + "babyUser.do?method=GetChildRecord";
+
+    public final static String URL_MENG_LESSION = "http://app.mengbaobao.com/class/index.html";
 
     public static String mergeUrlAndParam(String url , String value){
         String result = null;

@@ -300,7 +300,13 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <com.doumengmengandroidbady.view.GraphModule
+                android:id="@+id/graph_module"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y19px"></com.doumengmengandroidbady.view.GraphModule>
+
+<!--            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y96px"
                 android:layout_marginTop="@dimen/y19px"
@@ -335,7 +341,7 @@
                             android:src="@drawable/bg_boy_weight_data"
                             android:contentDescription="@string/contentDescription" />
 
-                        <com.doumengmengandroidbady.view.DiagramView
+                        <com.doumengmengandroidbady.view.GraphView
                             android:id="@+id/diagram_view"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -395,7 +401,7 @@
                         android:button="@null" />
 
                 </RelativeLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/ll_developmental_behavior"

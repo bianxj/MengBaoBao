@@ -22,7 +22,10 @@ import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.request.task.LoginTask;
+import com.doumengmengandroidbady.response.RegisterResponse;
+import com.doumengmengandroidbady.response.VCResponse;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
+import com.doumengmengandroidbady.util.GsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -120,7 +123,11 @@ public class RegisterActivity extends BaseActivity {
     private void getVerificationCode(){
         if ( checkVerificationCode() ) {
             try {
-                getVerificationTask = new RequestTask.Builder(this,getVerificationCodeCallBack).build();
+                getVerificationTask = new RequestTask.Builder(this,getVerificationCodeCallBack)
+                        .setUrl(UrlAddressList.URL_GET_VC)
+                        .setType(RequestTask.NO_PROMPT)
+                        .setContent(buildVcContent())
+                        .build();
                 getVerificationTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
@@ -128,21 +135,15 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
+    private Map<String, String> buildVcContent() {
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,et_phone.getText().toString());
+        return map;
+    }
+
     private final RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-        }
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_GET_VC;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM,et_phone.getText().toString());
-            return map;
         }
 
         @Override
@@ -152,19 +153,8 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                String verificationCode = res.optString("code");
-                BaseApplication.getInstance().saveRegisterVc(verificationCode);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public int type() {
-            return NO_PROMPT;
+            VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
+            BaseApplication.getInstance().saveRegisterVc(response.getResult().getCode());
         }
     };
 
@@ -203,7 +193,11 @@ public class RegisterActivity extends BaseActivity {
             if ( cb_agreement.isChecked() ){
                 //进入激活流程
                 try {
-                    registerTask = new RequestTask.Builder(this,registerCallBack).build();
+                    registerTask = new RequestTask.Builder(this,registerCallBack)
+                            .setUrl(UrlAddressList.URL_REGISTER)
+                            .setType(RequestTask.NO_PROMPT)
+                            .setContent(buildRegisterContent())
+                            .build();
                     registerTask.execute();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
@@ -216,30 +210,24 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
+    private Map<String, String> buildRegisterContent() {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("accountMobile",et_phone.getText().toString().trim());
+            object.put("loginPwd",et_login_pwd.getText().toString().trim());
+            object.put("code", BaseApplication.getInstance().getRegisterVc());
+            object.put("checkCode",et_vc.getText().toString().trim());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,object.toString());
+        return map;
+    }
+
     private final RequestCallBack registerCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {}
-
-        @Override
-        public String getUrl() {
-            return UrlAddressList.URL_REGISTER;
-        }
-
-        @Override
-        public Map<String, String> getContent() {
-            JSONObject object = new JSONObject();
-            try {
-                object.put("accountMobile",et_phone.getText().toString().trim());
-                object.put("loginPwd",et_login_pwd.getText().toString().trim());
-                object.put("code", BaseApplication.getInstance().getRegisterVc());
-                object.put("checkCode",et_vc.getText().toString().trim());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Map<String,String> map = new HashMap<>();
-            map.put(UrlAddressList.PARAM,object.toString());
-            return map;
-        }
 
         @Override
         public void onError(String result) {
@@ -248,23 +236,12 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                JSONObject object = new JSONObject(result);
-                JSONObject res = object.getJSONObject("result");
-                int isSuccess = res.getInt("isSuccess");
-                if ( 1 == isSuccess ){
-                    login();
-                } else {
-                    //TODO
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            RegisterResponse response = GsonUtil.getInstance().fromJson(result,RegisterResponse.class);
+            if ( 1 == response.getResult().getIsSuccess() ){
+                login();
+            } else {
+                //TODO
             }
-        }
-
-        @Override
-        public int type() {
-            return NO_PROMPT;
         }
     };
 

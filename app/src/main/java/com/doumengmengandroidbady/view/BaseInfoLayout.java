@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
-import com.doumengmengandroidbady.response.UserData;
+import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
 
 import java.util.ArrayList;

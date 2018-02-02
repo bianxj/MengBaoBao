@@ -13,15 +13,23 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.adapter.HospitalReportAdapter;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.base.BaseFragment;
-import com.doumengmengandroidbady.config.Config;
-import com.doumengmengandroidbady.entity.HospitalReport;
+import com.doumengmengandroidbady.net.UrlAddressList;
+import com.doumengmengandroidbady.request.RequestCallBack;
+import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.response.HospitalReportResponse;
+import com.doumengmengandroidbady.response.entity.HospitalReport;
+import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/11.
@@ -43,8 +51,15 @@ public class HospitalReportFragment extends BaseFragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        stopTask(searchHospitalRecordTask);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
+        initView();
         MobclickAgent.onPageStart(getClass().getSimpleName());
         MobclickAgent.onResume(getContext());
     }
@@ -60,7 +75,6 @@ public class HospitalReportFragment extends BaseFragment {
         xrv_report = view.findViewById(R.id.xrv_report);
         rl_back = view.findViewById(R.id.rl_back);
         tv_title = view.findViewById(R.id.tv_title);
-        initView();
     }
 
     private void initView(){
@@ -68,19 +82,6 @@ public class HospitalReportFragment extends BaseFragment {
         tv_title.setText(R.string.hospital_report);
 
         reports = new ArrayList<>();
-        if (Config.isTest){
-            for (int i = 0; i <10 ; i++) {
-                HospitalReport report = new HospitalReport();
-                report.setBmi("正常范围");
-                report.setWeight("正常范围");
-                report.setHeight("正常范围");
-                report.setDevelop("正常范围");
-                report.setHospitalName("医院"+i);
-                report.setMonthAge("月龄"+i);
-                report.setReportTime("时间"+i);
-                reports.add(report);
-            }
-        }
 
         xrv_report.setLoadingMoreEnabled(true);
         xrv_report.setFootView(new XLoadMoreFooter(getContext()));
@@ -90,6 +91,18 @@ public class HospitalReportFragment extends BaseFragment {
         xrv_report.setAdapter(hospitalReportAdapter);
         xrv_report.setLayoutManager(new LinearLayoutManager(getContext()));
         hospitalReportAdapter.notifyDataSetChanged();
+
+        searchHospitalRecord();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if ( !hidden ){
+            initView();
+        } else {
+            stopTask(searchHospitalRecordTask);
+        }
     }
 
     private final XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
@@ -104,6 +117,52 @@ public class HospitalReportFragment extends BaseFragment {
                     xrv_report.setNoMore(true);
                 }
             },2000);
+        }
+    };
+
+    private RequestTask searchHospitalRecordTask;
+    private void searchHospitalRecord(){
+        try {
+            searchHospitalRecordTask = new RequestTask.Builder(getContext(),searchHospitalRecordCallBack)
+                    .setUrl(UrlAddressList.URL_SEARCH_HOSPITAL_RECODR)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildSearchReportContent())
+                    .build();
+            searchHospitalRecordTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    public Map<String,String> buildSearchReportContent(){
+        UserData userData = BaseApplication.getInstance().getUserData();
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        map.put(UrlAddressList.PARAM,userData.getUserid());
+        return map;
+    }
+
+    private RequestCallBack searchHospitalRecordCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            HospitalReportResponse response = GsonUtil.getInstance().fromJson(result,HospitalReportResponse.class);
+
+            xrv_report.setNoMore(true);
+            reports.addAll(response.getResult().getChildRecordList());
+            for (HospitalReport report:reports){
+                report.setImageData(response.getResult().getImgList());
+            }
+            hospitalReportAdapter.notifyDataSetChanged();
         }
     };
 

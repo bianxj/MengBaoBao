@@ -23,11 +23,11 @@ import java.util.List;
  * 描述: 曲线图控件
  * 创建日期: 2018/1/19 9:31
  */
-public class DiagramView extends View {
+public class GraphView extends View {
 
     private final Context context;
-    private DiagramBaseInfo baseInfo;
-    private DiagramParam param;
+    private GraphBaseInfo baseInfo;
+    private GraphLine param;
     private Paint paint;
     private Paint whitePaint;
 
@@ -39,17 +39,17 @@ public class DiagramView extends View {
     private float xUnit;
     private float yUnit;
 
-    public DiagramView(Context context, @Nullable AttributeSet attrs) {
+    public GraphView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs,0);
     }
 
-    public DiagramView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public GraphView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         init();
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DiagramView,defStyleAttr,0);
-        originX = a.getDimension(R.styleable.DiagramView_origin_x,0);
-        originY = a.getDimension(R.styleable.DiagramView_origin_y,0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.GraphView,defStyleAttr,0);
+        originX = a.getDimension(R.styleable.GraphView_origin_x,0);
+        originY = a.getDimension(R.styleable.GraphView_origin_y,0);
         a.recycle();
     }
 
@@ -69,7 +69,7 @@ public class DiagramView extends View {
 //        paddingRight =
     }
 
-    public void setParam(DiagramBaseInfo baseInfo,DiagramParam param){
+    public void setParam(GraphBaseInfo baseInfo, GraphLine param){
         this.baseInfo = baseInfo;
         this.param = param;
         xUnit = baseInfo.getxLength()/baseInfo.getxCount();
@@ -80,8 +80,8 @@ public class DiagramView extends View {
         postInvalidate();
     }
 
-    private void updateLowerPoint(List<DiagramPoint> points , DiagramBaseInfo baseInfo){
-        for ( DiagramPoint point:points ){
+    private void updateLowerPoint(List<GraphPoint> points , GraphBaseInfo baseInfo){
+        for ( GraphPoint point:points ){
             if ( point.getX() < baseInfo.getLowerLimitX() ){
                 point.setX(baseInfo.getLowerLimitX());
             }
@@ -97,8 +97,8 @@ public class DiagramView extends View {
 
     public boolean hasRedLine(){
         if ( hasPointInDiagram(param.getRedLine()) ){
-            List<DiagramPoint> bluePoints = param.getBlueLine();
-            List<DiagramPoint> redPoints = param.getRedLine();
+            List<GraphPoint> bluePoints = param.getBlueLine();
+            List<GraphPoint> redPoints = param.getRedLine();
             for (int i = 0 ; i< bluePoints.size();i++) {
                 if (!isSamePoint(bluePoints.get(i), redPoints.get(i))) {
                     return true;
@@ -108,23 +108,23 @@ public class DiagramView extends View {
         return false;
     }
 
-    private boolean hasPointInDiagram(List<DiagramPoint> points){
+    private boolean hasPointInDiagram(List<GraphPoint> points){
         return !(points == null || points.size() <= 0);
     }
 
-    private boolean isPointInRange(DiagramPoint point){
+    private boolean isPointInRange(GraphPoint point){
         return !(point.getX() < baseInfo.getLowerLimitX()
                 || point.getY() < baseInfo.getLowerLimitY());
     }
 
-    private boolean isSamePoint(DiagramPoint p1 , DiagramPoint p2){
+    private boolean isSamePoint(GraphPoint p1 , GraphPoint p2){
         return p1.getY() == p2.getY() && p1.getX() == p2.getX();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if ( baseInfo.getBackground() != -1 ){
+        if ( baseInfo != null && baseInfo.getBackground() != -1 ){
             drawBackground(canvas);
         }
         if ( param != null ){
@@ -161,13 +161,13 @@ public class DiagramView extends View {
         drawPoints(canvas,param.getBlueLine(),paint);
     }
 
-    private void drawPoints(Canvas canvas,List<DiagramPoint> points,Paint paint){
+    private void drawPoints(Canvas canvas, List<GraphPoint> points, Paint paint){
         for (int i = 0; i < points.size(); i++) {
             drawPoint(canvas,points.get(i),paint);
         }
     }
 
-    private void drawLineList(Canvas canvas ,List<DiagramPoint> points,Paint paint){
+    private void drawLineList(Canvas canvas , List<GraphPoint> points, Paint paint){
         paint.setStrokeWidth(strokeWidth);
         if ( points.size() >= 2 ) {
             for (int i = 0; i < points.size() - 1; i++) {
@@ -176,7 +176,7 @@ public class DiagramView extends View {
         }
     }
 
-    private void drawLine(Canvas canvas, DiagramPoint p1 , DiagramPoint p2 , Paint paint){
+    private void drawLine(Canvas canvas, GraphPoint p1 , GraphPoint p2 , Paint paint){
         float startX = (p1.x-baseInfo.getLowerLimitX())*xUnit+originX;
         float startY = getHeight()-(p1.y-baseInfo.getLowerLimitY())*yUnit-originY;
         float stopX = (p2.x-baseInfo.getLowerLimitX())*xUnit+originX;
@@ -184,46 +184,46 @@ public class DiagramView extends View {
         canvas.drawLine(startX,startY,stopX,stopY,paint);
     }
 
-    private void drawPoint(Canvas canvas,DiagramPoint p,Paint paint){
+    private void drawPoint(Canvas canvas, GraphPoint p, Paint paint){
         float cx = (p.getX()-baseInfo.getLowerLimitX())*xUnit+originX;
         float cy = getHeight()-(p.getY()-baseInfo.getLowerLimitY())*yUnit-originY;
 //        canvas.drawCircle(cx,cy,outerRadius,whitePaint);
-        if ( p.getType() != 1 ){
-            canvas.drawCircle(cx,cy,radius,paint);
-            canvas.drawCircle(cx, cy, innerRadius, whitePaint);
-        } else {
+        if ( p.getType() != 2 ){
             canvas.drawCircle(cx,cy,radius,whitePaint);
             canvas.drawCircle(cx, cy, innerRadius, paint);
+        } else {
+            canvas.drawCircle(cx,cy,radius,paint);
+            canvas.drawCircle(cx, cy, innerRadius, whitePaint);
         }
     }
 
-    public static class DiagramParam{
-        private List<DiagramPoint> blueLine;
-        private List<DiagramPoint> redLine;
+    public static class GraphLine {
+        private List<GraphPoint> blueLine;
+        private List<GraphPoint> redLine;
 
-        public DiagramParam() {
+        public GraphLine() {
             blueLine = new ArrayList<>();
             redLine = new ArrayList<>();
         }
 
-        public List<DiagramPoint> getBlueLine() {
+        public List<GraphPoint> getBlueLine() {
             return blueLine;
         }
 
-        public void setBlueLine(List<DiagramPoint> blueLine) {
+        public void setBlueLine(List<GraphPoint> blueLine) {
             this.blueLine = blueLine;
         }
 
-        public List<DiagramPoint> getRedLine() {
+        public List<GraphPoint> getRedLine() {
             return redLine;
         }
 
-        public void setRedLine(List<DiagramPoint> redLine) {
+        public void setRedLine(List<GraphPoint> redLine) {
             this.redLine = redLine;
         }
     }
 
-    public static class DiagramBaseInfo{
+    public static class GraphBaseInfo {
         private int lowerLimitX;
         private int lowerLimitY;
         private int upperLimitX;
@@ -298,12 +298,12 @@ public class DiagramView extends View {
 
     }
 
-    public static class DiagramPoint{
+    public static class GraphPoint {
         private int x;
         private int y;
         private int type;
 
-        public DiagramPoint(int x, int y, int type) {
+        public GraphPoint(int x, int y, int type) {
             this.x = x;
             this.y = y;
             this.type = type;

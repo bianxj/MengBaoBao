@@ -18,6 +18,14 @@ import java.util.Map;
  */
 
 public class RequestTask extends AsyncTask<String,Void,String> {
+    public final static int JSON = 0x001;
+    public final static int PROMPT = 0x010;
+    public final static int LOADING = 0x100;
+
+    public final static int DEFAULT = JSON | PROMPT | LOADING;
+    public final static int NO_PROMPT = JSON | LOADING;
+    public final static int NO_LOADING = JSON | PROMPT;
+    public final static int NO_JSON = LOADING | PROMPT;
 
     private final static boolean isTest = false;
 
@@ -32,7 +40,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        if ( isSelectFlag(builder.getCallBack().type(),RequestCallBack.LOADING) ) {
+        if ( isSelectFlag(builder.getType(),LOADING) ) {
             handler = new Handler();
             runnable = new Runnable() {
                 @Override
@@ -49,8 +57,8 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... strings) {
         String result;
         if (!isTest) {
-            String url = builder.getCallBack().getUrl();
-            Map<String,String> map = builder.getCallBack().getContent();
+            String url = builder.getUrl();
+            Map<String,String> map = builder.getContent();
             result = HttpUtil.getInstance().httpsRequestPost(url,map);
         }
         return result;
@@ -62,13 +70,13 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         if ( handler != null ){
             handler.removeCallbacks(runnable);
         }
-        if ( isSelectFlag(builder.getCallBack().type(),RequestCallBack.LOADING) ) {
+        if ( isSelectFlag(builder.getType(),LOADING) ) {
             MyDialog.dismissLoadingDialog();
         }
         if ( isTest ){
             builder.getCallBack().onPostExecute(s);
         } else {
-            if ( !isSelectFlag(builder.getCallBack().type(),RequestCallBack.JSON) ){
+            if ( !isSelectFlag(builder.getType(),JSON) ){
                 builder.getCallBack().onPostExecute(s);
             } else {
                 if (!isError(s)) {
@@ -102,7 +110,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
             return false;
         } else {
             if ( !isLoginTimeOut(json) ) {
-                if (isSelectFlag(builder.getCallBack().type(), RequestCallBack.PROMPT)) {
+                if (isSelectFlag(builder.getType(), PROMPT)) {
                     errorDispose(errorMsg);
                 }
             }
@@ -123,6 +131,9 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
     public static class Builder{
 
+        private String url;
+        private Map<String,String> content;
+        private int type;
         private WeakReference<Context> weakReference;
         private RequestCallBack callBack;
 
@@ -145,6 +156,33 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
         public void setWeakReference(Context context) {
             this.weakReference = new WeakReference<>(context);
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public Builder setUrl(String url) {
+            this.url = url;
+            return this;
+        }
+
+        public Map<String, String> getContent() {
+            return content;
+        }
+
+        public Builder setContent(Map<String, String> content) {
+            this.content = content;
+            return this;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public Builder setType(int type) {
+            this.type = type;
+            return this;
         }
 
         public RequestTask build() throws Throwable {

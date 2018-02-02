@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.doumengmengandroidbady.response.MengClass;
+import com.doumengmengandroidbady.response.entity.MengClass;
 
 import java.util.List;
 

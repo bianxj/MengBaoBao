@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -99,6 +100,29 @@ public class InputCacationActivity extends BaseInputDataActivity {
     }
 
     private boolean checkData(){
+        String day = et_input_data_one.getText().toString();
+        String count = et_input_data_two.getText().toString();
+
+        if (TextUtils.isEmpty(day)){
+            showPromptDialog("天数不能为空");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(count)){
+            showPromptDialog("次数不能为空");
+            return false;
+        }
+
+        if ( Integer.parseInt(day) < 0 ){
+            showPromptDialog("天数不能小于0");
+            return false;
+        }
+
+        if ( Integer.parseInt(count) < 0 ){
+            showPromptDialog("次数不能小于0");
+            return false;
+        }
+
         return true;
     }
 }
