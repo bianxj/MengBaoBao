@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
@@ -161,6 +162,8 @@ public class InputInfoActivity extends BaseActivity {
                 BaseApplication.getInstance().saveBabyInfo(baby_info.getBabyInfo());
                 BaseApplication.getInstance().saveParentInfo(parent_info.getParentInfo());
                 BaseApplication.getInstance().saveDayList(response.getResult().getDayList());
+
+                DaoManager.getInstance().getGrowthDao().saveGrowthList(InputInfoActivity.this,response.getResult().getGrowthList());
                 startActivity(RecordActivity.class);
             } else {
                 //TODO

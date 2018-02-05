@@ -1,6 +1,9 @@
 package com.doumengmengandroidbady.response;
 
 import com.doumengmengandroidbady.response.entity.DayList;
+import com.doumengmengandroidbady.response.entity.Growth;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/1/31.
@@ -21,6 +24,7 @@ public class SubmitInfoResponse extends BaseResponse {
     public static class Result{
         private int isSaveUser;
         private DayList DayList;
+        private List<Growth> GrowthList;
 
         public int getIsSaveUser() {
             return isSaveUser;
@@ -36,6 +40,14 @@ public class SubmitInfoResponse extends BaseResponse {
 
         public void setDayList(DayList dayList) {
             DayList = dayList;
+        }
+
+        public List<Growth> getGrowthList() {
+            return GrowthList;
+        }
+
+        public void setGrowthList(List<Growth> growthList) {
+            GrowthList = growthList;
         }
     }
 
