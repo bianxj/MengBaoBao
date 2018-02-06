@@ -38,6 +38,7 @@
     <color name="linkLightPink">#FEF1F7</color>
     <color name="linePink">#FFD6EB</color>
     <color name="linkPink">#EF4399</color>
+    <color name="translucenceLinkPink">#33EF4399</color>
 
     <color name="btmMenuColor">#EF4399</color>
     <color name="circleFrame">#DE3B93</color>

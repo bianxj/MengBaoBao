@@ -45,7 +45,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/milliliter"
+                    android:text="@string/ml_chinese"
                     style="@style/FirstGray.Text26px"
                     android:layout_marginLeft="@dimen/x18px"
                     android:layout_centerVertical="true"
@@ -98,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/count_day"
+                        android:text="@string/record_count_day"
                         style="@style/FirstGray.Text26px"
                         android:layout_marginLeft="@dimen/x18px"
                         />

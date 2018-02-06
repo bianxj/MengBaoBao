@@ -149,6 +149,7 @@ public class PictureAdapter extends BaseAdapter {
             if ( smallBitmap == null ){
                 DisplayMetrics display = BaseApplication.getInstance().getDisplayInfo();
                 smallBitmap = PictureUtils.getSmallBitmap(picturePath,display.widthPixels,display.heightPixels);
+                smallBitmap = PictureUtils.rotateToPortrait(smallBitmap);
             }
             return smallBitmap;
         }

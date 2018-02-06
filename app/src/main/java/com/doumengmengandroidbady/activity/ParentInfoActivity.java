@@ -103,6 +103,7 @@ public class ParentInfoActivity extends BaseActivity {
     private boolean checkData(){
         if ( !parent_info.checkParentInfo() ){
             //TODO
+            return false;
         }
         return true;
     }

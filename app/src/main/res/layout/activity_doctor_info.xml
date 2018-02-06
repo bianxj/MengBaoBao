@@ -96,7 +96,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/speciality"
+                            android:text="@string/doctor_info_speciality"
                             style="@style/ThirdBlack.Text28px"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x55px"
@@ -135,7 +135,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/introduce"
+                            android:text="@string/doctor_info_introduce"
                             style="@style/ThirdBlack.Text28px"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/x55px"
@@ -161,7 +161,7 @@
         android:layout_height="@dimen/y83px"
         android:background="@color/linkPink"
         android:layout_alignParentBottom="true"
-        android:text="@string/choose_me"
+        android:text="@string/doctor_info_choose_me"
         style="@style/FirstWhite.Text34px"
         />
 

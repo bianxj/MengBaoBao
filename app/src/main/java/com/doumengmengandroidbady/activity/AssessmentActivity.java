@@ -65,7 +65,7 @@ public class AssessmentActivity extends BaseActivity {
     private GraphModule graph_module;
 
     //发育行为
-    private LinearLayout ll_developmental_behavior;
+//    private LinearLayout ll_developmental_behavior;
     private LinearLayout ll_developmental_content;
     private TextView tv_developmental_title;
 
@@ -129,7 +129,7 @@ public class AssessmentActivity extends BaseActivity {
         graph_module = findViewById(R.id.graph_module);
 
         //发育行为
-        ll_developmental_behavior = findViewById(R.id.ll_developmental_behavior);
+//        ll_developmental_behavior = findViewById(R.id.ll_developmental_behavior);
         ll_developmental_content = findViewById(R.id.ll_developmental_content);
         tv_developmental_title = findViewById(R.id.tv_developmental_title);
 

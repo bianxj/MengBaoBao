@@ -40,7 +40,6 @@
                 android:id="@+id/tv_cancel"
                 android:layout_width="@dimen/x264px"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 style="@style/SecondPink.Text34px"
                 android:gravity="center"
                 android:layout_alignParentLeft="true"

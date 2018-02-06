@@ -77,16 +77,16 @@
     <string name="parent_info">父母信息</string>
 
     <!--ContactActivity信息-->
-    <string name="hotline">客服热线</string>
-    <string name="hotline_phone">021–64335531</string>
-    <string name="work_time">周一至周五9:00~17:00</string>
+    <string name="contact_hotline">客服热线</string>
+    <string name="contact_hotline_phone">021–64335531</string>
+    <string name="contact_work_time">周一至周五9:00~17:00</string>
 
     <!--AboutActivity信息-->
-    <string name="company_name">上海豆蒙萌健康管理咨询有限公司</string>
-    <string name="company_location">上海市漕溪北路737弄1号楼3202室</string>
-    <string name="company_phone">400–876-6060</string>
-    <string name="company_mail">customerservice@mengbaobao.com</string>
-    <string name="company_website">www.mengbaobao.com</string>
+    <string name="about_company_name">上海豆蒙萌健康管理咨询有限公司</string>
+    <string name="about_company_location">上海市徐汇区南丹东路300弄9号亚都商务楼409室</string>
+    <string name="about_company_phone">021-64335531</string>
+    <string name="about_company_mail">customerservice@mengbaobao.com</string>
+    <string name="about_company_website">www.mengbaobao.com</string>
 
     <!--SettingActivity信息-->
     <string name="change_pwd">修改密码</string>
@@ -109,19 +109,17 @@
     <string name="history_search">历史搜索</string>
 
     <!--DoctorInfoActivity信息-->
-    <string name="choose_me">选我</string>
-    <string name="speciality">擅长</string>
-    <string name="introduce">医生介绍</string>
+    <string name="doctor_info_choose_me">选我</string>
+    <string name="doctor_info_speciality">擅长</string>
+    <string name="doctor_info_introduce">医生介绍</string>
 
     <!--HeightInputActivity信息-->
-    <string name="cent">厘米</string>
     <string name="height_reference_value">参考值：85.11~97.33厘米</string>
     <string name="height_title">家庭正确的身长测量方法</string>
     <string name="height_content">3岁之前的宝宝应采用仰卧位测量，称为身长。\n脱去帽、鞋、袜，穿单衣仰卧于量床底板中线上。\n助手将头扶正，头顶接触头版，宝宝面向上。\n测量者位于宝宝右侧，左手握住双膝，使腿伸直，右手移动足板使其接触两侧足跟。\n（图示，此方法较精准的测量请在医院进行）</string>
 
 
     <!--WeightInputActivity信息-->
-    <string name="kilograme">公斤</string>
     <string name="weight_reference_value">参考值：10.6~15.31公斤</string>
     <string name="weight_title">家庭正确的体重测量方法</string>
     <string name="weight_content">测量体重尽量在相同的室温下，尽量在26~28°c。\n测量前应检查磅秤的零点。在宝宝空腹、排空大小便，裸体或穿背心的情况下进行。\n如果条件不允许脱成单衣单裤，应设法扣除衣物重量，取得净重。\n称体重时，婴儿可卧位（图示）</string>
@@ -144,16 +142,12 @@
     <string name="chest_content">采用无伸缩性软尺测量\n让宝宝卧位或立位姿势（可扶立时）\n测量者于宝宝前方或右侧，左手拇指固定软尺零点于宝宝右侧乳头下缘，右手持软尺贴宝宝胸壁，经右侧腋下、肩胛下角下缘、左侧腋下、左侧乳头回至零点，读与零点交叉刻度，取平静呼、吸气的中间读数，精确至0.1厘米 胸围反映胸廓、胸背部肌肉、皮下脂肪和肺的发育 。</string>
 
     <!--InputCacationActivity-->
-    <string name="day">天</string>
-    <string name="count">次</string>
     <string name="cacation_content">你一开始让宝宝进食固体食物，宝宝的大便会更硬，颜色也会发生变化。 由于糖和脂肪的进食量增加，所以气味也更臭；豆类和其他蔬菜可</string>
 
     <!--MicturitionInputActivity-->
-    <string name="day_count">天/次</string>
-    <string name="micturition_content">宝宝每1–3小时就可能需要排尿，母乳喂养的宝宝 每日6-7次，次数较少时可能每天4-6次。 如果生病了或是发热以及天气炎热时</string>
+    <string name="micturition_content">宝宝每1–3小时就可能需要排尿，母乳喂养的宝宝 每日6–7次，次数较少时可能每天4-6次。 如果生病了或是发热以及天气炎热时</string>
 
     <!--NightSleepInputActivity-->
-    <string name="hour_day">小时/天</string>
     <string name="night_sleep_time">夜间睡眠时间</string>
     <string name="night_sleep_content">参考值：平均夜间睡眠时间为11个小时，平均日间睡眠时间为2.5小时，平均总计睡眠时间13.5小时。</string>
 
@@ -162,7 +156,6 @@
     <string name="day_sleep_content">参考值：平均夜间睡眠时间为11个小时，平均日间睡眠时间为2.5小时，平均总计睡眠时间13.5小时。</string>
 
     <!--BrestFeedingActivity-->
-    <string name="milliliter">毫升</string>
     <string name="brest_fedding_count">人乳喂养次数</string>
     <string name="brest_reference_value">参考值：300~400毫升</string>
     <string name="brest_fedding_title">母乳喂养</string>
@@ -265,9 +258,6 @@
     <string name="mother_weight">体重（母亲）</string>
     <string name="mother_BMI">BMI（母亲）</string>
 
-    <string name="cm">cm</string>
-    <string name="kg">kg</string>
-    <string name="age">岁</string>
 
     <!--ObserveActivity-->
     <string name="oberve_matter">观察要点</string>
@@ -277,65 +267,61 @@
 
     <!--ScanActivity-->
     <string name="scan">扫码</string>
-    <string name="photo_album">相册</string>
+    <string name="scan_photo_album">相册</string>
     <string name="scan_hint">对准二维码</string>
 
     <!--RecordActivity-->
-    <string name="week">周</string>
     <string name="record">记录</string>
     <string name="record_month_age">%s个月%s天</string>
 
-    <string name="really_month">实际月龄:</string>
-    <string name="correct_month">矫正月龄</string>
-    <string name="measure_info">测量信息</string>
-    <string name="head_circumference">头围</string>
-    <string name="chest_circumference">胸围</string>
-    <string name="cacation">排便</string>
-    <string name="micturition">排尿</string>
-    <string name="count_day">次/天</string>
-    <string name="night_sleep">夜间睡眠</string>
-    <string name="day_sleep">日间睡眠</string>
+    <string name="record_really_month">实际月龄:</string>
+    <string name="record_correct_month">矫正月龄</string>
+    <string name="record_measure_info">测量信息</string>
+    <string name="record_head_circumference">头围</string>
+    <string name="record_chest_circumference">胸围</string>
+    <string name="record_cacation">排便</string>
+    <string name="record_micturition">排尿</string>
+    <string name="record_count_day">次/天</string>
+    <string name="record_night_sleep">夜间睡眠</string>
+    <string name="record_day_sleep">日间睡眠</string>
 
-    <string name="fedding_info">喂养情况</string>
-    <string name="breastfeeding_title">母乳喂养</string>
-    <string name="breastfeeding">人乳喂养量</string>
-    <string name="breastfeeding_count">人乳喂养次数</string>
-    <string name="formula_milk_title">配方奶喂养</string>
-    <string name="formula_milk">配方奶喂养量</string>
-    <string name="formula_milk_count">配方奶喂养次数</string>
-    <string name="ml_count">毫升/次</string>
+    <string name="record_fedding_info">喂养情况</string>
+    <string name="record_breastfeeding_title">母乳喂养</string>
+    <string name="record_breastfeeding">人乳喂养量</string>
+    <string name="record_breastfeeding_count">人乳喂养次数</string>
+    <string name="record_formula_milk_title">配方奶喂养</string>
+    <string name="record_formula_milk">配方奶喂养量</string>
+    <string name="record_formula_milk_count">配方奶喂养次数</string>
     
-    <string name="assisted_food_add">辅食添加</string>
-    <string name="milk">牛奶</string>
-    <string name="milk_powder">奶粉</string>
-    <string name="ml_day">毫升/日</string>
-    <string name="flour">米粉</string>
-    <string name="food">面食</string>
-    <string name="porridge">粥</string>
-    <string name="rice">饭</string>
-    <string name="meat">荤菜（鱼肉肝）</string>
-    <string name="egg">全蛋或蛋黄</string>
-    <string name="bean">豆制品</string>
-    <string name="vegetables">蔬菜</string>
-    <string name="fruit">水果</string>
-    <string name="water">水</string>
-    <string name="vitamin">维生素</string>
-    <string name="calcium">钙</string>
-    <string name="appetite">食欲</string>
-    <string name="other">其他</string>
-    <string name="product_name">品名</string>
-    <string name="dosage">剂量</string>
-    <string name="gram_day">克/日</string>
-    <string name="mg_day">毫克/日</string>
+    <string name="record_assisted_food_add">辅食添加</string>
+    <string name="record_milk">牛奶</string>
+    <string name="record_milk_powder">奶粉</string>
+    <string name="record_ml_day">毫升/日</string>
+    <string name="record_flour">米粉</string>
+    <string name="record_food">面食</string>
+    <string name="record_porridge">粥</string>
+    <string name="record_rice">饭</string>
+    <string name="record_meat">荤菜（鱼肉肝）</string>
+    <string name="record_egg">全蛋或蛋黄</string>
+    <string name="record_bean">豆制品</string>
+    <string name="record_vegetables">蔬菜</string>
+    <string name="record_fruit">水果</string>
+    <string name="record_water">水</string>
+    <string name="record_vitamin">维生素</string>
+    <string name="record_calcium">钙</string>
+    <string name="record_appetite">食欲</string>
+    <string name="record_other">其他</string>
+    <string name="record_product_name">品名</string>
+    <string name="record_dosage">剂量</string>
 
-    <string name="good">好</string>
-    <string name="mid">中</string>
-    <string name="bad">差</string>
+    <string name="record_good">好</string>
+    <string name="record_mid">中</string>
+    <string name="record_bad">差</string>
 
-    <string name="developmental_hehavior">发育行为观察</string>
+    <string name="record_developmental_hehavior">发育行为观察</string>
 
-    <string name="parent_message">家长留言板</string>
-    <string name="upload_report">上传报告</string>
+    <string name="record_parent_message">家长留言板</string>
+    <string name="record_upload_report">上传报告</string>
 
     <!--InputInfoActivity-->
     <string name="input_info">填写信息</string>
@@ -382,6 +368,15 @@
     <string name="hospital_report_reporter_name">报告人：%s</string>
     <string name="hospital_report_time">测量日期：%s</string>
     <string name="hospital_report_develop">发育行为（%s个月）</string>
+    <string name="hospital_report_measure_info">测量信息</string>
+    <string name="hospital_report_feeding_type">喂养方式</string>
+    <string name="hospital_report_develop_history"></string>
+    <string name="hospital_report_ill_history"></string>
+    <string name="hospital_report_current_ill_history"></string>
+    <string name="hospital_report_who">生长评价均数标准差结果（WHO）</string>
+    <string name="hospital_report_result">评价结果</string>
+    <string name="hospital_report_doctor_success">医生建议</string>
+    <string name="hospital_report_reference">本报告仅供临床参考</string>
 
     <!--DiagramDataActivity-->
     <string name="diagram_data_date">日期</string>
@@ -400,6 +395,8 @@
     <string name="dialog_content_location_permission">定位服务为开启,请在系统中开启定位服务</string>
     <string name="dialog_content_read_phone_permission">请打开电话权限</string>
     <string name="dialog_price">￥%s</string>
+    <string name="dialog_year_month_day">%d-%02d-%02d</string>
+    <string name="dialog_minute_second">%d:%02d</string>
     <string name="dialog_btn_prompt_later">暂不</string>
     <string name="dialog_btn_prompt_go_setting">去设置</string>
     
@@ -502,7 +499,7 @@
 
     <!--Observer-->
     <string-array name="free_observe_content">
-        <item>0-3岁是孩子生长发育的高峰期，日长夜大。宝妈需要了解孩子的发育进程，对孩子可能出现的问题做到“早发现、早干预、早治疗”，让孩子健康成长。</item>
+        <item>0–3岁是孩子生长发育的高峰期，日长夜大。宝妈需要了解孩子的发育进程，对孩子可能出现的问题做到“早发现、早干预、早治疗”，让孩子健康成长。</item>
     </string-array>
 
 </resources>

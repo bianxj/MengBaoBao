@@ -28,7 +28,7 @@ public class InputCacationActivity extends BaseInputDataActivity {
     public final static String OUT_PARAM_CACATION_COUNT = "cacation_count";
 
     private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title,tv_complete;
+    private TextView tv_title;
 
     private LinearLayout ll_content;
     private EditText et_input_data_one,et_input_data_two;
@@ -43,7 +43,6 @@ public class InputCacationActivity extends BaseInputDataActivity {
         rl_back = findViewById(R.id.rl_back);
         rl_complete = findViewById(R.id.rl_complete);
         tv_title = findViewById(R.id.tv_title);
-        tv_complete = findViewById(R.id.tv_complete);
 
         et_input_data_one = findViewById(R.id.et_input_data_one);
         et_input_data_two = findViewById(R.id.et_input_data_two);
@@ -52,7 +51,7 @@ public class InputCacationActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.cacation);
+        tv_title.setText(R.string.record_cacation);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);

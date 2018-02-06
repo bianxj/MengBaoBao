@@ -8,8 +8,6 @@ import android.widget.EditText;
 
 
 public class EditTextUtil {
-    private int selectionStart;
-    private int selectionEnd;
     private final EditText editText;
 
     public EditTextUtil(EditText editText) {
@@ -30,8 +28,8 @@ public class EditTextUtil {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            selectionStart = editText.getSelectionStart();
-            selectionEnd = editText.getSelectionEnd();
+            int selectionStart = editText.getSelectionStart();
+            int selectionEnd = editText.getSelectionEnd();
             if (!FormatCheckUtil.isOnlyPointNumber(editText.getText().toString()) && selectionStart > 0){
                 //删除多余输入的字（不会显示出来）
                 editable.delete(selectionStart - 1, selectionEnd);

@@ -25,7 +25,7 @@ public class InputMicturitionActivity extends BaseInputDataActivity {
     public final static String OUT_PARAM_MICTURITION = "micturition";
 
     private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title,tv_complete;
+    private TextView tv_title;
 
     private EditText et_input_data;
     private LinearLayout ll_content;
@@ -40,7 +40,6 @@ public class InputMicturitionActivity extends BaseInputDataActivity {
         rl_back = findViewById(R.id.rl_back);
         rl_complete = findViewById(R.id.rl_complete);
         tv_title = findViewById(R.id.tv_title);
-        tv_complete = findViewById(R.id.tv_complete);
 
         et_input_data = findViewById(R.id.et_input_data_two);
         ll_content = findViewById(R.id.ll_content);
@@ -48,7 +47,7 @@ public class InputMicturitionActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.micturition);
+        tv_title.setText(R.string.record_micturition);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);

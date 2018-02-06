@@ -63,6 +63,12 @@ public class HeadImageActivity extends BaseActivity {
         findView();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTask(uploadHeadImageTask);
+    }
+
     private void findView(){
         rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);

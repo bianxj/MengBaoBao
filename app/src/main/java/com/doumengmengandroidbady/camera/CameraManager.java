@@ -33,7 +33,7 @@ public class CameraManager {
     private final Context context;
     private final CameraConfigurationManager configManager;
 
-    private final int requestedCameraId = OpenCameraInterface.NO_REQUESTED_CAMERA;
+//    private final int requestedCameraId = OpenCameraInterface.NO_REQUESTED_CAMERA;
     private OpenCamera camera;
     private boolean initialized;
     private boolean previewing;
@@ -64,7 +64,7 @@ public class CameraManager {
     public synchronized void openDriver(SurfaceHolder holder) throws IOException {
         OpenCamera theCamera = camera;
         if (theCamera == null) {
-            theCamera = OpenCameraInterface.open(requestedCameraId);
+            theCamera = OpenCameraInterface.open(OpenCameraInterface.NO_REQUESTED_CAMERA);
             if (theCamera == null) {
                 throw new IOException("Camera.open() failed to return object from driver");
             }

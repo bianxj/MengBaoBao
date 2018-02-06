@@ -229,7 +229,8 @@
                     android:background="@drawable/bg_circle_edittext"
                     android:labelFor="@+id/et_week"
                     android:inputType="number"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:nextFocusDown="@+id/et_day"/>
 
                 <TextView
                     style="@style/FirstGray.Text26px"
@@ -237,7 +238,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x8px"
                     android:layout_marginRight="@dimen/x16px"
-                    android:text="@string/week" />
+                    android:text="@string/week_chinese" />
 
                 <EditText
                     android:id="@+id/et_day"
@@ -254,7 +255,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x8px"
-                    android:text="@string/day" />
+                    android:text="@string/day_chinese" />
             </LinearLayout>
 
             <View
@@ -431,7 +432,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/count" />
+                android:text="@string/count_chinese" />
 
             <View
                 android:layout_width="match_parent"
@@ -477,7 +478,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/count" />
+                android:text="@string/count_chinese" />
 
             <View
                 android:layout_width="match_parent"
@@ -523,7 +524,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/age" />
+                android:text="@string/age_chinese" />
 
             <View
                 android:layout_width="match_parent"

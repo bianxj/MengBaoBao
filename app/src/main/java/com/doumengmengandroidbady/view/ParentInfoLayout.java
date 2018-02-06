@@ -35,7 +35,7 @@ public class ParentInfoLayout extends LinearLayout {
         EDITABLE_NO_MARK
     }
 
-    private Context context;
+//    private Context context;
 
     private List<View> markList;
 
@@ -65,7 +65,7 @@ public class ParentInfoLayout extends LinearLayout {
     }
 
     private void initInfoView(Context context){
-        this.context = context;
+//        this.context = context;
         View view = LayoutInflater.from(context).inflate(R.layout.view_parent_info,null);
         addView(view);
         findView();

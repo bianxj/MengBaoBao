@@ -87,7 +87,7 @@ public class GraphModule extends LinearLayout {
         HW
     }
 
-    private Map<GRAPH_TYPE,GraphData> dataMap = new HashMap<>();
+    private final Map<GRAPH_TYPE,GraphData> dataMap = new HashMap<>();
 
     private void initGraphData(){
         dataMap.put(GRAPH_TYPE.WEIGHT,buildGraphData(0,0,1080,3000,R.dimen.x600px,R.dimen.x622px));

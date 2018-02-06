@@ -34,7 +34,7 @@ public class ObserveActivity extends BaseActivity {
     private ImageView iv_ad;
     private Button bt_buy;
 
-    private List<String> contents;
+//    private List<String> contents;
     private ListView lv_observe;
     private ObserveAdapter adapter;
 
@@ -56,6 +56,7 @@ public class ObserveActivity extends BaseActivity {
     }
 
     private void initView() {
+        List<String> contents = null;
         if ( BaseApplication.getInstance().getRoleType() == RoleType.FREE_NET_USER || BaseApplication.getInstance().getRoleType() == RoleType.FREE_HOSPITAL_USER){
             //免费用户
             contents = new ArrayList<>();

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -194,9 +195,18 @@ public class PictureUtils {
      * @return
      */
     private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
+        int height;
+        int width;
         int inSampleSize = 1;
+
+        if ( options.outHeight > options.outWidth ){
+            height = options.outHeight;
+            width = options.outWidth;
+        } else {
+            height = options.outWidth;
+            width = options.outHeight;
+        }
+
         if (height > reqHeight || width > reqWidth) {
             final int heightRatio = Math.round((float) height
                     / (float) reqHeight);
@@ -239,6 +249,23 @@ public class PictureUtils {
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(filePath, options);
+    }
+
+    public static Bitmap rotateToPortrait(Bitmap bitmap){
+        int height = bitmap.getHeight();
+        int width = bitmap.getWidth();
+        if ( height < width ){
+            Matrix matrix = new Matrix();
+            matrix.setRotate(90F);
+            Bitmap rotateBitmap = Bitmap.createBitmap(bitmap,0,0,width,height,matrix,false);
+            if ( rotateBitmap.equals(bitmap) ){
+                return bitmap;
+            }
+            bitmap.recycle();
+            return rotateBitmap;
+        } else {
+            return bitmap;
+        }
     }
 
     /**

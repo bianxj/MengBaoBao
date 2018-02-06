@@ -104,11 +104,6 @@ public class MainActivity extends BaseFragmentActivity {
         showDefaultFragment();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
     private void findView(){
         fl_content = findViewById(R.id.fl_content);
 

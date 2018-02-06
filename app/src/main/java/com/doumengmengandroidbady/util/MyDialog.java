@@ -3,6 +3,7 @@ package com.doumengmengandroidbady.util;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,8 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.adapter.PayAdapter;
 import com.doumengmengandroidbady.view.MyGifPlayer;
+import com.doumengmengandroidbady.view.PayItemLayout;
 
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class MyDialog {
     private static PopupWindow payDialog;
     private static PopupWindow cityDialog;
 
-    public static void showUpdateDialog(Context context,boolean isForce,String content,final UpdateDialogCallback callback){
+    public static void showUpdateDialog(Context context,boolean isForce,String updateVersion,String content,final UpdateDialogCallback callback){
         synchronized (updateLock){
             if ( updateDialog != null ){
                 updateDialog.dismiss();
@@ -70,6 +71,7 @@ public class MyDialog {
             TextView tv_use_percent = view.findViewById(R.id.tv_use_percent);
             TextView tv_update_version = view.findViewById(R.id.tv_update_version);
 
+            tv_update_version.setText(updateVersion);
             tv_update_content.setText(content);
             if ( isForce ){
                 rl_close.setVisibility(View.GONE);
@@ -236,7 +238,7 @@ public class MyDialog {
         }
     }
 
-    public static void showPayDialog(final Context context,View parent,final PayCallBack callBack,List<PayAdapter.PayData> datas,String price,int timeOut){
+    public static void showPayDialog(final Context context,View parent,final PayCallBack callBack,List<PayItemLayout.PayData> datas,String price,int timeOut){
         synchronized (payLock){
             if ( payDialog != null && payDialog.isShowing() ) {
                 payDialog.dismiss();
@@ -245,9 +247,11 @@ public class MyDialog {
 
             payDialog = new PopupWindow(context);
             payDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));
-            payDialog.getBackground().setAlpha(50);
+
+
+            payDialog.setBackgroundDrawable(new BitmapDrawable());
             payDialog.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-            payDialog.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+            payDialog.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
             View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_pay, null);
             contentView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             payDialog.setContentView(contentView);
@@ -262,27 +266,29 @@ public class MyDialog {
             });
 
             final TextView tv_time = contentView.findViewById(R.id.tv_time);
-            tv_time.setText(String.format("%d:%02d",timeOut / 60,timeOut % 60));
+            tv_time.setText(String.format(context.getString(R.string.dialog_minute_second),timeOut / 60,timeOut % 60));
             tv_time.setTag(timeOut);
 
             TextView tv_price = contentView.findViewById(R.id.tv_price);
             tv_price.setText(String.format(context.getResources().getString(R.string.dialog_price),price));
 
-            ListView lv = contentView.findViewById(R.id.lv);
-            final PayAdapter adapter = new PayAdapter(datas);
-            lv.setAdapter(adapter);
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    adapter.setClickPosition(i);
-                }
-            });
+            final PayItemLayout pay_layout = contentView.findViewById(R.id.pay_layout);
+            pay_layout.addItems(datas);
+//            ListView lv = contentView.findViewById(R.id.lv);
+//            final PayAdapter adapter = new PayAdapter(datas);
+//            lv.setAdapter(adapter);
+//            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                    adapter.setClickPosition(i);
+//                }
+//            });
 
             TextView tv_pay = contentView.findViewById(R.id.tv_pay);
             tv_pay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int chooseId = adapter.getChoosePosition();
+                    int chooseId = pay_layout.getSelectPostion();
                     if ( chooseId != -1 ){
                         if ( chooseId == 0 ){
                             callBack.alipay();
@@ -316,7 +322,7 @@ public class MyDialog {
                 if ( time <= 0 ){
                     dismissPayDialog();
                 } else {
-                    tv.setText(String.format("%d:%02d",time / 60,time % 60));
+                    tv.setText(String.format(tv.getContext().getString(R.string.dialog_minute_second),time / 60,time % 60));
                     tv.setTag(time);
                     calcuteTimeOut(tv);
                 }

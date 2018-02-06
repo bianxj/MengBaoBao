@@ -26,7 +26,7 @@ public class BaseCrashHandler implements Thread.UncaughtExceptionHandler {
     private BaseCrashHandler(){}
 
     public void init(Context context){
-        this.context = context;
+        this.context = context.getApplicationContext();
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(this);
     }

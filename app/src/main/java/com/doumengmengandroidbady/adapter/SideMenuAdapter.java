@@ -20,7 +20,7 @@ import java.util.List;
 
 public class SideMenuAdapter extends BaseAdapter {
 
-    private List<SideMenuItem> items;
+    private final List<SideMenuItem> items;
     private final Context context;
 
     public SideMenuAdapter(Context context,List<SideMenuItem> items) {

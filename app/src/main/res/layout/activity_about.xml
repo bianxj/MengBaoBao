@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/company_name"
+        android:text="@string/about_company_name"
         android:textSize="@dimen/y34px"
         android:textColor="@color/second_black"
         android:layout_centerHorizontal="true"
@@ -36,7 +36,7 @@
         android:src="@drawable/icon_location"
         android:layout_marginStart="@dimen/x102px"
         android:layout_marginTop="@dimen/y592px"
-        android:contentDescription="@string/contentDescription" />
+        android:contentDescription="@string/contentDescription"/>
     <ImageView
         android:id="@+id/iv_tel"
         android:layout_width="@dimen/y31px"
@@ -69,9 +69,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/FirstGray.Text28px"
-        android:text="@string/company_location"
+        android:text="@string/about_company_location"
         android:layout_marginStart="@dimen/x148px"
-        android:layout_alignBottom="@+id/iv_location"
+        android:layout_alignTop="@+id/iv_location"
         android:includeFontPadding="true"
         />
 
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/FirstGray.Text28px"
-        android:text="@string/company_phone"
+        android:text="@string/about_company_phone"
         android:layout_marginStart="@dimen/x148px"
         android:layout_alignBottom="@+id/iv_tel"
         android:includeFontPadding="true"
@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/FirstGray.Text28px"
-        android:text="@string/company_mail"
+        android:text="@string/about_company_mail"
         android:layout_marginStart="@dimen/x148px"
         android:layout_alignBottom="@+id/iv_mail"
         android:includeFontPadding="true"
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/FirstGray.Text28px"
-        android:text="@string/company_website"
+        android:text="@string/about_company_website"
         android:layout_marginStart="@dimen/x148px"
         android:layout_alignBottom="@+id/iv_website"
         android:includeFontPadding="true"

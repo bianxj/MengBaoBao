@@ -27,7 +27,7 @@ public class InputWeightActivity extends BaseInputDataActivity {
 
     private MyGifPlayer player;
     private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title,tv_complete;
+    private TextView tv_title;
 
     private EditText et_input_data;
     private TextView tv_reference,tv_increase,tv_input_title;
@@ -43,7 +43,6 @@ public class InputWeightActivity extends BaseInputDataActivity {
         rl_back = findViewById(R.id.rl_back);
         rl_complete = findViewById(R.id.rl_complete);
         tv_title = findViewById(R.id.tv_title);
-        tv_complete = findViewById(R.id.tv_complete);
 
         player = findViewById(R.id.player);
         et_input_data = findViewById(R.id.et_input_data);
@@ -62,7 +61,7 @@ public class InputWeightActivity extends BaseInputDataActivity {
         rl_complete.setOnClickListener(listener);
         rl_back.setOnClickListener(listener);
         new EditTextUtil(et_input_data);
-        player.setGif(R.drawable.gif_height);
+        player.setGif(R.drawable.gif_weight);
 
         //参考值
         if ( isBoy ) {

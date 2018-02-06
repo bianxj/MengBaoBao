@@ -147,7 +147,7 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
         return map;
     }
 
-    private RequestCallBack PGCallBack = new RequestCallBack() {
+    private final RequestCallBack PGCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 

@@ -54,31 +54,6 @@ public class AutoScrollViewPager extends FrameLayout {
 
     private ScrollViewHandler handler;
 
-//    private final static int SCROLL_NEXT = 0x31;
-//    private final static int SCROLL_NEXT_NOSCROLL = 0x32;
-//    private Handler handler = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            if ( msg.what == SCROLL_NEXT ){
-//                int currentItem = viewPager.getCurrentItem();
-//                if(currentItem == viewPager.getAdapter().getCount() - 1){
-//                    currentItem = 0 ;
-//                }else {
-//                    currentItem++ ;
-//                }
-//                viewPager.setCurrentItem(currentItem);
-//            } else {
-//                int position = viewPager.getCurrentItem();
-//                if ( position == 0 ){
-//                    viewPager.setCurrentItem(index,false);
-//                } else if ( position == index + 1 ){
-//                    viewPager.setCurrentItem(1,false);
-//                }
-//            }
-//        }
-//    };
-
     public AutoScrollViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
@@ -199,7 +174,6 @@ public class AutoScrollViewPager extends FrameLayout {
                 RadioGroup.LayoutParams layoutParams = (RadioGroup.LayoutParams) radioButton.getLayoutParams();
                 layoutParams.leftMargin = 0;
                 radioButton.setLayoutParams(layoutParams);
-//                radioButton.setChecked(true);
             }
             dotLayout.addView(radioButton);
         }
@@ -222,17 +196,14 @@ public class AutoScrollViewPager extends FrameLayout {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if ( motionEvent.getAction() == MotionEvent.ACTION_DOWN ){
-                System.out.println("MotionEvent.ACTION_DOWN");
                 pauseLoop();
             } else if (motionEvent.getAction() == MotionEvent.ACTION_UP){
-                System.out.println("MotionEvent.ACTION_UP");
                 startLoop();
             }
             return false;
         }
     };
 
-//    private boolean isLoop = true;
     private TimerTask task;
     private void startLoop(){
         if ( timer == null ) {
@@ -419,12 +390,6 @@ public class AutoScrollViewPager extends FrameLayout {
             }
         }
     }
-
-    @Override
-    public boolean performClick() {
-        return super.performClick();
-    }
-
 
     private static class CustomViewPager extends ViewPager{
 

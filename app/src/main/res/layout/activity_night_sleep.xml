@@ -45,7 +45,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hour_day"
+                        android:text="@string/hour_day_chinese"
                         style="@style/FirstGray.Text26px"
                         android:layout_marginLeft="@dimen/x18px"
                         android:layout_toRightOf="@+id/et_input_data_two"

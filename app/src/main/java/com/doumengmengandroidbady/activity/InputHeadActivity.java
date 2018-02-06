@@ -27,7 +27,7 @@ public class InputHeadActivity extends BaseInputDataActivity {
     public final static String OUT_PARAM_HEAD = "head";
 
     private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title,tv_complete;
+    private TextView tv_title;
 
     private TextView tv_increase,tv_reference,tv_std;
     private TextView tv_input_title;
@@ -47,7 +47,6 @@ public class InputHeadActivity extends BaseInputDataActivity {
         rl_back = findViewById(R.id.rl_back);
         rl_complete = findViewById(R.id.rl_complete);
         tv_title = findViewById(R.id.tv_title);
-        tv_complete = findViewById(R.id.tv_complete);
 
         tv_increase = findViewById(R.id.tv_increase);
         tv_reference = findViewById(R.id.tv_reference);
@@ -61,7 +60,7 @@ public class InputHeadActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.head_circumference);
+        tv_title.setText(R.string.record_head_circumference);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);

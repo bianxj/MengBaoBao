@@ -44,7 +44,7 @@ public class BaseInfoLayout extends LinearLayout {
     //未选择状态
     private final static int UN_CHOOSE = -1;
 
-    private Context context;
+//    private Context context;
 
     public BaseInfoLayout(Context context) {
         super(context);
@@ -62,7 +62,7 @@ public class BaseInfoLayout extends LinearLayout {
     }
 
     private void initInfoView(Context context){
-        this.context = context;
+//        this.context = context;
         View view = LayoutInflater.from(context).inflate(R.layout.view_base_info,null);
         addView(view);
         findView();
@@ -721,7 +721,7 @@ public class BaseInfoLayout extends LinearLayout {
                 month = monthOfYear;
                 day = dayOfMonth;
 
-                tv_calendar.setText(String.format("%d-%02d-%02d",year,month+1,day));
+                tv_calendar.setText(String.format(getContext().getString(R.string.dialog_year_month_day),year,month+1,day));
             }
         }, year, month, day);
         dp.show();

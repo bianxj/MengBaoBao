@@ -6,6 +6,7 @@ import com.doumengmengandroidbady.util.GsonUtil;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -43,6 +44,25 @@ public class HttpUtil {
 
     private HttpUtil() {
         client = defaultHttpClient();
+    }
+
+    public String httpsRequestFile(String url){
+        String result = null;
+        Request request = new Request.Builder().url(url).build();
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+            if ( response != null && response.body() != null ) {
+                result = response.body().string();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if ( response != null ){
+                response.close();
+            }
+        }
+        return result;
     }
 
     public String httpsRequestPost(String url, Map<String,String> map){

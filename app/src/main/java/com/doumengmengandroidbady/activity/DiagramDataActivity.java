@@ -39,7 +39,7 @@ public class DiagramDataActivity extends BaseActivity {
     private TextView tv_title_left , tv_title_center , tv_title_right;
     private ListView lv;
 
-    private List<ImageData> datas;
+//    private List<ImageData> datas;
     private DiagramDataAdapter adapter;
 
     @Override
@@ -66,7 +66,7 @@ public class DiagramDataActivity extends BaseActivity {
         Intent intent = getIntent();
         String param = intent.getStringExtra(IN_PARAM_IMAGE_DATA);
         int type = intent.getIntExtra(IN_PARAM_TYPE,DIAGRAM_TYPE.TYPE_HEIGHT.ordinal());
-        datas = GsonUtil.getInstance().fromJson(param,new TypeToken<List<ImageData>>(){}.getType());
+        List<ImageData> datas = GsonUtil.getInstance().fromJson(param,new TypeToken<List<ImageData>>(){}.getType());
 
         DIAGRAM_TYPE tt;
         tv_title_left.setText(getResources().getString(R.string.diagram_data_date));

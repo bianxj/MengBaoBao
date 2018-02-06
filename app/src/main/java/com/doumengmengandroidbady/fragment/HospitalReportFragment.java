@@ -134,7 +134,7 @@ public class HospitalReportFragment extends BaseFragment {
         }
     }
 
-    public Map<String,String> buildSearchReportContent(){
+    private Map<String,String> buildSearchReportContent(){
         UserData userData = BaseApplication.getInstance().getUserData();
         Map<String,String> map = new HashMap<>();
         map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
@@ -142,7 +142,7 @@ public class HospitalReportFragment extends BaseFragment {
         return map;
     }
 
-    private RequestCallBack searchHospitalRecordCallBack = new RequestCallBack() {
+    private final RequestCallBack searchHospitalRecordCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 

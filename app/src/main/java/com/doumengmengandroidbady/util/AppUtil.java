@@ -19,6 +19,11 @@ import java.util.List;
 
 public class AppUtil {
 
+    public static boolean isForceUpdate(String currentVersion , String updateVersion){
+        //TODO
+        return false;
+    }
+
     public static String getVersionName(Context context) throws PackageManager.NameNotFoundException {
         PackageManager manager = context.getPackageManager();
         PackageInfo info = manager.getPackageInfo(context.getPackageName(),0);

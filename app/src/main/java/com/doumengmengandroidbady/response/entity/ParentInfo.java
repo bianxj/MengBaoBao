@@ -114,8 +114,7 @@ public class ParentInfo {
 
     @Override
     public String toString() {
-        String value = GsonUtil.getInstance().toJson(this);
-        return value;
+        return GsonUtil.getInstance().toJson(this);
     }
 
     public static boolean isSamleValue(ParentInfo p1 , ParentInfo p2){

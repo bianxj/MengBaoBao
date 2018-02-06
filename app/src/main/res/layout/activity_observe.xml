@@ -30,9 +30,7 @@
                 android:id="@+id/bt_buy"
                 android:layout_width="@dimen/x418px"
                 android:layout_height="@dimen/y118px"
-                android:layout_centerHorizontal="true"
                 android:background="@drawable/btn_buy"
-                android:layout_above="@+id/iv_ad"
                 android:layout_gravity="center_horizontal"
                 android:visibility="gone" />
 
@@ -40,7 +38,6 @@
                 android:id="@+id/iv_ad"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y156px"
-                android:visibility="gone"
                 android:contentDescription="@string/contentDescription" />
         </LinearLayout>
     </RelativeLayout>

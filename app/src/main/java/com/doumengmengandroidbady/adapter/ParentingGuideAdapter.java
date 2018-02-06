@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ParentingGuideAdapter extends BaseAdapter {
 
-    private List<ParentingGuidanceResponse.Result.ParentingGuideItem> items;
+    private final List<ParentingGuidanceResponse.Result.ParentingGuideItem> items;
 
     public ParentingGuideAdapter(List<ParentingGuidanceResponse.Result.ParentingGuideItem> items) {
         this.items = items;

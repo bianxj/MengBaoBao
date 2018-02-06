@@ -38,6 +38,8 @@ public class UrlAddressList {
 
     public final static String URL_SEARCH_HOSPITAL_RECODR = BASE_URL + "babyUser.do?method=GetChildRecord";
 
+    public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";
+
     public final static String URL_MENG_LESSION = "http://app.mengbaobao.com/class/index.html";
 
 //    public static String mergeUrlAndParam(String url , String value){

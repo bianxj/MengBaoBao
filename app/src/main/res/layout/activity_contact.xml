@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hotline"
+        android:text="@string/contact_hotline"
         android:textSize="@dimen/y34px"
         android:textColor="@color/thinPink"
         android:layout_centerHorizontal="true"
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/y38px"
-        android:text="@string/hotline_phone"
+        android:text="@string/contact_hotline_phone"
         android:layout_marginTop="@dimen/y610px"
         android:layout_marginLeft="@dimen/x238px"
         />
@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/y26px"
-        android:text="@string/work_time"
+        android:text="@string/contact_work_time"
         android:layout_marginTop="@dimen/y678px"
         android:layout_centerHorizontal="true"
         />

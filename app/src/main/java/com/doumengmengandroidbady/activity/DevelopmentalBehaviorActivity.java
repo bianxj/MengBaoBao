@@ -103,7 +103,7 @@ public class DevelopmentalBehaviorActivity extends BaseActivity {
     }
 
     private void initData(){
-        tv_title.setText(R.string.developmental_hehavior);
+        tv_title.setText(R.string.record_developmental_hehavior);
         tv_complete.setText(R.string.complete);
     }
 

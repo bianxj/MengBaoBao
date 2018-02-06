@@ -43,8 +43,8 @@ public class HomePageFragment extends BaseFragment {
     private RelativeLayout rl_male;
     private Space space_observ_point;
     private LinearLayout ll_observe_point,ll_doctor_list;
-    private TextView tv_observe_point , tv_doctor_list;
-    private TextView tv_observe_point_content , tv_doctor_list_content;
+//    private TextView tv_observe_point , tv_doctor_list;
+//    private TextView tv_observe_point_content , tv_doctor_list_content;
     private FrameLayout rl_baby_head;
     private CircleImageView civ_baby;
     private CheckBox cb_male;
@@ -67,8 +67,8 @@ public class HomePageFragment extends BaseFragment {
         space_observ_point = view.findViewById(R.id.space_observ_point);
         ll_observe_point = view.findViewById(R.id.ll_observe_point);
         ll_doctor_list = view.findViewById(R.id.ll_doctor_list);
-        tv_observe_point_content = view.findViewById(R.id.tv_observe_point_content);
-        tv_doctor_list_content = view.findViewById(R.id.tv_doctor_list_content);
+//        tv_observe_point_content = view.findViewById(R.id.tv_observe_point_content);
+//        tv_doctor_list_content = view.findViewById(R.id.tv_doctor_list_content);
         rl_baby_head = view.findViewById(R.id.rl_baby_head);
         civ_baby = view.findViewById(R.id.civ_baby);
         cb_male = view.findViewById(R.id.cb_male);

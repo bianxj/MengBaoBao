@@ -2,12 +2,14 @@ package com.doumengmengandroidbady.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,6 +30,7 @@ import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.task.LoginTask;
 import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.response.InitConfigureResponse;
+import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
@@ -50,8 +53,6 @@ public class LoadingActivity extends BaseActivity {
 
     public final static String IN_PARAM_IS_TIME_OUT = "is_time_out";
 
-    private final static boolean isTest = true;
-
     private RelativeLayout rl_back;
     private TextView tv_loading_percent;
     private ImageView iv_loading_icon;
@@ -70,6 +71,10 @@ public class LoadingActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         stopTask(checkVersionTask);
+        stopTask(initConfigureTask);
+        if ( loginTask != null ) {
+            stopTask(loginTask.getTask());
+        }
         if ( drawable != null ){
             drawable.stop();
         }
@@ -119,20 +124,16 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private RequestTask checkVersionTask;
-    private void checkVersion(){
-        if ( isTest ){
-            initConfigure();
-        } else {
-            try {
-                checkVersionTask = new RequestTask.Builder(this,checkVersionCallBack)
-//                        .setUrl()
-//                        .setType()
-//                        .setContent()
-                        .build();
-                checkVersionTask.execute();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
+    private void checkVersion() {
+        try {
+            checkVersionTask = new RequestTask.Builder(this, checkVersionCallBack)
+                    .setUrl(UrlAddressList.URL_VERSION_FILE)
+                    .setType(RequestTask.FILE | RequestTask.LOADING)
+                    .setContent(null)
+                    .build();
+            checkVersionTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
 
@@ -149,8 +150,35 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-            startActivity(MainActivity.class);
+            try {
+                if (TextUtils.isEmpty(result)){
+                    //TODO
+                } else {
+                    String versionName = AppUtil.getVersionName(LoadingActivity.this);
+                    if (versionName.equals(result)) {
+                        initConfigure();
+                    } else {
+                        //TODO
+                        MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, result), result, "新版本特性\n" +
+                                "1、修复了部分bug\n" +
+                                "2、优化了部分交互设计\n" +
+                                "3、新增了一些功能\n" +
+                                "4、新增了引导页 \n", new MyDialog.UpdateDialogCallback() {
+                            @Override
+                            public void update() {
+                                AppUtil.openSoftwareMarket(LoadingActivity.this);
+                            }
+
+                            @Override
+                            public void cancel() {
+                                initConfigure();
+                            }
+                        });
+                    }
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     };
 

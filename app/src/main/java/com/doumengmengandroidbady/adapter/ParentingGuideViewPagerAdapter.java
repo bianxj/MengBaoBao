@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ParentingGuideViewPagerAdapter extends FragmentPagerAdapter {
 
-    private List<Fragment> fragments;
+    private final List<Fragment> fragments;
 
     public ParentingGuideViewPagerAdapter(FragmentManager fm) {
         super(fm);

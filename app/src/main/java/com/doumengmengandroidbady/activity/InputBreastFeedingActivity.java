@@ -29,7 +29,7 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
     public final static String OUT_PARAM_BREAST_FEEDING_COUNT = "breast_feeding_count";
 
     private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title,tv_complete;
+    private TextView tv_title;
 
     private EditText et_input_data_one,et_input_data_two;
     private MyGifPlayer player;
@@ -47,7 +47,6 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
         rl_back = findViewById(R.id.rl_back);
         rl_complete = findViewById(R.id.rl_complete);
         tv_title = findViewById(R.id.tv_title);
-        tv_complete = findViewById(R.id.tv_complete);
 
         et_input_data_one = findViewById(R.id.et_input_data);
         et_input_data_two = findViewById(R.id.et_input_data_two);
@@ -59,7 +58,7 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.breastfeeding_title);
+        tv_title.setText(R.string.record_breastfeeding_title);
         rl_complete.setVisibility(View.VISIBLE);
 
         rl_complete.setOnClickListener(listener);

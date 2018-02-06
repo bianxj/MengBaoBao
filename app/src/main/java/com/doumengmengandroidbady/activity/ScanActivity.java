@@ -97,11 +97,6 @@ public class ScanActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if ( REQUEST_CAMERA_PERMISSION == requestCode ){
@@ -382,9 +377,9 @@ public class ScanActivity extends BaseActivity {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inSampleSize = 1;
         Bitmap barcode = BitmapFactory.decodeFile(path, opts);
-        Result result = decodeBarcodeRGB(barcode);
+//        Result result = decodeBarcodeRGB(barcode);
 //        barcode.recycle();
-        return result;
+        return decodeBarcodeRGB(barcode);
     }
 
     /**

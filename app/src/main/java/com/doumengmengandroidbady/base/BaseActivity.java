@@ -3,8 +3,6 @@ package com.doumengmengandroidbady.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import com.doumengmengandroidbady.util.MyDialog;
 
@@ -18,16 +16,9 @@ public class BaseActivity extends Activity {
 
     protected static final int REQUEST_AGREEMENT = 0x01;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
-
-    public BaseApplication getBaseApplication(){
-        return (BaseApplication) getApplication();
-    }
+//    public BaseApplication getBaseApplication(){
+//        return (BaseApplication) getApplication();
+//    }
 
     protected void startActivity(Class<? extends Activity> act){
         Intent intent = new Intent(this,act);
@@ -47,7 +38,7 @@ public class BaseActivity extends Activity {
         }
     }
 
-    public void showPromptDialog(String message){
+    protected void showPromptDialog(String message){
         MyDialog.showPromptDialog(this,message,null);
     }
 

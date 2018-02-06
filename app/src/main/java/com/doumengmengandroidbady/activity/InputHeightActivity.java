@@ -30,7 +30,7 @@ public class InputHeightActivity extends BaseInputDataActivity {
 
     private MyGifPlayer player;
     private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title,tv_complete;
+    private TextView tv_title;
 
     private EditText et_input_data;
     private TextView tv_reference,tv_increase,tv_input_title;
@@ -47,7 +47,6 @@ public class InputHeightActivity extends BaseInputDataActivity {
         rl_back = findViewById(R.id.rl_back);
         rl_complete = findViewById(R.id.rl_complete);
         tv_title = findViewById(R.id.tv_title);
-        tv_complete = findViewById(R.id.tv_complete);
 
         player = findViewById(R.id.player);
         et_input_data = findViewById(R.id.et_input_data);

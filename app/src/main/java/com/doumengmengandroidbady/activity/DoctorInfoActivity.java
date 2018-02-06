@@ -16,22 +16,22 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.doumengmengandroidbady.R;
-import com.doumengmengandroidbady.adapter.PayAdapter;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.response.AliPayResponse;
 import com.doumengmengandroidbady.response.entity.Doctor;
 import com.doumengmengandroidbady.response.entity.Hospital;
 import com.doumengmengandroidbady.response.entity.UserData;
-import com.doumengmengandroidbady.response.AliPayResponse;
 import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.view.CircleImageView;
+import com.doumengmengandroidbady.view.PayItemLayout;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
@@ -187,7 +187,7 @@ public class DoctorInfoActivity extends BaseActivity {
 
         rl_back.setOnClickListener(listener);
         bt_choose.setOnClickListener(listener);
-        tv_title.setText(R.string.introduce);
+        tv_title.setText(R.string.doctor_info_introduce);
 
         tv_doctor_name.setText(doctor.getDoctorname());
         tv_doctor_position.setText(doctor.getPositionaltitles());
@@ -226,10 +226,10 @@ public class DoctorInfoActivity extends BaseActivity {
     private void choose(){
         if (PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
 
-            List<PayAdapter.PayData> datas = new ArrayList<>();
-            datas.add(new PayAdapter.PayData(R.drawable.alipay_logo_60,"支付宝",false));
+            List<PayItemLayout.PayData> datas = new ArrayList<>();
+            datas.add(new PayItemLayout.PayData(R.drawable.alipay_logo_60,"支付宝",false));
             if (api.isWXAppInstalled()) {
-                datas.add(new PayAdapter.PayData(R.drawable.iwx_logo, "微信", false));
+                datas.add(new PayItemLayout.PayData(R.drawable.iwx_logo, "微信", false));
             }
             if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.READ_PHONE_STATE)){
                 MyDialog.showPayDialog(this, rl_parent, new MyDialog.PayCallBack() {
@@ -371,7 +371,7 @@ public class DoctorInfoActivity extends BaseActivity {
 
 
     //-----------------------------------微信支付---------------------------------------------------
-    private final static String APP_ID = "";
+    private final static String APP_ID = "wxd0b4d1dd8772805a";
     private IWXAPI api;
 
     private void registerIWXApi(){
@@ -415,7 +415,7 @@ public class DoctorInfoActivity extends BaseActivity {
         return map;
     }
 
-    private RequestCallBack preIwxPayCallBack = new RequestCallBack() {
+    private final RequestCallBack preIwxPayCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
 

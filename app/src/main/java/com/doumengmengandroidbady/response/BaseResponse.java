@@ -4,7 +4,7 @@ package com.doumengmengandroidbady.response;
  * Created by Administrator on 2018/1/31.
  */
 
-public class BaseResponse {
+class BaseResponse {
 
     private int errorId;
     private String serverTime;

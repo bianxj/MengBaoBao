@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -55,16 +54,14 @@
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="科室：儿保科" />
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_child_code"
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="儿童编号：2016017085615" />
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,16 +75,14 @@
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="姓名：陈红当" />
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_gender"
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="性别：女" />
+                        android:layout_weight="1"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -101,16 +96,14 @@
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="出生日期：2016-07-06" />
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_current_month"
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="实足月龄：3个月12天" />
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -125,8 +118,7 @@
                         style="@style/FirstPink.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="矫正月龄：2个月25天" />
+                        android:layout_weight="1" />
 
                     <TextView
                         style="@style/SecondBlack.Text26px"
@@ -156,7 +148,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="测量信息"
+                    android:text="@string/hospital_report_measure_info"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -170,16 +162,14 @@
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="身长：57.0cm" />
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_weight"
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="体重：4.8kg" />
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -193,16 +183,14 @@
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="头围：38.0cm" />
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_chest"
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="胸围：37.0cm" />
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -216,8 +204,7 @@
                         style="@style/SecondBlack.Text26px"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="BMI：14.77" />
+                        android:layout_weight="1" />
 
                     <TextView
                         style="@style/SecondBlack.Text26px"
@@ -247,7 +234,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="喂养方式"
+                    android:text="@string/hospital_report_feeding_type"
                     android:textStyle="bold" />
 
                 <TextView
@@ -277,7 +264,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发育史"
+                    android:text="@string/hospital_report_develop_history"
                     android:textStyle="bold" />
 
                 <TextView
@@ -308,7 +295,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="疾病史"
+                    android:text="@string/hospital_report_ill_history"
                     android:textStyle="bold" />
 
                 <TextView
@@ -339,7 +326,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="现病史"
+                    android:text="@string/hospital_report_current_ill_history"
                     android:textStyle="bold" />
 
                 <TextView
@@ -476,7 +463,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="生长评价均数标准差结果（WHO）"
+                    android:text="@string/hospital_report_who"
                     android:textStyle="bold" />
 
                 <RelativeLayout
@@ -489,8 +476,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:text="体重：" />
+                        android:layout_alignParentLeft="true" />
 
                     <com.doumengmengandroidbady.view.ScaleplateView
                         android:id="@+id/sv_weight"
@@ -511,8 +497,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:text="身长：" />
+                        android:layout_alignParentLeft="true" />
 
                     <com.doumengmengandroidbady.view.ScaleplateView
                         android:id="@+id/sv_height"
@@ -533,8 +518,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:text="身长体重比：" />
+                        android:layout_alignParentLeft="true" />
 
                     <com.doumengmengandroidbady.view.ScaleplateView
                         android:id="@+id/sv_height_weight"
@@ -555,8 +539,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:text="BMI：" />
+                        android:layout_alignParentLeft="true" />
 
                     <com.doumengmengandroidbady.view.ScaleplateView
                         android:id="@+id/sv_BMI"
@@ -585,7 +568,6 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发育行为（3个月）"
                     android:textStyle="bold"
                     android:layout_marginLeft="@dimen/x20px"
                     android:layout_marginBottom="@dimen/y35px"/>
@@ -615,7 +597,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="评价结果"
+                    android:text="@string/hospital_report_result"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -623,26 +605,22 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y26px"
-                    android:text="体重：正常范围内"/>
+                    android:layout_marginTop="@dimen/y26px"/>
                 <TextView
                     android:id="@+id/tv_result_height"
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="身长：正常范围内"/>
+                    android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/tv_result_height_weight"
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="身长体重比：正常"/>
+                    android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/tv_result_other"
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="神经心理、发育行为评估：可疑，请结合临床。"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <View
@@ -662,7 +640,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="医生建议"
+                    android:text="@string/hospital_report_doctor_success"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -670,8 +648,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/y26px"
-                    android:text="目前检查结果存在一定的疑问，建议每个月评估1次。连续6次，具体情况请咨询医生。"/>
+                    android:layout_marginTop="@dimen/y26px"/>
             </LinearLayout>
 
             <View
@@ -684,7 +661,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="本报告仅供临床参考"
+                android:text="@string/hospital_report_reference"
                 android:gravity="center"
                 style="@style/FirstGray.Text26px"/>
 
@@ -701,8 +678,7 @@
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="送检医师：马骏" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/tv_report_name"
@@ -710,8 +686,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="报告人：烽" />
+                    android:gravity="right" />
             </LinearLayout>
 
             <TextView
@@ -723,8 +698,7 @@
                 android:layout_marginLeft="@dimen/x20px"
                 android:layout_marginTop="@dimen/y10px"
                 android:layout_marginBottom="@dimen/y100px"
-                android:gravity="right"
-                android:text="测量日期：2017-10-10" />
+                android:gravity="right" />
 
         </LinearLayout>
     </ScrollView>

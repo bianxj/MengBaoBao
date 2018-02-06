@@ -36,7 +36,6 @@ public class InputInfoActivity extends BaseActivity {
     private RelativeLayout rl_back;
     private TextView tv_title;
     private RelativeLayout rl_complete;
-    private TextView tv_complete;
 
     //-------------------------------基本信息控件-------------------------------------
     private BaseInfoLayout baby_info;
@@ -62,7 +61,6 @@ public class InputInfoActivity extends BaseActivity {
 
         tv_title = findViewById(R.id.tv_title);
         rl_complete = findViewById(R.id.rl_complete);
-        tv_complete = findViewById(R.id.tv_complete);
 
         baby_info = findViewById(R.id.baby_info);
         baby_info.setType(BaseInfoLayout.TYPE.EDITABLE);

@@ -30,7 +30,7 @@ public class BabyKnowledgeFragment extends BaseFragment {
     private TextView tv_title;
     private GridView gv;
     private BabyKnowledgeAdapter adapter;
-    private List<String> infos = null;
+//    private List<String> infos = null;
     private List<String> pages = null;
 
     @Override
@@ -54,7 +54,7 @@ public class BabyKnowledgeFragment extends BaseFragment {
     }
 
     private void initGridView(){
-        infos = new ArrayList<>();
+        List<String> infos = new ArrayList<>();
         pages = new ArrayList<>();
         genTimeQuantum(infos,pages);
         adapter = new BabyKnowledgeAdapter(getContext(),infos);

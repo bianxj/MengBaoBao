@@ -39,11 +39,6 @@ public class PersonCenterActivity extends BaseActivity {
         initView();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     private void findView(){
         tv_title = findViewById(R.id.tv_title);
         rl_back = findViewById(R.id.rl_back);

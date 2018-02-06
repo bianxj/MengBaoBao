@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class RequestTask extends AsyncTask<String,Void,String> {
     public final static int JSON = 0x001;
+    public final static int FILE = 0x002;
     public final static int PROMPT = 0x010;
     public final static int LOADING = 0x100;
 
@@ -55,11 +56,13 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        String result;
-        if (!isTest) {
-            String url = builder.getUrl();
-            Map<String,String> map = builder.getContent();
-            result = HttpUtil.getInstance().httpsRequestPost(url,map);
+        String result = null;
+        String url = builder.getUrl();
+        if ( isSelectFlag(builder.getType(),JSON) ) {
+            Map<String, String> map = builder.getContent();
+            result = HttpUtil.getInstance().httpsRequestPost(url, map);
+        } else if ( isSelectFlag(builder.getType(),FILE) ){
+            result = HttpUtil.getInstance().httpsRequestFile(url);
         }
         return result;
     }

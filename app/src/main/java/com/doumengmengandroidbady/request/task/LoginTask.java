@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class LoginTask {
 
-    private WeakReference<Context> weakReference;
+    private final WeakReference<Context> weakReference;
     private RequestTask task;
     private final LoginCallBack loginCallBack;
     private final String accountMobile;
@@ -52,7 +52,7 @@ public class LoginTask {
         return task;
     }
 
-    public Map<String, String> buildLoginContent() {
+    private Map<String, String> buildLoginContent() {
         JSONObject object = new JSONObject();
         try {
             object.put("accountMobile",accountMobile);
