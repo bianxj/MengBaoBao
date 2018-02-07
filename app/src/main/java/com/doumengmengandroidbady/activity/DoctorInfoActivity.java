@@ -19,6 +19,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
+import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
@@ -254,12 +255,12 @@ public class DoctorInfoActivity extends BaseActivity {
      */
     private void goNext(){
         BaseApplication.getInstance().addRecordTimes();
-        if ( BaseApplication.getInstance().isPay() ){
-            startActivity(RecordActivity.class);
-        } else {
-            BaseApplication.getInstance().payRoleType();
+        if (RoleType.FREE_NET_USER == BaseApplication.getInstance().getRoleType() ){
             startActivity(InputInfoActivity.class);
+        } else {
+            startActivity(RecordActivity.class);
         }
+        BaseApplication.getInstance().payRoleType();
     }
 
     //-----------------------------------支付------------------------------------------------

@@ -32,6 +32,7 @@
                             android:layout_centerInParent="true"
                             style="@style/InputDataStyle"
                             android:inputType="number"
+                            android:maxLength="2"
                             tools:ignore="LabelFor" />
                 <TextView
                     android:layout_width="wrap_content"

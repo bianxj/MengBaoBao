@@ -42,6 +42,7 @@
                             android:layout_height="@dimen/y86px"
                             style="@style/InputDataStyle"
                             android:inputType="number"
+                            android:maxLength="4"
                             android:imeOptions="actionNext"
                             tools:ignore="LabelFor" />
                 </LinearLayout>
@@ -98,12 +99,13 @@
                             android:layout_height="@dimen/y57px"
                             style="@style/InputDataStyle"
                             android:inputType="number"
+                            android:maxLength="2"
                             android:imeOptions="actionDone"
                             tools:ignore="LabelFor" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/record_count_day"
+                        android:text="@string/count_day_chinese"
                         style="@style/FirstGray.Text26px"
                         android:layout_marginLeft="@dimen/x18px"
                         />

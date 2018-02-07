@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.util.MyDialog;
 
 public class AgreementActivity extends BaseActivity {
 
@@ -125,8 +126,12 @@ public class AgreementActivity extends BaseActivity {
     }
 
     private void agree(){
-        setResult(Activity.RESULT_OK);
-        finish();
+        if ( cb_agreement.isChecked() ) {
+            setResult(Activity.RESULT_OK);
+            finish();
+        } else {
+            MyDialog.showPromptDialog(this,getString(R.string.dialog_content_read_agreement),null);
+        }
     }
 
 }

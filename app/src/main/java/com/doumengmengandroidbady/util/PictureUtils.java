@@ -8,12 +8,16 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.DisplayMetrics;
+
+import com.doumengmengandroidbady.base.BaseApplication;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,12 +29,22 @@ import java.io.IOException;
  */
 
 public class PictureUtils {
+
+    public static String getFilePath(Context context,Uri uri){
+        int sdkVersion = Build.VERSION.SDK_INT;
+        if (sdkVersion >= 19) {
+            return PictureUtils.getPath_above19(context, uri);
+        } else {
+            return PictureUtils.getFilePath_below19(context,uri);
+        }
+    }
+
     /**
      * API19以下获取图片路径的方法
      *
      * @param uri
      */
-    public static String getFilePath_below19(Context context, Uri uri) {
+    private static String getFilePath_below19(Context context, Uri uri) {
         //这里开始的第二部分，获取图片的路径：低版本的是没问题的，但是sdk>19会获取不到
         String[] proj = {MediaStore.Images.Media.DATA};
         //好像是android多媒体数据库的封装接口，具体的看Android文档
@@ -61,7 +75,7 @@ public class PictureUtils {
      * @return
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static String getPath_above19(final Context context, final Uri uri) {
+    private static String getPath_above19(final Context context, final Uri uri) {
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
@@ -252,11 +266,15 @@ public class PictureUtils {
     }
 
     public static Bitmap rotateToPortrait(Bitmap bitmap){
+        return rotateToPortrait(bitmap,90F);
+    }
+
+    private static Bitmap rotateToPortrait(Bitmap bitmap,float degree){
         int height = bitmap.getHeight();
         int width = bitmap.getWidth();
         if ( height < width ){
             Matrix matrix = new Matrix();
-            matrix.setRotate(90F);
+            matrix.setRotate(degree);
             Bitmap rotateBitmap = Bitmap.createBitmap(bitmap,0,0,width,height,matrix,false);
             if ( rotateBitmap.equals(bitmap) ){
                 return bitmap;
@@ -309,7 +327,11 @@ public class PictureUtils {
 
     public static void compressPicture(String source , String target, int reqWidth, int reqHeight) {
         Bitmap bitmap = getSmallBitmap(source, reqWidth, reqHeight);
-        File file = new File(target);
+        saveBitmapToPath(bitmap,target);
+    }
+
+    private static void saveBitmapToPath(Bitmap bitmap,String path){
+        File file = new File(path);
         try {
             if ( !file.exists() ){
                 file.createNewFile();
@@ -322,6 +344,38 @@ public class PictureUtils {
                 bitmap.recycle();
             }
         }
+    }
+
+    public static void rotationNormalDegree(String path){
+        int degree = getRotationDegree(path);
+        DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
+        if ( degree > 0 ){
+            Bitmap bitmap = getSmallBitmap(path,metrics.widthPixels,metrics.heightPixels);
+            bitmap = rotateToPortrait(bitmap,degree);
+            saveBitmapToPath(bitmap,path);
+        }
+    }
+
+    private static int getRotationDegree(String path){
+        int degree = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface(path);
+            int type = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL);
+            switch (type) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return degree;
     }
 
 }

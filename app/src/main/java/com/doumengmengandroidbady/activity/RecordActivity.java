@@ -4,10 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.view.View;
@@ -30,13 +30,14 @@ import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.entity.SubmitRecord;
+import com.doumengmengandroidbady.response.CurrentRecordResponse;
+import com.doumengmengandroidbady.response.SubmitRecordResponse;
 import com.doumengmengandroidbady.response.entity.DayList;
 import com.doumengmengandroidbady.response.entity.Record;
 import com.doumengmengandroidbady.response.entity.RecordResult;
 import com.doumengmengandroidbady.response.entity.UserData;
-import com.doumengmengandroidbady.response.CurrentRecordResponse;
-import com.doumengmengandroidbady.response.SubmitRecordResponse;
 import com.doumengmengandroidbady.util.AppUtil;
+import com.doumengmengandroidbady.util.EditTextUtil;
 import com.doumengmengandroidbady.util.FormulaUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
@@ -241,6 +242,9 @@ public class RecordActivity extends BaseActivity {
 
         iv_develop_action.setOnClickListener(listener);
 
+        new EditTextUtil(et_egg);
+        new EditTextUtil(et_fruit);
+
         adapter = new PictureAdapter(this,tackPictureCallBack);
         gv_upload_report.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -304,7 +308,7 @@ public class RecordActivity extends BaseActivity {
                         Intent intent = new Intent(RecordActivity.this, DevelopmentalBehaviorActivity.class);
                         String development = GsonUtil.getInstance().toJson(developments);
                         intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_DEVELOPMENT, development);
-                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_MONTH_AGE, dayList.getCorrentMonth());
+                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_MONTH_AGE, Integer.parseInt(dayList.getCorrentMonth())<0?"0":dayList.getCorrentMonth());
                         intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_RECORD_TIME, FormulaUtil.getCurrentTime());
                         startActivityForResult(intent, REQUEST_DEVELOPMENTAL_ACTION);
                     break;
@@ -313,6 +317,9 @@ public class RecordActivity extends BaseActivity {
     };
 
     private void back(){
+        Intent intent = new Intent(RecordActivity.this,MainActivity.class);
+        intent.putExtra(MainActivity.SHOW_PAGE,MainActivity.PAGE_SPACIALIST_SERVICE);
+        startActivity(intent);
         finish();
     }
 
@@ -329,13 +336,9 @@ public class RecordActivity extends BaseActivity {
         //照片返回
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             String source;
+
             Uri uri = data.getData();
-            int sdkVersion = Build.VERSION.SDK_INT;
-            if (sdkVersion >= 19) {
-                source = PictureUtils.getPath_above19(RecordActivity.this, uri);
-            } else {
-                source = PictureUtils.getFilePath_below19(RecordActivity.this,uri);
-            }
+            source = PictureUtils.getFilePath(RecordActivity.this,uri);
             DisplayMetrics display = BaseApplication.getInstance().getDisplayInfo();
             String target = BaseApplication.getInstance().getUploadPicture();
 
@@ -805,8 +808,64 @@ public class RecordActivity extends BaseActivity {
     };
 
     private boolean checkData(){
+        if (isTextContentEmpty(tv_height)){showPromptDialog("身长数据不能为空");return false;}
+        if (isTextContentEmpty(tv_weight)){showPromptDialog("体重数据不能为空");return false;}
+        if (isTextContentEmpty(tv_head_circumference)){showPromptDialog("头围数据不能为空");return false;}
+        if (isTextContentEmpty(tv_chest_circumference)){showPromptDialog("胸围数据不能为空");return false;}
+        if (isTextContentEmpty(tv_cacation_day)){showPromptDialog("排便数据不能为空");return false;}
+        if (isTextContentEmpty(tv_cacation_count)){showPromptDialog("排便数据不能为空");return false;}
+        if (isTextContentEmpty(tv_micturition_count)){showPromptDialog("排尿数据不能为空");return false;}
+        if (isTextContentEmpty(tv_night_sleep)){showPromptDialog("夜间数据不能为空");return false;}
+        if (isTextContentEmpty(tv_day_sleep)){showPromptDialog("日间数据不能为空");return false;}
+        if (isTextContentEmpty(tv_breastfeeding)){showPromptDialog("人乳喂养数据不能为空");return false;}
+        if (isTextContentEmpty(tv_breastfeeding_count)){showPromptDialog("人乳喂养数据不能为空");return false;}
+        if (isTextContentEmpty(tv_formula_milk)){showPromptDialog("配方奶数据不能为空");return false;}
+        if (isTextContentEmpty(tv_formula_milk_count)){showPromptDialog("配方奶数据不能为空");return false;}
 
+        float milk = getTextContentToFloat(et_milk);
+        if ( 0 > milk || milk > 2000 ){showPromptDialog("牛奶 范围为0~2000");return false;}
+
+        float flour = getTextContentToFloat(et_flour);
+        if ( 0 > flour || flour > 5000 ){showPromptDialog("米粉 范围为0~5000");return false;}
+
+        float food = getTextContentToFloat(et_food);
+        if ( 0 > food || food > 5000 ){showPromptDialog("面食 范围为0~5000");return false;}
+
+        float porridge = getTextContentToFloat(et_porridge);
+        if ( 0 > porridge || porridge > 5000 ){showPromptDialog("粥 范围为0~5000");return false;}
+
+        float rice = getTextContentToFloat(et_rice);
+        if ( 0 > rice || rice > 5000 ){showPromptDialog("饭 范围为0~5000");return false;}
+
+        float meat = getTextContentToFloat(et_meat);
+        if ( 0 > meat || meat > 5000 ){showPromptDialog("荤菜（鱼肉肝） 范围为0~5000");return false;}
+
+        float bean = getTextContentToFloat(et_bean);
+        if ( 0 > bean || bean > 5000 ){showPromptDialog("豆制品 范围为0~5000");return false;}
+        float vegetables = getTextContentToFloat(et_vegetables);
+        if ( 0 > vegetables || vegetables > 5000 ){showPromptDialog("蔬菜 范围为0~5000");return false;}
+
+        float water = getTextContentToFloat(et_water);
+        if ( 0 > water || water > 2000 ){showPromptDialog("水 范围为0~2000");return false;}
+        float vitamin_dosage = getTextContentToFloat(et_vitamin_dosage);
+        if ( 0 > vitamin_dosage || vitamin_dosage > 2000 ){showPromptDialog("维生素 范围为0~2000");return false;}
+        float calcium_dosage = getTextContentToFloat(et_calcium_dosage);
+        if ( 0 > calcium_dosage || calcium_dosage > 2000 ){showPromptDialog("钙 范围为0~2000");return false;}
         return true;
+    }
+
+    private float getTextContentToFloat(TextView textView){
+        if ( TextUtils.isEmpty(textView.getText().toString().trim()) ){
+            return 0;
+        }
+        return Float.parseFloat(textView.getText().toString().trim());
+    }
+
+    private boolean isTextContentEmpty(TextView textView){
+        if ( TextUtils.isEmpty(textView.getText()) ){
+            return true;
+        }
+        return false;
     }
 
     //-------------------------------获取最新的评估记录--------------------------------------------

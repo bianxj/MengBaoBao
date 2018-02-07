@@ -40,7 +40,7 @@ public class HttpUtil {
     public final static String  TYPE_FILE = "UPLOAD_FILES";
 
     private final OkHttpClient client;
-    private MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded;charset=utf-8");
+//    private MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded;charset=utf-8");
 
     private HttpUtil() {
         client = defaultHttpClient();
@@ -48,16 +48,24 @@ public class HttpUtil {
 
     public String httpsRequestFile(String url){
         String result = null;
-        Request request = new Request.Builder().url(url).build();
+        Request.Builder builder = new Request.Builder();
+        builder.url(url);
+        builder.addHeader("content-type","text/html;charset:utf-8");
+        builder.addHeader("Connection","close");
+        Request request = builder.build();
         Response response = null;
         try {
             response = client.newCall(request).execute();
             if ( response != null && response.body() != null ) {
                 result = response.body().string();
+                response.body().close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
+            if ( builder != null ){
+                builder.delete();
+            }
             if ( response != null ){
                 response.close();
             }
@@ -74,6 +82,7 @@ public class HttpUtil {
             builder  = new Request.Builder();
             builder.url(url);
             builder.addHeader("content-type","text/html;charset:utf-8");
+//            builder.addHeader("Connection", "close");
             MultipartBody.Builder bodyBuilder = new MultipartBody.Builder();
             bodyBuilder.setType(MultipartBody.FORM);
             BaseApplication.getInstance().getMLog().info("HttpUtil:url:"+url);
@@ -100,6 +109,7 @@ public class HttpUtil {
             BaseApplication.getInstance().getMLog().info("HttpUtil:code:"+response.code());
             if (response.code() == 200 && response.body() != null) {
                 result = response.body().string();
+                response.body().close();
             } else {
                 result = ResponseErrorCode.ERROR_REQUEST_FAILED_MSG;
             }

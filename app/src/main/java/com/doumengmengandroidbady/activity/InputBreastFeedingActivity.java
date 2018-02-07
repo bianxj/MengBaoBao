@@ -121,12 +121,12 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
             showPromptDialog("喂养次数不能为空");
             return false;
         }
-        if ( Float.parseFloat(ml) < 0  ){
-            showPromptDialog("母乳喂养量不能小于0");
+        if ( Float.parseFloat(ml) < 0 || Float.parseFloat(ml) > 2000  ){
+            showPromptDialog("母乳喂养量 范围为0~2000");
             return false;
         }
-        if ( Float.parseFloat(count) < 0  ){
-            showPromptDialog("喂养次数不能小于0");
+        if ( Float.parseFloat(count) < 0 || Float.parseFloat(count) > 30 ){
+            showPromptDialog("喂养次数 范围为0~30");
             return false;
         }
         return true;

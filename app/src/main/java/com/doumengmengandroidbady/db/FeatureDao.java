@@ -8,9 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import com.doumengmengandroidbady.response.entity.Feature;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2018/1/9.
@@ -154,36 +157,61 @@ public class FeatureDao {
         return maps;
     }
 
-    private final static String VERSION_ONE = "2017-06-01 18:00:00";
-    private final static String VERSION_TWO = "2017-11-10 18:00:00";
+//    private final static String[] SPLIT_TIME = new String[]{"2017-06-01 18:00:00","2017-11-10 18:00:00","2018-02-01 18:00:00","2099-12-31 18:00:00"};
 
-    private static final List<String> versionOne;
-    private static final List<String> versionTwo;
-    private static final List<String> versionThree;
+//    private final static String VERSION_ONE = "2017-06-01 18:00:00";
+//    private final static String VERSION_TWO = "2017-11-10 18:00:00";
+//    private final static String VERSION_THREE = "2018-02-01 18:00:00";
 
-    private static Map<String,List<String>> versionMap;
+//    private static final List<String> versionOne;
+//    private static final List<String> versionTwo;
+//    private static final List<String> versionThree;
+//    private static final List<String> versionFour;
+
+    private final static Map<String,List<String>> versionMap = new LinkedHashMap<>();
 
     static {
-        versionOne = new ArrayList<>();
-        versionOne.add("0");
-        versionOne.add("1");
 
-        versionTwo = new ArrayList<>();
-        versionTwo.add("0");
-        versionTwo.add("2");
+        versionMap.put("2017-06-01 18:00:00",new ArrayList<String>(Arrays.asList("0","1")));
+        versionMap.put("2017-11-10 18:00:00",new ArrayList<String>(Arrays.asList("0","2")));
+        versionMap.put("2018-02-01 18:00:00",new ArrayList<String>(Arrays.asList("3")));
+        versionMap.put("2099-12-31 18:00:00",new ArrayList<String>(Arrays.asList("4")));
 
-        versionThree = new ArrayList<>();
-        versionThree.add("3");
+//        versionOne = new ArrayList<>();
+//        versionOne.add("0");
+//        versionOne.add("1");
+//
+//        versionTwo = new ArrayList<>();
+//        versionTwo.add("0");
+//        versionTwo.add("2");
+//
+//        versionThree = new ArrayList<>();
+//        versionThree.add("3");
+//
+//        versionFour = new ArrayList<>();
+//        versionFour.add("4");
     }
 
     private List<String> conculateIsUse(String recordTime){
-        if ( VERSION_ONE.compareTo(recordTime) > 0 ){
-            return versionOne;
-        } else if ( VERSION_TWO.compareTo(recordTime) > 0 ){
-            return versionTwo;
-        } else {
-            return versionThree;
+        Set<String> times = versionMap.keySet();
+        for (String time:times){
+            if ( time.compareTo(recordTime) > 0 ){
+                return versionMap.get(time);
+            }
         }
+        return versionMap.get("2099-12-31 18:00:00");
+
+//        if ( VERSION_ONE.compareTo(recordTime) > 0 ){
+//            return versionOne;
+//        } else if ( VERSION_TWO.compareTo(recordTime) > 0 ){
+//            return versionTwo;
+//        } else if ( VERSION_THREE.compareTo(recordTime) > 0 ) {
+//            return versionThree;
+//        } else {
+//            return versionFour;
+//        }
+
+
     }
 
     private String generateWhereIn(String columnName,List<String> list){

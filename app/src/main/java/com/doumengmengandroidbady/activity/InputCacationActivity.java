@@ -112,13 +112,13 @@ public class InputCacationActivity extends BaseInputDataActivity {
             return false;
         }
 
-        if ( Integer.parseInt(day) < 0 ){
-            showPromptDialog("天数不能小于0");
+        if ( Integer.parseInt(day) < 0 || Integer.parseInt(day) > 30 ){
+            showPromptDialog("天数 范围为0~30");
             return false;
         }
 
-        if ( Integer.parseInt(count) < 0 ){
-            showPromptDialog("次数不能小于0");
+        if ( Integer.parseInt(count) < 0 || Integer.parseInt(day) > 30 ){
+            showPromptDialog("次数 范围为0~30");
             return false;
         }
 

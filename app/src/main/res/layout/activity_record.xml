@@ -333,7 +333,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_count_day" />
+                        android:text="@string/count_day_chinese" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -523,7 +523,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_count_day" />
+                        android:text="@string/count_day_chinese" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -597,7 +597,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_count_day" />
+                        android:text="@string/count_day_chinese" />
                 </RelativeLayout>
             </LinearLayout>
             <Space
@@ -655,6 +655,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_flour"/>
 
 
@@ -665,7 +666,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_ml_day" />
+                        android:text="@string/ml_day_chinese" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -696,6 +697,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_food"/>
 
 
@@ -725,6 +727,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_porridge"/>
 
 
@@ -735,7 +738,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_ml_day" />
+                        android:text="@string/gram_day_chinese" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -766,6 +769,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_rice" />
 
 
@@ -795,6 +799,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_meat" />
 
 
@@ -805,7 +810,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_ml_day" />
+                        android:text="@string/gram_day_chinese" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -836,6 +841,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_egg" />
 
 
@@ -846,7 +852,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_ml_day" />
+                        android:text="@string/gram_day_chinese" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -874,9 +880,10 @@
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_Second_Input_Margin_Left"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="7"
                         android:nextFocusDown="@+id/et_bean"/>
 
 
@@ -887,7 +894,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_ml_day" />
+                        android:text="@string/mount_day_chinese" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -918,6 +925,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_vegetables"/>
 
 
@@ -947,6 +955,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_fruit"/>
 
 
@@ -957,7 +966,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_ml_day" />
+                        android:text="@string/gram_day_chinese" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -984,9 +993,10 @@
                         style="@style/RecordInputStyle"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Record_First_Input_Margin_Left"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="7"
                         android:nextFocusDown="@+id/et_water"/>
 
 
@@ -997,7 +1007,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_First_Unit_Margin_Right"
-                        android:text="@string/gram_day_chinese" />
+                        android:text="@string/mount_day_chinese" />
 
                     <TextView
                         style="@style/FourthBlack.Text26px"
@@ -1016,6 +1026,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_vitamin_dosage"/>
 
 
@@ -1026,7 +1037,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Record_Second_Unit_Margin_Right"
-                        android:text="@string/record_ml_day" />
+                        android:text="@string/ml_day_chinese" />
 
                     <View
                         android:layout_width="@dimen/x637px"
@@ -1056,6 +1067,7 @@
                         android:inputType="number"
                         android:lines="1"
                         tools:ignore="LabelFor"
+                        android:maxLength="4"
                         android:nextFocusDown="@+id/et_calcium_dosage"/>
 
                     <TextView
@@ -1094,6 +1106,7 @@
                         android:layout_marginLeft="@dimen/Record_Dosage_Input_Margin_Left"
                         android:inputType="number"
                         android:lines="1"
+                        android:maxLength="4"
                         tools:ignore="LabelFor" />
 
                     <TextView
@@ -1134,6 +1147,7 @@
                         android:inputType="text"
                         android:gravity="left|center_vertical"
                         android:lines="1"
+                        android:maxLength="100"
                         tools:ignore="LabelFor" />
 
                     <View

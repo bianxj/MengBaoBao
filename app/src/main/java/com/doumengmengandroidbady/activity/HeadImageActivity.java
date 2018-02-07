@@ -188,16 +188,12 @@ public class HeadImageActivity extends BaseActivity {
         String source = null;
         if ( REQUEST_CAMERA == requestCode && Activity.RESULT_OK == resultCode){
             source = BaseApplication.getInstance().getPersonHeadImgPath();
+            PictureUtils.rotationNormalDegree(source);
         }
 
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             Uri uri = data.getData();
-            int sdkVersion = Build.VERSION.SDK_INT;
-            if (sdkVersion >= 19) {
-                source = PictureUtils.getPath_above19(HeadImageActivity.this, uri);
-            } else {
-                source = PictureUtils.getFilePath_below19(HeadImageActivity.this,uri);
-            }
+            source = PictureUtils.getFilePath(HeadImageActivity.this,uri);
         }
         if ( Activity.RESULT_OK == resultCode ) {
             String target = BaseApplication.getInstance().getPersonHeadImgPath();

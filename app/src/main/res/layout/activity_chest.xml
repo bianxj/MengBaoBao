@@ -39,6 +39,7 @@
                         style="@style/InputDataStyle"
                         android:text=""
                         android:inputType="numberDecimal"
+                        android:maxLength="7"
                         tools:ignore="LabelFor" />
                 </RelativeLayout>
                 <TextView

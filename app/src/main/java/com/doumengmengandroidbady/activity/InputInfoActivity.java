@@ -159,8 +159,8 @@ public class InputInfoActivity extends BaseActivity {
             if ( 1 == response.getResult().getIsSaveUser() ){
                 BaseApplication.getInstance().saveBabyInfo(baby_info.getBabyInfo());
                 BaseApplication.getInstance().saveParentInfo(parent_info.getParentInfo());
-                BaseApplication.getInstance().saveDayList(response.getResult().getDayList());
 
+                BaseApplication.getInstance().saveDayList(response.getResult().getDayList());
                 DaoManager.getInstance().getGrowthDao().saveGrowthList(InputInfoActivity.this,response.getResult().getGrowthList());
                 startActivity(RecordActivity.class);
             } else {

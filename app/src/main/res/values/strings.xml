@@ -281,7 +281,8 @@
     <string name="record_chest_circumference">胸围</string>
     <string name="record_cacation">排便</string>
     <string name="record_micturition">排尿</string>
-    <string name="record_count_day">次/天</string>
+<!--    <string name="record_count_day">次/天</string>
+    <string name="record_ml_day">毫升/日</string>-->
     <string name="record_night_sleep">夜间睡眠</string>
     <string name="record_day_sleep">日间睡眠</string>
 
@@ -296,7 +297,6 @@
     <string name="record_assisted_food_add">辅食添加</string>
     <string name="record_milk">牛奶</string>
     <string name="record_milk_powder">奶粉</string>
-    <string name="record_ml_day">毫升/日</string>
     <string name="record_flour">米粉</string>
     <string name="record_food">面食</string>
     <string name="record_porridge">粥</string>
@@ -394,6 +394,7 @@
     <string name="dialog_content_storage_permission">请打开存储权限</string>
     <string name="dialog_content_location_permission">定位服务为开启,请在系统中开启定位服务</string>
     <string name="dialog_content_read_phone_permission">请打开电话权限</string>
+    <string name="dialog_content_read_agreement">请勾选“我已阅读”</string>
     <string name="dialog_price">￥%s</string>
     <string name="dialog_year_month_day">%d-%02d-%02d</string>
     <string name="dialog_minute_second">%d:%02d</string>

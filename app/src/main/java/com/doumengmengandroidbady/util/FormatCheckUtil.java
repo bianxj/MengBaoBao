@@ -11,6 +11,13 @@ import java.util.regex.Pattern;
 
 public class FormatCheckUtil {
 
+    public static boolean isChinese(String chinese){
+        Pattern p = Pattern.compile("[\u4e00-\u9fa5]+");
+        Matcher m = p.matcher(chinese);
+        return m.matches();
+//        return true;
+    }
+
     public static boolean isPhone(String phone){
         Pattern p = Pattern.compile("^[1][3,4,5,8][0-9]{9}$");
         Matcher m = p.matcher(phone);

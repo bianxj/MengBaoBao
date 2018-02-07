@@ -176,8 +176,8 @@ public class HospitalReportActivity extends BaseActivity {
     }
 
     private void initDevelopBehavior(){
-        tv_develop_behavior.setText(String.format(getString(R.string.hospital_report_develop),report.getCorrectMonthDay()));
-        initDevelopment(generateDevelopmentData(report.getCorrectMonthAge(),report.getRecordTime(),report.getFeatures()));
+        tv_develop_behavior.setText(String.format(getString(R.string.hospital_report_develop),report.getFeatureAge()));
+        initDevelopment(generateDevelopmentData(report.getFeatureAge(),report.getRecordTime(),report.getFeatures()));
     }
 
     private void initGraphView(){

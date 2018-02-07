@@ -45,6 +45,7 @@
                 android:layout_centerVertical="true"
                 android:inputType="text"
                 android:text=""
+                android:maxLength="5"
                 tools:ignore="LabelFor" />
 
             <View
@@ -229,6 +230,7 @@
                     android:background="@drawable/bg_circle_edittext"
                     android:labelFor="@+id/et_week"
                     android:inputType="number"
+                    android:maxLength="2"
                     android:gravity="center"
                     android:nextFocusDown="@+id/et_day"/>
 
@@ -247,6 +249,7 @@
                     android:layout_height="@dimen/y54px"
                     android:background="@drawable/bg_circle_edittext"
                     android:inputType="number"
+                    android:maxLength="1"
                     android:gravity="center"
                     tools:ignore="LabelFor" />
 
@@ -293,7 +296,8 @@
                 android:id="@+id/et_phone"
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
-                android:inputType="phone"
+                android:inputType="number"
+                android:maxLength="11"
                 android:text=""
                 tools:ignore="LabelFor" />
 
@@ -332,6 +336,7 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="numberDecimal"
+                android:maxLength="7"
                 tools:ignore="LabelFor" />
 
             <TextView
@@ -377,6 +382,7 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="numberDecimal"
+                android:maxLength="7"
                 android:text=""
                 tools:ignore="LabelFor" />
 
@@ -423,6 +429,7 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="number"
+                android:maxLength="1"
                 android:text=""
                 tools:ignore="LabelFor" />
 
@@ -469,6 +476,7 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="number"
+                android:maxLength="1"
                 android:text=""
                 tools:ignore="LabelFor" />
 
@@ -515,6 +523,7 @@
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="number"
+                android:maxLength="2"
                 android:text=""
                 tools:ignore="LabelFor" />
 
@@ -1007,6 +1016,8 @@
                 android:paddingLeft="@dimen/x25px"
                 android:paddingRight="@dimen/x25px"
                 android:inputType="text"
+                android:lines="1"
+                android:maxLength="100"
                 tools:ignore="LabelFor" />
         </RelativeLayout>
 
@@ -1083,6 +1094,8 @@
             android:paddingLeft="@dimen/x25px"
             android:paddingRight="@dimen/x25px"
             android:inputType="text"
+            android:lines="1"
+            android:maxLength="100"
             tools:ignore="LabelFor" />
         </RelativeLayout>
 
@@ -1517,6 +1530,8 @@
                 android:paddingLeft="@dimen/x25px"
                 android:paddingRight="@dimen/x25px"
                 android:inputType="text"
+                android:lines="1"
+                android:maxLength="100"
                 tools:ignore="LabelFor" />
         </RelativeLayout>
     </LinearLayout>

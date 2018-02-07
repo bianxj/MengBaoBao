@@ -32,6 +32,7 @@
                         android:layout_width="@dimen/x233px"
                         android:layout_height="@dimen/y86px"
                         android:layout_centerHorizontal="true"
+                        android:maxLength="7"
                         style="@style/InputDataStyle"
                         android:inputType="numberDecimal"
                         tools:ignore="LabelFor" />

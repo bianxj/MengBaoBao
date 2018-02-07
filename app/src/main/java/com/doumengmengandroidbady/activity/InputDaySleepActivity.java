@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseInputDataActivity;
+import com.doumengmengandroidbady.util.EditTextUtil;
 
 /**
  * 作者: 边贤君
@@ -59,6 +60,7 @@ public class InputDaySleepActivity extends BaseInputDataActivity {
             String day = intent.getStringExtra(IN_PARAM_DAY_SLEEP);
             et_input_data.setText(day);
         }
+        new EditTextUtil(et_input_data);
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -97,7 +99,7 @@ public class InputDaySleepActivity extends BaseInputDataActivity {
         }
 
         float hour = Float.parseFloat(hourString);
-        if ( hour <= 0 || hour >= 24 ){
+        if ( hour < 0 || hour > 24 ){
             showPromptDialog("睡眠时间范围为0~24");
             return false;
         }

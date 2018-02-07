@@ -19,6 +19,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
 import com.doumengmengandroidbady.response.entity.ParentInfo;
+import com.doumengmengandroidbady.util.FormatCheckUtil;
 import com.doumengmengandroidbady.util.FormulaUtil;
 
 import java.util.ArrayList;
@@ -199,10 +200,58 @@ public class ParentInfoLayout extends LinearLayout {
 
     private String errorMessage;
     public boolean checkParentInfo(){
+        String fatherName = et_father_name.getText().toString().trim();
+        if ( !TextUtils.isEmpty(fatherName) ){
+            if (!FormatCheckUtil.isChinese(fatherName)){
+                errorMessage = "父亲姓名不是中文";
+                return false;
+            }
+        }
+
+        String fatherHeight = et_father_height.getText().toString().trim();
+        if ( !TextUtils.isEmpty(fatherHeight) ){
+            if ( 0 > Float.parseFloat(fatherHeight) || Float.parseFloat(fatherHeight) > 250 ){
+                errorMessage = "父亲身高 范围0~250cm";
+                return false;
+            }
+        }
+
+        String fatherWeight = et_father_weight.getText().toString().trim();
+        if ( !TextUtils.isEmpty(fatherWeight) ){
+            if ( 0 > Float.parseFloat(fatherWeight) || Float.parseFloat(fatherWeight) > 150 ){
+                errorMessage = "父亲体重 范围0~150kg";
+                return false;
+            }
+        }
+
         int fatherCalture = singleChooseCheck(father_culture_id);
         if ( UN_CHOOSE == fatherCalture ){
             errorMessage = "请选择文化程度";
             return false;
+        }
+
+        String monthName = et_mother_name.getText().toString().trim();
+        if ( !TextUtils.isEmpty(monthName) ){
+            if (!FormatCheckUtil.isChinese(monthName)){
+                errorMessage = "母亲姓名不是中文";
+                return false;
+            }
+        }
+
+        String motherHeight = et_mother_height.getText().toString().trim();
+        if ( !TextUtils.isEmpty(motherHeight) ){
+            if ( 0 > Float.parseFloat(motherHeight) || Float.parseFloat(motherHeight) > 250 ){
+                errorMessage = "母亲身高 范围0~250cm";
+                return false;
+            }
+        }
+
+        String motherWeight = et_mother_weight.getText().toString().trim();
+        if ( !TextUtils.isEmpty(motherWeight) ){
+            if ( 0 > Float.parseFloat(motherWeight) || Float.parseFloat(motherWeight) > 150 ){
+                errorMessage = "母亲体重 范围0~150kg";
+                return false;
+            }
         }
 
         int motherCalture = singleChooseCheck(mother_culture_id);

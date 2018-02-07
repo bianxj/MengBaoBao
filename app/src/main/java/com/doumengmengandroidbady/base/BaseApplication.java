@@ -395,17 +395,17 @@ public class BaseApplication extends Application {
 
     public RoleType getRoleType(){
         UserData data = getUserData();
-//        String roleType = data.getRoletype();
-//        if ( "3".equals(roleType) ) {
-//            return RoleType.FREE_HOSPITAL_USER;
-//        } else if ( "1".equals(roleType) ){
-//            return RoleType.PAY_NET_USER;
-//        } else if ( "2".equals(roleType) ){
-//            return RoleType.PAY_HOSPITAL_USER;
-//        } else {
-//            return RoleType.FREE_NET_USER;
-//        }
-        return RoleType.FREE_NET_USER;
+        String roleType = data.getRoletype();
+        if ( "3".equals(roleType) ) {
+            return RoleType.FREE_HOSPITAL_USER;
+        } else if ( "1".equals(roleType) ){
+            return RoleType.PAY_NET_USER;
+        } else if ( "2".equals(roleType) ){
+            return RoleType.PAY_HOSPITAL_USER;
+        } else {
+            return RoleType.FREE_NET_USER;
+        }
+//        return RoleType.FREE_NET_USER;
     }
 
     private final static String PERSON_DIR = "person";
@@ -432,7 +432,7 @@ public class BaseApplication extends Application {
                 //TODO
             }
         }
-        return dirPath + File.separator + "picture_" + System.currentTimeMillis();
+        return dirPath + File.separator + "picture_" + System.currentTimeMillis() + ".jpg";
     }
 
     public void clearUploadPicture(){

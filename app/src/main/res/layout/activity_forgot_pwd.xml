@@ -122,7 +122,8 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/EditMarginLeft"
             android:layout_marginRight="@dimen/EditMarginRight"
-            android:hint="@string/input_new_pwd_hint" />
+            android:hint="@string/input_new_pwd_hint"
+            android:inputType="textPassword"/>
 
     </LinearLayout>
 

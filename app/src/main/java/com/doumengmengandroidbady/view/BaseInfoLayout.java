@@ -23,6 +23,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
 import com.doumengmengandroidbady.response.entity.UserData;
+import com.doumengmengandroidbady.util.EditTextUtil;
 import com.doumengmengandroidbady.util.FormatCheckUtil;
 
 import java.util.ArrayList;
@@ -134,6 +135,9 @@ public class BaseInfoLayout extends LinearLayout {
         et_other_disease = findViewById(R.id.et_other_disease);
 
         rg_gender = findViewById(R.id.rg_gender);
+
+        new EditTextUtil(et_baby_height);
+        new EditTextUtil(et_baby_weight);
 
         findEditText();
         findNetEditText();
@@ -320,6 +324,8 @@ public class BaseInfoLayout extends LinearLayout {
     }
 
     private void initReadableArea(){
+        findViewById(R.id.cb_other_disease).setVisibility(View.GONE);
+
         rg_gender.setVisibility(View.GONE);
         tv_calendar.setVisibility(View.GONE);
         for (EditText editText:editList){
@@ -436,6 +442,11 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
+        if ( 0 > Integer.parseInt(parityCount) || Integer.parseInt(parityCount) > 9 ){
+            errorMessage = "胎次 范围0~9";
+            return false;
+        }
+
         //产次
         String birthCount = et_birth_count.getText().toString().trim();
         if (TextUtils.isEmpty(birthCount)){
@@ -443,10 +454,20 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
+        if ( 0 > Integer.parseInt(birthCount) || Integer.parseInt(birthCount) > 9 ){
+            errorMessage = "产次 范围0~9";
+            return false;
+        }
+
         //母亲生育年龄
         String birthAge = et_birth_age.getText().toString().trim();
         if (TextUtils.isEmpty(birthAge)){
             errorMessage = "请填写母亲生育年龄";
+            return false;
+        }
+
+        if ( 0 > Integer.parseInt(birthAge) || Integer.parseInt(birthAge) > 99 ){
+            errorMessage = "母亲生育年龄 范围0~99";
             return false;
         }
 
@@ -520,6 +541,11 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
+        if ( !FormatCheckUtil.isChinese(babyName) ){
+            errorMessage = "宝宝姓名不是中文";
+            return false;
+        }
+
         //出生日期
         String babyBirthday = tv_calendar.getText().toString().trim();
         if ( TextUtils.isEmpty(babyBirthday) ){
@@ -534,9 +560,19 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
+        if ( 0 > Integer.parseInt(week) || Integer.parseInt(week) > 60 ){
+            errorMessage = "孕周(周) 范围0~60";
+            return false;
+        }
+
         String day = et_day.getText().toString().trim();
         if ( TextUtils.isEmpty(day) ){
             errorMessage = "请填写孕周";
+            return false;
+        }
+
+        if ( 0 > Integer.parseInt(day) || Integer.parseInt(day) > 7 ){
+            errorMessage = "孕周(天) 范围0~7";
             return false;
         }
 
@@ -560,10 +596,20 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
+        if ( 0 > Float.parseFloat(weight) || Float.parseFloat(weight) > 150 ){
+            errorMessage = "出生体重 范围0~150kg";
+            return false;
+        }
+
         //出生身长
         String height = et_baby_height.getText().toString().trim();
         if (TextUtils.isEmpty(height)){
             errorMessage = "请填写出生身长";
+            return false;
+        }
+
+        if ( 0 > Float.parseFloat(height) || Float.parseFloat(height) > 250 ){
+            errorMessage = "出生身高 范围0~250cm";
             return false;
         }
 
@@ -724,6 +770,10 @@ public class BaseInfoLayout extends LinearLayout {
                 tv_calendar.setText(String.format(getContext().getString(R.string.dialog_year_month_day),year,month+1,day));
             }
         }, year, month, day);
+
+        Calendar last = Calendar.getInstance();
+        last.set(last.get(Calendar.YEAR)-3,last.get(Calendar.MONTH),calendar.get((Calendar.DATE)));
+        dp.getDatePicker().setMinDate(last.getTime().getTime());
         dp.show();
     }
 

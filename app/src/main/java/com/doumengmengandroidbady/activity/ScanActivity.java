@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -129,12 +128,7 @@ public class ScanActivity extends BaseActivity {
         if ( REQUEST_ALBUM == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             String source;
             Uri uri = data.getData();
-            int sdkVersion = Build.VERSION.SDK_INT;
-            if (sdkVersion >= 19) {
-                source = PictureUtils.getPath_above19(ScanActivity.this, uri);
-            } else {
-                source = PictureUtils.getFilePath_below19(ScanActivity.this,uri);
-            }
+            source = PictureUtils.getFilePath(ScanActivity.this,uri);
             new Thread(new DecodeRunnable(source)).start();
         }
     }
