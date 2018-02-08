@@ -45,7 +45,8 @@
             android:hint="@string/input_phone_hint"
             android:layout_marginLeft="@dimen/EditMarginLeft"
             android:layout_marginRight="@dimen/EditMarginRight"
-            android:inputType="phone"
+            android:inputType="number"
+            android:maxLength="11"
             android:lines="1"
             style="@style/EditTextView"/>
 

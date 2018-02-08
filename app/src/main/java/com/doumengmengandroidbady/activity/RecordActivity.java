@@ -29,6 +29,7 @@ import com.doumengmengandroidbady.net.HttpUtil;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.request.entity.SubmitRecord;
 import com.doumengmengandroidbady.response.CurrentRecordResponse;
 import com.doumengmengandroidbady.response.SubmitRecordResponse;
@@ -251,7 +252,8 @@ public class RecordActivity extends BaseActivity {
 
         dayList = BaseApplication.getInstance().getDayList();
         if ( dayList == null ){
-            //TODO
+            //TODO 无月龄数据如何处理
+            BaseApplication.getInstance().getMLog().error("无月龄数据");
         } else {
             tv_really_month.setText(String.format(getResources().getString(R.string.record_month_age),dayList.getCurrentMonth(),dayList.getCurrentDay()));
             tv_correct_month.setText(String.format(getResources().getString(R.string.record_month_age),dayList.getCorrentMonth(),dayList.getCorrentDay()));
@@ -793,7 +795,7 @@ public class RecordActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-
+            showPromptDialog(ResponseErrorCode.getErrorMsg(result));
         }
 
         @Override
@@ -802,56 +804,60 @@ public class RecordActivity extends BaseActivity {
             if ( 1 == response.getResult().getIsSuccess() ){
                 getCurrentRecord();
             } else {
-                //TODO
+                showPromptDialog(getString(R.string.dialog_content_submit_failed));
             }
         }
     };
 
     private boolean checkData(){
-        if (isTextContentEmpty(tv_height)){showPromptDialog("身长数据不能为空");return false;}
-        if (isTextContentEmpty(tv_weight)){showPromptDialog("体重数据不能为空");return false;}
-        if (isTextContentEmpty(tv_head_circumference)){showPromptDialog("头围数据不能为空");return false;}
-        if (isTextContentEmpty(tv_chest_circumference)){showPromptDialog("胸围数据不能为空");return false;}
-        if (isTextContentEmpty(tv_cacation_day)){showPromptDialog("排便数据不能为空");return false;}
-        if (isTextContentEmpty(tv_cacation_count)){showPromptDialog("排便数据不能为空");return false;}
-        if (isTextContentEmpty(tv_micturition_count)){showPromptDialog("排尿数据不能为空");return false;}
-        if (isTextContentEmpty(tv_night_sleep)){showPromptDialog("夜间数据不能为空");return false;}
-        if (isTextContentEmpty(tv_day_sleep)){showPromptDialog("日间数据不能为空");return false;}
-        if (isTextContentEmpty(tv_breastfeeding)){showPromptDialog("人乳喂养数据不能为空");return false;}
-        if (isTextContentEmpty(tv_breastfeeding_count)){showPromptDialog("人乳喂养数据不能为空");return false;}
-        if (isTextContentEmpty(tv_formula_milk)){showPromptDialog("配方奶数据不能为空");return false;}
-        if (isTextContentEmpty(tv_formula_milk_count)){showPromptDialog("配方奶数据不能为空");return false;}
+        if (isTextContentEmpty(tv_height)){showPromptTitle("身长数据不能为空");return false;}
+        if (isTextContentEmpty(tv_weight)){showPromptTitle("体重数据不能为空");return false;}
+        if (isTextContentEmpty(tv_head_circumference)){showPromptTitle("头围数据不能为空");return false;}
+        if (isTextContentEmpty(tv_chest_circumference)){showPromptTitle("胸围数据不能为空");return false;}
+        if (isTextContentEmpty(tv_cacation_day)){showPromptTitle("排便数据不能为空");return false;}
+        if (isTextContentEmpty(tv_cacation_count)){showPromptTitle("排便数据不能为空");return false;}
+        if (isTextContentEmpty(tv_micturition_count)){showPromptTitle("排尿数据不能为空");return false;}
+        if (isTextContentEmpty(tv_night_sleep)){showPromptTitle("夜间数据不能为空");return false;}
+        if (isTextContentEmpty(tv_day_sleep)){showPromptTitle("日间数据不能为空");return false;}
+        if (isTextContentEmpty(tv_breastfeeding)){showPromptTitle("人乳喂养数据不能为空");return false;}
+        if (isTextContentEmpty(tv_breastfeeding_count)){showPromptTitle("人乳喂养数据不能为空");return false;}
+        if (isTextContentEmpty(tv_formula_milk)){showPromptTitle("配方奶数据不能为空");return false;}
+        if (isTextContentEmpty(tv_formula_milk_count)){showPromptTitle("配方奶数据不能为空");return false;}
 
         float milk = getTextContentToFloat(et_milk);
-        if ( 0 > milk || milk > 2000 ){showPromptDialog("牛奶 范围为0~2000");return false;}
+        if ( 0 > milk || milk > 2000 ){showPromptTitle("牛奶 范围为0~2000");return false;}
 
         float flour = getTextContentToFloat(et_flour);
-        if ( 0 > flour || flour > 5000 ){showPromptDialog("米粉 范围为0~5000");return false;}
+        if ( 0 > flour || flour > 5000 ){showPromptTitle("米粉 范围为0~5000");return false;}
 
         float food = getTextContentToFloat(et_food);
-        if ( 0 > food || food > 5000 ){showPromptDialog("面食 范围为0~5000");return false;}
+        if ( 0 > food || food > 5000 ){showPromptTitle("面食 范围为0~5000");return false;}
 
         float porridge = getTextContentToFloat(et_porridge);
-        if ( 0 > porridge || porridge > 5000 ){showPromptDialog("粥 范围为0~5000");return false;}
+        if ( 0 > porridge || porridge > 5000 ){showPromptTitle("粥 范围为0~5000");return false;}
 
         float rice = getTextContentToFloat(et_rice);
-        if ( 0 > rice || rice > 5000 ){showPromptDialog("饭 范围为0~5000");return false;}
+        if ( 0 > rice || rice > 5000 ){showPromptTitle("饭 范围为0~5000");return false;}
 
         float meat = getTextContentToFloat(et_meat);
-        if ( 0 > meat || meat > 5000 ){showPromptDialog("荤菜（鱼肉肝） 范围为0~5000");return false;}
+        if ( 0 > meat || meat > 5000 ){showPromptTitle("荤菜（鱼肉肝） 范围为0~5000");return false;}
 
         float bean = getTextContentToFloat(et_bean);
-        if ( 0 > bean || bean > 5000 ){showPromptDialog("豆制品 范围为0~5000");return false;}
+        if ( 0 > bean || bean > 5000 ){showPromptTitle("豆制品 范围为0~5000");return false;}
         float vegetables = getTextContentToFloat(et_vegetables);
-        if ( 0 > vegetables || vegetables > 5000 ){showPromptDialog("蔬菜 范围为0~5000");return false;}
+        if ( 0 > vegetables || vegetables > 5000 ){showPromptTitle("蔬菜 范围为0~5000");return false;}
 
         float water = getTextContentToFloat(et_water);
-        if ( 0 > water || water > 2000 ){showPromptDialog("水 范围为0~2000");return false;}
+        if ( 0 > water || water > 2000 ){showPromptTitle("水 范围为0~2000");return false;}
         float vitamin_dosage = getTextContentToFloat(et_vitamin_dosage);
-        if ( 0 > vitamin_dosage || vitamin_dosage > 2000 ){showPromptDialog("维生素 范围为0~2000");return false;}
+        if ( 0 > vitamin_dosage || vitamin_dosage > 2000 ){showPromptTitle("维生素 范围为0~2000");return false;}
         float calcium_dosage = getTextContentToFloat(et_calcium_dosage);
-        if ( 0 > calcium_dosage || calcium_dosage > 2000 ){showPromptDialog("钙 范围为0~2000");return false;}
+        if ( 0 > calcium_dosage || calcium_dosage > 2000 ){showPromptTitle("钙 范围为0~2000");return false;}
         return true;
+    }
+
+    private void showPromptTitle(String message){
+        tv_title.setText(message);
     }
 
     private float getTextContentToFloat(TextView textView){

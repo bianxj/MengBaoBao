@@ -93,15 +93,19 @@ public class InputMicturitionActivity extends BaseInputDataActivity {
     private boolean checkData(){
         String data = et_input_data.getText().toString();
         if (TextUtils.isEmpty(data)){
-            showPromptDialog("排尿天/次 不能为空");
+            showPromptTitle("排尿天/次 不能为空");
             return false;
         }
 
         float countDay = Float.parseFloat(data);
         if ( countDay < 0 || countDay > 30 ){
-            showPromptDialog("排尿天/次 范围为0~30");
+            showPromptTitle("排尿天/次 范围为0~30");
             return false;
         }
         return true;
+    }
+
+    private void showPromptTitle(String message){
+        tv_title.setText(message);
     }
 }

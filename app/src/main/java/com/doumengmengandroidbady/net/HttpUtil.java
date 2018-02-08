@@ -18,6 +18,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.internal.Util;
 
 /**
  * 作者:边贤君
@@ -46,11 +47,57 @@ public class HttpUtil {
         client = defaultHttpClient();
     }
 
-    public String httpsRequestFile(String url){
+    public String httpsRequestFile(String urlString){
+//        HttpURLConnection connection = null;
+//        InputStream inputStream = null;
+//        ByteArrayOutputStream outputStream = null;
+//        String result = null;
+//        try {
+//            URL url = new URL(urlString);
+//            connection = (HttpURLConnection)url.openConnection();
+//            connection.setRequestMethod("POST");
+//            connection.addRequestProperty("Connection","close");
+//            inputStream = connection.getInputStream();
+//
+//            outputStream = new ByteArrayOutputStream();
+//
+//            int len = 0;
+//            byte[] buf = new byte[40960];
+//            while ( (len = inputStream.read(buf)) > 0 ){
+//                outputStream.write(buf,0,len);
+//            }
+//            result = outputStream.toString("UTF-8");
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if ( outputStream != null ){
+//                try {
+//                    outputStream.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            if (  inputStream != null ){
+//                try {
+//                    inputStream.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            if ( connection != null ){
+//                connection.disconnect();
+//            }
+//        }
+//
+//        return result;
+
         String result = null;
         Request.Builder builder = new Request.Builder();
-        builder.url(url);
-        builder.addHeader("content-type","text/html;charset:utf-8");
+        builder.url(urlString);
+        builder.post(Util.EMPTY_REQUEST);
+//        builder.addHeader("content-type","text/html;charset:utf-8");
         builder.addHeader("Connection","close");
         Request request = builder.build();
         Response response = null;

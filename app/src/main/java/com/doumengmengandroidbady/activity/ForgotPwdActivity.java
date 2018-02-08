@@ -3,6 +3,8 @@ package com.doumengmengandroidbady.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,7 +18,6 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
-import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
@@ -31,6 +32,7 @@ import com.doumengmengandroidbady.util.MyDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,14 +43,14 @@ import java.util.Map;
  */
 public class ForgotPwdActivity extends BaseActivity {
 
-    private final static boolean isTest = Config.isTest;
-
     private RelativeLayout rl_back;
     private Button bt_sure;
     private TextView bt_get_vc , tv_prompt;
     private EditText et_phone , et_vc , et_login_pwd;
     private LinearLayout ll_agreement;
     private CheckBox cb_agreement;
+
+    private int countDown;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +68,9 @@ public class ForgotPwdActivity extends BaseActivity {
         stopTask(changePwdTask);
         if ( loginTask != null ) {
             stopTask(loginTask.getTask());
+        }
+        if ( handler != null ){
+            handler.removeCallbacksAndMessages(null);
         }
     }
 
@@ -144,10 +149,12 @@ public class ForgotPwdActivity extends BaseActivity {
     private final RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
+            bt_get_vc.setEnabled(false);
         }
 
         @Override
         public void onError(String result) {
+            bt_get_vc.setEnabled(true);
             disposeError(result);
         }
 
@@ -155,8 +162,38 @@ public class ForgotPwdActivity extends BaseActivity {
         public void onPostExecute(String result) {
             VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
             BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
+
+            countDown = 60;
+            handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
         }
     };
+
+    private ForgotHandler handler = new ForgotHandler(this);
+    private static class ForgotHandler extends Handler {
+        public final static int COUNT_DOWN = 0x01;
+        private WeakReference<ForgotPwdActivity> weakReference;
+
+        public ForgotHandler(ForgotPwdActivity activity) {
+            weakReference = new WeakReference<ForgotPwdActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( msg.what == COUNT_DOWN ){
+                ForgotPwdActivity activity = weakReference.get();
+                if ( activity.countDown <= 0 ){
+                    activity.bt_get_vc.setText(activity.getString(R.string.get_vc));
+                    activity.bt_get_vc.setEnabled(true);
+                    removeMessages(COUNT_DOWN);
+                } else {
+                    activity.bt_get_vc.setText(activity.countDown+"");
+                    activity.countDown--;
+                    sendEmptyMessageDelayed(COUNT_DOWN,1000);
+                }
+            }
+        }
+    }
 
     /**
      * 作者: 边贤君
@@ -164,9 +201,6 @@ public class ForgotPwdActivity extends BaseActivity {
      * 日期: 2018/1/8 10:01
      */
     private boolean checkVerificationCode(){
-        if (isTest){
-            return true;
-        }
         tv_prompt.setText("");
         String phone = et_phone.getText().toString().trim();
         if (!FormatCheckUtil.isPhone(phone) ){
@@ -205,9 +239,6 @@ public class ForgotPwdActivity extends BaseActivity {
      * 日期: 2018/1/8 9:58
      */
     private boolean checkChangePwd(){
-        if (isTest){
-            return true;
-        }
         tv_prompt.setText("");
         String phone = et_phone.getText().toString().trim();
         if (TextUtils
@@ -217,6 +248,13 @@ public class ForgotPwdActivity extends BaseActivity {
         }
         if (!FormatCheckUtil.isPhone(phone) ){
             tv_prompt.setText(R.string.prompt_error_phone);
+            return false;
+        }
+
+        String saveVc = BaseApplication.getInstance().getForgetVc();
+        if ( TextUtils.isEmpty(saveVc) ){
+            tv_prompt.setText(R.string.prompt_no_save_vc);
+
             return false;
         }
 
@@ -271,6 +309,7 @@ public class ForgotPwdActivity extends BaseActivity {
                 login();
             } else {
                 //TODO
+                tv_prompt.setText("密码修改失败");
             }
         }
 

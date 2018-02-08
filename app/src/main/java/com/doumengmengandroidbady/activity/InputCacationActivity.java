@@ -103,25 +103,30 @@ public class InputCacationActivity extends BaseInputDataActivity {
         String count = et_input_data_two.getText().toString();
 
         if (TextUtils.isEmpty(day)){
-            showPromptDialog("天数不能为空");
+            showPromptTitle("天数不能为空");
             return false;
         }
 
         if (TextUtils.isEmpty(count)){
-            showPromptDialog("次数不能为空");
+            showPromptTitle("次数不能为空");
             return false;
         }
 
         if ( Integer.parseInt(day) < 0 || Integer.parseInt(day) > 30 ){
-            showPromptDialog("天数 范围为0~30");
+            showPromptTitle("天数 0~30");
             return false;
         }
 
         if ( Integer.parseInt(count) < 0 || Integer.parseInt(day) > 30 ){
-            showPromptDialog("次数 范围为0~30");
+            showPromptTitle("次数 0~30");
             return false;
         }
 
         return true;
     }
+
+    private void showPromptTitle(String message){
+        tv_title.setText(message);
+    }
+
 }

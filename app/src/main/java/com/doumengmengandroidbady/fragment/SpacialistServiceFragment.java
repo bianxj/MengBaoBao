@@ -60,6 +60,7 @@ public class SpacialistServiceFragment extends BaseFragment {
 
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_spacialist_service,null);
         findView(view);
         return view;

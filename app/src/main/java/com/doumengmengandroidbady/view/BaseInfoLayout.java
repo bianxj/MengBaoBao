@@ -31,10 +31,13 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/13.
+ * 作者: 边贤君
+ * 描述: 基本信息
+ * 创建日期: 2018/2/8 14:44
  */
-
 public class BaseInfoLayout extends LinearLayout {
+
+    private final static String UN_KNOW = "未知";
 
     public enum TYPE{
         EDITABLE,
@@ -77,6 +80,7 @@ public class BaseInfoLayout extends LinearLayout {
             ,et_parity_count,et_birth_count,et_birth_age;
 
     private TextView tv_calendar;
+    private TextView tv_birth_age_unit;
 
     private LinearLayout ll_parturition_state;
     private final List<CompoundButton> parturitionCheckBox = new ArrayList<>();
@@ -118,6 +122,8 @@ public class BaseInfoLayout extends LinearLayout {
         et_parity_count = findViewById(R.id.et_parity_count);
         et_birth_count = findViewById(R.id.et_birth_count);
         et_birth_age = findViewById(R.id.et_birth_age);
+
+        tv_birth_age_unit = findViewById(R.id.tv_birth_age_unit);
 
         tv_calendar = findViewById(R.id.tv_calendar);
 
@@ -368,7 +374,13 @@ public class BaseInfoLayout extends LinearLayout {
 
         et_birth_count.setText(userData.getBirthtimes());
         et_parity_count.setText(userData.getPregnancies());
-        et_birth_age.setText(userData.getMumbearage());
+        if ( type == TYPE.READ_ONLY && (TextUtils.isEmpty(userData.getMumbearage()) || Integer.parseInt(userData.getMumbearage()) == 0) ){
+            et_birth_age.setText(UN_KNOW);
+            tv_birth_age_unit.setVisibility(View.INVISIBLE);
+        } else {
+            et_birth_age.setText(userData.getMumbearage());
+            tv_birth_age_unit.setVisibility(View.VISIBLE);
+        }
 
         if ( "1".equals(userData.getBorntype()) ){
             selectRadioButton(R.id.rb_single_birth);
@@ -443,7 +455,7 @@ public class BaseInfoLayout extends LinearLayout {
         }
 
         if ( 0 > Integer.parseInt(parityCount) || Integer.parseInt(parityCount) > 9 ){
-            errorMessage = "胎次 范围0~9";
+            errorMessage = "胎次 0~9";
             return false;
         }
 
@@ -455,7 +467,7 @@ public class BaseInfoLayout extends LinearLayout {
         }
 
         if ( 0 > Integer.parseInt(birthCount) || Integer.parseInt(birthCount) > 9 ){
-            errorMessage = "产次 范围0~9";
+            errorMessage = "产次 0~9";
             return false;
         }
 
@@ -466,8 +478,8 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
-        if ( 0 > Integer.parseInt(birthAge) || Integer.parseInt(birthAge) > 99 ){
-            errorMessage = "母亲生育年龄 范围0~99";
+        if ( 0 >= Integer.parseInt(birthAge) || Integer.parseInt(birthAge) > 99 ){
+            errorMessage = "母亲生育年龄 0~99";
             return false;
         }
 
@@ -560,8 +572,8 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
-        if ( 0 > Integer.parseInt(week) || Integer.parseInt(week) > 60 ){
-            errorMessage = "孕周(周) 范围0~60";
+        if ( 20 > Integer.parseInt(week) || Integer.parseInt(week) > 60 ){
+            errorMessage = "孕周(周) 20~60";
             return false;
         }
 
@@ -572,21 +584,21 @@ public class BaseInfoLayout extends LinearLayout {
         }
 
         if ( 0 > Integer.parseInt(day) || Integer.parseInt(day) > 7 ){
-            errorMessage = "孕周(天) 范围0~7";
+            errorMessage = "孕周(天) 0~7";
             return false;
         }
 
-        //联系手机
-        String phone = et_phone.getText().toString().trim();
-        if (TextUtils.isEmpty(phone)){
-            errorMessage = "请填写联系手机";
-            return false;
-        }
-
-        if (!FormatCheckUtil.isPhone(phone)){
-            errorMessage = "手机格式不正确";
-            return false;
-        }
+//        //联系手机
+//        String phone = et_phone.getText().toString().trim();
+//        if (TextUtils.isEmpty(phone)){
+//            errorMessage = "请填写联系手机";
+//            return false;
+//        }
+//
+//        if (!FormatCheckUtil.isPhone(phone)){
+//            errorMessage = "手机格式不正确";
+//            return false;
+//        }
 
 
         //出生体重
@@ -596,8 +608,8 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
-        if ( 0 > Float.parseFloat(weight) || Float.parseFloat(weight) > 150 ){
-            errorMessage = "出生体重 范围0~150kg";
+        if ( 0 >= Float.parseFloat(weight) || Float.parseFloat(weight) > 150 ){
+            errorMessage = "出生体重 0~150kg";
             return false;
         }
 
@@ -608,8 +620,8 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
-        if ( 0 > Float.parseFloat(height) || Float.parseFloat(height) > 250 ){
-            errorMessage = "出生身高 范围0~250cm";
+        if ( 0 >= Float.parseFloat(height) || Float.parseFloat(height) > 250 ){
+            errorMessage = "出生身高 0~250cm";
             return false;
         }
 
@@ -671,12 +683,17 @@ public class BaseInfoLayout extends LinearLayout {
         babyInfo.setTrueName(getValueFromEditText(et_baby_name));
         babyInfo.setPregnancyWeeks(getValueFromEditText(et_week));
         babyInfo.setPregnancyDays(getValueFromEditText(et_day));
-        babyInfo.setAccountMobile(getValueFromEditText(et_phone));
+//        babyInfo.setAccountMobile(getValueFromEditText(et_phone));
+        babyInfo.setAccountMobile(BaseApplication.getInstance().getUserData().getAccountmobile());
         babyInfo.setBornWeight(getValueFromEditText(et_baby_weight));
         babyInfo.setBornHeight(getValueFromEditText(et_baby_height));
         babyInfo.setPregnancies(getValueFromEditText(et_parity_count));
         babyInfo.setBirthTimes(getValueFromEditText(et_birth_count));
-        babyInfo.setMumBearAge(getValueFromEditText(et_birth_age));
+        if ( !et_birth_age.isEnabled() && UN_KNOW.equals(et_birth_age.getText().toString().trim()) ){
+            babyInfo.setMumBearAge("0");
+        } else {
+            babyInfo.setMumBearAge(getValueFromEditText(et_birth_age));
+        }
 
         int birthState = singleChooseCheck(rb_birth_state);
         if ( R.id.rb_single_birth == birthState ){

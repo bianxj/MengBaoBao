@@ -44,7 +44,7 @@
     <string name="home_page_observe_point_content">宝妈，您有注意到宝宝的这些变化吗？</string>
     <string name="home_page_doctor_list">萌宝宝医生</string>
     <string name="home_page_doctor_list_content">宝妈，你可以为您的宝宝选择专属医生</string>
-    <string name="home_page_month_age">%s周%s日</string>
+    <string name="home_page_month_age">%s月%s天</string>
 
     <!--SpacialistServiceFragment-->
     <string name="spacialist_service_buy">购买</string>
@@ -372,7 +372,7 @@
     <string name="hospital_report_feeding_type">喂养方式</string>
     <string name="hospital_report_develop_history"></string>
     <string name="hospital_report_ill_history"></string>
-    <string name="hospital_report_current_ill_history"></string>
+    <string name="hospital_report_current_ill_history">现病史</string>
     <string name="hospital_report_who">生长评价均数标准差结果（WHO）</string>
     <string name="hospital_report_result">评价结果</string>
     <string name="hospital_report_doctor_success">医生建议</string>
@@ -402,11 +402,17 @@
     <string name="dialog_btn_prompt_go_setting">去设置</string>
     
     <string name="update_content">的用户正在使用新版本</string>
-    <string name="change_pwd_content">修改密码成功</string>
+    <string name="dialog_content_pwd_change_success">修改密码成功</string>
+    <string name="dialog_content_pwd_change_failed">修改密码失败</string>
     <string name="dialog_btn_go_on">继续</string>
 
-    <string name="change_base_info_content">修改成功</string>
-    <string name="change_parent_info_content">修改成功</string>
+    <string name="dialog_content_logout">是否确定退出?</string>
+
+    <string name="dialog_content_edit_success">修改成功</string>
+    <string name="dialog_content_edit_failed">修改失败</string>
+
+    <string name="dialog_content_submit_success">提交成功</string>
+    <string name="dialog_content_submit_failed">提交失败</string>
 
     <string name="dialog_content_open_location_service">请打开定位服务</string>
 
@@ -434,6 +440,7 @@
     <string name="prompt_no_account">请输入帐号</string>
     <string name="prompt_error_phone">请输入11位正确的手机号码</string>
     <string name="prompt_no_vc">请输入验证码</string>
+    <string name="prompt_no_save_vc">请获取验证码</string>
     <string name="prompt_no_password">请输入6–16位由数字、字母组成的密码</string>
     <string name="prompt_error_password">请输入6–16位由数字、字母组成的密码</string>
 

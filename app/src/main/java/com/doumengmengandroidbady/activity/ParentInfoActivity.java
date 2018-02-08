@@ -12,6 +12,7 @@ import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
 import com.doumengmengandroidbady.response.SubmitInfoResponse;
 import com.doumengmengandroidbady.util.GsonUtil;
@@ -102,7 +103,8 @@ public class ParentInfoActivity extends BaseActivity {
 
     private boolean checkData(){
         if ( !parent_info.checkParentInfo() ){
-            //TODO
+            tv_title.setText(parent_info.getErrorMsg());
+//            showPromptDialog(parent_info.getErrorMsg());
             return false;
         }
         return true;
@@ -122,13 +124,11 @@ public class ParentInfoActivity extends BaseActivity {
 
     private final RequestCallBack changeParentInfoCallBack = new RequestCallBack() {
         @Override
-        public void onPreExecute() {
-            //TODO
-        }
+        public void onPreExecute() {}
 
         @Override
         public void onError(String result) {
-            //TODO
+            MyDialog.showPromptDialog(ParentInfoActivity.this, ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override
@@ -136,14 +136,14 @@ public class ParentInfoActivity extends BaseActivity {
             SubmitInfoResponse response = GsonUtil.getInstance().fromJson(result,SubmitInfoResponse.class);
             if ( 1 == response.getResult().getIsSaveUser() ){
                 BaseApplication.getInstance().saveParentInfo(parent_info.getParentInfo());
-                MyDialog.showPromptDialog(ParentInfoActivity.this, getString(R.string.change_parent_info_content), new MyDialog.PromptDialogCallback() {
+                MyDialog.showPromptDialog(ParentInfoActivity.this, getString(R.string.dialog_content_edit_success), new MyDialog.PromptDialogCallback() {
                     @Override
                     public void sure() {
                         back();
                     }
                 });
             } else {
-                //TODO
+                MyDialog.showPromptDialog(ParentInfoActivity.this, getString(R.string.dialog_content_edit_failed), null);
             }
         }
     };

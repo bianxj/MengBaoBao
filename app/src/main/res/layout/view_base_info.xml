@@ -271,7 +271,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/unuse_tv_phone"
@@ -528,6 +528,7 @@
                 tools:ignore="LabelFor" />
 
             <TextView
+                android:id="@+id/tv_birth_age_unit"
                 style="@style/FirstGray.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

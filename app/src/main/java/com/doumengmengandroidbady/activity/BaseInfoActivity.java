@@ -14,6 +14,7 @@ import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
 import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.response.SubmitInfoResponse;
@@ -98,7 +99,7 @@ public class BaseInfoActivity extends BaseActivity {
 
     private RequestTask changeBaseInfo;
     private void changeBaseInfo(){
-        if ( base_info.checkBaseInfo() ){
+        if ( checkBaseInfo() ){
             try {
                 changeBaseInfo = new RequestTask.Builder(this,changeBaseInfoCallBack)
                         .setUrl(UrlAddressList.URL_SAVE_USER_INFO)
@@ -109,9 +110,16 @@ public class BaseInfoActivity extends BaseActivity {
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
-        } else {
-            String errorMsg = base_info.getCheckErrorMsg();
         }
+    }
+
+    private boolean checkBaseInfo(){
+        if ( !base_info.checkBaseInfo() ){
+//            showPromptDialog(base_info.getCheckErrorMsg());
+            tv_title.setText(base_info.getCheckErrorMsg());
+            return false;
+        }
+        return true;
     }
 
     private Map<String, String> buildChangeBaseInfoContent() {
@@ -135,7 +143,7 @@ public class BaseInfoActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            //TODO
+            MyDialog.showPromptDialog(BaseInfoActivity.this, ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override
@@ -143,14 +151,14 @@ public class BaseInfoActivity extends BaseActivity {
             SubmitInfoResponse response = GsonUtil.getInstance().fromJson(result,SubmitInfoResponse.class);
             if ( 1 == response.getResult().getIsSaveUser() ){
                 BaseApplication.getInstance().saveBabyInfo(base_info.getBabyInfo());
-                MyDialog.showPromptDialog(BaseInfoActivity.this, getString(R.string.change_base_info_content), new MyDialog.PromptDialogCallback() {
+                MyDialog.showPromptDialog(BaseInfoActivity.this, getString(R.string.dialog_content_edit_success), new MyDialog.PromptDialogCallback() {
                     @Override
                     public void sure() {
                         back();
                     }
                 });
             } else {
-                //TODO
+                MyDialog.showPromptDialog(BaseInfoActivity.this,getString(R.string.dialog_content_edit_failed),null);
             }
         }
     };

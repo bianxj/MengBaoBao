@@ -94,16 +94,21 @@ public class InputDaySleepActivity extends BaseInputDataActivity {
     private boolean checkData(){
         String hourString = et_input_data.getText().toString();
         if (TextUtils.isEmpty(hourString)){
-            showPromptDialog("睡眠时间不能为空");
+            showPromptTitle("睡眠时间不能为空");
             return false;
         }
 
         float hour = Float.parseFloat(hourString);
         if ( hour < 0 || hour > 24 ){
-            showPromptDialog("睡眠时间范围为0~24");
+            showPromptTitle("睡眠时间 0~24");
             return false;
         }
 
         return true;
     }
+
+    private void showPromptTitle(String message){
+        tv_title.setText(message);
+    }
+
 }

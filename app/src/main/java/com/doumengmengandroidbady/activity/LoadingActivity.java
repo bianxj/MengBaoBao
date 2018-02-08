@@ -24,9 +24,11 @@ import com.doumengmengandroidbady.db.FeatureDao;
 import com.doumengmengandroidbady.db.GrowthDao;
 import com.doumengmengandroidbady.db.HospitalDao;
 import com.doumengmengandroidbady.db.MengClassDao;
+import com.doumengmengandroidbady.entity.LoginInfo;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
+import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.request.task.LoginTask;
 import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.response.InitConfigureResponse;
@@ -51,7 +53,7 @@ import java.util.Map;
  */
 public class LoadingActivity extends BaseActivity {
 
-    public final static String IN_PARAM_IS_TIME_OUT = "is_time_out";
+    public final static String IN_PARAM_AUTO_LOGIN = "is_auto_login";
 
     private RelativeLayout rl_back;
     private TextView tv_loading_percent;
@@ -96,8 +98,8 @@ public class LoadingActivity extends BaseActivity {
 
     private void loading(){
         Intent intent = getIntent();
-        boolean isTimeOut = intent.getBooleanExtra(IN_PARAM_IS_TIME_OUT,false);
-        if ( isTimeOut ){
+        boolean isAutoLogin = intent.getBooleanExtra(IN_PARAM_AUTO_LOGIN,false);
+        if ( isAutoLogin ){
             login();
         } else {
             checkVersionAndWifi();
@@ -140,25 +142,24 @@ public class LoadingActivity extends BaseActivity {
     private final RequestCallBack checkVersionCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
-            //TODO
         }
 
         @Override
         public void onError(String result) {
-            //TODO
+            showPromptDialog(ResponseErrorCode.getErrorMsg(result));
         }
 
         @Override
         public void onPostExecute(String result) {
             try {
                 if (TextUtils.isEmpty(result)){
-                    //TODO
+                    //TODO 版本信息获取失败处理
                 } else {
                     String versionName = AppUtil.getVersionName(LoadingActivity.this);
                     if (versionName.equals(result)) {
                         initConfigure();
                     } else {
-                        //TODO
+                        //TODO 获取版本更新信息
                         MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, result), result, "新版本特性\n" +
                                 "1、修复了部分bug\n" +
                                 "2、优化了部分交互设计\n" +
@@ -215,7 +216,14 @@ public class LoadingActivity extends BaseActivity {
         public void onPreExecute() {}
 
         @Override
-        public void onError(String result) {}
+        public void onError(String result) {
+            MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
+                @Override
+                public void sure() {
+                    BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
+                }
+            });
+        }
 
         @Override
         public void onPostExecute(String result) {
@@ -231,9 +239,9 @@ public class LoadingActivity extends BaseActivity {
      * 日期: 2018/1/8 9:51
      */
     private void login(){
-        UserData userData = BaseApplication.getInstance().getUserData();
+        LoginInfo loginInfo = BaseApplication.getInstance().getLogin();
             try {
-                loginTask = new LoginTask(LoadingActivity.this, userData.getAccountmobile(), userData.getPasswd(), new LoginTask.LoginCallBack() {
+                loginTask = new LoginTask(LoadingActivity.this, loginInfo.getAccount(), loginInfo.getPasswd(), new LoginTask.LoginCallBack() {
                     @Override
                     public void onPreExecute() {
 
@@ -241,6 +249,12 @@ public class LoadingActivity extends BaseActivity {
 
                     @Override
                     public void onError(String result) {
+                        MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
+                            @Override
+                            public void sure() {
+                                BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
+                            }
+                        });
                     }
 
                     @Override

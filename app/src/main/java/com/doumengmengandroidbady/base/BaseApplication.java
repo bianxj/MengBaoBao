@@ -2,10 +2,14 @@ package com.doumengmengandroidbady.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
+import com.doumengmengandroidbady.activity.GuideActivity;
+import com.doumengmengandroidbady.entity.LoginInfo;
 import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.request.entity.InputUserInfo;
 import com.doumengmengandroidbady.response.entity.DayList;
@@ -141,6 +145,7 @@ public class BaseApplication extends Application {
         if ( !file.exists() || !file.isDirectory() ) {
             if ( !file.mkdirs() ){
                 //TODO
+                BaseApplication.getInstance().getMLog().error("目录创建失败");
             }
         }
         return file;
@@ -165,6 +170,7 @@ public class BaseApplication extends Application {
 
     //----------------------------------------------------------------------------------------------
     private final static String TABLE_USER = "user";
+    private final static String COLUMN_LOGIN = "login";
     private final static String COLUMN_USER = "user";
     private final static String COLUMN_PARENT = "parent";
     private final static String COLUMN_REGISTER_VC = "register_vc";
@@ -177,10 +183,44 @@ public class BaseApplication extends Application {
     public final static String COLUMN_CURRENT_DAY = "current_day";
     public final static String COLUMN_CURRENT_MONTH = "current_month";
 
+    private LoginInfo loginInfo;
     private UserData userData;
     private ParentInfo parentInfo;
     public void clearUserData(){
+        userData = null;
+        parentInfo = null;
+        loginInfo = null;
         SharedPreferencesUtil.clearTable(this,TABLE_USER);
+    }
+
+    public LoginInfo getLogin(){
+        if ( loginInfo == null ) {
+            String data = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_LOGIN,null);
+            if (data != null) {
+                loginInfo = GsonUtil.getInstance().fromJson(data, LoginInfo.class);
+            }
+        }
+        return loginInfo;
+    }
+
+    public void saveLogin(String account , String passwd){
+        if ( loginInfo == null ){
+            loginInfo = new LoginInfo();
+        }
+        loginInfo.setAccount(account);
+        loginInfo.setPasswd(passwd);
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_LOGIN,GsonUtil.getInstance().toJson(loginInfo));
+    }
+
+    public boolean hasAccountData(){
+        LoginInfo loginInfo = getLogin();
+        if ( loginInfo != null ){
+            if (!TextUtils.isEmpty(loginInfo.getAccount())
+                    && !TextUtils.isEmpty(loginInfo.getPasswd())){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void saveBabyInfo(InputUserInfo.BabyInfo babyInfo){
@@ -418,6 +458,7 @@ public class BaseApplication extends Application {
         if ( !dir.exists() || !dir.isDirectory() ){
             if ( !dir.mkdirs() ){
                 //TODO
+                BaseApplication.getInstance().getMLog().error("目录创建失败");
             }
         }
         return dirPath + File.separator + PERSON_HEAD_IMG;
@@ -430,6 +471,7 @@ public class BaseApplication extends Application {
         if ( !dir.exists() || !dir.isDirectory() ){
             if ( !dir.mkdirs() ){
                 //TODO
+                BaseApplication.getInstance().getMLog().error("目录创建失败");
             }
         }
         return dirPath + File.separator + "picture_" + System.currentTimeMillis() + ".jpg";
@@ -452,6 +494,13 @@ public class BaseApplication extends Application {
             display = getResources().getDisplayMetrics();
         }
         return display;
+    }
+
+    public void skipToGuide(Context context){
+        clearUserData();
+        Intent intent = new Intent(context, GuideActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 }

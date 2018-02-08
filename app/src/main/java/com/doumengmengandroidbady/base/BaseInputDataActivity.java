@@ -30,6 +30,8 @@ public class BaseInputDataActivity extends BaseActivity {
     private void initData(){
         DayList dayList = BaseApplication.getInstance().getDayList();
         month = Integer.parseInt(dayList.getCurrentMonth());
+        month = month<0?0:month;
+        month = month>35?35:month;
         isBoy = BaseApplication.getInstance().getUserData().isMale();
     }
 

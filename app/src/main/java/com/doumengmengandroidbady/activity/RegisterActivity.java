@@ -3,6 +3,8 @@ package com.doumengmengandroidbady.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.doumengmengandroidbady.util.GsonUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +52,8 @@ public class RegisterActivity extends BaseActivity {
     private LinearLayout ll_agreement;
     private CheckBox cb_agreement;
 
+    private int countDown = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +69,9 @@ public class RegisterActivity extends BaseActivity {
         stopTask(registerTask);
         if ( loginTask != null ) {
             stopTask(loginTask.getTask());
+        }
+        if ( handler != null ){
+            handler.removeCallbacksAndMessages(null);
         }
     }
 
@@ -144,10 +152,12 @@ public class RegisterActivity extends BaseActivity {
     private final RequestCallBack getVerificationCodeCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
+            bt_get_vc.setEnabled(false);
         }
 
         @Override
         public void onError(String result) {
+            bt_get_vc.setEnabled(true);
             tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
         }
 
@@ -155,8 +165,37 @@ public class RegisterActivity extends BaseActivity {
         public void onPostExecute(String result) {
             VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
             BaseApplication.getInstance().saveRegisterVc(response.getResult().getCode());
+            countDown = 60;
+            handler.sendEmptyMessage(RegisterHandler.COUNT_DOWN);
         }
     };
+
+    private RegisterHandler handler = new RegisterHandler(this);
+    private static class RegisterHandler extends Handler{
+        public final static int COUNT_DOWN = 0x01;
+        private WeakReference<RegisterActivity> weakReference;
+
+        public RegisterHandler(RegisterActivity activity) {
+            weakReference = new WeakReference<RegisterActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( msg.what == COUNT_DOWN ){
+                RegisterActivity activity = weakReference.get();
+                if ( activity.countDown <= 0 ){
+                    activity.bt_get_vc.setText(activity.getString(R.string.get_vc));
+                    activity.bt_get_vc.setEnabled(true);
+                    removeMessages(COUNT_DOWN);
+                } else {
+                    activity.bt_get_vc.setText(activity.countDown+"");
+                    activity.countDown--;
+                    sendEmptyMessageDelayed(COUNT_DOWN,1000);
+                }
+            }
+        }
+    }
 
     /**
      * 作者: 边贤君
@@ -240,7 +279,7 @@ public class RegisterActivity extends BaseActivity {
             if ( 1 == response.getResult().getIsSuccess() ){
                 login();
             } else {
-                //TODO
+                tv_prompt.setText("");
             }
         }
     };

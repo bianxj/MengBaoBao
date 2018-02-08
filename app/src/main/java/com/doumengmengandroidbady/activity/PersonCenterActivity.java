@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class PersonCenterActivity extends BaseActivity {
     private CheckBox cb_male;
     private RelativeLayout rl_back;
     private RelativeLayout rl_child_info , rl_parent_info;
+    private ImageView iv_logout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class PersonCenterActivity extends BaseActivity {
         tv_baby_age = findViewById(R.id.tv_baby_age);
         cb_male = findViewById(R.id.cb_male);
         civ_baby_img = findViewById(R.id.civ_baby_img);
+        iv_logout = findViewById(R.id.iv_logout);
     }
 
     private void initView(){
@@ -80,6 +83,7 @@ public class PersonCenterActivity extends BaseActivity {
         rl_back.setOnClickListener(listener);
         rl_child_info.setOnClickListener(listener);
         rl_parent_info.setOnClickListener(listener);
+        iv_logout.setOnClickListener(listener);
     }
 
     /**
@@ -115,6 +119,9 @@ public class PersonCenterActivity extends BaseActivity {
                 case R.id.rl_back:
                     back();
                     break;
+                case R.id.iv_logout:
+                    logout();
+                    break;
             }
         }
     };
@@ -145,6 +152,19 @@ public class PersonCenterActivity extends BaseActivity {
             public void sure() {
                 //跳转至找医生界面
                 startActivity(SpacialistServiceActivity.class);
+                back();
+            }
+
+            @Override
+            public void cancel() {}
+    });
+    }
+
+    private void logout(){
+        MyDialog.showChooseDialog(this, getString(R.string.dialog_content_logout), R.string.prompt_bt_cancel, R.string.prompt_bt_sure, new MyDialog.ChooseDialogCallback() {
+            @Override
+            public void sure() {
+                BaseApplication.getInstance().skipToGuide(PersonCenterActivity.this);
                 back();
             }
 

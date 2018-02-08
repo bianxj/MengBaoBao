@@ -1,14 +1,17 @@
 package com.doumengmengandroidbady.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.util.ZxingUtil;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.GraphView;
@@ -17,7 +20,6 @@ import com.google.zxing.WriterException;
 /**
  * Created by Administrator on 2017/12/5.
  */
-//TODO
 public class GuideActivity extends BaseActivity {
 
     private AutoScrollViewPager asvp;
@@ -29,8 +31,14 @@ public class GuideActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
-        findView();
-        initView();
+        if (BaseApplication.getInstance().hasAccountData()){
+            Intent intent = new Intent(this,LoadingActivity.class);
+            intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
+            startActivity(intent);
+        } else {
+            findView();
+            initView();
+        }
     }
 
     @Override
@@ -66,18 +74,6 @@ public class GuideActivity extends BaseActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.bt_guide_register:
-//                    NotificationUtil.showNotification(GuideActivity.this);
-//                    MyDialog.showPayDialog(GuideActivity.this, findViewById(R.id.rl_parent), new MyDialog.PayCallBack() {
-//                        @Override
-//                        public void alipay() {
-//
-//                        }
-//
-//                        @Override
-//                        public void iwxpay() {
-//
-//                        }
-//                    },30.00F,15*60);
                     startActivity(RegisterActivity.class);
                     break;
                 case R.id.bt_guide_login:
@@ -86,5 +82,15 @@ public class GuideActivity extends BaseActivity {
             }
         }
     };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //截取返回键
+        if ( keyCode == KeyEvent.KEYCODE_BACK ){
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

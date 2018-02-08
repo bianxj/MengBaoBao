@@ -85,10 +85,10 @@ public class LoginTask {
             LoginResponse response = GsonUtil.getInstance().fromJson(result, LoginResponse.class);
 
             UserData userData = response.getResult().getUser();
-            userData.setPasswd(loginPwd);
             userData.setSessionId(response.getResult().getSessionId());
             BaseApplication.getInstance().saveUserData(userData);
 
+            BaseApplication.getInstance().saveLogin(accountMobile,loginPwd);
             BaseApplication.getInstance().saveAbnormalExit(response.getResult().getIsAbnormalExit() != 0);
             if (loginCallBack != null) {
                 loginCallBack.onPostExecute(result);

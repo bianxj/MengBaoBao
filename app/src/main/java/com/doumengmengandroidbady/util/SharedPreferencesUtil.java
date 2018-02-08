@@ -42,7 +42,9 @@ public class SharedPreferencesUtil {
 
     public static void clearTable(Context context,String tableName){
         SharedPreferences preferences = context.getSharedPreferences(tableName,Context.MODE_PRIVATE);
-        preferences.edit().clear().commit();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
     }
 
 }

@@ -31,55 +31,55 @@ public class MLog {
     private final SimpleDateFormat fileFormat;
     private final Builder builder;
     private MLog(Builder builder){
-        format = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss", Locale.CHINA);
-        fileFormat = new SimpleDateFormat("yyyy-MM-DD", Locale.CHINA);
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        fileFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         this.builder = builder;
     }
 
     public void info(String string){
-        String content = getLogPrintInfo(Log.INFO,string,3);
+        String content = getLogPrintInfo(Log.INFO,string,4);
         printLog(Log.INFO,content);
         writeLogToFile(content);
     }
     public void info(Throwable throwable){
         String s = cnvThrowToStr(throwable);
-        String content = getLogPrintInfo(Log.INFO,s,3);
+        String content = getLogPrintInfo(Log.INFO,s,4);
         printLog(Log.INFO,content);
         writeLogToFile(content);
     }
 
     public void warning(String string){
-        String content = getLogPrintInfo(Log.WARN,string,3);
+        String content = getLogPrintInfo(Log.WARN,string,4);
         printLog(Log.WARN,content);
         writeLogToFile(content);
     }
     public void warning(Throwable throwable){
         String s = cnvThrowToStr(throwable);
-        String content = getLogPrintInfo(Log.WARN,s,3);
+        String content = getLogPrintInfo(Log.WARN,s,4);
         printLog(Log.WARN,content);
         writeLogToFile(content);
     }
 
     public void error(String string){
-        String content = getLogPrintInfo(Log.ERROR,string,3);
+        String content = getLogPrintInfo(Log.ERROR,string,4);
         printLog(Log.ERROR,content);
         writeLogToFile(content);
     }
     public void error(Throwable throwable){
         String s = cnvThrowToStr(throwable);
-        String content = getLogPrintInfo(Log.ERROR,s,3);
+        String content = getLogPrintInfo(Log.ERROR,s,4);
         printLog(Log.ERROR,content);
         writeLogToFile(content);
     }
 
     public void debug(String string){
-        String content = getLogPrintInfo(Log.DEBUG,string,3);
+        String content = getLogPrintInfo(Log.DEBUG,string,4);
         printLog(Log.DEBUG,content);
         writeLogToFile(content);
     }
     public void debug(Throwable throwable){
         String s = cnvThrowToStr(throwable);
-        String content = getLogPrintInfo(Log.DEBUG,s,3);
+        String content = getLogPrintInfo(Log.DEBUG,s,4);
         printLog(Log.DEBUG,content);
         writeLogToFile(content);
     }
@@ -211,7 +211,7 @@ public class MLog {
         int lineNum = element.getLineNumber();
 
         sb.append(" ").append(className).append(".").append(methodName);
-        sb.append("(").append(lineNum).append(") \n");
+        sb.append("(").append(lineNum).append("): ");
         sb.append(msg).append("\n");
         return sb.toString();
     }

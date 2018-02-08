@@ -175,14 +175,19 @@ public class ChangePwdActivity extends BaseActivity {
         public void onPostExecute(String result) {
             ChangePwdResponse response = GsonUtil.getInstance().fromJson(result,ChangePwdResponse.class);
             if ( 1 == response.getResult().getIsEditPwd() ){
-                MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.change_pwd_content), new MyDialog.PromptDialogCallback() {
+                MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.dialog_content_pwd_change_success), new MyDialog.PromptDialogCallback() {
                     @Override
                     public void sure() {
                         back();
                     }
                 });
             } else {
-                //TODO
+                MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.dialog_content_pwd_change_failed), new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        back();
+                    }
+                });
             }
         }
     };

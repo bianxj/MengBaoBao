@@ -53,6 +53,7 @@ public class HomePageFragment extends BaseFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
         activity = (MainActivity) getActivity();
         View view = inflater.inflate(R.layout.fragment_home_page,null);
         findView(view);
@@ -149,9 +150,7 @@ public class HomePageFragment extends BaseFragment {
                     break;
                 case R.id.ll_observe_point:
                     //观察要点
-                    Intent intent = new Intent(getContext(),ObserveActivity.class);
-                    intent.putExtra(ObserveActivity.IN_PARAM_MONTH,BaseApplication.getInstance().getDayList().getCurrentMonth());
-                    startActivity(intent);
+                    startActivity(ObserveActivity.class);
                     break;
                 case R.id.ll_doctor_list:
                     //医院医生列表

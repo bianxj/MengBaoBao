@@ -56,10 +56,10 @@ public class GrowthDao {
         DataBaseUtil.closeDataBase();
     }
 
-    public List<String> searchGrowth(Context context,String month){
+    public List<String> searchGrowth(Context context){
         List<String> contents = new ArrayList<>();
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
-        String sql = "select "+OBSERVE_CONTENT+" from " + TABLE_NAME + " where " + AGE + " = " + month + " order by " + OBSERVE_ORDER;
+        String sql = "select "+OBSERVE_CONTENT+" from " + TABLE_NAME + " order by " + OBSERVE_ORDER;
         Cursor cursor = db.rawQuery(sql,null);
         while ( cursor.moveToNext() ){
             contents.add(cursor.getString(0));

@@ -6,14 +6,10 @@ import android.support.annotation.Nullable;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
@@ -24,21 +20,18 @@ import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.response.entity.Doctor;
 import com.doumengmengandroidbady.response.entity.Hospital;
-import com.doumengmengandroidbady.response.entity.ImageData;
 import com.doumengmengandroidbady.response.entity.Record;
 import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.util.FormulaUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.doumengmengandroidbady.view.GraphModule;
-import com.doumengmengandroidbady.view.GraphView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -184,7 +177,7 @@ public class AssessmentActivity extends BaseActivity {
         initReportInterpretation();
         initParentingGuide();
         initPromptMessage();
-        refreshDiagram(currentIndex);
+//        refreshDiagram(currentIndex);
         updateReadState();
     }
 
@@ -227,7 +220,7 @@ public class AssessmentActivity extends BaseActivity {
      * 日期: 2018/1/16 16:37
      */
     private void initDevelopmentalBehavior(){
-        tv_developmental_title.setText(String.format(getResources().getString(R.string.assessment_develop_month),record.getCorrectMonthAge()));
+        tv_developmental_title.setText(String.format(getResources().getString(R.string.assessment_develop_month),record.getCorrectMonthAge()<0?0:record.getCorrectMonthAge()));
         Map<String,List<String>> maps = DaoManager.getInstance().getFeatureDao().searchFeatureListById(this,record.getFeatureList());
         initDevelopment(maps);
     }
@@ -401,157 +394,156 @@ public class AssessmentActivity extends BaseActivity {
     }
 
     //--------------------------------------曲线图界面----------------------------------------------
-    private int currentIndex;
+//    private int currentIndex;
+//
+//    private ImageView iv_details;
+//    private GraphView diagram_view;
+//    private RelativeLayout rl_data;
+//    private Button bt_details;
+//    private RadioButton rg_weight,rg_height,rg_BMI;
+//
+//    private final static String PARAM_WEIGHT = "weight";
+//    private final static String PARAM_HEIGHT = "height";
+//    //根据实际月龄判断
+//    private final static String PARAM_HEIGHT_DEVIDE_WEIGHT_0_2 = "bmi_0_2";
+//    private final static String PARAM_HEIGHT_DEVIDE_WEIGHT_2_5 = "bmi_2_5";
+//    private final Map<String, GraphView.GraphBaseInfo> baseParamMap = new HashMap<>();
+//    private final Map<String, GraphView.GraphLine> paramMap = new HashMap<>();
+//    private final List<RadioButton> diagramButtons = new ArrayList<>();
+//    private void initDiagramViewParam(){
+//        currentIndex = R.id.rg_weight;
+//
+//        GraphView.GraphBaseInfo weightParam = new GraphView.GraphBaseInfo();
+//        weightParam.setLowerLimitX(0);
+//        weightParam.setLowerLimitY(0);
+//        weightParam.setUpperLimitX(1080);
+//        weightParam.setUpperLimitY(3000);
+//        weightParam.setxLength(getResources().getDimension(R.dimen.x600px));
+//        weightParam.setyLength(getResources().getDimension(R.dimen.x622px));
+//        baseParamMap.put(PARAM_WEIGHT,weightParam);
+//
+//        GraphView.GraphBaseInfo heightParam = new GraphView.GraphBaseInfo();
+//        heightParam.setLowerLimitX(0);
+//        heightParam.setUpperLimitX(1080);
+//        heightParam.setLowerLimitY(4500);
+//        heightParam.setUpperLimitY(12000);
+//        heightParam.setxLength(getResources().getDimension(R.dimen.x600px));
+//        heightParam.setyLength(getResources().getDimension(R.dimen.x622px));
+//        baseParamMap.put(PARAM_HEIGHT,heightParam);
+//
+//
+//        GraphView.GraphBaseInfo bmi0_2Param = new GraphView.GraphBaseInfo();
+//        bmi0_2Param.setLowerLimitX(4500);
+//        bmi0_2Param.setUpperLimitX(11000);
+//        bmi0_2Param.setLowerLimitY(0);
+//        bmi0_2Param.setUpperLimitY(3000);
+//        bmi0_2Param.setxLength(getResources().getDimension(R.dimen.x590px));
+//        bmi0_2Param.setyLength(getResources().getDimension(R.dimen.x622px));
+//        baseParamMap.put(PARAM_HEIGHT_DEVIDE_WEIGHT_0_2,bmi0_2Param);
+//
+//        GraphView.GraphBaseInfo bmi2_5Param = new GraphView.GraphBaseInfo();
+//        bmi2_5Param.setLowerLimitX(6500);
+//        bmi2_5Param.setUpperLimitX(12000);
+//        bmi2_5Param.setLowerLimitY(0);
+//        bmi2_5Param.setUpperLimitY(3000);
+//        bmi2_5Param.setxLength(getResources().getDimension(R.dimen.x588px));
+//        bmi2_5Param.setyLength(getResources().getDimension(R.dimen.x622px));
+//        baseParamMap.put(PARAM_HEIGHT_DEVIDE_WEIGHT_2_5,bmi2_5Param);
+//    }
 
-    private ImageView iv_details;
-    private GraphView diagram_view;
-    private RelativeLayout rl_data;
-    private Button bt_details;
-    private RadioButton rg_weight,rg_height,rg_BMI;
-
-    private final static String PARAM_WEIGHT = "weight";
-    private final static String PARAM_HEIGHT = "height";
-    //根据实际月龄判断
-    private final static String PARAM_HEIGHT_DEVIDE_WEIGHT_0_2 = "bmi_0_2";
-    private final static String PARAM_HEIGHT_DEVIDE_WEIGHT_2_5 = "bmi_2_5";
-    private final Map<String, GraphView.GraphBaseInfo> baseParamMap = new HashMap<>();
-    private final Map<String, GraphView.GraphLine> paramMap = new HashMap<>();
-    private final List<RadioButton> diagramButtons = new ArrayList<>();
-    private void initDiagramViewParam(){
-        currentIndex = R.id.rg_weight;
-
-        GraphView.GraphBaseInfo weightParam = new GraphView.GraphBaseInfo();
-        weightParam.setLowerLimitX(0);
-        weightParam.setLowerLimitY(0);
-        weightParam.setUpperLimitX(1080);
-        weightParam.setUpperLimitY(3000);
-        weightParam.setxLength(getResources().getDimension(R.dimen.x600px));
-        weightParam.setyLength(getResources().getDimension(R.dimen.x622px));
-        baseParamMap.put(PARAM_WEIGHT,weightParam);
-
-        GraphView.GraphBaseInfo heightParam = new GraphView.GraphBaseInfo();
-        heightParam.setLowerLimitX(0);
-        heightParam.setUpperLimitX(1080);
-        heightParam.setLowerLimitY(4500);
-        heightParam.setUpperLimitY(12000);
-        heightParam.setxLength(getResources().getDimension(R.dimen.x600px));
-        heightParam.setyLength(getResources().getDimension(R.dimen.x622px));
-        baseParamMap.put(PARAM_HEIGHT,heightParam);
-
-
-        GraphView.GraphBaseInfo bmi0_2Param = new GraphView.GraphBaseInfo();
-        bmi0_2Param.setLowerLimitX(4500);
-        bmi0_2Param.setUpperLimitX(11000);
-        bmi0_2Param.setLowerLimitY(0);
-        bmi0_2Param.setUpperLimitY(3000);
-        bmi0_2Param.setxLength(getResources().getDimension(R.dimen.x590px));
-        bmi0_2Param.setyLength(getResources().getDimension(R.dimen.x622px));
-        baseParamMap.put(PARAM_HEIGHT_DEVIDE_WEIGHT_0_2,bmi0_2Param);
-
-        GraphView.GraphBaseInfo bmi2_5Param = new GraphView.GraphBaseInfo();
-        bmi2_5Param.setLowerLimitX(6500);
-        bmi2_5Param.setUpperLimitX(12000);
-        bmi2_5Param.setLowerLimitY(0);
-        bmi2_5Param.setUpperLimitY(3000);
-        bmi2_5Param.setxLength(getResources().getDimension(R.dimen.x588px));
-        bmi2_5Param.setyLength(getResources().getDimension(R.dimen.x622px));
-        baseParamMap.put(PARAM_HEIGHT_DEVIDE_WEIGHT_2_5,bmi2_5Param);
-    }
-
-    //曲线图详细界面跳转
-    private final View.OnClickListener diagramListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //TODO
-            List<ImageData> data = record.getImageData();
-            if ( data != null ) {
-                String imageData = GsonUtil.getInstance().toJson(data);
-                int type;
-                if ( rg_height.isChecked() ){
-                    type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_HEIGHT.ordinal();
-                } else if ( rg_weight.isChecked() ){
-                    type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_WEIGHT.ordinal();
-                } else {
-                    type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_HEIGHT_WEIGHT.ordinal();
-                }
-                Intent intent = new Intent(AssessmentActivity.this, DiagramDataActivity.class);
-                intent.putExtra(DiagramDataActivity.IN_PARAM_IMAGE_DATA, imageData);
-                intent.putExtra(DiagramDataActivity.IN_PARAM_TYPE,type);
-                startActivity(intent);
-            } else {
-                Toast.makeText(AssessmentActivity.this,"暂无数据",Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-
-    private final CompoundButton.OnCheckedChangeListener diagramOnChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-            if ( isChecked ){
-                refreshDiagram(compoundButton.getId());
-            }
-        }
-    };
-
-    //刷新曲线图
-    private void refreshDiagram(int id){
-        for (RadioButton button:diagramButtons){
-            if ( button.getId() != id ){
-                button.setChecked(false);
-            }
-        }
-
-        switch (id){
-            case R.id.rg_weight:
-                refreshWeight();
-                break;
-            case R.id.rg_height:
-                refreshHeight();
-                break;
-            case R.id.rg_BMI:
-                refreshHeightWeight();
-                break;
-        }
-    }
-
-    private void refreshWeight(){
-        if ( userData.isMale() ) {
-            iv_details.setImageResource(R.drawable.bg_boy_weight_data);
-        } else {
-            iv_details.setImageResource(R.drawable.bg_girl_weight_data);
-        }
-        rl_data.setBackgroundColor(getResources().getColor(R.color.bgWeightColor));
-        diagram_view.setParam(baseParamMap.get(PARAM_WEIGHT),paramMap.get(PARAM_WEIGHT));
-    }
-
-    private void refreshHeight(){
-        if ( userData.isMale() ) {
-            iv_details.setImageResource(R.drawable.bg_boy_height_data);
-        } else {
-            iv_details.setImageResource(R.drawable.bg_girl_height_data);
-        }
-        rl_data.setBackgroundColor(getResources().getColor(R.color.bgHeightColor));
-        diagram_view.setParam(baseParamMap.get(PARAM_HEIGHT),paramMap.get(PARAM_HEIGHT));
-    }
-
-    private void refreshHeightWeight(){
-        if ( !isLowerThanTwoYear() ){
-            if ( userData.isMale() ) {
-                iv_details.setImageResource(R.drawable.bg_boy_height_weight_2_5);
-            } else {
-                iv_details.setImageResource(R.drawable.bg_girl_height_weight_2_5);
-            }
-            diagram_view.setParam(baseParamMap.get(PARAM_HEIGHT_DEVIDE_WEIGHT_2_5),paramMap.get(PARAM_HEIGHT_DEVIDE_WEIGHT_2_5));
-        } else {
-            if ( userData.isMale() ) {
-                iv_details.setImageResource(R.drawable.bg_boy_height_weight_0_2);
-            } else {
-                iv_details.setImageResource(R.drawable.bg_girl_height_weight_0_2);
-            }
-            diagram_view.setParam(baseParamMap.get(PARAM_HEIGHT_DEVIDE_WEIGHT_0_2),paramMap.get(PARAM_HEIGHT_DEVIDE_WEIGHT_0_2));
-        }
-        rl_data.setBackgroundColor(getResources().getColor(R.color.bgBMIColor));
-    }
+//    //曲线图详细界面跳转
+//    private final View.OnClickListener diagramListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            List<ImageData> data = record.getImageData();
+//            if ( data != null ) {
+//                String imageData = GsonUtil.getInstance().toJson(data);
+//                int type;
+//                if ( rg_height.isChecked() ){
+//                    type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_HEIGHT.ordinal();
+//                } else if ( rg_weight.isChecked() ){
+//                    type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_WEIGHT.ordinal();
+//                } else {
+//                    type = DiagramDataActivity.DIAGRAM_TYPE.TYPE_HEIGHT_WEIGHT.ordinal();
+//                }
+//                Intent intent = new Intent(AssessmentActivity.this, DiagramDataActivity.class);
+//                intent.putExtra(DiagramDataActivity.IN_PARAM_IMAGE_DATA, imageData);
+//                intent.putExtra(DiagramDataActivity.IN_PARAM_TYPE,type);
+//                startActivity(intent);
+//            } else {
+//                Toast.makeText(AssessmentActivity.this,"暂无数据",Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    };
+//
+//    private final CompoundButton.OnCheckedChangeListener diagramOnChangeListener = new CompoundButton.OnCheckedChangeListener() {
+//        @Override
+//        public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//            if ( isChecked ){
+//                refreshDiagram(compoundButton.getId());
+//            }
+//        }
+//    };
+//
+//    //刷新曲线图
+//    private void refreshDiagram(int id){
+//        for (RadioButton button:diagramButtons){
+//            if ( button.getId() != id ){
+//                button.setChecked(false);
+//            }
+//        }
+//
+//        switch (id){
+//            case R.id.rg_weight:
+//                refreshWeight();
+//                break;
+//            case R.id.rg_height:
+//                refreshHeight();
+//                break;
+//            case R.id.rg_BMI:
+//                refreshHeightWeight();
+//                break;
+//        }
+//    }
+//
+//    private void refreshWeight(){
+//        if ( userData.isMale() ) {
+//            iv_details.setImageResource(R.drawable.bg_boy_weight_data);
+//        } else {
+//            iv_details.setImageResource(R.drawable.bg_girl_weight_data);
+//        }
+//        rl_data.setBackgroundColor(getResources().getColor(R.color.bgWeightColor));
+//        diagram_view.setParam(baseParamMap.get(PARAM_WEIGHT),paramMap.get(PARAM_WEIGHT));
+//    }
+//
+//    private void refreshHeight(){
+//        if ( userData.isMale() ) {
+//            iv_details.setImageResource(R.drawable.bg_boy_height_data);
+//        } else {
+//            iv_details.setImageResource(R.drawable.bg_girl_height_data);
+//        }
+//        rl_data.setBackgroundColor(getResources().getColor(R.color.bgHeightColor));
+//        diagram_view.setParam(baseParamMap.get(PARAM_HEIGHT),paramMap.get(PARAM_HEIGHT));
+//    }
+//
+//    private void refreshHeightWeight(){
+//        if ( !isLowerThanTwoYear() ){
+//            if ( userData.isMale() ) {
+//                iv_details.setImageResource(R.drawable.bg_boy_height_weight_2_5);
+//            } else {
+//                iv_details.setImageResource(R.drawable.bg_girl_height_weight_2_5);
+//            }
+//            diagram_view.setParam(baseParamMap.get(PARAM_HEIGHT_DEVIDE_WEIGHT_2_5),paramMap.get(PARAM_HEIGHT_DEVIDE_WEIGHT_2_5));
+//        } else {
+//            if ( userData.isMale() ) {
+//                iv_details.setImageResource(R.drawable.bg_boy_height_weight_0_2);
+//            } else {
+//                iv_details.setImageResource(R.drawable.bg_girl_height_weight_0_2);
+//            }
+//            diagram_view.setParam(baseParamMap.get(PARAM_HEIGHT_DEVIDE_WEIGHT_0_2),paramMap.get(PARAM_HEIGHT_DEVIDE_WEIGHT_0_2));
+//        }
+//        rl_data.setBackgroundColor(getResources().getColor(R.color.bgBMIColor));
+//    }
 
     private boolean isLowerThanTwoYear(){
         return record.getMonthAge() <= 24;

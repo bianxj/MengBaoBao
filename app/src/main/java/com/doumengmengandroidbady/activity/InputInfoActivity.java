@@ -11,6 +11,7 @@ import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.db.DaoManager;
+import com.doumengmengandroidbady.db.GrowthDao;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
@@ -161,16 +162,18 @@ public class InputInfoActivity extends BaseActivity {
                 BaseApplication.getInstance().saveParentInfo(parent_info.getParentInfo());
 
                 BaseApplication.getInstance().saveDayList(response.getResult().getDayList());
+
+                DaoManager.getInstance().deleteTable(InputInfoActivity.this, GrowthDao.TABLE_NAME);
                 DaoManager.getInstance().getGrowthDao().saveGrowthList(InputInfoActivity.this,response.getResult().getGrowthList());
                 startActivity(RecordActivity.class);
             } else {
                 //TODO
+                showPromptDialog("提交信息失败");
             }
         }
     };
 
     private boolean checkData(){
-
         if ( !baby_info.checkBaseInfo() ){
             tv_title.setText(baby_info.getCheckErrorMsg());
             return false;

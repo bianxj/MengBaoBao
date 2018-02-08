@@ -106,7 +106,6 @@ public class PictureAdapter extends BaseAdapter {
                         if ( pictures.size() < 6 && position == -1 ){
                             callBack.tackPicture();
                         } else {
-                            //TODO 显示照片
                             MyDialog.showPictureDialog(context,pictures.get(position).smallBitmap);
                         }
                         break;

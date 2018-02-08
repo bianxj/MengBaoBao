@@ -26,7 +26,8 @@ public class UserData {
 
     private String accountmobile;               //手机账号
     private String loginpwd;                    //登录密码
-    private String passwd;                      //密码
+//    private String userAccount;                 //登录账号
+//    private String passwd;                      //密码
 
     private String childuserid;                 //?
     private String assistedreproductive;        //辅助生育
@@ -347,11 +348,11 @@ public class UserData {
         return weekdvalue+"周"+daydvalue+"日";
     }
 
-    public String getPasswd() {
-        return passwd;
-    }
+//    public String getPasswd() {
+//        return passwd;
+//    }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
+//    public void setPasswd(String passwd) {
+//        this.passwd = passwd;
+//    }
 }

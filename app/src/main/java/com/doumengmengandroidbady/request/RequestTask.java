@@ -98,7 +98,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     private void skipToLoading(){
         Context context = builder.getWeakReference().get();
         Intent intent = new Intent(context, LoadingActivity.class);
-        intent.putExtra(LoadingActivity.IN_PARAM_IS_TIME_OUT,true);
+        intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
         context.startActivity(intent);
     }
 

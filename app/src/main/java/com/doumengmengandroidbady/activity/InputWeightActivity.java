@@ -122,15 +122,19 @@ public class InputWeightActivity extends BaseInputDataActivity {
         String weightString = et_input_data.getText().toString().trim();
 
         if ( TextUtils.isEmpty(weightString) ) {
-            showPromptDialog("体重数据不能为空");
+            showPromptTitle("体重数据不能为空");
             return false;
         }
         float weight = Float.parseFloat(et_input_data.getText().toString().trim());
         if ( weight <= 0 || weight > 150 ){
-            showPromptDialog("体重数据需要在0~150kg之间");
+            showPromptTitle("体重 0~150kg");
             return false;
         }
         return true;
+    }
+
+    private void showPromptTitle(String message){
+        tv_title.setText(message);
     }
 
 }

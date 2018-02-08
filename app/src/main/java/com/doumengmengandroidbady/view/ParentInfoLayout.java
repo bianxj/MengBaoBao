@@ -26,9 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/13.
+ * 作者: 边贤君
+ * 描述: 父母信息
+ * 创建日期: 2018/2/8 14:44
  */
-
 public class ParentInfoLayout extends LinearLayout {
 
     public enum TYPE{
@@ -210,16 +211,16 @@ public class ParentInfoLayout extends LinearLayout {
 
         String fatherHeight = et_father_height.getText().toString().trim();
         if ( !TextUtils.isEmpty(fatherHeight) ){
-            if ( 0 > Float.parseFloat(fatherHeight) || Float.parseFloat(fatherHeight) > 250 ){
-                errorMessage = "父亲身高 范围0~250cm";
+            if ( 0 >= Float.parseFloat(fatherHeight) || Float.parseFloat(fatherHeight) > 250 ){
+                errorMessage = "父亲身高 0~250cm";
                 return false;
             }
         }
 
         String fatherWeight = et_father_weight.getText().toString().trim();
         if ( !TextUtils.isEmpty(fatherWeight) ){
-            if ( 0 > Float.parseFloat(fatherWeight) || Float.parseFloat(fatherWeight) > 150 ){
-                errorMessage = "父亲体重 范围0~150kg";
+            if ( 0 >= Float.parseFloat(fatherWeight) || Float.parseFloat(fatherWeight) > 150 ){
+                errorMessage = "父亲体重 0~150kg";
                 return false;
             }
         }
@@ -240,16 +241,16 @@ public class ParentInfoLayout extends LinearLayout {
 
         String motherHeight = et_mother_height.getText().toString().trim();
         if ( !TextUtils.isEmpty(motherHeight) ){
-            if ( 0 > Float.parseFloat(motherHeight) || Float.parseFloat(motherHeight) > 250 ){
-                errorMessage = "母亲身高 范围0~250cm";
+            if ( 0 >= Float.parseFloat(motherHeight) || Float.parseFloat(motherHeight) > 250 ){
+                errorMessage = "母亲身高 0~250cm";
                 return false;
             }
         }
 
         String motherWeight = et_mother_weight.getText().toString().trim();
         if ( !TextUtils.isEmpty(motherWeight) ){
-            if ( 0 > Float.parseFloat(motherWeight) || Float.parseFloat(motherWeight) > 150 ){
-                errorMessage = "母亲体重 范围0~150kg";
+            if ( 0 >= Float.parseFloat(motherWeight) || Float.parseFloat(motherWeight) > 150 ){
+                errorMessage = "母亲体重 0~150kg";
                 return false;
             }
         }

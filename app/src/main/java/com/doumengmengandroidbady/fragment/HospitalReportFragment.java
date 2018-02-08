@@ -45,6 +45,7 @@ public class HospitalReportFragment extends BaseFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_hospital_report,null);
         findView(view);
         return view;
@@ -158,9 +159,11 @@ public class HospitalReportFragment extends BaseFragment {
             HospitalReportResponse response = GsonUtil.getInstance().fromJson(result,HospitalReportResponse.class);
 
             xrv_report.setNoMore(true);
-            reports.addAll(response.getResult().getChildRecordList());
-            for (HospitalReport report:reports){
-                report.setImageData(response.getResult().getImgList());
+            if ( null != response.getResult().getChildRecordList() ) {
+                reports.addAll(response.getResult().getChildRecordList());
+                for (HospitalReport report:reports){
+                    report.setImageData(response.getResult().getImgList());
+                }
             }
             hospitalReportAdapter.notifyDataSetChanged();
         }
