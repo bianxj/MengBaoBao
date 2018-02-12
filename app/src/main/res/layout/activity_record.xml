@@ -1286,7 +1286,7 @@
 
                 <EditText
                     android:id="@+id/et_parent_message"
-                    style="@style/EditTextView"
+                    style="@style/SecondBlack.Text28px"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y221px"
                     android:layout_marginBottom="@dimen/y31px"
@@ -1297,7 +1297,9 @@
                     android:gravity="top|left"
                     android:inputType="textMultiLine"
                     android:lines="@null"
-                    android:maxLength="100"
+                    android:maxLength="500"
+                    android:hint="@string/record_hint_message"
+                    android:textColorHint="@color/second_gray"
                     android:background="@drawable/bg_circle_parent_message"
                     tools:ignore="LabelFor" />
 

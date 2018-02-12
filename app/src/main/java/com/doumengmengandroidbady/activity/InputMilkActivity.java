@@ -122,11 +122,11 @@ public class InputMilkActivity extends BaseInputDataActivity {
         String count = et_input_data_two.getText().toString().trim();
 
         if ( TextUtils.isEmpty(ml) ) {
-            showPromptTitle("配方奶喂养量不能为空");
+            showPromptTitle("请输入配方奶喂养量");
             return false;
         }
         if ( TextUtils.isEmpty(count) ) {
-            showPromptTitle("喂养次数不能为空");
+            showPromptTitle("请输入喂养次数");
             return false;
         }
         if ( Float.parseFloat(ml) < 0 || Float.parseFloat(ml) > 2000 ){

@@ -127,7 +127,7 @@ public class InputHeightActivity extends BaseInputDataActivity {
         String heightString = et_input_data.getText().toString().trim();
 
         if ( TextUtils.isEmpty(heightString) ) {
-            showPromptTitle("身高数据不能为空");
+            showPromptTitle("请输入身高");
             return false;
         }
         float height = Float.parseFloat(et_input_data.getText().toString().trim());

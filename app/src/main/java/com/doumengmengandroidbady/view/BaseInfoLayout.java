@@ -791,6 +791,7 @@ public class BaseInfoLayout extends LinearLayout {
         Calendar last = Calendar.getInstance();
         last.set(last.get(Calendar.YEAR)-3,last.get(Calendar.MONTH),calendar.get((Calendar.DATE)));
         dp.getDatePicker().setMinDate(last.getTime().getTime());
+        dp.getDatePicker().setMaxDate(calendar.getTime().getTime());
         dp.show();
     }
 

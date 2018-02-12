@@ -46,6 +46,13 @@ public class PayItemLayout extends LinearLayout {
 
         iv_icon.setImageResource(data.getDrawableId());
         tv_name.setText(data.getName());
+        cb_choose.setChecked(data.isCheck());
+        cb_choose.setTag(view);
+        if ( data.isCheck() ){
+            view.setBackgroundColor(getResources().getColor(R.color.thirdGray));
+        } else {
+            view.setBackgroundColor(getResources().getColor(R.color.first_white));
+        }
         view.setOnClickListener(listener);
         checkBoxes.add(cb_choose);
         return view;
@@ -63,8 +70,10 @@ public class PayItemLayout extends LinearLayout {
         for (CompoundButton checkBox:checkBoxes){
             if ( checkBox.equals(compoundButton) ){
                 checkBox.setChecked(true);
+                ((View)checkBox.getTag()).setBackgroundColor(getResources().getColor(R.color.thirdGray));
             } else {
                 checkBox.setChecked(false);
+                ((View)checkBox.getTag()).setBackgroundColor(getResources().getColor(R.color.first_white));
             }
         }
     }

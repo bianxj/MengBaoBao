@@ -122,7 +122,7 @@ public class InputWeightActivity extends BaseInputDataActivity {
         String weightString = et_input_data.getText().toString().trim();
 
         if ( TextUtils.isEmpty(weightString) ) {
-            showPromptTitle("体重数据不能为空");
+            showPromptTitle("请输入体重信息");
             return false;
         }
         float weight = Float.parseFloat(et_input_data.getText().toString().trim());

@@ -30,8 +30,9 @@ import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.request.task.LoginTask;
-import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.response.InitConfigureResponse;
+import com.doumengmengandroidbady.response.UpdateContentResponse;
+import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
@@ -41,6 +42,7 @@ import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -126,6 +128,7 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private RequestTask checkVersionTask;
+    private String serviceVersion;
     private void checkVersion() {
         try {
             checkVersionTask = new RequestTask.Builder(this, checkVersionCallBack)
@@ -142,6 +145,7 @@ public class LoadingActivity extends BaseActivity {
     private final RequestCallBack checkVersionCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
+            serviceVersion = null;
         }
 
         @Override
@@ -153,28 +157,35 @@ public class LoadingActivity extends BaseActivity {
         public void onPostExecute(String result) {
             try {
                 if (TextUtils.isEmpty(result)){
-                    //TODO 版本信息获取失败处理
+                    MyDialog.showPromptDialog(LoadingActivity.this, "版本信息获取失败,请检查网络", new MyDialog.PromptDialogCallback() {
+                        @Override
+                        public void sure() {
+                            finish();
+                        }
+                    });
                 } else {
+                    serviceVersion = result;
                     String versionName = AppUtil.getVersionName(LoadingActivity.this);
-                    if (versionName.equals(result)) {
-                        initConfigure();
+                    if (AppUtil.isNeedUpdate(versionName, result)) {
+                        getUpdateInfo();
+//                        //TODO 获取版本更新信息
+//                        MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, result), result, "新版本特性\n" +
+//                                "1、修复了部分bug\n" +
+//                                "2、优化了部分交互设计\n" +
+//                                "3、新增了一些功能\n" +
+//                                "4、新增了引导页 \n", new MyDialog.UpdateDialogCallback() {
+//                            @Override
+//                            public void update() {
+//                                AppUtil.openSoftwareMarket(LoadingActivity.this);
+//                            }
+//
+//                            @Override
+//                            public void cancel() {
+//                                initConfigure();
+//                            }
+//                        });
                     } else {
-                        //TODO 获取版本更新信息
-                        MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, result), result, "新版本特性\n" +
-                                "1、修复了部分bug\n" +
-                                "2、优化了部分交互设计\n" +
-                                "3、新增了一些功能\n" +
-                                "4、新增了引导页 \n", new MyDialog.UpdateDialogCallback() {
-                            @Override
-                            public void update() {
-                                AppUtil.openSoftwareMarket(LoadingActivity.this);
-                            }
-
-                            @Override
-                            public void cancel() {
-                                initConfigure();
-                            }
-                        });
+                        initConfigure();
                     }
                 }
             } catch (PackageManager.NameNotFoundException e) {
@@ -182,6 +193,74 @@ public class LoadingActivity extends BaseActivity {
             }
         }
     };
+
+
+    private RequestTask updateInfoTask = null;
+    private void getUpdateInfo(){
+        try {
+            updateInfoTask = new RequestTask.Builder(this,updateInfoCallback)
+                    .setUrl(UrlAddressList.URL_UPDATE_INFO)
+                    .setType(RequestTask.DEFAULT)
+                    .setContent(buildUpdateInfo())
+                    .build();
+            updateInfoTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private RequestCallBack updateInfoCallback = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public void onError(String result) {
+            MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
+                @Override
+                public void sure() {
+                    BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
+                }
+            });
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            UpdateContentResponse response = GsonUtil.getInstance().fromJson(result, UpdateContentResponse.class);
+            String versionName = null;
+            try {
+                versionName = AppUtil.getVersionName(LoadingActivity.this);
+                MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, serviceVersion), serviceVersion, convertUpdateContent(response.getResult().getVersionData()), new MyDialog.UpdateDialogCallback() {
+                    @Override
+                    public void update() {
+                        AppUtil.openSoftwareMarket(LoadingActivity.this);
+                    }
+
+                    @Override
+                    public void cancel() {
+                        initConfigure();
+                    }
+                });
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    private String convertUpdateContent(List<String> list){
+        StringBuffer buffer = new StringBuffer("新版本特性\n");
+        for (String content:list){
+            buffer.append(content+"\n");
+        }
+        return buffer.toString();
+    }
+
+    private Map<String,String> buildUpdateInfo(){
+        Map<String,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,"");
+        return map;
+    }
 
     private RequestTask initConfigureTask = null;
     private void initConfigure(){

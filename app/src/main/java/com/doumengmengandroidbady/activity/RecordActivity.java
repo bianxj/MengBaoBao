@@ -810,19 +810,19 @@ public class RecordActivity extends BaseActivity {
     };
 
     private boolean checkData(){
-        if (isTextContentEmpty(tv_height)){showPromptTitle("身长数据不能为空");return false;}
-        if (isTextContentEmpty(tv_weight)){showPromptTitle("体重数据不能为空");return false;}
-        if (isTextContentEmpty(tv_head_circumference)){showPromptTitle("头围数据不能为空");return false;}
-        if (isTextContentEmpty(tv_chest_circumference)){showPromptTitle("胸围数据不能为空");return false;}
-        if (isTextContentEmpty(tv_cacation_day)){showPromptTitle("排便数据不能为空");return false;}
-        if (isTextContentEmpty(tv_cacation_count)){showPromptTitle("排便数据不能为空");return false;}
-        if (isTextContentEmpty(tv_micturition_count)){showPromptTitle("排尿数据不能为空");return false;}
-        if (isTextContentEmpty(tv_night_sleep)){showPromptTitle("夜间数据不能为空");return false;}
-        if (isTextContentEmpty(tv_day_sleep)){showPromptTitle("日间数据不能为空");return false;}
-        if (isTextContentEmpty(tv_breastfeeding)){showPromptTitle("人乳喂养数据不能为空");return false;}
-        if (isTextContentEmpty(tv_breastfeeding_count)){showPromptTitle("人乳喂养数据不能为空");return false;}
-        if (isTextContentEmpty(tv_formula_milk)){showPromptTitle("配方奶数据不能为空");return false;}
-        if (isTextContentEmpty(tv_formula_milk_count)){showPromptTitle("配方奶数据不能为空");return false;}
+        if (isTextContentEmpty(tv_height)){showPromptTitle("请输入身长信息");return false;}
+        if (isTextContentEmpty(tv_weight)){showPromptTitle("请输入体重信息");return false;}
+        if (isTextContentEmpty(tv_head_circumference)){showPromptTitle("请输入头围信息");return false;}
+        if (isTextContentEmpty(tv_chest_circumference)){showPromptTitle("请输入胸围信息");return false;}
+        if (isTextContentEmpty(tv_cacation_day)){showPromptTitle("请输入排便信息");return false;}
+        if (isTextContentEmpty(tv_cacation_count)){showPromptTitle("请输入排便信息");return false;}
+        if (isTextContentEmpty(tv_micturition_count)){showPromptTitle("请输入排尿信息");return false;}
+        if (isTextContentEmpty(tv_night_sleep)){showPromptTitle("请输入夜间睡眠信息");return false;}
+        if (isTextContentEmpty(tv_day_sleep)){showPromptTitle("请输入日间睡眠信息");return false;}
+        if (isTextContentEmpty(tv_breastfeeding)){showPromptTitle("请输入人乳喂养信息");return false;}
+        if (isTextContentEmpty(tv_breastfeeding_count)){showPromptTitle("请输入人乳喂养信息");return false;}
+        if (isTextContentEmpty(tv_formula_milk)){showPromptTitle("请输入配方奶信息");return false;}
+        if (isTextContentEmpty(tv_formula_milk_count)){showPromptTitle("请输入配方奶信息");return false;}
 
         float milk = getTextContentToFloat(et_milk);
         if ( 0 > milk || milk > 2000 ){showPromptTitle("牛奶 范围为0~2000");return false;}

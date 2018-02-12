@@ -31,9 +31,10 @@
             android:text=""/>
 
         <RelativeLayout
+            android:id="@+id/rl_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x46px"
+            android:paddingLeft="@dimen/x46px"
             android:layout_marginTop="@dimen/y32px"
             android:layout_marginBottom="@dimen/y32px"
             >

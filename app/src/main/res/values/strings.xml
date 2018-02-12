@@ -8,6 +8,7 @@
     <string name="input_new_pwd_hint">新密码（6~16位数字、字母）</string>
     <string name="input_vc_hint">短信验证码</string>
     <string name="get_vc">获取验证码</string>
+    <string name="replay">重试</string>
     <string name="prompt_read_agreement">我已阅读同意萌宝宝用户协议</string>
     <string name="complete">完成</string>
     <string name="mark">*</string>
@@ -273,6 +274,7 @@
     <!--RecordActivity-->
     <string name="record">记录</string>
     <string name="record_month_age">%s个月%s天</string>
+    <string name="record_hint_message">限制500字以内</string>
 
     <string name="record_really_month">实际月龄:</string>
     <string name="record_correct_month">矫正月龄</string>

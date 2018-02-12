@@ -75,7 +75,8 @@
                 android:layout_marginLeft="@dimen/EditMarginLeft"
                 android:layout_marginRight="@dimen/EditMarginRight"
                 android:lines="1"
-                android:inputType="text"
+                android:inputType="number"
+                android:maxLength="8"
                 style="@style/EditTextView"/>
 
         </LinearLayout>
@@ -125,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/EditMarginLeft"
             android:layout_marginRight="@dimen/EditMarginRight"
-            android:hint="@string/input_new_pwd_hint"
+            android:hint="@string/input_pwd_hint"
             android:lines="1"
             android:inputType="textPassword"
             android:maxLength="16"

@@ -18,7 +18,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/y80px">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,15 +28,21 @@
                 android:textSize="@dimen/x26px"
                 android:text="@string/dialog_lost_pay_time"/>
 
-            <ImageView
-                android:id="@+id/iv_close"
-                android:layout_width="@dimen/x29px"
-                android:layout_height="@dimen/x27px"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x40px"
-                android:src="@drawable/btn_pay_close"
-                android:contentDescription="@string/contentDescription" />
+            <RelativeLayout
+                android:id="@+id/rl_close"
+                android:layout_width="@dimen/x100px"
+                android:layout_height="@dimen/y80px"
+                android:layout_alignParentRight="true">
+                <ImageView
+                    android:id="@+id/iv_close"
+                    android:layout_width="@dimen/x29px"
+                    android:layout_height="@dimen/x27px"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/x40px"
+                    android:src="@drawable/btn_pay_close"
+                    android:contentDescription="@string/contentDescription" />
+            </RelativeLayout>
 
         </RelativeLayout>
 

@@ -69,8 +69,10 @@ public class SpacialistServiceFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        initView();
-        initRecyclerView();
+        if ( !isHidden() ){
+            initView();
+            initRecyclerView();
+        }
     }
 
     @Override

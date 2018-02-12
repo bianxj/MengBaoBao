@@ -1,7 +1,11 @@
 package com.doumengmengandroidbady.activity;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +22,7 @@ import com.alipay.sdk.app.PayTask;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.config.Constants;
 import com.doumengmengandroidbady.db.DaoManager;
 import com.doumengmengandroidbady.entity.RoleType;
 import com.doumengmengandroidbady.net.UrlAddressList;
@@ -35,12 +40,8 @@ import com.doumengmengandroidbady.view.CircleImageView;
 import com.doumengmengandroidbady.view.PayItemLayout;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.tencent.mm.opensdk.constants.ConstantsAPI;
-import com.tencent.mm.opensdk.modelbase.BaseReq;
-import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONException;
@@ -87,6 +88,7 @@ public class DoctorInfoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterIWXApi();
         stopTask(preAliPayTask);
         stopTask(preIwxPayTask);
         if ( handler != null ){
@@ -228,7 +230,7 @@ public class DoctorInfoActivity extends BaseActivity {
         if (PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
 
             List<PayItemLayout.PayData> datas = new ArrayList<>();
-            datas.add(new PayItemLayout.PayData(R.drawable.alipay_logo_60,"支付宝",false));
+            datas.add(new PayItemLayout.PayData(R.drawable.alipay_logo_60,"支付宝",true));
             if (api.isWXAppInstalled()) {
                 datas.add(new PayItemLayout.PayData(R.drawable.iwx_logo, "微信", false));
             }
@@ -372,22 +374,29 @@ public class DoctorInfoActivity extends BaseActivity {
 
 
     //-----------------------------------微信支付---------------------------------------------------
-    private final static String APP_ID = "wxd0b4d1dd8772805a";
+
     private IWXAPI api;
+    private PayBroadcastReceiver receiver;
 
     private void registerIWXApi(){
-        if ( api == null ){
-            api = WXAPIFactory.createWXAPI(this,APP_ID,false);
-        }
-        api.registerApp(APP_ID);
+        api = WXAPIFactory.createWXAPI(this, null);
+//        api.unregisterApp();
+        api.registerApp(Constants.WX_APP_ID);
+        receiver = new PayBroadcastReceiver(this);
+        registerReceiver(receiver,new IntentFilter(PayBroadcastReceiver.ACTION_IWX_PAY_RESULT));
+    }
+
+    private void unregisterIWXApi(){
+        api.unregisterApp();
+        unregisterReceiver(receiver);
     }
 
     private RequestTask preIwxPayTask;
     private void preIwxPay(){
         try {
             preIwxPayTask = new RequestTask.Builder(this,preIwxPayCallBack)
-                    .setUrl("")
-                    .setType(RequestTask.DEFAULT)
+                    .setUrl(UrlAddressList.URL_PRE_IWX_PAY)
+                    .setType(RequestTask.JSON|RequestTask.PROMPT)
                     .setContent(buildPreIwxPayContent())
                     .build();
             preIwxPayTask.execute();
@@ -404,8 +413,8 @@ public class DoctorInfoActivity extends BaseActivity {
             object.put("accountmobile",userData.getAccountmobile());
             object.put("orderdevice","1");
             object.put("doctorid",doctor.getDoctorid());
-//                object.put("totalamout",doctor.getCost());
-            object.put("totalamout","0.01");
+//                object.put("totalamout",Integer.parseInt(doctor.getCost())*100+"");
+            object.put("totalamout","2");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -429,39 +438,69 @@ public class DoctorInfoActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            iwxPay();
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                iwxPay(res.getString("wxPayBody"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+//        {"appid":"wxd0b4d1dd8772805a","partnerid":"1498861492","prepayid":"wx20180209150413137f6d69e90053885330","package":"Sign=WXPay","noncestr":"3aaa3db6a8983226601cac5dde15a26b","timestamp":"1518159854","sign":"AD61CD62A988253F69DEEB80F532F6C1"}
         }
     };
 
-    private void iwxPay(){
-        api.handleIntent(getIntent(),eventHandler);
-
-        PayReq request = new PayReq();
-        request.appId = APP_ID;
-        request.partnerId = "1900000109";
-        request.prepayId= "1101000000140415649af9fc314aa427";
-        request.packageValue = "Sign=WXPay";
-        request.nonceStr= "1101000000140429eb40476f8896f4c9";
-        request.timeStamp= "1398746574";
-        request.sign= "7FFECB600D7157C5AA49810D2D8F28BC2811827B";
-        api.sendReq(request);
+    public final static int REQUEST_WX = 0x01;
+    private void iwxPay(final String result){
+        IWXAPI api = WXAPIFactory.createWXAPI(this, Constants.WX_APP_ID);
+        api.registerApp(Constants.WX_APP_ID);
+        JSONObject object = null;
+        try {
+            object = new JSONObject(result);
+            PayReq request = new PayReq();
+            request.appId = Constants.WX_APP_ID;
+            request.partnerId = object.getString("partnerid");
+            request.prepayId= object.getString("prepayid");
+            request.packageValue = object.getString("package");
+            request.nonceStr= object.getString("noncestr");
+            request.timeStamp= object.getString("timestamp");
+            request.sign= object.getString("sign");
+            api.sendReq(request);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    private final IWXAPIEventHandler eventHandler = new IWXAPIEventHandler() {
-        @Override
-        public void onReq(BaseReq baseReq) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ( requestCode == REQUEST_WX ){
+            if ( resultCode == Activity.RESULT_OK){
+                goNext();
+            } else {
+                Toast.makeText(DoctorInfoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public static class PayBroadcastReceiver extends BroadcastReceiver{
+        public final static String ACTION_IWX_PAY_RESULT = "iwx_pay_result";
+        public final static String PARAM_RESULT_CODE = "result_code";
+        private WeakReference<DoctorInfoActivity> weakReference;
+
+        public PayBroadcastReceiver(DoctorInfoActivity activity) {
+            weakReference = new WeakReference<DoctorInfoActivity>(activity);
         }
 
         @Override
-        public void onResp(BaseResp resp) {
-            if(resp.getType()== ConstantsAPI.COMMAND_PAY_BY_WX){
-                if( 0 == resp.errCode ){
-                    goNext();
+        public void onReceive(Context context, Intent intent) {
+            if ( ACTION_IWX_PAY_RESULT.equals(intent.getAction()) ){
+                int resultCode = intent.getIntExtra(PARAM_RESULT_CODE,-1);
+                if ( 0 == resultCode ){
+                    weakReference.get().goNext();
                 } else {
-                    Toast.makeText(DoctorInfoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(weakReference.get(), "支付失败", Toast.LENGTH_SHORT).show();
                 }
             }
         }
-    };
-
+    }
 }

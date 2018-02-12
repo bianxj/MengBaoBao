@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/y45px"
         android:layout_marginRight="@dimen/y45px"
-        style="@style/SecondBlack.Text28px"/>
+        style="@style/FirstBlack.Text28px"/>
 
     <TextView
         android:id="@+id/tv_content"

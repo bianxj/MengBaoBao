@@ -50,6 +50,7 @@ public class GraphModule extends LinearLayout {
 
         bt_details = findViewById(R.id.bt_details);
         iv_details = findViewById(R.id.iv_details);
+        iv_describe = findViewById(R.id.iv_describe);
         graph_view = findViewById(R.id.diagram_view);
         rl_data = findViewById(R.id.rl_data);
         rg_weight = findViewById(R.id.rg_weight);
@@ -78,6 +79,7 @@ public class GraphModule extends LinearLayout {
     private GraphView graph_view;
     private RelativeLayout rl_data;
     private Button bt_details;
+    private ImageView iv_describe;
     private RadioButton rg_weight,rg_height,rg_BMI;
     private final List<RadioButton> graphButtons = new ArrayList<>();
 
@@ -242,6 +244,13 @@ public class GraphModule extends LinearLayout {
     private void refreshGraph(GRAPH_TYPE type){
         GraphData data = dataMap.get(type);
         graph_view.setParam(data.getBaseInfo(),data.getLine());
+        if ( graph_view.hasRedLine() && graph_view.hasBlueLine() ){
+            iv_describe.setImageResource(R.drawable.icon_graph_describe);
+        } else if ( graph_view.hasBlueLine() ){
+            iv_describe.setImageResource(R.drawable.icon_graph_blue_describe);
+        } else {
+            iv_describe.setImageResource(R.drawable.icon_graph_red_describe);
+        }
     }
 
     private boolean isLowerThanTwoYear(){

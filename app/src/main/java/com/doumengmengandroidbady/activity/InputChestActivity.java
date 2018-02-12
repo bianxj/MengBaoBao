@@ -129,7 +129,7 @@ public class InputChestActivity extends BaseInputDataActivity {
         String chestString = et_input_data.getText().toString().trim();
 
         if ( TextUtils.isEmpty(chestString) ) {
-            showPromptTitle("胸围数据不能为空");
+            showPromptTitle("请输入胸围信息");
             return false;
         }
         float chest = Float.parseFloat(et_input_data.getText().toString().trim());

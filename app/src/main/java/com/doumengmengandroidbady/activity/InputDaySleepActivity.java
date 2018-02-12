@@ -94,7 +94,7 @@ public class InputDaySleepActivity extends BaseInputDataActivity {
     private boolean checkData(){
         String hourString = et_input_data.getText().toString();
         if (TextUtils.isEmpty(hourString)){
-            showPromptTitle("睡眠时间不能为空");
+            showPromptTitle("请输入睡眠时间");
             return false;
         }
 

@@ -114,11 +114,11 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
         String count = et_input_data_two.getText().toString().trim();
 
         if ( TextUtils.isEmpty(ml) ) {
-            showPromptTitle("母乳喂养量不能为空");
+            showPromptTitle("请输入母乳喂养量");
             return false;
         }
         if ( TextUtils.isEmpty(count) ) {
-            showPromptTitle("喂养次数不能为空");
+            showPromptTitle("请输入喂养次数");
             return false;
         }
         if ( Float.parseFloat(ml) < 0 || Float.parseFloat(ml) > 2000  ){

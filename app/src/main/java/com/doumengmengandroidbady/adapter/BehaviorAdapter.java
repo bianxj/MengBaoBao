@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
@@ -50,6 +50,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
+        private RelativeLayout rl_item;
         private final TextView tv_hehavior_title;
         private final CheckBox cb_hebavior;
         private final TextView tv_behavior;
@@ -67,6 +68,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
             player = itemView.findViewById(R.id.player);
             view_underline = itemView.findViewById(R.id.view_underline);
             space_behavior = itemView.findViewById(R.id.space_behavior);
+            rl_item = itemView.findViewById(R.id.rl_item);
         }
 
         private void initData(Feature feature,List<String> selection){
@@ -83,7 +85,8 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
             tv_hehavior_title.setText(feature.getFeaturetype());
             tv_behavior.setText(feature.getDetaildesc());
             cb_hebavior.setChecked(selection.contains( feature.getId()));
-            cb_hebavior.setOnCheckedChangeListener(changeListener);
+            rl_item.setOnClickListener(onClickListener);
+//            cb_hebavior.setOnCheckedChangeListener(changeListener);
             if (TextUtils.isEmpty(feature.getExampleimgurl())) {
                 player.clearDrawable();
                 player.setVisibility(View.GONE);
@@ -94,16 +97,28 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
             }
         }
 
-        private final CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
+        private final View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if ( b ){
+            public void onClick(View view) {
+                cb_hebavior.setChecked(!cb_hebavior.isChecked());
+                if ( cb_hebavior.isChecked() ){
                     selection.add(feature.getId());
                 } else {
                     selection.remove(feature.getId());
                 }
             }
         };
+
+//        private final CompoundButton.OnCheckedChangeListener changeListener = new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if ( b ){
+//                    selection.add(feature.getId());
+//                } else {
+//                    selection.remove(feature.getId());
+//                }
+//            }
+//        };
 
         private final View.OnClickListener listener = new View.OnClickListener() {
             @Override

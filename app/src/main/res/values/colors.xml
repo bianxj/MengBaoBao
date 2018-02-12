@@ -56,4 +56,7 @@
     <color name="transparent">#00000000</color>
     <color name="translucence">#330e0000</color>
     <color name="dark_translucence">#bb000000</color>
+
+
+    <color name="navpage">#FFE1E8EB</color>
 </resources>

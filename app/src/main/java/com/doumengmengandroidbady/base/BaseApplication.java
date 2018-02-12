@@ -35,6 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * 作者:边贤君
@@ -464,6 +465,25 @@ public class BaseApplication extends Application {
         return dirPath + File.separator + PERSON_HEAD_IMG;
     }
 
+    private final static String PERSON_CROP_HEAD_IMG = "cropheadimg.jpg";
+
+    public String getHeadCropPath(){
+        return EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR+File.separator+PERSON_CROP_HEAD_IMG;
+    }
+
+    public File getHeadCropFile(){
+        File file = new File(getHeadCropPath());
+        if ( file.exists() ){
+            file.delete();
+        }
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
     private final static String PICTURE_DIR = "picture";
     public String getUploadPicture(){
         String dirPath = getFilesDir().getPath()+File.separator+PICTURE_DIR;
@@ -499,7 +519,7 @@ public class BaseApplication extends Application {
     public void skipToGuide(Context context){
         clearUserData();
         Intent intent = new Intent(context, GuideActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 

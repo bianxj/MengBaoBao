@@ -223,7 +223,7 @@ public class MainActivity extends BaseFragmentActivity {
      * 日期: 2018/1/8 10:35
      */
     private void loadHeadImg(boolean isMale,String urlHeadImg){
-        DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
         if ( isMale ){
             builder.showImageOnLoading(R.drawable.default_icon_boy);
             builder.showImageForEmptyUri(R.drawable.default_icon_boy);

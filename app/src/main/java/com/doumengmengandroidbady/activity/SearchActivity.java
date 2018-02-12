@@ -92,6 +92,7 @@ public class SearchActivity extends BaseActivity {
 
         tv_search.setText(R.string.cancel);
         ll_back.setVisibility(View.GONE);
+        rl_close.setVisibility(View.INVISIBLE);
 
         et_search.addTextChangedListener(new TextWatcher() {
             @Override

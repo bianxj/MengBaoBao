@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -238,7 +239,7 @@ public class MyDialog {
         }
     }
 
-    public static void showPayDialog(final Context context,View parent,final PayCallBack callBack,List<PayItemLayout.PayData> datas,String price,int timeOut){
+    public static void showPayDialog(final Context context, View parent, final PayCallBack callBack, List<PayItemLayout.PayData> datas, String price, int timeOut){
         synchronized (payLock){
             if ( payDialog != null && payDialog.isShowing() ) {
                 payDialog.dismiss();
@@ -257,8 +258,9 @@ public class MyDialog {
             payDialog.setContentView(contentView);
             payDialog.setAnimationStyle(R.style.PayAnimation);
 
-            ImageView iv_close = contentView.findViewById(R.id.iv_close);
-            iv_close.setOnClickListener(new View.OnClickListener() {
+            RelativeLayout rl_close = contentView.findViewById(R.id.rl_close);
+            /*ImageView iv_close = contentView.findViewById(R.id.iv_close);*/
+            rl_close.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dismissPayDialog();
@@ -308,6 +310,7 @@ public class MyDialog {
 //                    tv_time.removeCallbacks()
                 }
             });
+            payDialog.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             payDialog.showAtLocation(parent,Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,0,0);
             calcuteTimeOut(tv_time);
         }

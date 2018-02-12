@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,9 @@ import com.doumengmengandroidbady.view.GraphView;
 import com.google.zxing.WriterException;
 
 /**
- * Created by Administrator on 2017/12/5.
+ * 作者: 边贤君
+ * 描述: 引导页
+ * 创建日期: 2018/2/9 14:47
  */
 public class GuideActivity extends BaseActivity {
 
@@ -30,6 +33,7 @@ public class GuideActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_guide);
         if (BaseApplication.getInstance().hasAccountData()){
             Intent intent = new Intent(this,LoadingActivity.class);
@@ -48,6 +52,13 @@ public class GuideActivity extends BaseActivity {
 
     private void findView(){
 //        asvp = findViewById(R.id.asvp);
+        DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
+
+        System.out.println("screen_height:"+metrics.heightPixels);
+        System.out.println("screen_width:"+metrics.widthPixels);
+        System.out.println("screen_height2:"+getResources().getDimension(R.dimen.y1280px));
+        System.out.println("screen_width2:"+getResources().getDimension(R.dimen.x720px));
+
         bt_guide_register = findViewById(R.id.bt_guide_register);
         bt_guide_login = findViewById(R.id.bt_guide_login);
     }

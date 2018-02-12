@@ -18,6 +18,10 @@
         <item name="android:textColor">@color/first_black</item>
     </style>
 
+    <style name="FirstBlack.Text28px">
+        <item name="android:textSize">@dimen/y28px</item>
+    </style>
+
     <style name="FirstBlack.Text30px">
         <item name="android:textSize">@dimen/y30px</item>
     </style>
@@ -335,10 +339,30 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
     <!--Dialog end-->
+    <style name="TransparentActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+    <!--Activity start-->
+    <!--Activity end-->
 
     <style name="PayAnimation">
         <item name="android:windowEnterAnimation">@anim/bottom_in</item>
         <item name="android:windowExitAnimation">@anim/bottom_out</item>
+    </style>
+
+    <style name="NavPage">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <!-- <item name="android:background">@drawable/nav_page</item> -->
+        <item name="android:background">@color/navpage</item>
     </style>
 
 </resources>

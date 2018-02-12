@@ -93,7 +93,7 @@ public class PersonCenterActivity extends BaseActivity {
      * 日期: 2018/1/8 10:35
      */
     private void loadHeadImg(UserData userData){
-        DisplayImageOptions.Builder builder = new DisplayImageOptions.Builder();
+        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
         if ( userData.isMale() ){
             builder.showImageOnLoading(R.drawable.default_icon_boy);
             builder.showImageForEmptyUri(R.drawable.default_icon_boy);

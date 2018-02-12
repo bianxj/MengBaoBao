@@ -88,6 +88,19 @@
 
         <activity android:name=".activity.DiagramDataActivity" android:screenOrientation="portrait"></activity>
 
+        <activity android:name=".wxapi.WXPayEntryActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/TransparentActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+                <data android:scheme="wxd0b4d1dd8772805a"></data>
+            </intent-filter>
+        </activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.doumengmengandroidbady.fileProvider"

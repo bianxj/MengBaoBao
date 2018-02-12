@@ -250,6 +250,10 @@ public class AssessmentActivity extends BaseActivity {
     private void initReportInterpretation(){
         if ( "3".equals(record.getRecordStatus()) || "4".equals(record.getRecordStatus()) ){
             ll_report_interpretation.setVisibility(View.VISIBLE);
+            tv_report_content_1.setText(record.getGrowthTendencyAppraisal());
+            tv_report_content_2.setText(record.getGrowthLevelAppraisal());
+            tv_report_content_3.setText(record.getFeatureAppraisal());
+            tv_report_content_4.setText(record.getDoctorAdvice());
         } else {
             ll_report_interpretation.setVisibility(View.GONE);
         }

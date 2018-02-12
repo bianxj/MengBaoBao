@@ -2,6 +2,7 @@
 <resources>
 
     <string name="day_chinese">天</string>
+    <string name="second_chinese">秒</string>
     <string name="count_chinese">次</string>
     <string name="gram_day_chinese">克/日</string>
     <string name="mg_day_chinese">毫克/日</string>

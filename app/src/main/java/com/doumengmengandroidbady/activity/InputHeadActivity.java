@@ -129,7 +129,7 @@ public class InputHeadActivity extends BaseInputDataActivity {
         String headString = et_input_data.getText().toString().trim();
 
         if ( TextUtils.isEmpty(headString) ) {
-            showPromptTitle("头围数据不能为空");
+            showPromptTitle("请输入头围信息");
             return false;
         }
         float head = Float.parseFloat(et_input_data.getText().toString().trim());

@@ -58,11 +58,11 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... strings) {
         String result = null;
         String url = builder.getUrl();
-        if ( isSelectFlag(builder.getType(),JSON) ) {
+        if ( isSelectFlag(builder.getType(),FILE) ){
+            result = HttpUtil.getInstance().httpsRequestFile(url);
+        } else {
             Map<String, String> map = builder.getContent();
             result = HttpUtil.getInstance().httpsRequestPost(url, map);
-        } else if ( isSelectFlag(builder.getType(),FILE) ){
-            result = HttpUtil.getInstance().httpsRequestFile(url);
         }
         return result;
     }

@@ -19,8 +19,27 @@ import java.util.List;
 
 public class AppUtil {
 
+    private enum TYPE_EQUAL{
+        LARGER,
+        EQUAL,
+        LOWER
+    }
+
     public static boolean isForceUpdate(String currentVersion , String updateVersion){
-        //TODO
+        String[] currents = currentVersion.split("\\.");
+        String[] updates = updateVersion.split("\\.");
+        if ( updates.length == currents.length ){
+            for ( int i = 0; i< currents.length-1;i++ ){
+                TYPE_EQUAL equal = isUpdate(updates[i],currents[i]);
+                if ( equal == TYPE_EQUAL.LARGER ){
+                    return true;
+                } else if ( equal == TYPE_EQUAL.LOWER ){
+                    break;
+                }
+            }
+        } else if ( updates.length > currents.length ){
+            return true;
+        }
         return false;
     }
 
@@ -28,6 +47,36 @@ public class AppUtil {
         PackageManager manager = context.getPackageManager();
         PackageInfo info = manager.getPackageInfo(context.getPackageName(),0);
         return info.versionName;
+    }
+
+    private static TYPE_EQUAL isUpdate(String update,String current){
+        int upd = Integer.parseInt(update);
+        int cur = Integer.parseInt(current);
+        if ( upd > cur ) {
+            return TYPE_EQUAL.LARGER;
+        } else if ( upd == cur ) {
+            return TYPE_EQUAL.EQUAL;
+        } else {
+            return TYPE_EQUAL.LOWER;
+        }
+    }
+
+    public static boolean isNeedUpdate(String currentVersion , String updateVersion){
+        String[] currents = currentVersion.split("\\.");
+        String[] updates = updateVersion.split("\\.");
+        if ( updates.length == currents.length ){
+            for ( int i = 0; i< currents.length;i++ ){
+                TYPE_EQUAL equal = isUpdate(updates[i],currents[i]);
+                if ( equal == TYPE_EQUAL.LARGER ){
+                    return true;
+                } else if ( equal == TYPE_EQUAL.LOWER ){
+                    break;
+                }
+            }
+        } else if ( updates.length > currents.length ){
+            return true;
+        }
+        return false;
     }
 
     public static void openPrimession(Context context){

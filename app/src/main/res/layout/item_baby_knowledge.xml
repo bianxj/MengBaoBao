@@ -6,8 +6,8 @@
     android:layout_height="@dimen/y174px">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/x174px"
+        android:layout_height="@dimen/x174px"
         android:scaleType="fitXY"
         android:src="@drawable/frame_baby_knowledge"
         android:contentDescription="@string/contentDescription" />
@@ -22,8 +22,8 @@
         style="@style/FirstPink.Text28px"/>
 
     <ImageView
-        android:layout_width="@dimen/y52px"
-        android:layout_height="@dimen/y52px"
+        android:layout_width="@dimen/x52px"
+        android:layout_height="@dimen/x52px"
         android:scaleType="fitXY"
         android:src="@drawable/icon_baby_knowledge1"
         android:layout_gravity="center_horizontal"

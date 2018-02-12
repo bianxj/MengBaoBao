@@ -103,12 +103,12 @@ public class InputCacationActivity extends BaseInputDataActivity {
         String count = et_input_data_two.getText().toString();
 
         if (TextUtils.isEmpty(day)){
-            showPromptTitle("天数不能为空");
+            showPromptTitle("请输入天数");
             return false;
         }
 
         if (TextUtils.isEmpty(count)){
-            showPromptTitle("次数不能为空");
+            showPromptTitle("请输入次数");
             return false;
         }
 

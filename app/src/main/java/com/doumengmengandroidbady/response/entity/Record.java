@@ -52,13 +52,13 @@ public class Record {
 
     private List<ImageData> imageData;
 
-    @SerializedName("GrowthTendencyAppraisal")
+    @SerializedName("growthtendencyappraisal")
     private String growthTendencyAppraisal;
-    @SerializedName("GrowthLevelAppraisal")
+    @SerializedName("growthlevelappraisal")
     private String growthLevelAppraisal;
-    @SerializedName("FeatureAppraisal")
+    @SerializedName("featureappraisal")
     private String featureAppraisal;
-    @SerializedName("DoctorAdvice")
+    @SerializedName("doctoradvice")
     private String doctorAdvice;
 
     public String getRecordId() {

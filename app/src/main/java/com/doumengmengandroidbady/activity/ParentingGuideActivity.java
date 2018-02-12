@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -80,12 +82,13 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                updateTabTextView(tab,true);
                 vp.setCurrentItem(tab.getPosition());
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                updateTabTextView(tab,false);
             }
 
             @Override
@@ -110,6 +113,17 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
 
             }
         });
+    }
+
+    private void updateTabTextView(TabLayout.Tab tab,boolean isSelected){
+        TextView tv_title = tab.getCustomView().findViewById(R.id.tv_title);
+        if ( isSelected ) {
+            tv_title.setTextColor(getResources().getColor(R.color.first_gray));
+            tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y34px));
+        } else {
+            tv_title.setTextColor(getResources().getColor(R.color.fourth_gray));
+            tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
+        }
     }
 
     private void getRecordId(){
@@ -171,7 +185,13 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
             ParentingGuidanceResponse.Result.ParentingGuideClass cls = list.get(i);
 
             TabLayout.Tab subTab = tab.newTab();
-            subTab.setText(cls.getGuidanceType());
+            View view = LayoutInflater.from(this).inflate(R.layout.item_tab_layout,null);
+            TextView tv_title = view.findViewById(R.id.tv_title);
+            tv_title.setText(cls.getGuidanceType());
+            tv_title.setTextColor(getResources().getColor(R.color.fourth_gray));
+            tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
+            subTab.setCustomView(view);
+//            subTab.setText(cls.getGuidanceType());
             subTab.setTag(i);
             tab.addTab(subTab);
 

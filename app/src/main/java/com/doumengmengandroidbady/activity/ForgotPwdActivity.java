@@ -183,11 +183,11 @@ public class ForgotPwdActivity extends BaseActivity {
             if ( msg.what == COUNT_DOWN ){
                 ForgotPwdActivity activity = weakReference.get();
                 if ( activity.countDown <= 0 ){
-                    activity.bt_get_vc.setText(activity.getString(R.string.get_vc));
+                    activity.bt_get_vc.setText(activity.getString(R.string.replay));
                     activity.bt_get_vc.setEnabled(true);
                     removeMessages(COUNT_DOWN);
                 } else {
-                    activity.bt_get_vc.setText(activity.countDown+"");
+                    activity.bt_get_vc.setText(activity.countDown+activity.getString(R.string.second_chinese));
                     activity.countDown--;
                     sendEmptyMessageDelayed(COUNT_DOWN,1000);
                 }
