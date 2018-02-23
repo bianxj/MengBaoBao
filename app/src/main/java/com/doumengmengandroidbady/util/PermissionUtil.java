@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,12 @@ import java.util.Map;
  */
 public class PermissionUtil {
 
+    public enum PermissionType{
+        PERMISSION_GRANTED,
+        PERMISSION_DENIED,
+        PERMISSION_ALWAYS_DENIED
+    }
+
     private static final Map<String,Integer> requestCodeMap;
 
     static {
@@ -27,16 +34,54 @@ public class PermissionUtil {
         requestCodeMap.put(Manifest.permission.ACCESS_FINE_LOCATION,0x34);
     }
 
-    public static boolean checkPermissionAndRequest(Activity activity,String permission) {
+    public static boolean checkPermissionAndRequest(final Activity activity, String permission) {
         if (requestCodeMap.containsKey(permission)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ActivityCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED) {
-                    return true;
-                } else {
-                    ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCodeMap.get(permission));
+            if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
+                if (ContextCompat.checkSelfPermission(activity,permission) != PackageManager.PERMISSION_GRANTED){
+                    activity.requestPermissions(new String[]{permission},requestCodeMap.get(permission));
                     return false;
+                } else {
+                    return true;
                 }
+//                try{
+//                    int oldChecker = PermissionChecker.checkSelfPermission(activity,permission);
+//                    int newChecker = activity.checkSelfPermission(permission);
+//
+//                    if ( newChecker != PackageManager.PERMISSION_GRANTED || oldChecker == PermissionChecker.PERMISSION_DENIED ){
+//                        ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCodeMap.get(permission));
+//                        return PermissionType.PERMISSION_DENIED;
+//                    } else if ( oldChecker == PermissionChecker.PERMISSION_GRANTED ){
+//                        return PermissionType.PERMISSION_GRANTED;
+//                    } else {
+//                        return PermissionType.PERMISSION_ALWAYS_DENIED;
+//                    }
+//                } catch (Exception e){
+//                    if (activity.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED) {
+//                        return PermissionType.PERMISSION_GRANTED;
+//                    } else {
+//                        ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCodeMap.get(permission));
+//                        return PermissionType.PERMISSION_DENIED;
+//                    }
+//                }
             }
+
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                int grant = PermissionChecker.checkSelfPermission(activity,permission);
+//                if ( grant == PermissionChecker.PERMISSION_GRANTED ){
+//                    return true;
+//                } else if ( grant == PermissionChecker.PERMISSION_DENIED ) {
+//                    ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCodeMap.get(permission));
+//                    return false;
+//                } else {
+//                    denied.alwaysDenied();
+//                }
+//                if (activity.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED) {
+//                    return true;
+//                } else {
+//                    ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCodeMap.get(permission));
+//                    return false;
+//                }
+//            }
             return true;
         } else {
             return false;
@@ -67,6 +112,10 @@ public class PermissionUtil {
         void success(String permission);
         void denied(String permission);
         void alwaysDenied(String permission);
+    }
+
+    public interface RequestPermissionDenied{
+        void alwaysDenied();
     }
 
 }

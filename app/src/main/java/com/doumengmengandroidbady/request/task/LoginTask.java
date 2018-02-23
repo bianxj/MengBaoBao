@@ -9,6 +9,7 @@ import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.response.LoginResponse;
 import com.doumengmengandroidbady.util.GsonUtil;
+import com.umeng.commonsdk.utils.UMUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,6 +58,7 @@ public class LoginTask {
         try {
             object.put("accountMobile",accountMobile);
             object.put("loginPwd",loginPwd);
+            object.put("deviceToken", UMUtils.getDeviceToken(weakReference.get()));
         } catch (JSONException e) {
             e.printStackTrace();
         }

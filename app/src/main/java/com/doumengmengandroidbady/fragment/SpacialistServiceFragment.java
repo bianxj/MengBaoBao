@@ -63,15 +63,15 @@ public class SpacialistServiceFragment extends BaseFragment {
         super.onCreateView(inflater,container,savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_spacialist_service,null);
         findView(view);
+        initRecyclerView();
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if ( !isHidden() ){
+        if ( isVisible() && !isHidden() ){
             initView();
-            initRecyclerView();
         }
     }
 

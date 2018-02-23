@@ -56,6 +56,13 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
     @Override
     protected String doInBackground(String... strings) {
+        if ( -1 != builder.getDelay() ){
+            try {
+                Thread.sleep(builder.getDelay());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         String result = null;
         String url = builder.getUrl();
         if ( isSelectFlag(builder.getType(),FILE) ){
@@ -139,6 +146,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         private int type;
         private WeakReference<Context> weakReference;
         private RequestCallBack callBack;
+        private int delay = -1;
 
         public Builder(Context context,@NonNull RequestCallBack callBack) {
             this.callBack = callBack;
@@ -185,6 +193,15 @@ public class RequestTask extends AsyncTask<String,Void,String> {
 
         public Builder setType(int type) {
             this.type = type;
+            return this;
+        }
+
+        public int getDelay() {
+            return delay;
+        }
+
+        public Builder setDelay(int delay) {
+            this.delay = delay;
             return this;
         }
 

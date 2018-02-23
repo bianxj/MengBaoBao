@@ -241,6 +241,7 @@
     <!--SecondPink start-->
     <style name="SecondPink">
         <item name="android:color">@color/second_pink</item>
+        <item name="android:textColor">@color/second_pink</item>
     </style>
     <style name="SecondPink.Text34px">
         <item name="android:textSize">@dimen/y34px</item>

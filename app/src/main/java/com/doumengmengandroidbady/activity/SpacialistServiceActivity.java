@@ -79,13 +79,29 @@ public class SpacialistServiceActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spacialist_service);
         findView();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         checkLocationPermission();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         destoryLocation();
+        MyDialog.dismissChooseCityDialog();
         if ( handler != null ){
             handler.removeCallbacksAndMessages(null);
         }
@@ -353,7 +369,7 @@ public class SpacialistServiceActivity extends BaseActivity {
 
                         @Override
                         public void cancel() {
-
+                            locationFailed();
                         }
                     });
                 }
@@ -391,12 +407,16 @@ public class SpacialistServiceActivity extends BaseActivity {
                 String city = bdLocation.getProvince();
                 setCity(city);
             } else {
-                tv_location_failed.setVisibility(View.VISIBLE);
+                locationFailed();
             }
             rl_location_area.setEnabled(true);
             destoryLocation();
         }
     };
+
+    private void locationFailed(){
+        tv_location_failed.setVisibility(View.VISIBLE);
+    }
 
     private void destoryLocation(){
         if ( client != null ){

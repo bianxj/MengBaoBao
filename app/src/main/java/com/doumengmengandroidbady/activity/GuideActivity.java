@@ -1,9 +1,15 @@
 package com.doumengmengandroidbady.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.PermissionChecker;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
@@ -43,6 +49,18 @@ public class GuideActivity extends BaseActivity {
             findView();
             initView();
         }
+    }
+
+    @SuppressLint("WrongConstant")
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("checkSelfPermission:"+ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION));
+        System.out.println("checkSelfPermission:"+ PermissionChecker.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION));
+        System.out.println("checkSelfPermission:"+checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+        System.out.println("checkCallingOrSelfPermission:"+checkCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+        System.out.println("shouldShowRequestPermissionRationale:"+ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION));
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.doumengmengandroidbady.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -15,7 +14,6 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -31,6 +29,9 @@ import android.widget.Toast;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.camera.CameraManager;
+import com.doumengmengandroidbady.util.AppUtil;
+import com.doumengmengandroidbady.util.MyDialog;
+import com.doumengmengandroidbady.util.PermissionUtil;
 import com.doumengmengandroidbady.util.PictureUtils;
 import com.doumengmengandroidbady.view.ViewfinderView;
 import com.google.zxing.BarcodeFormat;
@@ -84,42 +85,93 @@ public class ScanActivity extends BaseActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         checkCameraPermission();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         stopScan();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if ( REQUEST_CAMERA_PERMISSION == requestCode ){
-            if (PackageManager.PERMISSION_GRANTED != grantResults[0] ){
-                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
-                    checkCameraPermission();
-                } else {
-                    Toast.makeText(this,"请打开照相机权限",Toast.LENGTH_LONG).show();
+        PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults, new PermissionUtil.RequestPermissionSuccess() {
+            @Override
+            public void success(String permission) {
+                if ( Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission) ){
+                    openAlbum();
                 }
-            } else {
-                startScan();
+                if ( Manifest.permission.CAMERA.equals(permission) ){
+                    startScan();
+                }
             }
-        }
-        if ( REQUEST_PERMISSION_STORAGE == requestCode ){
-            if ( PackageManager.PERMISSION_GRANTED != grantResults[0] ){
-                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
+
+            @Override
+            public void denied(String permission) {
+                if ( Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission) ){
                     checkExternalStoragePermission();
-                } else {
-                    Toast.makeText(this,"请打开存储权限",Toast.LENGTH_LONG).show();
                 }
-            } else {
-                openAlbum();
+                if ( Manifest.permission.CAMERA.equals(permission) ){
+                    checkCameraPermission();
+                }
             }
-        }
+
+            @Override
+            public void alwaysDenied(String permission) {
+                if ( Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission) ){
+                    MyDialog.showPermissionDialog(ScanActivity.this, getString(R.string.dialog_content_open_storage), new MyDialog.ChooseDialogCallback() {
+                        @Override
+                        public void sure() {
+                            AppUtil.openPrimession(ScanActivity.this);
+                        }
+
+                        @Override
+                        public void cancel() {
+
+                        }
+                    });
+                }
+                if ( Manifest.permission.CAMERA.equals(permission) ){
+                    MyDialog.showPermissionDialog(ScanActivity.this, getString(R.string.dialog_content_open_camera), new MyDialog.ChooseDialogCallback() {
+                        @Override
+                        public void sure() {
+                            AppUtil.openPrimession(ScanActivity.this);
+                        }
+
+                        @Override
+                        public void cancel() {
+                            back();
+                        }
+                    });
+                }
+            }
+        });
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if ( REQUEST_CAMERA_PERMISSION == requestCode ){
+//            if (PackageManager.PERMISSION_GRANTED != grantResults[0] ){
+//                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
+//                    checkCameraPermission();
+//                } else {
+//                    Toast.makeText(this,"请打开照相机权限",Toast.LENGTH_LONG).show();
+//                }
+//            } else {
+//                startScan();
+//            }
+//        }
+//        if ( REQUEST_PERMISSION_STORAGE == requestCode ){
+//            if ( PackageManager.PERMISSION_GRANTED != grantResults[0] ){
+//                if ( ActivityCompat.shouldShowRequestPermissionRationale(this,permissions[0]) ){
+//                    checkExternalStoragePermission();
+//                } else {
+//                    Toast.makeText(this,"请打开存储权限",Toast.LENGTH_LONG).show();
+//                }
+//            } else {
+//                openAlbum();
+//            }
+//        }
     }
 
     @Override
@@ -198,18 +250,15 @@ public class ScanActivity extends BaseActivity {
     private SurfaceHolder holder;
 
     private void checkCameraPermission(){
-        if ( ActivityCompat.checkSelfPermission(this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED ){
+//        System.out.println("permission:"+ActivityCompat.checkSelfPermission(this,Manifest.permission.CAMERA));
+        if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.CAMERA)){
             startScan();
-        } else {
-            ActivityCompat.requestPermissions(this, permissions, REQUEST_CAMERA_PERMISSION);
         }
     }
 
     private void checkExternalStoragePermission(){
-        if ( ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ){
+        if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)){
             openAlbum();
-        } else {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_PERMISSION_STORAGE);
         }
     }
 
@@ -231,6 +280,19 @@ public class ScanActivity extends BaseActivity {
             cameraManager.requestPreviewFrame(previewCallback);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+            MyDialog.showPermissionDialog(ScanActivity.this,getString(R.string.dialog_content_open_camera), new MyDialog.ChooseDialogCallback() {
+                @Override
+                public void sure() {
+                    AppUtil.openPrimession(ScanActivity.this);
+                }
+
+                @Override
+                public void cancel() {
+                    back();
+                }
+            });
         }
     }
 

@@ -649,7 +649,7 @@ public class RecordActivity extends BaseActivity {
     };
 
     private void tackPicture(){
-        if ( PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) ){
+        if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)){
             Intent intent = new Intent(Intent.ACTION_PICK) ;
             intent.setType("image/*") ;
             startActivityForResult(intent , REQUEST_IMAGE) ;

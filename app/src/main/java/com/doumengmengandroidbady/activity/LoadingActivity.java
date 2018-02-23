@@ -1,5 +1,6 @@
 package com.doumengmengandroidbady.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -36,6 +38,7 @@ import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
+import com.doumengmengandroidbady.util.PermissionUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,20 +71,69 @@ public class LoadingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         findView();
-        loading();
+//        loading();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStart() {
+        super.onStart();
+        checkExternalStorage();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
         stopTask(checkVersionTask);
         stopTask(initConfigureTask);
         if ( loginTask != null ) {
             stopTask(loginTask.getTask());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         if ( drawable != null ){
             drawable.stop();
         }
+    }
+
+    private void checkExternalStorage(){
+        if ( PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ){
+            loading();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults, new PermissionUtil.RequestPermissionSuccess() {
+            @Override
+            public void success(String permission) {
+                BaseApplication.getInstance().initPush();
+                loading();
+            }
+
+            @Override
+            public void denied(String permission) {
+                checkExternalStorage();
+            }
+
+            @Override
+            public void alwaysDenied(String permission) {
+                MyDialog.showChooseDialog(LoadingActivity.this, "请打开存储权限",R.string.prompt_bt_cancel,R.string.dialog_btn_prompt_go_setting, new MyDialog.ChooseDialogCallback() {
+                    @Override
+                    public void sure() {
+                        AppUtil.openPrimession(LoadingActivity.this);
+                    }
+
+                    @Override
+                    public void cancel() {
+                        back();
+                    }
+                });
+            }
+        });
     }
 
     private void findView(){
@@ -107,7 +159,6 @@ public class LoadingActivity extends BaseActivity {
             checkVersionAndWifi();
         }
     }
-
 
     private void checkVersionAndWifi(){
         if ( isWifi() ){
@@ -411,6 +462,8 @@ public class LoadingActivity extends BaseActivity {
             DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,result.getFeatureList());
             BaseApplication.getInstance().saveParentInfo(result.getParentInfo());
             BaseApplication.getInstance().saveDayList(result.getDayList());
+
+            BaseApplication.getInstance().removeMainPage();
             handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
         }
     }

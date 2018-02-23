@@ -417,6 +417,10 @@
     <string name="dialog_content_submit_failed">提交失败</string>
 
     <string name="dialog_content_open_location_service">请打开定位服务</string>
+    <string name="dialog_content_open_camera">请打开相机权限</string>
+    <string name="dialog_content_open_location">请打开位置权限</string>
+    <string name="dialog_content_open_storage">请打开存储权限</string>
+    <string name="dialog_content_open_phone">请打开定位权限</string>
 
     <string name="dialog_title_notification">请允许我们向您发送通知</string>
     <string name="dialog_content_notification">让您不错过每一条育儿知识</string>

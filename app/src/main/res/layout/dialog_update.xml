@@ -58,10 +58,13 @@
 
         <TextView
             android:id="@+id/tv_update_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxHeight="@dimen/y150px"
             android:layout_marginLeft="@dimen/x58px"
+            android:layout_marginRight="@dimen/x58px"
             android:layout_marginTop="@dimen/y277px"
+            android:scrollbars="vertical"
             style="@style/SecondBlack.Text23px"/>
 
         <ImageView

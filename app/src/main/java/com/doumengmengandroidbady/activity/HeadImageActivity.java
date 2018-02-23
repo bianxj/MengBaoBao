@@ -31,11 +31,11 @@ import com.doumengmengandroidbady.util.AppUtil;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 import com.doumengmengandroidbady.util.PermissionUtil;
+import com.doumengmengandroidbady.util.PictureUtils;
 import com.doumengmengandroidbady.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -116,7 +116,7 @@ public class HeadImageActivity extends BaseActivity {
     private Uri destUri = null;
 
     private void openCamera(){
-        if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.CAMERA)){
+        if ( PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.CAMERA) ){
             File picture = new File(BaseApplication.getInstance().getPersonHeadImgPath());
             if ( picture.exists() ){
                 picture.delete();
@@ -158,6 +158,20 @@ public class HeadImageActivity extends BaseActivity {
             intent.setType("image/*") ;
             startActivityForResult(intent , REQUEST_IMAGE) ;
         }
+    }
+
+    private void showAppPermissionDialog(int strings){
+        MyDialog.showPermissionDialog(this, getString(strings), new MyDialog.ChooseDialogCallback() {
+            @Override
+            public void sure() {
+                AppUtil.openPrimession(HeadImageActivity.this);
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+        });
     }
 
     private void cropFromPicture(Uri src) {
@@ -254,13 +268,14 @@ public class HeadImageActivity extends BaseActivity {
 
         if ( REQUEST_CROP == requestCode && Activity.RESULT_OK == resultCode ){
             Bitmap bitmap = null;
-            try {
-                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(destUri));
+//            try {
+                bitmap = BitmapFactory.decodeFile(BaseApplication.getInstance().getHeadCropPath());// BitmapFactory.decodeStream(getContentResolver().openInputStream(destUri));
                 civ_head.setImageBitmap(bitmap);
+                PictureUtils.saveBitmap(BaseApplication.getInstance().getHeadCropFile(),bitmap);
                 uploadHeadImg();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
         }
 
 //        if ( Activity.RESULT_OK == resultCode ) {

@@ -74,9 +74,8 @@ public class BaseApplication extends Application {
         return application;
     }
 
-    private void initPush(){
+    public void initPush(){
         UMConfigure.setLogEnabled(true);
-
         UMConfigure.init(this,"5a6e8ad4f43e4803e300008d","Umeng",UMConfigure.DEVICE_TYPE_PHONE,"5aa0b627542b2f3d0a297401addd6ee1");
 
         PushAgent mPushAgent = PushAgent.getInstance(this);
@@ -171,6 +170,7 @@ public class BaseApplication extends Application {
 
     //----------------------------------------------------------------------------------------------
     private final static String TABLE_USER = "user";
+    private final static String COLUMN_MAIN_PAGE = "main_page";
     private final static String COLUMN_LOGIN = "login";
     private final static String COLUMN_USER = "user";
     private final static String COLUMN_PARENT = "parent";
@@ -211,6 +211,18 @@ public class BaseApplication extends Application {
         loginInfo.setAccount(account);
         loginInfo.setPasswd(passwd);
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_LOGIN,GsonUtil.getInstance().toJson(loginInfo));
+    }
+
+    public String getMainPage(){
+        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_MAIN_PAGE,null);
+    }
+
+    public void saveMainPage(String pageName){
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_MAIN_PAGE,pageName);
+    }
+
+    public void removeMainPage(){
+        SharedPreferencesUtil.deleteColumn(this,TABLE_USER,COLUMN_MAIN_PAGE);
     }
 
     public boolean hasAccountData(){
@@ -517,6 +529,7 @@ public class BaseApplication extends Application {
     }
 
     public void skipToGuide(Context context){
+        clearImageLoaderCache();
         clearUserData();
         Intent intent = new Intent(context, GuideActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);

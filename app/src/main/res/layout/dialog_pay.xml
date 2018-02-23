@@ -8,14 +8,17 @@
     <LinearLayout
         android:layout_width="@dimen/x720px"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/first_white">
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y29px"
+            android:layout_height="@dimen/y15px"
             android:background="@drawable/top_shadow_layer_list"></View>
-
+    <LinearLayout
+        android:layout_width="@dimen/x720px"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/first_white">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y80px">
@@ -127,6 +130,7 @@
 <!--        </RelativeLayout>-->
 
 
+    </LinearLayout>
     </LinearLayout>
     
 </RelativeLayout>

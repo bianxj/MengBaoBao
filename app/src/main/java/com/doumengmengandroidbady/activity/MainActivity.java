@@ -92,7 +92,11 @@ public class MainActivity extends BaseFragmentActivity {
         findView();
         initView();
         initFragment();
-        page = PAGE_HOME;
+
+        page = BaseApplication.getInstance().getMainPage();
+        if ( page == null ) {
+            page = PAGE_HOME;
+        }
         switchFragment(page);
         checkNotification();
     }
@@ -160,7 +164,7 @@ public class MainActivity extends BaseFragmentActivity {
                 @Override
                 public void sure() {
                     if (!NotificationUtil.isNotificationEnable()){
-                        MyDialog.showChooseDialog(MainActivity.this, "萌宝宝想给您发送的通知", R.string.prompt_bt_not_allow, R.string.prompt_bt_allow, new MyDialog.ChooseDialogCallback() {
+                        MyDialog.showChooseDialog(MainActivity.this, "萌宝宝想给您发送的通知", R.string.dialog_btn_prompt_later, R.string.prompt_bt_allow, new MyDialog.ChooseDialogCallback() {
                             @Override
                             public void sure() {
                                 AppUtil.openPrimession(MainActivity.this);
@@ -263,23 +267,19 @@ public class MainActivity extends BaseFragmentActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.rl_home_page:
-                    page = PAGE_HOME;
                     switchFragment(PAGE_HOME);
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                     break;
                 case R.id.rl_baby_knowledge:
-                    page = PAGE_BABY_KNOWLEDGE;
                     switchFragment(PAGE_BABY_KNOWLEDGE);
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
                 case R.id.rl_spacialist_service:
-                    page = PAGE_SPACIALIST_SERVICE;
                     switchFragment(PAGE_SPACIALIST_SERVICE);
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
                 case R.id.rl_hospital_report:
                     if ( RoleType.PAY_HOSPITAL_USER == BaseApplication.getInstance().getRoleType() || RoleType.FREE_HOSPITAL_USER == BaseApplication.getInstance().getRoleType() ){
-                        page = PAGE_HOSPITAL_REPORT;
                         switchFragment(PAGE_HOSPITAL_REPORT);
                         dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     } else {
@@ -287,7 +287,6 @@ public class MainActivity extends BaseFragmentActivity {
                     }
                     break;
                 case R.id.rl_meng_lesson:
-                    page = PAGE_LESSON;
                     switchFragment(PAGE_LESSON);
                     dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     break;
@@ -323,6 +322,8 @@ public class MainActivity extends BaseFragmentActivity {
      * 日期: 2018/1/8 10:25
      */
     private void switchFragment(String page){
+        this.page = page;
+        BaseApplication.getInstance().saveMainPage(page);
         Fragment fragment = fragmentMap.get(page);
         if ( !fragment.isVisible() ){
             FragmentTransaction transaction = fm.beginTransaction();
@@ -373,5 +374,4 @@ public class MainActivity extends BaseFragmentActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
 }

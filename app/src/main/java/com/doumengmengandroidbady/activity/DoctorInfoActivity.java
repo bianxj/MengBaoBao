@@ -228,7 +228,6 @@ public class DoctorInfoActivity extends BaseActivity {
 
     private void choose(){
         if (PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-
             List<PayItemLayout.PayData> datas = new ArrayList<>();
             datas.add(new PayItemLayout.PayData(R.drawable.alipay_logo_60,"支付宝",true));
             if (api.isWXAppInstalled()) {
@@ -248,6 +247,20 @@ public class DoctorInfoActivity extends BaseActivity {
                 },datas,doctor.getCost(),15*60);
             }
         }
+    }
+
+    private void showAppPermissionDialog(int strings){
+        MyDialog.showPermissionDialog(this, getString(strings), new MyDialog.ChooseDialogCallback() {
+            @Override
+            public void sure() {
+                AppUtil.openPrimession(DoctorInfoActivity.this);
+            }
+
+            @Override
+            public void cancel() {
+                back();
+            }
+        });
     }
 
     /**

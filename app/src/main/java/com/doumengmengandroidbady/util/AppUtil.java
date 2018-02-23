@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
 
@@ -23,6 +24,10 @@ public class AppUtil {
         LARGER,
         EQUAL,
         LOWER
+    }
+
+    public static String getSystemOsName(){
+        return Build.BRAND;
     }
 
     public static boolean isForceUpdate(String currentVersion , String updateVersion){

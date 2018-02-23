@@ -21,6 +21,7 @@ import com.doumengmengandroidbady.base.BaseApplication;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -29,6 +30,15 @@ import java.io.IOException;
  */
 
 public class PictureUtils {
+
+    public static void saveBitmap(File file , Bitmap bitmap){
+        try {
+            FileOutputStream os = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,os);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static String getFilePath(Context context,Uri uri){
         int sdkVersion = Build.VERSION.SDK_INT;

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +59,10 @@ public class MyDialog {
     private static PopupWindow payDialog;
     private static PopupWindow cityDialog;
 
+    public static void showPermissionDialog(Context context, String content , ChooseDialogCallback callback){
+        showChooseDialog(context,content,R.string.dialog_btn_prompt_later,R.string.dialog_btn_prompt_go_setting,callback);
+    }
+
     public static void showUpdateDialog(Context context,boolean isForce,String updateVersion,String content,final UpdateDialogCallback callback){
         synchronized (updateLock){
             if ( updateDialog != null ){
@@ -69,6 +74,7 @@ public class MyDialog {
             RelativeLayout rl_close = view.findViewById(R.id.rl_close);
             ImageView iv_update = view.findViewById(R.id.iv_update);
             TextView tv_update_content = view.findViewById(R.id.tv_update_content);
+            tv_update_content.setMovementMethod(new ScrollingMovementMethod());
             TextView tv_use_percent = view.findViewById(R.id.tv_use_percent);
             TextView tv_update_version = view.findViewById(R.id.tv_update_version);
 
@@ -159,9 +165,9 @@ public class MyDialog {
         showChooseDialog(context,content,R.string.prompt_bt_cancel,R.string.prompt_bt_sure,callback);
     }
 
-    public static void showPermissionDialog(Context context,String content,ChooseDialogCallback callback){
-        showChooseDialog(context,content,R.string.dialog_btn_prompt_later,R.string.dialog_btn_prompt_go_setting,callback);
-    }
+//    public static void showPermissionDialog(Context context,String content,ChooseDialogCallback callback){
+//        showChooseDialog(context,content,R.string.dialog_btn_prompt_later,R.string.dialog_btn_prompt_go_setting,callback);
+//    }
 
     public static void showChooseDialog(Context context,String content,int cancel,int sure,final ChooseDialogCallback callback){
         synchronized (chooseLock){
@@ -219,6 +225,7 @@ public class MyDialog {
             ListView lv_city = contentView.findViewById(R.id.lv_city);
             contentView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             cityDialog.setContentView(contentView);
+            cityDialog.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
             lv_city.setAdapter(new CityAdapter(context, citys));
             lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -230,11 +237,15 @@ public class MyDialog {
             if (Build.VERSION.SDK_INT < 24) {
                 cityDialog.showAsDropDown(view);
             } else {
-                int[] location = new int[2];
-                view.getLocationOnScreen(location);
-                int x = location[0];
-                int y = location[1];
-                cityDialog.showAtLocation(view, Gravity.NO_GRAVITY, 0, y + view.getHeight());
+                if ( "SMARTISAN".equals(AppUtil.getSystemOsName()) ){
+                    cityDialog.showAsDropDown(view);
+                } else {
+                    int[] location = new int[2];
+                    view.getLocationOnScreen(location);
+                    int x = location[0];
+                    int y = location[1];
+                    cityDialog.showAtLocation(view, Gravity.NO_GRAVITY, 0, y + view.getHeight());
+                }
             }
         }
     }

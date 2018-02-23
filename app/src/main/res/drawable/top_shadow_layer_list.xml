@@ -3,32 +3,27 @@
 
     <item>
         <shape android:shape="rectangle">
-            <padding android:top="@dimen/y8px"></padding>
-            <solid android:color="#02333333"></solid>
+            <solid android:color="#1Acccccc"></solid>
         </shape>
     </item>
-    <item>
+    <item android:top="@dimen/x4px">
         <shape android:shape="rectangle">
-            <padding android:top="@dimen/y6px"></padding>
-            <solid android:color="#02333333"></solid>
+            <solid android:color="#1fcccccc"></solid>
         </shape>
     </item>
-    <item>
+    <item android:top="@dimen/x8px">
         <shape android:shape="rectangle">
-            <padding android:top="@dimen/y6px"></padding>
-            <solid android:color="#02333333"></solid>
+            <solid android:color="#2acccccc"></solid>
         </shape>
     </item>
-    <item>
+    <item android:top="@dimen/x12px">
         <shape android:shape="rectangle">
-            <padding android:top="@dimen/y6px"></padding>
-            <solid android:color="#02333333"></solid>
+            <solid android:color="#2fcccccc"></solid>
         </shape>
     </item>
-    <item>
+    <item android:top="@dimen/x14px">
         <shape android:shape="rectangle">
-            <padding android:top="@dimen/y3px"></padding>
-            <solid android:color="#02333333"></solid>
+            <solid android:color="#3acccccc"></solid>
         </shape>
     </item>
 </layer-list>
