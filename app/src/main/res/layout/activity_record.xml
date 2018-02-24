@@ -1301,6 +1301,7 @@
                     android:hint="@string/record_hint_message"
                     android:textColorHint="@color/second_gray"
                     android:background="@drawable/bg_circle_parent_message"
+                    android:scrollbars="vertical"
                     tools:ignore="LabelFor" />
 
             </LinearLayout>

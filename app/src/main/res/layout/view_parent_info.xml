@@ -265,12 +265,22 @@
 
             <TextView
                 android:id="@+id/tv_father_BMI"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="numberDecimal"
+                android:background="@color/transparent"
+                android:maxLength="7"
+                android:text=""
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tv_father_BMI_unit"
                 style="@style/FirstGray.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="" />
+                android:text="@string/kg_divide_m_square" />
 
             <View
                 android:layout_width="match_parent"
@@ -531,12 +541,22 @@
 
             <TextView
                 android:id="@+id/tv_mother_BMI"
+                style="@style/InputDataNormalEditText"
+                android:layout_centerVertical="true"
+                android:inputType="numberDecimal"
+                android:background="@color/transparent"
+                android:maxLength="7"
+                android:text=""
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tv_mother_BMI_unit"
                 style="@style/FirstGray.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="" />
+                android:text="@string/kg_divide_m_square" />
 
             <View
                 android:layout_width="match_parent"

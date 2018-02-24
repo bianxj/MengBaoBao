@@ -308,6 +308,7 @@ public class AssessmentActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(AssessmentActivity.this,ParentingGuideActivity.class);
             intent.putExtra(ParentingGuideActivity.IN_PARAM_RECORD_ID,record.getRecordId());
+            intent.putExtra(ParentingGuideActivity.IN_PARAM_DOCTOR_ID,record.getDoctorid());
             startActivity(intent);
         }
     };

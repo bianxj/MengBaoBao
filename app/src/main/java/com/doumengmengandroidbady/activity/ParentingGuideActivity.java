@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ import java.util.Map;
 public class ParentingGuideActivity extends BaseFragmentActivity {
 
     public final static String IN_PARAM_RECORD_ID = "record_id";
+    public final static String IN_PARAM_DOCTOR_ID = "doctor_id";
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -42,7 +44,10 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
     private ViewPager vp;
     private ParentingGuideViewPagerAdapter adapter;
 
+    private Button bt_buy_again;
+
     private String recordId;
+    private String doctorId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +56,7 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
         findView();
 //        initData();
         tv_title.setText("养育指导");
-        getRecordId();
+        getDataInfo();
         getParentingGuideData();
     }
 
@@ -113,6 +118,16 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
 
             }
         });
+
+        bt_buy_again = findViewById(R.id.bt_buy_again);
+        bt_buy_again.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ParentingGuideActivity.this,DoctorInfoActivity.class);
+                intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_ID,doctorId);
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateTabTextView(TabLayout.Tab tab,boolean isSelected){
@@ -126,9 +141,10 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
         }
     }
 
-    private void getRecordId(){
+    private void getDataInfo(){
         Intent intent = getIntent();
         recordId = intent.getStringExtra(IN_PARAM_RECORD_ID);
+        doctorId = intent.getStringExtra(IN_PARAM_DOCTOR_ID);
     }
 
     private RequestTask PGTask;

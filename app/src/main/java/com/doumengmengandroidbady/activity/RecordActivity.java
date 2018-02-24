@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -243,6 +244,8 @@ public class RecordActivity extends BaseActivity {
 
         iv_develop_action.setOnClickListener(listener);
 
+        et_parent_message.setOnTouchListener(onTouchListener);
+
         new EditTextUtil(et_egg);
         new EditTextUtil(et_fruit);
 
@@ -261,6 +264,41 @@ public class RecordActivity extends BaseActivity {
                 rl_correct_month.setVisibility(View.INVISIBLE);
             }
         }
+    }
+
+    private final View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if ((view.getId() == R.id.et_parent_message && canVerticalScroll(et_parent_message))) {
+                view.getParent().requestDisallowInterceptTouchEvent(true);
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    view.getParent().requestDisallowInterceptTouchEvent(false);
+                }
+            }
+            return false;
+        }
+    };
+
+    /**
+     * EditText竖直方向是否可以滚动
+     * @param editText  需要判断的EditText
+     * @return  true：可以滚动   false：不可以滚动
+     */
+    private boolean canVerticalScroll(EditText editText) {
+        //滚动的距离
+        int scrollY = editText.getScrollY();
+        //控件内容的总高度
+        int scrollRange = editText.getLayout().getHeight();
+        //控件实际显示的高度
+        int scrollExtent = editText.getHeight() - editText.getCompoundPaddingTop() -editText.getCompoundPaddingBottom();
+        //控件内容总高度与实际显示高度的差值
+        int scrollDifference = scrollRange - scrollExtent;
+
+        if(scrollDifference == 0) {
+            return false;
+        }
+
+        return (scrollY > 0) || (scrollY < scrollDifference - 1);
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
