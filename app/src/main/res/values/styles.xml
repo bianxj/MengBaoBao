@@ -350,6 +350,13 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
     </style>
     <!--Activity start-->
+    <style name="AppLauncher" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
     <!--Activity end-->
 
     <style name="PayAnimation">

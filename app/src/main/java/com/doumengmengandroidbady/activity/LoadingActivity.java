@@ -64,6 +64,7 @@ public class LoadingActivity extends BaseActivity {
     private TextView tv_loading_percent;
     private ImageView iv_loading_icon;
     private AnimationDrawable drawable;
+    private int percent;
 
 
     @Override
@@ -78,6 +79,18 @@ public class LoadingActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         checkExternalStorage();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        resumeLoadingPercent();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        pauseLoadingPercent();
     }
 
     @Override
@@ -145,26 +158,26 @@ public class LoadingActivity extends BaseActivity {
 
     private void initView(){
         rl_back.setOnClickListener(listener);
-        tv_loading_percent.setText("40%");
+        percent = 0;
+        tv_loading_percent.setText("0%");
         AnimationDrawable drawable = (AnimationDrawable) iv_loading_icon.getDrawable();
         drawable.start();
     }
 
+    private void updateLoadingPercent(){
+        tv_loading_percent.setText(String.format("%d%%",percent));
+        percent+=5;
+    }
+
     private void loading(){
-        Intent intent = getIntent();
-        boolean isAutoLogin = intent.getBooleanExtra(IN_PARAM_AUTO_LOGIN,false);
-        if ( isAutoLogin ){
-            login();
-        } else {
-            checkVersionAndWifi();
-        }
+        checkVersionAndWifi();
     }
 
     private void checkVersionAndWifi(){
         if ( isWifi() ){
             checkVersion();
         } else {
-            MyDialog.showPromptDialog(this, getString(R.string.prompt_no_wifi), new MyDialog.PromptDialogCallback() {
+            MyDialog.showPromptDialog(this, getString(R.string.prompt_no_wifi),R.string.dialog_btn_go_on, new MyDialog.PromptDialogCallback() {
                 @Override
                 public void sure() {
                     checkVersion();
@@ -196,18 +209,21 @@ public class LoadingActivity extends BaseActivity {
     private final RequestCallBack checkVersionCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
+            startLoadingPercent();
             serviceVersion = null;
         }
 
         @Override
         public void onError(String result) {
-            showPromptDialog(ResponseErrorCode.getErrorMsg(result));
+            stopLoadingPercent();
+            MyDialog.showPromptDialog(LoadingActivity.this,ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override
         public void onPostExecute(String result) {
             try {
                 if (TextUtils.isEmpty(result)){
+                    stopLoadingPercent();
                     MyDialog.showPromptDialog(LoadingActivity.this, "版本信息获取失败,请检查网络", new MyDialog.PromptDialogCallback() {
                         @Override
                         public void sure() {
@@ -219,28 +235,19 @@ public class LoadingActivity extends BaseActivity {
                     String versionName = AppUtil.getVersionName(LoadingActivity.this);
                     if (AppUtil.isNeedUpdate(versionName, result)) {
                         getUpdateInfo();
-//                        //TODO 获取版本更新信息
-//                        MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, result), result, "新版本特性\n" +
-//                                "1、修复了部分bug\n" +
-//                                "2、优化了部分交互设计\n" +
-//                                "3、新增了一些功能\n" +
-//                                "4、新增了引导页 \n", new MyDialog.UpdateDialogCallback() {
-//                            @Override
-//                            public void update() {
-//                                AppUtil.openSoftwareMarket(LoadingActivity.this);
-//                            }
-//
-//                            @Override
-//                            public void cancel() {
-//                                initConfigure();
-//                            }
-//                        });
                     } else {
-                        initConfigure();
+                        Intent intent = getIntent();
+                        boolean isAutoLogin = intent.getBooleanExtra(IN_PARAM_AUTO_LOGIN,false);
+                        if ( isAutoLogin ){
+                            login();
+                        } else {
+                            initConfigure();
+                        }
                     }
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
+                stopLoadingPercent();
             }
         }
     };
@@ -268,6 +275,7 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
+            stopLoadingPercent();
             MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
                 @Override
                 public void sure() {
@@ -347,6 +355,7 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
+            stopLoadingPercent();
             MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
                 @Override
                 public void sure() {
@@ -379,6 +388,7 @@ public class LoadingActivity extends BaseActivity {
 
                     @Override
                     public void onError(String result) {
+                        stopLoadingPercent();
                         MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
                             @Override
                             public void sure() {
@@ -389,12 +399,14 @@ public class LoadingActivity extends BaseActivity {
 
                     @Override
                     public void onPostExecute(String result) {
-                        checkVersionAndWifi();
+//                        checkVersionAndWifi();
+                        initConfigure();
                     }
                 },RequestTask.DEFAULT);
                 loginTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
+                stopLoadingPercent();
             }
     }
 
@@ -415,15 +427,18 @@ public class LoadingActivity extends BaseActivity {
 
     private static class LoadingHandler extends Handler{
         private final static int MESSAGE_JUMP_TO_MAIN = 0x01;
-        private final WeakReference<Context> weakReference;
+        private final static int MESSAGE_LOADING_PERCENT = 0x02;
+        private final static int MESSAGE_LOADING_CANCLE = 0x03;
+        private final WeakReference<LoadingActivity> weakReference;
 
-        public LoadingHandler(Context context) {
+        public LoadingHandler(LoadingActivity context) {
             this.weakReference = new WeakReference<>(context);
         }
 
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if ( msg.what == MESSAGE_JUMP_TO_MAIN ) {
+                weakReference.get().stopLoadingPercent();
                 if ( BaseApplication.getInstance().isAbnormalExit() ){
                     Intent intent = new Intent(weakReference.get(), InputInfoActivity.class);
                     weakReference.get().startActivity(intent);
@@ -431,8 +446,37 @@ public class LoadingActivity extends BaseActivity {
                     Intent intent = new Intent(weakReference.get(), MainActivity.class);
                     weakReference.get().startActivity(intent);
                 }
+            } else if ( msg.what == MESSAGE_LOADING_PERCENT) {
+                removeMessages(MESSAGE_LOADING_PERCENT);
+                if ( weakReference.get().percent < 99 ){
+                    weakReference.get().updateLoadingPercent();
+                    sendEmptyMessageDelayed(MESSAGE_LOADING_PERCENT,100);
+                }
+            } else if ( msg.what == MESSAGE_LOADING_CANCLE ) {
+                removeMessages(MESSAGE_LOADING_PERCENT);
             }
         }
+    }
+
+    private boolean isLoading = false;
+    private void startLoadingPercent(){
+        isLoading = true;
+        handler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_PERCENT);
+    }
+
+    private void resumeLoadingPercent(){
+        if ( isLoading == true ) {
+            handler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_PERCENT);
+        }
+    }
+
+    private void pauseLoadingPercent(){
+        handler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_CANCLE);
+    }
+
+    private void stopLoadingPercent(){
+        isLoading = false;
+        handler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_CANCLE);
     }
 
     private final Handler handler = new LoadingHandler(this);

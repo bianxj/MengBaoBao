@@ -119,10 +119,10 @@ public class MyDialog {
     }
 
     public static void showPromptDialog(Context context, String content, final PromptDialogCallback callback){
-        showPromptDialog(context,content,R.string.dialog_btn_go_on,callback);
+        showPromptDialog(context,content,R.string.prompt_bt_sure,callback);
     }
 
-    private static void showPromptDialog(Context context, String content, int sure, final PromptDialogCallback callback){
+    public static void showPromptDialog(Context context, String content, int sure, final PromptDialogCallback callback){
         synchronized (promptLock){
             if ( promptDialog != null ){
                 promptDialog.dismiss();

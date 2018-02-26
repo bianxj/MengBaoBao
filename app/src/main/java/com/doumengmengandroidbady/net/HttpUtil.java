@@ -41,58 +41,12 @@ public class HttpUtil {
     public final static String  TYPE_FILE = "UPLOAD_FILES";
 
     private final OkHttpClient client;
-//    private MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded;charset=utf-8");
 
     private HttpUtil() {
         client = defaultHttpClient();
     }
 
     public String httpsRequestFile(String urlString){
-//        HttpURLConnection connection = null;
-//        InputStream inputStream = null;
-//        ByteArrayOutputStream outputStream = null;
-//        String result = null;
-//        try {
-//            URL url = new URL(urlString);
-//            connection = (HttpURLConnection)url.openConnection();
-//            connection.setRequestMethod("POST");
-//            connection.addRequestProperty("Connection","close");
-//            inputStream = connection.getInputStream();
-//
-//            outputStream = new ByteArrayOutputStream();
-//
-//            int len = 0;
-//            byte[] buf = new byte[40960];
-//            while ( (len = inputStream.read(buf)) > 0 ){
-//                outputStream.write(buf,0,len);
-//            }
-//            result = outputStream.toString("UTF-8");
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if ( outputStream != null ){
-//                try {
-//                    outputStream.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            if (  inputStream != null ){
-//                try {
-//                    inputStream.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            if ( connection != null ){
-//                connection.disconnect();
-//            }
-//        }
-//
-//        return result;
-
         String result = null;
         Request.Builder builder = new Request.Builder();
         builder.url(urlString);
@@ -129,7 +83,6 @@ public class HttpUtil {
             builder  = new Request.Builder();
             builder.url(url);
             builder.addHeader("content-type","text/html;charset:utf-8");
-//            builder.addHeader("Connection", "close");
             MultipartBody.Builder bodyBuilder = new MultipartBody.Builder();
             bodyBuilder.setType(MultipartBody.FORM);
             BaseApplication.getInstance().getMLog().info("HttpUtil:url:"+url);
@@ -175,93 +128,11 @@ public class HttpUtil {
         return result;
     }
 
-//    public String httpsRequestPost(String url) {
-//        String result = null;
-//        try {
-//            RequestBody body = RequestBody.create(mediaType, "");
-//            Request.Builder builder = new Request.Builder();
-//            String urlUtf = new String(url.getBytes(),"utf-8");
-//            BaseApplication.getInstance().getMLog().info("HttpUtil:url:"+urlUtf);
-//            builder.url(urlUtf);
-//            builder.post(body);
-//            Request request = builder.build();
-//            Response response = client.newCall(builder.build()).execute();
-//            BaseApplication.getInstance().getMLog().info("HttpUtil:code:"+response.code());
-//            if (response.code() == 200) {
-//                result = response.body().string();
-//            } else {
-//                result = ResponseErrorCode.ERROR_REQUEST_FAILED_MSG;
-//            }
-//            BaseApplication.getInstance().getMLog().info("HttpUtil:result:"+result);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            result = ResponseErrorCode.ERROR_REQUEST_FAILED_MSG;
-//        }
-//        return result;
-//    }
-
-//    public String httpsRequestPost(String urlString){
-//        URL url = null;
-//        try {
-//            String par = URLEncoder.encode("{\"accountMobile\":\"测试\",\"loginPwd\":\"测试\"}","UTF-8");
-//            url = new URL("http://192.168.31.112:8080/mbbPhoneServerV2/babyUser.do?method=Login&paramStr="+par);
-//            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-//            httpURLConnection.setRequestMethod("POST");// 提交模式
-//////            httpURLConnection.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
-//            httpURLConnection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-//            httpURLConnection.setRequestProperty("Accept-Charset", "utf-8");
-//////            httpURLConnection.setRequestProperty("Charset", "utf-8");
-//            httpURLConnection.setConnectTimeout(10000);//连接超时 单位毫秒
-//            httpURLConnection.setReadTimeout(2000);//读取超时 单位毫秒
-////            // 发送POST请求必须设置如下两行
-//            httpURLConnection.setDoOutput(true);
-//            httpURLConnection.setDoInput(true);
-////            httpURLConnection.setInstanceFollowRedirects(true);
-////            // 获取URLConnection对象对应的输出流
-////            //开始获取数据
-////
-////            BufferedInputStream bis = new BufferedInputStream(httpURLConnection.getInputStream());
-////            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-////            int len;
-////            byte[] arr = new byte[1024];
-////            while((len=bis.read(arr))!= -1){
-////                bos.write(arr,0,len);
-////                bos.flush();
-////            }
-////            bos.close();
-////            return bos.toString("utf-8");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
-//    public String httpsRequestPost2(String urlString){
-//        try {
-//            URL url = new URL(urlString);
-//            url.openConnection();
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    private void defineHeader(Request.Builder builder){
-//
-//    }
-
     private OkHttpClient defaultHttpClient(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS);
 
         builder.readTimeout(READ_TIMEOUT,TimeUnit.MILLISECONDS);
-//        builder.addInterceptor(new Interceptor() {
-//            @Override
-//            public Response intercept(Chain chain) throws IOException {
-//                Request originalRequest = chain.request();
-//                Response response = chain.proceed(originalRequest);
-//                return response;
-//            }
-//        });
         return builder.build();
     }
 

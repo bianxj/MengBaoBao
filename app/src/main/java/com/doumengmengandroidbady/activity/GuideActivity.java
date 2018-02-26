@@ -1,16 +1,11 @@
 package com.doumengmengandroidbady.activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.PermissionChecker;
-import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +13,6 @@ import android.widget.ImageView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.util.ZxingUtil;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.GraphView;
@@ -31,6 +25,8 @@ import com.google.zxing.WriterException;
  */
 public class GuideActivity extends BaseActivity {
 
+//    public final static String IN_PARAM_IS_LOGIN_FAILED = "isLoginFailed";
+
     private AutoScrollViewPager asvp;
     private Button bt_guide_register , bt_guide_login;
 
@@ -41,14 +37,15 @@ public class GuideActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_guide);
-        if (BaseApplication.getInstance().hasAccountData()){
-            Intent intent = new Intent(this,LoadingActivity.class);
-            intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
-            startActivity(intent);
-        } else {
-            findView();
-            initView();
-        }
+//        boolean isLoginFailed = getIntent().getBooleanExtra(IN_PARAM_IS_LOGIN_FAILED,false);
+        findView();
+        initView();
+
+//        if (BaseApplication.getInstance().hasAccountData()){
+//            Intent intent = new Intent(this,LoadingActivity.class);
+//            intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
+//            startActivity(intent);
+//        }
     }
 
     @SuppressLint("WrongConstant")
@@ -56,11 +53,6 @@ public class GuideActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("checkSelfPermission:"+ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION));
-        System.out.println("checkSelfPermission:"+ PermissionChecker.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION));
-        System.out.println("checkSelfPermission:"+checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION));
-        System.out.println("checkCallingOrSelfPermission:"+checkCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION));
-        System.out.println("shouldShowRequestPermissionRationale:"+ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION));
     }
 
     @Override
@@ -69,14 +61,6 @@ public class GuideActivity extends BaseActivity {
     }
 
     private void findView(){
-//        asvp = findViewById(R.id.asvp);
-        DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
-
-        System.out.println("screen_height:"+metrics.heightPixels);
-        System.out.println("screen_width:"+metrics.widthPixels);
-        System.out.println("screen_height2:"+getResources().getDimension(R.dimen.y1280px));
-        System.out.println("screen_width2:"+getResources().getDimension(R.dimen.x720px));
-
         bt_guide_register = findViewById(R.id.bt_guide_register);
         bt_guide_login = findViewById(R.id.bt_guide_login);
     }

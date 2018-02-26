@@ -833,7 +833,7 @@ public class RecordActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            showPromptDialog(ResponseErrorCode.getErrorMsg(result));
+            MyDialog.showPromptDialog(RecordActivity.this,ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override
@@ -842,7 +842,7 @@ public class RecordActivity extends BaseActivity {
             if ( 1 == response.getResult().getIsSuccess() ){
                 getCurrentRecord();
             } else {
-                showPromptDialog(getString(R.string.dialog_content_submit_failed));
+                MyDialog.showPromptDialog(RecordActivity.this,getString(R.string.dialog_content_submit_failed),null);
             }
         }
     };

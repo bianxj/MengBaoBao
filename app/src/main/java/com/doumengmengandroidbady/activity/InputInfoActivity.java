@@ -167,8 +167,7 @@ public class InputInfoActivity extends BaseActivity {
                 DaoManager.getInstance().getGrowthDao().saveGrowthList(InputInfoActivity.this,response.getResult().getGrowthList());
                 startActivity(RecordActivity.class);
             } else {
-                //TODO
-                showPromptDialog("提交信息失败");
+                MyDialog.showPromptDialog(InputInfoActivity.this,"提交信息失败",null);
             }
         }
     };

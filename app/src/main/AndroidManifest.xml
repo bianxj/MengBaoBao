@@ -32,6 +32,7 @@
         <activity
             android:name=".activity.GuideActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppLauncher"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
