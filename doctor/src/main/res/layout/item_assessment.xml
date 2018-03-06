@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y210px"
+        android:orientation="vertical">
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y18px" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y192px"
+            android:background="@color/first_white">
+            <com.doumengmeng.doctor.view.CircleImageView
+                android:id="@+id/civ_head"
+                android:layout_width="@dimen/x144px"
+                android:layout_height="@dimen/x144px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x72px"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/x283px"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="@dimen/x32px"
+                        android:layout_height="@dimen/x32px"
+                        android:src="@drawable/icon_calendar"
+                        android:scaleType="fitXY"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/baby_month_age"
+                        android:layout_marginLeft="@dimen/x19px"
+                        style="@style/SecondBlack.Text28px"/>
+
+                    <TextView
+                        android:id="@+id/tv_month_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x53px"
+                        style="@style/SecondBlue.Text23px"
+                        android:text="24个月05天"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/y16px">
+                    <ImageView
+                        android:layout_width="@dimen/x32px"
+                        android:layout_height="@dimen/x32px"
+                        android:src="@drawable/icon_time"
+                        android:scaleType="fitXY"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accessment_time"
+                        android:layout_marginLeft="@dimen/x19px"
+                        style="@style/SecondBlack.Text28px"/>
+
+                    <TextView
+                        android:id="@+id/tv_accessment_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x53px"
+                        style="@style/SecondBlue.Text23px"
+                        android:text="24个月05天"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/y16px">
+                    <ImageView
+                        android:layout_width="@dimen/x32px"
+                        android:layout_height="@dimen/x32px"
+                        android:src="@drawable/icon_alarm"
+                        android:scaleType="fitXY"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/over_time"
+                        android:layout_marginLeft="@dimen/x19px"
+                        style="@style/SecondBlack.Text28px"/>
+
+                    <TextView
+                        android:id="@+id/tv_over_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x53px"
+                        style="@style/FirstPink.Text23px"
+                        android:text="24个月05天"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+    
+</LinearLayout>

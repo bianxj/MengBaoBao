@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00B7EE</color>
+    <color name="colorPrimaryDark">#00B7EE</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="first_black">#000000</color>
+    <color name="second_black">#333333</color>
+    <color name="third_black">#1A1A1A</color>
+    <color name="fourth_black">#4D4D4D</color>
+
+    <color name="first_gray">#666666</color>
+    <color name="second_gray">#808080</color>
+    <color name="lineGray">#D7D7D7</color>
+    <color name="thirdGray">#F0F0F0</color>
+    <color name="fourth_gray">#909090</color>
+    <color name="fifthGray">#F5F5F5</color>
+    <color name="sixth_gray">#999999</color>
+    <color name="seven_gray">#979797</color>
+
+    <color name="first_white">#ffffff</color>
+    <color name="second_white">#FEFEFE</color>
+
+    <color name="first_blue">#00B7EE</color>
+    <color name="second_blue">#1D2088</color>
+
+    <color name="first_pink">#EF4399</color>
+    <color name="second_pink">#D81780</color>
+
+    <color name="colorEditText">#000000</color>
+    <color name="colorEditTextHint">#00B7EE</color>
+
+    <color name="unread">#F1A773</color>
+
+    <color name="thinPink">#FC6DA6</color>
+    <color name="deepPink">#D81780</color>
+    <color name="lightSky">#DAF4FF</color>
+    <color name="scanMask">#66777777</color>
+    <color name="lightPink">#F7D6D7</color>
+
+    <color name="linkLightPink">#FEF1F7</color>
+    <color name="linePink">#FDA4C3</color>
+    <color name="linkPink">#EF4399</color>
+    <color name="translucenceLinkPink">#33EF4399</color>
+
+    <color name="btmMenuColor">#EF4399</color>
+    <color name="circleFrame">#DE3B93</color>
+
+    <color name="editFrame">#EAEAEA</color>
+    <color name="uncheckFrame">#DADADA</color>
+    <color name="checkColor">#FC6DA6</color>
+    <color name="doctorFrame">#A6F5ED</color>
+    <color name="hospitalFrame">#A6F5ED</color>
+
+    <color name="bgWeightColor">#FC6DA6</color>
+    <color name="bgHeightColor">#F0A774</color>
+    <color name="bgBMIColor">#23E3F8</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="translucence">#330e0000</color>
+    <color name="dark_translucence">#bb000000</color>
+
+
+    <color name="navpage">#FFE1E8EB</color>
+</resources>

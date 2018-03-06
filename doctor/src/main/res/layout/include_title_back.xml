@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/SelfActionBarHeight"
+    android:background="@color/colorPrimary"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl_back"
+        android:layout_width="@dimen/x100px"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="@dimen/x31px"
+            android:layout_height="@dimen/x50px"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/btn_back"
+            android:layout_marginLeft="@dimen/x48px"
+            android:layout_marginTop="@dimen/y29px"
+            android:scaleType="fitXY"
+            android:contentDescription="@string/contentDescription" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="@dimen/x500px"
+        style="@style/SecondWhite.Text48px"
+        android:layout_centerInParent="true"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:text=""/>
+
+    <RelativeLayout
+        android:id="@+id/rl_complete"
+        android:layout_width="@dimen/x100px"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/tv_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/complete"
+            style="@style/SecondWhite.Text28px"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

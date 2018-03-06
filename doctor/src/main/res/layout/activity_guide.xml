@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.doumengmeng.doctor.view.CheckBoxLayout
+            android:id="@+id/cbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:default_grap="@dimen/x20px"
+            app:vertical_grap="@dimen/y20px"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y56px"
+            android:layout_marginLeft="@dimen/x30px"
+            android:layout_marginRight="@dimen/x30px"
+            android:background="@drawable/bg_circle_edittext"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x30px"
+            android:layout_marginRight="@dimen/x30px"
+            android:layout_marginTop="@dimen/y40px"
+            android:background="@drawable/bg_circle_edittext_multi_line"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_experience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/guide_experience"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/y60px"
+        />
+
+</RelativeLayout>

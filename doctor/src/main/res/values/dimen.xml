@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="SelfActionBarHeight">@dimen/y106px</dimen>
+    <dimen name="EditContainerWidth">@dimen/x606px</dimen>
+    <dimen name="EditContainerHeight">@dimen/y84px</dimen>
+    <dimen name="EditVcContainerWidth">@dimen/x368px</dimen>
+    <dimen name="IconMarginLeft">@dimen/x16px</dimen>
+    <dimen name="EditMarginLeft">@dimen/x9px</dimen>
+    <dimen name="EditMarginRight">@dimen/x30px</dimen>
+
+    <dimen name="TextNormalSize">@dimen/y30px</dimen>
+
+    <dimen name="AssessmentMarginLeft1">@dimen/x150px</dimen>
+    <dimen name="AssessmentMarginLeft2">@dimen/x180px</dimen>
+    <dimen name="AssessmentMarginLeft3">@dimen/x235px</dimen>
+    <dimen name="AssessmentMarginLeft4">@dimen/x97px</dimen>
+    <dimen name="AssessmentReferenceMarginLeft">@dimen/x80px</dimen>
+
+</resources>

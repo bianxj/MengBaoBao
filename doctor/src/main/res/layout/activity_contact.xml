@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include layout="@layout/include_title_back" />
+
+    <ImageView
+        android:layout_width="@dimen/y318px"
+        android:layout_height="@dimen/y318px"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_contact_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y225px"
+        android:contentDescription="@string/contentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contact_hotline"
+        android:textSize="@dimen/y34px"
+        android:textColor="@color/thinPink"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y557px"
+        />
+
+    <ImageView
+        android:layout_width="@dimen/y31px"
+        android:layout_height="@dimen/y31px"
+        android:layout_marginTop="@dimen/y618px"
+        android:layout_marginLeft="@dimen/x186px"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_tel"
+        android:contentDescription="@string/contentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/y38px"
+        android:text="@string/contact_hotline_phone"
+        android:layout_marginTop="@dimen/y610px"
+        android:layout_marginLeft="@dimen/x238px"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/y26px"
+        android:text="@string/contact_work_time"
+        android:layout_marginTop="@dimen/y678px"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>

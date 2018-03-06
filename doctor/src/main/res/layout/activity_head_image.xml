@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/include_title_back" />
+
+    <com.doumengmeng.doctor.view.CircleImageView
+        android:id="@+id/civ_head"
+        android:layout_width="@dimen/y470px"
+        android:layout_height="@dimen/y470px"
+        android:src="@drawable/frame_head"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y324px"
+        />
+
+    <ImageView
+        android:id="@+id/iv_camera"
+        android:layout_width="@dimen/x166px"
+        android:layout_height="@dimen/x114px"
+        android:src="@drawable/btn_camera"
+        android:layout_marginTop="@dimen/y847px"
+        android:layout_marginLeft="@dimen/x156px"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/contentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_picture"
+        android:layout_width="@dimen/x166px"
+        android:layout_height="@dimen/x114px"
+        android:src="@drawable/btn_picture"
+        android:layout_marginTop="@dimen/y847px"
+        android:layout_marginRight="@dimen/x156px"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/contentDescription" />
+</RelativeLayout>

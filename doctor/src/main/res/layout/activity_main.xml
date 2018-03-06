@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightSky">
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_bottom">
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y156px"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/first_white"
+        >
+
+        <FrameLayout
+            android:id="@+id/fl_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:layout_width="@dimen/x66px"
+                android:layout_height="@dimen/x66px"
+                android:background="@drawable/menu_btn_home"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y28px"
+                android:checked="true"
+                android:button="@null"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="首页"
+                android:enabled="false"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="@dimen/y25px"
+                android:textColor="@drawable/menu_text_color"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/fl_account"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:layout_width="@dimen/x66px"
+                android:layout_height="@dimen/x66px"
+                android:background="@drawable/menu_btn_account"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y28px"
+                android:button="@null"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="账户"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="@dimen/y25px"
+                android:textColor="@drawable/menu_text_color"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_message"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:layout_width="@dimen/x66px"
+                android:layout_height="@dimen/x66px"
+                android:background="@drawable/menu_btn_message"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y28px"
+                android:button="@null"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="@dimen/y25px"
+                android:textColor="@drawable/menu_text_color"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_about"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/cb_home"
+                android:layout_width="@dimen/x66px"
+                android:layout_height="@dimen/x66px"
+                android:background="@drawable/menu_btn_about"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y28px"
+                android:button="@null"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="@dimen/y25px"
+                android:textColor="@drawable/menu_text_color"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+    </LinearLayout>
+
+</RelativeLayout>

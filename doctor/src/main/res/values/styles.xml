@@ -1,0 +1,334 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:activityOpenEnterAnimation">@anim/left_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/right_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/right_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/left_out</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+
+    <style name="EditTextView">
+        <item name="android:textSize">@dimen/y30px</item>
+        <item name="android:textColor">@color/colorEditText</item>
+        <item name="android:textColorHint">@color/colorEditTextHint</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_height">@dimen/y84px</item>
+        <item name="android:lines">1</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <!--FirstBlack start-->
+    <style name="FirstBlack">
+        <item name="android:textColor">@color/first_black</item>
+    </style>
+
+    <style name="FirstBlack.Text28px">
+        <item name="android:textSize">@dimen/y28px</item>
+    </style>
+
+    <style name="FirstBlack.Text30px">
+        <item name="android:textSize">@dimen/y30px</item>
+    </style>
+
+    <style name="FirstBlack.Text34px">
+        <item name="android:textSize">@dimen/y34px</item>
+    </style>
+    <!--FirstBlack end-->
+
+    <!--SecondBlack start-->
+    <style name="SecondBlack">
+        <item name="android:textColor">@color/second_black</item>
+    </style>
+
+    <style name="SecondBlack.Text26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="SecondBlack.Text26px.Margin">
+        <item name="android:layout_marginLeft">@dimen/x29px</item>
+        <item name="android:layout_marginRight">@dimen/x29px</item>
+    </style>
+
+    <style name="SecondBlack.Text28px.MarginLeft29px">
+        <item name="android:layout_marginLeft">@dimen/x29px</item>
+    </style>
+
+    <style name="SecondBlack.Text34px">
+        <item name="android:textSize">@dimen/y34px</item>
+    </style>
+
+    <style name="SecondBlack.Text32px">
+        <item name="android:textSize">@dimen/y32px</item>
+    </style>
+
+    <style name="SecondBlack.Text28px">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="SecondBlack.Text29px">
+        <item name="android:textSize">@dimen/y29px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="SecondBlack.Text30px">
+        <item name="android:textSize">@dimen/y30px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+    <style name="SecondBlack.Text24px">
+        <item name="android:textSize">@dimen/y24px</item>
+    </style>
+    <style name="SecondBlack.Text23px">
+        <item name="android:textSize">@dimen/y23px</item>
+    </style>
+    <!--SecondBlack end-->
+
+    <!--ThirdBlack start-->
+    <style name="ThirdBlack">
+        <item name="android:textColor">@color/third_black</item>
+    </style>
+
+    <style name="ThirdBlack.Text28px">
+        <item name="android:textSize">@dimen/y28px</item>
+    </style>
+
+    <style name="ThirdBlack.Text26px">
+        <item name="android:textSize">@dimen/y26px</item>
+    </style>
+    <!--ThirdBlack end-->
+
+    <!--FourthBlack start-->
+    <style name="FourthBlack">
+        <item name="android:textColor">@color/fourth_black</item>
+    </style>
+
+    <style name="FourthBlack.Text26px">
+        <item name="android:textSize">@dimen/y26px</item>
+    </style>
+
+    <style name="FourthBlack.Text23px">
+        <item name="android:textSize">@dimen/y23px</item>
+    </style>
+    <!--FourthBlack end-->
+
+    <!--FirstGray start-->
+    <style name="FirstGray">
+        <item name="android:textColor">@color/first_gray</item>
+    </style>
+    <style name="FirstGray.Text26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+    <style name="FirstGray.Text21px">
+        <item name="android:textSize">@dimen/y21px</item>
+    </style>
+    <style name="FirstGray.Text24px">
+        <item name="android:textSize">@dimen/y24px</item>
+        <item name="android:textColor">@color/first_gray</item>
+    </style>
+    <style name="FirstGray.Text28px">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+    <style name="FirstGray.Text29px">
+        <item name="android:textSize">@dimen/y29px</item>
+    </style>
+    <style name="FirstGray.Text26px.MarginLeft382px">
+        <item name="android:layout_marginLeft">@dimen/x382px</item>
+    </style>
+    <!--FirstGray end-->
+
+    <!--SecondGray start-->
+    <style name="SecondGray">
+        <item name="android:textColor">@color/second_gray</item>
+    </style>
+    <style name="SecondGray.Text23px">
+        <item name="android:textSize">@dimen/y23px</item>
+    </style>
+    <!--SecondGray end-->
+
+    <!--FourthGray start-->
+    <style name="FourthGray">
+        <item name="android:textColor">@color/fourth_gray</item>
+    </style>
+
+    <style name="FourthGray.Text26px">
+        <item name="android:textSize">@dimen/y26px</item>
+    </style>
+
+    <style name="FourthGray.Text24px">
+        <item name="android:textSize">@dimen/y24px</item>
+    </style>
+
+    <style name="FourthGray.Text28px">
+        <item name="android:textSize">@dimen/y28px</item>
+        <item name="android:textColor">#909090</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+    <!--FourthGray end-->
+    <!--SixthGray start-->
+    <style name="SixthGray">
+        <item name="android:textColor">@color/sixth_gray</item>
+    </style>
+    <style name="SixthGray.Text23px">
+        <item name="android:textSize">@dimen/y23px</item>
+    </style>
+    <!--SixthGray end-->
+    <!--SevenGray start-->
+    <style name="SevenGray">
+        <item name="android:textColor">@color/seven_gray</item>
+    </style>
+    <style name="SevenGray.Text24px">
+        <item name="android:textSize">@dimen/y24px</item>
+    </style>
+    <!--SevenGray end-->
+
+    <!--FirstWhite start-->
+    <style name="FirstWhite">
+        <item name="android:textColor">@color/first_white</item>
+    </style>
+    <style name="FirstWhite.Text22px">
+        <item name="android:textSize">@dimen/y22px</item>
+    </style>
+    <style name="FirstWhite.Text24px">
+        <item name="android:textSize">@dimen/y24px</item>
+    </style>
+    <style name="FirstWhite.Text26px">
+        <item name="android:textSize">@dimen/y26px</item>
+    </style>
+    <style name="FirstWhite.Text28px">
+        <item name="android:textSize">@dimen/y28px</item>
+    </style>
+    <style name="FirstWhite.Text34px">
+        <item name="android:textSize">@dimen/y34px</item>
+        <item name="android:textColor">@color/first_white</item>
+    </style>
+    <style name="FirstWhite.Text52px">
+        <item name="android:textSize">@dimen/y52px</item>
+        <item name="android:textColor">@color/first_white</item>
+    </style>
+    <!--FirstWhite end-->
+
+    <!--SecondWhite start-->
+    <style name="SecondWhite">
+        <item name="android:textColor">@color/second_white</item>
+    </style>
+    <style name="SecondWhite.Text48px">
+        <item name="android:textSize">@dimen/y48px</item>
+    </style>
+    <style name="SecondWhite.Text28px">
+        <item name="android:textSize">@dimen/y28px</item>
+    </style>
+    <style name="SecondWhite.Text30px">
+        <item name="android:textSize">@dimen/y30px</item>
+    </style>
+    <!--SecondWhite end-->
+    <!--FirstPink start-->
+    <style name="FirstPink">
+        <item name="android:color">@color/first_pink</item>
+        <item name="android:textColor">@color/first_pink</item>
+    </style>
+    <style name="FirstPink.Text23px">
+        <item name="android:textSize">@dimen/y23px</item>
+    </style>
+    <style name="FirstPink.Text26px">
+        <item name="android:textSize">@dimen/y26px</item>
+    </style>
+    <style name="FirstPink.Text29px">
+        <item name="android:textSize">@dimen/y29px</item>
+    </style>
+    <!--FirstPink end-->
+    <!--SecondPink start-->
+    <style name="SecondPink">
+        <item name="android:color">@color/second_pink</item>
+        <item name="android:textColor">@color/second_pink</item>
+    </style>
+    <style name="SecondPink.Text34px">
+        <item name="android:textSize">@dimen/y34px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+    <!--SecondPink end-->
+
+    <!--Blue start-->
+    <!--FirstBlue start-->
+    <style name="FirstBlue">
+        <item name="android:textColor">@color/first_blue</item>
+    </style>
+
+    <style name="FirstBlue.Text28px">
+        <item name="android:textSize">@dimen/y28px</item>
+    </style>
+
+    <style name="FirstBlue.Text32px">
+        <item name="android:textSize">@dimen/y32px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="FirstBlue.Text23px">
+        <item name="android:textSize">@dimen/y23px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+
+    <style name="FirstBlue.Text21px">
+        <item name="android:textSize">@dimen/y21px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+    <style name="FirstBlue.Text26px">
+        <item name="android:textSize">@dimen/y26px</item>
+        <item name="android:lineSpacingExtra">@dimen/y10px</item>
+    </style>
+    <!--FirstBlue end-->
+    <!--SecondBlue start-->
+    <style name="SecondBlue">
+        <item name="android:color">@color/second_blue</item>
+        <item name="android:textColor">@color/second_blue</item>
+    </style>
+    <style name="SecondBlue.Text23px">
+        <item name="android:textSize">@dimen/y23px</item>
+    </style>
+    <style name="SecondBlue.Text24px">
+        <item name="android:textSize">@dimen/y24px</item>
+    </style>
+    <style name="SecondBlue.Text25px">
+        <item name="android:textSize">@dimen/y25px</item>
+    </style>
+    <!--SecondBlue end-->
+    <!--Blue end-->
+
+    <style name="CheckText">
+        <item name="android:textSize">@dimen/y26px</item>
+    </style>
+
+    <style name="CheckText.Checked">
+        <item name="android:textColor">@drawable/bg_circle_text_color</item>
+        <item name="android:background">@drawable/bg_circle</item>
+    </style>
+
+    <!--Dialog start-->
+    <style name="MyDialog" parent="@android:style/Theme.Dialog" >
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="LoadingDialog" parent="@android:style/Theme.Dialog" >
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <!--Dialog end-->
+
+</resources>

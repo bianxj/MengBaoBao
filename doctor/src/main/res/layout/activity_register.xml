@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/bg_login">
+
+    <android.support.v4.widget.Space
+        android:id="@+id/v_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/SelfActionBarHeight" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_name"
+        android:layout_marginTop="@dimen/y39px"
+        style="@style/SecondWhite.Text48px"
+        />
+
+    <LinearLayout
+        android:layout_width="@dimen/EditContainerWidth"
+        android:layout_height="@dimen/EditContainerHeight"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/y53px"
+        android:background="@drawable/bg_input_long">
+
+        <ImageView
+            android:layout_width="@dimen/y54px"
+            android:layout_height="@dimen/y54px"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/IconMarginLeft"
+            android:src="@drawable/icon_phone"
+            android:contentDescription="@string/contentDescription" />
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:hint="@string/input_phone_hint"
+            android:layout_marginLeft="@dimen/EditMarginLeft"
+            android:layout_marginRight="@dimen/EditMarginRight"
+            android:inputType="number"
+            android:maxLength="11"
+            style="@style/EditTextView"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="@dimen/x616px"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x5px"
+        android:layout_marginTop="@dimen/x53px">
+        <LinearLayout
+            android:layout_width="@dimen/EditVcContainerWidth"
+            android:layout_height="@dimen/EditContainerHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_input_short"
+            android:layout_marginTop="@dimen/y5px"
+            android:id="@+id/linearLayout">
+
+            <ImageView
+                android:layout_width="@dimen/y54px"
+                android:layout_height="@dimen/y54px"
+                android:scaleType="fitXY"
+                android:layout_marginLeft="@dimen/IconMarginLeft"
+                android:src="@drawable/icon_vc"
+                android:contentDescription="@string/contentDescription" />
+
+            <EditText
+                android:id="@+id/et_vc"
+                android:layout_width="match_parent"
+                android:hint="@string/input_vc_hint"
+                android:layout_marginLeft="@dimen/EditMarginLeft"
+                android:layout_marginRight="@dimen/EditMarginRight"
+                android:lines="1"
+                android:inputType="number"
+                android:maxLength="8"
+                style="@style/EditTextView"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/x236px"
+            android:layout_height="@dimen/y117px"
+            android:background="@drawable/btn_vc"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            >
+
+            <TextView
+                android:id="@+id/bt_get_vc"
+                android:layout_width="@dimen/x200px"
+                android:layout_height="@dimen/EditContainerHeight"
+                android:layout_marginTop="@dimen/y5px"
+                android:layout_marginRight="@dimen/x10px"
+                android:gravity="center"
+                android:text="@string/get_vc"
+                android:textColor="@color/deepPink"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/TextNormalSize" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/EditContainerWidth"
+        android:layout_height="@dimen/EditContainerHeight"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/y82px"
+        android:background="@drawable/bg_input_long">
+
+        <ImageView
+            android:layout_width="@dimen/y54px"
+            android:layout_height="@dimen/y54px"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/IconMarginLeft"
+            android:src="@drawable/icon_pwd"
+            android:contentDescription="@string/contentDescription" />
+
+        <EditText
+            android:id="@+id/et_login_pwd"
+            style="@style/EditTextView"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/EditMarginLeft"
+            android:layout_marginRight="@dimen/EditMarginRight"
+            android:hint="@string/input_pwd_hint"
+            android:lines="1"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_agreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y52px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_agreement"
+            android:layout_width="@dimen/y34px"
+            android:layout_height="@dimen/y34px"
+            android:button="@drawable/cb_agreement"
+            android:clickable="false"
+            android:checked="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x32px"
+            style="@style/SecondWhite.Text30px"
+            android:text="@string/prompt_read_agreement"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y58px"
+        style="@style/SecondWhite.Text30px"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/bt_sure"
+        android:layout_width="@dimen/x639px"
+        android:layout_height="@dimen/y127px"
+        android:layout_marginTop="@dimen/y39px"
+        android:background="@drawable/btn_submit"/>
+
+</LinearLayout>

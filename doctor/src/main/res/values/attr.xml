@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ViewfinderView">
+        <attr name="mask_color" format="color" />
+        <attr name="laser_color" format="color" />
+        <attr name="laser_size" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="border_size" format="color" />
+        <attr name="cent_x" format="dimension" />
+        <attr name="cent_y" format="dimension" />
+        <attr name="side_size" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="AutoScrollViewPager">
+        <attr name="dot_src" format="reference" />
+        <attr name="dot_size" format="dimension" />
+        <attr name="dot_gap" format="dimension" />
+        <attr name="dot_margin_bottom" format="dimension" />
+        <attr name="page_height" format="dimension" />
+        <attr name="page_margin_top" format="dimension" />
+        <attr name="canLoop" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MyGifPlayer">
+        <attr name="start_drawable" format="reference" />
+        <attr name="start_side" format="dimension" />
+        <attr name="need_share" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="GraphView">
+        <attr name="origin_x" format="dimension" />
+        <attr name="origin_y" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CheckBoxLayout">
+        <attr name="default_grap" format="dimension"></attr>
+        <attr name="vertical_grap" format="dimension"></attr>
+    </declare-styleable>
+
+</resources>

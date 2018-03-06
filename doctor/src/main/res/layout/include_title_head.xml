@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y307px"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/tv_doctor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/FirstWhite.Text52px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y29px"
+        android:includeFontPadding="false"
+        android:text="童梅玲"/>
+
+    <RelativeLayout
+        android:id="@+id/ll_qr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:layout_width="@dimen/x51px"
+            android:layout_height="@dimen/x51px"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_qr"
+            android:layout_marginTop="@dimen/y35px"
+            android:layout_marginRight="@dimen/x47px"
+            android:layout_marginLeft="@dimen/x15px"
+            android:layout_marginBottom="@dimen/y20px"/>
+
+    </RelativeLayout>
+
+
+    <com.doumengmeng.doctor.view.CircleImageView
+        android:id="@+id/civ_head"
+        android:layout_width="@dimen/x195px"
+        android:layout_height="@dimen/x195px"
+        android:background="@drawable/bg_doctor_default"
+        android:layout_marginTop="@dimen/y78px"
+        android:layout_marginLeft="@dimen/x45px"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y118px"
+        android:layout_marginLeft="@dimen/x284px"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_doctor_positionaltitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FirstWhite.Text24px"
+            android:includeFontPadding="false"
+            android:text="主任医师"/>
+        <TextView
+            android:id="@+id/tv_hospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FirstWhite.Text24px"
+            android:includeFontPadding="false"
+            android:text="南京市妇幼保健院"
+            android:layout_marginTop="@dimen/y12px"/>
+        <TextView
+            android:id="@+id/tv_doctor_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FirstWhite.Text24px"
+            android:includeFontPadding="false"
+            android:text="儿保科"
+            android:layout_marginTop="@dimen/y12px"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

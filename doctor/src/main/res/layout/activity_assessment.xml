@@ -1,0 +1,1981 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightSky"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title_back"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y48px"
+        android:background="@color/first_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/y27px"
+            android:layout_height="@dimen/y32px"
+            android:layout_marginLeft="@dimen/x218px"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_red_alarm" />
+
+        <TextView
+            style="@style/FirstPink.Text29px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20px"
+            android:text="@string/over_time" />
+
+        <TextView
+            android:id="@+id/tv_over_time"
+            style="@style/FirstPink.Text23px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x31px"
+            android:text="25分钟" />
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y19px" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y20px"
+                android:paddingLeft="@dimen/x48px"
+                android:paddingRight="@dimen/x48px"
+                android:paddingTop="@dimen/y20px">
+
+                <TextView
+                    style="@style/SecondBlack.Text28px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/assessment_baby_base_info"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2px"
+                    android:layout_marginTop="@dimen/y3px"
+                    android:background="@color/linePink" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_baby_name" />
+
+                        <TextView
+                            android:id="@+id/tv_baby_name"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_baby_gender" />
+
+                        <TextView
+                            android:id="@+id/tv_baby_gender"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_birthday" />
+
+                        <TextView
+                            android:id="@+id/tv_birthday"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_pregnancy_weeks" />
+
+                        <TextView
+                            android:id="@+id/tv_pregnancy_weeks"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft2"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_born_weight" />
+
+                        <TextView
+                            android:id="@+id/tv_born_weight"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_born_height" />
+
+                        <TextView
+                            android:id="@+id/tv_born_height"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_parity_count" />
+
+                        <TextView
+                            android:id="@+id/tv_parity_count"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_birth_count" />
+
+                        <TextView
+                            android:id="@+id/tv_birth_count"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_mon_age" />
+
+                        <TextView
+                            android:id="@+id/tv_mon_age"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft2"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_born_type" />
+
+                        <TextView
+                            android:id="@+id/tv_born_type"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_delivery_methods" />
+
+                        <TextView
+                            android:id="@+id/tv_delivery_methods"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_assisted_reproductive" />
+
+                        <TextView
+                            android:id="@+id/tv_assisted_reproductive"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_birth_injury" />
+
+                        <TextView
+                            android:id="@+id/tv_birth_injury"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_neonatalasphyxia" />
+
+                        <TextView
+                            android:id="@+id/tv_neonatalasphyxia"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft2"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SecondBlack.Text28px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_intracranial_hemorrhage" />
+
+                    <TextView
+                        android:id="@+id/tv_intracranial_hemorrhage"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                        android:text="妮妮" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SecondBlack.Text28px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_hereditary_history" />
+
+                    <TextView
+                        android:id="@+id/tv_hereditary_history"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft2"
+                        android:text="妮妮" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SecondBlack.Text28px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_allergic_history" />
+
+                    <TextView
+                        android:id="@+id/tv_allergic_history"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft2"
+                        android:text="妮妮" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SecondBlack.Text28px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_past_history" />
+
+                    <TextView
+                        android:id="@+id/tv_past_history"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft2"
+                        android:text="妮妮" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y19px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y20px"
+                android:paddingLeft="@dimen/x48px"
+                android:paddingRight="@dimen/x48px"
+                android:paddingTop="@dimen/y20px">
+
+                <TextView
+                    style="@style/SecondBlack.Text28px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/assessment_measure_info"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2px"
+                    android:layout_marginTop="@dimen/y3px"
+                    android:background="@color/linePink" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_current_month" />
+
+                        <TextView
+                            android:id="@+id/tv_current_month"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/FirstPink.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_correct_month" />
+
+                        <TextView
+                            android:id="@+id/tv_correct_month"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_height" />
+
+                        <TextView
+                            android:id="@+id/tv_height"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_weight" />
+
+                        <TextView
+                            android:id="@+id/tv_weight"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_reference_value" />
+
+                        <TextView
+                            android:id="@+id/tv_height_reference_value"
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentReferenceMarginLeft"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_reference_value" />
+
+                        <TextView
+                            android:id="@+id/tv_weight_reference_value"
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentReferenceMarginLeft"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_head" />
+
+                        <TextView
+                            android:id="@+id/tv_head"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_chest" />
+
+                        <TextView
+                            android:id="@+id/tv_chest"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_reference_value" />
+
+                        <TextView
+                            android:id="@+id/tv_head_reference_value"
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentReferenceMarginLeft"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_reference_value" />
+
+                        <TextView
+                            android:id="@+id/tv_chest_reference_value"
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentReferenceMarginLeft"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_night_sleep" />
+
+                        <TextView
+                            android:id="@+id/tv_night_sleep"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_day_sleep" />
+
+                        <TextView
+                            android:id="@+id/tv_day_sleep"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_reference_value" />
+
+                        <TextView
+                            android:id="@+id/tv_night_sleep_reference_value"
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentReferenceMarginLeft"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_reference_value" />
+
+                        <TextView
+                            android:id="@+id/tv_day_sleep_reference_value"
+                            style="@style/SecondGray.Text23px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentReferenceMarginLeft"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_cacation" />
+
+                        <TextView
+                            android:id="@+id/tv_cacation"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_micturition" />
+
+                        <TextView
+                            android:id="@+id/tv_micturition"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft1"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y19px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y20px"
+                android:paddingLeft="@dimen/x48px"
+                android:paddingRight="@dimen/x48px"
+                android:paddingTop="@dimen/y20px">
+
+                <TextView
+                    style="@style/SecondBlack.Text28px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/assessment_feed_info"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2px"
+                    android:layout_marginTop="@dimen/y3px"
+                    android:background="@color/linePink" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/assessment_human_feed" />
+
+                    <TextView
+                        android:id="@+id/tv_human_feed"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft3"
+                        android:text="100毫升/次" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/assessment_human_feed_count" />
+
+                    <TextView
+                        android:id="@+id/tv_human_feed_count"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft3"
+                        android:text="100毫升/次" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/FirstPink.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/assessment_human_feed_all" />
+
+                    <TextView
+                        android:id="@+id/tv_human_feed_all"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft3"
+                        android:text="100毫升/次" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/assessment_formula_feed" />
+
+                    <TextView
+                        android:id="@+id/tv_formula_feed"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft3"
+                        android:text="100毫升/次" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/assessment_formula_feed_count" />
+
+                    <TextView
+                        android:id="@+id/tv_formula_feed_count"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft3"
+                        android:text="100毫升/次" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/FirstPink.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/assessment_formula_feed_all" />
+
+                    <TextView
+                        android:id="@+id/tv_formula_feed_all"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft3"
+                        android:text="100毫升/次" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/FirstPink.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/assessment_feed_all" />
+
+                    <TextView
+                        android:id="@+id/tv_feed_all"
+                        style="@style/SecondBlue.Text25px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/AssessmentMarginLeft3"
+                        android:text="100毫升/次" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y19px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y20px"
+                android:paddingLeft="@dimen/x48px"
+                android:paddingRight="@dimen/x48px"
+                android:paddingTop="@dimen/y20px">
+
+                <TextView
+                    style="@style/SecondBlack.Text28px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/assessment_feed_info"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2px"
+                    android:layout_marginTop="@dimen/y3px"
+                    android:background="@color/linePink" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_milk" />
+
+                        <TextView
+                            android:id="@+id/tv_milk"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_milk_powder" />
+
+                        <TextView
+                            android:id="@+id/tv_milk_powder"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_rice_flour" />
+
+                        <TextView
+                            android:id="@+id/tv_rice_flour"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_food" />
+
+                        <TextView
+                            android:id="@+id/tv_food"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_porridge" />
+
+                        <TextView
+                            android:id="@+id/tv_porridge"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_rice" />
+
+                        <TextView
+                            android:id="@+id/tv_rice"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_meat" />
+
+                        <TextView
+                            android:id="@+id/tv_meat"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft3"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_egg" />
+
+                        <TextView
+                            android:id="@+id/tv_egg"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft3"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_bean" />
+
+                        <TextView
+                            android:id="@+id/tv_bean"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_vegetables" />
+
+                        <TextView
+                            android:id="@+id/tv_vegetables"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_fruit" />
+
+                        <TextView
+                            android:id="@+id/tv_fruit"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_water" />
+
+                        <TextView
+                            android:id="@+id/tv_water"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_vitamin" />
+
+                        <TextView
+                            android:id="@+id/tv_vitamin"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft2"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_calcium" />
+
+                        <TextView
+                            android:id="@+id/tv_calcium"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_other" />
+
+                        <TextView
+                            android:id="@+id/tv_other"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SecondBlack.Text29px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/assessment_appetite" />
+
+                        <TextView
+                            android:id="@+id/tv_appetite"
+                            style="@style/SecondBlue.Text25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/AssessmentMarginLeft4"
+                            android:text="妮妮" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y19px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/first_white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/y20px"
+            android:paddingLeft="@dimen/x48px"
+            android:paddingRight="@dimen/x48px"
+            android:paddingTop="@dimen/y20px">
+
+            <TextView
+                style="@style/SecondBlack.Text28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/assessment_message_board"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y2px"
+                android:layout_marginTop="@dimen/y3px"
+                android:background="@color/linePink" />
+
+            <TextView
+                android:id="@+id/tv_message_board"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SecondBlue.Text25px"
+                android:layout_marginTop="@dimen/y10px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/first_white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/y20px"
+            android:paddingLeft="@dimen/x48px"
+            android:paddingRight="@dimen/x48px"
+            android:paddingTop="@dimen/y20px">
+
+            <TextView
+                style="@style/SecondBlack.Text28px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/assessment_report_image"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y2px"
+                android:layout_marginTop="@dimen/y3px"
+                android:background="@color/linePink" />
+
+            <LinearLayout
+                android:id="@+id/ll_report_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <com.doumengmeng.doctor.view.GraphModule
+                android:id="@+id/graph_module"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y19px"
+                android:layout_marginBottom="@dimen/y28px">
+
+            </com.doumengmeng.doctor.view.GraphModule>
+
+            <LinearLayout
+                android:id="@+id/ll_developmental_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20px"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x24px"
+                android:paddingRight="@dimen/x24px">
+
+                <TextView
+                    android:id="@+id/tv_developmental_title"
+                    style="@style/SecondBlack.Text28px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y96px"
+                    android:gravity="center_vertical"
+                    android:text="">
+
+                </TextView>
+
+                <LinearLayout
+                    android:id="@+id/ll_developmental_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_assessment_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20px"
+                android:background="@color/first_white"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x24px"
+                android:paddingRight="@dimen/x24px"
+                android:visibility="visible">
+
+                <TextView
+                    style="@style/SecondBlack.Text28px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:text="@string/assessment_result" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y28px"
+                    android:layout_marginLeft="@dimen/x52px"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_weight_content"
+                        style="@style/FirstGray.Text26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/tv_height_content"
+                        style="@style/FirstGray.Text26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/tv_bmi_content"
+                        style="@style/FirstGray.Text26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/tv_other_content"
+                        style="@style/FirstGray.Text26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_report_interpretation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20px"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x24px"
+                android:paddingRight="@dimen/x24px"
+                android:visibility="visible">
+
+                <TextView
+                    style="@style/SecondBlack.Text28px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:text="@string/assessment_analysis" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x22px"
+                    android:layout_marginRight="@dimen/x22px"
+                    android:layout_marginTop="@dimen/x10px"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/FirstGray.Text26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_body_growth" />
+
+                    <TextView
+                        style="@style/FirstGray.Text26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_growth_tendency" />
+
+                    <EditText
+                        android:id="@+id/tv_report_content_1"
+                        style="@style/FourthGray.Text26px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y13px"
+                        android:layout_marginBottom="@dimen/y13px"
+                        android:background="@drawable/bg_circle_edittext_multi_line"
+                        android:padding="@dimen/x20px"
+                        android:text="" />
+
+                    <TextView
+                        style="@style/FirstGray.Text26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_growth_level" />
+
+                    <EditText
+                        android:id="@+id/tv_report_content_2"
+                        style="@style/FourthGray.Text26px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y13px"
+                        android:layout_marginBottom="@dimen/y13px"
+                        android:background="@drawable/bg_circle_edittext_multi_line"
+                        android:padding="@dimen/x20px"
+                        android:text="" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x2px"
+                    android:background="@color/linkLightPink" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x22px"
+                    android:layout_marginRight="@dimen/x22px"
+                    android:layout_marginTop="@dimen/y32px"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/FirstGray.Text26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_growth_result" />
+
+                    <EditText
+                        android:id="@+id/tv_report_content_3"
+                        style="@style/FourthGray.Text26px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y13px"
+                        android:layout_marginBottom="@dimen/y13px"
+                        android:background="@drawable/bg_circle_edittext_multi_line"
+                        android:padding="@dimen/x20px"
+                        android:text="" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x2px"
+                    android:background="@color/linkLightPink" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x22px"
+                    android:layout_marginRight="@dimen/x22px"
+                    android:layout_marginTop="@dimen/y32px"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/FirstGray.Text26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_doctor_suggest" />
+
+                    <EditText
+                        android:id="@+id/tv_report_content_4"
+                        style="@style/FourthGray.Text26px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y13px"
+                        android:layout_marginBottom="@dimen/y13px"
+                        android:background="@drawable/bg_circle_edittext_multi_line"
+                        android:padding="@dimen/x20px"
+                        android:text="" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y19px" />
+
+            <Button
+                android:id="@+id/bt_parenting_guide"
+                android:layout_width="@dimen/x434px"
+                android:layout_height="@dimen/x133px"
+                android:background="@drawable/btn_parenting_guide"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:id="@+id/ll_parenting_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

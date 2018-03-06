@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/bg_login">
+
+    <android.support.v4.widget.Space
+        android:id="@+id/v_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_width="@dimen/x184px"
+        android:layout_height="@dimen/y267px"
+        android:scaleType="fitXY"
+        android:src="@drawable/logo"
+        android:contentDescription="@string/contentDescription"
+        android:layout_marginTop="@dimen/SelfActionBarHeight"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_name"
+        android:layout_marginTop="@dimen/y96px"
+        style="@style/SecondWhite.Text48px"
+        />
+
+    <LinearLayout
+        android:layout_width="@dimen/EditContainerWidth"
+        android:layout_height="@dimen/EditContainerHeight"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/y47px"
+        android:background="@drawable/bg_input_long">
+
+        <ImageView
+            android:layout_width="@dimen/y54px"
+            android:layout_height="@dimen/y54px"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/IconMarginLeft"
+            android:src="@drawable/icon_phone"
+            android:contentDescription="@string/contentDescription" />
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:hint="@string/input_phone_hint"
+            android:layout_marginLeft="@dimen/EditMarginLeft"
+            android:layout_marginRight="@dimen/EditMarginRight"
+            android:inputType="number"
+            android:maxLength="11"
+            android:lines="1"
+            style="@style/EditTextView"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="@dimen/EditContainerWidth"
+        android:layout_height="@dimen/EditContainerHeight"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/y42px"
+        android:background="@drawable/bg_input_long">
+
+        <ImageView
+            android:layout_width="@dimen/y54px"
+            android:layout_height="@dimen/y54px"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/IconMarginLeft"
+            android:src="@drawable/icon_pwd"
+            android:contentDescription="@string/contentDescription" />
+
+        <EditText
+            android:id="@+id/et_login_pwd"
+            style="@style/EditTextView"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/EditMarginLeft"
+            android:layout_marginRight="@dimen/EditMarginRight"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:hint="@string/input_pwd_hint" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y34px"
+        style="@style/SecondWhite.Text30px"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/bt_sure"
+        android:layout_width="@dimen/x639px"
+        android:layout_height="@dimen/y117px"
+        android:layout_marginTop="@dimen/y48px"
+        android:background="@drawable/btn_sure"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y28px">
+        <TextView
+            android:id="@+id/tv_fast_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fast_registe"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/x154px"
+            style="@style/SecondWhite.Text30px"/>
+        <TextView
+            android:id="@+id/tv_forgot_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_pwd"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x128px"
+            style="@style/SecondWhite.Text30px"/>
+    </RelativeLayout>
+
+</LinearLayout>

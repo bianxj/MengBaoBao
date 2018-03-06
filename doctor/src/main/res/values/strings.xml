@@ -1,0 +1,264 @@
+<resources>
+    <string name="app_name">医生端</string>
+
+    <!--异常退出提示-->
+    <string name="error_exit_message">很抱歉，程序出现异常，即将退出</string>
+
+    <!--Other-->
+    <string name="contentDescription">image</string>
+
+    <!--Shared数据-->
+    <string name="input_phone_hint">手机号</string>
+    <string name="input_pwd_hint">密码（6~16位数字、字母）</string>
+    <string name="input_new_pwd_hint">新密码（6~16位数字、字母）</string>
+    <string name="input_vc_hint">短信验证码</string>
+    <string name="get_vc">获取验证码</string>
+    <string name="replay">重试</string>
+    <string name="prompt_read_agreement">我已阅读同意萌宝宝用户协议</string>
+    <string name="complete">完成</string>
+    <string name="mark">*</string>
+    <string name="title_save">保存</string>
+
+    <!--GuideActivity-->
+    <string name="guide_experience">立即体验</string>
+
+    <!--LoginActiivty信息-->
+    <string name="login_name">登录</string>
+    <string name="sure">确认</string>
+    <string name="fast_registe">快速注册</string>
+    <string name="forgot_pwd">忘记密码?</string>
+
+    <!--RegisterActivity信息-->
+    <string name="register_name">注   册</string>
+    <string name="commit">提交</string>
+
+    <!--ForgotPwdActivity信息-->
+    <string name="change_pwd_name">设置新密码</string>
+
+    <!--LoadingActivity信息-->
+    <string name="loading_message">0~3岁婴幼儿生长发育管理专家</string>
+
+    <!--AgreementActivity信息-->
+    <string name="agreement_name">使用协议</string>
+    <string name="mark_read">我已阅读</string>
+
+    <!--ErrorMsg-->
+    <string name="prompt_no_account">请输入帐号</string>
+    <string name="prompt_error_phone">请输入11位正确的手机号码</string>
+    <string name="prompt_no_vc">请输入验证码</string>
+    <string name="prompt_no_save_vc">请获取验证码</string>
+    <string name="prompt_no_password">请输入6–16位由数字、字母组成的密码</string>
+    <string name="prompt_error_password">请输入6–16位由数字、字母组成的密码</string>
+
+    <!--AboutActivity信息-->
+    <string name="about_company_name">上海豆蒙萌健康管理咨询有限公司</string>
+    <string name="about_company_location">上海市徐汇区南丹东路300弄9号亚都商务楼409室</string>
+    <string name="about_company_phone">021-64335531</string>
+    <string name="about_company_mail">customerservice@mengbaobao.com</string>
+    <string name="about_company_website">www.mengbaobao.com</string>
+
+    <!--ChangePwdActivity信息-->
+    <string name="old_pwd">旧密码</string>
+    <string name="new_pwd">新密码（6~16位数字、字母）</string>
+    <string name="confirm_pwd">新密码（再输入一次新密码）</string>
+
+    <!--DiagramDataActivity-->
+    <string name="diagram_data_date">日期</string>
+
+    <string name="diagram_data_height_record">身高记录</string>
+    <string name="diagram_data_baby_age">宝宝年龄</string>
+    <string name="diagram_data_height">身高cm</string>
+    <string name="diagram_data_weight_record">体重记录</string>
+    <string name="diagram_data_weight">体重kg</string>
+    <string name="diagram_data_height_weight_ratio">身长体重比</string>
+    <string name="diagram_data_month_day">%d个月%d天</string>
+
+    <!--ContactActivity信息-->
+    <string name="contact_hotline">客服热线</string>
+    <string name="contact_hotline_phone">021–64335531</string>
+    <string name="contact_work_time">周一至周五9:00~17:00</string>
+
+    <!--HeadImageActivity-->
+    <string name="head_image">个人头像</string>
+
+    <!--ItemAccessment-->
+    <string name="baby_month_age">宝宝月龄</string>
+    <string name="accessment_time">测评时间</string>
+    <string name="over_time">跑单时间</string>
+    <string name="baby_month_age_format">%d个月%02d天</string>
+    <!--<string name="over_time_format">%d分钟</string>-->
+
+    <!--HomeFragment-->
+    <string name="accessment_no_data_hint">还没有宝妈购买您的服务，加油哦！</string>
+    <string name="accessment_complete_hint">恭喜您，您的评估都已完成了！</string>
+
+    <!--AssessmentActivity-->
+    <string name="assessment_baby_base_info">宝宝基本信息</string>
+    <string name="assessment_baby_name">宝宝姓名</string>
+    <string name="assessment_baby_gender">宝宝性别</string>
+    <string name="assessment_birthday">出生日期</string>
+    <string name="assessment_pregnancy_weeks">孕周（胎龄）</string>
+    <string name="assessment_born_weight">出生体重</string>
+    <string name="assessment_born_height">出生生长</string>
+    <string name="assessment_parity_count">胎次</string>
+    <string name="assessment_birth_count">产次</string>
+    <string name="assessment_mon_age">母亲生育年龄</string>
+    <string name="assessment_born_type">出生状态</string>
+    <string name="assessment_delivery_methods">分娩方式</string>
+    <string name="assessment_assisted_reproductive">辅助生育</string>
+    <string name="assessment_birth_injury">产伤</string>
+    <string name="assessment_neonatalasphyxia">新生儿窒息</string>
+    <string name="assessment_intracranial_hemorrhage">颅内出血</string>
+    <string name="assessment_hereditary_history">家族遗传史</string>
+    <string name="assessment_allergic_history">家族过敏疾病</string>
+    <string name="assessment_past_history">既往史</string>
+    
+    <string name="assessment_measure_info">测量信息</string>
+    <string name="assessment_current_month">实际月龄</string>
+    <string name="assessment_correct_month">矫正月龄</string>
+    <string name="assessment_height">身长</string>
+    <string name="assessment_weight">体重</string>
+    <string name="assessment_head">头围</string>
+    <string name="assessment_chest">胸围</string>
+    <string name="assessment_night_sleep">夜间睡眠</string>
+    <string name="assessment_day_sleep">日间睡眠</string>
+    <string name="assessment_cacation">排便</string>
+    <string name="assessment_micturition">排尿</string>
+    <string name="assessment_reference_value">参考值</string>
+
+    <string name="assessment_feed_info">喂养情况</string>
+    <string name="assessment_human_feed">人乳喂养量</string>
+    <string name="assessment_human_feed_count">人乳喂养次数</string>
+    <string name="assessment_human_feed_all">人乳喂养总奶量</string>
+    <string name="assessment_formula_feed">配方奶喂养量</string>
+    <string name="assessment_formula_feed_count">配方奶喂养次数</string>
+    <string name="assessment_formula_feed_all">配方奶总奶量</string>
+    <string name="assessment_feed_all">每日总奶量</string>
+    
+    <string name="assessment_assist_food">辅食添加</string>
+    <string name="assessment_milk">牛奶</string>
+    <string name="assessment_milk_powder">奶粉</string>
+    <string name="assessment_rice_flour">米粉</string>
+    <string name="assessment_food">面食</string>
+    <string name="assessment_porridge">粥</string>
+    <string name="assessment_rice">饭</string>
+    <string name="assessment_meat">荤菜（鱼肉肝）</string>
+    <string name="assessment_egg">全蛋或蛋黄</string>
+    <string name="assessment_bean">豆制品</string>
+    <string name="assessment_vegetables">蔬菜</string>
+    <string name="assessment_fruit">水果</string>
+    <string name="assessment_water">水</string>
+    <string name="assessment_vitamin">维生素AD</string>
+    <string name="assessment_calcium">钙</string>
+    <string name="assessment_other">其他</string>
+    <string name="assessment_appetite">食欲</string>
+
+    <string name="assessment_message_board">家长留言板</string>
+    <string name="assessment_report_image">报告（点击放大）</string>
+
+    <string name="assessment_result">评估结果：</string>
+
+    <string name="assessment_analysis">报告解读：</string>
+    <string name="assessment_body_growth">一、体格生长评价：</string>
+    <string name="assessment_growth_tendency">1.生长趋势（从出生位置水平到现在）</string>
+    <string name="assessment_growth_level">2.生长水平（本次测量的水平）</string>
+    <string name="assessment_growth_result">二、发育评价：</string>
+    <string name="assessment_doctor_suggest">三、医生的指导建议（包含对家长留言回复）</string>
+    <string name="assessment_wait_message">72小时内看到医生的养育指导和评估</string>
+    <string name="assessment_refund_message">抱歉，医生未能按约给予评估及指导，
+已为您退款或在途中！</string>
+
+    <!--HospitalListActivity-->
+    <string name="appraisal_result">测评结果</string>
+
+    <!--HospitalReportActivity-->
+    <string name="hospital_report_title">婴幼儿生长发育监测评估报告单</string>
+    <string name="hospital_report_department">科室：%s</string>
+    <string name="hospital_report_child_code">儿童编号：%s</string>
+    <string name="hospital_report_name">姓名：%s</string>
+    <string name="hospital_report_gender">性别：%s</string>
+    <string name="hospital_report_birthday">出生日期：%s</string>
+    <string name="hospital_report_current_month">实足月龄：%s</string>
+    <string name="hospital_report_corrent_month">矫正月龄：%s</string>
+    <string name="hospital_report_height">身长：%scm</string>
+    <string name="hospital_report_weight">体重：%skg</string>
+    <string name="hospital_report_head">头围：%scm</string>
+    <string name="hospital_report_chest">胸围：%scm</string>
+    <string name="hospital_report_bmi">BMI：%scm</string>
+    <string name="hospital_report_weight_result">体重：%s</string>
+    <string name="hospital_report_height_result">身长：%s</string>
+    <string name="hospital_report_hw_result">身长体重比：%s</string>
+    <string name="hospital_report_other_result">神经心理、发育行为评估：%s</string>
+    <string name="hospital_report_doctor_name">送检医师：%s</string>
+    <string name="hospital_report_reporter_name">报告人：%s</string>
+    <string name="hospital_report_time">测量日期：%s</string>
+    <string name="hospital_report_develop">发育行为（%s个月）</string>
+    <string name="hospital_report_measure_info">测量信息</string>
+    <string name="hospital_report_feeding_type">喂养方式</string>
+    <string name="hospital_report_develop_history"></string>
+    <string name="hospital_report_ill_history"></string>
+    <string name="hospital_report_current_ill_history">现病史</string>
+    <string name="hospital_report_who">生长评价均数标准差结果（WHO）</string>
+    <string name="hospital_report_result">评价结果</string>
+    <string name="hospital_report_doctor_success">医生建议</string>
+    <string name="hospital_report_reference">本报告仅供临床参考</string>
+
+    <!--HistoryReportActivity-->
+    <string name="assessment_realy_age">实足年龄</string>
+    <string name="assessment_correct_age">矫正月龄</string>
+    <string name="assessment_BMI">BMI</string>
+    <string name="assessment_develop_month">发育行为（%d个月）</string>
+    <string name="assessment">评估</string>
+
+    <!--BaseInfo-->
+    <string name="baby_name">宝宝姓名</string>
+    <string name="baby_gender">宝宝性别</string>
+    <string name="baby_birthday">出生日期</string>
+
+    <!--ParentInfo-->
+    <string name="culture">文化程度*</string>
+    <string name="choose">请选择</string>
+    <string name="primary">小学及以下</string>
+    <string name="junior">初中</string>
+    <string name="senior">高中</string>
+    <string name="university">大学</string>
+    <string name="master">硕士</string>
+    <string name="doctor_culture">博士</string>
+
+    <string name="father_name">父亲姓名</string>
+    <string name="father_height">身高（父亲）</string>
+    <string name="father_weight">体重（父亲）</string>
+    <string name="father_BMI">BMI（父亲）</string>
+    <string name="mother_name">母亲姓名</string>
+    <string name="mother_height">身高（母亲）</string>
+    <string name="mother_weight">体重（母亲）</string>
+    <string name="mother_BMI">BMI（母亲）</string>
+
+    <!---->
+    <string name="about">关于我们</string>
+    <string name="contact">客服中心</string>
+
+    <string name="assessment_source">来源：WHO儿童成长标准，世界卫生组织</string>
+
+    <!--Dialog-->
+    <string name="dialog_content_camera_permission">请打开相机权限</string>
+    <string name="dialog_content_storage_permission">请打开存储权限</string>
+    <string name="dialog_content_location_permission">定位服务为开启,请在系统中开启定位服务</string>
+    <string name="dialog_content_read_phone_permission">请打开电话权限</string>
+    <string name="update_content">的用户正在使用新版本</string>
+    <string name="dialog_btn_go_on">继续</string>
+    <string name="dialog_updating">正在更新…</string>
+    <string name="dialog_btn_prompt_go_setting">去设置</string>
+    <string name="dialog_btn_prompt_later">暂不</string>
+    <string name="dialog_content_read_agreement">请勾选“我已阅读”</string>
+
+    <string name="prompt_bt_cancel">取消</string>
+    <string name="prompt_bt_sure">确认</string>
+    <string name="prompt_no_wifi">当前不在wifi状态下，可能会产生流量费用</string>
+
+    <string name="prompt_old_passwd_empty">旧密码为空</string>
+    <string name="prompt_new_passwd_empty">新密码为空</string>
+    <string name="prompt_confirm_passwd_empty">请确认密码</string>
+    <string name="prompt_confirm_passwd_error">两次输入的面膜不一致</string>
+
+</resources>

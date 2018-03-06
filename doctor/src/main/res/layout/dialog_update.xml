@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:layout_width="@dimen/x576px"
+        android:layout_height="@dimen/y558px"
+        android:background="@drawable/bg_update"
+        >
+        <RelativeLayout
+            android:id="@+id/rl_close"
+            android:layout_width="@dimen/y56px"
+            android:layout_height="@dimen/y56px"
+            android:layout_marginTop="@dimen/y64px"
+            android:layout_marginLeft="@dimen/x487px"
+            >
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="@dimen/y26px"
+                android:layout_height="@dimen/y26px"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_close"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/contentDescription" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40px"
+            android:layout_marginTop="@dimen/y230px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_use_percent"
+                style="@style/FirstBlue.Text23px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                style="@style/SecondBlack.Text23px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update_content" />
+
+            <TextView
+                android:id="@+id/tv_update_version"
+                style="@style/FirstBlue.Text23px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_update_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="@dimen/y150px"
+            android:layout_marginLeft="@dimen/x58px"
+            android:layout_marginRight="@dimen/x58px"
+            android:layout_marginTop="@dimen/y277px"
+            android:scrollbars="vertical"
+            style="@style/SecondBlack.Text23px"/>
+
+        <ImageView
+            android:id="@+id/iv_update"
+            android:layout_width="@dimen/x483px"
+            android:layout_height="@dimen/y102px"
+            android:src="@drawable/btn_update"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y453px"
+            android:contentDescription="@string/contentDescription" />
+    </RelativeLayout>
+
+</LinearLayout>
