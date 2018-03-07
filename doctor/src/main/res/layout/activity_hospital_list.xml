@@ -6,6 +6,31 @@
 
     <include layout="@layout/include_title_back"></include>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y118px"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FirstWhite.Text34px"
+            android:text="@string/default_city"
+            android:layout_centerInParent="true"
+            />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="@dimen/y29px"
+            android:layout_height="@dimen/y17px"
+            android:layout_toRightOf="@+id/tv_city"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_down_arrow"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x19px"
+            android:contentDescription="@string/contentDescription" />
+    </RelativeLayout>
+
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrv"
         android:layout_width="match_parent"

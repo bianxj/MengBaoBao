@@ -12,7 +12,7 @@ import com.doumengmeng.doctor.base.BaseActivity;
 /**
  * Created by Administrator on 2017/12/8.
  */
-public class ContactActivity extends BaseActivity {
+public class CallCenterActivity extends BaseActivity {
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -31,7 +31,7 @@ public class ContactActivity extends BaseActivity {
     }
 
     private void configView(){
-        tv_title.setText(R.string.contact);
+        tv_title.setText(R.string.call_center);
 
         rl_back.setOnClickListener(new View.OnClickListener() {
             @Override

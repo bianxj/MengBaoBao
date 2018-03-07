@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/include_title_back"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/x29px"
+            android:paddingRight="@dimen/x29px"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y26px"
+                style="@style/FirstPink.Text25px"
+                android:includeFontPadding="false"
+                android:text="@string/person_info_hint"/>
+
+            <com.doumengmeng.doctor.view.CircleImageView
+                android:id="@+id/civ_head"
+                android:layout_width="@dimen/x192px"
+                android:layout_height="@dimen/x192px"
+                android:layout_marginTop="@dimen/y26px"
+                android:src="@drawable/default_icon_doctor"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y36px"
+                    android:layout_marginBottom="@dimen/y34px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SecondBlack.Text28px"
+                        android:includeFontPadding="false"
+                        android:text="@string/name"/>
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x174px"
+                        android:includeFontPadding="false"
+                        style="@style/SecondBlack.Text28px"
+                        android:text="童梅玲"/>
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1px"
+                    android:background="@color/linePink"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:layout_marginBottom="@dimen/y34px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SecondBlack.Text28px"
+                        android:includeFontPadding="false"
+                        android:text="@string/hospital"/>
+
+                    <TextView
+                        android:id="@+id/tv_hospital"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x174px"
+                        android:includeFontPadding="false"
+                        style="@style/SecondBlack.Text28px"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:ellipsize="end"/>
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1px"
+                    android:background="@color/linePink"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:layout_marginBottom="@dimen/y34px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SecondBlack.Text28px"
+                        android:includeFontPadding="false"
+                        android:text="@string/department"/>
+
+                    <TextView
+                        android:id="@+id/tv_department"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x174px"
+                        android:includeFontPadding="false"
+                        style="@style/SecondBlack.Text28px"
+                        android:text="童梅玲"/>
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1px"
+                    android:background="@color/linePink"/>
+            </LinearLayout>
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y34px"
+                android:layout_marginBottom="@dimen/y34px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/SecondBlack.Text28px"
+                    android:includeFontPadding="false"
+                    android:text="@string/professional_title"/>
+
+                <TextView
+                    android:id="@+id/tv_professional_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x174px"
+                    android:includeFontPadding="false"
+                    style="@style/SecondBlack.Text28px"
+                    android:text="童梅玲"/>
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1px"
+                android:background="@color/linePink"/>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:layout_marginBottom="@dimen/y34px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SecondBlack.Text28px"
+                        android:includeFontPadding="false"
+                        android:text="@string/service_cost"/>
+
+                    <TextView
+                        android:id="@+id/tv_service_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x174px"
+                        android:includeFontPadding="false"
+                        style="@style/SecondBlack.Text28px"
+                        android:text="童梅玲"/>
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1px"
+                    android:background="@color/linePink"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SecondBlack.Text28px"
+                        android:includeFontPadding="false"
+                        android:text="@string/income"/>
+
+                    <TextView
+                        android:id="@+id/tv_income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x174px"
+                        android:includeFontPadding="false"
+                        style="@style/SecondBlack.Text28px"
+                        android:text="童梅玲"/>
+
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/FirstPink.Text25px"
+                    android:text="@string/service_cost_hint"
+                    android:layout_marginBottom="@dimen/y17px"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1px"
+                    android:background="@color/linePink"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:layout_marginBottom="@dimen/y34px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SecondBlack.Text28px"
+                        android:includeFontPadding="false"
+                        android:text="@string/speciality"/>
+
+                    <TextView
+                        android:id="@+id/tv_speciality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x174px"
+                        android:includeFontPadding="false"
+                        android:maxLines="3"
+                        android:scrollHorizontally="true"
+                        style="@style/SecondBlack.Text28px"
+                        android:text="童梅玲"/>
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1px"
+                    android:background="@color/linePink"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:layout_marginBottom="@dimen/y34px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SecondBlack.Text28px"
+                        android:includeFontPadding="false"
+                        android:text="@string/intro"/>
+
+                    <TextView
+                        android:id="@+id/tv_intro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x174px"
+                        android:includeFontPadding="false"
+                        android:maxLines="6"
+                        android:scrollHorizontally="true"
+                        style="@style/SecondBlack.Text28px"
+                        android:text="童梅玲"/>
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1px"
+                    android:background="@color/linePink"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:layout_marginBottom="@dimen/y34px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SecondBlack.Text28px"
+                        android:includeFontPadding="false"
+                        android:text="@string/identity_num"/>
+
+                    <TextView
+                        android:id="@+id/tv_identity_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x174px"
+                        android:includeFontPadding="false"
+                        android:scrollHorizontally="true"
+                        style="@style/SecondBlack.Text28px"
+                        android:text="童梅玲"/>
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1px"
+                    android:background="@color/linePink"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y34px"
+                    android:layout_marginBottom="@dimen/y34px"
+                    style="@style/SecondBlack.Text28px"
+                    android:includeFontPadding="false"
+                    android:text="@string/doctor_certificate"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv_certification_p1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/iv_certification_p2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

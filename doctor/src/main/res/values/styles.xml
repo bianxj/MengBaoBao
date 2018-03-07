@@ -39,6 +39,9 @@
     <style name="FirstBlack.Text34px">
         <item name="android:textSize">@dimen/y34px</item>
     </style>
+    <style name="FirstBlack.Text35px">
+        <item name="android:textSize">@dimen/y35px</item>
+    </style>
     <!--FirstBlack end-->
 
     <!--SecondBlack start-->
@@ -62,6 +65,14 @@
 
     <style name="SecondBlack.Text34px">
         <item name="android:textSize">@dimen/y34px</item>
+    </style>
+
+    <style name="SecondBlack.Text42px">
+        <item name="android:textSize">@dimen/y42px</item>
+    </style>
+
+    <style name="SecondBlack.Text52px">
+        <item name="android:textSize">@dimen/y52px</item>
     </style>
 
     <style name="SecondBlack.Text32px">
@@ -206,12 +217,17 @@
     <style name="FirstWhite.Text28px">
         <item name="android:textSize">@dimen/y28px</item>
     </style>
+    <style name="FirstWhite.Text30px">
+        <item name="android:textSize">@dimen/y30px</item>
+    </style>
     <style name="FirstWhite.Text34px">
         <item name="android:textSize">@dimen/y34px</item>
-        <item name="android:textColor">@color/first_white</item>
     </style>
     <style name="FirstWhite.Text52px">
         <item name="android:textSize">@dimen/y52px</item>
+    </style>
+    <style name="FirstWhite.Text76px">
+        <item name="android:textSize">@dimen/y76px</item>
         <item name="android:textColor">@color/first_white</item>
     </style>
     <!--FirstWhite end-->
@@ -237,6 +253,9 @@
     </style>
     <style name="FirstPink.Text23px">
         <item name="android:textSize">@dimen/y23px</item>
+    </style>
+    <style name="FirstPink.Text25px">
+        <item name="android:textSize">@dimen/y25px</item>
     </style>
     <style name="FirstPink.Text26px">
         <item name="android:textSize">@dimen/y26px</item>
@@ -301,6 +320,18 @@
     </style>
     <!--SecondBlue end-->
     <!--Blue end-->
+
+    <!--Green start-->
+    <!--FirstGreen start-->
+    <style name="FirstGreen">
+        <item name="android:color">@color/first_green</item>
+        <item name="android:textColor">@color/first_green</item>
+    </style>
+    <style name="FirstGreen.Text35px">
+        <item name="android:textSize">@dimen/y35px</item>
+    </style>
+    <!--FirstGreen end-->
+    <!--Green end-->
 
     <style name="CheckText">
         <item name="android:textSize">@dimen/y26px</item>

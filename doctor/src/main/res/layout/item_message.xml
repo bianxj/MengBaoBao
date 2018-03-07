@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightSky">
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y14px" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y144px"
+        >
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="@dimen/x115px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/first_pink"
+            style="@style/FirstWhite.Text34px"
+            android:text="@string/delete"
+            android:layout_gravity="right"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y144px"
+            android:background="@color/first_white">
+
+            <ImageView
+                android:id="@+id/iv_type"
+                android:layout_width="@dimen/x97px"
+                android:layout_height="@dimen/x97px"
+                android:layout_marginLeft="@dimen/x66px"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_over_time"/>
+
+            <TextView
+                android:id="@+id/tv_message_content"
+                android:layout_width="@dimen/x227px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x221px"
+                android:layout_centerVertical="true"
+                style="@style/SecondBlack.Text28px"
+                android:text="新增等待评估通知"/>
+
+            <TextView
+                android:id="@+id/tv_message_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x482px"
+                android:layout_centerVertical="true"
+                style="@style/FourthGray.Text24px"
+                android:text="2017.12.12"/>
+
+            <ImageView
+                android:layout_width="@dimen/x21px"
+                android:layout_height="@dimen/x33px"
+                android:layout_marginRight="@dimen/x30px"
+                android:src="@drawable/right_allow"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>

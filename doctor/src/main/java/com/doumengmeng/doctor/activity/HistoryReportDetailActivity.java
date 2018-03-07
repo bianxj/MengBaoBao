@@ -14,6 +14,6 @@ public class HistoryReportDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_report);
+        setContentView(R.layout.activity_history_report_detail);
     }
 }

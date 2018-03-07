@@ -34,6 +34,8 @@
             android:layout_marginLeft="@dimen/x30px"
             android:layout_marginRight="@dimen/x30px"
             android:layout_marginTop="@dimen/y40px"
+            android:gravity="top"
+            android:minHeight="@dimen/y200px"
             android:background="@drawable/bg_circle_edittext_multi_line"
             />
     </LinearLayout>

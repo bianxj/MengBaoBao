@@ -1,31 +1,518 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightSky">
+    android:background="@color/lightSky"
+    android:orientation="vertical">
 
     <include layout="@layout/include_title_back"></include>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y19px" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/y18px"
                 android:background="@color/first_white"
-                >
-                <LinearLayout
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y21px"
+                android:paddingLeft="@dimen/x30px"
+                android:paddingRight="@dimen/x30px"
+                android:paddingTop="@dimen/y20px">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></LinearLayout>
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/name" />
+
+                    <EditText
+                        android:id="@+id/et_name"
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y57px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x142px"
+                        android:background="@drawable/bg_circle_edittext"
+                        android:lines="1"
+                        android:scrollHorizontally="true" />
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/SecondBlue.Text24px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y21px"
+                    android:includeFontPadding="false"
+                    android:text="@string/input_name_hint" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2px"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:background="@color/linePink" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y19px">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/head_portrait" />
+
+                    <com.doumengmeng.doctor.view.CircleImageView
+                        android:id="@+id/civ_head"
+                        android:layout_width="@dimen/x144px"
+                        android:layout_height="@dimen/x144px"
+                        android:layout_marginLeft="@dimen/x142px"
+                        android:src="@drawable/btn_upload_head" />
+
+                    <ImageView
+                        android:layout_width="@dimen/x144px"
+                        android:layout_height="@dimen/x144px"
+                        android:layout_marginLeft="@dimen/x370px"
+                        android:src="@drawable/img_head_example" />
+
+                    <TextView
+                        style="@style/SecondBlue.Text24px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x545px"
+                        android:ems="1"
+                        android:text="@string/head_portrait_example" />
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/SecondBlue.Text24px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y13px"
+                    android:includeFontPadding="false"
+                    android:text="@string/head_portrait_hint" />
             </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y10px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x30px"
+                android:paddingRight="@dimen/x30px">
+
+                <RelativeLayout
+                    android:id="@+id/rl_hospital"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y94px">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/hospital" />
+
+                    <TextView
+                        android:id="@+id/tv_hospital"
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="@dimen/x250px"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x175px"
+                        android:text="@string/hospital" />
+
+                    <ImageView
+                        android:layout_width="@dimen/x24px"
+                        android:layout_height="@dimen/x40px"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/right_arrow_blue" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2px"
+                    android:background="@color/linePink" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_department"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y94px">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/department" />
+
+                    <TextView
+                        android:id="@+id/tv_department"
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="@dimen/x250px"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x175px"
+                        android:text="@string/hospital" />
+
+                    <ImageView
+                        android:layout_width="@dimen/x24px"
+                        android:layout_height="@dimen/x40px"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/right_arrow_blue" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2px"
+                    android:background="@color/linePink" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/y33px"
+                    android:paddingTop="@dimen/y19px">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/y14px"
+                        android:includeFontPadding="false"
+                        android:text="@string/professional_title" />
+
+                    <com.doumengmeng.doctor.view.CheckBoxLayout
+                        android:id="@+id/cbl_professional_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x143px" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y10px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y24px"
+                android:paddingLeft="@dimen/x30px"
+                android:paddingRight="@dimen/x30px">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/y33px"
+                    android:paddingTop="@dimen/y19px">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/y14px"
+                        android:includeFontPadding="false"
+                        android:text="@string/service_cost" />
+
+                    <com.doumengmeng.doctor.view.CheckBoxLayout
+                        android:id="@+id/cbl_service_cost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x143px" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2px"
+                    android:background="@color/linePink" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y28px">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:includeFontPadding="false"
+                        android:text="@string/income" />
+
+                    <TextView
+                        android:id="@+id/tv_income"
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:includeFontPadding="false"
+                        android:paddingLeft="@dimen/y174px"
+                        android:text="@string/income" />
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/SecondBlue.Text24px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y23px"
+                    android:includeFontPadding="false"
+                    android:text="@string/income_hint" />
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y10px" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:paddingBottom="@dimen/y20px"
+                android:paddingLeft="@dimen/x30px"
+                android:paddingRight="@dimen/x30px"
+                android:paddingTop="@dimen/y17px">
+
+                <TextView
+                    style="@style/SecondBlack.Text29px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/y13px"
+                    android:includeFontPadding="false"
+                    android:text="@string/speciality" />
+
+                <EditText
+                    android:id="@+id/et_speciality"
+                    style="@style/SecondBlack.Text28px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y126px"
+                    android:layout_marginLeft="@dimen/y142px"
+                    android:background="@drawable/bg_circle_edittext_multi_line"
+                    android:gravity="top"
+                    android:hint="@string/speciality_hint"
+                    android:paddingBottom="@dimen/y14px"
+                    android:paddingLeft="@dimen/x31px"
+                    android:paddingRight="@dimen/x31px"
+                    android:paddingTop="@dimen/y14px"
+                    android:scrollbars="vertical"
+                    android:textColorHint="@color/sixth_gray" />
+            </RelativeLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y10px" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:paddingBottom="@dimen/y20px"
+                android:paddingLeft="@dimen/x30px"
+                android:paddingRight="@dimen/x30px"
+                android:paddingTop="@dimen/y17px">
+
+                <TextView
+                    style="@style/SecondBlack.Text29px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/y13px"
+                    android:includeFontPadding="false"
+                    android:text="@string/intro" />
+
+                <EditText
+                    android:id="@+id/et_intro"
+                    style="@style/SecondBlack.Text28px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y231px"
+                    android:layout_marginLeft="@dimen/y142px"
+                    android:background="@drawable/bg_circle_edittext_multi_line"
+                    android:gravity="top"
+                    android:hint="@string/intro_hint"
+                    android:paddingBottom="@dimen/y14px"
+                    android:paddingLeft="@dimen/x31px"
+                    android:paddingRight="@dimen/x31px"
+                    android:paddingTop="@dimen/y14px"
+                    android:scrollbars="vertical"
+                    android:textColorHint="@color/sixth_gray" />
+            </RelativeLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y10px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y21px"
+                android:paddingLeft="@dimen/x30px"
+                android:paddingRight="@dimen/x30px"
+                android:paddingTop="@dimen/y20px">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/identity_num" />
+
+                    <EditText
+                        android:id="@+id/et_identity_num"
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y57px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x142px"
+                        android:background="@drawable/bg_circle_edittext"
+                        android:lines="1"
+                        android:scrollHorizontally="true" />
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/SecondBlue.Text24px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y21px"
+                    android:includeFontPadding="false"
+                    android:text="@string/identity_num_hint" />
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y10px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y21px"
+                android:paddingLeft="@dimen/x30px"
+                android:paddingRight="@dimen/x30px"
+                android:paddingTop="@dimen/y20px">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/SecondBlack.Text29px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/upload_doctor_certificate" />
+
+                    <TextView
+                        style="@style/SecondBlue.Text24px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x262px"
+                        android:layout_marginTop="@dimen/y21px"
+                        android:layout_centerVertical="true"
+                        android:includeFontPadding="false"
+                        android:text="@string/upload_doctor_certificate_hint" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/x384px"
+                        android:layout_height="@dimen/x288px"
+                        android:layout_marginTop="@dimen/y29px"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_certificate_example"
+                        android:layout_centerInParent="true"/>
+
+                    <TextView
+                        style="@style/SecondBlue.Text24px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x545px"
+                        android:ems="1"
+                        android:text="@string/enlarged" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_first_certificate"
+                        android:layout_width="@dimen/x270px"
+                        android:layout_height="@dimen/x203px"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/btn_first_certificate"/>
+
+                    <ImageView
+                        android:id="@+id/iv_second_certificate"
+                        android:layout_width="@dimen/x270px"
+                        android:layout_height="@dimen/x203px"
+                        android:layout_marginLeft="@dimen/x28px"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/btn_first_certificate" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bt_submit"
+                android:layout_width="@dimen/x434px"
+                android:layout_height="@dimen/x133px"
+                android:layout_marginTop="@dimen/y6px"
+                android:layout_marginBottom="@dimen/y33px"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_short_submit"/>
         </LinearLayout>
     </ScrollView>
 

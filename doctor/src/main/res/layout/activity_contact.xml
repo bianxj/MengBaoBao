@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/first_white"
     >
 
     <include layout="@layout/include_title_back" />
@@ -53,5 +54,14 @@
         android:layout_marginTop="@dimen/y678px"
         android:layout_centerHorizontal="true"
         />
+
+    <ImageView
+        android:id="@+id/iv_message_board"
+        android:layout_width="@dimen/x480px"
+        android:layout_height="@dimen/y67px"
+        android:layout_marginBottom="@dimen/y95px"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/btn_message_board"/>
 
 </RelativeLayout>

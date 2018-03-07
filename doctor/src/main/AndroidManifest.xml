@@ -39,7 +39,7 @@
         <activity android:name="com.doumengmeng.doctor.activity.AgreementActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.doctor.activity.ChangePwdActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.doctor.activity.DiagramDataActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name="com.doumengmeng.doctor.activity.ContactActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.doctor.activity.CallCenterActivity" android:screenOrientation="portrait"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

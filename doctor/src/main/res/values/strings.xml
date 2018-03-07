@@ -234,11 +234,65 @@
     <string name="mother_weight">体重（母亲）</string>
     <string name="mother_BMI">BMI（母亲）</string>
 
-    <!---->
+    <!--FragmentAccount-->
+    <string name="account_month_income">本月所得(元)</string>
+    <string name="account_month_buy">本月购买</string>
+    <string name="account_month_assessment">本月评估</string>
+    <string name="account_total_buy">累计购买</string>
+    <string name="account_total_assessment">累计评估</string>
+    <string name="account_total_over_time">累计跑单</string>
+
+    <!--AccountDetailsActivity-->
+    <string name="account_income">收入</string>
+
+    <!--FragmentMessage-->
+    <string name="no_message">暂无消息提醒</string>
+    <string name="delete">删除</string>
+
+    <!--FragmentAbout-->
+    <string name="i">我</string>
+    <string name="person_info">个人信息</string>
+    <string name="call_center">客服中心</string>
     <string name="about">关于我们</string>
-    <string name="contact">客服中心</string>
+    <string name="change_password">修改密码</string>
+    <string name="agreement">使用协议</string>
+    <string name="logout">退出登录</string>
+
+    <!--PersonInfoActivity-->
+    <string name="person_info_hint">如有疑问，请致电客服热线:021-64335531</string>
+    <string name="service_cost_hint">如需调整服务费，请致电客服热线:021-64335531</string>
+    <string name="name">姓名</string>
+    <string name="hospital">职业医院</string>
+    <string name="department">科室</string>
+    <string name="professional_title">职称</string>
+    <string name="service_cost">服务费</string>
+    <string name="income">实际所得</string>
+    <string name="speciality">专长</string>
+    <string name="intro">简介</string>
+    <string name="identity_num">身份证号</string>
+    <string name="doctor_certificate">医生职业证书</string>
+
+    <!--MessageBoardActivity-->
+    <string name="message_board_hint">请尽可能详细的描述您的问题</string>
+    <string name="contact">联系方式：</string>
+    <string name="contact_hint">请留下您的联系方式 手机或邮箱</string>
+
+    <!--InputDoctorActivity-->
+    <string name="input_name_hint">请输入您的真实姓名，提交后不可修改</string>
+    <string name="head_portrait">头像</string>
+    <string name="head_portrait_hint">照片要求：清晰证件照，无杂乱背景</string>
+    <string name="head_portrait_example">头像样张</string>
+    <string name="income_hint">按平台协议规定，实际所得为服务费的50%</string>
+    <string name="speciality_hint">限150字</string>
+    <string name="intro_hint">限1000字</string>
+    <string name="identity_num_hint">请务必填写真实信息，您的信息我们将严格保密</string>
+    <string name="upload_doctor_certificate">上传医师执业证书</string>
+    <string name="upload_doctor_certificate_hint">请确保图片内容清晰可见</string>
+    <string name="enlarged">点击放大</string>
 
     <string name="assessment_source">来源：WHO儿童成长标准，世界卫生组织</string>
+
+
 
     <!--Dialog-->
     <string name="dialog_content_camera_permission">请打开相机权限</string>
@@ -260,5 +314,43 @@
     <string name="prompt_new_passwd_empty">新密码为空</string>
     <string name="prompt_confirm_passwd_empty">请确认密码</string>
     <string name="prompt_confirm_passwd_error">两次输入的面膜不一致</string>
+
+    <string name="default_city">北京市</string>
+    <string-array name="citys">
+        <item>北京市</item>
+        <item>天津市</item>
+        <item>河北省</item>
+        <item>山西省</item>
+        <item>内蒙古自治区</item>
+        <item>新疆维吾尔自治区</item>
+        <item>辽宁省</item>
+        <item>吉林省</item>
+        <item>黑龙江省</item>
+        <item>上海市</item>
+        <item>江苏省</item>
+        <item>浙江省</item>
+        <item>安徽省</item>
+        <item>福建省</item>
+        <item>江西省</item>
+        <item>山东省</item>
+        <item>河南省</item>
+        <item>湖北省</item>
+        <item>湖南省</item>
+        <item>广东省</item>
+        <item>广西壮族自治区</item>
+        <item>海南省</item>
+        <item>重庆市</item>
+        <item>四川省</item>
+        <item>贵州省</item>
+        <item>云南省</item>
+        <item>西藏自治区</item>
+        <item>陕西省</item>
+        <item>甘肃省</item>
+        <item>青海省</item>
+        <item>宁夏回族自治区</item>
+        <item>香港特别行政区省</item>
+        <item>澳门特别行政区</item>
+        <item>台湾省</item>
+    </string-array>
 
 </resources>

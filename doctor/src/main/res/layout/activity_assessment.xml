@@ -1873,6 +1873,8 @@
                         android:layout_marginBottom="@dimen/y13px"
                         android:background="@drawable/bg_circle_edittext_multi_line"
                         android:padding="@dimen/x20px"
+                        android:minHeight="@dimen/y115px"
+                        android:gravity="top"
                         android:text="" />
 
                     <TextView
@@ -1890,6 +1892,8 @@
                         android:layout_marginBottom="@dimen/y13px"
                         android:background="@drawable/bg_circle_edittext_multi_line"
                         android:padding="@dimen/x20px"
+                        android:minHeight="@dimen/y115px"
+                        android:gravity="top"
                         android:text="" />
                 </LinearLayout>
 
@@ -1921,6 +1925,8 @@
                         android:layout_marginBottom="@dimen/y13px"
                         android:background="@drawable/bg_circle_edittext_multi_line"
                         android:padding="@dimen/x20px"
+                        android:minHeight="@dimen/y115px"
+                        android:gravity="top"
                         android:text="" />
                 </LinearLayout>
 
@@ -1952,6 +1958,8 @@
                         android:layout_marginBottom="@dimen/y13px"
                         android:background="@drawable/bg_circle_edittext_multi_line"
                         android:padding="@dimen/x20px"
+                        android:minHeight="@dimen/y115px"
+                        android:gravity="top"
                         android:text="" />
                 </LinearLayout>
             </LinearLayout>

@@ -26,7 +26,7 @@ public class HospitalReportActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hospital_list);
+        setContentView(R.layout.activity_hospital_report);
         findView();
     }
 

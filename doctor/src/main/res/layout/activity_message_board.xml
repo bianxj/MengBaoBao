@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/include_title_back"></include>
+
+    <TextView
+        android:id="@+id/tv_message_content"
+        android:layout_width="@dimen/x576px"
+        android:layout_height="@dimen/y385px"
+        android:layout_marginTop="@dimen/y48px"
+        android:padding="@dimen/x27px"
+        android:gravity="top"
+        android:scrollbars="vertical"
+        android:textColorHint="@color/sixth_gray"
+        style="@style/SecondBlack.Text26px"
+        android:hint="@string/message_board_hint"
+        android:background="@drawable/bg_circle_edittext_multi_line"/>
+
+    <TextView
+        android:layout_width="@dimen/x576px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y47px"
+        style="@style/SecondBlack.Text29px"
+        android:includeFontPadding="true"
+        android:text="@string/contact"
+        />
+
+    <TextView
+        android:id="@+id/tv_contact"
+        android:layout_width="@dimen/x576px"
+        android:layout_height="@dimen/y86px"
+        android:layout_marginTop="@dimen/y28px"
+        android:padding="@dimen/x27px"
+        android:gravity="top"
+        android:scrollHorizontally="true"
+        android:textColorHint="@color/sixth_gray"
+        style="@style/SecondBlack.Text26px"
+        android:hint="@string/contact_hint"
+        android:background="@drawable/bg_circle_edittext_multi_line"/>
+
+
+    <ImageView
+        android:id="@+id/iv_submit"
+        android:layout_width="@dimen/x639px"
+        android:layout_height="@dimen/x116px"
+        android:layout_marginTop="@dimen/y63px"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_submit"
+        />
+
+</LinearLayout>

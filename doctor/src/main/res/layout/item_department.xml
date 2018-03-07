@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y163px"
+    android:background="@color/lightSky"
+    >
+
+    <RelativeLayout
+        android:layout_width="@dimen/x720px"
+        android:layout_height="@dimen/y163px"
+        android:layout_marginTop="@dimen/y19px"
+        android:background="@color/first_white"
+        >
+
+        <com.doumengmeng.doctor.view.CircleImageView
+            android:id="@+id/civ_hospital"
+            android:layout_width="@dimen/y95px"
+            android:layout_height="@dimen/y95px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:src="@drawable/ic_launcher_background"
+            app:civ_border_width="@dimen/y1px"
+            app:civ_border_color="@color/doctorFrame" />
+
+        <TextView
+            android:id="@+id/tv_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x163px"
+            android:layout_centerVertical="true"
+            style="@style/SecondBlack.Text30px"
+            android:text="儿童保健科"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
