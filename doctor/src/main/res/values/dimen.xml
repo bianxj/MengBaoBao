@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="SelfActionBarHeight">@dimen/y106px</dimen>
-    <dimen name="EditContainerWidth">@dimen/x606px</dimen>
-    <dimen name="EditContainerHeight">@dimen/y84px</dimen>
+    <dimen name="EditContainerWidth">@dimen/x601px</dimen>
+    <dimen name="EditContainerHeight">@dimen/y83px</dimen>
     <dimen name="EditVcContainerWidth">@dimen/x368px</dimen>
     <dimen name="IconMarginLeft">@dimen/x16px</dimen>
     <dimen name="EditMarginLeft">@dimen/x9px</dimen>

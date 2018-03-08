@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 
 /**
@@ -52,6 +53,12 @@ public class BaseActivity extends Activity {
             if ( AsyncTask.Status.FINISHED != task.getStatus() ){
                 task.cancel(false);
             }
+        }
+    }
+
+    protected void clearHandler(Handler handler){
+        if ( handler != null ){
+            handler.removeCallbacksAndMessages(null);
         }
     }
 

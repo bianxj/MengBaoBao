@@ -11,15 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <android.support.v4.widget.Space
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/SelfActionBarHeight" />
-    
+        android:layout_height="match_parent">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register_name"
-        android:layout_marginTop="@dimen/y39px"
+        android:layout_marginTop="@dimen/y145px"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
         style="@style/SecondWhite.Text48px"
         />
 
@@ -28,7 +29,8 @@
         android:layout_height="@dimen/EditContainerHeight"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="@dimen/y53px"
+        android:layout_marginTop="@dimen/y243px"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/bg_input_long">
 
         <ImageView
@@ -55,7 +57,8 @@
         android:layout_width="@dimen/x616px"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/x5px"
-        android:layout_marginTop="@dimen/x53px">
+        android:layout_marginTop="@dimen/y379px"
+        android:layout_centerHorizontal="true">
         <LinearLayout
             android:layout_width="@dimen/EditVcContainerWidth"
             android:layout_height="@dimen/EditContainerHeight"
@@ -116,7 +119,8 @@
         android:layout_height="@dimen/EditContainerHeight"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/y82px"
+        android:layout_marginTop="@dimen/y575px"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/bg_input_long">
 
         <ImageView
@@ -145,7 +149,8 @@
         android:id="@+id/ll_agreement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y52px"
+        android:layout_marginTop="@dimen/y697px"
+        android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <CheckBox
@@ -156,19 +161,35 @@
             android:clickable="false"
             android:checked="true"
             />
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x32px"
-            style="@style/SecondWhite.Text30px"
-            android:text="@string/prompt_read_agreement"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x32px"
+                style="@style/SecondWhite.Text30px"
+                android:includeFontPadding="false"
+                android:text="@string/prompt_read_agree"/>
+            <TextView
+                android:id="@+id/tv_agreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/SecondWhite.Text30px"
+                android:textColor="@color/lightPink"
+                android:includeFontPadding="false"
+                android:text="@string/prompt_agreement"/>
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y58px"
+        android:layout_marginTop="@dimen/y788px"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
         style="@style/SecondWhite.Text30px"
         android:text=""/>
 
@@ -176,7 +197,32 @@
         android:id="@+id/bt_sure"
         android:layout_width="@dimen/x639px"
         android:layout_height="@dimen/y127px"
-        android:layout_marginTop="@dimen/y39px"
+        android:layout_marginTop="@dimen/y858px"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/btn_next"/>
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y1052px"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:id="@+id/tv_fast_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fast_login"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/x154px"
+            style="@style/SecondWhite.Text30px"/>
+        <TextView
+            android:id="@+id/tv_forgot_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_pwd"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x128px"
+            style="@style/SecondWhite.Text30px"/>
+    </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

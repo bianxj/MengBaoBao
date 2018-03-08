@@ -11,28 +11,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ImageView
         android:layout_width="@dimen/x184px"
         android:layout_height="@dimen/y267px"
         android:scaleType="fitXY"
         android:src="@drawable/logo"
         android:contentDescription="@string/contentDescription"
-        android:layout_marginTop="@dimen/SelfActionBarHeight"/>
+        android:layout_marginTop="@dimen/y90px"
+        android:layout_centerHorizontal="true"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login_name"
-        android:layout_marginTop="@dimen/y96px"
-        style="@style/SecondWhite.Text48px"
-        />
+        android:layout_marginTop="@dimen/y452px"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登"
+            android:includeFontPadding="false"
+            style="@style/SecondWhite.Text52px"
+            />
+        <android.support.v4.widget.Space
+            android:layout_width="@dimen/x50px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="录"
+            android:includeFontPadding="false"
+            style="@style/SecondWhite.Text52px"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="@dimen/EditContainerWidth"
         android:layout_height="@dimen/EditContainerHeight"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="@dimen/y47px"
+        android:layout_marginTop="@dimen/y546px"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/bg_input_long">
 
         <ImageView
@@ -62,7 +85,8 @@
         android:layout_height="@dimen/EditContainerHeight"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/y42px"
+        android:layout_marginTop="@dimen/y671px"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/bg_input_long">
 
         <ImageView
@@ -89,21 +113,25 @@
         android:id="@+id/tv_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y34px"
+        android:layout_marginTop="@dimen/y788px"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
         style="@style/SecondWhite.Text30px"
         android:text=""/>
 
     <Button
         android:id="@+id/bt_sure"
-        android:layout_width="@dimen/x639px"
-        android:layout_height="@dimen/y117px"
-        android:layout_marginTop="@dimen/y48px"
+        android:layout_width="@dimen/x656px"
+        android:layout_height="@dimen/y134px"
+        android:layout_marginTop="@dimen/y855px"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/btn_sure"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y28px">
+        android:layout_marginTop="@dimen/y1050px"
+        android:layout_centerHorizontal="true">
         <TextView
             android:id="@+id/tv_fast_register"
             android:layout_width="wrap_content"
@@ -122,4 +150,14 @@
             style="@style/SecondWhite.Text30px"/>
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y1133px"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
+        style="@style/FirstWhite.Text32px"
+        android:text="@string/loading_message"/>
+
+    </RelativeLayout>
 </LinearLayout>

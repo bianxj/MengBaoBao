@@ -7,6 +7,9 @@
     <!--Other-->
     <string name="contentDescription">image</string>
 
+    <!--PageTitle-->
+    <string name="input_person_info">完善个人信息</string>
+
     <!--Shared数据-->
     <string name="input_phone_hint">手机号</string>
     <string name="input_pwd_hint">密码（6~16位数字、字母）</string>
@@ -14,7 +17,8 @@
     <string name="input_vc_hint">短信验证码</string>
     <string name="get_vc">获取验证码</string>
     <string name="replay">重试</string>
-    <string name="prompt_read_agreement">我已阅读同意萌宝宝用户协议</string>
+    <string name="prompt_read_agree">我已阅读同意</string>
+    <string name="prompt_agreement">萌宝宝用户协议</string>
     <string name="complete">完成</string>
     <string name="mark">*</string>
     <string name="title_save">保存</string>
@@ -26,6 +30,7 @@
     <string name="login_name">登录</string>
     <string name="sure">确认</string>
     <string name="fast_registe">快速注册</string>
+    <string name="fast_login">快速登录</string>
     <string name="forgot_pwd">忘记密码?</string>
 
     <!--RegisterActivity信息-->
@@ -262,7 +267,7 @@
     <string name="person_info_hint">如有疑问，请致电客服热线:021-64335531</string>
     <string name="service_cost_hint">如需调整服务费，请致电客服热线:021-64335531</string>
     <string name="name">姓名</string>
-    <string name="hospital">职业医院</string>
+    <string name="hospital">执业医院</string>
     <string name="department">科室</string>
     <string name="professional_title">职称</string>
     <string name="service_cost">服务费</string>
@@ -289,9 +294,12 @@
     <string name="upload_doctor_certificate">上传医师执业证书</string>
     <string name="upload_doctor_certificate_hint">请确保图片内容清晰可见</string>
     <string name="enlarged">点击放大</string>
+    <string name="commit_audit">提交审核</string>
 
     <string name="assessment_source">来源：WHO儿童成长标准，世界卫生组织</string>
 
+    <!--Footer-->
+    <string name="footer_load_more">……正在载入</string>
 
 
     <!--Dialog-->
@@ -305,6 +313,7 @@
     <string name="dialog_btn_prompt_go_setting">去设置</string>
     <string name="dialog_btn_prompt_later">暂不</string>
     <string name="dialog_content_read_agreement">请勾选“我已阅读”</string>
+    <string name="dialog_content_open_location_service">请打开定位服务</string>
 
     <string name="prompt_bt_cancel">取消</string>
     <string name="prompt_bt_sure">确认</string>
@@ -314,6 +323,7 @@
     <string name="prompt_new_passwd_empty">新密码为空</string>
     <string name="prompt_confirm_passwd_empty">请确认密码</string>
     <string name="prompt_confirm_passwd_error">两次输入的面膜不一致</string>
+
 
     <string name="default_city">北京市</string>
     <string-array name="citys">
@@ -351,6 +361,23 @@
         <item>香港特别行政区省</item>
         <item>澳门特别行政区</item>
         <item>台湾省</item>
+    </string-array>
+
+    <string-array name="service_cost">
+        <item>30元</item>
+        <item>50元</item>
+        <item>80元</item>
+        <item>100元</item>
+        <item>150元</item>
+        <item>200元</item>
+        <item>300元</item>
+    </string-array>
+    
+    <string-array name="professional_titles">
+        <item>主任医师</item>
+        <item>副主任医师</item>
+        <item>主治医师</item>
+        <item>住院医师</item>
     </string-array>
 
 </resources>

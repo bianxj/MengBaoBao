@@ -13,11 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -50,21 +46,19 @@ public class LoadingActivity extends BaseActivity {
 
     public final static String IN_PARAM_AUTO_LOGIN = "is_auto_login";
 
-    private View v_status_bar;
     private RelativeLayout rl_back;
     private TextView tv_loading_percent;
     private ImageView iv_loading_icon;
     private AnimationDrawable drawable;
     private int percent;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,WindowManager.LayoutParams. FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_loading);
         findView();
+        loading();
     }
 
     @Override
@@ -142,12 +136,11 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private void findView(){
-        v_status_bar = findViewById(R.id.v_status_bar);
-        v_status_bar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AppUtil.getStatusBarHeight(this)));
-
         rl_back = findViewById(R.id.rl_back);
         tv_loading_percent = findViewById(R.id.tv_loading_percent);
         iv_loading_icon = findViewById(R.id.iv_loading_icon);
+
+        rl_back.setVisibility(View.GONE);
         initView();
     }
 
@@ -247,6 +240,7 @@ public class LoadingActivity extends BaseActivity {
         }
     };
 
+
     private RequestTask updateInfoTask = null;
     private void getUpdateInfo(){
         try {
@@ -280,7 +274,6 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
 //            UpdateContentResponse response = GsonUtil.getInstance().fromJson(result, UpdateContentResponse.class);
 //            String versionName = null;
 //            try {
@@ -316,7 +309,6 @@ public class LoadingActivity extends BaseActivity {
         return map;
     }
 
-
     private RequestTask initConfigureTask = null;
     private void initConfigure(){
         try {
@@ -332,7 +324,6 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private Map<String, String> buildInitConfigureContent() {
-        //TODO
 //        UserData userData = BaseApplication.getInstance().getUserData();
 //        Map<String,String> map = new HashMap<>();
 //        JSONObject object = new JSONObject();
@@ -377,37 +368,36 @@ public class LoadingActivity extends BaseActivity {
      * 日期: 2018/1/8 9:51
      */
     private void login(){
-        //TODO
 //        LoginInfo loginInfo = BaseApplication.getInstance().getLogin();
-//        try {
-//            loginTask = new LoginTask(LoadingActivity.this, loginInfo.getAccount(), loginInfo.getPasswd(), new LoginTask.LoginCallBack() {
-//                @Override
-//                public void onPreExecute() {
+//            try {
+//                loginTask = new LoginTask(LoadingActivity.this, loginInfo.getAccount(), loginInfo.getPasswd(), new LoginTask.LoginCallBack() {
+//                    @Override
+//                    public void onPreExecute() {
 //
-//                }
+//                    }
 //
-//                @Override
-//                public void onError(String result) {
-//                    stopLoadingPercent();
-//                    MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
-//                        @Override
-//                        public void sure() {
-//                            BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
-//                        }
-//                    });
-//                }
+//                    @Override
+//                    public void onError(String result) {
+//                        stopLoadingPercent();
+//                        MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
+//                            @Override
+//                            public void sure() {
+//                                BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
+//                            }
+//                        });
+//                    }
 //
-//                @Override
-//                public void onPostExecute(String result) {
+//                    @Override
+//                    public void onPostExecute(String result) {
 ////                        checkVersionAndWifi();
-//                    initConfigure();
-//                }
-//            },RequestTask.DEFAULT);
-//            loginTask.execute();
-//        } catch (Throwable throwable) {
-//            throwable.printStackTrace();
-//            stopLoadingPercent();
-//        }
+//                        initConfigure();
+//                    }
+//                },RequestTask.DEFAULT);
+//                loginTask.execute();
+//            } catch (Throwable throwable) {
+//                throwable.printStackTrace();
+//                stopLoadingPercent();
+//            }
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -416,7 +406,7 @@ public class LoadingActivity extends BaseActivity {
             switch(v.getId()){
                 case R.id.rl_back:
                     back();
-                    break;
+                break;
             }
         }
     };
@@ -425,8 +415,7 @@ public class LoadingActivity extends BaseActivity {
         finish();
     }
 
-
-    private static class LoadingHandler extends Handler {
+    private static class LoadingHandler extends Handler{
         private final static int MESSAGE_JUMP_TO_MAIN = 0x01;
         private final static int MESSAGE_LOADING_PERCENT = 0x02;
         private final static int MESSAGE_LOADING_CANCLE = 0x03;
@@ -438,25 +427,25 @@ public class LoadingActivity extends BaseActivity {
 
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            //TODO
-//            if ( msg.what == MESSAGE_JUMP_TO_MAIN ) {
-//                weakReference.get().stopLoadingPercent();
+            if ( msg.what == MESSAGE_JUMP_TO_MAIN ) {
+                weakReference.get().stopLoadingPercent();
+                //TODO
 //                if ( BaseApplication.getInstance().isAbnormalExit() ){
 //                    Intent intent = new Intent(weakReference.get(), InputInfoActivity.class);
 //                    weakReference.get().startActivity(intent);
 //                } else {
-//                    Intent intent = new Intent(weakReference.get(), MainActivity.class);
-//                    weakReference.get().startActivity(intent);
+                    Intent intent = new Intent(weakReference.get(), MainActivity.class);
+                    weakReference.get().startActivity(intent);
 //                }
-//            } else if ( msg.what == MESSAGE_LOADING_PERCENT) {
-//                removeMessages(MESSAGE_LOADING_PERCENT);
-//                if ( weakReference.get().percent < 99 ){
-//                    weakReference.get().updateLoadingPercent();
-//                    sendEmptyMessageDelayed(MESSAGE_LOADING_PERCENT,100);
-//                }
-//            } else if ( msg.what == MESSAGE_LOADING_CANCLE ) {
-//                removeMessages(MESSAGE_LOADING_PERCENT);
-//            }
+            } else if ( msg.what == MESSAGE_LOADING_PERCENT) {
+                removeMessages(MESSAGE_LOADING_PERCENT);
+                if ( weakReference.get().percent < 99 ){
+                    weakReference.get().updateLoadingPercent();
+                    sendEmptyMessageDelayed(MESSAGE_LOADING_PERCENT,100);
+                }
+            } else if ( msg.what == MESSAGE_LOADING_CANCLE ) {
+                removeMessages(MESSAGE_LOADING_PERCENT);
+            }
         }
     }
 
@@ -483,17 +472,16 @@ public class LoadingActivity extends BaseActivity {
 
     private final Handler handler = new LoadingHandler(this);
 
-    //TODO
-//    private class DataBaseRunnable implements Runnable{
-//
+    private class DataBaseRunnable implements Runnable{
+        //TODO
 //        private final InitConfigureResponse response;
 //
 //        public DataBaseRunnable(InitConfigureResponse response) {
 //            this.response = response;
 //        }
-//
-//        @Override
-//        public void run() {
+
+        @Override
+        public void run() {
 //            DaoManager.getInstance().deleteTable(LoadingActivity.this, DoctorDao.TABLE_NAME);
 //            DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
 //            DaoManager.getInstance().deleteTable(LoadingActivity.this, GrowthDao.TABLE_NAME);
@@ -512,7 +500,7 @@ public class LoadingActivity extends BaseActivity {
 //
 //            BaseApplication.getInstance().removeMainPage();
 //            handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
-//        }
-//    }
+        }
+    }
 
 }

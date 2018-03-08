@@ -99,7 +99,7 @@
                 android:layout_marginRight="@dimen/x10px"
                 android:gravity="center"
                 android:text="@string/get_vc"
-                android:textColor="@color/colorEditTextHint"
+                android:textColor="@color/deepPink"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/TextNormalSize" />
@@ -152,7 +152,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x32px"
             style="@style/SecondWhite.Text30px"
-            android:text="@string/prompt_read_agreement"/>
+            android:text="@string/prompt_read_agree"/>
+        <TextView
+            android:id="@+id/tv_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SecondWhite.Text30px"
+            android:textColor="@color/lightPink"
+            android:text="@string/prompt_agreement"/>
     </LinearLayout>
 
     <TextView

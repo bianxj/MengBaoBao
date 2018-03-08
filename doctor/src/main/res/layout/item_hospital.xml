@@ -9,6 +9,7 @@
     >
 
     <RelativeLayout
+        android:id="@+id/rl_hospital"
         android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/y163px"
         android:layout_marginTop="@dimen/y19px"

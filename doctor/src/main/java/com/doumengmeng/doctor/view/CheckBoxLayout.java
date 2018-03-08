@@ -27,6 +27,7 @@ public class CheckBoxLayout extends LinearLayout {
     private List<CheckBox> checkBoxes;
     private List<String> contents;
     private boolean isDrawed = false;
+    private OnItemSelectListener onItemSelectListener;
 
     public CheckBoxLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -40,8 +41,8 @@ public class CheckBoxLayout extends LinearLayout {
 
     private void init(Context context, @Nullable AttributeSet attrs){
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CheckBoxLayout,0,0);
-        defaultGrap = array.getDimensionPixelOffset(R.styleable.CheckBoxLayout_default_grap,0);
-        verticalGrap = array.getDimensionPixelOffset(R.styleable.CheckBoxLayout_vertical_grap,0);
+        defaultGrap = array.getDimensionPixelOffset(R.styleable.CheckBoxLayout_default_grap,getResources().getDimensionPixelOffset(R.dimen.x28px));
+        verticalGrap = array.getDimensionPixelOffset(R.styleable.CheckBoxLayout_vertical_grap,getResources().getDimensionPixelOffset(R.dimen.y48px));
         array.recycle();
         setOrientation(LinearLayout.VERTICAL);
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -55,6 +56,10 @@ public class CheckBoxLayout extends LinearLayout {
                 }
             }
         });
+    }
+
+    public void setOnItemSelectListener(OnItemSelectListener onItemSelectListener){
+        this.onItemSelectListener = onItemSelectListener;
     }
 
     public void setCheckBoxes(List<String> contents,boolean isRadio){
@@ -138,6 +143,9 @@ public class CheckBoxLayout extends LinearLayout {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
             if ( b ){
+                if ( onItemSelectListener != null ){
+                    onItemSelectListener.onItemClickListener(compoundButton);
+                }
                 selectCompoundButton(compoundButton);
             }
         }
@@ -147,6 +155,14 @@ public class CheckBoxLayout extends LinearLayout {
         for (CheckBox checkBox:checkBoxes){
             checkBox.setChecked(checkBox.equals(button));
         }
+    }
+
+    public List<CheckBox> getCheckBoxes(){
+        return checkBoxes;
+    }
+
+    public interface OnItemSelectListener{
+        public void onItemClickListener(CompoundButton compoundButton);
     }
 
 }

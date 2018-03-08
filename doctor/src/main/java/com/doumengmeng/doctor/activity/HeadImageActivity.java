@@ -39,8 +39,6 @@ public class HeadImageActivity extends BaseActivity {
     private final static int REQUEST_IMAGE = 0x02;
     private final static int REQUEST_CROP = 0x03;
 
-    //TODO
-//    private UserData userData;
     private RelativeLayout rl_back;
     private TextView tv_title;
 
@@ -73,11 +71,14 @@ public class HeadImageActivity extends BaseActivity {
         iv_camera.setOnClickListener(listener);
         tv_title.setText(R.string.head_image);
 
-        //TODO
-//        userData = BaseApplication.getInstance().getUserData();
-//        if ( !TextUtils.isEmpty(userData.getHeadimg()) ) {
-//            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
-//        }
+        loadHeadImg();
+    }
+
+    private void loadHeadImg(){
+        Bitmap bitmap = BitmapFactory.decodeFile(BaseApplication.getInstance().getHeadCropPath());
+        if ( bitmap != null ){
+            civ_head.setImageBitmap(bitmap);
+        }
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -146,20 +147,6 @@ public class HeadImageActivity extends BaseActivity {
             intent.setType("image/*") ;
             startActivityForResult(intent , REQUEST_IMAGE) ;
         }
-    }
-
-    private void showAppPermissionDialog(int strings){
-        MyDialog.showPermissionDialog(this, getString(strings), new MyDialog.ChooseDialogCallback() {
-            @Override
-            public void sure() {
-                AppUtil.openPrimession(HeadImageActivity.this);
-            }
-
-            @Override
-            public void cancel() {
-
-            }
-        });
     }
 
     private void cropFromPicture(Uri src) {
@@ -237,32 +224,22 @@ public class HeadImageActivity extends BaseActivity {
         });
     }
 
-    private Bitmap headImg = null;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String source = null;
         if ( REQUEST_CAMERA == requestCode && Activity.RESULT_OK == resultCode){
             cropFromCamera(new File(BaseApplication.getInstance().getPersonHeadImgPath()));
-//            source = BaseApplication.getInstance().getPersonHeadImgPath();
-//            PictureUtils.rotationNormalDegree(source);
         }
 
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             Uri uri = data.getData();
             cropFromPicture(uri);
-//            source = PictureUtils.getFilePath(HeadImageActivity.this,uri);
         }
 
-        if ( REQUEST_CROP == requestCode && Activity.RESULT_OK == resultCode ){
-            Bitmap bitmap = null;
-//            try {
-                bitmap = BitmapFactory.decodeFile(BaseApplication.getInstance().getHeadCropPath());// BitmapFactory.decodeStream(getContentResolver().openInputStream(destUri));
-                civ_head.setImageBitmap(bitmap);
-                PictureUtils.saveBitmap(BaseApplication.getInstance().getHeadCropFile(),bitmap);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
+        if ( REQUEST_CROP == requestCode && Activity.RESULT_OK == resultCode ) {
+            Bitmap bitmap = BitmapFactory.decodeFile(BaseApplication.getInstance().getHeadCropPath());// BitmapFactory.decodeStream(getContentResolver().openInputStream(destUri));
+            civ_head.setImageBitmap(bitmap);
+            PictureUtils.saveBitmap(BaseApplication.getInstance().getHeadCropFile(), bitmap);
         }
     }
 

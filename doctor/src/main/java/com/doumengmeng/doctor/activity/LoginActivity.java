@@ -40,7 +40,6 @@ public class LoginActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,WindowManager.LayoutParams. FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
         findView();
-        initView();
     }
 
     private void findView(){
@@ -54,6 +53,7 @@ public class LoginActivity extends BaseActivity {
         bt_sure = findViewById(R.id.bt_sure);
         tv_fast_register = findViewById(R.id.tv_fast_register);
         tv_forgot_pwd = findViewById(R.id.tv_forgot_pwd);
+        initView();
     }
 
     private void initView(){

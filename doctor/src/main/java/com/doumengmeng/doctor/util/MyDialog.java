@@ -2,13 +2,22 @@ package com.doumengmeng.doctor.util;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,7 +37,7 @@ public class MyDialog {
 //    private final static Object pictureLock = new Object();
 //    private final static Object notificationLock = new Object();
 //    private final static Object gifLock = new Object();
-//    private final static Object cityLock = new Object();
+    private final static Object cityLock = new Object();
 //    private final static Object payLock = new Object();
 
     private static Dialog updateDialog;
@@ -40,7 +49,7 @@ public class MyDialog {
 //    private static Dialog gifDialog;
 //
 //    private static PopupWindow payDialog;
-//    private static PopupWindow cityDialog;
+    private static PopupWindow cityDialog;
 //
     public static void showPermissionDialog(Context context, String content , ChooseDialogCallback callback){
         showChooseDialog(context,content,R.string.dialog_btn_prompt_later,R.string.dialog_btn_prompt_go_setting,callback);
@@ -202,46 +211,46 @@ public class MyDialog {
         }
     }
 
-//    public static void showChooseCityDialog(final Context context,View view,final ChooseCityCallback callback){
-//        synchronized (cityLock) {
-//            if ( cityDialog != null && cityDialog.isShowing() ) {
-//                cityDialog.dismiss();
-//                cityDialog = null;
-//            }
-//            final String[] citys = context.getResources().getStringArray(R.array.citys);
-//            cityDialog = new PopupWindow(context);
-//            cityDialog.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-//            cityDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));
-//            cityDialog.setBackgroundDrawable(null);
-//            View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_choose_city, null);
-//            ListView lv_city = contentView.findViewById(R.id.lv_city);
-//            contentView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-//            cityDialog.setContentView(contentView);
-//            cityDialog.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-//
-//            lv_city.setAdapter(new CityAdapter(context, citys));
-//            lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                    callback.choose(citys[i]);
-//                }
-//            });
-//            if (Build.VERSION.SDK_INT < 24) {
-//                cityDialog.showAsDropDown(view);
-//            } else {
-//                if ( "SMARTISAN".equals(AppUtil.getSystemOsName()) ){
-//                    cityDialog.showAsDropDown(view);
-//                } else {
-//                    int[] location = new int[2];
-//                    view.getLocationOnScreen(location);
-//                    int x = location[0];
-//                    int y = location[1];
-//                    cityDialog.showAtLocation(view, Gravity.NO_GRAVITY, 0, y + view.getHeight());
-//                }
-//            }
-//        }
-//    }
-//
+    public static void showChooseCityDialog(final Context context,View view,final ChooseCityCallback callback){
+        synchronized (cityLock) {
+            if ( cityDialog != null && cityDialog.isShowing() ) {
+                cityDialog.dismiss();
+                cityDialog = null;
+            }
+            final String[] citys = context.getResources().getStringArray(R.array.citys);
+            cityDialog = new PopupWindow(context);
+            cityDialog.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+            cityDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));
+            cityDialog.setBackgroundDrawable(null);
+            View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_choose_city, null);
+            ListView lv_city = contentView.findViewById(R.id.lv_city);
+            contentView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            cityDialog.setContentView(contentView);
+            cityDialog.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+            lv_city.setAdapter(new CityAdapter(context, citys));
+            lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    callback.choose(citys[i]);
+                }
+            });
+            if (Build.VERSION.SDK_INT < 24) {
+                cityDialog.showAsDropDown(view);
+            } else {
+                if ( "SMARTISAN".equals(AppUtil.getSystemOsName()) ){
+                    cityDialog.showAsDropDown(view);
+                } else {
+                    int[] location = new int[2];
+                    view.getLocationOnScreen(location);
+                    int x = location[0];
+                    int y = location[1];
+                    cityDialog.showAtLocation(view, Gravity.NO_GRAVITY, 0, y + view.getHeight());
+                }
+            }
+        }
+    }
+
 //    public static void showPayDialog(final Context context, View parent, final PayCallBack callBack, List<PayItemLayout.PayData> datas, String price, int timeOut){
 //        synchronized (payLock){
 //            if ( payDialog != null && payDialog.isShowing() ) {
@@ -416,20 +425,20 @@ public class MyDialog {
 //        }
 //    }
 //
-//    public static boolean isShowingChooseCityDialog(){
-//        synchronized (cityLock) {
-//            return cityDialog != null && cityDialog.isShowing();
-//        }
-//    }
-//
-//    public static void dismissChooseCityDialog(){
-//        synchronized (cityLock){
-//            if ( cityDialog != null && cityDialog.isShowing() ) {
-//                cityDialog.dismiss();
-//                cityDialog = null;
-//            }
-//        }
-//    }
+    public static boolean isShowingChooseCityDialog(){
+        synchronized (cityLock) {
+            return cityDialog != null && cityDialog.isShowing();
+        }
+    }
+
+    public static void dismissChooseCityDialog(){
+        synchronized (cityLock){
+            if ( cityDialog != null && cityDialog.isShowing() ) {
+                cityDialog.dismiss();
+                cityDialog = null;
+            }
+        }
+    }
 //
 //    private static void dismissPictureDialog(){
 //        synchronized (pictureLock){
@@ -439,42 +448,42 @@ public class MyDialog {
 //            }
 //        }
 //    }
-//
-//    private static class CityAdapter extends BaseAdapter{
-//
-//        private final Context context;
-//        private final String[] citys;
-//
-//        public CityAdapter(Context context,String[] citys) {
-//            this.context = context;
-//            this.citys = citys;
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return citys.length;
-//        }
-//
-//        @Override
-//        public Object getItem(int i) {
-//            return citys[i];
-//        }
-//
-//        @Override
-//        public long getItemId(int i) {
-//            return 0;
-//        }
-//
-//        @Override
-//        public View getView(int i, View view, ViewGroup viewGroup) {
-//            if ( view == null ){
-//                view = LayoutInflater.from(context).inflate(R.layout.item_choose_city,null);
-//            }
-//            TextView tv_city_name = view.findViewById(R.id.tv_city_name);
-//            tv_city_name.setText(citys[i]);
-//            return view;
-//        }
-//    }
+
+    private static class CityAdapter extends BaseAdapter {
+
+        private final Context context;
+        private final String[] citys;
+
+        public CityAdapter(Context context,String[] citys) {
+            this.context = context;
+            this.citys = citys;
+        }
+
+        @Override
+        public int getCount() {
+            return citys.length;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return citys[i];
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            if ( view == null ){
+                view = LayoutInflater.from(context).inflate(R.layout.item_choose_city,null);
+            }
+            TextView tv_city_name = view.findViewById(R.id.tv_city_name);
+            tv_city_name.setText(citys[i]);
+            return view;
+        }
+    }
 
     public static void showLoadingDialog(Context context){
         synchronized (loadingLock){
@@ -517,11 +526,11 @@ public class MyDialog {
         void sure();
         void cancel();
     }
-//
-//    public interface ChooseCityCallback{
-//        void choose(String city);
-//    }
-//
+
+    public interface ChooseCityCallback{
+        void choose(String city);
+    }
+
 //    public interface NotificationCallback{
 //        void sure();
 //        void cancel();

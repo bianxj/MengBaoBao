@@ -9,6 +9,7 @@
     >
 
     <RelativeLayout
+        android:id="@+id/rl_department"
         android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/y163px"
         android:layout_marginTop="@dimen/y19px"
@@ -21,7 +22,7 @@
             android:layout_height="@dimen/y95px"
             android:layout_centerVertical="true"
             android:layout_marginLeft="26dp"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/default_icon_hospital"
             app:civ_border_width="@dimen/y1px"
             app:civ_border_color="@color/doctorFrame" />
 

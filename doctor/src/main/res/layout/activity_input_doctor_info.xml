@@ -1,11 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightSky"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
-    <include layout="@layout/include_title_back"></include>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/include_title_back"></include>
+        <RelativeLayout
+            android:id="@+id/rl_prompt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/SelfActionBarHeight"
+            android:background="@color/thinPink"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/tv_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/FirstWhite.Text26px"
+                android:layout_centerInParent="true"
+                android:maxWidth="@dimen/x500px"
+                />
+
+            <RelativeLayout
+                android:id="@+id/rl_prompt_close"
+                android:layout_width="@dimen/x106px"
+                android:layout_height="@dimen/SelfActionBarHeight"
+                android:layout_alignParentRight="true">
+                <ImageView
+                    android:layout_width="@dimen/x26px"
+                    android:layout_height="@dimen/x26px"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/btn_close"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -49,6 +86,10 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/x142px"
                         android:background="@drawable/bg_circle_edittext"
+                        android:paddingLeft="@dimen/x20px"
+                        android:paddingRight="@dimen/x20px"
+                        android:inputType="text"
+                        android:maxLength="8"
                         android:lines="1"
                         android:scrollHorizontally="true" />
                 </RelativeLayout>
@@ -204,10 +245,11 @@
 
                     <TextView
                         style="@style/SecondBlack.Text29px"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="@dimen/y14px"
+                        android:layout_alignParentTop="true"
                         android:includeFontPadding="false"
                         android:text="@string/professional_title" />
 
@@ -243,10 +285,11 @@
 
                     <TextView
                         style="@style/SecondBlack.Text29px"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="@dimen/y14px"
+                        android:layout_alignParentTop="true"
                         android:includeFontPadding="false"
                         android:text="@string/service_cost" />
 
@@ -335,6 +378,7 @@
                     android:paddingRight="@dimen/x31px"
                     android:paddingTop="@dimen/y14px"
                     android:scrollbars="vertical"
+                    android:maxLines="150"
                     android:textColorHint="@color/sixth_gray" />
             </RelativeLayout>
 
@@ -375,6 +419,7 @@
                     android:paddingRight="@dimen/x31px"
                     android:paddingTop="@dimen/y14px"
                     android:scrollbars="vertical"
+                    android:maxLength="1000"
                     android:textColorHint="@color/sixth_gray" />
             </RelativeLayout>
 
@@ -410,8 +455,12 @@
                         android:layout_height="@dimen/y57px"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/x142px"
+                        android:paddingLeft="@dimen/x20px"
+                        android:paddingRight="@dimen/x20px"
                         android:background="@drawable/bg_circle_edittext"
                         android:lines="1"
+                        android:inputType="text"
+                        android:maxLength="18"
                         android:scrollHorizontally="true" />
                 </RelativeLayout>
 
@@ -464,6 +513,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:id="@+id/iv_certificate_example"
                         android:layout_width="@dimen/x384px"
                         android:layout_height="@dimen/x288px"
                         android:layout_marginTop="@dimen/y29px"
@@ -500,7 +550,7 @@
                         android:layout_height="@dimen/x203px"
                         android:layout_marginLeft="@dimen/x28px"
                         android:scaleType="fitXY"
-                        android:src="@drawable/btn_first_certificate" />
+                        android:src="@drawable/btn_second_certificate" />
 
                 </LinearLayout>
             </LinearLayout>

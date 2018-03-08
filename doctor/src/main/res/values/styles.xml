@@ -220,6 +220,9 @@
     <style name="FirstWhite.Text30px">
         <item name="android:textSize">@dimen/y30px</item>
     </style>
+    <style name="FirstWhite.Text32px">
+        <item name="android:textSize">@dimen/y32px</item>
+    </style>
     <style name="FirstWhite.Text34px">
         <item name="android:textSize">@dimen/y34px</item>
     </style>
@@ -235,6 +238,9 @@
     <!--SecondWhite start-->
     <style name="SecondWhite">
         <item name="android:textColor">@color/second_white</item>
+    </style>
+    <style name="SecondWhite.Text52px">
+        <item name="android:textSize">@dimen/y52px</item>
     </style>
     <style name="SecondWhite.Text48px">
         <item name="android:textSize">@dimen/y48px</item>

@@ -19,12 +19,17 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
+import com.doumengmeng.doctor.request.task.LoginTask;
+import com.doumengmeng.doctor.response.RegisterResponse;
+import com.doumengmeng.doctor.response.VCResponse;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.FormatCheckUtil;
+import com.doumengmeng.doctor.util.GsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +48,8 @@ public class RegisterActivity extends BaseActivity {
 
     private View v_status_bar;
     private Button bt_sure;
-    private TextView bt_get_vc , tv_prompt;
+    private TextView bt_get_vc , tv_prompt , tv_agreement;
+    private TextView tv_fast_login , tv_forgot_pwd;
     private EditText et_phone , et_vc , et_login_pwd;
     private LinearLayout ll_agreement;
     private CheckBox cb_agreement;
@@ -57,29 +63,51 @@ public class RegisterActivity extends BaseActivity {
 
         setContentView(R.layout.activity_register);
         findView();
-        initView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTask(registerTask);
+        stopTask(getVerifyCodeTask);
+        if ( loginTask != null ) {
+            stopTask(loginTask.getTask());
+        }
+        clearHandler(handler);
     }
 
     private void findView(){
+        initStatusBar();
+        initContentView();
+    }
+
+    private void initStatusBar(){
         v_status_bar = findViewById(R.id.v_status_bar);
         v_status_bar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AppUtil.getStatusBarHeight(this)));
+    }
 
-        bt_get_vc = findViewById(R.id.bt_get_vc);
+    private void initContentView(){
         et_login_pwd = findViewById(R.id.et_login_pwd);
         et_phone = findViewById(R.id.et_phone);
         et_vc = findViewById(R.id.et_vc);
-
-        tv_prompt = findViewById(R.id.tv_prompt);
+        bt_get_vc = findViewById(R.id.bt_get_vc);
         bt_sure = findViewById(R.id.bt_sure);
-
+        tv_prompt = findViewById(R.id.tv_prompt);
+        tv_agreement = findViewById(R.id.tv_agreement);
         ll_agreement = findViewById(R.id.ll_agreement);
         cb_agreement = findViewById(R.id.cb_agreement);
-    }
+        tv_fast_login = findViewById(R.id.tv_fast_login);
+        tv_forgot_pwd = findViewById(R.id.tv_forgot_pwd);
 
-    private void initView(){
+        tv_fast_login.getPaint().setUnderlineText(true);
+        tv_fast_login.setOnClickListener(listener);
+        tv_forgot_pwd.getPaint().setUnderlineText(true);
+        tv_forgot_pwd.setOnClickListener(listener);
         bt_get_vc.setOnClickListener(listener);
         bt_sure.setOnClickListener(listener);
         ll_agreement.setOnClickListener(listener);
+        tv_agreement.setOnClickListener(listener);
+        tv_agreement.getPaint().setUnderlineText(true);
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -87,7 +115,7 @@ public class RegisterActivity extends BaseActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.bt_get_vc:
-                    getVerificationCode();
+                    getVerifyCode();
                     break;
                 case R.id.bt_sure:
                     register();
@@ -95,27 +123,36 @@ public class RegisterActivity extends BaseActivity {
                 case R.id.ll_agreement:
                     clickAgreement();
                     break;
+                case R.id.tv_agreement:
+                    goAgreementActivity();
+                    break;
+                case R.id.tv_fast_login:
+                    goLoginActivity();
+                    break;
+                case R.id.tv_forgot_pwd:
+                    goForgotPwdActivity();
+                    break;
             }
         }
     };
 
-    private RequestTask getVerificationTask;
-    private void getVerificationCode(){
-        if ( checkVerificationCode() ) {
+    private RequestTask getVerifyCodeTask;
+    private void getVerifyCode(){
+        if ( checkVerifyCodeData() ) {
             try {
-                getVerificationTask = new RequestTask.Builder(this,getVerificationCodeCallBack)
+                getVerifyCodeTask = new RequestTask.Builder(this,getVerificationCodeCallBack)
                         .setUrl(UrlAddressList.URL_GET_VC)
                         .setType(RequestTask.NO_PROMPT)
-                        .setContent(buildVcContent())
+                        .setContent(buildVerifyCodeContent())
                         .build();
-                getVerificationTask.execute();
+                getVerifyCodeTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
         }
     }
 
-    private boolean checkVerificationCode(){
+    private boolean checkVerifyCodeData(){
         tv_prompt.setText("");
         String phone = et_phone.getText().toString().trim();
         if ( TextUtils.isEmpty(phone) ){
@@ -129,7 +166,7 @@ public class RegisterActivity extends BaseActivity {
         return true;
     }
 
-    private Map<String, String> buildVcContent() {
+    private Map<String, String> buildVerifyCodeContent() {
         Map<String,String> map = new HashMap<>();
         map.put(UrlAddressList.PARAM,et_phone.getText().toString());
         return map;
@@ -149,11 +186,10 @@ public class RegisterActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-//            VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
-//            BaseApplication.getInstance().saveRegisterVc(response.getResult().getCode());
-//            countDown = 60;
-//            handler.sendEmptyMessage(RegisterHandler.COUNT_DOWN);
+            VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
+            BaseApplication.getInstance().saveRegisterVc(response.getResult().getCode());
+            countDown = 60;
+            handler.sendEmptyMessage(RegisterHandler.COUNT_DOWN);
         }
     };
 
@@ -174,9 +210,7 @@ public class RegisterActivity extends BaseActivity {
                     throwable.printStackTrace();
                 }
             } else {
-                //跳转至用户协议界面
-                Intent intent = new Intent(RegisterActivity.this,AgreementActivity.class);
-                startActivityForResult(intent,REQUEST_AGREEMENT);
+                goAgreementActivity();
             }
         }
     }
@@ -220,7 +254,7 @@ public class RegisterActivity extends BaseActivity {
             //TODO
             object.put("accountMobile",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
-//            object.put("code", BaseApplication.getInstance().getRegisterVc());
+            object.put("code", BaseApplication.getInstance().getRegisterVc());
             object.put("checkCode",et_vc.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -242,14 +276,61 @@ public class RegisterActivity extends BaseActivity {
         @Override
         public void onPostExecute(String result) {
             //TODO
-//            RegisterResponse response = GsonUtil.getInstance().fromJson(result,RegisterResponse.class);
-//            if ( 1 == response.getResult().getIsSuccess() ){
-//                login();
-//            } else {
-//                tv_prompt.setText("");
-//            }
+            RegisterResponse response = GsonUtil.getInstance().fromJson(result,RegisterResponse.class);
+            if ( 1 == response.getResult().getIsSuccess() ){
+                login();
+            } else {
+                tv_prompt.setText("");
+            }
         }
     };
+
+    private void goAgreementActivity(){
+        //跳转至用户协议界面
+        Intent intent = new Intent(RegisterActivity.this,AgreementActivity.class);
+        startActivityForResult(intent,REQUEST_AGREEMENT);
+    }
+
+    private LoginTask loginTask;
+    /**
+     * 作者: 边贤君
+     * 描述: 登录
+     * 日期: 2018/1/8 9:26
+     */
+    private void login(){
+        String accountMobile = et_phone.getText().toString().trim();
+        String loginPwd = et_login_pwd.getText().toString().trim();
+        try {
+            loginTask = new LoginTask(this, accountMobile, loginPwd, new LoginTask.LoginCallBack() {
+                @Override
+                public void onPreExecute() {
+
+                }
+
+                @Override
+                public void onError(String result) {
+                    tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
+                }
+
+                @Override
+                public void onPostExecute(String result) {
+                    //登录成功后,进入Loading页面
+                    startActivity(LoadingActivity.class);
+                }
+            });
+            loginTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private void goLoginActivity(){
+        startActivity(LoginActivity.class);
+    }
+
+    private void goForgotPwdActivity(){
+        startActivity(ForgotPwdActivity.class);
+    }
 
     private void clickAgreement(){
         cb_agreement.setChecked(!cb_agreement.isChecked());

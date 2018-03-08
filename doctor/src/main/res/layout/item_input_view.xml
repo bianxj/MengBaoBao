@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightSky">
+
+    <RelativeLayout
+        android:layout_width="@dimen/x720px"
+        android:layout_height="@dimen/y163px"
+        android:layout_marginTop="@dimen/y19px"
+        android:background="@color/first_white"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/assessment_other"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x48px"
+            style="@style/SecondBlack.Text30px"/>
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="@dimen/x385px"
+            android:layout_height="@dimen/x57px"
+            android:lines="1"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x20px"
+            android:paddingRight="@dimen/x20px"
+            style="@style/SecondBlack.Text30px"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_circle_edittext"
+            android:layout_marginLeft="@dimen/x124px"
+            />
+
+        <Button
+            android:id="@+id/bt_commit"
+            android:layout_width="@dimen/x145px"
+            android:layout_height="@dimen/x57px"
+            android:background="@drawable/bg_circle_check"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x48px"
+            android:text="@string/commit_audit"
+            style="@style/FirstWhite.Text30px"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

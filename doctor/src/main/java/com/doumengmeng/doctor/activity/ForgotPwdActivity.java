@@ -20,12 +20,16 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
+import com.doumengmeng.doctor.response.VCResponse;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.FormatCheckUtil;
+import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +43,7 @@ public class ForgotPwdActivity extends BaseActivity {
     private View v_status_bar;
     private RelativeLayout rl_back;
     private Button bt_sure;
-    private TextView bt_get_vc , tv_prompt;
+    private TextView bt_get_vc , tv_prompt , tv_agreement;
     private EditText et_phone , et_vc , et_login_pwd;
     private LinearLayout ll_agreement;
     private CheckBox cb_agreement;
@@ -56,6 +60,14 @@ public class ForgotPwdActivity extends BaseActivity {
         findView();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTask(changePwdTask);
+        stopTask(getVerificationCodeTask);
+        clearHandler(handler);
+    }
+
     private void findView(){
         v_status_bar = findViewById(R.id.v_status_bar);
         v_status_bar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AppUtil.getStatusBarHeight(this)));
@@ -68,6 +80,7 @@ public class ForgotPwdActivity extends BaseActivity {
         et_vc = findViewById(R.id.et_vc);
 
         tv_prompt = findViewById(R.id.tv_prompt);
+        tv_agreement = findViewById(R.id.tv_agreement);
         bt_sure = findViewById(R.id.bt_sure);
 
         ll_agreement = findViewById(R.id.ll_agreement);
@@ -80,6 +93,8 @@ public class ForgotPwdActivity extends BaseActivity {
         bt_get_vc.setOnClickListener(listener);
         bt_sure.setOnClickListener(listener);
         ll_agreement.setOnClickListener(listener);
+        tv_agreement.setOnClickListener(listener);
+        tv_agreement.getPaint().setUnderlineText(true);
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -97,6 +112,9 @@ public class ForgotPwdActivity extends BaseActivity {
                     break;
                 case R.id.ll_agreement:
                     clickAgreement();
+                    break;
+                case R.id.tv_agreement:
+                    goAgreementActivity();
                     break;
             }
         }
@@ -156,12 +174,10 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-//            VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
-//            BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
-//
-//            countDown = 60;
-//            handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
+            VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
+            BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
+            countDown = 60;
+            handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
         }
     };
 
@@ -181,9 +197,7 @@ public class ForgotPwdActivity extends BaseActivity {
                     throwable.printStackTrace();
                 }
             } else {
-                //跳转至用户协议
-                Intent intent = new Intent(ForgotPwdActivity.this,AgreementActivity.class);
-                startActivityForResult(intent,REQUEST_AGREEMENT);
+                goAgreementActivity();
             }
         }
     }
@@ -206,13 +220,12 @@ public class ForgotPwdActivity extends BaseActivity {
             return false;
         }
 
-        //TODO
-//        String saveVc = BaseApplication.getInstance().getForgetVc();
-//        if ( TextUtils.isEmpty(saveVc) ){
-//            tv_prompt.setText(R.string.prompt_no_save_vc);
-//
-//            return false;
-//        }
+        String saveVc = BaseApplication.getInstance().getForgetVc();
+        if ( TextUtils.isEmpty(saveVc) ){
+            tv_prompt.setText(R.string.prompt_no_save_vc);
+
+            return false;
+        }
 
         String vc = et_vc.getText().toString().trim();
         if ( TextUtils.isEmpty(vc) ){
@@ -236,10 +249,9 @@ public class ForgotPwdActivity extends BaseActivity {
     private Map<String, String> buildChangePwdContent() {
         JSONObject object = new JSONObject();
         try {
-            //TODO
             object.put("accountMobile",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
-//            object.put("code", BaseApplication.getInstance().getForgetVc());
+            object.put("code", BaseApplication.getInstance().getForgetVc());
             object.put("checkCode",et_vc.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -294,13 +306,13 @@ public class ForgotPwdActivity extends BaseActivity {
         if ( ResponseErrorCode.ERROR_LOGIN_ROLE_NOT_EXIST == errorCode ){
             //用户不存在跳转至注册界面
             //TODO
-//            MyDialog.showPromptDialog(this, errorMsg, new MyDialog.PromptDialogCallback() {
-//                @Override
-//                public void sure() {
-//                    startActivity(RegisterActivity.class);
-//                    back();
-//                }
-//            });
+            MyDialog.showPromptDialog(this, errorMsg, new MyDialog.PromptDialogCallback() {
+                @Override
+                public void sure() {
+                    startActivity(RegisterActivity.class);
+                    back();
+                }
+            });
         } else {
             tv_prompt.setText(errorMsg);
         }
@@ -331,6 +343,11 @@ public class ForgotPwdActivity extends BaseActivity {
                 }
             }
         }
+    }
+
+    private void goAgreementActivity(){
+        Intent intent = new Intent(ForgotPwdActivity.this,AgreementActivity.class);
+        startActivityForResult(intent,REQUEST_AGREEMENT);
     }
 
 }
