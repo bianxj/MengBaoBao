@@ -9,6 +9,9 @@
 
     <!--PageTitle-->
     <string name="input_person_info">完善个人信息</string>
+    <string name="account">账户</string>
+    <string name="detail">明细</string>
+    <string name="message">消息</string>
 
     <!--Shared数据-->
     <string name="input_phone_hint">手机号</string>
@@ -315,9 +318,15 @@
     <string name="dialog_content_read_agreement">请勾选“我已阅读”</string>
     <string name="dialog_content_open_location_service">请打开定位服务</string>
 
+    <string name="dialog_content_certificate_example">医师执业证书（示例）</string>
+    <string name="dialog_content_first_page">第一页</string>
+    <string name="dialog_content_second_page">第二页</string>
+    <string name="dialog_content_example_hint">保证照片中的内容（姓名、医院。名称、科室、证件编号）清晰可见</string>
+
     <string name="prompt_bt_cancel">取消</string>
     <string name="prompt_bt_sure">确认</string>
     <string name="prompt_no_wifi">当前不在wifi状态下，可能会产生流量费用</string>
+    <string name="prompt_rates_content">按平台协议规定\n实际所得为服务费的50%</string>
 
     <string name="prompt_old_passwd_empty">旧密码为空</string>
     <string name="prompt_new_passwd_empty">新密码为空</string>

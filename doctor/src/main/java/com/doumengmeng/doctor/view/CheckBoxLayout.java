@@ -161,6 +161,15 @@ public class CheckBoxLayout extends LinearLayout {
         return checkBoxes;
     }
 
+    public CheckBox getFirstCheckBox(){
+        for (CheckBox checkBox:checkBoxes){
+            if ( checkBox.isChecked() ){
+                return checkBox;
+            }
+        }
+        return null;
+    }
+
     public interface OnItemSelectListener{
         public void onItemClickListener(CompoundButton compoundButton);
     }

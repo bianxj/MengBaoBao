@@ -29,7 +29,9 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="mjFnnk87mnZUXfMBPSHZXLu7CUUizr1M" />
 
-        <activity android:name="com.doumengmeng.doctor.activity.InputDoctorInfoActivity">
+        <activity android:name="com.doumengmeng.doctor.activity.MainActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,6 +50,8 @@
         <activity android:name=".activity.HeadImageActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.HospitalListActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.DepartmentActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.InputDoctorInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.AccountDetailActivity" android:screenOrientation="portrait"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

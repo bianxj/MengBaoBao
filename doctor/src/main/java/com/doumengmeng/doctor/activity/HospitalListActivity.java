@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +19,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -26,12 +29,15 @@ import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.adapter.HospitalAdaper;
 import com.doumengmeng.doctor.adapter.viewholder.InputContentHolder;
 import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.db.DaoManager;
+import com.doumengmeng.doctor.response.entity.Hospital;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.util.PermissionUtil;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +60,7 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
     private ImageView iv_arrow;
     private XRecyclerView xrv;
     private HospitalAdaper adapter;
+    private List<HospitalAdaper.HospitalData> hospitals = new ArrayList<>();
 
     private boolean isSkipToApp = false;
     @Override
@@ -61,6 +68,12 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_list);
         findView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        clearHandler(handler);
     }
 
     private void findView(){
@@ -92,17 +105,9 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
         xrv.setFootView(new XLoadMoreFooter(this));
 //        xrv.setLoadingListener(searchLoadingListener);
 
-        List<HospitalAdaper.HospitalData> datas = new ArrayList<>();
-        for (int i = 0 ; i< 40;i++){
-            HospitalAdaper.HospitalData data = new HospitalAdaper.HospitalData();
-            data.setHospitalAddress("Addresss"+i);
-            data.setHospitalId("Id"+i);
-            data.setHospitalName("Name"+i);
-            datas.add(data);
-        }
-
-        adapter = new HospitalAdaper(this,datas);
+        adapter = new HospitalAdaper(this,hospitals);
         xrv.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -132,15 +137,40 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
                 @Override
                 public void choose(String city) {
                     executeRotateAnimation();
-//                    if ( DaoManager.getInstance().getHospitalDao().hasHospitalInCity(HospitalListActivity.this,city) ) {
+                    if ( DaoManager.getInstance().getHospitalDao().hasHospitalInCity(HospitalListActivity.this,city) ) {
                         setCity(city);
-//                    } else {
-//                        Toast.makeText(HospitalListActivity.this,"该地区还在开发中",Toast.LENGTH_SHORT).show();
-//                    }
+                    } else {
+                        Toast.makeText(HospitalListActivity.this,"该地区还在开发中", Toast.LENGTH_SHORT).show();
+                    }
                     MyDialog.dismissChooseCityDialog();
                 }
             });
         }
+    }
+
+    private List<Hospital> tempHospitals;
+    private void refreshHospitalList(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                tempHospitals = DaoManager.getInstance().getHospitalDao().searchHospitalListByCity(HospitalListActivity.this,tv_city.getText().toString().trim());
+                handler.sendEmptyMessage(HospitalHandler.ACTION_UPDATE_HOSPITAL);
+            }
+        }).start();
+    }
+
+    private void updateHospitalList(){
+        hospitals.clear();
+        for (int i = 0;i<tempHospitals.size();i++){
+            HospitalAdaper.HospitalData data = new HospitalAdaper.HospitalData();
+            Hospital hospital = tempHospitals.get(i);
+            data.setHospitalName(hospital.getHospitalname());
+            data.setHospitalAddress(hospital.getHospitaladdress());
+            data.setHospitalUrl(hospital.getHospitalurl());
+            data.setHospitalId(hospital.getHospitalid());
+            hospitals.add(data);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     //-------------------------------------Animation start------------------------------------------
@@ -307,4 +337,26 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
             
         }
     }
+
+    private HospitalHandler handler = new HospitalHandler(this);
+    private static class HospitalHandler extends Handler{
+
+        public final static int ACTION_UPDATE_HOSPITAL = 0x01;
+
+        private WeakReference<HospitalListActivity> weakReference;
+
+        public HospitalHandler(HospitalListActivity activity) {
+            this.weakReference = new WeakReference<HospitalListActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ( ACTION_UPDATE_HOSPITAL == msg.what ){
+                weakReference.get().updateHospitalList();
+            }
+        }
+
+    }
+
 }

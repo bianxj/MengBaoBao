@@ -208,6 +208,9 @@
     <style name="FirstWhite.Text22px">
         <item name="android:textSize">@dimen/y22px</item>
     </style>
+    <style name="FirstWhite.Text23px">
+        <item name="android:textSize">@dimen/y23px</item>
+    </style>
     <style name="FirstWhite.Text24px">
         <item name="android:textSize">@dimen/y24px</item>
     </style>

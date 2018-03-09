@@ -25,15 +25,20 @@
                 android:layout_centerInParent="true"
                 style="@style/FirstWhite.Text30px"
                 android:text="@string/account_month_income"/>
-            <ImageView
-                android:id="@+id/iv_details"
-                android:layout_width="@dimen/x36px"
-                android:layout_height="@dimen/x36px"
+            <RelativeLayout
+                android:id="@+id/rl_details"
+                android:layout_width="@dimen/x52px"
+                android:layout_height="@dimen/x52px"
                 android:layout_toRightOf="@+id/unuse_month_income"
-                android:layout_marginLeft="@dimen/x20px"
-                android:layout_centerVertical="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/btn_account_details"/>
+                android:layout_centerVertical="true">
+                <ImageView
+                    android:id="@+id/iv_details"
+                    android:layout_width="@dimen/x36px"
+                    android:layout_height="@dimen/x36px"
+                    android:layout_centerInParent="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/btn_account_details"/>
+            </RelativeLayout>
         </RelativeLayout>
 
         <TextView
@@ -106,7 +111,7 @@
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y14px" />
+        android:layout_height="@dimen/y10px" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -164,7 +169,7 @@
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y14px" />
+        android:layout_height="@dimen/y10px" />
 
     <LinearLayout
         android:layout_width="match_parent"

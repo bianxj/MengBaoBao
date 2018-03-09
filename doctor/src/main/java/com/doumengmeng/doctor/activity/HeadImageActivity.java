@@ -92,7 +92,7 @@ public class HeadImageActivity extends BaseActivity {
                     openCamera();
                     break;
                 case R.id.iv_picture:
-                    tackPicture();
+                    takePicture();
                     break;
             }
         }
@@ -141,7 +141,7 @@ public class HeadImageActivity extends BaseActivity {
         cropPicture(srcUri,destUri,needPermission);
     }
 
-    private void tackPicture(){
+    private void takePicture(){
         if ( PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) ){
             Intent intent = new Intent(Intent.ACTION_PICK) ;
             intent.setType("image/*") ;
@@ -191,7 +191,7 @@ public class HeadImageActivity extends BaseActivity {
                     openCamera();
                 }
                 if ( Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permission) ){
-                    tackPicture();
+                    takePicture();
                 }
             }
 

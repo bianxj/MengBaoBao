@@ -14,7 +14,7 @@
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y156px"
+        android:layout_height="@dimen/y152px"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="@color/first_white"
@@ -33,6 +33,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y28px"
                 android:checked="true"
+                android:clickable="false"
                 android:button="@null"/>
 
             <TextView
@@ -44,10 +45,20 @@
                 android:layout_marginBottom="@dimen/y25px"
                 android:textColor="@drawable/menu_text_color"/>
 
-            <ImageView
+            <TextView
+                android:id="@+id/tv_home_count"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:layout_height="@dimen/x35px"
+                android:layout_marginTop="@dimen/y15px"
+                android:layout_marginLeft="@dimen/x30px"
+                android:minWidth="@dimen/x35px"
+                android:paddingLeft="@dimen/x8px"
+                android:paddingRight="@dimen/x8px"
+                android:text="9"
+                android:gravity="center"
+                style="@style/FirstWhite.Text23px"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/icon_message_count"/>
 
         </FrameLayout>
 
@@ -64,6 +75,7 @@
                 android:background="@drawable/menu_btn_account"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y28px"
+                android:clickable="false"
                 android:button="@null"/>
 
             <TextView
@@ -73,11 +85,6 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginBottom="@dimen/y25px"
                 android:textColor="@drawable/menu_text_color"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
 
         </FrameLayout>
 
@@ -93,6 +100,7 @@
                 android:background="@drawable/menu_btn_message"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y28px"
+                android:clickable="false"
                 android:button="@null"/>
 
             <TextView
@@ -101,12 +109,25 @@
                 android:text="消息"
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginBottom="@dimen/y25px"
+                android:enabled="false"
                 android:textColor="@drawable/menu_text_color"/>
 
-            <ImageView
+
+
+            <TextView
+                android:id="@+id/tv_message_count"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:layout_height="@dimen/x35px"
+                android:layout_marginTop="@dimen/y15px"
+                android:layout_marginLeft="@dimen/x30px"
+                android:minWidth="@dimen/x35px"
+                android:paddingLeft="@dimen/x8px"
+                android:paddingRight="@dimen/x8px"
+                android:text="9"
+                android:gravity="center"
+                style="@style/FirstWhite.Text23px"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/icon_message_count"/>
 
         </FrameLayout>
 
@@ -123,6 +144,7 @@
                 android:background="@drawable/menu_btn_about"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y28px"
+                android:clickable="false"
                 android:button="@null"/>
 
             <TextView
@@ -132,11 +154,6 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginBottom="@dimen/y25px"
                 android:textColor="@drawable/menu_text_color"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
 
         </FrameLayout>
     </LinearLayout>

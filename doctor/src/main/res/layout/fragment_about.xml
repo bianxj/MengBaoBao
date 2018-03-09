@@ -19,7 +19,6 @@
             android:layout_height="@dimen/x197px"
             android:layout_marginTop="@dimen/y60px"
             android:layout_marginLeft="@dimen/x46px"
-            android:scaleType="fitXY"
             android:src="@drawable/default_icon_doctor"
             app:civ_border_width="@dimen/y2px"
             app:civ_border_color="@color/first_pink"

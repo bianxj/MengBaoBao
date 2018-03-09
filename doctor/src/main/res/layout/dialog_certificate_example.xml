@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="@dimen/x48px"
+            android:layout_height="@dimen/x48px"
+            android:layout_gravity="right"
+            android:src="@drawable/btn_certificate_close"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/x581px"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_rounded"
+            android:layout_marginTop="@dimen/y26px"
+            android:layout_marginRight="@dimen/x35px"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y28px"
+                android:includeFontPadding="false"
+                style="@style/SecondBlack.Text30px"
+                android:text="@string/dialog_content_certificate_example"/>
+
+            <ImageView
+                android:layout_width="@dimen/x483px"
+                android:layout_height="@dimen/x340px"
+                android:layout_marginTop="@dimen/y20px"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_first_certificate_example"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y18px"
+                android:includeFontPadding="false"
+                style="@style/SecondBlack.Text26px"
+                android:text="@string/dialog_content_first_page"/>
+
+            <ImageView
+                android:layout_width="@dimen/x486px"
+                android:layout_height="@dimen/x353px"
+                android:layout_marginTop="@dimen/y15px"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_second_certificate_example"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10px"
+                android:includeFontPadding="false"
+                style="@style/SecondBlack.Text26px"
+                android:text="@string/dialog_content_second_page"/>
+            <TextView
+                android:layout_width="@dimen/x435px"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20px"
+                android:layout_marginBottom="@dimen/y20px"
+                android:includeFontPadding="false"
+                style="@style/SecondBlue.Text24px"
+                android:text="@string/dialog_content_example_hint"/>
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

@@ -24,6 +24,8 @@ public class UrlAddressList {
     public final static String URL_INIT_CONFIGURE = BASE_URL + "system.do?method=InitServerConfigure";
     public final static String URL_EIDT_PASSWORD = BASE_URL + "babyUser.do?method=EditPwd";
 
+    public final static String URL_SAVE_DOCTOR = BASE_URL + "babyDoctor.do?method=SubmitRecord";
+
 //    public final static String URL_SAVE_USER_INFO = BASE_URL + "babyUser.do?method=SaveUser";
 //    public final static String URL_UPLOAD_HEAD_IMG = BASE_URL + "babyUser.do?method=UploadUserHead";
 //    public final static String URL_GET_ALL_RECORD = BASE_URL + "babyUser.do?method=GetAllRecord";

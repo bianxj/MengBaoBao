@@ -1,14 +1,17 @@
 package com.doumengmeng.doctor.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.MotionEvent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,11 +21,24 @@ import android.widget.TextView;
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.net.HttpUtil;
+import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.request.entity.RequestDoctorInfo;
+import com.doumengmeng.doctor.util.AppUtil;
+import com.doumengmeng.doctor.util.EditTextUtil;
+import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
+import com.doumengmeng.doctor.util.PermissionUtil;
+import com.doumengmeng.doctor.util.PictureUtils;
 import com.doumengmeng.doctor.view.CheckBoxLayout;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/3/1.
@@ -42,7 +58,7 @@ public class InputDoctorInfoActivity extends BaseActivity {
     private RelativeLayout rl_prompt,rl_prompt_close;
     private TextView tv_prompt;
 
-    private EditText et_name,et_speciality,et_intro;
+    private EditText et_name,et_speciality,et_intro,et_identity_num;
     private ImageView civ_head;
     private RelativeLayout rl_hospital,rl_department;
     private TextView tv_hospital ,tv_department;
@@ -86,12 +102,14 @@ public class InputDoctorInfoActivity extends BaseActivity {
         tv_prompt = findViewById(R.id.tv_prompt);
 
         rl_prompt.setVisibility(View.GONE);
+        rl_prompt_close.setOnClickListener(listener);
     }
 
     private void initContentView(){
         et_name = findViewById(R.id.et_name);
         et_speciality = findViewById(R.id.et_speciality);
         et_intro = findViewById(R.id.et_intro);
+        et_identity_num = findViewById(R.id.et_identity_num);
         civ_head = findViewById(R.id.civ_head);
         rl_hospital = findViewById(R.id.rl_hospital);
         rl_department = findViewById(R.id.rl_department);
@@ -108,6 +126,8 @@ public class InputDoctorInfoActivity extends BaseActivity {
         cbl_professional_title.setCheckBoxes(Arrays.asList(getResources().getStringArray(R.array.professional_titles)),true);
         cbl_service_cost.setCheckBoxes(Arrays.asList(getResources().getStringArray(R.array.service_cost)),true);
         cbl_service_cost.setOnItemSelectListener(selectListener);
+        EditTextUtil.scrollEditText(et_intro);
+        EditTextUtil.scrollEditText(et_speciality);
 
         civ_head.setOnClickListener(listener);
         rl_hospital.setOnClickListener(listener);
@@ -127,7 +147,7 @@ public class InputDoctorInfoActivity extends BaseActivity {
 
     private void refreshCost(String cost){
         int realCost = Integer.parseInt(cost.replace("元",""));
-        tv_income.setText(realCost+"元");
+        tv_income.setText(realCost/2+"元");
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -144,10 +164,13 @@ public class InputDoctorInfoActivity extends BaseActivity {
                     selectDepartment();
                     break;
                 case R.id.iv_certificate_example:
+                    showCertificateExample();
                     break;
                 case R.id.iv_first_certificate:
+                    chooseFirstCertificate();
                     break;
                 case R.id.iv_second_certificate:
+                    chooseSecondCertificate();
                     break;
                 case R.id.bt_submit:
                     uploadDoctorInfo();
@@ -155,9 +178,21 @@ public class InputDoctorInfoActivity extends BaseActivity {
                 case R.id.rl_back:
                     back();
                     break;
+                case R.id.rl_prompt_close:
+                    closePrompt();
+                    break;
             }
         }
     };
+
+    private void closePrompt(){
+        rl_prompt.setVisibility(View.GONE);
+    }
+
+    private void showPrompt(String content){
+        rl_prompt.setVisibility(View.VISIBLE);
+        tv_prompt.setText(content);
+    }
 
     private void chooseHeadImage(){
         Intent intent = new Intent(this,HeadImageActivity.class);
@@ -175,17 +210,58 @@ public class InputDoctorInfoActivity extends BaseActivity {
     }
 
     private void showCertificateExample(){
-
+        MyDialog.showExampleDialog(this);
     }
 
     private void chooseFirstCertificate(){
-
+        takePicture(REQUEST_FIRST_CERTIFICATE);
     }
 
     private void chooseSecondCertificate(){
-
+        takePicture(REQUEST_SECOND_CERTIFICATE);
     }
 
+    private void takePicture(int requestCode){
+        if ( PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ){
+            Intent intent = new Intent(Intent.ACTION_PICK) ;
+            intent.setType("image/*") ;
+            startActivityForResult(intent , requestCode) ;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults, new PermissionUtil.RequestPermissionSuccess() {
+            @Override
+            public void success(String permission) {
+                takePicture(requestCode);
+            }
+
+            @Override
+            public void denied(String permission) {
+
+            }
+
+            @Override
+            public void alwaysDenied(String permission) {
+                MyDialog.showPermissionDialog(InputDoctorInfoActivity.this, getString(R.string.dialog_content_storage_permission), new MyDialog.ChooseDialogCallback() {
+                    @Override
+                    public void sure() {
+                        AppUtil.openPrimession(InputDoctorInfoActivity.this);
+                    }
+
+                    @Override
+                    public void cancel() {
+
+                    }
+                });
+            }
+        });
+    }
+
+    private String firstCertificatePath;
+    private String secondCertificatePath;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -198,6 +274,19 @@ public class InputDoctorInfoActivity extends BaseActivity {
         if ( REQUEST_DEPARTMENT == requestCode && Activity.RESULT_OK == resultCode ){
             saveDepartmentName(data);
         }
+        if ( REQUEST_FIRST_CERTIFICATE == requestCode && Activity.RESULT_OK == resultCode ){
+            firstCertificatePath = PictureUtils.getFilePath(this,data.getData());
+            loadImageView(firstCertificatePath,iv_first_certificate);
+        }
+        if ( REQUEST_SECOND_CERTIFICATE == requestCode && Activity.RESULT_OK == resultCode ){
+            secondCertificatePath = PictureUtils.getFilePath(this,data.getData());
+            loadImageView(secondCertificatePath,iv_second_certificate);
+        }
+    }
+
+    private void loadImageView(String path,ImageView imageView){
+        Bitmap bitmap = PictureUtils.getSmallBitmap(path,imageView.getWidth(),imageView.getHeight());
+        imageView.setImageBitmap(bitmap);
     }
 
     private void refreshHeadImg(){
@@ -223,14 +312,86 @@ public class InputDoctorInfoActivity extends BaseActivity {
 
     private void uploadDoctorInfo(){
         //TODO
+        if ( checkUploadDoctorInfo() ) {
+            try {
+                uploadDoctorInfoTask = new RequestTask.Builder(this, uploadDoctorInfoCallBack)
+                        .setContent(buildUploadDoctorContent())
+                        .setUrl(UrlAddressList.URL_SAVE_DOCTOR)
+                        .setType(RequestTask.DEFAULT).build();
+                uploadDoctorInfoTask.execute();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        }
     }
 
-    private void checkUploadDoctorInfo(){
+    private boolean checkUploadDoctorInfo(){
+        if (TextUtils.isEmpty(et_name.getText().toString().trim()) ){
+            showPrompt("姓名不能为空");
+            return false;
+        }
 
+        if ( TextUtils.isEmpty(tv_hospital.getText().toString().trim()) ){
+            showPrompt("请选择执业医院");
+            return false;
+        }
+
+        if ( TextUtils.isEmpty(tv_department.getText().toString().trim()) ){
+            showPrompt("请选择科室");
+            return false;
+        }
+
+        if ( null == cbl_professional_title.getFirstCheckBox() ){
+            showPrompt("请选择职称");
+            return false;
+        }
+
+        if ( null == cbl_service_cost.getFirstCheckBox() ){
+            showPrompt("请选择服务费");
+            return false;
+        }
+
+        if ( TextUtils.isEmpty(et_identity_num.getText().toString().trim()) ){
+            showPrompt("请输入身份证号");
+            return false;
+        }
+
+        if ( TextUtils.isEmpty(firstCertificatePath) || TextUtils.isEmpty(secondCertificatePath) ){
+            showPrompt("证书信息不完全");
+            return false;
+        }
+
+        return true;
     }
 
-    private void buildUploadDoctorContent(){
+    private Map<String,String> buildUploadDoctorContent(){
+        Map<String,String> map = new HashMap<>();
 
+        RequestDoctorInfo doctorInfo = new RequestDoctorInfo();
+        doctorInfo.setDoctorId("");
+        CheckBox costBox = cbl_service_cost.getFirstCheckBox();
+
+        CheckBox positionlBox = cbl_professional_title.getFirstCheckBox();
+
+        doctorInfo.setDoctorName(et_name.getText().toString().trim());
+        doctorInfo.setHospitalName(tv_hospital.getText().toString().trim());
+        doctorInfo.setDepartmentName(tv_department.getText().toString().trim());
+        doctorInfo.setPositionalTitles(positionlBox.getText().toString().trim());
+        doctorInfo.setCost(costBox.getText().toString().trim().replace("元",""));
+        doctorInfo.setSpeciality(et_speciality.getText().toString().trim());
+        doctorInfo.setDoctorDesc(et_intro.getText().toString().trim());
+        doctorInfo.setDoctorCode(et_identity_num.getText().toString().trim());
+
+        List<HttpUtil.UploadFile> uploadFiles = new ArrayList<>();
+        uploadFiles.add(new HttpUtil.UploadFile("doctorHead",BaseApplication.getInstance().getHeadCropPath()));
+        uploadFiles.add(new HttpUtil.UploadFile("certificate1",firstCertificatePath));
+        uploadFiles.add(new HttpUtil.UploadFile("certificate2",secondCertificatePath));
+
+        map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getSessionId());
+        map.put(UrlAddressList.PARAM, GsonUtil.getInstance().toJson(doctorInfo));
+        map.put(HttpUtil.TYPE_FILE,GsonUtil.getInstance().toJson(uploadFiles));
+
+        return map;
     }
 
     private RequestCallBack uploadDoctorInfoCallBack = new RequestCallBack() {
@@ -252,41 +413,6 @@ public class InputDoctorInfoActivity extends BaseActivity {
 
     private void back(){
         finish();
-    }
-
-    private final View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if ((view.getId() == R.id.et_speciality && canVerticalScroll(et_speciality))) {
-                view.getParent().requestDisallowInterceptTouchEvent(true);
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    view.getParent().requestDisallowInterceptTouchEvent(false);
-                }
-            }
-            return false;
-        }
-    };
-
-    /**
-     * EditText竖直方向是否可以滚动
-     * @param editText  需要判断的EditText
-     * @return  true：可以滚动   false：不可以滚动
-     */
-    private boolean canVerticalScroll(EditText editText) {
-        //滚动的距离
-        int scrollY = editText.getScrollY();
-        //控件内容的总高度
-        int scrollRange = editText.getLayout().getHeight();
-        //控件实际显示的高度
-        int scrollExtent = editText.getHeight() - editText.getCompoundPaddingTop() -editText.getCompoundPaddingBottom();
-        //控件内容总高度与实际显示高度的差值
-        int scrollDifference = scrollRange - scrollExtent;
-
-        if(scrollDifference == 0) {
-            return false;
-        }
-
-        return (scrollY > 0) || (scrollY < scrollDifference - 1);
     }
 
 }

@@ -41,6 +41,8 @@ public class MainActivity extends BaseFragmentActivity {
     //我
     private static final String PAGE_ABOUT = "page_about";
 
+    private TextView tv_home_count,tv_message_count;
+
     private FragmentManager fm;
     private Fragment currentFragment;
     private Map<String,Fragment> fragmentMap = new HashMap<>();
@@ -51,10 +53,19 @@ public class MainActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findView();
+        setDefaultPage();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshCornerMark();
     }
 
     private void findView(){
 //        fl_content = findViewById(R.id.fl_content);
+        tv_home_count = findViewById(R.id.tv_home_count);
+        tv_message_count = findViewById(R.id.tv_message_count);
         initView();
     }
 
@@ -78,6 +89,15 @@ public class MainActivity extends BaseFragmentActivity {
         fragmentMap.put(PAGE_ACCOUNT,new AccountFragment());
         fragmentMap.put(PAGE_MESSAGE,new MessageFragment());
         fragmentMap.put(PAGE_ABOUT,new AboutFragment());
+    }
+
+    private void setDefaultPage(){
+        switchFragment(PAGE_HOME);
+    }
+
+    private void refreshCornerMark(){
+//        tv_home_count.setText();
+//        tv_message_count.setText();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

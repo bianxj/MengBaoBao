@@ -4,8 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
+import android.text.TextUtils;
 
 import com.doumengmeng.doctor.activity.GuideActivity;
+import com.doumengmeng.doctor.response.entity.UserData;
+import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.util.MLog;
 import com.doumengmeng.doctor.util.SharedPreferencesUtil;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -140,8 +143,23 @@ public class BaseApplication extends Application {
     /**-------------------------------------------SharedPerference Start---------------------------------------------------*/
     private final static String TABLE_USER = "user";
 
+    private final static String COLUMN_USER_DATA = "user_data";
+    private final static String COLUMN_SESSION_ID = "session_id";
     private final static String COLUMN_REGISTER_VC = "register_vc";
     private final static String COLUMN_FORGET_VC = "forget_vc";
+
+    public void saveUserData(UserData userData){
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_USER_DATA, GsonUtil.getInstance().toJson(userData));
+    }
+
+    public UserData getUserData(){
+        String content = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_USER_DATA,"");
+        if (TextUtils.isEmpty(content) ){
+            return null;
+        }
+        return GsonUtil.getInstance().fromJson(content,UserData.class);
+    }
+
     public void saveRegisterVc(String registerVc){
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_REGISTER_VC,registerVc);
     }
@@ -157,6 +175,15 @@ public class BaseApplication extends Application {
     public String getForgetVc(){
         return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_FORGET_VC,null);
     }
+
+    public String getSessionId(){
+        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_SESSION_ID,"");
+    }
+
+    public void saveSessionId(String sessionId){
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_SESSION_ID,sessionId);
+    }
+
     /**-------------------------------------------SharedPerference End---------------------------------------------------*/
 
     private final static String PERSON_DIR = "person";

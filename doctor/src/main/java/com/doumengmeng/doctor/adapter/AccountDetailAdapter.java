@@ -8,12 +8,24 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/3/7.
  */
 
 public class AccountDetailAdapter extends RecyclerView.Adapter<AccountDetailAdapter.ViewHolder> {
 
+    private List<AccountDetailData> datas;
+
+    public AccountDetailAdapter(List<AccountDetailData> datas) {
+        if ( datas == null ){
+            this.datas = new ArrayList<>();
+        } else {
+            this.datas = datas;
+        }
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -23,12 +35,12 @@ public class AccountDetailAdapter extends RecyclerView.Adapter<AccountDetailAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        holder.initView(datas.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return datas.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -44,6 +56,53 @@ public class AccountDetailAdapter extends RecyclerView.Adapter<AccountDetailAdap
             tv_date = itemView.findViewById(R.id.tv_date);
             tv_time = itemView.findViewById(R.id.tv_time);
             tv_income = itemView.findViewById(R.id.tv_income);
+        }
+
+        private void initView(AccountDetailData data){
+            tv_customer_info.setText(data.getName());
+            tv_date.setText(data.getDate());
+            tv_time.setText(data.getTime());
+            tv_income.setText(data.getCost());
+        }
+
+    }
+
+    public static class AccountDetailData{
+        private String name;
+        private String date;
+        private String time;
+        private String cost;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+
+        public String getCost() {
+            return cost;
+        }
+
+        public void setCost(String cost) {
+            this.cost = cost;
         }
     }
 

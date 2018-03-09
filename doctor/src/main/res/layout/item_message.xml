@@ -23,7 +23,8 @@
             android:layout_gravity="right"
             />
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:id="@+id/rl_message"
+            android:layout_width="@dimen/x720px"
             android:layout_height="@dimen/y144px"
             android:background="@color/first_white">
 

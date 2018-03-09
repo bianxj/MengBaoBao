@@ -39,6 +39,7 @@ public class MyDialog {
 //    private final static Object gifLock = new Object();
     private final static Object cityLock = new Object();
 //    private final static Object payLock = new Object();
+    private final static Object exampleLock = new Object();
 
     private static Dialog updateDialog;
     private static Dialog promptDialog;
@@ -50,9 +51,34 @@ public class MyDialog {
 //
 //    private static PopupWindow payDialog;
     private static PopupWindow cityDialog;
+    private static Dialog exampleDialog;
 //
     public static void showPermissionDialog(Context context, String content , ChooseDialogCallback callback){
         showChooseDialog(context,content,R.string.dialog_btn_prompt_later,R.string.dialog_btn_prompt_go_setting,callback);
+    }
+
+    public static void showExampleDialog(Context context){
+        synchronized (exampleLock){
+            if ( exampleDialog != null ){
+                exampleDialog.dismiss();
+                exampleDialog = null;
+            }
+
+            exampleDialog = new Dialog(context,R.style.MyDialog);
+            View view = LayoutInflater.from(context).inflate(R.layout.dialog_certificate_example,null);
+            ImageView iv_close = view.findViewById(R.id.iv_close);
+            iv_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    exampleDialog.dismiss();
+                }
+            });
+
+            exampleDialog.setCancelable(false);
+            exampleDialog.setCanceledOnTouchOutside(false);
+            exampleDialog.setContentView(view);
+            exampleDialog.show();
+        }
     }
 
     public static void showUpdateDialog(Context context, boolean isForce, String updateVersion, String content, final UpdateDialogCallback callback){

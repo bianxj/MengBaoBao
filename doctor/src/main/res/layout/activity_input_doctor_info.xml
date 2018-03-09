@@ -183,8 +183,7 @@
                         android:layout_width="@dimen/x250px"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/x175px"
-                        android:text="@string/hospital" />
+                        android:layout_marginLeft="@dimen/x175px" />
 
                     <ImageView
                         android:layout_width="@dimen/x24px"
@@ -219,8 +218,7 @@
                         android:layout_width="@dimen/x250px"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/x175px"
-                        android:text="@string/hospital" />
+                        android:layout_marginLeft="@dimen/x175px" />
 
                     <ImageView
                         android:layout_width="@dimen/x24px"
@@ -327,8 +325,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:includeFontPadding="false"
-                        android:paddingLeft="@dimen/y174px"
-                        android:text="@string/income" />
+                        android:paddingLeft="@dimen/y174px" />
 
                 </RelativeLayout>
 
