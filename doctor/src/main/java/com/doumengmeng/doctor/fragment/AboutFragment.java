@@ -18,8 +18,12 @@ import com.doumengmeng.doctor.activity.CallCenterActivity;
 import com.doumengmeng.doctor.activity.ChangePwdActivity;
 import com.doumengmeng.doctor.activity.PersonInfoActivity;
 import com.doumengmeng.doctor.adapter.AboutAdapter;
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.base.BaseFragment;
+import com.doumengmeng.doctor.db.DaoManager;
+import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.view.CircleImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,20 +52,35 @@ public class AboutFragment extends BaseFragment {
     }
 
     private void findView(View view){
+        initTitle(view);
+        initDoctorInfo(view);
+        initAboutList(view);
+    }
+
+    private void initTitle(View view){
         rl_back = view.findViewById(R.id.rl_back);
         rl_back.setVisibility(View.GONE);
         tv_title = view.findViewById(R.id.tv_title);
         tv_title.setText(getString(R.string.i));
+    }
 
+    private void initDoctorInfo(View view){
+        civ_head = view.findViewById(R.id.civ_head);
+        tv_doctor_name = view.findViewById(R.id.tv_doctor_name);
+        tv_positional_titles = view.findViewById(R.id.tv_positional_titles);
+        tv_hospital = view.findViewById(R.id.tv_hospital);
+        tv_doctor_department = view.findViewById(R.id.tv_doctor_department);
+
+        UserData userData = BaseApplication.getInstance().getUserData();
+        ImageLoader.getInstance().displayImage(userData.getDoctorImg(),civ_head);
+        tv_doctor_name.setText(userData.getDoctorName());
+        tv_positional_titles.setText(userData.getPositionalTitles());
+        tv_hospital.setText(DaoManager.getInstance().getHospitalDao().searchHospitalNameById(getContext(),userData.getHospitalId()));
+        tv_doctor_department.setText(userData.getDepartmentName());
+    }
+
+    private void initAboutList(View view){
         lv = view.findViewById(R.id.lv);
-        initView();
-    }
-
-    private void initView(){
-        initAboutList();
-    }
-
-    private void initAboutList(){
         adapter = new AboutAdapter(initAboutItem());
         lv.setAdapter(adapter);
         adapter.notifyDataSetChanged();

@@ -54,6 +54,7 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
         private TextView tv_message_content;
         private TextView tv_message_time;
         private TextView tv_delete;
+        private TextView tv_unread;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -62,6 +63,7 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
             tv_message_content = itemView.findViewById(R.id.tv_message_content);
             tv_message_time = itemView.findViewById(R.id.tv_message_time);
             tv_delete = itemView.findViewById(R.id.tv_delete);
+            tv_unread = itemView.findViewById(R.id.tv_unread);
         }
 
         public void initView(MessageData data){
@@ -81,7 +83,7 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
             tv_message_time.setText(data.getMessageDate());
 
             tv_delete.setOnClickListener(listener);
-            rl_message.setOnTouchListener(touchListener);
+//            rl_message.setOnTouchListener(touchListener);
         }
 
         private View.OnClickListener listener = new View.OnClickListener() {

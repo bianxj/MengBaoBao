@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.adapter.DiagramDataAdapter;
 import com.doumengmeng.doctor.base.BaseActivity;
-import com.doumengmeng.doctor.entity.ImageData;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.google.gson.reflect.TypeToken;
 

@@ -6,8 +6,8 @@
 
     <include layout="@layout/include_title_back"></include>
 
-    <TextView
-        android:id="@+id/tv_message_content"
+    <EditText
+        android:id="@+id/et_message_content"
         android:layout_width="@dimen/x576px"
         android:layout_height="@dimen/y385px"
         android:layout_marginTop="@dimen/y48px"
@@ -28,8 +28,8 @@
         android:text="@string/contact"
         />
 
-    <TextView
-        android:id="@+id/tv_contact"
+    <EditText
+        android:id="@+id/et_contact"
         android:layout_width="@dimen/x576px"
         android:layout_height="@dimen/y86px"
         android:layout_marginTop="@dimen/y28px"

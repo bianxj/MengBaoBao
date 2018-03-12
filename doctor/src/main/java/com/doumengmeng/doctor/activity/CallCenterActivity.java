@@ -3,6 +3,7 @@ package com.doumengmeng.doctor.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,30 +18,50 @@ public class CallCenterActivity extends BaseActivity {
     private RelativeLayout rl_back;
     private TextView tv_title;
 
+    private ImageView iv_message_board;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
         findView();
-        configView();
     }
 
     private void findView(){
-        rl_back = findViewById(R.id.rl_back);
-        tv_title = findViewById(R.id.tv_title);
+        initTitle();
+        initContent();
     }
 
-    private void configView(){
+    private void initTitle(){
+        rl_back = findViewById(R.id.rl_back);
+        tv_title = findViewById(R.id.tv_title);
         tv_title.setText(R.string.call_center);
 
-        rl_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ( v.getId() == R.id.rl_back ){
+        rl_back.setOnClickListener(listener);
+    }
+
+    private void initContent(){
+        iv_message_board = findViewById(R.id.iv_message_board);
+
+        iv_message_board.setOnClickListener(listener);
+    }
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.rl_back:
                     back();
-                }
+                    break;
+                case R.id.iv_message_board:
+                    goMessageBoard();
+                    break;
             }
-        });
+        }
+    };
+
+    private void goMessageBoard(){
+        startActivity(MessageBoardActivity.class);
     }
 
     private void back(){

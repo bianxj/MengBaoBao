@@ -506,19 +506,17 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/rl_prompt_message"
+                android:id="@+id/rl_parenting_guide"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y153px">
 
-                <TextView
-                    android:id="@+id/tv_prompt_message"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/iv_parenting_guide"
+                    android:layout_width="@dimen/x408px"
+                    android:layout_height="@dimen/x107px"
                     android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:lineSpacingExtra="@dimen/y10px"
-                    android:maxWidth="@dimen/x480px"
-                    android:textColor="@color/colorPrimary" />
+                    android:background="@drawable/btn_parenting_guide"
+                    android:contentDescription="@string/contentDescription" />
             </RelativeLayout>
         </LinearLayout>
 

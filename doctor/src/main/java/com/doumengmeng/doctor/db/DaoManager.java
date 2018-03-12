@@ -37,6 +37,14 @@ public class DaoManager {
         return featureDao;
     }
 
+    private NurtureDao nutureDao;
+    public NurtureDao getNurtureDao(){
+        if ( nutureDao == null ){
+            nutureDao = new NurtureDao();
+        }
+        return nutureDao;
+    }
+
     public void deleteTable(Context context ,String tableName){
         try {
             DataBaseUtil.openDataBase(context).delete(tableName,null,null);

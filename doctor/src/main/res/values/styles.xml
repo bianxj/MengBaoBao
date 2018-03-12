@@ -28,8 +28,16 @@
         <item name="android:textColor">@color/first_black</item>
     </style>
 
+    <style name="FirstBlack.Text27px">
+        <item name="android:textSize">@dimen/y27px</item>
+    </style>
+
     <style name="FirstBlack.Text28px">
         <item name="android:textSize">@dimen/y28px</item>
+    </style>
+
+    <style name="FirstBlack.Text29px">
+        <item name="android:textSize">@dimen/y29px</item>
     </style>
 
     <style name="FirstBlack.Text30px">

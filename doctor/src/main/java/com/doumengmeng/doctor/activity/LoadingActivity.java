@@ -20,14 +20,23 @@ import android.widget.TextView;
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.db.DaoManager;
+import com.doumengmeng.doctor.db.FeatureDao;
+import com.doumengmeng.doctor.db.HospitalDao;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.request.task.LoginTask;
+import com.doumengmeng.doctor.response.InitConfigureResponse;
+import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.util.AppUtil;
+import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.util.PermissionUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -324,18 +333,17 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private Map<String, String> buildInitConfigureContent() {
-//        UserData userData = BaseApplication.getInstance().getUserData();
-//        Map<String,String> map = new HashMap<>();
-//        JSONObject object = new JSONObject();
-//        try {
-//            object.put("userId",userData.getUserid());
-//            map.put(UrlAddressList.PARAM,object.toString());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
-//        return map;
-        return null;
+        UserData userData = BaseApplication.getInstance().getUserData();
+        Map<String,String> map = new HashMap<>();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("doctorId",userData.getDoctorId());
+            map.put(UrlAddressList.PARAM,object.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getSessionId());
+        return map;
     }
 
     private final RequestCallBack initConfigureCallback = new RequestCallBack() {
@@ -356,8 +364,8 @@ public class LoadingActivity extends BaseActivity {
         @Override
         public void onPostExecute(String result) {
             //TODO
-//            InitConfigureResponse response = GsonUtil.getInstance().fromJson(result,InitConfigureResponse.class);
-//            new Thread(new DataBaseRunnable(response)).start();
+            InitConfigureResponse response = GsonUtil.getInstance().fromJson(result,InitConfigureResponse.class);
+            new Thread(new DataBaseRunnable(response)).start();
         }
     };
 
@@ -474,32 +482,23 @@ public class LoadingActivity extends BaseActivity {
 
     private class DataBaseRunnable implements Runnable{
         //TODO
-//        private final InitConfigureResponse response;
-//
-//        public DataBaseRunnable(InitConfigureResponse response) {
-//            this.response = response;
-//        }
+        private final InitConfigureResponse response;
+
+        public DataBaseRunnable(InitConfigureResponse response) {
+            this.response = response;
+        }
 
         @Override
         public void run() {
-//            DaoManager.getInstance().deleteTable(LoadingActivity.this, DoctorDao.TABLE_NAME);
-//            DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
-//            DaoManager.getInstance().deleteTable(LoadingActivity.this, GrowthDao.TABLE_NAME);
-//            DaoManager.getInstance().deleteTable(LoadingActivity.this, MengClassDao.TABLE_NAME);
-//            DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
-//
-//            InitConfigureResponse.Result result = response.getResult();
-//
-//            DaoManager.getInstance().getDaotorDao().saveDoctorList(LoadingActivity.this, result.getDoctorList());
-//            DaoManager.getInstance().getGrowthDao().saveGrowthList(LoadingActivity.this, result.getGrowthList());
-//            DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, result.getHospitalList());
-//            DaoManager.getInstance().getMengClassDao().saveMengClassList(LoadingActivity.this, result.getMengClassList());
-//            DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,result.getFeatureList());
-//            BaseApplication.getInstance().saveParentInfo(result.getParentInfo());
-//            BaseApplication.getInstance().saveDayList(result.getDayList());
-//
-//            BaseApplication.getInstance().removeMainPage();
-//            handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
+            DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
+            DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
+
+            InitConfigureResponse.Result result = response.getResult();
+
+            DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, result.getHospitalList());
+            DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,result.getFeatureList());
+
+            handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
         }
     }
 

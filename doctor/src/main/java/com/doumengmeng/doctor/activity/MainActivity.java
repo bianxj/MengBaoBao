@@ -17,6 +17,7 @@ import com.doumengmeng.doctor.base.BaseFragmentActivity;
 import com.doumengmeng.doctor.fragment.AboutFragment;
 import com.doumengmeng.doctor.fragment.AccountFragment;
 import com.doumengmeng.doctor.fragment.HomeFragment;
+import com.doumengmeng.doctor.fragment.MessageDetailFragment;
 import com.doumengmeng.doctor.fragment.MessageFragment;
 
 import java.util.HashMap;
@@ -40,6 +41,8 @@ public class MainActivity extends BaseFragmentActivity {
     public static final String PAGE_MESSAGE = "page_message";
     //我
     private static final String PAGE_ABOUT = "page_about";
+    //消息详情
+    public static final String PAGE_MESSAGE_DETAIL = "page_message_detail";
 
     private TextView tv_home_count,tv_message_count;
 
@@ -89,6 +92,7 @@ public class MainActivity extends BaseFragmentActivity {
         fragmentMap.put(PAGE_ACCOUNT,new AccountFragment());
         fragmentMap.put(PAGE_MESSAGE,new MessageFragment());
         fragmentMap.put(PAGE_ABOUT,new AboutFragment());
+        fragmentMap.put(PAGE_MESSAGE_DETAIL,new MessageDetailFragment());
     }
 
     private void setDefaultPage(){

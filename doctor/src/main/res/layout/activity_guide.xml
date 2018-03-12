@@ -51,7 +51,7 @@
         android:text="9"
         android:gravity="center"
         style="@style/FirstWhite.Text23px"
-        android:background="@drawable/icon_message_count"/>
+        android:background="@drawable/bg_message_count"/>
 
     <Button
         android:id="@+id/bt_experience"

@@ -28,12 +28,14 @@ class DataBaseUtil extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         HospitalDao.createTable(db);
         FeatureDao.createTable(db);
+        NurtureDao.createTable(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         HospitalDao.updateTable(db,oldVersion,newVersion);
         FeatureDao.updateTable(db,oldVersion,newVersion);
+        NurtureDao.updateTable(db,oldVersion,newVersion);
     }
 
     public static SQLiteDatabase openDataBase(Context context){

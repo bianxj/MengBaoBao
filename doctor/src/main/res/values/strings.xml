@@ -12,6 +12,9 @@
     <string name="account">账户</string>
     <string name="detail">明细</string>
     <string name="message">消息</string>
+    <string name="message_board">留言板</string>
+    <string name="hospital_report">医院报告</string>
+    <string name="parent_info">父母信息</string>
 
     <!--Shared数据-->
     <string name="input_phone_hint">手机号</string>
@@ -175,6 +178,13 @@
     <string name="assessment_wait_message">72小时内看到医生的养育指导和评估</string>
     <string name="assessment_refund_message">抱歉，医生未能按约给予评估及指导，
 已为您退款或在途中！</string>
+
+    <!--AssessmentParentGuideActivity-->
+    <string name="type">类别</string>
+    <string name="month_age">月龄</string>
+    <string name="doctor_supplement">医生补充</string>
+    <string name="custom_title_hint">添加自定义养育指导标题</string>
+    <string name="custom_content_hint">添加自定义养育指导内容，每个类别限一条，100字上限。</string>
 
     <!--HospitalListActivity-->
     <string name="appraisal_result">测评结果</string>

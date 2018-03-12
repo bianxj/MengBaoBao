@@ -1,4 +1,4 @@
-package com.doumengmeng.doctor.entity;
+package com.doumengmeng.doctor.response.entity;
 
 /**
  * 作者: 边贤君

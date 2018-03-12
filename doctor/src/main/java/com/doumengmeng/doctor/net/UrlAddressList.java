@@ -39,7 +39,10 @@ public class UrlAddressList {
 //    public final static String URL_PRE_IWX_PAY = BASE_URL + "system.do?method=MbbWXGeneratingOrder";
 //    public final static String URL_ALI_PAY_RESPONCE = BASE_URL + "system.do?method=MbbALiPay";
 //
-//    public final static String URL_SEARCH_HOSPITAL_RECODR = BASE_URL + "babyUser.do?method=GetChildRecord";
+    public final static String URL_GET_HISTORY_REPORT = BASE_URL + "";
+    public final static String URL_SEARCH_HOSPITAL_REPORT = BASE_URL + "";
+
+    public final static String URL_SUBMIT_MESSAGE_BOARD = BASE_URL + "";
 
     public final static String URL_UPDATE_INFO = BASE_URL + "system.do?method=GetVersion";
     public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";

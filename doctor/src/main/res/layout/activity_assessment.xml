@@ -5,7 +5,7 @@
     android:background="@color/lightSky"
     android:orientation="vertical">
 
-    <include layout="@layout/include_title_back"></include>
+    <include layout="@layout/include_title_prompt_back"></include>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -1211,7 +1211,7 @@
                     style="@style/SecondBlack.Text28px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/assessment_feed_info"
+                    android:text="@string/assessment_assist_food"
                     android:textStyle="bold" />
 
                 <View
@@ -1720,13 +1720,14 @@
                 android:layout_marginTop="@dimen/y3px"
                 android:background="@color/linePink" />
 
-            <LinearLayout
-                android:id="@+id/ll_report_image"
+            <GridView
+                android:id="@+id/gv_upload_report"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
+                android:layout_marginTop="@dimen/y22px"
+                android:layout_marginBottom="@dimen/y46px"
+                android:listSelector="@color/transparent"
+                android:numColumns="3" />
 
         </LinearLayout>
 
@@ -1825,6 +1826,36 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/x39px"
+                android:paddingRight="@dimen/x39px"
+                android:paddingBottom="@dimen/y12px"
+                android:paddingTop="@dimen/y12px">
+                <Button
+                    android:id="@+id/bt_hospital_report"
+                    android:layout_width="@dimen/x211px"
+                    android:layout_height="@dimen/x106px"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@+id/bt_history_report"
+                    android:background="@drawable/btn_hospital_report"/>
+                <Button
+                    android:id="@+id/bt_history_report"
+                    android:layout_width="@dimen/x211px"
+                    android:layout_height="@dimen/x106px"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_history_report"/>
+                <Button
+                    android:id="@+id/bt_parent_info"
+                    android:layout_width="@dimen/x211px"
+                    android:layout_height="@dimen/x106px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/bt_history_report"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/btn_parent_info"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/ll_report_interpretation"
@@ -1865,7 +1896,7 @@
                         android:text="@string/assessment_growth_tendency" />
 
                     <EditText
-                        android:id="@+id/tv_report_content_1"
+                        android:id="@+id/et_report_content_1"
                         style="@style/FourthGray.Text26px"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1884,7 +1915,7 @@
                         android:text="@string/assessment_growth_level" />
 
                     <EditText
-                        android:id="@+id/tv_report_content_2"
+                        android:id="@+id/et_report_content_2"
                         style="@style/FourthGray.Text26px"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1917,7 +1948,7 @@
                         android:text="@string/assessment_growth_result" />
 
                     <EditText
-                        android:id="@+id/tv_report_content_3"
+                        android:id="@+id/et_report_content_3"
                         style="@style/FourthGray.Text26px"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1950,7 +1981,7 @@
                         android:text="@string/assessment_doctor_suggest" />
 
                     <EditText
-                        android:id="@+id/tv_report_content_4"
+                        android:id="@+id/et_report_content_4"
                         style="@style/FourthGray.Text26px"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

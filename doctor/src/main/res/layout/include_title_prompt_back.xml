@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="@dimen/SelfActionBarHeight">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/include_title_back"></include>
+        <RelativeLayout
+            android:id="@+id/rl_prompt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/SelfActionBarHeight"
+            android:background="@color/thinPink"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/tv_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/FirstWhite.Text26px"
+                android:layout_centerInParent="true"
+                android:maxWidth="@dimen/x500px"
+                />
+
+            <RelativeLayout
+                android:id="@+id/rl_prompt_close"
+                android:layout_width="@dimen/x106px"
+                android:layout_height="@dimen/SelfActionBarHeight"
+                android:layout_alignParentRight="true">
+                <ImageView
+                    android:layout_width="@dimen/x26px"
+                    android:layout_height="@dimen/x26px"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/btn_close"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>
