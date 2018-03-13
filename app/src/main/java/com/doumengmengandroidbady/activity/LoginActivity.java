@@ -1,9 +1,9 @@
 package com.doumengmengandroidbady.activity;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
-import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.config.Config;
 import com.doumengmengandroidbady.request.ResponseErrorCode;
 import com.doumengmengandroidbady.request.task.LoginTask;
@@ -37,11 +36,6 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
-        System.out.println("dimenMetricsX:"+metrics.widthPixels);
-        System.out.println("dimenMetricsY:"+metrics.heightPixels);
-        System.out.println("dimenX:"+getResources().getDimensionPixelOffset(R.dimen.x720px));
-        System.out.println("dimenY:"+getResources().getDimensionPixelOffset(R.dimen.y1280px));
         findView();
         initView();
     }
@@ -71,6 +65,8 @@ public class LoginActivity extends BaseActivity {
         rl_back.setOnClickListener(listener);
         tv_fast_register.setOnClickListener(listener);
         tv_forgot_pwd.setOnClickListener(listener);
+        tv_fast_register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        tv_forgot_pwd.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
