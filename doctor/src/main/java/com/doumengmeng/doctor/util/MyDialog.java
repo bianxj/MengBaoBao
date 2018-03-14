@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 作者: 边贤君
@@ -34,7 +35,7 @@ public class MyDialog {
     private final static Object promptLock = new Object();
     private final static Object chooseLock = new Object();
     private final static Object loadingLock = new Object();
-//    private final static Object pictureLock = new Object();
+    private final static Object pictureLock = new Object();
 //    private final static Object notificationLock = new Object();
 //    private final static Object gifLock = new Object();
     private final static Object cityLock = new Object();
@@ -45,7 +46,7 @@ public class MyDialog {
     private static Dialog promptDialog;
     private static Dialog chooseDialog;
     private static Dialog loadingDialog;
-//    private static Dialog pictureDialog;
+    private static Dialog pictureDialog;
 //    private static Dialog notificationDialog;
 //    private static Dialog gifDialog;
 //
@@ -379,17 +380,17 @@ public class MyDialog {
 //            }
 //        }
 //    }
-//
-//    public static void showPictureDialog(Context context, Bitmap bitmap){
-//        synchronized (pictureLock){
-//            pictureDialog = new Dialog(context,R.style.MyDialog);
-//            View view = LayoutInflater.from(context).inflate(R.layout.dialog_picture,null);
-//            ImageView iv_picture = view.findViewById(R.id.iv_picture);
-//            iv_picture.setImageBitmap(bitmap);
-//            pictureDialog.setContentView(view);
-//            pictureDialog.show();
-//        }
-//    }
+
+    public static void showPictureDialog(Context context, String bitmap){
+        synchronized (pictureLock){
+            pictureDialog = new Dialog(context,R.style.MyDialog);
+            View view = LayoutInflater.from(context).inflate(R.layout.dialog_picture,null);
+            ImageView iv_picture = view.findViewById(R.id.iv_picture);
+            pictureDialog.setContentView(view);
+            pictureDialog.show();
+            ImageLoader.getInstance().displayImage(bitmap,iv_picture);
+        }
+    }
 //
 //    public static void showGifDialog(Context context,String url){
 //        synchronized (gifLock){
@@ -465,15 +466,15 @@ public class MyDialog {
             }
         }
     }
-//
-//    private static void dismissPictureDialog(){
-//        synchronized (pictureLock){
-//            if ( pictureDialog != null && pictureDialog.isShowing() ){
-//                pictureDialog.dismiss();
-//                pictureDialog = null;
-//            }
-//        }
-//    }
+
+    private static void dismissPictureDialog(){
+        synchronized (pictureLock){
+            if ( pictureDialog != null && pictureDialog.isShowing() ){
+                pictureDialog.dismiss();
+                pictureDialog = null;
+            }
+        }
+    }
 
     private static class CityAdapter extends BaseAdapter {
 

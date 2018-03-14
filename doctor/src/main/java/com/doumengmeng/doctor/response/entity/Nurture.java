@@ -97,4 +97,21 @@ public class Nurture {
     public void setCustom(boolean custom) {
         isCustom = custom;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if ( obj == null ){
+            return false;
+        }
+        if ( obj instanceof Nurture ){
+            Nurture nurture = (Nurture) obj;
+            if ( nurture.getId() == null ){
+                return false;
+            }
+            if ( nurture.getId().equals(id) ){
+                return true;
+            }
+        }
+        return false;
+    }
 }

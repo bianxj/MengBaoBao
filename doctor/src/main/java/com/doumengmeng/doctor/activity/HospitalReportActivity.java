@@ -13,10 +13,15 @@ import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.response.HospitalReportResponse;
 import com.doumengmeng.doctor.response.entity.HospitalReport;
 import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,12 +34,17 @@ import java.util.Map;
 
 public class HospitalReportActivity extends BaseActivity {
 
+    public final static String IN_PARAM_USER_DATA = "in_user_data";
+    public final static String IN_PARAM_DOCTOR_ID = "in_doctor_id";
+
     private RelativeLayout rl_back;
     private TextView tv_title;
     private XRecyclerView xrv;
 
     private HospitalReportAdapter adapter;
     private List<HospitalReport> reports = new ArrayList<>();
+    private AssessmentDetailResponse.User user;
+    private String doctorId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,9 +74,14 @@ public class HospitalReportActivity extends BaseActivity {
 
     private void initListView(){
         xrv = findViewById(R.id.xrv);
+        xrv.setLoadingMoreEnabled(true);
+        xrv.setFootView(new XLoadMoreFooter(this));
+
         adapter = new HospitalReportAdapter(reports);
         xrv.setAdapter(adapter);
 
+        user = GsonUtil.getInstance().fromJson(getIntent().getStringExtra(IN_PARAM_USER_DATA), AssessmentDetailResponse.User.class);
+        doctorId = getIntent().getStringExtra(IN_PARAM_DOCTOR_ID);
         searchHospitalReport();
     }
 
@@ -85,10 +100,16 @@ public class HospitalReportActivity extends BaseActivity {
     }
 
     private Map<String,String> buildSearchReportContent(){
-//        UserData userData = BaseApplication.getInstance().getUserData();
         Map<String,String> map = new HashMap<>();
         map.put(UrlAddressList.SESSION_ID, BaseApplication.getInstance().getSessionId());
-//        map.put(UrlAddressList.PARAM,userData.getUserid());
+        JSONObject object = new JSONObject();
+        try {
+            object.put("userId",user.getUserid());
+            object.put("doctorId",doctorId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.PARAM,object.toString());
         return map;
     }
 

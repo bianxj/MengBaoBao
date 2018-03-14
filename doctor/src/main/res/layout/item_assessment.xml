@@ -4,13 +4,14 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/y210px"
         android:orientation="vertical">
         <android.support.v4.widget.Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/y18px" />
         <RelativeLayout
+            android:id="@+id/rl_assessment"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y192px"
             android:background="@color/first_white">

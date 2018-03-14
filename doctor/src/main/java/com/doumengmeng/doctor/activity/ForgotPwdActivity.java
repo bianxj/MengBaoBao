@@ -25,6 +25,8 @@ import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
+import com.doumengmeng.doctor.request.task.LoginTask;
+import com.doumengmeng.doctor.response.ForgotPwdResponse;
 import com.doumengmeng.doctor.response.VCResponse;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.FormatCheckUtil;
@@ -65,6 +67,9 @@ public class ForgotPwdActivity extends BaseActivity {
         super.onDestroy();
         stopTask(changePwdTask);
         stopTask(getVerificationCodeTask);
+        if ( loginTask != null ) {
+            stopTask(loginTask.getTask());
+        }
         clearHandler(handler);
     }
 
@@ -249,7 +254,7 @@ public class ForgotPwdActivity extends BaseActivity {
     private Map<String, String> buildChangePwdContent() {
         JSONObject object = new JSONObject();
         try {
-            object.put("accountMobile",et_phone.getText().toString().trim());
+            object.put("doctorPhone",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
             object.put("code", BaseApplication.getInstance().getForgetVc());
             object.put("checkCode",et_vc.getText().toString().trim());
@@ -273,18 +278,43 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-//            ForgotPwdResponse response = GsonUtil.getInstance().fromJson(result,ForgotPwdResponse.class);
-//            if ( 1 == response.getResult().getIsEditPwd() ) {
-//                login();
-//            } else {
-//                //TODO
-//                tv_prompt.setText("密码修改失败");
-//            }
+            ForgotPwdResponse response = GsonUtil.getInstance().fromJson(result,ForgotPwdResponse.class);
+            if ( 1 == response.getResult().getIsEditPwd() ) {
+                login();
+            } else {
+                //TODO
+                tv_prompt.setText("密码修改失败");
+            }
         }
 
     };
+    //---------------------------------登录------------------------------------------------------
+    private LoginTask loginTask;
+    private void login(){
+        try {
+            String accountMobile = et_phone.getText().toString().trim();
+            String loginPwd = et_login_pwd.getText().toString().trim();
+            loginTask = new LoginTask(this, accountMobile, loginPwd, new LoginTask.LoginCallBack() {
+                @Override
+                public void onPreExecute() {
 
+                }
+
+                @Override
+                public void onError(String result) {
+                    tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
+                }
+
+                @Override
+                public void onPostExecute(String result) {
+                    startActivity(LoadingActivity.class);
+                }
+            });
+            loginTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
     //---------------------------------使用协议-----------------------------------------------------
     private void clickAgreement(){
         cb_agreement.setChecked(!cb_agreement.isChecked());

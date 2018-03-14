@@ -252,7 +252,7 @@ public class RegisterActivity extends BaseActivity {
         JSONObject object = new JSONObject();
         try {
             //TODO
-            object.put("accountMobile",et_phone.getText().toString().trim());
+            object.put("doctorPhone",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
             object.put("code", BaseApplication.getInstance().getRegisterVc());
             object.put("checkCode",et_vc.getText().toString().trim());

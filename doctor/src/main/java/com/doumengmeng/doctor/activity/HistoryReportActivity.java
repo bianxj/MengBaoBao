@@ -13,12 +13,17 @@ import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.response.HistoryReportResponse;
 import com.doumengmeng.doctor.response.entity.HistoryReport;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +34,17 @@ import java.util.Map;
 
 public class HistoryReportActivity extends BaseActivity {
 
+    public final static String IN_PARAM_USER_DATA = "in_user_data";
+    public final static String IN_PARAM_DOCTOR_ID = "in_doctor_id";
+
     private RelativeLayout rl_back;
     private TextView tv_title;
     private XRecyclerView xrv;
 
     private HistoryReportAdapter adapter;
-    private List<HistoryReport> reports;
+    private List<HistoryReport> reports = new ArrayList<>();
+    private AssessmentDetailResponse.User user;
+    private String doctorId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +63,7 @@ public class HistoryReportActivity extends BaseActivity {
         tv_title = findViewById(R.id.tv_title);
 
         rl_back.setOnClickListener(listener);
+        tv_title.setText(R.string.history_report);
     }
 
     private void initListView(){
@@ -60,8 +71,11 @@ public class HistoryReportActivity extends BaseActivity {
         xrv.setLoadingMoreEnabled(true);
         xrv.setFootView(new XLoadMoreFooter(this));
 
+        user = GsonUtil.getInstance().fromJson(getIntent().getStringExtra(IN_PARAM_USER_DATA), AssessmentDetailResponse.User.class);
+        doctorId = getIntent().getStringExtra(IN_PARAM_DOCTOR_ID);
+
         xrv.setLoadingListener(loadingListener);
-        adapter = new HistoryReportAdapter(reports);
+        adapter = new HistoryReportAdapter(reports,user);
         xrv.setAdapter(adapter);
 
         searchHistoryReport();
@@ -86,7 +100,7 @@ public class HistoryReportActivity extends BaseActivity {
     private void searchHistoryReport(){
         try {
             recordTask = new RequestTask.Builder(this, searchHistoryReportCallBack)
-                    .setUrl(UrlAddressList.URL_GET_HISTORY_REPORT)
+                    .setUrl(UrlAddressList.URL_SEARCH_HISTORY_REPORT)
                     .setType(RequestTask.DEFAULT)
                     .setContent(buildHistoryReportRequest())
                     .build();
@@ -98,7 +112,14 @@ public class HistoryReportActivity extends BaseActivity {
 
     private Map<String, String> buildHistoryReportRequest() {
         Map<String ,String> map = new HashMap<>();
-//        map.put(UrlAddressList.PARAM,userData.getUserid());
+        JSONObject object = new JSONObject();
+        try {
+            object.put("userId",user.getUserid());
+            object.put("doctorId",doctorId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.PARAM,object.toString());
         map.put(UrlAddressList.SESSION_ID, BaseApplication.getInstance().getSessionId());
         return map;
     }

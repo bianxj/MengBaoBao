@@ -149,6 +149,9 @@
                         android:layout_width="@dimen/x250px"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:scrollHorizontally="true"
                         android:layout_marginLeft="@dimen/x175px" />
 
                     <ImageView
@@ -184,6 +187,9 @@
                         android:layout_width="@dimen/x250px"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:scrollHorizontally="true"
                         android:layout_marginLeft="@dimen/x175px" />
 
                     <ImageView

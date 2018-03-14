@@ -65,7 +65,7 @@ public class NurtureDao {
         DataBaseUtil.closeDataBase();
     }
 
-    public List<Nurture> searchNurtureByAge(Context context , String age){
+    public List<Nurture> searchNurtureByAge(Context context , int age){
         List<Nurture> nurtures = new ArrayList<>();
         String builder = "select " +
                 ID + "," +
@@ -76,8 +76,8 @@ public class NurtureDao {
                 NURTURE_ORDER + "," +
                 NURTURE_TYPE_ID +
                 " from " + TABLE_NAME +
-                " where " + AGE + " between " + (Integer.parseInt(age)-2) + " in " + (Integer.parseInt(age)+2) +
-                " order by " + NURTURE_TYPE_ID + " , " + AGE + " , " + NURTURE_ORDER ;
+                " where " + AGE + " between '" + (age-2) + "' and '" + (age+2) +
+                "' order by " + NURTURE_TYPE_ID + " , " + AGE + " , " + NURTURE_ORDER ;
 
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         Cursor cursor = db.rawQuery(builder,null);

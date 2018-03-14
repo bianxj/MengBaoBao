@@ -61,6 +61,31 @@ public class HistoryReport {
     @SerializedName("doctoradvice")
     private String doctorAdvice;
 
+    @SerializedName("doctorimg")
+    private String doctorImg;
+    @SerializedName("doctorname")
+    private String doctorName;
+    @SerializedName("positionalTitles")
+    private String positionalTitles;
+    @SerializedName("hospitalname")
+    private String hospitalName;
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
+    public String getPositionalTitles() {
+        return positionalTitles;
+    }
+
+    public void setPositionalTitles(String positionalTitles) {
+        this.positionalTitles = positionalTitles;
+    }
+
     public String getRecordId() {
         return recordId;
     }
@@ -319,5 +344,21 @@ public class HistoryReport {
 
     public void setDoctorAdvice(String doctorAdvice) {
         this.doctorAdvice = doctorAdvice;
+    }
+
+    public String getDoctorImg() {
+        return doctorImg;
+    }
+
+    public void setDoctorImg(String doctorImg) {
+        this.doctorImg = doctorImg;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 }

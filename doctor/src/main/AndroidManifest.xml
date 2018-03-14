@@ -29,7 +29,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="mjFnnk87mnZUXfMBPSHZXLu7CUUizr1M" />
 
-        <activity android:name=".activity.MainActivity"
+        <activity android:name=".activity.GuideActivity"
             android:screenOrientation="portrait"
             >
             <intent-filter>
@@ -38,6 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ForgotPwdActivity" android:screenOrientation="portrait"></activity>
@@ -58,6 +59,12 @@
         <activity android:name=".activity.HistoryReportDetailActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.HospitalReportActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.HospitalReportDetailActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.AssessmentParentingGuideActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.MessageBoardActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.AssessmentActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ParentInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.AboutActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.QRActivity" android:screenOrientation="portrait"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

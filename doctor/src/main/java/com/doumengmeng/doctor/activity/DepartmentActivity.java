@@ -58,10 +58,12 @@ public class DepartmentActivity extends BaseActivity implements InputContentHold
         xrv.setFootView(new XLoadMoreFooter(this));
 //        xrv.setLoadingListener(searchLoadingListener);
 
+        String[] strings = new String[]{"儿童保健科","发育行为儿科","儿科"};
+
         List<DepartmentAdapter.DepartmentData> datas = new ArrayList<>();
-        for (int i = 0 ; i< 40;i++){
+        for (String string:strings){
             DepartmentAdapter.DepartmentData data = new DepartmentAdapter.DepartmentData();
-            data.setDepartmentName("Name"+i);
+            data.setDepartmentName(string);
             datas.add(data);
         }
 

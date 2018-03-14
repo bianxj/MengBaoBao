@@ -46,6 +46,7 @@ public class PersonInfoActivity extends BaseActivity {
         tv_title = findViewById(R.id.tv_title);
 
         rl_back.setOnClickListener(listener);
+        tv_title.setText(R.string.person_info);
     }
 
     private void initDoctorInfo(){
@@ -68,13 +69,13 @@ public class PersonInfoActivity extends BaseActivity {
         tv_department.setText(userData.getDepartmentName());
         tv_professional_title.setText(userData.getPositionalTitles());
         tv_service_cost.setText(userData.getCost());
-        tv_income.setText(Integer.getInteger(userData.getCost())/2+"");
+        tv_income.setText(Integer.parseInt(userData.getCost())/2+"");
         tv_speciality.setText(userData.getSpeciality());
-        tv_intro.setText(userData.getDoctorDest());
+        tv_intro.setText(userData.getDoctorDesc());
         tv_identity_num.setText(userData.getDoctorCode());
-        ImageLoader.getInstance().displayImage(userData.getDoctorImg(),civ_head);
-        ImageLoader.getInstance().displayImage(userData.getCertificateA(),iv_certification_p1);
-        ImageLoader.getInstance().displayImage(userData.getCertificateB(),iv_certification_p2);
+        ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+        ImageLoader.getInstance().displayImage(userData.getCertificateAUrl(),iv_certification_p1);
+        ImageLoader.getInstance().displayImage(userData.getCertificateBUrl(),iv_certification_p2);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

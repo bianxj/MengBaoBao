@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 
 import com.doumengmeng.doctor.activity.GuideActivity;
+import com.doumengmeng.doctor.entity.LoginInfo;
 import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.util.MLog;
@@ -147,6 +148,9 @@ public class BaseApplication extends Application {
     private final static String COLUMN_SESSION_ID = "session_id";
     private final static String COLUMN_REGISTER_VC = "register_vc";
     private final static String COLUMN_FORGET_VC = "forget_vc";
+    private final static String COLUMN_IS_ABNORMAL_EXIT = "is_abnormal_exit";
+    private final static String COLUMN_IS_TO_EXAMINE = "is_to_examine";
+    private final static String COLUMN_LOGIN = "login";
 
     public void saveUserData(UserData userData){
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_USER_DATA, GsonUtil.getInstance().toJson(userData));
@@ -182,6 +186,42 @@ public class BaseApplication extends Application {
 
     public void saveSessionId(String sessionId){
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_SESSION_ID,sessionId);
+    }
+
+    public boolean isAbnormalExit(){
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_USER,COLUMN_IS_ABNORMAL_EXIT,false);
+    }
+
+    public void saveAbnormalExit(boolean isAbnormalExit){
+        SharedPreferencesUtil.saveBoolean(this,TABLE_USER,COLUMN_IS_ABNORMAL_EXIT,isAbnormalExit);
+    }
+
+    public boolean isToExamine(){
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_USER,COLUMN_IS_TO_EXAMINE,false);
+    }
+
+    public void saveToExamine(boolean isToExamine){
+        SharedPreferencesUtil.saveBoolean(this,TABLE_USER,COLUMN_IS_TO_EXAMINE,isToExamine);
+    }
+
+    private LoginInfo loginInfo;
+    public LoginInfo getLogin(){
+        if ( loginInfo == null ) {
+            String data = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_LOGIN,null);
+            if (data != null) {
+                loginInfo = GsonUtil.getInstance().fromJson(data, LoginInfo.class);
+            }
+        }
+        return loginInfo;
+    }
+
+    public void saveLogin(String account , String passwd){
+        if ( loginInfo == null ){
+            loginInfo = new LoginInfo();
+        }
+        loginInfo.setAccount(account);
+        loginInfo.setPasswd(passwd);
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_LOGIN,GsonUtil.getInstance().toJson(loginInfo));
     }
 
     /**-------------------------------------------SharedPerference End---------------------------------------------------*/

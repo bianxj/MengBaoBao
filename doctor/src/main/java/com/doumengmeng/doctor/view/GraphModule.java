@@ -248,8 +248,10 @@ public class GraphModule extends LinearLayout {
             iv_describe.setImageResource(R.drawable.icon_graph_describe);
         } else if ( graph_view.hasBlueLine() ){
             iv_describe.setImageResource(R.drawable.icon_graph_blue_describe);
-        } else {
+        } else if ( graph_view.hasRedLine() ) {
             iv_describe.setImageResource(R.drawable.icon_graph_red_describe);
+        } else {
+            iv_describe.setImageBitmap(null);
         }
     }
 

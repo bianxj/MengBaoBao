@@ -23,6 +23,7 @@ import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.db.FeatureDao;
 import com.doumengmeng.doctor.db.HospitalDao;
+import com.doumengmeng.doctor.db.NurtureDao;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
@@ -67,7 +68,7 @@ public class LoadingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         findView();
-        loading();
+//        loading();
     }
 
     @Override
@@ -172,12 +173,15 @@ public class LoadingActivity extends BaseActivity {
 
     private void checkVersionAndWifi(){
         if ( isWifi() ){
-            checkVersion();
+            initConfigure();
+            //checkVersion();
         } else {
             MyDialog.showPromptDialog(this, getString(R.string.prompt_no_wifi),R.string.dialog_btn_go_on, new MyDialog.PromptDialogCallback() {
                 @Override
                 public void sure() {
-                    checkVersion();
+                    //TODO
+                    initConfigure();
+//                    checkVersion();
                 }
             });
         }
@@ -438,13 +442,13 @@ public class LoadingActivity extends BaseActivity {
             if ( msg.what == MESSAGE_JUMP_TO_MAIN ) {
                 weakReference.get().stopLoadingPercent();
                 //TODO
-//                if ( BaseApplication.getInstance().isAbnormalExit() ){
-//                    Intent intent = new Intent(weakReference.get(), InputInfoActivity.class);
-//                    weakReference.get().startActivity(intent);
-//                } else {
+                if ( BaseApplication.getInstance().isAbnormalExit() ){
+                    Intent intent = new Intent(weakReference.get(), InputDoctorInfoActivity.class);
+                    weakReference.get().startActivity(intent);
+                } else {
                     Intent intent = new Intent(weakReference.get(), MainActivity.class);
                     weakReference.get().startActivity(intent);
-//                }
+                }
             } else if ( msg.what == MESSAGE_LOADING_PERCENT) {
                 removeMessages(MESSAGE_LOADING_PERCENT);
                 if ( weakReference.get().percent < 99 ){
@@ -492,11 +496,13 @@ public class LoadingActivity extends BaseActivity {
         public void run() {
             DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
             DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
+            DaoManager.getInstance().deleteTable(LoadingActivity.this, NurtureDao.TABLE_NAME);
 
             InitConfigureResponse.Result result = response.getResult();
 
             DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, result.getHospitalList());
             DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,result.getFeatureList());
+            DaoManager.getInstance().getNurtureDao().saveNurtureList(LoadingActivity.this,result.getNurtureGuideInfoList());
 
             handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
         }

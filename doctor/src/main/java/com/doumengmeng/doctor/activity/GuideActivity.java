@@ -1,5 +1,8 @@
 package com.doumengmeng.doctor.activity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -62,9 +65,23 @@ public class GuideActivity extends BaseActivity {
                 case R.id.bt_experience:
                     startActivity(LoginActivity.class);
 //                    initView();
+//                    Toast.makeText(GuideActivity.this,getClipboardMessage(),Toast.LENGTH_LONG).show();
                     break;
             }
         }
     };
+
+    private String getClipboardMessage(){
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+
+        // 获取剪贴板的剪贴数据集
+        ClipData clipData = clipboard.getPrimaryClip();
+
+        if (clipData != null && clipData.getItemCount() > 0) {
+            // 从数据集中获取（粘贴）第一条文本数据
+            return  clipData.getItemAt(0).getText().toString();
+        }
+        return "null";
+    }
 
 }

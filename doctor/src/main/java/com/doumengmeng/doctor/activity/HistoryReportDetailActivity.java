@@ -15,12 +15,14 @@ import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.db.DaoManager;
+import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.response.entity.HistoryReport;
 import com.doumengmeng.doctor.util.FormulaUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.view.CircleImageView;
 import com.doumengmeng.doctor.view.GraphModule;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,7 @@ import java.util.Set;
 public class HistoryReportDetailActivity extends BaseActivity {
 
     public final static String IN_PARAM_HISTORY_REPORT = "in_history_report";
+    public final static String IN_PARAM_USER_DATA = "in_user_data";
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -68,6 +71,7 @@ public class HistoryReportDetailActivity extends BaseActivity {
 
 //    private UserData userData;
     private HistoryReport report;
+    private AssessmentDetailResponse.User user;
 //    private Doctor doctor;
 //    private Hospital hospital;
 
@@ -152,8 +156,10 @@ public class HistoryReportDetailActivity extends BaseActivity {
 
         Intent intent = getIntent();
         String recordString = intent.getStringExtra(IN_PARAM_HISTORY_REPORT);
+        String userString = intent.getStringExtra(IN_PARAM_USER_DATA);
 //        userData = BaseApplication.getInstance().getUserData();
         report = GsonUtil.getInstance().fromJson(recordString,HistoryReport.class);
+        user = GsonUtil.getInstance().fromJson(userString, AssessmentDetailResponse.User.class);
 //        doctor = DaoManager.getInstance().getDaotorDao().searchDoctorById(this, report.getDoctorid());
 //        hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this,doctor.getDoctorid());
 
@@ -170,10 +176,10 @@ public class HistoryReportDetailActivity extends BaseActivity {
 
     private void initDoctorData(){
         //TODO
-//        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_doctor,initDisplayImageOptions());
-//        tv_doctor_name.setText(doctor.getDoctorname());
-//        tv_doctor_hospital.setText(hospital.getHospitalname());
-//        tv_doctor_position.setText(doctor.getPositionaltitles());
+        ImageLoader.getInstance().displayImage(report.getDoctorImg(),civ_doctor,initDisplayImageOptions());
+        tv_doctor_name.setText(report.getDoctorName());
+        tv_doctor_hospital.setText(report.getHospitalName());
+        tv_doctor_position.setText(report.getPositionalTitles());
     }
 
     private DisplayImageOptions initDisplayImageOptions(){
@@ -185,10 +191,9 @@ public class HistoryReportDetailActivity extends BaseActivity {
     }
 
     private void initUserData(){
-        //TODO
-//        tv_baby_name.setText(userData.getTruename());
-//        tv_baby_gender.setText(userData.getSexString());
-//        tv_baby_birthday.setText(userData.getBirthday());
+        tv_baby_name.setText(user.getTruename());
+        tv_baby_gender.setText(user.getSexString());
+        tv_baby_birthday.setText(user.getBirthday());
 
         tv_realy_age.setText(report.getCurrentMonthAgeString());
         tv_correct_age.setText(report.getCorrectMonthAgeString());
@@ -200,8 +205,7 @@ public class HistoryReportDetailActivity extends BaseActivity {
     }
 
     private void initDiagram(){
-        //TODO
-//        graph_module.setData(report.getImageData(), report.getMonthAge(),userData.isMale(), true);
+        graph_module.setData(report.getImageData(), report.getMonthAge(),user.isMale(), true);
     }
 
     /**
@@ -263,10 +267,10 @@ public class HistoryReportDetailActivity extends BaseActivity {
     }
 
 //    private void initPromptMessage(){
-//        if ( "1".equals(report.getRecordStatus()) || "2".equals(report.getRecordStatus()) ){
+//        if ( "1".equals(report.getRecordstatus()) || "2".equals(report.getRecordstatus()) ){
 //            rl_prompt_message.setVisibility(View.VISIBLE);
 //            tv_prompt_message.setText(getResources().getString(R.string.assessment_wait_message));
-//        } else if ( "5".equals(report.getRecordStatus()) ){
+//        } else if ( "5".equals(report.getRecordstatus()) ){
 //            rl_prompt_message.setVisibility(View.VISIBLE);
 //            tv_prompt_message.setText(getResources().getString(R.string.assessment_refund_message));
 //        } else {
@@ -383,7 +387,7 @@ public class HistoryReportDetailActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
 //            Intent intent = new Intent(AssessmentActivity.this,AssessmentParentingGuideActivity.class);
-//            intent.putExtra(AssessmentParentingGuideActivity.IN_PARAM_RECORD_ID,record.getRecordId());
+//            intent.putExtra(AssessmentParentingGuideActivity.IN_PARAM_RECORD_ID,record.getRecordid());
 //            intent.putExtra(AssessmentParentingGuideActivity.IN_PARAM_DOCTOR_ID,record.getDoctorid());
 //            startActivity(intent);
         }

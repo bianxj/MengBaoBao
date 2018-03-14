@@ -2,9 +2,12 @@ package com.doumengmeng.doctor.request.task;
 
 import android.content.Context;
 
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.response.LoginResponse;
+import com.doumengmeng.doctor.util.GsonUtil;
 import com.umeng.commonsdk.utils.UMUtils;
 
 import org.json.JSONException;
@@ -52,7 +55,7 @@ public class LoginTask {
     private Map<String, String> buildLoginContent() {
         JSONObject object = new JSONObject();
         try {
-            object.put("accountMobile",accountMobile);
+            object.put("doctorPhone",accountMobile);
             object.put("loginPwd",loginPwd);
             object.put("deviceToken", UMUtils.getDeviceToken(weakReference.get()));
         } catch (JSONException e) {
@@ -80,17 +83,17 @@ public class LoginTask {
 
         @Override
         public void onPostExecute(String result) {
-//            LoginResponse response = GsonUtil.getInstance().fromJson(result, LoginResponse.class);
-//
-//            UserData userData = response.getResult().getUser();
-//            userData.setSessionId(response.getResult().getSessionId());
-//            BaseApplication.getInstance().saveUserData(userData);
-//
-//            BaseApplication.getInstance().saveLogin(accountMobile,loginPwd);
-//            BaseApplication.getInstance().saveAbnormalExit(response.getResult().getIsAbnormalExit() != 0);
-//            if (loginCallBack != null) {
-//                loginCallBack.onPostExecute(result);
-//            }
+            LoginResponse response = GsonUtil.getInstance().fromJson(result, LoginResponse.class);
+
+            BaseApplication.getInstance().saveSessionId(response.getResult().getSessionId());
+            BaseApplication.getInstance().saveUserData(response.getResult().getUser());
+
+            BaseApplication.getInstance().saveLogin(accountMobile,loginPwd);
+            BaseApplication.getInstance().saveAbnormalExit(response.getResult().getIsAbnormalExit() != 0);
+            BaseApplication.getInstance().saveToExamine(response.getResult().getIsToExamine() != 0);
+            if (loginCallBack != null) {
+                loginCallBack.onPostExecute(result);
+            }
         }
     };
 

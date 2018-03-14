@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.activity.HistoryReportDetailActivity;
+import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.response.entity.HistoryReport;
 import com.doumengmeng.doctor.util.GsonUtil;
 
@@ -23,9 +24,11 @@ import java.util.List;
 public class HistoryReportAdapter extends RecyclerView.Adapter<HistoryReportAdapter.RecordHolder> {
 
     private final List<HistoryReport> records;
+    private final AssessmentDetailResponse.User user;
 
-    public HistoryReportAdapter(List<HistoryReport> records) {
+    public HistoryReportAdapter(List<HistoryReport> records, AssessmentDetailResponse.User user) {
         this.records = records;
+        this.user = user;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class HistoryReportAdapter extends RecyclerView.Adapter<HistoryReportAdap
     @Override
     public void onBindViewHolder(HistoryReportAdapter.RecordHolder holder, int position) {
         HistoryReport record = records.get(position);
-        holder.initView(record);
+        holder.initView(record,user);
     }
 
     @Override
@@ -55,6 +58,7 @@ public class HistoryReportAdapter extends RecyclerView.Adapter<HistoryReportAdap
         private final TextView tv_develop;
         private final View view;
         private HistoryReport record;
+        private AssessmentDetailResponse.User user;
 
         public RecordHolder(View itemView) {
             super(itemView);
@@ -68,7 +72,7 @@ public class HistoryReportAdapter extends RecyclerView.Adapter<HistoryReportAdap
             view.setOnClickListener(listener);
         }
 
-        private void initView(HistoryReport record){
+        private void initView(HistoryReport record, AssessmentDetailResponse.User user){
             tv_baby_month.setText(record.getBabyMonth());
             tv_bmi.setText(record.getHwResultString());
             tv_develop.setText(record.getFeatureResultString());
@@ -76,6 +80,7 @@ public class HistoryReportAdapter extends RecyclerView.Adapter<HistoryReportAdap
             tv_record_date.setText(record.getRecordDay());
             tv_weight.setText(record.getWeightResultString());
             this.record = record;
+            this.user = user;
         }
 
         private final View.OnClickListener listener = new View.OnClickListener() {
@@ -84,6 +89,7 @@ public class HistoryReportAdapter extends RecyclerView.Adapter<HistoryReportAdap
                 Context context = view.getContext();
                 Intent intent = new Intent(context, HistoryReportDetailActivity.class);
                 intent.putExtra(HistoryReportDetailActivity.IN_PARAM_HISTORY_REPORT, GsonUtil.getInstance().toJson(record));
+                intent.putExtra(HistoryReportDetailActivity.IN_PARAM_USER_DATA,GsonUtil.getInstance().toJson(user));
                 context.startActivity(intent);
             }
         };

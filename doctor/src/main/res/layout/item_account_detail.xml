@@ -5,7 +5,7 @@
     android:background="@color/lightSky">
 
     <android.support.v4.widget.Space
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/y14px" />
 
     <LinearLayout

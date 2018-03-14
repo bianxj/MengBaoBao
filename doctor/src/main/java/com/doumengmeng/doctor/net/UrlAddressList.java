@@ -13,6 +13,8 @@ public class UrlAddressList {
 
 //    public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneServerV2/";
 //    public final static String BASE_URL = "http://app.mengbaobao.com/mbbPhoneServerV2/";
+    public  final static String BASE_IMAGE_URL = "http://192.168.31.112:8080/mbbPhoneServerV2/";
+
     public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneDoctorServerV2/";
 
     public final static String URL_GET_VC = BASE_URL + "babyDoctor.do?method=SendMessage";
@@ -24,7 +26,9 @@ public class UrlAddressList {
     public final static String URL_INIT_CONFIGURE = BASE_URL + "system.do?method=InitServerConfigure";
     public final static String URL_EIDT_PASSWORD = BASE_URL + "babyUser.do?method=EditPwd";
 
-    public final static String URL_SAVE_DOCTOR = BASE_URL + "babyDoctor.do?method=SubmitRecord";
+    public final static String URL_SAVE_DOCTOR = BASE_URL + "babyDoctor.do?method=SaveDoctor";
+    public final static String URL_SEARCH_ASSESSMENT = BASE_URL + "babyDoctor.do?method=LoadHome";
+    public final static String URL_SEARCH_ASSESSMENT_DETAIL = BASE_URL + "babyDoctor.do?method=GetUserRecordInfo";
 
 //    public final static String URL_SAVE_USER_INFO = BASE_URL + "babyUser.do?method=SaveUser";
 //    public final static String URL_UPLOAD_HEAD_IMG = BASE_URL + "babyUser.do?method=UploadUserHead";
@@ -39,8 +43,9 @@ public class UrlAddressList {
 //    public final static String URL_PRE_IWX_PAY = BASE_URL + "system.do?method=MbbWXGeneratingOrder";
 //    public final static String URL_ALI_PAY_RESPONCE = BASE_URL + "system.do?method=MbbALiPay";
 //
-    public final static String URL_GET_HISTORY_REPORT = BASE_URL + "";
-    public final static String URL_SEARCH_HOSPITAL_REPORT = BASE_URL + "";
+    public final static String URL_SEARCH_HISTORY_REPORT = BASE_URL + "babyDoctor.do?method=GetPastReport";
+    public final static String URL_SEARCH_HOSPITAL_REPORT = BASE_URL + "babyDoctor.do?method=GetHospitalReport";
+    public final static String URL_EVALUTION = BASE_URL + "babyDoctor.do?method=Evaluation";
 
     public final static String URL_SUBMIT_MESSAGE_BOARD = BASE_URL + "";
 

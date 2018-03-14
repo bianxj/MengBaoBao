@@ -25,7 +25,10 @@ import com.doumengmeng.doctor.net.HttpUtil;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.request.entity.RequestDoctorInfo;
+import com.doumengmeng.doctor.response.InputDoctorInfoResponse;
+import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.EditTextUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
@@ -332,22 +335,22 @@ public class InputDoctorInfoActivity extends BaseActivity {
         }
 
         if ( TextUtils.isEmpty(tv_hospital.getText().toString().trim()) ){
-            showPrompt("请选择执业医院");
+            showPrompt("请勾选执业医院");
             return false;
         }
 
         if ( TextUtils.isEmpty(tv_department.getText().toString().trim()) ){
-            showPrompt("请选择科室");
+            showPrompt("请勾选科室");
             return false;
         }
 
         if ( null == cbl_professional_title.getFirstCheckBox() ){
-            showPrompt("请选择职称");
+            showPrompt("请勾选职称");
             return false;
         }
 
         if ( null == cbl_service_cost.getFirstCheckBox() ){
-            showPrompt("请选择服务费");
+            showPrompt("请勾选服务费");
             return false;
         }
 
@@ -367,8 +370,10 @@ public class InputDoctorInfoActivity extends BaseActivity {
     private Map<String,String> buildUploadDoctorContent(){
         Map<String,String> map = new HashMap<>();
 
+        UserData userData = BaseApplication.getInstance().getUserData();
+
         RequestDoctorInfo doctorInfo = new RequestDoctorInfo();
-        doctorInfo.setDoctorId("");
+        doctorInfo.setDoctorId(userData.getDoctorId());
         CheckBox costBox = cbl_service_cost.getFirstCheckBox();
 
         CheckBox positionlBox = cbl_professional_title.getFirstCheckBox();
@@ -402,16 +407,32 @@ public class InputDoctorInfoActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-
+            MyDialog.showPromptDialog(InputDoctorInfoActivity.this, ResponseErrorCode.getErrorMsg(result), null);
         }
 
         @Override
         public void onPostExecute(String result) {
-
+            InputDoctorInfoResponse response = GsonUtil.getInstance().fromJson(result,InputDoctorInfoResponse.class);
+            if ( 1 == response.getResult().getIsSuccess() ){
+                MyDialog.showPromptDialog(InputDoctorInfoActivity.this, getString(R.string.dialog_content_wait_audit), new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        goLoginActivity();
+                    }
+                });
+            } else {
+                MyDialog.showPromptDialog(InputDoctorInfoActivity.this, getString(R.string.dialog_content_submit_error), null);
+            }
         }
     };
 
+    private void goLoginActivity(){
+        startActivity(LoginActivity.class);
+        finish();
+    }
+
     private void back(){
+        startActivity(RegisterActivity.class);
         finish();
     }
 

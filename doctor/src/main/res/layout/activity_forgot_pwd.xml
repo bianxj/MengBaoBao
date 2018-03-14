@@ -79,6 +79,7 @@
                 android:hint="@string/input_vc_hint"
                 android:layout_marginLeft="@dimen/EditMarginLeft"
                 android:layout_marginRight="@dimen/EditMarginRight"
+                android:maxLength="8"
                 style="@style/EditTextView"/>
 
         </LinearLayout>
@@ -129,6 +130,7 @@
             android:layout_marginLeft="@dimen/EditMarginLeft"
             android:layout_marginRight="@dimen/EditMarginRight"
             android:hint="@string/input_new_pwd_hint"
+            android:maxLength="16"
             android:inputType="textPassword"/>
 
     </LinearLayout>
@@ -173,8 +175,8 @@
     <Button
         android:id="@+id/bt_sure"
         android:layout_width="@dimen/x639px"
-        android:layout_height="@dimen/y127px"
+        android:layout_height="@dimen/y116px"
         android:layout_marginTop="@dimen/y39px"
-        android:background="@drawable/btn_next"/>
+        android:background="@drawable/btn_submit"/>
 
 </LinearLayout>

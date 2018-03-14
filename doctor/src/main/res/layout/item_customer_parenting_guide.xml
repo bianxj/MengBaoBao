@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x48px"
+        android:paddingRight="@dimen/x48px"
+        android:paddingTop="@dimen/y19px"
+        android:paddingBottom="@dimen/y19px"
+        android:orientation="vertical"
+        android:background="@color/first_white"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FirstBlack.Text29px"
+            android:text="@string/doctor_supplement"/>
+
+        <EditText
+            android:id="@+id/et_custom_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20px"
+            android:paddingLeft="@dimen/y20px"
+            android:paddingRight="@dimen/y20px"
+            android:paddingTop="@dimen/y25px"
+            android:paddingBottom="@dimen/y25px"
+            android:gravity="top"
+            android:textColorHint="@color/eight_gray"
+            android:hint="@string/custom_title_hint"
+            android:minHeight="@dimen/y77px"
+            android:background="@drawable/bg_circle_edittext_multi_line"/>
+
+        <EditText
+            android:id="@+id/et_custom_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20px"
+            android:paddingLeft="@dimen/y20px"
+            android:paddingRight="@dimen/y20px"
+            android:paddingTop="@dimen/y25px"
+            android:paddingBottom="@dimen/y25px"
+            android:gravity="top"
+            android:textColorHint="@color/eight_gray"
+            android:hint="@string/custom_content_hint"
+            android:minHeight="@dimen/y240px"
+            android:maxLength="100"
+            android:background="@drawable/bg_circle_edittext_multi_line"/>
+
+    </LinearLayout>
+
+</LinearLayout>

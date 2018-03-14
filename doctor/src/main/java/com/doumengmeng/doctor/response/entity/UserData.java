@@ -1,24 +1,43 @@
 package com.doumengmeng.doctor.response.entity;
 
+import android.text.TextUtils;
+
+import com.doumengmeng.doctor.net.UrlAddressList;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Administrator on 2018/3/9.
  */
 
 public class UserData {
 
+    @SerializedName("doctorid")
     private String doctorId;
+    @SerializedName("doctorphone")
     private String doctorPhone;
+    @SerializedName("loginpwd")
     private String loginPwd;
+    @SerializedName("doctorname")
     private String doctorName;
+    @SerializedName("positionaltitles")
     private String positionalTitles;
+    @SerializedName("speciality")
     private String speciality;
-    private String doctorDest;
+    @SerializedName("doctordesc")
+    private String doctorDesc;
+    @SerializedName("doctorimg")
     private String doctorImg;
+    @SerializedName("doctorcode")
     private String doctorCode;
+    @SerializedName("cost")
     private String cost;
+    @SerializedName("hospitalid")
     private String hospitalId;
+    @SerializedName("certificatea")
     private String certificateA;
+    @SerializedName("certificateb")
     private String certificateB;
+    @SerializedName("departmentname")
     private String departmentName;
 
     public String getDoctorId() {
@@ -69,12 +88,12 @@ public class UserData {
         this.speciality = speciality;
     }
 
-    public String getDoctorDest() {
-        return doctorDest;
+    public String getDoctorDesc() {
+        return doctorDesc;
     }
 
-    public void setDoctorDest(String doctorDest) {
-        this.doctorDest = doctorDest;
+    public void setDoctorDesc(String doctorDesc) {
+        this.doctorDesc = doctorDesc;
     }
 
     public String getDoctorImg() {
@@ -132,4 +151,29 @@ public class UserData {
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
+
+    public String getHeadimg() {
+        if (TextUtils.isEmpty(doctorImg)){
+            return null;
+        } else {
+            return UrlAddressList.BASE_IMAGE_URL + doctorImg;
+        }
+    }
+
+    public String getCertificateAUrl(){
+        if (TextUtils.isEmpty(certificateA)){
+            return null;
+        } else {
+            return UrlAddressList.BASE_IMAGE_URL + certificateA;
+        }
+    }
+
+    public String getCertificateBUrl(){
+        if (TextUtils.isEmpty(certificateB)){
+            return null;
+        } else {
+            return UrlAddressList.BASE_IMAGE_URL + certificateB;
+        }
+    }
+
 }

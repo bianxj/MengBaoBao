@@ -71,9 +71,16 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        checkLocationPermission();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         clearHandler(handler);
+        destoryLocation();
     }
 
     private void findView(){
@@ -96,7 +103,6 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
         iv_arrow = findViewById(R.id.iv_arrow);
 
         rl_location_area.setOnClickListener(listener);
-        checkLocationPermission();
     }
 
     private void initHospitalList(){
@@ -300,6 +306,8 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
             } else {
                 locationFailed();
             }
+
+            refreshHospitalList();
 //            rl_location_area.setEnabled(true);
             destoryLocation();
         }

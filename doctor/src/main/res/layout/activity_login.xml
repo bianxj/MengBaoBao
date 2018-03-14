@@ -105,6 +105,7 @@
             android:layout_marginRight="@dimen/EditMarginRight"
             android:inputType="textPassword"
             android:lines="1"
+            android:maxLength="16"
             android:hint="@string/input_pwd_hint" />
 
     </LinearLayout>

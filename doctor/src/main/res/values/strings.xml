@@ -15,6 +15,8 @@
     <string name="message_board">留言板</string>
     <string name="hospital_report">医院报告</string>
     <string name="parent_info">父母信息</string>
+    <string name="parenting_guide">养育指导</string>
+    <string name="history_report">往期报告</string>
 
     <!--Shared数据-->
     <string name="input_phone_hint">手机号</string>
@@ -179,6 +181,8 @@
     <string name="assessment_refund_message">抱歉，医生未能按约给予评估及指导，
 已为您退款或在途中！</string>
 
+    <string name="edit">修改</string>
+
     <!--AssessmentParentGuideActivity-->
     <string name="type">类别</string>
     <string name="month_age">月龄</string>
@@ -332,6 +336,8 @@
     <string name="dialog_content_first_page">第一页</string>
     <string name="dialog_content_second_page">第二页</string>
     <string name="dialog_content_example_hint">保证照片中的内容（姓名、医院。名称、科室、证件编号）清晰可见</string>
+    <string name="dialog_content_wait_audit">待审核状态，文案待定</string>
+    <string name="dialog_content_submit_error">提交失败</string>
 
     <string name="prompt_bt_cancel">取消</string>
     <string name="prompt_bt_sure">确认</string>
