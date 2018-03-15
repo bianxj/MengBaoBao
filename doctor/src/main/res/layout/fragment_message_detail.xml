@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center_horizontal"
     android:layout_height="match_parent">
 
     <include layout="@layout/include_title_back"></include>
 
+    <TextView
+        android:id="@+id/tv_message_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/FirstBlack.Text36px"
+        android:layout_marginTop="@dimen/y53px"
+        android:includeFontPadding="false"
+        />
 
+    <TextView
+        android:id="@+id/tv_message_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20px"
+        style="@style/FirstGray.Text26px"
+        android:includeFontPadding="false"
+        />
+
+    <TextView
+        android:id="@+id/tv_message_content"
+        android:layout_width="@dimen/x625px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y55px"
+        android:lineSpacingExtra="@dimen/y30px"
+        style="@style/FirstBlack.Text28px"
+        />
 
 </LinearLayout>

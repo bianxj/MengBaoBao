@@ -1,11 +1,14 @@
 package com.doumengmeng.doctor.request;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
+import com.doumengmeng.doctor.activity.LoadingActivity;
 import com.doumengmeng.doctor.net.HttpUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -100,10 +103,10 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     }
 
     private void skipToLoading(){
-//        Context context = builder.getWeakReference().get();
-//        Intent intent = new Intent(context, LoadingActivity.class);
-//        intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
-//        context.startActivity(intent);
+        Context context = builder.getWeakReference().get();
+        Intent obj = new Intent(context, LoadingActivity.class);
+        obj.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
+        context.startActivity(obj);
     }
 
     private boolean isLoginTimeOut(String json){
@@ -128,7 +131,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     private void errorDispose(String errorMsg){
         Context context = builder.getWeakReference().get();
         if ( null != context ) {
-//            MyDialog.showPromptDialog(builder.getWeakReference().get(), errorMsg, null);
+            MyDialog.showPromptDialog(builder.getWeakReference().get(), errorMsg, null);
         }
     }
 

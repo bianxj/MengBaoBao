@@ -1,5 +1,6 @@
 package com.doumengmeng.doctor.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -141,11 +142,13 @@ public class AboutFragment extends BaseFragment {
     }
 
     private void goAgreement(){
-        startActivity(AgreementActivity.class);
+        Intent intent = new Intent(getContext(),AgreementActivity.class);
+        intent.putExtra(AgreementActivity.HIDE_BOTTOM,true);
+        getContext().startActivity(intent);
     }
 
     private void logout(){
-
+        BaseApplication.getInstance().skipToGuide(getContext());
     }
 
 }

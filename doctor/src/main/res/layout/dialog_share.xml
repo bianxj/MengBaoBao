@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_picture"
+        android:layout_width="@dimen/x576px"
+        android:layout_height="@dimen/y939px"
+        android:layout_marginTop="@dimen/y104px"
+        android:scaleType="centerInside"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/contentDescription" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/ll_weixin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/x77px"
+                android:layout_height="@dimen/x77px"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_weixin"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y9px"
+                android:text="@string/prompt_weixin"
+                android:includeFontPadding="false"
+                style="@style/FirstWhite.Text24px"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_friend_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x96px"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/x77px"
+                android:layout_height="@dimen/x77px"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_friend_circle"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y9px"
+                android:text="@string/prompt_friend_circle"
+                android:includeFontPadding="false"
+                style="@style/FirstWhite.Text24px"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

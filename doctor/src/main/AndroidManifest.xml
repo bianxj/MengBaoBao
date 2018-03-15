@@ -29,7 +29,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="mjFnnk87mnZUXfMBPSHZXLu7CUUizr1M" />
 
-        <activity android:name=".activity.GuideActivity"
+        <activity android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
             >
             <intent-filter>
@@ -38,7 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"></activity>
+        <!--<activity android:name=".activity.MainActivity" android:screenOrientation="portrait"></activity>-->
         <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ForgotPwdActivity" android:screenOrientation="portrait"></activity>

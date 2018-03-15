@@ -151,17 +151,45 @@ public class BaseApplication extends Application {
     private final static String COLUMN_IS_ABNORMAL_EXIT = "is_abnormal_exit";
     private final static String COLUMN_IS_TO_EXAMINE = "is_to_examine";
     private final static String COLUMN_LOGIN = "login";
+    private final static String COLUMN_MESSAGE_COUNT = "message_count";
+    private final static String COLUMN_ASSESSMENT_COUNT = "assessment_count";
+
+    public void saveAssessmentCount(int count){
+        SharedPreferencesUtil.saveInteger(this,TABLE_USER,COLUMN_ASSESSMENT_COUNT,count);
+    }
+
+    public int getAssessmentCount(){
+        return SharedPreferencesUtil.loadInteger(this,TABLE_USER,COLUMN_ASSESSMENT_COUNT,0);
+    }
+
+    public void saveMessageCount(int count){
+        SharedPreferencesUtil.saveInteger(this,TABLE_USER,COLUMN_MESSAGE_COUNT,count);
+    }
+
+    public int getMessageCount(){
+        return SharedPreferencesUtil.loadInteger(this,TABLE_USER,COLUMN_MESSAGE_COUNT,0);
+    }
+
+    private UserData userData;
+    public void clearUserData(){
+        userData = null;
+        loginInfo = null;
+        SharedPreferencesUtil.clearTable(this,TABLE_USER);
+    }
 
     public void saveUserData(UserData userData){
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_USER_DATA, GsonUtil.getInstance().toJson(userData));
     }
 
     public UserData getUserData(){
-        String content = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_USER_DATA,"");
-        if (TextUtils.isEmpty(content) ){
-            return null;
+        if ( userData == null ) {
+            String content = SharedPreferencesUtil.loadString(this, TABLE_USER, COLUMN_USER_DATA, "");
+            if (TextUtils.isEmpty(content)) {
+                return null;
+            }
+            userData = GsonUtil.getInstance().fromJson(content,UserData.class);
         }
-        return GsonUtil.getInstance().fromJson(content,UserData.class);
+        return userData;
     }
 
     public void saveRegisterVc(String registerVc){
@@ -262,9 +290,8 @@ public class BaseApplication extends Application {
     }
 
     public void skipToGuide(Context context){
-        //TODO
-//        clearImageLoaderCache();
-//        clearUserData();
+        clearImageLoaderCache();
+        clearUserData();
         Intent intent = new Intent(context, GuideActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

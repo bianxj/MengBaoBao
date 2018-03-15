@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -59,7 +60,7 @@ public class MessageFragment extends BaseFragment {
         xrv = view.findViewById(R.id.xrv);
         xrv.setLoadingMoreEnabled(false);
         xrv.setFootView(new XLoadMoreFooter(getContext()));
-
+        xrv.setOnTouchListener(touchListener);
         datas = new ArrayList<>();
         for (int i = 0 ;i<10;i++){
             MessageAdapter.MessageData data = new MessageAdapter.MessageData();
@@ -91,5 +92,13 @@ public class MessageFragment extends BaseFragment {
             ll_no_message.setVisibility(View.VISIBLE);
         }
     }
+
+    private View.OnTouchListener touchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+//            adapter.closeOpenedView();
+            return false;
+        }
+    };
 
 }

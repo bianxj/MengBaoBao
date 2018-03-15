@@ -385,4 +385,10 @@ public class PictureUtils {
         return degree;
     }
 
+    public static byte[] convertBitmapToByte(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        return baos.toByteArray();
+    }
+
 }

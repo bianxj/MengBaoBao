@@ -1,5 +1,6 @@
 package com.doumengmeng.doctor.activity;
 
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,12 +14,15 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
+import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseFragment;
 import com.doumengmeng.doctor.base.BaseFragmentActivity;
 import com.doumengmeng.doctor.fragment.AboutFragment;
 import com.doumengmeng.doctor.fragment.AccountFragment;
 import com.doumengmeng.doctor.fragment.HomeFragment;
 import com.doumengmeng.doctor.fragment.MessageDetailFragment;
 import com.doumengmeng.doctor.fragment.MessageFragment;
+import com.doumengmeng.doctor.receiver.UpdateSuperScriptReceiver;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,13 +48,14 @@ public class MainActivity extends BaseFragmentActivity {
     //消息详情
     public static final String PAGE_MESSAGE_DETAIL = "page_message_detail";
 
-    private TextView tv_home_count,tv_message_count;
 
     private FragmentManager fm;
     private Fragment currentFragment;
-    private Map<String,Fragment> fragmentMap = new HashMap<>();
+    private Map<String,BaseFragment> fragmentMap = new HashMap<>();
     private final Map<String,FrameLayout> bottomMap = new HashMap<>();
     private String page;
+
+    private UpdateSuperScriptReceiver receiver;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,23 +68,30 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onResume() {
         super.onResume();
         refreshCornerMark();
+        register();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregister();
     }
 
     private void findView(){
 //        fl_content = findViewById(R.id.fl_content);
-        tv_home_count = findViewById(R.id.tv_home_count);
-        tv_message_count = findViewById(R.id.tv_message_count);
         initView();
     }
 
     private void initView(){
         initFragment();
+        initSuperScript();
     }
 
     private void initFragment(){
         bottomMap.put(PAGE_HOME,(FrameLayout) findViewById(R.id.fl_home));
         bottomMap.put(PAGE_ACCOUNT,(FrameLayout) findViewById(R.id.fl_account));
         bottomMap.put(PAGE_MESSAGE,(FrameLayout) findViewById(R.id.fl_message));
+        bottomMap.put(PAGE_MESSAGE_DETAIL,(FrameLayout) findViewById(R.id.fl_message));
         bottomMap.put(PAGE_ABOUT,(FrameLayout) findViewById(R.id.fl_about));
 
         Set<String> keys = bottomMap.keySet();
@@ -93,6 +105,26 @@ public class MainActivity extends BaseFragmentActivity {
         fragmentMap.put(PAGE_MESSAGE,new MessageFragment());
         fragmentMap.put(PAGE_ABOUT,new AboutFragment());
         fragmentMap.put(PAGE_MESSAGE_DETAIL,new MessageDetailFragment());
+    }
+
+    private TextView tv_home_count,tv_message_count;
+    private void initSuperScript(){
+        tv_home_count = findViewById(R.id.tv_home_count);
+        tv_message_count = findViewById(R.id.tv_message_count);
+        updateSuperScript();
+
+        receiver = new UpdateSuperScriptReceiver(this);
+    }
+
+    private void register(){
+        IntentFilter filter = new IntentFilter(UpdateSuperScriptReceiver.ACTION_UPDATE_SCRIPT);
+        registerReceiver(receiver,filter);
+    }
+
+    private void unregister(){
+        if ( receiver != null ){
+            unregisterReceiver(receiver);
+        }
     }
 
     private void setDefaultPage(){
@@ -124,10 +156,17 @@ public class MainActivity extends BaseFragmentActivity {
         }
     };
 
-    private void switchFragment(String page){
+    public void switchFragment(String page){
+        switchFragment(page,null);
+    }
+
+    public void switchFragment(String page, Object object){
         this.page = page;
 //        BaseApplication.getInstance().saveMainPage(page);
-        Fragment fragment = fragmentMap.get(page);
+        BaseFragment fragment = fragmentMap.get(page);
+        if ( object != null ){
+            fragment.setObject(object);
+        }
         if ( !fragment.isVisible() ){
             FragmentTransaction transaction = fm.beginTransaction();
             if ( currentFragment != null ){
@@ -167,6 +206,26 @@ public class MainActivity extends BaseFragmentActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void updateSuperScript(){
+        int messgeCount = BaseApplication.getInstance().getMessageCount();
+        int assessmentCount = BaseApplication.getInstance().getAssessmentCount();
+        updateSuperScriptItem(tv_home_count,assessmentCount);
+        updateSuperScriptItem(tv_message_count,messgeCount);
+    }
+
+    private void updateSuperScriptItem(TextView tv_script,int count){
+        if ( count <= 0 ){
+            tv_script.setVisibility(View.GONE);
+        } else {
+            if ( count > 99 ){
+                tv_script.setText("99+");
+            } else {
+                tv_script.setText(count+"");
+            }
+            tv_script.setVisibility(View.VISIBLE);
+        }
     }
 
 }

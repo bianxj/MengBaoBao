@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y14px" />
 
-    <FrameLayout
+    <com.doumengmeng.doctor.view.SwipeLayout
+        android:id="@+id/sl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y144px"
         >
@@ -24,8 +25,8 @@
             />
         <RelativeLayout
             android:id="@+id/rl_message"
-            android:layout_width="@dimen/x720px"
-            android:layout_height="@dimen/y144px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@color/first_white">
 
             <FrameLayout
@@ -82,6 +83,6 @@
                 android:layout_centerVertical="true"/>
 
         </RelativeLayout>
-    </FrameLayout>
+    </com.doumengmeng.doctor.view.SwipeLayout>
 
 </LinearLayout>

@@ -386,10 +386,10 @@ public class HistoryReportDetailActivity extends BaseActivity {
     private final View.OnClickListener parentingGuideListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-//            Intent intent = new Intent(AssessmentActivity.this,AssessmentParentingGuideActivity.class);
-//            intent.putExtra(AssessmentParentingGuideActivity.IN_PARAM_RECORD_ID,record.getRecordid());
-//            intent.putExtra(AssessmentParentingGuideActivity.IN_PARAM_DOCTOR_ID,record.getDoctorid());
-//            startActivity(intent);
+//            Intent obj = new Intent(AssessmentActivity.this,AssessmentParentingGuideActivity.class);
+//            obj.putExtra(AssessmentParentingGuideActivity.IN_PARAM_RECORD_ID,record.getRecordid());
+//            obj.putExtra(AssessmentParentingGuideActivity.IN_PARAM_DOCTOR_ID,record.getDoctorid());
+//            startActivity(obj);
         }
     };
 

@@ -9,6 +9,18 @@ import android.content.SharedPreferences;
 
 public class SharedPreferencesUtil {
 
+    public static void saveInteger(Context context,String tableName,String key,int value){
+        SharedPreferences preferences = context.getSharedPreferences(tableName,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(key,value);
+        editor.commit();
+    }
+
+    public static int loadInteger(Context context,String tableName,String key,int defaultValue){
+        SharedPreferences preferences = context.getSharedPreferences(tableName,Context.MODE_PRIVATE);
+        return preferences.getInt(key,defaultValue);
+    }
+
     public static void saveBoolean(Context context,String tableName,String key,boolean value){
         SharedPreferences preferences = context.getSharedPreferences(tableName,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

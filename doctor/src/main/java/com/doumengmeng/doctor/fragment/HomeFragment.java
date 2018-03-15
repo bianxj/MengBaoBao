@@ -1,5 +1,6 @@
 package com.doumengmeng.doctor.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.base.BaseTimeFragment;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.net.UrlAddressList;
+import com.doumengmeng.doctor.receiver.UpdateSuperScriptReceiver;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.response.AssessmentListResponse;
@@ -225,7 +227,14 @@ public class HomeFragment extends BaseTimeFragment {
                 items.remove(items.get(i));
             }
         }
+        BaseApplication.getInstance().saveAssessmentCount(items.size());
+        refreshScript();
         adapter.notifyDataSetChanged();
+    }
+
+    public void refreshScript(){
+        Intent intent = new Intent(UpdateSuperScriptReceiver.ACTION_UPDATE_SCRIPT);
+        getContext().sendBroadcast(intent);
     }
 
 }

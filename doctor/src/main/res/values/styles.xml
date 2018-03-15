@@ -50,6 +50,12 @@
     <style name="FirstBlack.Text35px">
         <item name="android:textSize">@dimen/y35px</item>
     </style>
+    <style name="FirstBlack.Text36px">
+        <item name="android:textSize">@dimen/y36px</item>
+    </style>
+    <style name="FirstBlack.Text52px">
+        <item name="android:textSize">@dimen/y52px</item>
+    </style>
     <!--FirstBlack end-->
 
     <!--SecondBlack start-->

@@ -27,8 +27,8 @@ public class NotificationUtil {
             builder.setDefaults(NotificationCompat.DEFAULT_SOUND);
             builder.setSmallIcon(R.mipmap.ic_launcher);
 
-//            Intent intent = new Intent(context, MainActivity.class);
-//            PendingIntent pIntent = PendingIntent.getActivity(context, 1, intent, 0);
+//            Intent obj = new Intent(context, MainActivity.class);
+//            PendingIntent pIntent = PendingIntent.getActivity(context, 1, obj, 0);
 //            builder.setContentIntent(pIntent);
             //这句是重点
             builder.setFullScreenIntent(null, true);

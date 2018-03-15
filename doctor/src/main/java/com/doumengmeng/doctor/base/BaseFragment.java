@@ -16,6 +16,9 @@ import android.view.ViewGroup;
  */
 
 public class BaseFragment extends Fragment {
+
+    protected Object obj;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,4 +56,9 @@ public class BaseFragment extends Fragment {
             }
         }
     }
+
+    public void setObject(Object obj){
+        this.obj = obj;
+    }
+
 }

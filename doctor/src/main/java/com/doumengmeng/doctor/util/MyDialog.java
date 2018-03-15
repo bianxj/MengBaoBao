@@ -2,6 +2,7 @@ package com.doumengmeng.doctor.util;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
@@ -41,6 +42,7 @@ public class MyDialog {
     private final static Object cityLock = new Object();
 //    private final static Object payLock = new Object();
     private final static Object exampleLock = new Object();
+    private final static Object shareLock = new Object();
 
     private static Dialog updateDialog;
     private static Dialog promptDialog;
@@ -53,6 +55,7 @@ public class MyDialog {
 //    private static PopupWindow payDialog;
     private static PopupWindow cityDialog;
     private static Dialog exampleDialog;
+    private static Dialog shareDialog;
 //
     public static void showPermissionDialog(Context context, String content , ChooseDialogCallback callback){
         showChooseDialog(context,content,R.string.dialog_btn_prompt_later,R.string.dialog_btn_prompt_go_setting,callback);
@@ -381,6 +384,47 @@ public class MyDialog {
 //        }
 //    }
 
+    public static void showShareDialog(Context context,final Bitmap bitmap ,final ShareCallBack callBack){
+        synchronized (shareLock){
+            shareDialog = new Dialog(context,R.style.MyDialog);
+            View view = LayoutInflater.from(context).inflate(R.layout.dialog_share,null);
+            ImageView iv_picture = view.findViewById(R.id.iv_picture);
+            LinearLayout ll_weixin = view.findViewById(R.id.ll_weixin);
+            LinearLayout ll_friend_circle = view.findViewById(R.id.ll_friend_circle);
+
+            ll_weixin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismissShareDialog();
+                    callBack.shareToWeixin(bitmap);
+                }
+            });
+
+            ll_friend_circle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismissShareDialog();
+                    callBack.sharedToFriend(bitmap);
+                }
+            });
+
+            shareDialog.setContentView(view);
+            shareDialog.show();
+            iv_picture.setImageBitmap(bitmap);
+        }
+    }
+
+    public static void dismissShareDialog(){
+        synchronized (shareLock){
+            shareDialog.dismiss();
+        }
+    }
+
+    public interface ShareCallBack{
+        public void sharedToFriend(Bitmap bitmap);
+        public void shareToWeixin(Bitmap bitmap);
+    }
+
     public static void showPictureDialog(Context context, String bitmap){
         synchronized (pictureLock){
             pictureDialog = new Dialog(context,R.style.MyDialog);
@@ -391,6 +435,7 @@ public class MyDialog {
             ImageLoader.getInstance().displayImage(bitmap,iv_picture);
         }
     }
+
 //
 //    public static void showGifDialog(Context context,String url){
 //        synchronized (gifLock){

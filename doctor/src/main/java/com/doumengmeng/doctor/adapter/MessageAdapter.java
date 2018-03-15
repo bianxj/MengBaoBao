@@ -1,8 +1,8 @@
 package com.doumengmeng.doctor.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,7 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
+import com.doumengmeng.doctor.activity.MainActivity;
+import com.doumengmeng.doctor.view.SwipeLayout;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +21,13 @@ import java.util.List;
  * Created by Administrator on 2018/3/7.
  */
 
-public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
     private List<MessageData> datas;
+    private List<ViewHolder> holders;
 
     public MessageAdapter(List<MessageData> datas) {
+        holders = new ArrayList<>();
         if ( null == datas ){
             this.datas = new ArrayList<>();
         } else {
@@ -33,7 +38,9 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message,null);
-        return new ViewHolder(view);
+        ViewHolder holder = new ViewHolder(view,this);
+        holders.add(holder);
+        return holder;
     }
 
     @Override
@@ -48,7 +55,9 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
+        private WeakReference<MessageAdapter> weakReference;
         private MessageData data;
+        private SwipeLayout sl;
         private RelativeLayout rl_message;
         private ImageView iv_type;
         private TextView tv_message_content;
@@ -56,14 +65,17 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
         private TextView tv_delete;
         private TextView tv_unread;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView,MessageAdapter adapter) {
             super(itemView);
+            sl = itemView.findViewById(R.id.sl);
             rl_message = itemView.findViewById(R.id.rl_message);
             iv_type = itemView.findViewById(R.id.iv_type);
             tv_message_content = itemView.findViewById(R.id.tv_message_content);
             tv_message_time = itemView.findViewById(R.id.tv_message_time);
             tv_delete = itemView.findViewById(R.id.tv_delete);
             tv_unread = itemView.findViewById(R.id.tv_unread);
+
+            weakReference = new WeakReference<MessageAdapter>(adapter);
         }
 
         public void initView(MessageData data){
@@ -82,54 +94,61 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
             tv_message_content.setText(data.getMessageTitle());
             tv_message_time.setText(data.getMessageDate());
 
-            tv_delete.setOnClickListener(listener);
-//            rl_message.setOnTouchListener(touchListener);
+            sl.setOnSwipeLayoutClick(onSwipeLayoutClick);
         }
 
-        private View.OnClickListener listener = new View.OnClickListener() {
+        private SwipeLayout.OnSwipeLayoutClick onSwipeLayoutClick = new SwipeLayout.OnSwipeLayoutClick() {
             @Override
-            public void onClick(View view) {
-                //TODO
-            }
-        };
-
-        private View.OnTouchListener touchListener = new View.OnTouchListener() {
-            float historyX = 0;
-            boolean isMoved = false;
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                System.out.println("motionEvent:"+motionEvent.getX());
-                switch (motionEvent.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        historyX = motionEvent.getX();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        move(motionEvent.getX()-historyX);
-                        historyX = motionEvent.getX();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        break;
+            public void onFrontClick(Context context,boolean isOpen) {
+                if ( isOpen ){
+                    close();
+                } else {
+                    goMessageDetailActivity();
                 }
-                return true;
+            }
+
+            @Override
+            public void onBackClick(Context context) {
+                weakReference.get().removeMessage(data);
+            }
+
+            @Override
+            public void onStatusChanged(boolean isOpen) {
+            }
+
+            @Override
+            public void onTouch(Context context) {
+                if ( !sl.isOpen() ) {
+                    weakReference.get().closeOpenedView();
+                }
             }
         };
 
-        private void move(float deltaX){
-            float left = rl_message.getLeft() +deltaX ;
-            System.out.println("deltaX:"+deltaX);
-            System.out.println("Left:"+left + "----" + tv_delete.getWidth());
-            if ( left > 0 ){
-                rl_message.setLeft(0);
-                rl_message.setRight(rl_message.getWidth());
-            } else if ( Math.abs(left) > tv_delete.getWidth()  ){
-                rl_message.setLeft(-1*tv_delete.getWidth());
-                rl_message.setRight(rl_message.getWidth()-tv_delete.getWidth());
-            } else {
-                rl_message.setLeft((int) left);
-                rl_message.setRight((int) (rl_message.getRight()+deltaX));
-            }
+        public boolean isOpen(){
+            return sl.isOpen();
         }
 
+        public void close(){
+            sl.close();
+        }
+
+        private void goMessageDetailActivity(){
+            ((MainActivity)sl.getContext()).switchFragment(MainActivity.PAGE_MESSAGE_DETAIL,data);
+        }
+
+    }
+
+    public void removeMessage(MessageData data){
+        datas.remove(data);
+        notifyDataSetChanged();
+    }
+
+    public void closeOpenedView(){
+        for (ViewHolder holder:holders){
+            if ( holder.isOpen() ){
+                holder.close();
+            }
+        }
     }
 
     public enum MESSAGE_TYPE{
@@ -141,9 +160,18 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
 
     public static class MessageData{
         private MESSAGE_TYPE messageType;
+        private String messageId;
         private String messageTitle;
         private String messageDesc;
         private String messageDate;
+
+        public String getMessageId() {
+            return messageId;
+        }
+
+        public void setMessageId(String messageId) {
+            this.messageId = messageId;
+        }
 
         public MESSAGE_TYPE getMessageType() {
             return messageType;
