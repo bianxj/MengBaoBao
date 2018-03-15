@@ -9,8 +9,6 @@ import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.doumengmengandroidbady.base.BaseApplication;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +85,7 @@ public class AppUtil {
     public static void openPrimession(Context context){
         Intent intent = new Intent();
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", BaseApplication.getInstance().getPackageName(), null);
+        Uri uri = Uri.fromParts("package", context.getPackageName(), null);
         intent.setData(uri);
         context.startActivity(intent);
     }

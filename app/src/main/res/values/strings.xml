@@ -22,6 +22,8 @@
     <!--LoginActiivty信息-->
     <string name="login_name">登录</string>
     <string name="sure">确认</string>
+    <string name="fast_registe">快速注册</string>
+    <string name="forgot_pwd">忘记密码?</string>
 
     <!--RegisterActivity信息-->
     <string name="register_name">注   册</string>
@@ -63,8 +65,6 @@
     <!--AgreementActivity信息-->
     <string name="agreement_name">使用协议</string>
     <string name="mark_read">我已阅读</string>
-    <string name="fast_registe">快速注册</string>
-    <string name="forgot_pwd">忘记密码</string>
 
     <!--SideMenu信息-->
     <string name="person_center">个人中心</string>

@@ -74,6 +74,7 @@
                 android:hint="@string/input_vc_hint"
                 android:layout_marginLeft="@dimen/EditMarginLeft"
                 android:layout_marginRight="@dimen/EditMarginRight"
+                android:maxLength="8"
                 style="@style/EditTextView"/>
 
         </LinearLayout>
@@ -124,6 +125,7 @@
             android:layout_marginLeft="@dimen/EditMarginLeft"
             android:layout_marginRight="@dimen/EditMarginRight"
             android:hint="@string/input_new_pwd_hint"
+            android:maxLength="16"
             android:inputType="textPassword"/>
 
     </LinearLayout>

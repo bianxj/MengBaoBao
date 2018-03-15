@@ -181,18 +181,18 @@ public class BaseApplication extends Application {
 
     public final static String COLUMN_CORRENT_DAY = "corrent_day";
     public final static String COLUMN_CORRENT_MONTH = "corrent_month";
-    public final static String COLUMN_CURRENT_DAY = "current_day";
-    public final static String COLUMN_CURRENT_MONTH = "current_month";
-
-    private LoginInfo loginInfo;
-    private UserData userData;
-    private ParentInfo parentInfo;
-    public void clearUserData(){
+    public final static String COLUMN_CURRENT_DAY = "current_day";    public void clearUserData(){
         userData = null;
         parentInfo = null;
         loginInfo = null;
         SharedPreferencesUtil.clearTable(this,TABLE_USER);
     }
+    public final static String COLUMN_CURRENT_MONTH = "current_month";
+
+    private LoginInfo loginInfo;
+    private UserData userData;
+    private ParentInfo parentInfo;
+
 
     public LoginInfo getLogin(){
         if ( loginInfo == null ) {
