@@ -1,6 +1,5 @@
 package com.doumengmeng.doctor.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,13 +11,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
+import com.doumengmeng.doctor.activity.MainActivity;
 import com.doumengmeng.doctor.activity.QRActivity;
 import com.doumengmeng.doctor.adapter.AssessmentAdapter;
 import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.base.BaseTimeFragment;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.net.UrlAddressList;
-import com.doumengmeng.doctor.receiver.UpdateSuperScriptReceiver;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.response.AssessmentListResponse;
@@ -66,7 +65,7 @@ public class HomeFragment extends BaseTimeFragment {
     public void onResume() {
         super.onResume();
         stopTask(searchAssessmentTask);
-        refreshAssessmentList();
+        searchAssessmentList();
     }
 
     @Override
@@ -79,7 +78,7 @@ public class HomeFragment extends BaseTimeFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if ( !hidden ){
-            refreshAssessmentList();
+            searchAssessmentList();
         } else {
             stopTask(searchAssessmentTask);
         }
@@ -143,7 +142,7 @@ public class HomeFragment extends BaseTimeFragment {
     }
 
     private RequestTask searchAssessmentTask;
-    private void refreshAssessmentList(){
+    private void searchAssessmentList(){
         try {
             searchAssessmentTask = new RequestTask.Builder(getContext(),searchAssessmentCallback)
                     .setContent(buildRequestAssessment())
@@ -233,8 +232,7 @@ public class HomeFragment extends BaseTimeFragment {
     }
 
     public void refreshScript(){
-        Intent intent = new Intent(UpdateSuperScriptReceiver.ACTION_UPDATE_SCRIPT);
-        getContext().sendBroadcast(intent);
+        ((MainActivity)getActivity()).refreshSuperScript();
     }
 
 }

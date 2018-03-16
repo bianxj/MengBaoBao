@@ -63,6 +63,7 @@
                 android:layout_marginLeft="@dimen/x221px"
                 android:layout_centerVertical="true"
                 style="@style/SecondBlack.Text28px"
+                android:enabled="false"
                 android:text="新增等待评估通知"/>
 
             <TextView
@@ -72,6 +73,7 @@
                 android:layout_marginLeft="@dimen/x482px"
                 android:layout_centerVertical="true"
                 style="@style/FourthGray.Text24px"
+                android:enabled="false"
                 android:text="2017.12.12"/>
 
             <ImageView

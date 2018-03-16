@@ -1,6 +1,5 @@
 package com.doumengmeng.doctor.activity;
 
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,7 +21,6 @@ import com.doumengmeng.doctor.fragment.AccountFragment;
 import com.doumengmeng.doctor.fragment.HomeFragment;
 import com.doumengmeng.doctor.fragment.MessageDetailFragment;
 import com.doumengmeng.doctor.fragment.MessageFragment;
-import com.doumengmeng.doctor.receiver.UpdateSuperScriptReceiver;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +53,7 @@ public class MainActivity extends BaseFragmentActivity {
     private final Map<String,FrameLayout> bottomMap = new HashMap<>();
     private String page;
 
-    private UpdateSuperScriptReceiver receiver;
+//    private UpdateSuperScriptReceiver receiver;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +65,7 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        refreshCornerMark();
+        refreshSuperScript();
         register();
     }
 
@@ -111,29 +109,24 @@ public class MainActivity extends BaseFragmentActivity {
     private void initSuperScript(){
         tv_home_count = findViewById(R.id.tv_home_count);
         tv_message_count = findViewById(R.id.tv_message_count);
-        updateSuperScript();
+        refreshSuperScript();
 
-        receiver = new UpdateSuperScriptReceiver(this);
+//        receiver = new UpdateSuperScriptReceiver(this);
     }
 
     private void register(){
-        IntentFilter filter = new IntentFilter(UpdateSuperScriptReceiver.ACTION_UPDATE_SCRIPT);
-        registerReceiver(receiver,filter);
+//        IntentFilter filter = new IntentFilter(UpdateSuperScriptReceiver.ACTION_UPDATE_SCRIPT);
+//        registerReceiver(receiver,filter);
     }
 
     private void unregister(){
-        if ( receiver != null ){
-            unregisterReceiver(receiver);
-        }
+//        if ( receiver != null ){
+//            unregisterReceiver(receiver);
+//        }
     }
 
     private void setDefaultPage(){
         switchFragment(PAGE_HOME);
-    }
-
-    private void refreshCornerMark(){
-//        tv_home_count.setText();
-//        tv_message_count.setText();
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -208,14 +201,14 @@ public class MainActivity extends BaseFragmentActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public void updateSuperScript(){
+    public void refreshSuperScript(){
         int messgeCount = BaseApplication.getInstance().getMessageCount();
         int assessmentCount = BaseApplication.getInstance().getAssessmentCount();
-        updateSuperScriptItem(tv_home_count,assessmentCount);
-        updateSuperScriptItem(tv_message_count,messgeCount);
+        refreshSuperScriptItem(tv_home_count,assessmentCount);
+        refreshSuperScriptItem(tv_message_count,messgeCount);
     }
 
-    private void updateSuperScriptItem(TextView tv_script,int count){
+    private void refreshSuperScriptItem(TextView tv_script, int count){
         if ( count <= 0 ){
             tv_script.setVisibility(View.GONE);
         } else {

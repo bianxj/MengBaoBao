@@ -3,10 +3,10 @@ package com.doumengmeng.doctor.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
@@ -23,10 +23,15 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
+    private RecyclerView listView;
     private List<MessageData> datas;
     private List<ViewHolder> holders;
+    private OnDeleteCallBack onDeleteCallBack;
 
-    public MessageAdapter(List<MessageData> datas) {
+    public MessageAdapter(RecyclerView listView,List<MessageData> datas,OnDeleteCallBack onDeleteCallBack) {
+        this.listView = listView;
+        listView.setOnTouchListener(listener);
+        this.onDeleteCallBack = onDeleteCallBack;
         holders = new ArrayList<>();
         if ( null == datas ){
             this.datas = new ArrayList<>();
@@ -53,26 +58,34 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return datas.size();
     }
 
+    private View.OnTouchListener listener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            closeOpenedView();
+            return false;
+        }
+    };
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         private WeakReference<MessageAdapter> weakReference;
         private MessageData data;
         private SwipeLayout sl;
-        private RelativeLayout rl_message;
+//        private RelativeLayout rl_message;
         private ImageView iv_type;
         private TextView tv_message_content;
         private TextView tv_message_time;
-        private TextView tv_delete;
+//        private TextView tv_delete;
         private TextView tv_unread;
 
         public ViewHolder(View itemView,MessageAdapter adapter) {
             super(itemView);
             sl = itemView.findViewById(R.id.sl);
-            rl_message = itemView.findViewById(R.id.rl_message);
+//            rl_message = itemView.findViewById(R.id.rl_message);
             iv_type = itemView.findViewById(R.id.iv_type);
             tv_message_content = itemView.findViewById(R.id.tv_message_content);
             tv_message_time = itemView.findViewById(R.id.tv_message_time);
-            tv_delete = itemView.findViewById(R.id.tv_delete);
+//            tv_delete = itemView.findViewById(R.id.tv_delete);
             tv_unread = itemView.findViewById(R.id.tv_unread);
 
             weakReference = new WeakReference<MessageAdapter>(adapter);
@@ -89,6 +102,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 icon = R.drawable.icon_over_time;
             } else {
                 icon = R.drawable.icon_assessment;
+            }
+            if ( data.isRead() ){
+                tv_unread.setVisibility(View.GONE);
+            } else {
+                tv_unread.setVisibility(View.VISIBLE);
             }
             iv_type.setImageResource(icon);
             tv_message_content.setText(data.getMessageTitle());
@@ -109,7 +127,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
             @Override
             public void onBackClick(Context context) {
-                weakReference.get().removeMessage(data);
+                MessageAdapter adapter = weakReference.get();
+                if ( adapter.onDeleteCallBack != null ){
+                    adapter.onDeleteCallBack.delete(data);
+                }
             }
 
             @Override
@@ -164,6 +185,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         private String messageTitle;
         private String messageDesc;
         private String messageDate;
+        private boolean isRead;
 
         public String getMessageId() {
             return messageId;
@@ -204,6 +226,28 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         public void setMessageDate(String messageDate) {
             this.messageDate = messageDate;
         }
+
+        public boolean isRead() {
+            return isRead;
+        }
+
+        public void setRead(boolean read) {
+            isRead = read;
+        }
+    }
+
+    public int getUnReadMessageCount(){
+        int count = 0;
+        for (MessageData data:datas){
+            if ( !data.isRead() ){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public interface OnDeleteCallBack{
+        public void delete(MessageData data);
     }
 
 }

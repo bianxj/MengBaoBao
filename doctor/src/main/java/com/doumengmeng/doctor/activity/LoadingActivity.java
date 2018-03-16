@@ -24,6 +24,7 @@ import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.db.FeatureDao;
 import com.doumengmeng.doctor.db.HospitalDao;
 import com.doumengmeng.doctor.db.NurtureDao;
+import com.doumengmeng.doctor.entity.LoginInfo;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
@@ -173,14 +174,14 @@ public class LoadingActivity extends BaseActivity {
 
     private void checkVersionAndWifi(){
         if ( isWifi() ){
-            initConfigure();
+            afterCheckVersion();
             //checkVersion();
         } else {
             MyDialog.showPromptDialog(this, getString(R.string.prompt_no_wifi),R.string.dialog_btn_go_on, new MyDialog.PromptDialogCallback() {
                 @Override
                 public void sure() {
                     //TODO
-                    initConfigure();
+                    afterCheckVersion();
 //                    checkVersion();
                 }
             });
@@ -237,13 +238,7 @@ public class LoadingActivity extends BaseActivity {
                     if (AppUtil.isNeedUpdate(versionName, result)) {
                         getUpdateInfo();
                     } else {
-                        Intent intent = getIntent();
-                        boolean isAutoLogin = intent.getBooleanExtra(IN_PARAM_AUTO_LOGIN,false);
-                        if ( isAutoLogin ){
-                            login();
-                        } else {
-                            initConfigure();
-                        }
+                        afterCheckVersion();
                     }
                 }
             } catch (PackageManager.NameNotFoundException e) {
@@ -252,6 +247,16 @@ public class LoadingActivity extends BaseActivity {
             }
         }
     };
+
+    private void afterCheckVersion(){
+        Intent intent = getIntent();
+        boolean isAutoLogin = intent.getBooleanExtra(IN_PARAM_AUTO_LOGIN,false);
+        if ( isAutoLogin ){
+            login();
+        } else {
+            initConfigure();
+        }
+    }
 
 
     private RequestTask updateInfoTask = null;
@@ -380,36 +385,36 @@ public class LoadingActivity extends BaseActivity {
      * 日期: 2018/1/8 9:51
      */
     private void login(){
-//        LoginInfo loginInfo = BaseApplication.getInstance().getLogin();
-//            try {
-//                loginTask = new LoginTask(LoadingActivity.this, loginInfo.getAccount(), loginInfo.getPasswd(), new LoginTask.LoginCallBack() {
-//                    @Override
-//                    public void onPreExecute() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(String result) {
-//                        stopLoadingPercent();
-//                        MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
-//                            @Override
-//                            public void sure() {
-//                                BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
-//                            }
-//                        });
-//                    }
-//
-//                    @Override
-//                    public void onPostExecute(String result) {
-////                        checkVersionAndWifi();
-//                        initConfigure();
-//                    }
-//                },RequestTask.DEFAULT);
-//                loginTask.execute();
-//            } catch (Throwable throwable) {
-//                throwable.printStackTrace();
-//                stopLoadingPercent();
-//            }
+        LoginInfo loginInfo = BaseApplication.getInstance().getLogin();
+            try {
+                loginTask = new LoginTask(LoadingActivity.this, loginInfo.getAccount(), loginInfo.getPasswd(), new LoginTask.LoginCallBack() {
+                    @Override
+                    public void onPreExecute() {
+
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                        stopLoadingPercent();
+                        MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
+                            @Override
+                            public void sure() {
+                                BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onPostExecute(String result) {
+//                        checkVersionAndWifi();
+                        initConfigure();
+                    }
+                },RequestTask.DEFAULT);
+                loginTask.execute();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+                stopLoadingPercent();
+            }
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {

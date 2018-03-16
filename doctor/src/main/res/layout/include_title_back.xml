@@ -34,7 +34,7 @@
 
     <RelativeLayout
         android:id="@+id/rl_complete"
-        android:layout_width="@dimen/x100px"
+        android:layout_width="@dimen/x140px"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:visibility="gone"
@@ -43,9 +43,11 @@
             android:id="@+id/tv_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x46px"
             android:text="@string/complete"
-            style="@style/SecondWhite.Text28px"
+            style="@style/SecondWhite.Text36px"
             />
     </RelativeLayout>
 

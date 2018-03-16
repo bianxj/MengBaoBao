@@ -62,10 +62,14 @@ public class SwipeLayout extends FrameLayout {
     private ViewDragHelper.Callback mCallback = new ViewDragHelper.Callback() {
         @Override
         public boolean tryCaptureView(@NonNull View child, int pointerId) {
-            if ( child == mBackView ) {
-                return false;
+            if ( child == mFrontView ){
+                return true;
             }
-            return  true;
+            return false;
+//            if ( child == mBackView ) {
+//                return false;
+//            }
+//            return  true;
         }
 
         @Override
@@ -81,11 +85,6 @@ public class SwipeLayout extends FrameLayout {
         }
 
         @Override
-        public void onViewPositionChanged(@NonNull View changedView, int left, int top, int dx, int dy) {
-           invalidate();
-        }
-
-        @Override
         public void onViewReleased(@NonNull View releasedChild, float xvel, float yvel) {
             if ( xvel < 0 ){
                 open();
@@ -98,13 +97,15 @@ public class SwipeLayout extends FrameLayout {
     };
 
     @Override
-    public boolean onInterceptHoverEvent(MotionEvent event) {
-        return mDragHelper.shouldInterceptTouchEvent(event);
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return mDragHelper.shouldInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        onSwipeLayoutClick.onTouch(getContext());
+        if ( onSwipeLayoutClick != null ) {
+            onSwipeLayoutClick.onTouch(getContext());
+        }
         dispatchOnTouchEvent(event);
         try {
             mDragHelper.processTouchEvent(event);
@@ -126,22 +127,28 @@ public class SwipeLayout extends FrameLayout {
             if (Math.abs(movex - x) > DX) {//防止点击事件，会稍微手指抖动
                 isClick = false;
             }
+            if ( !isClick ){
+                getParent().requestDisallowInterceptTouchEvent(true);
+            }
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             if (isClick) {
                 dispatchClickListener((int) event.getX());
             }
+            getParent().requestDisallowInterceptTouchEvent(false);
         }
     }
 
     public void dispatchClickListener(int x) {
-        if ( isOpen ) {
-            if ( x > 0 && x < (mWidth-mRange) ){
-                onSwipeLayoutClick.onFrontClick(getContext(),true);
+        if ( onSwipeLayoutClick != null ) {
+            if (isOpen) {
+                if (x > 0 && x < (mWidth - mRange)) {
+                    onSwipeLayoutClick.onFrontClick(getContext(), true);
+                } else {
+                    onSwipeLayoutClick.onBackClick(getContext());
+                }
             } else {
-                onSwipeLayoutClick.onBackClick(getContext());
+                onSwipeLayoutClick.onFrontClick(getContext(), false);
             }
-        } else {
-            onSwipeLayoutClick.onFrontClick(getContext(),false);
         }
     }
 
@@ -167,7 +174,9 @@ public class SwipeLayout extends FrameLayout {
     }
 
     public void open(boolean isSmooth){
-        onSwipeLayoutClick.onStatusChanged(true);
+        if ( onSwipeLayoutClick != null ) {
+            onSwipeLayoutClick.onStatusChanged(true);
+        }
         isOpen = true;
         if ( isSmooth ){
             if ( mDragHelper.smoothSlideViewTo(mFrontView,-mRange,0) ){
@@ -183,7 +192,9 @@ public class SwipeLayout extends FrameLayout {
     }
 
     public void close(boolean isSmooth){
-        onSwipeLayoutClick.onStatusChanged(false);
+        if ( onSwipeLayoutClick != null ) {
+            onSwipeLayoutClick.onStatusChanged(false);
+        }
         isOpen = false;
         if ( isSmooth ){
             if ( mDragHelper.smoothSlideViewTo(mFrontView,0,0) ){
@@ -216,5 +227,7 @@ public class SwipeLayout extends FrameLayout {
     public boolean isOpen(){
         return isOpen;
     }
+
+
 
 }

@@ -84,6 +84,7 @@ public class InputDoctorInfoActivity extends BaseActivity {
     }
 
     private void findView(){
+        BaseApplication.getInstance().clearHeadFile();
         initTitle();
         initPrompt();
         initContentView();
@@ -417,6 +418,7 @@ public class InputDoctorInfoActivity extends BaseActivity {
                 MyDialog.showPromptDialog(InputDoctorInfoActivity.this, getString(R.string.dialog_content_wait_audit), new MyDialog.PromptDialogCallback() {
                     @Override
                     public void sure() {
+                        BaseApplication.getInstance().clearHeadFile();
                         goLoginActivity();
                     }
                 });

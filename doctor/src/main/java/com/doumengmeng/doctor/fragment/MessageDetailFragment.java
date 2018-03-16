@@ -42,13 +42,14 @@ public class MessageDetailFragment extends BaseFragment {
 
     private void initTitle(View view){
         rl_back = view.findViewById(R.id.rl_back);
-        rl_complete = view.findViewById(R.id.rl_back);
+        rl_complete = view.findViewById(R.id.rl_complete);
         tv_title = view.findViewById(R.id.tv_title);
         tv_complete = view.findViewById(R.id.tv_complete);
 
         tv_title.setText(R.string.message_details);
         tv_complete.setText(R.string.delete);
 
+        rl_complete.setVisibility(View.VISIBLE);
         rl_back.setOnClickListener(listener);
         rl_complete.setOnClickListener(listener);
     }

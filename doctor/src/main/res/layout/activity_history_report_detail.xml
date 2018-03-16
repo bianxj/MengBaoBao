@@ -509,7 +509,7 @@
                 android:id="@+id/rl_parenting_guide"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y153px"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <ImageView
                     android:id="@+id/iv_parenting_guide"
@@ -517,7 +517,8 @@
                     android:layout_height="@dimen/x107px"
                     android:layout_centerInParent="true"
                     android:background="@drawable/btn_parenting_guide_2"
-                    android:contentDescription="@string/contentDescription" />
+                    android:contentDescription="@string/contentDescription"
+                    android:visibility="gone"/>
             </RelativeLayout>
         </LinearLayout>
 

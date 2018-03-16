@@ -562,12 +562,24 @@
                 android:paddingRight="@dimen/x48px"
                 android:paddingTop="@dimen/y20px">
 
-                <TextView
-                    style="@style/SecondBlack.Text28px"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/assessment_measure_info"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        style="@style/SecondBlack.Text28px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assessment_measure_info"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        style="@style/SixthGray.Text23px"
+                        android:text="参考值引用WHO标准"/>
+                </RelativeLayout>
+
 
                 <View
                     android:layout_width="match_parent"

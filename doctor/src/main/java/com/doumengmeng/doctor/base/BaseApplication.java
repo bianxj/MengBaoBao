@@ -6,9 +6,10 @@ import android.content.Intent;
 import android.os.Environment;
 import android.text.TextUtils;
 
-import com.doumengmeng.doctor.activity.GuideActivity;
+import com.doumengmeng.doctor.activity.LoginActivity;
 import com.doumengmeng.doctor.entity.LoginInfo;
 import com.doumengmeng.doctor.response.entity.UserData;
+import com.doumengmeng.doctor.util.FileUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.util.MLog;
 import com.doumengmeng.doctor.util.SharedPreferencesUtil;
@@ -22,7 +23,6 @@ import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
 import com.umeng.commonsdk.UMConfigure;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Administrator on 2018/2/26.
@@ -154,6 +154,17 @@ public class BaseApplication extends Application {
     private final static String COLUMN_MESSAGE_COUNT = "message_count";
     private final static String COLUMN_ASSESSMENT_COUNT = "assessment_count";
 
+    public boolean hasAccountData(){
+        LoginInfo loginInfo = getLogin();
+        if ( loginInfo != null ){
+            if (!TextUtils.isEmpty(loginInfo.getAccount())
+                    && !TextUtils.isEmpty(loginInfo.getPasswd())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void saveAssessmentCount(int count){
         SharedPreferencesUtil.saveInteger(this,TABLE_USER,COLUMN_ASSESSMENT_COUNT,count);
     }
@@ -254,45 +265,38 @@ public class BaseApplication extends Application {
 
     /**-------------------------------------------SharedPerference End---------------------------------------------------*/
 
-    private final static String PERSON_DIR = "person";
     private final static String EXTERNAL_STORAGE_DIR = Environment.getExternalStorageDirectory().getPath() + File.separator + "doc_dmm";
+    private final static String PERSON_DIR = "person";
     private final static String PERSON_HEAD_IMG = "headimg.jpg";
+    private final static String PERSON_CROP_HEAD_IMG = "cropheadimg.jpg";
+
     public String getPersonHeadImgPath(){
-//        String dirPath = getFilesDir().getPath()+File.separator+PERSON_DIR;
         String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
-        File dir = new File(dirPath);
-        if ( !dir.exists() || !dir.isDirectory() ){
-            if ( !dir.mkdirs() ){
-                //TODO
-                BaseApplication.getInstance().getMLog().error("目录创建失败");
-            }
-        }
+        FileUtil.getIntance().createFolder(dirPath);
         return dirPath + File.separator + PERSON_HEAD_IMG;
     }
-
-    private final static String PERSON_CROP_HEAD_IMG = "cropheadimg.jpg";
 
     public String getHeadCropPath(){
         return EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR+File.separator+PERSON_CROP_HEAD_IMG;
     }
 
+    public String getHeadImgPath(){
+        return EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR+File.separator+PERSON_HEAD_IMG;
+    }
+
     public File getHeadCropFile(){
-        File file = new File(getHeadCropPath());
-        if ( file.exists() ){
-            file.delete();
-        }
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
+        return FileUtil.getIntance().createNewFile(getHeadCropPath());
+    }
+
+    public void clearHeadFile(){
+        FileUtil.getIntance().deleteFile(getHeadImgPath());
+        FileUtil.getIntance().deleteFile(getHeadCropPath());
     }
 
     public void skipToGuide(Context context){
         clearImageLoaderCache();
         clearUserData();
-        Intent intent = new Intent(context, GuideActivity.class);
+        Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

@@ -6,52 +6,20 @@
     android:layout_height="match_parent"
     >
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <com.doumengmeng.doctor.view.CheckBoxLayout
-            android:id="@+id/cbl"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <LinearLayout
+            android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:default_grap="@dimen/x20px"
-            app:vertical_grap="@dimen/y20px"
-            />
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
 
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y56px"
-            android:layout_marginLeft="@dimen/x30px"
-            android:layout_marginRight="@dimen/x30px"
-            android:background="@drawable/bg_circle_edittext"
-            />
-
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x30px"
-            android:layout_marginRight="@dimen/x30px"
-            android:layout_marginTop="@dimen/y40px"
-            android:gravity="top"
-            android:minHeight="@dimen/y200px"
-            android:background="@drawable/bg_circle_edittext_multi_line"
-            />
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/tv_message_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/x35px"
-        android:minWidth="@dimen/x35px"
-        android:paddingLeft="@dimen/x8px"
-        android:paddingRight="@dimen/x8px"
-        android:text="9"
-        android:gravity="center"
-        style="@style/FirstWhite.Text23px"
-        android:background="@drawable/bg_message_count"/>
 
     <Button
         android:id="@+id/bt_experience"

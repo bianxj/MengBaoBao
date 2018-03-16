@@ -28,6 +28,10 @@
         <item name="android:textColor">@color/first_black</item>
     </style>
 
+    <style name="FirstBlack.Text26px">
+        <item name="android:textSize">@dimen/y26px</item>
+    </style>
+
     <style name="FirstBlack.Text27px">
         <item name="android:textSize">@dimen/y27px</item>
     </style>
@@ -267,6 +271,9 @@
     </style>
     <style name="SecondWhite.Text30px">
         <item name="android:textSize">@dimen/y30px</item>
+    </style>
+    <style name="SecondWhite.Text36px">
+        <item name="android:textSize">@dimen/y36px</item>
     </style>
     <!--SecondWhite end-->
     <!--FirstPink start-->

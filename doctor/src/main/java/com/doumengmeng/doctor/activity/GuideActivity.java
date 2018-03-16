@@ -3,6 +3,7 @@ package com.doumengmeng.doctor.activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -10,10 +11,7 @@ import android.widget.Button;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
-import com.doumengmeng.doctor.view.CheckBoxLayout;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.doumengmeng.doctor.base.BaseApplication;
 
 /**
  * Created by Administrator on 2018/2/26.
@@ -29,28 +27,15 @@ public class GuideActivity extends BaseActivity {
         setContentView(R.layout.activity_guide);
         findView();
         initView();
+
+        if (BaseApplication.getInstance().hasAccountData()){
+            Intent intent = new Intent(this,LoadingActivity.class);
+            intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
+            startActivity(intent);
+        }
     }
 
     private void initView(){
-        CheckBoxLayout cbl = findViewById(R.id.cbl);
-        List<String> contents = new ArrayList<>();
-        contents.add("主治医师");
-        contents.add("主任医师");
-        contents.add("副主任医师");
-        contents.add("住院医师");
-        contents.add("住院医师");
-        contents.add("住院医师");
-        contents.add("住院医师");
-        contents.add("住院医师");
-        contents.add("住院医师");
-        contents.add("住院医师");
-        contents.add("住院医师");
-        contents.add("测试1");
-        contents.add("测试2");
-        contents.add("测试4");
-        contents.add("测试3");
-        contents.add("测试7");
-        cbl.setCheckBoxes(contents,false);
     }
 
     private void findView(){
@@ -83,5 +68,6 @@ public class GuideActivity extends BaseActivity {
         }
         return "null";
     }
+
 
 }

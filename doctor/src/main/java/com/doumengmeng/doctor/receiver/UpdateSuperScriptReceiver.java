@@ -25,7 +25,7 @@ public class UpdateSuperScriptReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if ( ACTION_UPDATE_SCRIPT.equals(intent.getAction()) ){
-            weakReference.get().updateSuperScript();
+            weakReference.get().refreshSuperScript();
         }
     }
 }

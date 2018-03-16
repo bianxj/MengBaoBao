@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:background="@color/first_white"
+    android:orientation="vertical"
     >
 
     <include layout="@layout/include_title_back" />
@@ -14,8 +16,20 @@
         android:scaleType="fitXY"
         android:src="@drawable/logo_about"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/y207px"
+        android:layout_marginTop="@dimen/y101px"
         android:contentDescription="@string/contentDescription" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/FirstBlack.Text26px"
+        android:includeFontPadding="false"
+        android:layout_centerHorizontal="true"
+        android:text="医生版1.0.0"
+        android:layout_marginTop="@dimen/y20px"
+        />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,14 +39,15 @@
         android:textColor="@color/second_black"
         android:layout_centerHorizontal="true"
         android:includeFontPadding="false"
-        android:layout_marginTop="@dimen/y500px"
+        android:layout_marginTop="@dimen/y40px"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y592px"
-        android:layout_marginStart="@dimen/x102px"
+        android:layout_marginTop="@dimen/y47px"
+        android:layout_gravity="left"
+        android:layout_marginLeft="@dimen/x98px"
         android:orientation="vertical">
 
         <LinearLayout
@@ -203,4 +218,4 @@
         android:includeFontPadding="true"
         />-->
 
-</RelativeLayout>
+</LinearLayout>
