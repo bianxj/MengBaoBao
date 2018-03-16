@@ -13,10 +13,12 @@ import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.response.HospitalReportResponse;
 import com.doumengmeng.doctor.response.entity.HospitalReport;
 import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -121,7 +123,7 @@ public class HospitalReportActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-
+            MyDialog.showPromptDialog(HospitalReportActivity.this, ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override

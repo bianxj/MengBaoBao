@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -12,10 +13,18 @@ import android.widget.Toast;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.request.ResponseErrorCode;
+import com.doumengmeng.doctor.response.MessageBoardResponse;
 import com.doumengmeng.doctor.util.EditTextUtil;
+import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +44,7 @@ public class MessageBoardActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_message_board);
         findView();
     }
@@ -118,8 +128,18 @@ public class MessageBoardActivity extends BaseActivity {
     }
 
     private Map<String,String> buildMessageBoardContent(){
-        //TODO
         Map<String,String> map = new HashMap<>();
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("doctorId",BaseApplication.getInstance().getUserData().getDoctorId());
+            object.put("content",et_message_content.getText().toString().trim());
+            object.put("contactInformation",et_contact.getText().toString().trim());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.PARAM, object.toString());
+        map.put(UrlAddressList.SESSION_ID, BaseApplication.getInstance().getSessionId());
         return map;
     }
 
@@ -132,12 +152,22 @@ public class MessageBoardActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-
+            MyDialog.showPromptDialog(MessageBoardActivity.this, ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override
         public void onPostExecute(String result) {
-
+            MessageBoardResponse response = GsonUtil.getInstance().fromJson(result,MessageBoardResponse.class);
+            if ( response.getResult() != null && 1 == response.getResult().getIsSuccess() ){
+                MyDialog.showPromptDialog(MessageBoardActivity.this, "提交成功", new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        back();
+                    }
+                });
+            } else {
+                MyDialog.showPromptDialog(MessageBoardActivity.this, "提交失败",null);
+            }
         }
     };
 

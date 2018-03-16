@@ -28,6 +28,7 @@ import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.request.entity.RequestAssessment;
 import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.response.EvalutionResponse;
@@ -35,6 +36,7 @@ import com.doumengmeng.doctor.response.entity.AssessmentItem;
 import com.doumengmeng.doctor.response.entity.Nurture;
 import com.doumengmeng.doctor.util.FormulaUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.view.GraphModule;
 import com.google.gson.reflect.TypeToken;
 
@@ -122,7 +124,7 @@ public class AssessmentActivity extends BaseTimeActivity {
 
         @Override
         public void onError(String result) {
-
+            MyDialog.showPromptDialog(AssessmentActivity.this, ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override
@@ -644,7 +646,7 @@ public class AssessmentActivity extends BaseTimeActivity {
 
         @Override
         public void onError(String result) {
-
+            MyDialog.showPromptDialog(AssessmentActivity.this, ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override

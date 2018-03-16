@@ -24,7 +24,7 @@ public class UrlAddressList {
     public final static String URL_RESET_PASSWORD_GET_VC = BASE_URL + "babyDoctor.do?method=SendResetPasswordMessage";
     public final static String URL_RESET_PASSWORD = BASE_URL + "babyDoctor.do?method=SaveNewPwd";
     public final static String URL_INIT_CONFIGURE = BASE_URL + "system.do?method=InitServerConfigure";
-    public final static String URL_EIDT_PASSWORD = BASE_URL + "babyUser.do?method=EditPwd";
+    public final static String URL_EIDT_PASSWORD = BASE_URL + "babyDoctor.do?method=EditPwd";
 
     public final static String URL_SAVE_DOCTOR = BASE_URL + "babyDoctor.do?method=SaveDoctor";
     public final static String URL_SEARCH_ASSESSMENT = BASE_URL + "babyDoctor.do?method=LoadHome";
@@ -48,7 +48,10 @@ public class UrlAddressList {
     public final static String URL_SEARCH_HOSPITAL_REPORT = BASE_URL + "babyDoctor.do?method=GetHospitalReport";
     public final static String URL_EVALUTION = BASE_URL + "babyDoctor.do?method=Evaluation";
 
-    public final static String URL_SUBMIT_MESSAGE_BOARD = BASE_URL + "";
+    public final static String URL_ACCOUNT_DATA = BASE_URL + "babyDoctor.do?method=GetCount";
+    public final static String URL_ACCOUNT_DETAIL = BASE_URL + "babyDoctor.do?method=GetDetailed";
+
+    public final static String URL_SUBMIT_MESSAGE_BOARD = BASE_URL + "babyDoctor.do?method=MessageBoard";
 
     public final static String URL_UPDATE_INFO = BASE_URL + "system.do?method=GetVersion";
     public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";

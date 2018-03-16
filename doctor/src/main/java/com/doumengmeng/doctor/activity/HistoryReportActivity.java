@@ -13,10 +13,12 @@ import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.response.HistoryReportResponse;
 import com.doumengmeng.doctor.response.entity.HistoryReport;
 import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -51,6 +53,12 @@ public class HistoryReportActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_report);
         findView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTask(recordTask);
     }
 
     private void findView(){
@@ -132,7 +140,7 @@ public class HistoryReportActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-
+            MyDialog.showPromptDialog(HistoryReportActivity.this, ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override

@@ -20,11 +20,13 @@ import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.response.AssessmentListResponse;
 import com.doumengmeng.doctor.response.entity.AssessmentItem;
 import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.util.FormulaUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.view.CircleImageView;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -178,7 +180,7 @@ public class HomeFragment extends BaseTimeFragment {
 
         @Override
         public void onError(String result) {
-
+            MyDialog.showPromptDialog(getContext(), ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override

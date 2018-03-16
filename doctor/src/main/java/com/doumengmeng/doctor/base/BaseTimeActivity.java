@@ -14,13 +14,13 @@ public abstract class BaseTimeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        registerTimeReceiver();
+//        registerTimeReceiver();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterTimeReceiver();
+//        unregisterTimeReceiver();
     }
 
     private void registerTimeReceiver(){

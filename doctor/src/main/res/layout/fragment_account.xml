@@ -46,8 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/y67px"
-            style="@style/FirstWhite.Text76px"
-            android:text="￥1,369.36"/>
+            style="@style/FirstWhite.Text76px"/>
 
     </LinearLayout>
 
@@ -80,7 +79,7 @@
                 android:gravity="center"
                 android:background="@drawable/bg_circle_edittext_multi_line"
                 style="@style/SecondBlack.Text42px"
-                android:text="15人"
+                
                 />
         </LinearLayout>
         <LinearLayout
@@ -104,7 +103,7 @@
                 android:gravity="center"
                 android:background="@drawable/bg_circle_edittext_multi_line"
                 style="@style/SecondBlack.Text42px"
-                android:text="15人"
+                
                 />
         </LinearLayout>
     </LinearLayout>
@@ -138,7 +137,6 @@
                 android:gravity="center"
                 android:background="@drawable/bg_circle_edittext_multi_line"
                 style="@style/SecondBlack.Text42px"
-                android:text="15人"
                 />
         </LinearLayout>
         <LinearLayout
@@ -162,7 +160,6 @@
                 android:gravity="center"
                 android:background="@drawable/bg_circle_edittext_multi_line"
                 style="@style/SecondBlack.Text42px"
-                android:text="15人"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -208,7 +205,6 @@
                 android:gravity="center"
                 android:background="@drawable/bg_circle_edittext_multi_line"
                 style="@style/SecondBlack.Text42px"
-                android:text="15人"
                 />
         </LinearLayout>
         <LinearLayout

@@ -17,6 +17,8 @@
         android:gravity="top"
         android:scrollbars="vertical"
         android:textColorHint="@color/sixth_gray"
+        android:inputType="text"
+        android:nextFocusDown="@+id/et_contact"
         style="@style/SecondBlack.Text26px"
         android:hint="@string/message_board_hint"
         android:background="@drawable/bg_circle_edittext_multi_line"/>
@@ -37,6 +39,8 @@
         android:layout_marginTop="@dimen/y28px"
         android:padding="@dimen/x27px"
         android:gravity="top"
+        android:lines="1"
+        android:ellipsize="end"
         android:scrollHorizontally="true"
         android:textColorHint="@color/sixth_gray"
         style="@style/SecondBlack.Text26px"

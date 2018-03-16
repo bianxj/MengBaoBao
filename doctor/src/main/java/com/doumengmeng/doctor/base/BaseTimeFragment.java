@@ -13,24 +13,24 @@ public abstract class BaseTimeFragment extends BaseFragment {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if ( hidden ){
-            unregisterTimeReceiver();
-        } else {
-            registerTimeReceiver();
-        }
+//        super.onHiddenChanged(hidden);
+//        if ( hidden ){
+//            unregisterTimeReceiver();
+//        } else {
+//            registerTimeReceiver();
+//        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        registerTimeReceiver();
+//        registerTimeReceiver();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        unregisterTimeReceiver();
+//        unregisterTimeReceiver();
     }
 
     private void registerTimeReceiver(){

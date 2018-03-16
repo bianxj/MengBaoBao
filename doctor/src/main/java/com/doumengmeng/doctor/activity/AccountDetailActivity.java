@@ -9,11 +9,24 @@ import android.widget.TextView;
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.adapter.AccountDetailAdapter;
 import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.net.UrlAddressList;
+import com.doumengmeng.doctor.request.RequestCallBack;
+import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.request.ResponseErrorCode;
+import com.doumengmeng.doctor.response.AccountDetailResponse;
+import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/3/1.
@@ -26,7 +39,7 @@ public class AccountDetailActivity extends BaseActivity {
 
     private XRecyclerView xrv;
     private AccountDetailAdapter adapter;
-    private List<AccountDetailAdapter.AccountDetailData> datas;
+    private List<AccountDetailAdapter.AccountDetailData> datas = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,9 +48,16 @@ public class AccountDetailActivity extends BaseActivity {
         findView();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTask(searchAccountDetailTask);
+    }
+
     private void findView(){
         initTitle();
         initListView();
+        searchAccountDetail();
     }
 
     private void initTitle(){
@@ -52,17 +72,6 @@ public class AccountDetailActivity extends BaseActivity {
         xrv = findViewById(R.id.xrv);
         xrv.setLoadingMoreEnabled(true);
         xrv.setFootView(new XLoadMoreFooter(this));
-//        xrv.setLoadingListener(searchLoadingListener);
-
-        datas = new ArrayList<>();
-        for (int i = 0; i < 20 ; i++){
-            AccountDetailAdapter.AccountDetailData data = new AccountDetailAdapter.AccountDetailData();
-            data.setCost("Cost"+1);
-            data.setDate("Date"+1);
-            data.setTime("Time"+1);
-            data.setName("Name"+1);
-            datas.add(data);
-        }
         adapter = new AccountDetailAdapter(datas);
         xrv.setAdapter(adapter);
     }
@@ -80,6 +89,67 @@ public class AccountDetailActivity extends BaseActivity {
 
     private void back(){
         finish();
+    }
+
+    private RequestTask searchAccountDetailTask;
+
+    private void searchAccountDetail(){
+        try {
+            searchAccountDetailTask = new RequestTask.Builder(this,searchAccountDetailCallBack)
+                    .setContent(buildRequest())
+                    .setType(RequestTask.DEFAULT)
+                    .setUrl(UrlAddressList.URL_ACCOUNT_DETAIL)
+                    .build();
+            searchAccountDetailTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private Map<String,String> buildRequest(){
+        Map<String,String> map = new HashMap<>();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("doctorId",BaseApplication.getInstance().getUserData().getDoctorId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        map.put(UrlAddressList.PARAM,object.toString());
+        map.put(UrlAddressList.SESSION_ID, BaseApplication.getInstance().getSessionId());
+        return map;
+    }
+
+    private RequestCallBack searchAccountDetailCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public void onError(String result) {
+            MyDialog.showPromptDialog(AccountDetailActivity.this, ResponseErrorCode.getErrorMsg(result),null);
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            AccountDetailResponse response = GsonUtil.getInstance().fromJson(result,AccountDetailResponse.class);
+            refreshAccountData(response.getResult());
+        }
+    };
+
+    private void refreshAccountData(AccountDetailResponse.Result result){
+        List<AccountDetailResponse.Detail> details = result.getDetailedList();
+        datas.clear();
+        for (AccountDetailResponse.Detail detail:details){
+            AccountDetailAdapter.AccountDetailData data = new AccountDetailAdapter.AccountDetailData();
+            data.setDate(detail.getEvaluationtime().split(" ")[0]);
+            data.setName(detail.getTruename());
+            data.setCost(detail.getBuyprice());
+            data.setTime(detail.getEvaluationtime().split(" ")[1]);
+            datas.add(data);
+        }
+        adapter.notifyDataSetChanged();
     }
 
 }

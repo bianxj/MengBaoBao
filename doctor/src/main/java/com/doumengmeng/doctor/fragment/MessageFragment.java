@@ -18,6 +18,8 @@ import com.doumengmeng.doctor.base.BaseFragment;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
+import com.doumengmeng.doctor.request.ResponseErrorCode;
+import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -153,7 +155,7 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         public void onError(String result) {
-
+            MyDialog.showPromptDialog(getContext(), ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override
@@ -191,7 +193,7 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         public void onError(String result) {
-
+            MyDialog.showPromptDialog(getContext(), ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override

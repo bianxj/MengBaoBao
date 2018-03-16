@@ -19,5 +19,7 @@
     <string name="format_mg_day">%s毫克/日</string>
     <string name="format_count_day">%s只/日</string>
     <string name="format_kg_divide_m_square">%skg/m²</string>
+    <string name="format_person">%d人</string>
+    <string name="format_money">￥%,.2f</string>
 
 </resources>
