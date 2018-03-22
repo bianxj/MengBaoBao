@@ -340,6 +340,8 @@
     <string name="dialog_content_example_hint">保证照片中的内容（姓名、医院。名称、科室、证件编号）清晰可见</string>
     <string name="dialog_content_wait_audit">待审核状态，文案待定</string>
     <string name="dialog_content_submit_error">提交失败</string>
+    <string name="dialog_content_pwd_change_success">修改密码成功</string>
+    <string name="dialog_content_pwd_change_failed">修改密码失败</string>
 
     <string name="dialog_friend_circle">朋友圈</string>
 

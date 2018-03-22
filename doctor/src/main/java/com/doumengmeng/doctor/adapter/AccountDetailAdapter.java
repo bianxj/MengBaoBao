@@ -62,7 +62,13 @@ public class AccountDetailAdapter extends RecyclerView.Adapter<AccountDetailAdap
             tv_customer_info.setText(data.getName());
             tv_date.setText(data.getDate());
             tv_time.setText(data.getTime());
-            tv_income.setText(data.getCost());
+
+            double cost = Double.parseDouble(data.getCost());
+            if ( cost >= 0  ) {
+                tv_income.setText("+"+data.getCost());
+            } else {
+                tv_income.setText(data.getCost());
+            }
         }
 
     }

@@ -147,7 +147,7 @@ public class AccountFragment extends BaseFragment {
         try {
             searchAccountTask = new RequestTask.Builder(getContext(),searchAccountCallBack)
                     .setContent(buildRequestAccount())
-                    .setType(RequestTask.DEFAULT)
+                    .setType(RequestTask.NO_LOADING)
                     .setUrl(UrlAddressList.URL_ACCOUNT_DATA)
                     .build();
             searchAccountTask.execute();

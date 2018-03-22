@@ -159,8 +159,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     }
 
-    public void removeMessage(MessageData data){
-        datas.remove(data);
+    public void removeMessage(String messageId){
+        for (MessageData data:datas){
+            if ( messageId.equals(data.getMessageId()) ){
+                datas.remove(data);
+                break;
+            }
+        }
         notifyDataSetChanged();
     }
 

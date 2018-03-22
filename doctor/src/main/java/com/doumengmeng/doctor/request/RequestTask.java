@@ -42,14 +42,14 @@ public class RequestTask extends AsyncTask<String,Void,String> {
     protected void onPreExecute() {
         super.onPreExecute();
         if ( isSelectFlag(builder.getType(),LOADING) ) {
-            handler = new Handler();
-            runnable = new Runnable() {
-                @Override
-                public void run() {
+//            handler = new Handler();
+//            runnable = new Runnable() {
+//                @Override
+//                public void run() {
                     MyDialog.showLoadingDialog(builder.getWeakReference().get());
-                }
-            };
-            handler.postDelayed(runnable, 2000);
+//                }
+//            };
+//            handler.postDelayed(runnable, 2000);
         }
         builder.getCallBack().onPreExecute();
     }

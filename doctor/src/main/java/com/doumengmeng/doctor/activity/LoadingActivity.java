@@ -31,6 +31,7 @@ import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.request.task.LoginTask;
 import com.doumengmeng.doctor.response.InitConfigureResponse;
+import com.doumengmeng.doctor.response.UpdateContentResponse;
 import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
@@ -174,15 +175,15 @@ public class LoadingActivity extends BaseActivity {
 
     private void checkVersionAndWifi(){
         if ( isWifi() ){
-            afterCheckVersion();
-            //checkVersion();
+//            afterCheckVersion();
+            checkVersion();
         } else {
             MyDialog.showPromptDialog(this, getString(R.string.prompt_no_wifi),R.string.dialog_btn_go_on, new MyDialog.PromptDialogCallback() {
                 @Override
                 public void sure() {
                     //TODO
-                    afterCheckVersion();
-//                    checkVersion();
+//                    afterCheckVersion();
+                    checkVersion();
                 }
             });
         }
@@ -264,7 +265,7 @@ public class LoadingActivity extends BaseActivity {
         try {
             updateInfoTask = new RequestTask.Builder(this,updateInfoCallback)
                     .setUrl(UrlAddressList.URL_UPDATE_INFO)
-                    .setType(RequestTask.DEFAULT)
+                    .setType(RequestTask.NO_PROMPT)
                     .setContent(buildUpdateInfo())
                     .build();
             updateInfoTask.execute();
@@ -292,24 +293,24 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-//            UpdateContentResponse response = GsonUtil.getInstance().fromJson(result, UpdateContentResponse.class);
-//            String versionName = null;
-//            try {
-//                versionName = AppUtil.getVersionName(LoadingActivity.this);
-//                MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, serviceVersion), serviceVersion, convertUpdateContent(response.getResult().getVersionData()), new MyDialog.UpdateDialogCallback() {
-//                    @Override
-//                    public void update() {
-//                        AppUtil.openSoftwareMarket(LoadingActivity.this);
-//                    }
-//
-//                    @Override
-//                    public void cancel() {
-//                        initConfigure();
-//                    }
-//                });
-//            } catch (PackageManager.NameNotFoundException e) {
-//                e.printStackTrace();
-//            }
+            UpdateContentResponse response = GsonUtil.getInstance().fromJson(result, UpdateContentResponse.class);
+            String versionName = null;
+            try {
+                versionName = AppUtil.getVersionName(LoadingActivity.this);
+                MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, serviceVersion), serviceVersion, convertUpdateContent(response.getResult().getVersionData()), new MyDialog.UpdateDialogCallback() {
+                    @Override
+                    public void update() {
+                        AppUtil.openSoftwareMarket(LoadingActivity.this);
+                    }
+
+                    @Override
+                    public void cancel() {
+                        initConfigure();
+                    }
+                });
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     };
 
@@ -332,7 +333,7 @@ public class LoadingActivity extends BaseActivity {
         try {
             initConfigureTask = new RequestTask.Builder(this,initConfigureCallback)
                     .setUrl(UrlAddressList.URL_INIT_CONFIGURE)
-                    .setType(RequestTask.DEFAULT)
+                    .setType(RequestTask.NO_LOADING)
                     .setContent(buildInitConfigureContent())
                     .build();
             initConfigureTask.execute();
@@ -409,7 +410,7 @@ public class LoadingActivity extends BaseActivity {
 //                        checkVersionAndWifi();
                         initConfigure();
                     }
-                },RequestTask.DEFAULT);
+                },RequestTask.NO_LOADING);
                 loginTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();

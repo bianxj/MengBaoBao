@@ -148,7 +148,7 @@ public class HomeFragment extends BaseTimeFragment {
         try {
             searchAssessmentTask = new RequestTask.Builder(getContext(),searchAssessmentCallback)
                     .setContent(buildRequestAssessment())
-                    .setType(RequestTask.DEFAULT)
+                    .setType(RequestTask.NO_LOADING)
                     .setUrl(UrlAddressList.URL_SEARCH_ASSESSMENT)
                     .build();
             searchAssessmentTask.execute();

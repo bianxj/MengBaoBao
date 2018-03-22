@@ -17,25 +17,23 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BaseApplication.getInstance().getMLog().debug("onCreate:"+this.getClass().getSimpleName());
+        BaseApplication.getInstance().addActivity(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        BaseApplication.getInstance().getMLog().debug("onResume:"+this.getClass().getSimpleName());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        BaseApplication.getInstance().getMLog().debug("onPause:"+this.getClass().getSimpleName());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BaseApplication.getInstance().getMLog().debug("onDestroy:"+this.getClass().getSimpleName());
+        BaseApplication.getInstance().removeActivity(this);
     }
 
     protected void startActivity(Class<? extends Activity> act){

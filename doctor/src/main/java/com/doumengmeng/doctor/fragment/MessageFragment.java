@@ -19,9 +19,15 @@ import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
+import com.doumengmeng.doctor.response.MessageDeleteResponse;
+import com.doumengmeng.doctor.response.MessageResponse;
+import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +59,7 @@ public class MessageFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-//        searchMessage();
+        searchMessage();
     }
 
     @Override
@@ -95,24 +101,6 @@ public class MessageFragment extends BaseFragment {
         adapter = new MessageAdapter(xrv,datas,deleteCallBack);
         xrv.setAdapter(adapter);
 
-        for (int i = 0 ;i<20;i++){
-            MessageAdapter.MessageData data = new MessageAdapter.MessageData();
-            if ( i%4 == 0 ) {
-                data.setMessageType(MessageAdapter.MESSAGE_TYPE.HOLIDAY);
-            } else if ( i%4 == 1 ){
-                data.setMessageType(MessageAdapter.MESSAGE_TYPE.MAINTAIN);
-            } else if ( i%4 == 2 ){
-                data.setMessageType(MessageAdapter.MESSAGE_TYPE.OVER_TIME);
-            } else if ( i%4 == 3 ){
-                data.setMessageType(MessageAdapter.MESSAGE_TYPE.WAIT_ASSESSMENT);
-            }
-            data.setMessageTitle("Test"+i);
-            data.setMessageDate("Date"+i);
-            data.setMessageDesc("Desc"+i);
-            data.setRead(false);
-            datas.add(data);
-        }
-
         refreshMessageList();
         saveAndFreshScript();
     }
@@ -120,10 +108,10 @@ public class MessageFragment extends BaseFragment {
     private void refreshMessageList(){
         if ( datas.size() > 0 ) {
             ll_no_message.setVisibility(View.GONE);
-            adapter.notifyDataSetChanged();
         } else {
             ll_no_message.setVisibility(View.VISIBLE);
         }
+        adapter.notifyDataSetChanged();
     }
 
     private RequestTask searchMessageTask;
@@ -131,7 +119,7 @@ public class MessageFragment extends BaseFragment {
         try {
             searchMessageTask = new RequestTask.Builder(getContext(),searchMessageCallBack)
                     .setContent(buildRequestSearchMessage())
-                    .setType(RequestTask.DEFAULT)
+                    .setType(RequestTask.NO_LOADING)
                     .setUrl(UrlAddressList.URL_SEARCH_MESSAGE)
                     .build();
             searchMessageTask.execute();
@@ -142,7 +130,13 @@ public class MessageFragment extends BaseFragment {
 
     private Map<String ,String> buildRequestSearchMessage(){
         Map<String,String> map = new HashMap<>();
-
+        JSONObject object = new JSONObject();
+        try {
+            object.put("doctorId",BaseApplication.getInstance().getUserData().getDoctorId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.PARAM, object.toString());
         map.put(UrlAddressList.SESSION_ID, BaseApplication.getInstance().getSessionId());
         return map;
     }
@@ -160,9 +154,30 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-//            refreshMessageList();
-//            saveAndFreshScript();
+            MessageResponse response = GsonUtil.getInstance().fromJson(result,MessageResponse.class);
+            datas.clear();
+            List<MessageResponse.News> news = response.getResult().getDoctorNews();
+
+            for (MessageResponse.News message:news){
+                MessageAdapter.MessageData data = new MessageAdapter.MessageData();
+                data.setMessageId(message.getNewsid());
+                data.setRead("1".equals(message.getNewsstate()));
+                data.setMessageTitle(message.getNewsname());
+                data.setMessageDesc(message.getNewscontent());
+                data.setMessageDate(message.getNewsdate().split(" ")[0]);
+                if ("1".equals(message.getNewstype())){
+                    data.setMessageType(MessageAdapter.MESSAGE_TYPE.HOLIDAY);
+                } else if ( "2".equals(message.getNewstype()) ){
+                    data.setMessageType(MessageAdapter.MESSAGE_TYPE.MAINTAIN);
+                } else if ( "3".equals(message.getNewstype()) ){
+                    data.setMessageType(MessageAdapter.MESSAGE_TYPE.OVER_TIME);
+                } else {
+                    data.setMessageType(MessageAdapter.MESSAGE_TYPE.WAIT_ASSESSMENT);
+                }
+                datas.add(data);
+            }
+            refreshMessageList();
+            saveAndFreshScript();
         }
     };
 
@@ -172,7 +187,7 @@ public class MessageFragment extends BaseFragment {
             deleteMessageTask = new RequestTask.Builder(getContext(),deleteMessageCallBack)
                     .setContent(buildRequestDeleteMessage(data))
                     .setType(RequestTask.DEFAULT)
-                    .setUrl("")
+                    .setUrl(UrlAddressList.URL_DELETE_MESSAGE)
                     .build();
             deleteMessageTask.execute();
         } catch (Throwable throwable) {
@@ -182,6 +197,17 @@ public class MessageFragment extends BaseFragment {
 
     private Map<String,String> buildRequestDeleteMessage(MessageAdapter.MessageData data){
         Map<String,String> map = new HashMap<>();
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("doctorId",BaseApplication.getInstance().getUserData().getDoctorId());
+            object.put("newsId",data.getMessageId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        map.put(UrlAddressList.PARAM,object.toString());
+        map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getSessionId());
         return map;
     }
 
@@ -198,9 +224,11 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-//            adapter.removeMessage();
-//            saveAndFreshScript();
+            MessageDeleteResponse response = GsonUtil.getInstance().fromJson(result,MessageDeleteResponse.class);
+            if ( response.getResult() != null && "1".equals(response.getResult().getIsDeleted()) ){
+                adapter.removeMessage(response.getResult().getNewsId());
+                saveAndFreshScript();
+            }
         }
     };
 

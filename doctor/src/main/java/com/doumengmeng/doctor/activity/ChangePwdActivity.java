@@ -11,10 +11,15 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.entity.LoginInfo;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
+import com.doumengmeng.doctor.response.ChangePwdResponse;
+import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,8 +38,6 @@ public class ChangePwdActivity extends BaseActivity {
     private TextView tv_title,tv_prompt;
     private EditText et_old_pwd , et_new_pwd , et_confirm_pwd;
     private Button bt_sure;
-
-//    private UserData userData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,9 +64,6 @@ public class ChangePwdActivity extends BaseActivity {
     }
 
     private void initView(){
-        //TODO
-//        userData = BaseApplication.getInstance().getUserData();
-
         tv_title.setText(R.string.change_pwd_name);
         tv_prompt.setText("");
 
@@ -149,12 +149,12 @@ public class ChangePwdActivity extends BaseActivity {
         try {
             object.put("oldPwd",et_old_pwd.getText().toString().trim());
             object.put("newPwd",et_new_pwd.getText().toString().trim());
-//            object.put("userId",userData.getUserid());
+            object.put("doctorId",BaseApplication.getInstance().getUserData().getDoctorId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         map.put(UrlAddressList.PARAM,object.toString());
-//        map.put("sesId",userData.getSessionId());
+        map.put("sesId", BaseApplication.getInstance().getSessionId());
         return map;
     }
 
@@ -170,23 +170,24 @@ public class ChangePwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            //TODO
-//            ChangePwdResponse response = GsonUtil.getInstance().fromJson(result,ChangePwdResponse.class);
-//            if ( 1 == response.getResult().getIsEditPwd() ){
-//                MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.dialog_content_pwd_change_success), new MyDialog.PromptDialogCallback() {
-//                    @Override
-//                    public void sure() {
-//                        back();
-//                    }
-//                });
-//            } else {
-//                MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.dialog_content_pwd_change_failed), new MyDialog.PromptDialogCallback() {
-//                    @Override
-//                    public void sure() {
-//                        back();
-//                    }
-//                });
-//            }
+            ChangePwdResponse response = GsonUtil.getInstance().fromJson(result,ChangePwdResponse.class);
+            if ( 1 == response.getResult().getIsEditPwd() ){
+                LoginInfo loginInfo = BaseApplication.getInstance().getLogin();
+                BaseApplication.getInstance().saveLogin(loginInfo.getAccount(),et_new_pwd.getText().toString().trim());
+                MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.dialog_content_pwd_change_success), new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        back();
+                    }
+                });
+            } else {
+                MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.dialog_content_pwd_change_failed), new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        back();
+                    }
+                });
+            }
         }
     };
 

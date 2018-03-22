@@ -179,6 +179,12 @@ public class MainActivity extends BaseFragmentActivity {
     private void refreshBottomMenu(String page){
         Set<String> keys = bottomMap.keySet();
         for (String key:keys) {
+            if ( PAGE_MESSAGE.equals(page) && PAGE_MESSAGE_DETAIL.equals(key)){
+                continue;
+            }
+            if ( PAGE_MESSAGE_DETAIL.equals(page) && PAGE_MESSAGE.equals(key)){
+                continue;
+            }
             FrameLayout layout = bottomMap.get(key);
             CheckBox button = (CheckBox) layout.getChildAt(0);
             TextView textView = (TextView) layout.getChildAt(1);
@@ -196,6 +202,7 @@ public class MainActivity extends BaseFragmentActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //截取返回键
         if ( keyCode == KeyEvent.KEYCODE_BACK ){
+            BaseApplication.getInstance().finishApp(this);
             return true;
         }
         return super.onKeyDown(keyCode, event);

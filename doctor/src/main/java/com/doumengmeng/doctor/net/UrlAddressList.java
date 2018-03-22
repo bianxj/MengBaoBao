@@ -43,7 +43,10 @@ public class UrlAddressList {
 //    public final static String URL_PRE_IWX_PAY = BASE_URL + "system.do?method=MbbWXGeneratingOrder";
 //    public final static String URL_ALI_PAY_RESPONCE = BASE_URL + "system.do?method=MbbALiPay";
 //
-    public final static String URL_SEARCH_MESSAGE = BASE_URL + "";
+    public final static String URL_SEARCH_MESSAGE = BASE_URL + "babyDoctor.do?method=GetNews";
+    public final static String URL_DELETE_MESSAGE = BASE_URL + "babyDoctor.do?method=DeleteNews";
+    public final static String URL_READ_MESSAGE = BASE_URL + "babyDoctor.do?method=UpdateNewsIsRead";
+
     public final static String URL_SEARCH_HISTORY_REPORT = BASE_URL + "babyDoctor.do?method=GetPastReport";
     public final static String URL_SEARCH_HOSPITAL_REPORT = BASE_URL + "babyDoctor.do?method=GetHospitalReport";
     public final static String URL_EVALUTION = BASE_URL + "babyDoctor.do?method=Evaluation";

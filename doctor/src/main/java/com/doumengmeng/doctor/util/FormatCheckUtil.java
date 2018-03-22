@@ -48,4 +48,10 @@ public class FormatCheckUtil {
         return matcher.matches();
     }
 
+    public static boolean isEmail(String email){
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
 }

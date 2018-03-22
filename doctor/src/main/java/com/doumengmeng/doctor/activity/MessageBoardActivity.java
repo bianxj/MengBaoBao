@@ -20,6 +20,7 @@ import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.response.MessageBoardResponse;
 import com.doumengmeng.doctor.util.EditTextUtil;
+import com.doumengmeng.doctor.util.FormatCheckUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.util.MyDialog;
 
@@ -119,8 +120,14 @@ public class MessageBoardActivity extends BaseActivity {
             return false;
         }
 
-        if (TextUtils.isEmpty(et_contact.getText().toString().trim())){
+        String contact = et_contact.getText().toString().trim();
+        if (TextUtils.isEmpty(contact)){
             Toast.makeText(this,"请填写联系方式",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!FormatCheckUtil.isPhone(contact)&&!FormatCheckUtil.isEmail(contact)){
+            Toast.makeText(this,"联系方式 需要手机或邮箱",Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -143,7 +150,6 @@ public class MessageBoardActivity extends BaseActivity {
         return map;
     }
 
-    //TODO
     private RequestCallBack submitMessageBoardCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
