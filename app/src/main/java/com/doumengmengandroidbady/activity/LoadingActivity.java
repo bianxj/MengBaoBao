@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -221,21 +220,21 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            try {
-                if (TextUtils.isEmpty(result)){
-                    stopLoadingPercent();
-                    MyDialog.showPromptDialog(LoadingActivity.this, "版本信息获取失败,请检查网络", new MyDialog.PromptDialogCallback() {
-                        @Override
-                        public void sure() {
-                            finish();
-                        }
-                    });
-                } else {
-                    serviceVersion = result;
-                    String versionName = AppUtil.getVersionName(LoadingActivity.this);
-                    if (AppUtil.isNeedUpdate(versionName, result)) {
-                        getUpdateInfo();
-                    } else {
+//            try {
+//                if (TextUtils.isEmpty(result)){
+//                    stopLoadingPercent();
+//                    MyDialog.showPromptDialog(LoadingActivity.this, "版本信息获取失败,请检查网络", new MyDialog.PromptDialogCallback() {
+//                        @Override
+//                        public void sure() {
+//                            finish();
+//                        }
+//                    });
+//                } else {
+//                    serviceVersion = result;
+//                    String versionName = AppUtil.getVersionName(LoadingActivity.this);
+//                    if (AppUtil.isNeedUpdate(versionName, result)) {
+//                        getUpdateInfo();
+//                    } else {
                         Intent intent = getIntent();
                         boolean isAutoLogin = intent.getBooleanExtra(IN_PARAM_AUTO_LOGIN,false);
                         if ( isAutoLogin ){
@@ -243,12 +242,12 @@ public class LoadingActivity extends BaseActivity {
                         } else {
                             initConfigure();
                         }
-                    }
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-                stopLoadingPercent();
-            }
+//                    }
+//                }
+//            } catch (PackageManager.NameNotFoundException e) {
+//                e.printStackTrace();
+//                stopLoadingPercent();
+//            }
         }
     };
 
@@ -445,6 +444,7 @@ public class LoadingActivity extends BaseActivity {
                 } else {
                     Intent intent = new Intent(weakReference.get(), MainActivity.class);
                     weakReference.get().startActivity(intent);
+                    weakReference.get().finish();
                 }
             } else if ( msg.what == MESSAGE_LOADING_PERCENT) {
                 removeMessages(MESSAGE_LOADING_PERCENT);

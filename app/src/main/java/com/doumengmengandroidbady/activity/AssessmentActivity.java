@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -294,6 +295,14 @@ public class AssessmentActivity extends BaseActivity {
             }
         }
     };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ( KeyEvent.KEYCODE_BACK == keyCode ){
+            back();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     private void back(){
         Intent intent = new Intent(this,MainActivity.class);

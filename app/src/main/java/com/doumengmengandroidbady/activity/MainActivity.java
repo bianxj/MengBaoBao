@@ -369,6 +369,8 @@ public class MainActivity extends BaseFragmentActivity {
         if ( keyCode == KeyEvent.KEYCODE_BACK ){
             if ( dl_main.isDrawerOpen(Gravity.LEFT) ) {
                 dl_main.closeDrawer(Gravity.LEFT);
+            } else {
+                BaseApplication.getInstance().finishApp(this);
             }
             return true;
         }

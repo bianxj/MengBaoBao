@@ -1,5 +1,6 @@
 package com.doumengmengandroidbady.base;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +37,8 @@ import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者:边贤君
@@ -45,6 +48,7 @@ import java.io.IOException;
 public class BaseApplication extends Application {
 
     private static BaseApplication application;
+    private List<Activity> activities = new ArrayList<>();
 
     private static MLog log;
 
@@ -529,11 +533,29 @@ public class BaseApplication extends Application {
     }
 
     public void skipToGuide(Context context){
+        activities.clear();
         clearImageLoaderCache();
         clearUserData();
         Intent intent = new Intent(context, GuideActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    public void addActivity(Activity activity){
+        activities.add(activity);
+    }
+
+    public void removeActivity(Activity activity){
+        activities.remove(activity);
+    }
+
+    public void finishApp(Activity currentActivity){
+        for (Activity activity:activities){
+            if ( !activity.equals(currentActivity) ){
+                activity.finish();
+            }
+        }
+        currentActivity.finish();
     }
 
 }

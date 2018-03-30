@@ -12,12 +12,13 @@ import android.widget.TextView;
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
 import com.doumengmengandroidbady.base.BaseApplication;
+import com.doumengmengandroidbady.entity.LoginInfo;
 import com.doumengmengandroidbady.net.UrlAddressList;
 import com.doumengmengandroidbady.request.RequestCallBack;
 import com.doumengmengandroidbady.request.RequestTask;
 import com.doumengmengandroidbady.request.ResponseErrorCode;
-import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.response.ChangePwdResponse;
+import com.doumengmengandroidbady.response.entity.UserData;
 import com.doumengmengandroidbady.util.GsonUtil;
 import com.doumengmengandroidbady.util.MyDialog;
 
@@ -175,6 +176,8 @@ public class ChangePwdActivity extends BaseActivity {
         public void onPostExecute(String result) {
             ChangePwdResponse response = GsonUtil.getInstance().fromJson(result,ChangePwdResponse.class);
             if ( 1 == response.getResult().getIsEditPwd() ){
+                LoginInfo loginInfo = BaseApplication.getInstance().getLogin();
+                BaseApplication.getInstance().saveLogin(loginInfo.getAccount(),et_new_pwd.getText().toString().trim());
                 MyDialog.showPromptDialog(ChangePwdActivity.this, getString(R.string.dialog_content_pwd_change_success), new MyDialog.PromptDialogCallback() {
                     @Override
                     public void sure() {

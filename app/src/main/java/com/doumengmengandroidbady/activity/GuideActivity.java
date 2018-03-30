@@ -2,6 +2,7 @@ package com.doumengmengandroidbady.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 
 import com.doumengmengandroidbady.R;
 import com.doumengmengandroidbady.base.BaseActivity;
+import com.doumengmengandroidbady.base.BaseApplication;
 import com.doumengmengandroidbady.util.ZxingUtil;
 import com.doumengmengandroidbady.view.AutoScrollViewPager;
 import com.doumengmengandroidbady.view.GraphView;
@@ -41,11 +43,11 @@ public class GuideActivity extends BaseActivity {
         findView();
         initView();
 
-//        if (BaseApplication.getInstance().hasAccountData()){
-//            Intent intent = new Intent(this,LoadingActivity.class);
-//            intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
-//            startActivity(intent);
-//        }
+        if (BaseApplication.getInstance().hasAccountData()){
+            Intent intent = new Intent(this,LoadingActivity.class);
+            intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
+            startActivity(intent);
+        }
     }
 
     @SuppressLint("WrongConstant")
