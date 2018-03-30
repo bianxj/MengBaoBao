@@ -64,6 +64,7 @@
         <activity android:name=".activity.ParentInfoActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.AboutActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.QRActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".wxapi.WXEntryActivity" android:screenOrientation="portrait" android:exported="true"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

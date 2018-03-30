@@ -116,12 +116,12 @@ public class QRActivity extends BaseActivity {
         MyDialog.showShareDialog(this, getShareBitmap(ll_qr_content), new MyDialog.ShareCallBack() {
             @Override
             public void sharedToFriend(Bitmap bitmap) {
-
+                QRActivity.this.shareToFriend(bitmap);
             }
 
             @Override
             public void shareToWeixin(Bitmap bitmap) {
-
+                QRActivity.this.shareToWeixin(bitmap);
             }
         });
     }
@@ -136,7 +136,7 @@ public class QRActivity extends BaseActivity {
     }
 
     private void shareToFriend(Bitmap bitmap){
-        share(bitmap,false);
+        share(bitmap,true);
     }
 
     private void shareToWeixin(Bitmap bitmap){
@@ -164,7 +164,7 @@ public class QRActivity extends BaseActivity {
     }
 
     private IWXAPI api;
-    private final static String APP_ID = "";
+    private final static String APP_ID = "wx82018bdb470014f2";
     private IWXAPI getIWXAPI(){
         if ( api == null ){
             api = WXAPIFactory.createWXAPI(this,APP_ID,true);

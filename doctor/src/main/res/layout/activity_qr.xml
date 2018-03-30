@@ -122,7 +122,6 @@
                 android:layout_height="@dimen/x84px"
                 android:layout_gravity="center"
                 android:src="@mipmap/ic_launcher"
-                android:layout_marginTop="@dimen/y14px"
                 />
         </FrameLayout>
 
