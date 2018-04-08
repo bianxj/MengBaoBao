@@ -41,8 +41,8 @@
     native <methods>;
 }
 
--keep class com.doumengmengandroidbady.request.** {*;}
--keep class com.doumengmengandroidbady.response.** {*;}
+-keep class com.doumengmeng.customer.request.** {*;}
+-keep class com.doumengmeng.customer.response.** {*;}
 
 # App混淆代码
 -keep public class * extends android.app.Activity

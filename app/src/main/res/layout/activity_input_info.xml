@@ -1517,14 +1517,14 @@
                     android:paddingLeft="@dimen/x25px" />
             </RelativeLayout>-->
 
-            <com.doumengmengandroidbady.view.BaseInfoLayout
+            <com.doumengmeng.customer.view.BaseInfoLayout
                 android:id="@+id/baby_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
 
-            </com.doumengmengandroidbady.view.BaseInfoLayout>
+            </com.doumengmeng.customer.view.BaseInfoLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -1541,7 +1541,7 @@
                     android:text="@string/parent_info" />
             </RelativeLayout>
 
-            <com.doumengmengandroidbady.view.ParentInfoLayout
+            <com.doumengmeng.customer.view.ParentInfoLayout
                 android:id="@+id/parent_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

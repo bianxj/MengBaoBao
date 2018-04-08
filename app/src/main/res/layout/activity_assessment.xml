@@ -25,7 +25,7 @@
                 android:background="@color/first_white"
                 android:visibility="visible">
 
-                <com.doumengmengandroidbady.view.CircleImageView
+                <com.doumengmeng.customer.view.CircleImageView
                     android:id="@+id/civ_doctor"
                     android:layout_width="@dimen/y94px"
                     android:layout_height="@dimen/y94px"
@@ -300,7 +300,7 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <com.doumengmengandroidbady.view.GraphModule
+            <com.doumengmeng.customer.view.GraphModule
                 android:id="@+id/graph_module"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

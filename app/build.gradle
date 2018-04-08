@@ -16,7 +16,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.doumengmengandroidbady"
+        applicationId "com.doumengmeng.customer"
         multiDexEnabled true
         minSdkVersion 19
         targetSdkVersion 23

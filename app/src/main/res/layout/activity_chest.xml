@@ -152,7 +152,7 @@
 
             </LinearLayout>
 
-            <com.doumengmengandroidbady.view.MyGifPlayer
+            <com.doumengmeng.customer.view.MyGifPlayer
                 android:id="@+id/player"
                 android:layout_width="@dimen/x447px"
                 android:layout_height="@dimen/y311px"
@@ -161,7 +161,7 @@
                 app:start_side="@dimen/x94px"
                 app:need_share="false">
 
-            </com.doumengmengandroidbady.view.MyGifPlayer>
+            </com.doumengmeng.customer.view.MyGifPlayer>
 
             <LinearLayout
                 android:id="@+id/ll_remark"

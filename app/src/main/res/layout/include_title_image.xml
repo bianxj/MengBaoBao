@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.doumengmengandroidbady.view.CircleImageView
+            <com.doumengmeng.customer.view.CircleImageView
                 android:id="@+id/cim_baby"
                 android:layout_width="@dimen/y133px"
                 android:layout_height="@dimen/y133px"

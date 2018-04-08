@@ -15,7 +15,7 @@
         android:background="@color/first_white"
         >
 
-        <com.doumengmengandroidbady.view.CircleImageView
+        <com.doumengmeng.customer.view.CircleImageView
             android:id="@+id/civ_hospital"
             android:layout_width="@dimen/y95px"
             android:layout_height="@dimen/y95px"

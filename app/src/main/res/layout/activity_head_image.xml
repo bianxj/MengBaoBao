@@ -5,7 +5,7 @@
 
     <include layout="@layout/include_title_back" />
 
-    <com.doumengmengandroidbady.view.CircleImageView
+    <com.doumengmeng.customer.view.CircleImageView
         android:id="@+id/civ_head"
         android:layout_width="@dimen/y470px"
         android:layout_height="@dimen/y470px"

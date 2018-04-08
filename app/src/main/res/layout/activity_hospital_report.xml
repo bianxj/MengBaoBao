@@ -343,14 +343,14 @@
                 android:layout_marginTop="@dimen/y28px"
                 android:background="@color/linePink" />
 
-            <com.doumengmengandroidbady.view.GraphModule
+            <com.doumengmeng.customer.view.GraphModule
                 android:id="@+id/graph_module"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y19px"
                 android:layout_marginBottom="@dimen/y28px">
 
-            </com.doumengmengandroidbady.view.GraphModule>
+            </com.doumengmeng.customer.view.GraphModule>
 
 <!--            <LinearLayout
             android:layout_width="match_parent"
@@ -478,7 +478,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true" />
 
-                    <com.doumengmengandroidbady.view.ScaleplateView
+                    <com.doumengmeng.customer.view.ScaleplateView
                         android:id="@+id/sv_weight"
                         android:layout_width="@dimen/x267px"
                         android:layout_height="@dimen/x27px"
@@ -499,7 +499,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true" />
 
-                    <com.doumengmengandroidbady.view.ScaleplateView
+                    <com.doumengmeng.customer.view.ScaleplateView
                         android:id="@+id/sv_height"
                         android:layout_width="@dimen/x267px"
                         android:layout_height="@dimen/x27px"
@@ -520,7 +520,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true" />
 
-                    <com.doumengmengandroidbady.view.ScaleplateView
+                    <com.doumengmeng.customer.view.ScaleplateView
                         android:id="@+id/sv_height_weight"
                         android:layout_width="@dimen/x267px"
                         android:layout_height="@dimen/x27px"
@@ -541,7 +541,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true" />
 
-                    <com.doumengmengandroidbady.view.ScaleplateView
+                    <com.doumengmeng.customer.view.ScaleplateView
                         android:id="@+id/sv_BMI"
                         android:layout_width="@dimen/x267px"
                         android:layout_height="@dimen/x27px"

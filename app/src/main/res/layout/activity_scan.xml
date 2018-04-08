@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:visibility="invisible">
 
-        <com.doumengmengandroidbady.view.ViewfinderView
+        <com.doumengmeng.customer.view.ViewfinderView
             android:id="@+id/vfv_scan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

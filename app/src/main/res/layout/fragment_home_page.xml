@@ -65,7 +65,7 @@
                     android:src="@drawable/icon_head"
                     android:contentDescription="@string/contentDescription" />
 
-                <com.doumengmengandroidbady.view.CircleImageView
+                <com.doumengmeng.customer.view.CircleImageView
                     android:id="@+id/civ_baby"
                     android:layout_width="@dimen/y133px"
                     android:layout_height="@dimen/y133px" />
@@ -110,7 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/RowSplitLine" />
 
-    <com.doumengmengandroidbady.view.AutoScrollViewPager
+    <com.doumengmeng.customer.view.AutoScrollViewPager
         android:id="@+id/asvp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y476px"
@@ -124,7 +124,7 @@
         android:background="@color/first_white"
         >
 
-    </com.doumengmengandroidbady.view.AutoScrollViewPager>
+    </com.doumengmeng.customer.view.AutoScrollViewPager>
 
     <android.support.v4.widget.Space
         android:id="@+id/space_observ_point"

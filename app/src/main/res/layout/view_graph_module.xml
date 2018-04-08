@@ -39,7 +39,7 @@
                 android:src="@drawable/bg_boy_weight_data"
                 android:contentDescription="@string/contentDescription" />
 
-            <com.doumengmengandroidbady.view.GraphView
+            <com.doumengmeng.customer.view.GraphView
                 android:id="@+id/diagram_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

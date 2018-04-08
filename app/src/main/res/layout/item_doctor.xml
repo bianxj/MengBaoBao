@@ -13,7 +13,7 @@
         android:layout_marginTop="@dimen/y19px"
         android:background="@color/first_white"
         >
-        <com.doumengmengandroidbady.view.CircleImageView
+        <com.doumengmeng.customer.view.CircleImageView
             android:id="@+id/civ_head"
             android:layout_width="@dimen/y95px"
             android:layout_height="@dimen/y95px"

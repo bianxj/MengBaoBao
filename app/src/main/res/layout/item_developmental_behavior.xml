@@ -64,7 +64,7 @@
                     android:layout_marginRight="@dimen/x46px"
                     />
             </RelativeLayout>
-            <com.doumengmengandroidbady.view.MyGifPlayer
+            <com.doumengmeng.customer.view.MyGifPlayer
                 android:id="@+id/player"
                 android:layout_width="@dimen/x179px"
                 android:layout_height="@dimen/y128px"

@@ -17,7 +17,7 @@
             android:orientation="vertical"
             >
 
-            <com.doumengmengandroidbady.view.ParentInfoLayout
+            <com.doumengmeng.customer.view.ParentInfoLayout
                 android:id="@+id/parent_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

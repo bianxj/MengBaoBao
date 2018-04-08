@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.doumengmengandroidbady">
+    package="com.doumengmeng.customer">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".base.BaseApplication"
+        android:name="com.doumengmeng.customer.base.BaseApplication"
         android:fullBackupContent="false">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -30,7 +30,7 @@
 
         <!--android:name=".activity.GuideActivity"-->
         <activity
-            android:name=".activity.GuideActivity"
+            android:name="com.doumengmeng.customer.activity.GuideActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppLauncher"
             >
@@ -39,57 +39,57 @@
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.ForgotPwdActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.AgreementActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.LoadingActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
-        <activity android:name=".activity.PersonCenterActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.BaseInfoActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.ParentInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.LoginActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.RegisterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.ForgotPwdActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.AgreementActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.LoadingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.MainActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.PersonCenterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.BaseInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.ParentInfoActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.ShopActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.ContactActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.AboutActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.SettingActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.ChangePwdActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.ShopActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.ContactActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.AboutActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.SettingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.ChangePwdActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.BabyKnowledgeDetailsActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.HospitalReportActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.BabyKnowledgeDetailsActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.HospitalReportActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.HeadImageActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.ObserveActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.DoctorListActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.SearchActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.HospitalDoctorActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.HeadImageActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.ObserveActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.DoctorListActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.SearchActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.HospitalDoctorActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.SpacialistServiceActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.SpacialistServiceActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.ScanActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.ScanActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.DoctorInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.DoctorInfoActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.InputInfoActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.RecordActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputBreastFeedingActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputCacationActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputChestActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputDaySleepActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputHeadActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputHeightActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputMilkActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputNightSleepActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputWeightActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.InputMicturitionActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.DevelopmentalBehaviorActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.RecordActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputBreastFeedingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputCacationActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputChestActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputDaySleepActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputHeadActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputHeightActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputMilkActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputNightSleepActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputWeightActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.InputMicturitionActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.DevelopmentalBehaviorActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.AssessmentActivity" android:screenOrientation="portrait" ></activity>
-        <activity android:name=".activity.ParentingGuideActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.AssessmentActivity" android:screenOrientation="portrait" ></activity>
+        <activity android:name="com.doumengmeng.customer.activity.ParentingGuideActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.DiagramDataActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.DiagramDataActivity" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".wxapi.WXPayEntryActivity"
+        <activity android:name="com.doumengmeng.customer.wxapi.WXPayEntryActivity"
             android:screenOrientation="portrait"
             android:exported="true"
             android:launchMode="singleTop"
@@ -104,7 +104,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.doumengmengandroidbady.fileProvider"
+            android:authorities="com.doumengmeng.customer.fileProvider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data

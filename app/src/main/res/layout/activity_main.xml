@@ -162,7 +162,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/SideMenuLineHeight">
-            <com.doumengmengandroidbady.view.CircleImageView
+            <com.doumengmeng.customer.view.CircleImageView
                 android:id="@+id/civ_head"
                 android:layout_width="@dimen/y67px"
                 android:layout_height="@dimen/y67px"

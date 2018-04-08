@@ -19,7 +19,7 @@
             android:orientation="vertical"
             >
 
-            <com.doumengmengandroidbady.view.BaseInfoLayout
+            <com.doumengmeng.customer.view.BaseInfoLayout
                 android:id="@+id/base_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
