@@ -60,9 +60,11 @@ public class HospitalReportFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        initView();
-        MobclickAgent.onPageStart(getClass().getSimpleName());
-        MobclickAgent.onResume(getContext());
+        if ( isVisible() && !isHidden() ) {
+            initView();
+            MobclickAgent.onPageStart(getClass().getSimpleName());
+            MobclickAgent.onResume(getContext());
+        }
     }
 
     @Override

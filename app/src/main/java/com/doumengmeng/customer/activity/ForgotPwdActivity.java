@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.config.Constants;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
@@ -163,7 +164,7 @@ public class ForgotPwdActivity extends BaseActivity {
             VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
             BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
 
-            countDown = 60;
+            countDown = Constants.VC_OVER_TIME;
             handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
         }
     };

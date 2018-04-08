@@ -22,7 +22,7 @@ public class ContactActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
         findView();
-        configView();
+        initView();
     }
 
     private void findView(){
@@ -30,7 +30,7 @@ public class ContactActivity extends BaseActivity {
         tv_title = findViewById(R.id.tv_title);
     }
 
-    private void configView(){
+    private void initView(){
         tv_title.setText(R.string.contact);
 
         rl_back.setOnClickListener(new View.OnClickListener() {

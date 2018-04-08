@@ -1,13 +1,18 @@
 package com.doumengmeng.customer.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -52,7 +57,7 @@ public class SearchActivity extends BaseActivity {
     private final List<DoctorEntity> doctors = new ArrayList<>();
     private final List<HospitalEntity> hospitals = new ArrayList<>();
     private HospitalDoctorAdapter adapter;
-    private SearchHandler handler;
+    private SearchHandler searchHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,8 +69,8 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if ( handler != null ){
-            handler.removeCallbacksAndMessages(null);
+        if ( searchHandler != null ){
+            searchHandler.removeCallbacksAndMessages(null);
         }
     }
 
@@ -94,6 +99,7 @@ public class SearchActivity extends BaseActivity {
         ll_back.setVisibility(View.GONE);
         rl_close.setVisibility(View.INVISIBLE);
 
+        et_search.setOnEditorActionListener(searchListener);
         et_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -117,7 +123,7 @@ public class SearchActivity extends BaseActivity {
             }
         });
 
-        handler = new SearchHandler(this);
+        searchHandler = new SearchHandler(this);
         initSearchList();
         initSearchHistory();
     }
@@ -212,7 +218,9 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void search(){
-        new Thread(searchRunnable).start();
+        if ( !TextUtils.isEmpty(et_search.getText().toString().trim()) ) {
+            new Thread(searchRunnable).start();
+        }
     }
 
     private List<DoctorEntity> tempDoctors = null;
@@ -224,10 +232,10 @@ public class SearchActivity extends BaseActivity {
             tempDoctors = DaoManager.getInstance().getDaotorDao().searchDoctorListByName(SearchActivity.this,search);
             tempHospitals = DaoManager.getInstance().getHospitalDao().searchHospitalListByName(SearchActivity.this,search);
 
-            Message message = handler.obtainMessage();
+            Message message = searchHandler.obtainMessage();
             message.what = SearchHandler.MESSAGE_SEARCH;
             message.obj = search;
-            handler.sendMessage(message);
+            searchHandler.sendMessage(message);
         }
     };
 
@@ -307,6 +315,21 @@ public class SearchActivity extends BaseActivity {
             String keyword = ((TextView)view).getText().toString();
             et_search.setText(keyword);
             search();
+        }
+    };
+
+    private final TextView.OnEditorActionListener searchListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+            if ( actionId == EditorInfo.IME_ACTION_SEARCH ){
+                search();
+                ((InputMethodManager) textView.getContext().getSystemService(
+                        Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                        SearchActivity.this.getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+                return true;
+            }
+            return false;
         }
     };
 

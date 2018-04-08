@@ -30,7 +30,6 @@ public class BabyKnowledgeFragment extends BaseFragment {
     private TextView tv_title;
     private GridView gv;
     private BabyKnowledgeAdapter adapter;
-//    private List<String> infos = null;
     private List<String> pages = null;
 
     @Override
@@ -38,7 +37,7 @@ public class BabyKnowledgeFragment extends BaseFragment {
         super.onCreateView(inflater,container,savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_baby_knowledge,null);
         findView(view);
-        configView();
+        initView();
         return view;
     }
 
@@ -48,7 +47,7 @@ public class BabyKnowledgeFragment extends BaseFragment {
         gv = view.findViewById(R.id.gv);
     }
 
-    private void configView(){
+    private void initView(){
         rl_back.setVisibility(View.INVISIBLE);
         tv_title.setText(R.string.baby_knowledge);
         initGridView();

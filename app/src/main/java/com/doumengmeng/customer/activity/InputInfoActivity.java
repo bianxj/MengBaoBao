@@ -109,9 +109,7 @@ public class InputInfoActivity extends BaseActivity {
                 }
 
                 @Override
-                public void cancel() {
-                    //UNDO
-                }
+                public void cancel() {}
             });
         }
     }

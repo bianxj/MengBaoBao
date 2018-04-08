@@ -86,7 +86,9 @@ public class LessonFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        wv.loadUrl(UrlAddressList.URL_MENG_LESSION);
+        if ( isVisible() && !isHidden() ) {
+            wv.loadUrl(UrlAddressList.URL_MENG_LESSION);
+        }
     }
 
     @Override

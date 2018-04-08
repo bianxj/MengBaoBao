@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
-import com.doumengmeng.customer.config.Config;
+import com.doumengmeng.customer.config.Constants;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
@@ -43,7 +43,6 @@ import java.util.Map;
  * 萌宝宝用户注册界面
  */
 public class RegisterActivity extends BaseActivity {
-    private static final boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private Button bt_sure;
@@ -165,7 +164,7 @@ public class RegisterActivity extends BaseActivity {
         public void onPostExecute(String result) {
             VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
             BaseApplication.getInstance().saveRegisterVc(response.getResult().getCode());
-            countDown = 60;
+            countDown = Constants.VC_OVER_TIME;
             handler.sendEmptyMessage(RegisterHandler.COUNT_DOWN);
         }
     };
@@ -204,9 +203,6 @@ public class RegisterActivity extends BaseActivity {
      * 日期: 2018/1/8 9:26
      */
     private boolean checkVerificationCode(){
-        if (isTest){
-            return true;
-        }
         tv_prompt.setText("");
         String phone = et_phone.getText().toString().trim();
         if ( TextUtils.isEmpty(phone) ){
@@ -324,9 +320,6 @@ public class RegisterActivity extends BaseActivity {
      * 日期: 2018/1/8 9:27
      */
     private boolean checkRegisterData(){
-        if (isTest){
-            return true;
-        }
         tv_prompt.setText("");
         String phone = et_phone.getText().toString().trim();
 

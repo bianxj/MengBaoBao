@@ -12,6 +12,7 @@ import com.doumengmeng.customer.adapter.DoctorAdapter;
 import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.DoctorEntity;
+import com.doumengmeng.customer.util.MyDialog;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -53,7 +54,12 @@ public class HospitalDoctorActivity extends BaseActivity {
             }
             doctors.addAll(entities);
         } else {
-            //TODO EXCEPTION
+            MyDialog.showPromptDialog(this, "数据异常,请重新尝试", new MyDialog.PromptDialogCallback() {
+                @Override
+                public void sure() {
+                    back();
+                }
+            });
         }
     }
 
@@ -73,8 +79,6 @@ public class HospitalDoctorActivity extends BaseActivity {
 
     private void initList(){
         xrv_doctor.setLoadingMoreEnabled(false);
-//        xrv_doctor.setFootView(new XLoadMoreFooter(this));
-//        xrv_doctor.setLoadingListener(doctorLoadingListener);
 
         doctorAdapter = new DoctorAdapter(doctors);
         xrv_doctor.setAdapter(doctorAdapter);
@@ -95,51 +99,5 @@ public class HospitalDoctorActivity extends BaseActivity {
     private void back(){
         finish();
     }
-
-//    private XRecyclerView.LoadingListener doctorLoadingListener = new XRecyclerView.LoadingListener(){
-//
-//        @Override
-//        public void onRefresh() {}
-//
-//        @Override
-//        public void onLoadMore() {
-//            if ( Config.isTest ){
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        for (int i = 0; i <10 ; i++) {
-//                            DoctorEntity doctor = new DoctorEntity();
-//                            doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-//                            doctor.setDoctordesc("Describe1");
-//                            doctor.setDoctorName("Name"+i);
-//                            doctor.setHospital("HospitalEntity"+i);
-//                            doctor.setPositionaltitles("Position"+i);
-//                            doctor.setSpeciality("Skill"+i);
-//                            doctors.add(doctor);
-//                        }
-//                        xrv_doctor.loadMoreComplete();
-//                        doctorAdapter.notifyDataSetChanged();
-//                    }
-//                },2000);
-//            }
-//        }
-//    };
-//
-//    private void requestDoctorList(){
-//        //TODO
-//        if ( Config.isTest ){
-//            for (int i = 0; i <10 ; i++) {
-//                DoctorEntity doctor = new DoctorEntity();
-//                doctor.setDoctorimg("http://img5.duitang.com/uploads/item/201510/02/20151002201518_8ZKWy.thumb.224_0.png");
-//                doctor.setDoctordesc("Describe1");
-//                doctor.setDoctorName("Name"+i);
-//                doctor.setHospital("HospitalEntity"+i);
-//                doctor.setPositionaltitles("Position"+i);
-//                doctor.setSpeciality("Skill"+i);
-//                doctors.add(doctor);
-//            }
-//        }
-//        doctorAdapter.notifyDataSetChanged();
-//    }
 
 }

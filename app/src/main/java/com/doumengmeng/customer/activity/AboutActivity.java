@@ -23,7 +23,7 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         findView();
-        configView();
+        initView();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class AboutActivity extends BaseActivity {
         tv_title = findViewById(R.id.tv_title);
     }
 
-    private void configView(){
+    private void initView(){
         tv_title.setText(R.string.about);
         rl_back.setOnClickListener(new View.OnClickListener() {
             @Override

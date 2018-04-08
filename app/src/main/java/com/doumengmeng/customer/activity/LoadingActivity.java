@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -62,16 +63,13 @@ public class LoadingActivity extends BaseActivity {
     private RelativeLayout rl_back;
     private TextView tv_loading_percent;
     private ImageView iv_loading_icon;
-    private AnimationDrawable drawable;
     private int percent;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         findView();
-//        loading();
     }
 
     @Override
@@ -95,8 +93,9 @@ public class LoadingActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        stopTask(checkVersionTask);
+        stopTask(loadRemoteVersionTask);
         stopTask(initConfigureTask);
+        stopTask(updateInfoTask);
         if ( loginTask != null ) {
             stopTask(loginTask.getTask());
         }
@@ -105,9 +104,6 @@ public class LoadingActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if ( drawable != null ){
-            drawable.stop();
-        }
     }
 
     private void checkExternalStorage(){
@@ -174,12 +170,12 @@ public class LoadingActivity extends BaseActivity {
 
     private void checkVersionAndWifi(){
         if ( isWifi() ){
-            checkVersion();
+            loadRemoteVersion();
         } else {
             MyDialog.showPromptDialog(this, getString(R.string.prompt_no_wifi),R.string.dialog_btn_go_on, new MyDialog.PromptDialogCallback() {
                 @Override
                 public void sure() {
-                    checkVersion();
+                    loadRemoteVersion();
                 }
             });
         }
@@ -190,74 +186,84 @@ public class LoadingActivity extends BaseActivity {
         return manager.isWifiEnabled();
     }
 
-    private RequestTask checkVersionTask;
-    private String serviceVersion;
-    private void checkVersion() {
+    private RequestTask loadRemoteVersionTask;
+    private String remoteVersion;
+    private void loadRemoteVersion() {
         try {
-            checkVersionTask = new RequestTask.Builder(this, checkVersionCallBack)
+            loadRemoteVersionTask = new RequestTask.Builder(this, loadRemoteVersionCallBack)
                     .setUrl(UrlAddressList.URL_VERSION_FILE)
-                    .setType(RequestTask.FILE | RequestTask.LOADING)
+                    .setType(RequestTask.FILE)
                     .setContent(null)
                     .build();
-            checkVersionTask.execute();
+            loadRemoteVersionTask.execute();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
     }
 
-    private final RequestCallBack checkVersionCallBack = new RequestCallBack() {
+    private final RequestCallBack loadRemoteVersionCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
             startLoadingPercent();
-            serviceVersion = null;
+            remoteVersion = null;
         }
 
         @Override
         public void onError(String result) {
-            stopLoadingPercent();
-            MyDialog.showPromptDialog(LoadingActivity.this,ResponseErrorCode.getErrorMsg(result),null);
+            loadingFailed(ResponseErrorCode.getErrorMsg(result));
         }
 
         @Override
         public void onPostExecute(String result) {
-//            try {
-//                if (TextUtils.isEmpty(result)){
-//                    stopLoadingPercent();
-//                    MyDialog.showPromptDialog(LoadingActivity.this, "版本信息获取失败,请检查网络", new MyDialog.PromptDialogCallback() {
-//                        @Override
-//                        public void sure() {
-//                            finish();
-//                        }
-//                    });
-//                } else {
-//                    serviceVersion = result;
-//                    String versionName = AppUtil.getVersionName(LoadingActivity.this);
-//                    if (AppUtil.isNeedUpdate(versionName, result)) {
-//                        getUpdateInfo();
-//                    } else {
-                        Intent intent = getIntent();
-                        boolean isAutoLogin = intent.getBooleanExtra(IN_PARAM_AUTO_LOGIN,false);
-                        if ( isAutoLogin ){
-                            login();
-                        } else {
-                            initConfigure();
-                        }
-//                    }
-//                }
-//            } catch (PackageManager.NameNotFoundException e) {
-//                e.printStackTrace();
-//                stopLoadingPercent();
-//            }
+            if (TextUtils.isEmpty(result)) {
+                loadingFailed("版本信息获取失败,请检查网络");
+            } else {
+                loadRemoteVersionSuccess(result);
+            }
         }
     };
 
+    private void loadingFailed(String describe){
+        stopLoadingPercent();
+        MyDialog.showPromptDialog(LoadingActivity.this, describe, new MyDialog.PromptDialogCallback() {
+            @Override
+            public void sure() {
+                BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
+            }
+        });
+    }
+
+    private void loadRemoteVersionSuccess(String version){
+        remoteVersion = version;
+        String versionName = null;
+        try {
+            versionName = AppUtil.getVersionName(LoadingActivity.this);
+            if (AppUtil.isNeedUpdate(versionName, version)) {
+                getUpdateInfo();
+            } else {
+                noNeedUpdate();
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void noNeedUpdate(){
+        Intent intent = getIntent();
+        boolean isAutoLogin = intent.getBooleanExtra(IN_PARAM_AUTO_LOGIN,false);
+        if ( isAutoLogin ){
+            login();
+        } else {
+            initConfigure();
+        }
+    }
 
     private RequestTask updateInfoTask = null;
     private void getUpdateInfo(){
         try {
             updateInfoTask = new RequestTask.Builder(this,updateInfoCallback)
                     .setUrl(UrlAddressList.URL_UPDATE_INFO)
-                    .setType(RequestTask.DEFAULT)
+                    .setType(RequestTask.JSON)
                     .setContent(buildUpdateInfo())
                     .build();
             updateInfoTask.execute();
@@ -274,13 +280,7 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            stopLoadingPercent();
-            MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
-                @Override
-                public void sure() {
-                    BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
-                }
-            });
+            loadingFailed(ResponseErrorCode.getErrorMsg(result));
         }
 
         @Override
@@ -289,7 +289,7 @@ public class LoadingActivity extends BaseActivity {
             String versionName = null;
             try {
                 versionName = AppUtil.getVersionName(LoadingActivity.this);
-                MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, serviceVersion), serviceVersion, convertUpdateContent(response.getResult().getVersionData()), new MyDialog.UpdateDialogCallback() {
+                MyDialog.showUpdateDialog(LoadingActivity.this, AppUtil.isForceUpdate(versionName, remoteVersion), remoteVersion, convertUpdateContent(response.getResult().getVersionData()), new MyDialog.UpdateDialogCallback() {
                     @Override
                     public void update() {
                         AppUtil.openSoftwareMarket(LoadingActivity.this);
@@ -297,7 +297,7 @@ public class LoadingActivity extends BaseActivity {
 
                     @Override
                     public void cancel() {
-                        initConfigure();
+                        noNeedUpdate();
                     }
                 });
             } catch (PackageManager.NameNotFoundException e) {
@@ -325,7 +325,7 @@ public class LoadingActivity extends BaseActivity {
         try {
             initConfigureTask = new RequestTask.Builder(this,initConfigureCallback)
                     .setUrl(UrlAddressList.URL_INIT_CONFIGURE)
-                    .setType(RequestTask.DEFAULT)
+                    .setType(RequestTask.JSON)
                     .setContent(buildInitConfigureContent())
                     .build();
             initConfigureTask.execute();
@@ -354,19 +354,13 @@ public class LoadingActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            stopLoadingPercent();
-            MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
-                @Override
-                public void sure() {
-                    BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
-                }
-            });
+            loadingFailed(ResponseErrorCode.getErrorMsg(result));
         }
 
         @Override
         public void onPostExecute(String result) {
             InitConfigureResponse response = GsonUtil.getInstance().fromJson(result,InitConfigureResponse.class);
-            new Thread(new DataBaseRunnable(response)).start();
+            new Thread(new SaveDataRunnable(response)).start();
         }
     };
 
@@ -376,37 +370,29 @@ public class LoadingActivity extends BaseActivity {
      * 描述: 登录
      * 日期: 2018/1/8 9:51
      */
-    private void login(){
+    private void login() {
         LoginInfo loginInfo = BaseApplication.getInstance().getLogin();
-            try {
-                loginTask = new LoginTask(LoadingActivity.this, loginInfo.getAccount(), loginInfo.getPasswd(), new LoginTask.LoginCallBack() {
-                    @Override
-                    public void onPreExecute() {
+        try {
+            loginTask = new LoginTask(LoadingActivity.this, loginInfo.getAccount(), loginInfo.getPasswd(), new LoginTask.LoginCallBack() {
+                @Override
+                public void onPreExecute() {
 
-                    }
+                }
 
-                    @Override
-                    public void onError(String result) {
-                        stopLoadingPercent();
-                        MyDialog.showPromptDialog(LoadingActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
-                            @Override
-                            public void sure() {
-                                BaseApplication.getInstance().skipToGuide(LoadingActivity.this);
-                            }
-                        });
-                    }
+                @Override
+                public void onError(String result) {
+                    loadingFailed(ResponseErrorCode.getErrorMsg(result));
+                }
 
-                    @Override
-                    public void onPostExecute(String result) {
-//                        checkVersionAndWifi();
-                        initConfigure();
-                    }
-                },RequestTask.DEFAULT);
-                loginTask.execute();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-                stopLoadingPercent();
-            }
+                @Override
+                public void onPostExecute(String result) {
+                    initConfigure();
+                }
+            }, RequestTask.JSON);
+            loginTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -461,31 +447,31 @@ public class LoadingActivity extends BaseActivity {
     private boolean isLoading = false;
     private void startLoadingPercent(){
         isLoading = true;
-        handler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_PERCENT);
+        loadingHandler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_PERCENT);
     }
 
     private void resumeLoadingPercent(){
         if ( isLoading == true ) {
-            handler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_PERCENT);
+            loadingHandler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_PERCENT);
         }
     }
 
     private void pauseLoadingPercent(){
-        handler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_CANCLE);
+        loadingHandler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_CANCLE);
     }
 
     private void stopLoadingPercent(){
         isLoading = false;
-        handler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_CANCLE);
+        loadingHandler.sendEmptyMessage(LoadingHandler.MESSAGE_LOADING_CANCLE);
     }
 
-    private final Handler handler = new LoadingHandler(this);
+    private final Handler loadingHandler = new LoadingHandler(this);
 
-    private class DataBaseRunnable implements Runnable{
+    private class SaveDataRunnable implements Runnable{
 
         private final InitConfigureResponse response;
 
-        public DataBaseRunnable(InitConfigureResponse response) {
+        public SaveDataRunnable(InitConfigureResponse response) {
             this.response = response;
         }
 
@@ -508,7 +494,7 @@ public class LoadingActivity extends BaseActivity {
             BaseApplication.getInstance().saveDayList(result.getDayList());
 
             BaseApplication.getInstance().removeMainPage();
-            handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
+            loadingHandler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
         }
     }
 

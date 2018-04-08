@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -11,13 +12,15 @@
             android:layout_width="@dimen/x169px"
             android:layout_height="@dimen/x169px"
             android:layout_centerInParent="true">
-            <ImageView
+            <com.doumengmeng.customer.view.CircularCoverView
                 android:id="@+id/iv_picture"
                 android:layout_width="@dimen/x139px"
                 android:layout_height="@dimen/x139px"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:src="@drawable/icon_add_picture"
+                app:cover_color="@color/first_white"
+                app:radius="@dimen/x10px"
                 android:contentDescription="@string/contentDescription" />
 
             <ImageView

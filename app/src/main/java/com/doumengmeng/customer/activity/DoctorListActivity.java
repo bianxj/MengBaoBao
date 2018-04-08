@@ -14,7 +14,6 @@ import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.DoctorAdapter;
 import com.doumengmeng.customer.adapter.HospitalAdapter;
 import com.doumengmeng.customer.base.BaseActivity;
-import com.doumengmeng.customer.config.Config;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.DoctorEntity;
 import com.doumengmeng.customer.entity.HospitalEntity;
@@ -35,8 +34,6 @@ public class DoctorListActivity extends BaseActivity {
     private final static int PAGE_SIZE = 100;
     private int doctor_page = 0;
     private int hospital_page = 0;
-
-    private final static boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private Button bt_search;

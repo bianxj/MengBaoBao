@@ -114,8 +114,4 @@ public class PermissionUtil {
         void alwaysDenied(String permission);
     }
 
-    public interface RequestPermissionDenied{
-        void alwaysDenied();
-    }
-
 }

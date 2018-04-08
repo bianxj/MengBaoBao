@@ -22,19 +22,14 @@ import com.doumengmeng.customer.view.AutoScrollViewPager;
  */
 public class GuideActivity extends BaseActivity {
 
-//    public final static String IN_PARAM_IS_LOGIN_FAILED = "isLoginFailed";
-
     private AutoScrollViewPager asvp;
     private Button bt_guide_register , bt_guide_login;
-
-//    private GraphView d_weight;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_guide);
-//        boolean isLoginFailed = getIntent().getBooleanExtra(IN_PARAM_IS_LOGIN_FAILED,false);
         findView();
         initView();
 
@@ -65,16 +60,6 @@ public class GuideActivity extends BaseActivity {
     private void initView(){
         bt_guide_register.setOnClickListener(listener);
         bt_guide_login.setOnClickListener(listener);
-//
-//        ImageView iv_qr = findViewById(R.id.iv_qr);
-//
-//        try {
-//            Bitmap bitmap = ZxingUtil.getInstance().encodeQR("http://www.baidu.com/",getResources().getDimensionPixelOffset(R.dimen.x720px));
-//            iv_qr.setImageBitmap(bitmap);
-//        } catch (WriterException e) {
-//            e.printStackTrace();
-//        }
-
         asvp = findViewById(R.id.asvp);
 
         int[] images = new int[]{R.drawable.icon_guide_1,R.drawable.icon_guide_2,R.drawable.icon_guide_3};

@@ -35,6 +35,7 @@ import java.util.TimerTask;
 
 public class AutoScrollViewPager extends FrameLayout {
 
+    private boolean dotVisible;
     private int dotImage;
     private int dotSize;
     private int dotGap;
@@ -70,9 +71,11 @@ public class AutoScrollViewPager extends FrameLayout {
 
     private void initParam(Context context , AttributeSet attrs){
         TypedArray array = context.obtainStyledAttributes(attrs,R.styleable.AutoScrollViewPager,0,0);
+        dotVisible = array.getBoolean(R.styleable.AutoScrollViewPager_dot_visible,true);
         dotImage = array.getResourceId(R.styleable.AutoScrollViewPager_dot_src,0);
         dotSize = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_dot_size,0);
         dotGap = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_dot_gap,0);
+
         dotMarginBottom = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_dot_margin_bottom,0);
         pageHeight = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_page_height,0);
         pageMarginTop = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_page_margin_top,0);
@@ -104,15 +107,10 @@ public class AutoScrollViewPager extends FrameLayout {
         handler = new ScrollViewHandler(viewPager);
     }
 
-    private void initDotLayout(){
-        dotLayout = new RadioGroup(context);
-        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-        params.gravity = Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL;
-        params.bottomMargin = dotMarginBottom;
-        dotLayout.setOrientation(RadioGroup.HORIZONTAL);
-        dotLayout.setLayoutParams(params);
-        addView(dotLayout);
+    private boolean isDotVisible(){
+        return dotVisible;
     }
+
 
     public void setOnClickCallBack(OnClickCallBack onClickCallBack){
         this.callBack = onClickCallBack;
@@ -168,19 +166,39 @@ public class AutoScrollViewPager extends FrameLayout {
         return imageView;
     }
 
-    private void initDotList(int dotCount){
-        dotLayout.removeAllViews();
-        for (int i = 0;i<dotCount;i++){
-            RadioButton radioButton = createDot();
-            if ( 0 == i ){
-                RadioGroup.LayoutParams layoutParams = (RadioGroup.LayoutParams) radioButton.getLayoutParams();
-                layoutParams.leftMargin = 0;
-                radioButton.setLayoutParams(layoutParams);
-            }
-            dotLayout.addView(radioButton);
+    private void initDotLayout(){
+        if ( isDotVisible() ) {
+            dotLayout = new RadioGroup(context);
+            LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+            params.bottomMargin = dotMarginBottom;
+            dotLayout.setOrientation(RadioGroup.HORIZONTAL);
+            dotLayout.setLayoutParams(params);
+            addView(dotLayout);
         }
-        RadioButton button = (RadioButton) dotLayout.getChildAt(0);
-        button.setChecked(true);
+    }
+
+    private void initDotList(int dotCount){
+        if ( isDotVisible() ) {
+            dotLayout.removeAllViews();
+            for (int i = 0; i < dotCount; i++) {
+                RadioButton radioButton = createDot();
+                if (0 == i) {
+                    RadioGroup.LayoutParams layoutParams = (RadioGroup.LayoutParams) radioButton.getLayoutParams();
+                    layoutParams.leftMargin = 0;
+                    radioButton.setLayoutParams(layoutParams);
+                }
+                dotLayout.addView(radioButton);
+            }
+            RadioButton button = (RadioButton) dotLayout.getChildAt(0);
+            button.setChecked(true);
+        }
+    }
+
+    private void switchDot(int position){
+        if ( isDotVisible() ) {
+            ((RadioButton) dotLayout.getChildAt(position)).setChecked(true);
+        }
     }
 
     private RadioButton createDot(){
@@ -248,16 +266,14 @@ public class AutoScrollViewPager extends FrameLayout {
             if ( canLoop() ) {
                 RadioButton botton = null;
                 if ( position == 0 ){
-                    botton = (RadioButton) dotLayout.getChildAt(index -1);
+                    switchDot(index -1);
                 } else if ( position == index + 1 ){
-                    botton = (RadioButton) dotLayout.getChildAt(0);
+                    switchDot(0);
                 } else {
-                    botton = (RadioButton) dotLayout.getChildAt(position-1);
+                    switchDot(position-1);
                 }
-                botton.setChecked(true);
             } else {
-                RadioButton botton = (RadioButton) dotLayout.getChildAt(position);
-                botton.setChecked(true);
+                switchDot(position);
             }
         }
 

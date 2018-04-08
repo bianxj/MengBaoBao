@@ -189,7 +189,7 @@ public class SpacialistServiceFragment extends BaseFragment {
         try {
             recordTask = new RequestTask.Builder(getActivity(),getRecordCallBack)
                     .setUrl(UrlAddressList.URL_GET_ALL_RECORD)
-                    .setType(RequestTask.DEFAULT)
+                    .setType(RequestTask.NO_LOADING)
                     .setContent(buildRecordContent())
                     .build();
             recordTask.execute();

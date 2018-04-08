@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -66,8 +65,6 @@ public class MainActivity extends BaseFragmentActivity {
 
     //抽屉
     private DrawerLayout dl_main;
-    //内容页
-    private FrameLayout fl_content;
 
     private RelativeLayout rl_home_page , rl_baby_knowledge , rl_spacialist_service , rl_hospital_report , rl_meng_lesson;
 
@@ -92,12 +89,7 @@ public class MainActivity extends BaseFragmentActivity {
         findView();
         initView();
         initFragment();
-
-        page = BaseApplication.getInstance().getMainPage();
-        if ( page == null ) {
-            page = PAGE_HOME;
-        }
-        switchFragment(page);
+        loadHomePage();
         checkNotification();
     }
 
@@ -108,8 +100,15 @@ public class MainActivity extends BaseFragmentActivity {
         showDefaultFragment();
     }
 
+    private void loadHomePage(){
+        page = BaseApplication.getInstance().getMainPage();
+        if ( page == null ) {
+            page = PAGE_HOME;
+        }
+        switchFragment(page);
+    }
+
     private void findView(){
-        fl_content = findViewById(R.id.fl_content);
 
         rl_home_page = findViewById(R.id.rl_home_page);
         rl_baby_knowledge = findViewById(R.id.rl_baby_knowledge);

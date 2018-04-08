@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseActivity;
-import com.doumengmeng.customer.config.Config;
 import com.doumengmeng.customer.request.ResponseErrorCode;
 import com.doumengmeng.customer.request.task.LoginTask;
 import com.doumengmeng.customer.util.FormatCheckUtil;
@@ -23,8 +22,6 @@ import com.doumengmeng.customer.util.FormatCheckUtil;
  * 创建日期: 2018/1/8 9:50
  */
 public class LoginActivity extends BaseActivity {
-
-    private static final boolean isTest = Config.isTest;
 
     private RelativeLayout rl_back;
     private EditText et_phone,et_login_pwd;
@@ -129,9 +126,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     private boolean checkLogin(){
-        if (isTest){
-            return true;
-        }
         tv_prompt.setText("");
         String phone = et_phone.getText().toString().trim();
         if (TextUtils.isEmpty(phone)){

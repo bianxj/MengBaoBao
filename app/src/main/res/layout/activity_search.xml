@@ -51,6 +51,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/x82px"
                 style="@style/EditTextView"
+                android:imeOptions="actionSearch"
                 android:lines="1"
                 android:hint="@string/search_hint"
                 />

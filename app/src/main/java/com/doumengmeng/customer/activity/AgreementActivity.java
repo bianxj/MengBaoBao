@@ -39,7 +39,7 @@ public class AgreementActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agreement);
         findView();
-        configView();
+        initView();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class AgreementActivity extends BaseActivity {
         wv = findViewById(R.id.wv);
     }
 
-    private void configView(){
+    private void initView(){
         Intent intent = getIntent();
         if ( null != intent && intent.getBooleanExtra(HIDE_BOTTOM,false) ){
             rl_bottom.setVisibility(View.GONE);

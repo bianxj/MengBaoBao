@@ -108,8 +108,8 @@ public class BaseApplication extends Application {
         imageLoader.init(configImageLoader());
         clearImageLoaderCache();
     }
-
     private ImageLoaderConfiguration.Builder builder;
+
 
     private ImageLoaderConfiguration configImageLoader(){
         if ( builder == null ){

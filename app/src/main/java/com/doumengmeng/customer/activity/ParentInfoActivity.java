@@ -32,8 +32,7 @@ public class ParentInfoActivity extends BaseActivity {
     private TextView tv_title,tv_complete;
 
     private ParentInfoLayout parent_info;
-
-    private RequestTask changeParentInfoTask;
+    private RequestTask uploadParentInfoTask;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class ParentInfoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopTask(changeParentInfoTask);
+        stopTask(uploadParentInfoTask);
     }
 
     private void findView(){
@@ -76,7 +75,7 @@ public class ParentInfoActivity extends BaseActivity {
                     back();
                     break;
                 case R.id.rl_complete:
-                    changeParentInfo();
+                    uploadParentInfo();
                     break;
             }
         }
@@ -86,15 +85,15 @@ public class ParentInfoActivity extends BaseActivity {
         finish();
     }
 
-    private void changeParentInfo(){
+    private void uploadParentInfo(){
         if ( checkData() ){
             try {
-                changeParentInfoTask = new RequestTask.Builder(this,changeParentInfoCallBack)
+                uploadParentInfoTask = new RequestTask.Builder(this, uploadParentInfoCallBack)
                         .setUrl(UrlAddressList.URL_SAVE_USER_INFO)
                         .setType(RequestTask.DEFAULT)
-                        .setContent(buildChangeParentContent())
+                        .setContent(buildUploadParentContent())
                         .build();
-                changeParentInfoTask.execute();
+                uploadParentInfoTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
@@ -110,7 +109,7 @@ public class ParentInfoActivity extends BaseActivity {
         return true;
     }
 
-    private Map<String, String> buildChangeParentContent() {
+    private Map<String, String> buildUploadParentContent() {
         InputUserInfo inputData = new InputUserInfo();
         inputData.setUserId(BaseApplication.getInstance().getUserData().getUserid());
 
@@ -122,7 +121,7 @@ public class ParentInfoActivity extends BaseActivity {
         return map;
     }
 
-    private final RequestCallBack changeParentInfoCallBack = new RequestCallBack() {
+    private final RequestCallBack uploadParentInfoCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {}
 

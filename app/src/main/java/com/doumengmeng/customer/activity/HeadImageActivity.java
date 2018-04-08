@@ -160,19 +160,19 @@ public class HeadImageActivity extends BaseActivity {
         }
     }
 
-    private void showAppPermissionDialog(int strings){
-        MyDialog.showPermissionDialog(this, getString(strings), new MyDialog.ChooseDialogCallback() {
-            @Override
-            public void sure() {
-                AppUtil.openPrimession(HeadImageActivity.this);
-            }
-
-            @Override
-            public void cancel() {
-
-            }
-        });
-    }
+//    private void showAppPermissionDialog(int strings){
+//        MyDialog.showPermissionDialog(this, getString(strings), new MyDialog.ChooseDialogCallback() {
+//            @Override
+//            public void sure() {
+//                AppUtil.openPrimession(HeadImageActivity.this);
+//            }
+//
+//            @Override
+//            public void cancel() {
+//
+//            }
+//        });
+//    }
 
     private void cropFromPicture(Uri src) {
         File dest = BaseApplication.getInstance().getHeadCropFile();
@@ -249,7 +249,7 @@ public class HeadImageActivity extends BaseActivity {
         });
     }
 
-    private Bitmap headImg = null;
+//    private Bitmap headImg = null;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

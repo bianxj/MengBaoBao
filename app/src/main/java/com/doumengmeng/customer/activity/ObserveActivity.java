@@ -27,14 +27,11 @@ import java.util.List;
  */
 public class ObserveActivity extends BaseActivity {
 
-//    public final static String IN_PARAM_MONTH = "IN_PARAM_MONTH";
-
     private RelativeLayout rl_back;
     private TextView tv_title;
     private ImageView iv_ad;
     private Button bt_buy;
 
-//    private List<String> contents;
     private ListView lv_observe;
     private ObserveAdapter adapter;
 
@@ -65,7 +62,6 @@ public class ObserveActivity extends BaseActivity {
             iv_ad.setVisibility(View.VISIBLE);
         } else {
             //付费用户
-//            String month = getIntent().getStringExtra(IN_PARAM_MONTH);
             bt_buy.setVisibility(View.GONE);
             iv_ad.setVisibility(View.GONE);
             contents = DaoManager.getInstance().getGrowthDao().searchGrowth(this);

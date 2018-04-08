@@ -66,7 +66,6 @@ public class BaseInfoLayout extends LinearLayout {
     }
 
     private void initInfoView(Context context){
-//        this.context = context;
         View view = LayoutInflater.from(context).inflate(R.layout.view_base_info,null);
         addView(view);
         findView();

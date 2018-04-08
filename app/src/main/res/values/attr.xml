@@ -20,6 +20,7 @@
 
 
     <declare-styleable name="AutoScrollViewPager">
+        <attr name="dot_visible" format="boolean"/>
         <attr name="dot_src" format="reference" />
         <attr name="dot_size" format="dimension" />
         <attr name="dot_gap" format="dimension" />
@@ -38,6 +39,11 @@
     <declare-styleable name="GraphView">
         <attr name="origin_x" format="dimension" />
         <attr name="origin_y" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CircularCoverView">
+        <attr name="radius" format="dimension"></attr>
+        <attr name="cover_color" format="reference"></attr>
     </declare-styleable>
 
 </resources>

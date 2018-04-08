@@ -60,8 +60,6 @@ import java.util.Map;
  */
 public class DoctorInfoActivity extends BaseActivity {
 
-    private final static boolean isTest = false;
-
     public final static String IN_PARAM_DOCTOR_ID = "doctor_id";
     public final static String IN_PARAM_DOCTOR_NAME = "doctor_name";
 
@@ -135,17 +133,6 @@ public class DoctorInfoActivity extends BaseActivity {
     }
 
     private void getNeedInfo(){
-        if (isTest){
-            doctor = new Doctor();
-            doctor.setDoctorname("Name1");
-            doctor.setDoctorimg("http://www.qqzhi.com/uploadpic/2015-01-22/022222987.jpg");
-            doctor.setPositionaltitles("Position1");
-            doctor.setDoctordesc("Describe1");
-            doctor.setSpeciality("Skill");
-
-            hospital = new Hospital();
-            hospital.setHospitalname("Hospital1");
-        } else {
             Intent intent = getIntent();
             String doctorId = intent.getStringExtra(IN_PARAM_DOCTOR_ID);
             if (TextUtils.isEmpty(doctorId) ){
@@ -165,7 +152,6 @@ public class DoctorInfoActivity extends BaseActivity {
                     }
                 });
             }
-        }
     }
 
     private void findView(){
@@ -249,19 +235,19 @@ public class DoctorInfoActivity extends BaseActivity {
         }
     }
 
-    private void showAppPermissionDialog(int strings){
-        MyDialog.showPermissionDialog(this, getString(strings), new MyDialog.ChooseDialogCallback() {
-            @Override
-            public void sure() {
-                AppUtil.openPrimession(DoctorInfoActivity.this);
-            }
-
-            @Override
-            public void cancel() {
-                back();
-            }
-        });
-    }
+//    private void showAppPermissionDialog(int strings){
+//        MyDialog.showPermissionDialog(this, getString(strings), new MyDialog.ChooseDialogCallback() {
+//            @Override
+//            public void sure() {
+//                AppUtil.openPrimession(DoctorInfoActivity.this);
+//            }
+//
+//            @Override
+//            public void cancel() {
+//                back();
+//            }
+//        });
+//    }
 
     /**
      * 作者: 边贤君
@@ -393,7 +379,6 @@ public class DoctorInfoActivity extends BaseActivity {
 
     private void registerIWXApi(){
         api = WXAPIFactory.createWXAPI(this, null);
-//        api.unregisterApp();
         api.registerApp(Constants.WX_APP_ID);
         receiver = new PayBroadcastReceiver(this);
         registerReceiver(receiver,new IntentFilter(PayBroadcastReceiver.ACTION_IWX_PAY_RESULT));
@@ -426,8 +411,8 @@ public class DoctorInfoActivity extends BaseActivity {
             object.put("accountmobile",userData.getAccountmobile());
             object.put("orderdevice","1");
             object.put("doctorid",doctor.getDoctorid());
-//            object.put("totalamout",Integer.parseInt(doctor.getCost())*100+"");
-            object.put("totalamout","2");
+            object.put("totalamout",Integer.parseInt(doctor.getCost())*100+"");
+//            object.put("totalamout","2");
         } catch (JSONException e) {
             e.printStackTrace();
         }

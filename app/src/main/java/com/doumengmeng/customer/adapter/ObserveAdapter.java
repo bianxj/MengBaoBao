@@ -12,10 +12,6 @@ import com.doumengmeng.customer.R;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2018/1/5.
- */
-
 public class ObserveAdapter extends BaseAdapter {
 
     private final Context context;

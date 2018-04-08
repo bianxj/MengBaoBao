@@ -32,7 +32,7 @@
     <color name="thinPink">#FC6DA6</color>
     <color name="deepPink">#D81780</color>
     <color name="lightSky">#DAF4FF</color>
-    <color name="scanMask">#66777777</color>
+    <color name="scanMask">#88000000</color>
     <color name="lightPink">#F7D6D7</color>
 
     <color name="linkLightPink">#FEF1F7</color>

@@ -30,7 +30,7 @@
 
         <!--android:name=".activity.GuideActivity"-->
         <activity
-            android:name="com.doumengmeng.customer.activity.GuideActivity"
+            android:name=".activity.GuideActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppLauncher"
             >

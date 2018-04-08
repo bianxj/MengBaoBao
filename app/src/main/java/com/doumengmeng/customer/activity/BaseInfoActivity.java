@@ -38,7 +38,6 @@ public class BaseInfoActivity extends BaseActivity {
     private ScrollView sv;
     private BaseInfoLayout base_info;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +49,7 @@ public class BaseInfoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopTask(changeBaseInfo);
+        stopTask(uploadBaseInfo);
     }
 
     private void findView(){
@@ -97,16 +96,16 @@ public class BaseInfoActivity extends BaseActivity {
         finish();
     }
 
-    private RequestTask changeBaseInfo;
+    private RequestTask uploadBaseInfo;
     private void changeBaseInfo(){
         if ( checkBaseInfo() ){
             try {
-                changeBaseInfo = new RequestTask.Builder(this,changeBaseInfoCallBack)
+                uploadBaseInfo = new RequestTask.Builder(this, uploadBaseInfoCallBack)
                         .setUrl(UrlAddressList.URL_SAVE_USER_INFO)
                         .setType(RequestTask.DEFAULT)
-                        .setContent(buildChangeBaseInfoContent())
+                        .setContent(buildUploadBaseInfoContent())
                         .build();
-                changeBaseInfo.execute();
+                uploadBaseInfo.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
@@ -115,14 +114,13 @@ public class BaseInfoActivity extends BaseActivity {
 
     private boolean checkBaseInfo(){
         if ( !base_info.checkBaseInfo() ){
-//            showPromptDialog(base_info.getCheckErrorMsg());
             tv_title.setText(base_info.getCheckErrorMsg());
             return false;
         }
         return true;
     }
 
-    private Map<String, String> buildChangeBaseInfoContent() {
+    private Map<String, String> buildUploadBaseInfoContent() {
         InputUserInfo inputUserInfo = new InputUserInfo();
         UserData userData = BaseApplication.getInstance().getUserData();
         inputUserInfo.setUserId(userData.getUserid());
@@ -136,7 +134,7 @@ public class BaseInfoActivity extends BaseActivity {
         return map;
     }
 
-    private final RequestCallBack changeBaseInfoCallBack = new RequestCallBack() {
+    private final RequestCallBack uploadBaseInfoCallBack = new RequestCallBack() {
         @Override
         public void onPreExecute() {
         }
