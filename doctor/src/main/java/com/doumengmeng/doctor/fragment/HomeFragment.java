@@ -67,7 +67,7 @@ public class HomeFragment extends BaseTimeFragment {
     public void onResume() {
         super.onResume();
         stopTask(searchAssessmentTask);
-        if ( isVisible() && !isHidden() ) {
+        if ( !isHidden() ) {
             searchAssessmentList();
         }
     }
@@ -225,7 +225,7 @@ public class HomeFragment extends BaseTimeFragment {
     public synchronized void refreshAssessment(){
         for (int i = items.size()-1;i>=0;i--){
             //TODO
-            items.get(i).setValidityTime("2018-03-14 16:55:00");
+            items.get(i).setValidityTime("2018-04-14 16:55:00");
             if ( FormulaUtil.getTimeDifference(items.get(i).getValidityTime())==null ){
                 items.remove(items.get(i));
             }

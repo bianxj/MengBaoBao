@@ -133,11 +133,7 @@ public class ParentingGuideFragment extends BaseFragment {
                     params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     view.setLayoutParams(params);
                 }
-                if ( ll_nurture.getChildCount() > 0 ) {
-                    params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y39px);
-                } else {
-                    params.topMargin = 0;
-                }
+                params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y39px);
                 ll_nurture.addView(buildNurtureContent(nurture));
             }
         }

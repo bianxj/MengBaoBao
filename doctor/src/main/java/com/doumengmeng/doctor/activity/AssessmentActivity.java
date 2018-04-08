@@ -231,7 +231,9 @@ public class AssessmentActivity extends BaseTimeActivity {
     private TextView tv_height_reference_value,tv_weight_reference_value,
             tv_head_reference_value,tv_chest_reference_value,tv_night_sleep_reference_value,
             tv_day_sleep_reference_value;
+    private RelativeLayout rl_correct_month;
     private void initMeasureInfo(){
+        rl_correct_month = findViewById(R.id.rl_correct_month);
         tv_current_month = findViewById(R.id.tv_current_month);
         tv_correct_month = findViewById(R.id.tv_correct_month);
         tv_height = findViewById(R.id.tv_height);
@@ -253,6 +255,13 @@ public class AssessmentActivity extends BaseTimeActivity {
         AssessmentDetailResponse.Record record = dataResult.getRecordList();
         tv_current_month.setText(String.format(getString(R.string.format_month_age),record.getMonthage(),record.getMonthday()));
         tv_correct_month.setText(String.format(getString(R.string.format_month_age),record.getCorrectmonthage(),record.getCorrectmonthday()));
+
+        if ( record.getMonthage() == record.getCorrectmonthage() && record.getMonthday() == record.getCorrectmonthday() ){
+            rl_correct_month.setVisibility(View.INVISIBLE);
+        } else {
+            rl_correct_month.setVisibility(View.VISIBLE);
+        }
+
         tv_height.setText(String.format(getString(R.string.format_cm),record.getHeight()));
         tv_weight.setText(String.format(getString(R.string.format_kg),record.getWeight()));
         tv_head.setText(String.format(getString(R.string.format_head),record.getHeadcircumference()));

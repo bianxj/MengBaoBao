@@ -621,6 +621,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl_correct_month"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -1273,7 +1274,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
 
                         <TextView
                             style="@style/SecondBlack.Text29px"

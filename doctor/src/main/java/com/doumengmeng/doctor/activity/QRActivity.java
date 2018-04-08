@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.Constant;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.util.MyDialog;
@@ -26,10 +27,6 @@ import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
-/**
- * Created by Administrator on 2018/3/1.
- */
 
 public class QRActivity extends BaseActivity {
 
@@ -113,17 +110,21 @@ public class QRActivity extends BaseActivity {
 
     private void share(){
         //TODO
-        MyDialog.showShareDialog(this, getShareBitmap(ll_qr_content), new MyDialog.ShareCallBack() {
-            @Override
-            public void sharedToFriend(Bitmap bitmap) {
-                QRActivity.this.shareToFriend(bitmap);
-            }
+        if ( getIWXAPI().isWXAppInstalled() ){
+            MyDialog.showShareDialog(this, getShareBitmap(ll_qr_content), new MyDialog.ShareCallBack() {
+                @Override
+                public void sharedToFriend(Bitmap bitmap) {
+                    QRActivity.this.shareToFriend(bitmap);
+                }
 
-            @Override
-            public void shareToWeixin(Bitmap bitmap) {
-                QRActivity.this.shareToWeixin(bitmap);
-            }
-        });
+                @Override
+                public void shareToWeixin(Bitmap bitmap) {
+                    QRActivity.this.shareToWeixin(bitmap);
+                }
+            });
+        } else {
+            MyDialog.showPromptDialog(this,"微信尚未安装",null);
+        }
     }
 
     private Bitmap getShareBitmap(View view) {
@@ -164,11 +165,10 @@ public class QRActivity extends BaseActivity {
     }
 
     private IWXAPI api;
-    private final static String APP_ID = "wx82018bdb470014f2";
     private IWXAPI getIWXAPI(){
         if ( api == null ){
-            api = WXAPIFactory.createWXAPI(this,APP_ID,true);
-            api.registerApp(APP_ID);
+            api = WXAPIFactory.createWXAPI(this,Constant.APP_ID,true);
+            api.registerApp(Constant.APP_ID);
         }
         return api;
     }
