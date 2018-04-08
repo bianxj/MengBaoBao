@@ -67,7 +67,9 @@ public class HomeFragment extends BaseTimeFragment {
     public void onResume() {
         super.onResume();
         stopTask(searchAssessmentTask);
-        searchAssessmentList();
+        if ( isVisible() && !isHidden() ) {
+            searchAssessmentList();
+        }
     }
 
     @Override

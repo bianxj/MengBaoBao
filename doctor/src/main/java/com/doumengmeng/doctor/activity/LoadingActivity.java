@@ -61,7 +61,6 @@ public class LoadingActivity extends BaseActivity {
     private RelativeLayout rl_back;
     private TextView tv_loading_percent;
     private ImageView iv_loading_icon;
-    private AnimationDrawable drawable;
     private int percent;
 
 
@@ -104,9 +103,6 @@ public class LoadingActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if ( drawable != null ){
-            drawable.stop();
-        }
     }
 
     private void checkExternalStorage(){
@@ -200,7 +196,7 @@ public class LoadingActivity extends BaseActivity {
         try {
             checkVersionTask = new RequestTask.Builder(this, checkVersionCallBack)
                     .setUrl(UrlAddressList.URL_VERSION_FILE)
-                    .setType(RequestTask.FILE | RequestTask.LOADING)
+                    .setType(RequestTask.FILE)
                     .setContent(null)
                     .build();
             checkVersionTask.execute();
@@ -265,7 +261,7 @@ public class LoadingActivity extends BaseActivity {
         try {
             updateInfoTask = new RequestTask.Builder(this,updateInfoCallback)
                     .setUrl(UrlAddressList.URL_UPDATE_INFO)
-                    .setType(RequestTask.NO_PROMPT)
+                    .setType(RequestTask.JSON)
                     .setContent(buildUpdateInfo())
                     .build();
             updateInfoTask.execute();
@@ -333,7 +329,7 @@ public class LoadingActivity extends BaseActivity {
         try {
             initConfigureTask = new RequestTask.Builder(this,initConfigureCallback)
                     .setUrl(UrlAddressList.URL_INIT_CONFIGURE)
-                    .setType(RequestTask.NO_LOADING)
+                    .setType(RequestTask.JSON)
                     .setContent(buildInitConfigureContent())
                     .build();
             initConfigureTask.execute();
@@ -410,7 +406,7 @@ public class LoadingActivity extends BaseActivity {
 //                        checkVersionAndWifi();
                         initConfigure();
                     }
-                },RequestTask.NO_LOADING);
+                },RequestTask.JSON);
                 loginTask.execute();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();

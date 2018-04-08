@@ -50,7 +50,9 @@ public class AccountFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        searchAccountData();
+        if ( isVisible() && !isHidden() ) {
+            searchAccountData();
+        }
     }
 
     @Override

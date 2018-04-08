@@ -45,4 +45,9 @@
         <attr name="vertical_grap" format="dimension"></attr>
     </declare-styleable>
 
+    <declare-styleable name="CircularCoverView">
+        <attr name="radius" format="dimension"></attr>
+        <attr name="cover_color" format="reference"></attr>
+    </declare-styleable>
+
 </resources>
