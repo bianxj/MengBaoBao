@@ -106,7 +106,7 @@ public class HeadImageActivity extends BaseActivity {
 
     private void openCamera(){
         if ( PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.CAMERA) ){
-            File picture = new File(BaseApplication.getInstance().getPersonHeadImgPath());
+            File picture = new File(BaseApplication.getInstance().getDoctorHeadImgPath());
             if ( picture.exists() ){
                 picture.delete();
             }
@@ -228,7 +228,7 @@ public class HeadImageActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ( REQUEST_CAMERA == requestCode && Activity.RESULT_OK == resultCode){
-            cropFromCamera(new File(BaseApplication.getInstance().getPersonHeadImgPath()));
+            cropFromCamera(new File(BaseApplication.getInstance().getDoctorHeadImgPath()));
         }
 
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {

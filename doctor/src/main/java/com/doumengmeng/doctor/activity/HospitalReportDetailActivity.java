@@ -1,5 +1,6 @@
 package com.doumengmeng.doctor.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.TypedValue;
@@ -219,6 +220,7 @@ public class HospitalReportDetailActivity extends BaseActivity {
             } else {
                 item.setCheck(false);
             }
+            item.setMark(!"0".equals(feature.getPointtag()));
             developmentalItems.add(item);
         }
         return map;
@@ -305,6 +307,17 @@ public class HospitalReportDetailActivity extends BaseActivity {
             tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
             subLayout.addView(tv_content);
 
+            if ( content.isMark ){
+                TextView tv_mark = new TextView(this);
+                LinearLayout.LayoutParams markParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                textParam.topMargin = -1*getResources().getDimensionPixelOffset(R.dimen.y5px);
+                tv_content.setLayoutParams(markParam);
+                tv_content.setText("*");
+                tv_content.setTextColor(Color.RED);
+                tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
+                subLayout.addView(tv_mark);
+            }
+
             layout.addView(subLayout);
         }
 
@@ -314,6 +327,7 @@ public class HospitalReportDetailActivity extends BaseActivity {
     public static class DevelopmentalItem{
         private String value;
         private boolean isCheck;
+        private boolean isMark;
 
         public String getValue() {
             return value;
@@ -329,6 +343,14 @@ public class HospitalReportDetailActivity extends BaseActivity {
 
         public void setCheck(boolean check) {
             isCheck = check;
+        }
+
+        public boolean isMark() {
+            return isMark;
+        }
+
+        public void setMark(boolean mark) {
+            isMark = mark;
         }
     }
 

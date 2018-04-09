@@ -13,10 +13,8 @@ import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
-import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.response.AccountDetailResponse;
 import com.doumengmeng.doctor.util.GsonUtil;
-import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -128,7 +126,7 @@ public class AccountDetailActivity extends BaseActivity {
 
         @Override
         public void onError(String result) {
-            MyDialog.showPromptDialog(AccountDetailActivity.this, ResponseErrorCode.getErrorMsg(result),null);
+//            MyDialog.showPromptDialog(AccountDetailActivity.this, ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override

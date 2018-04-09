@@ -219,7 +219,7 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         public void onError(String result) {
-            MyDialog.showPromptDialog(getContext(), ResponseErrorCode.getErrorMsg(result),null);
+//            MyDialog.showPromptDialog(getContext(), ResponseErrorCode.getErrorMsg(result),null);
         }
 
         @Override

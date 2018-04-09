@@ -67,22 +67,6 @@ public class BaseApplication extends Application {
     public void initPush(){
         UMConfigure.setLogEnabled(true);
         UMConfigure.init(this,"5a6e8ad4f43e4803e300008d","Umeng",UMConfigure.DEVICE_TYPE_PHONE,"5aa0b627542b2f3d0a297401addd6ee1");
-
-//        PushAgent mPushAgent = PushAgent.getInstance(this);
-//        mPushAgent.setNotificationPlaySound(MsgConstant.NOTIFICATION_PLAY_SDK_ENABLE);
-//
-//        //注册推送服务 每次调用register都会回调该接口
-//        mPushAgent.register(new IUmengRegisterCallback() {
-//            @Override
-//            public void onSuccess(String deviceToken) {
-//            }
-//
-//            @Override
-//            public void onFailure(String s, String s1) {
-//            }
-//        });
-//
-//        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
     }
 
     public MLog getMLog(){
@@ -274,7 +258,7 @@ public class BaseApplication extends Application {
     private final static String PERSON_HEAD_IMG = "headimg.jpg";
     private final static String PERSON_CROP_HEAD_IMG = "cropheadimg.jpg";
 
-    public String getPersonHeadImgPath(){
+    public String getDoctorHeadImgPath(){
         String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
         FileUtil.getIntance().createFolder(dirPath);
         return dirPath + File.separator + PERSON_HEAD_IMG;

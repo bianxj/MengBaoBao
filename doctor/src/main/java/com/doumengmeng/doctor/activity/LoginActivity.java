@@ -95,6 +95,7 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void onError(String result) {
+                        //TODO
                         tv_prompt.setText(ResponseErrorCode.getErrorMsg(result));
                     }
 

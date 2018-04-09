@@ -124,7 +124,12 @@ public class AssessmentActivity extends BaseTimeActivity {
 
         @Override
         public void onError(String result) {
-            MyDialog.showPromptDialog(AssessmentActivity.this, ResponseErrorCode.getErrorMsg(result),null);
+            MyDialog.showPromptDialog(AssessmentActivity.this, ResponseErrorCode.getErrorMsg(result), new MyDialog.PromptDialogCallback() {
+                @Override
+                public void sure() {
+                    back();
+                }
+            });
         }
 
         @Override
@@ -664,7 +669,7 @@ public class AssessmentActivity extends BaseTimeActivity {
             if ( response.getResult() != null && 1 == response.getResult().getIsSuccess() ){
                 back();
             } else {
-                //TODO
+                MyDialog.showPromptDialog(AssessmentActivity.this,"提交失败,请再次尝试",null);
             }
         }
     };
