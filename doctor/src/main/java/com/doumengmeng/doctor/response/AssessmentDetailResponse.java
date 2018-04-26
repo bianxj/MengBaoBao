@@ -789,7 +789,7 @@ public class AssessmentDetailResponse extends BaseResponse {
         private String childuserid;                 //?
         private String assistedreproductive;        //辅助生育
         private String mumbearage;                  //妈妈生育年龄
-        private String intracranialhemorrhage;      //颅内出血
+//        private String intracranialhemorrhage;      //颅内出血
         private String pregnancyweeks;              //孕周
         private String pregnancydays;               //孕周天
         private String birthtimes;                  //产次
@@ -798,7 +798,7 @@ public class AssessmentDetailResponse extends BaseResponse {
         private String pregnancies;                 //胎次
         private String bornweight;                  //出生体重
         private String borntype;                    //出生状况(1单胎,2多胎)
-        private String neonatalasphyxia;            //新生儿窒息
+//        private String neonatalasphyxia;            //新生儿窒息
         private String bornheight;                  //出生身高
         private String allergichistory;             //家族过敏史
         private String allergichistorydesc;         //家族过敏疾病内容
@@ -914,21 +914,21 @@ public class AssessmentDetailResponse extends BaseResponse {
             this.userid = userid;
         }
 
-        public String getIntracranialhemorrhage() {
-            return intracranialhemorrhage;
-        }
-
-        public String getIntracranialhemorrhageString(){
-            if ( "0".equals(intracranialhemorrhage) ){
-                return "无";
-            } else {
-                return "有";
-            }
-        }
-
-        public void setIntracranialhemorrhage(String intracranialhemorrhage) {
-            this.intracranialhemorrhage = intracranialhemorrhage;
-        }
+//        public String getIntracranialhemorrhage() {
+//            return intracranialhemorrhage;
+//        }
+//
+//        public String getIntracranialhemorrhageString(){
+//            if ( "0".equals(intracranialhemorrhage) ){
+//                return "无";
+//            } else {
+//                return "有";
+//            }
+//        }
+//
+//        public void setIntracranialhemorrhage(String intracranialhemorrhage) {
+//            this.intracranialhemorrhage = intracranialhemorrhage;
+//        }
 
         public String getAccountmobile() {
             return accountmobile;
@@ -1009,21 +1009,21 @@ public class AssessmentDetailResponse extends BaseResponse {
             this.borntype = borntype;
         }
 
-        public String getNeonatalasphyxia() {
-            return neonatalasphyxia;
-        }
-
-        public String getNeonatalasphyxiaString(){
-            if ( "0".equals(neonatalasphyxia) ){
-                return "无";
-            } else {
-                return "有";
-            }
-        }
-
-        public void setNeonatalasphyxia(String neonatalasphyxia) {
-            this.neonatalasphyxia = neonatalasphyxia;
-        }
+//        public String getNeonatalasphyxia() {
+//            return neonatalasphyxia;
+//        }
+//
+//        public String getNeonatalasphyxiaString(){
+//            if ( "0".equals(neonatalasphyxia) ){
+//                return "无";
+//            } else {
+//                return "有";
+//            }
+//        }
+//
+//        public void setNeonatalasphyxia(String neonatalasphyxia) {
+//            this.neonatalasphyxia = neonatalasphyxia;
+//        }
 
         public String getBornheight() {
             return bornheight;

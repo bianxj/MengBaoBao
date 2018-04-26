@@ -8,8 +8,16 @@
         android:id="@+id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ll_bottom">
+        android:layout_above="@+id/v_line">
     </FrameLayout>
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y2px"
+        android:background="@color/nine_gray"
+        android:layout_above="@+id/ll_bottom"
+        />
 
     <LinearLayout
         android:id="@+id/ll_bottom"

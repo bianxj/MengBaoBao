@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="@dimen/y531px"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_rounded">
+
+        <RelativeLayout
+            android:id="@+id/rl_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x29px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            >
+            <ImageView
+                android:layout_width="@dimen/x18px"
+                android:layout_height="@dimen/x18px"
+                android:src="@drawable/btn_prompt_close"
+                android:scaleType="fitCenter"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="@style/FirstBlack.Text34px"
+            android:text="服务器维护通知"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y49px"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y112px"
+            android:layout_marginBottom="@dimen/y53px"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            style="@style/SecondBlack.Text28px"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

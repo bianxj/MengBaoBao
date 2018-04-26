@@ -59,7 +59,9 @@ public class MessageFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        searchMessage();
+        if ( !isHidden() ) {
+            searchMessage();
+        }
     }
 
     @Override
@@ -242,6 +244,7 @@ public class MessageFragment extends BaseFragment {
     private void saveAndFreshScript(){
         BaseApplication.getInstance().saveMessageCount(adapter.getUnReadMessageCount());
         ((MainActivity)getActivity()).refreshSuperScript();
+        refreshMessageList();
     }
 
 }

@@ -14,6 +14,7 @@ public class AssessmentListResponse extends BaseResponse {
 
     public static class Result{
         private int hasEvaluation;
+        private String notice;
         private List<AssessmentItem> userRecordList;
 
         public int getHasEvaluation() {
@@ -30,6 +31,14 @@ public class AssessmentListResponse extends BaseResponse {
 
         public void setUserRecordList(List<AssessmentItem> userRecordList) {
             this.userRecordList = userRecordList;
+        }
+
+        public String getNotice() {
+            return notice;
+        }
+
+        public void setNotice(String notice) {
+            this.notice = notice;
         }
     }
 

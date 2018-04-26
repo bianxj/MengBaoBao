@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.request.task.LoginTask;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.FormatCheckUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 
 /**
  * 作者: 边贤君
@@ -102,7 +104,12 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onPostExecute(String result) {
                         //跳转至Loading界面
-                        startActivity(LoadingActivity.class);
+                        if (BaseApplication.getInstance().isToExamine()){
+                            startActivity(LoadingActivity.class);
+                        } else {
+                            MyDialog.showPromptDialog(LoginActivity.this,"请等待审核\n" +
+                                    " 审核通过后将会以短信形式通知您",R.string.sure,null);
+                        }
                     }
                 });
                 loginTask.execute();

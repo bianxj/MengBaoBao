@@ -150,14 +150,15 @@ public class ParentingGuideFragment extends BaseFragment {
         TextView tv_content = view.findViewById(R.id.tv_content);
         CheckBox cb = view.findViewById(R.id.cb);
 
-        ll_content.setTag(nurture);
-        cb.setTag(ll_content);
+        ll_content.setOnClickListener(nutureOnclicListener);
+
+//        ll_content.setTag(nurture);
+        cb.setTag(nurture);
         cb.setOnCheckedChangeListener(nurtureSelectListener);
 
         tv_title.setText(nurture.getNurtureTitle());
         tv_content.setText(nurture.getNurtureDesc());
         cb.setChecked(nurture.isChoose());
-        ll_content.setEnabled(nurture.isChoose());
         return view;
     }
 
@@ -189,13 +190,22 @@ public class ParentingGuideFragment extends BaseFragment {
         }
     };
 
+    private View.OnClickListener nutureOnclicListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            CheckBox cb = ((ViewGroup)view.getParent()).findViewById(R.id.cb);
+            cb.setChecked(!cb.isChecked());
+        }
+    };
+
     private CompoundButton.OnCheckedChangeListener nurtureSelectListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            LinearLayout ll_content = (LinearLayout) compoundButton.getTag();
-            Nurture nurture = (Nurture) ll_content.getTag();
-            ll_content.setEnabled(b);
+            LinearLayout ll_content = ((ViewGroup)compoundButton.getParent()).findViewById(R.id.ll_content);
+            Nurture nurture = (Nurture) compoundButton.getTag();
             nurture.setChoose(b);
+            ll_content.setBackgroundResource(b?R.drawable.bg_frame_check:R.drawable.bg_frame_uncheck);
+//            ll_content.setEnabled(b);
         }
     };
 

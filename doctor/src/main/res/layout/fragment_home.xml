@@ -101,6 +101,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:background="@color/first_white"
             android:visibility="gone">
 
             <ImageView
@@ -124,6 +125,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:background="@color/first_white"
             android:visibility="gone">
 
             <ImageView

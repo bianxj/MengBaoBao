@@ -180,9 +180,14 @@ public class ForgotPwdActivity extends BaseActivity {
         @Override
         public void onPostExecute(String result) {
             VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
-            BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
-            countDown = 60;
-            handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
+//            BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
+            if ( ResponseErrorCode.SUCCESS ==  response.getErrorId() ) {
+                countDown = 60;
+                handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
+            } else {
+                bt_get_vc.setEnabled(true);
+                disposeError("验证码获取失败");
+            }
         }
     };
 
@@ -225,12 +230,12 @@ public class ForgotPwdActivity extends BaseActivity {
             return false;
         }
 
-        String saveVc = BaseApplication.getInstance().getForgetVc();
-        if ( TextUtils.isEmpty(saveVc) ){
-            tv_prompt.setText(R.string.prompt_no_save_vc);
-
-            return false;
-        }
+//        String saveVc = BaseApplication.getInstance().getForgetVc();
+//        if ( TextUtils.isEmpty(saveVc) ){
+//            tv_prompt.setText(R.string.prompt_no_save_vc);
+//
+//            return false;
+//        }
 
         String vc = et_vc.getText().toString().trim();
         if ( TextUtils.isEmpty(vc) ){
@@ -256,7 +261,7 @@ public class ForgotPwdActivity extends BaseActivity {
         try {
             object.put("doctorPhone",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
-            object.put("code", BaseApplication.getInstance().getForgetVc());
+//            object.put("code", BaseApplication.getInstance().getForgetVc());
             object.put("checkCode",et_vc.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -307,7 +312,12 @@ public class ForgotPwdActivity extends BaseActivity {
 
                 @Override
                 public void onPostExecute(String result) {
-                    startActivity(LoadingActivity.class);
+                    if (BaseApplication.getInstance().isToExamine()){
+                        startActivity(LoadingActivity.class);
+                    } else {
+                        MyDialog.showPromptDialog(ForgotPwdActivity.this,"请等待审核\n" +
+                                " 审核通过后将会以短信形式通知您",R.string.sure,null);
+                    }
                 }
             });
             loginTask.execute();

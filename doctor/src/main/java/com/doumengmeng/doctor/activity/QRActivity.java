@@ -17,7 +17,6 @@ import com.doumengmeng.doctor.base.Constant;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.util.MyDialog;
-import com.doumengmeng.doctor.util.PictureUtils;
 import com.doumengmeng.doctor.util.ZxingUtil;
 import com.doumengmeng.doctor.view.CircleImageView;
 import com.google.zxing.WriterException;
@@ -82,8 +81,10 @@ public class QRActivity extends BaseActivity {
         ll_qr_content = findViewById(R.id.ll_qr_content);
         iv_qr = findViewById(R.id.iv_qr);
 
+        String url = "http://sj.qq.com/myapp/detail.htm?apkName=com.doumengmeng.customer&doctorId="+BaseApplication.getInstance().getUserData().getDoctorId();
+
         try {
-            Bitmap bitmap = ZxingUtil.getInstance().encodeQR("http://www.baidu.com/",getResources().getDimensionPixelOffset(R.dimen.x405px));
+            Bitmap bitmap = ZxingUtil.getInstance().encodeQR(url,getResources().getDimensionPixelOffset(R.dimen.x405px));
             iv_qr.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
@@ -149,9 +150,9 @@ public class QRActivity extends BaseActivity {
         WXMediaMessage msg = new WXMediaMessage();
         msg.mediaObject = imgObj;
 
-        Bitmap thumbBmp = Bitmap.createScaledBitmap(bitmap,300,300,true);
-        bitmap.recycle();
-        msg.thumbData = PictureUtils.convertBitmapToByte(thumbBmp);
+//        Bitmap thumbBmp = Bitmap.createScaledBitmap(bitmap,300,300,true);
+//        bitmap.recycle();
+//        msg.thumbData = PictureUtils.convertBitmapToByte(thumbBmp);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("img");

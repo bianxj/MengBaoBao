@@ -443,7 +443,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
 
                         <TextView
                             style="@style/SecondBlack.Text28px"
@@ -467,7 +468,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y10px"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         style="@style/SecondBlack.Text28px"

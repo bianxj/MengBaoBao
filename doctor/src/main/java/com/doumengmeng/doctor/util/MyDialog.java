@@ -43,6 +43,7 @@ public class MyDialog {
 //    private final static Object payLock = new Object();
     private final static Object exampleLock = new Object();
     private final static Object shareLock = new Object();
+    private final static Object maintainLock = new Object();
 
     private static Dialog updateDialog;
     private static Dialog promptDialog;
@@ -56,7 +57,37 @@ public class MyDialog {
     private static PopupWindow cityDialog;
     private static Dialog exampleDialog;
     private static Dialog shareDialog;
+    private static Dialog maintainDialog;
 //
+
+    public static void showMaintainDialog(Context context,String content){
+        synchronized (maintainLock){
+            if ( maintainDialog != null ){
+                maintainDialog.dismiss();
+                maintainDialog = null;
+            }
+
+            maintainDialog = new Dialog(context,R.style.MyDialog);
+            View view = LayoutInflater.from(context).inflate(R.layout.dialog_title_prompt_white,null);
+            RelativeLayout rl_close = view.findViewById(R.id.rl_close);
+            TextView tv_content = view.findViewById(R.id.tv_content);
+
+            tv_content.setText(content);
+
+            rl_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    maintainDialog.dismiss();
+                }
+            });
+
+            maintainDialog.setCancelable(false);
+            maintainDialog.setCanceledOnTouchOutside(false);
+            maintainDialog.setContentView(view);
+            maintainDialog.show();
+        }
+    }
+
     public static void showPermissionDialog(Context context, String content , ChooseDialogCallback callback){
         showChooseDialog(context,content,R.string.dialog_btn_prompt_later,R.string.dialog_btn_prompt_go_setting,callback);
     }

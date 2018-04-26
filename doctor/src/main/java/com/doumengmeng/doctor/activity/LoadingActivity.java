@@ -70,6 +70,10 @@ public class LoadingActivity extends BaseActivity {
         setContentView(R.layout.activity_loading);
         findView();
 //        loading();
+        if ( !BaseApplication.getInstance().isToExamine() ){
+            startActivity(LoginActivity.class);
+            back();
+        }
     }
 
     @Override
@@ -506,6 +510,7 @@ public class LoadingActivity extends BaseActivity {
             DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,result.getFeatureList());
             DaoManager.getInstance().getNurtureDao().saveNurtureList(LoadingActivity.this,result.getNurtureGuideInfoList());
 
+            BaseApplication.getInstance().saveMaintain("");
             handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
         }
     }

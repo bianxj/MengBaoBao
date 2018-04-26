@@ -3,6 +3,9 @@ package com.doumengmeng.doctor.activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -302,21 +305,29 @@ public class HospitalReportDetailActivity extends BaseActivity {
             textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
             textParam.topMargin = -1*getResources().getDimensionPixelOffset(R.dimen.y5px);
             tv_content.setLayoutParams(textParam);
-            tv_content.setText(content.getValue());
+            if ( content.isMark ) {
+                String value = content.getValue()+"*";
+                SpannableStringBuilder style = new SpannableStringBuilder(value);
+                style.setSpan(new ForegroundColorSpan(Color.RED), value.length()-1, value.length(),
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                tv_content.setText(style);
+            } else {
+                tv_content.setText(content.getValue());
+            }
             tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
             tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
             subLayout.addView(tv_content);
 
-            if ( content.isMark ){
-                TextView tv_mark = new TextView(this);
-                LinearLayout.LayoutParams markParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                textParam.topMargin = -1*getResources().getDimensionPixelOffset(R.dimen.y5px);
-                tv_content.setLayoutParams(markParam);
-                tv_content.setText("*");
-                tv_content.setTextColor(Color.RED);
-                tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
-                subLayout.addView(tv_mark);
-            }
+//            if ( content.isMark ){
+//                TextView tv_mark = new TextView(this);
+//                LinearLayout.LayoutParams markParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+//                textParam.topMargin = -1*getResources().getDimensionPixelOffset(R.dimen.y5px);
+//                tv_mark.setLayoutParams(markParam);
+//                tv_mark.setText("*");
+//                tv_mark.setTextColor(Color.RED);
+//                tv_mark.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
+//                subLayout.addView(tv_mark);
+//            }
 
             layout.addView(subLayout);
         }

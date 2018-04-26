@@ -141,6 +141,7 @@ public class BaseApplication extends Application {
     private final static String COLUMN_LOGIN = "login";
     private final static String COLUMN_MESSAGE_COUNT = "message_count";
     private final static String COLUMN_ASSESSMENT_COUNT = "assessment_count";
+    private final static String COLUMN_MAINTAIN = "maintion";
 
     public boolean hasAccountData(){
         LoginInfo loginInfo = getLogin();
@@ -191,21 +192,21 @@ public class BaseApplication extends Application {
         return userData;
     }
 
-    public void saveRegisterVc(String registerVc){
-        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_REGISTER_VC,registerVc);
-    }
-
-    public String getRegisterVc(){
-        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_REGISTER_VC,null);
-    }
-
-    public void saveForgetVc(String forgetVc){
-        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_FORGET_VC,forgetVc);
-    }
-
-    public String getForgetVc(){
-        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_FORGET_VC,null);
-    }
+//    public void saveRegisterVc(String registerVc){
+//        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_REGISTER_VC,registerVc);
+//    }
+//
+//    public String getRegisterVc(){
+//        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_REGISTER_VC,null);
+//    }
+//
+//    public void saveForgetVc(String forgetVc){
+//        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_FORGET_VC,forgetVc);
+//    }
+//
+//    public String getForgetVc(){
+//        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_FORGET_VC,null);
+//    }
 
     public String getSessionId(){
         return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_SESSION_ID,"");
@@ -224,7 +225,7 @@ public class BaseApplication extends Application {
     }
 
     public boolean isToExamine(){
-        return SharedPreferencesUtil.loadBoolean(this,TABLE_USER,COLUMN_IS_TO_EXAMINE,false);
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_USER,COLUMN_IS_TO_EXAMINE,false)||isAbnormalExit();
     }
 
     public void saveToExamine(boolean isToExamine){
@@ -249,6 +250,17 @@ public class BaseApplication extends Application {
         loginInfo.setAccount(account);
         loginInfo.setPasswd(passwd);
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_LOGIN,GsonUtil.getInstance().toJson(loginInfo));
+    }
+
+    public String getMaintain(){
+        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_MAINTAIN,"");
+    }
+
+    public void saveMaintain(String maintain){
+        if ( TextUtils.isEmpty(maintain) ){
+            return;
+        }
+        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_MAINTAIN,maintain);
     }
 
     /**-------------------------------------------SharedPerference End---------------------------------------------------*/

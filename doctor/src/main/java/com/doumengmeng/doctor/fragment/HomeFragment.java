@@ -3,9 +3,11 @@ package com.doumengmeng.doctor.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,12 +26,12 @@ import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.response.AssessmentListResponse;
 import com.doumengmeng.doctor.response.entity.AssessmentItem;
 import com.doumengmeng.doctor.response.entity.UserData;
-import com.doumengmeng.doctor.util.FormulaUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.view.CircleImageView;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
@@ -114,9 +116,17 @@ public class HomeFragment extends BaseTimeFragment {
             tv_doctor_department.setText(userData.getDepartmentName());
             tv_doctor_positionaltitle.setText(userData.getPositionalTitles());
             tv_hospital.setText(DaoManager.getInstance().getHospitalDao().searchHospitalNameById(getContext(),userData.getHospitalId()));
-            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+            loadHeadImg(civ_head, userData.getHeadimg());
         }
         rl_qr.setOnClickListener(listener);
+    }
+
+    private void loadHeadImg(ImageView imageView,String urlHeadImg){
+        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
+        builder.showImageOnLoading(R.drawable.default_icon_doctor);
+        builder.showImageForEmptyUri(R.drawable.default_icon_doctor);
+        builder.showImageOnFail(R.drawable.default_icon_doctor);
+        ImageLoader.getInstance().displayImage(urlHeadImg,imageView,builder.build());
     }
 
     private void initAssessmentList(View view){
@@ -188,10 +198,20 @@ public class HomeFragment extends BaseTimeFragment {
         @Override
         public void onPostExecute(String result) {
             AssessmentListResponse response = GsonUtil.getInstance().fromJson(result,AssessmentListResponse.class);
+            String notice = response.getResult().getNotice();
+            if (!TextUtils.isEmpty(notice) ){
+                if ( !BaseApplication.getInstance().getMaintain().equals(notice) ) {
+                    MyDialog.showMaintainDialog(getContext(), notice);
+                    BaseApplication.getInstance().saveMaintain(notice);
+                }
+            }
+
             if ( 0 == response.getResult().getHasEvaluation() ){
+                refreshAssessment(null);
                 showNoData();
             } else {
                 if ( response.getResult().getUserRecordList().size() == 0 ){
+                    refreshAssessment(null);
                     showAllComplete();
                 } else {
                     refreshAssessment(response.getResult().getUserRecordList());
@@ -218,18 +238,13 @@ public class HomeFragment extends BaseTimeFragment {
         xrv.setVisibility(View.VISIBLE);
 
         items.clear();
-        items.addAll(serviceItems);
+        if ( serviceItems != null ) {
+            items.addAll(serviceItems);
+        }
         refreshAssessment();
     }
 
     public synchronized void refreshAssessment(){
-        for (int i = items.size()-1;i>=0;i--){
-            //TODO
-            items.get(i).setValidityTime("2018-04-14 16:55:00");
-            if ( FormulaUtil.getTimeDifference(items.get(i).getValidityTime())==null ){
-                items.remove(items.get(i));
-            }
-        }
         BaseApplication.getInstance().saveAssessmentCount(items.size());
         refreshScript();
         adapter.notifyDataSetChanged();

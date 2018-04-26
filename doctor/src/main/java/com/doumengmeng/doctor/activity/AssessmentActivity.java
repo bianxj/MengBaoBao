@@ -224,8 +224,8 @@ public class AssessmentActivity extends BaseTimeActivity {
         tv_delivery_methods.setText(user.getDeliverymethods());
         tv_assisted_reproductive.setText(user.getAssistedreproductiveString());
         tv_birth_injury.setText(user.getBirthinjuryString());
-        tv_neonatalasphyxia.setText(user.getNeonatalasphyxiaString());
-        tv_intracranial_hemorrhage.setText(user.getIntracranialhemorrhageString());
+//        tv_neonatalasphyxia.setText(user.getNeonatalasphyxiaString());
+//        tv_intracranial_hemorrhage.setText(user.getIntracranialhemorrhageString());
         tv_hereditary_history.setText(user.getHereditaryhistoryString());
         tv_allergic_history.setText(user.getAllergichistoryString());
         tv_past_history.setText(user.getPasthistory());

@@ -6,15 +6,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.activity.AssessmentActivity;
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.response.entity.AssessmentItem;
 import com.doumengmeng.doctor.util.FormulaUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.lang.ref.WeakReference;
@@ -80,6 +83,20 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
             }
         };
 
+    }
+
+    private void loadHeadImg(ImageView imageView,boolean isMale, String urlHeadImg){
+        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
+        if ( isMale ){
+            builder.showImageOnLoading(R.drawable.default_icon_boy);
+            builder.showImageForEmptyUri(R.drawable.default_icon_boy);
+            builder.showImageOnFail(R.drawable.default_icon_boy);
+        } else {
+            builder.showImageOnLoading(R.drawable.default_icon_girl);
+            builder.showImageForEmptyUri(R.drawable.default_icon_girl);
+            builder.showImageOnFail(R.drawable.default_icon_girl);
+        }
+        ImageLoader.getInstance().displayImage(urlHeadImg,imageView,builder.build());
     }
 
 }

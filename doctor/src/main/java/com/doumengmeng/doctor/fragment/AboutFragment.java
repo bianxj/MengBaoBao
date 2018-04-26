@@ -73,7 +73,7 @@ public class AboutFragment extends BaseFragment {
         tv_doctor_department = view.findViewById(R.id.tv_doctor_department);
 
         UserData userData = BaseApplication.getInstance().getUserData();
-        ImageLoader.getInstance().displayImage(userData.getDoctorImg(),civ_head);
+        ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
         tv_doctor_name.setText(userData.getDoctorName());
         tv_positional_titles.setText(userData.getPositionalTitles());
         tv_hospital.setText(DaoManager.getInstance().getHospitalDao().searchHospitalNameById(getContext(),userData.getHospitalId()));

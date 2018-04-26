@@ -1,5 +1,6 @@
 package com.doumengmeng.doctor.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -202,7 +203,10 @@ public class MainActivity extends BaseFragmentActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //截取返回键
         if ( keyCode == KeyEvent.KEYCODE_BACK ){
-            BaseApplication.getInstance().finishApp(this);
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
             return true;
         }
         return super.onKeyDown(keyCode, event);

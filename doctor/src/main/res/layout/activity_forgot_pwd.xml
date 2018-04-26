@@ -80,6 +80,7 @@
                 android:layout_marginLeft="@dimen/EditMarginLeft"
                 android:layout_marginRight="@dimen/EditMarginRight"
                 android:maxLength="8"
+                android:inputType="number"
                 style="@style/EditTextView"/>
 
         </LinearLayout>
