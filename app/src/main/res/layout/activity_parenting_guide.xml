@@ -18,10 +18,12 @@
             app:tabBackground="@color/thirdGray"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabMode="scrollable"
+            app:tabGravity="center"
             android:fadingEdge="horizontal"
             android:fadingEdgeLength="@dimen/x100px"
             android:requiresFadingEdge="horizontal"
             android:layout_alignParentTop="true"
+            android:background="@color/thirdGray"
             >
 
         </android.support.design.widget.TabLayout>

@@ -236,16 +236,16 @@ public class LoadingActivity extends BaseActivity {
     private void loadRemoteVersionSuccess(String version){
         remoteVersion = version;
         String versionName = null;
-        try {
-            versionName = AppUtil.getVersionName(LoadingActivity.this);
-            if (AppUtil.isNeedUpdate(versionName, version)) {
-                getUpdateInfo();
-            } else {
+//        try {
+//            versionName = AppUtil.getVersionName(LoadingActivity.this);
+//            if (AppUtil.isNeedUpdate(versionName, version)) {
+//                getUpdateInfo();
+//            } else {
                 noNeedUpdate();
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
+//            }
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void noNeedUpdate(){

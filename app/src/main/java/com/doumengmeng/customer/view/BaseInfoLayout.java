@@ -400,8 +400,8 @@ public class BaseInfoLayout extends LinearLayout {
         }
 
         selectRadioButton(userData.getBirthinjury(),R.id.rb_injury_none,R.id.rb_injury_has);
-        selectRadioButton(userData.getNeonatalasphyxia(),R.id.rb_istifle_none,R.id.rb_istifle_has);
-        selectRadioButton(userData.getIntracranialhemorrhage(),R.id.rb_ICH_none,R.id.rb_ICH_has);
+//        selectRadioButton(userData.getNeonatalasphyxia(),R.id.rb_istifle_none,R.id.rb_istifle_has);
+//        selectRadioButton(userData.getIntracranialhemorrhage(),R.id.rb_ICH_none,R.id.rb_ICH_has);
         selectRadioButton(userData.getHereditaryhistory(),R.id.rb_genetic_none,R.id.rb_genetic_has);
         selectRadioButton(userData.getAllergichistory(),R.id.rb_allergy_none,R.id.rb_allergy_has);
 
@@ -509,19 +509,19 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
-        //新生儿窒息
-        int stifle = singleChooseCheck(rb_stifle);
-        if ( UN_CHOOSE == stifle ){
-            errorMessage = "是否有新生儿窒息";
-            return false;
-        }
-
-        //颅内出血
-        int ICH = singleChooseCheck(rb_ICH);
-        if ( UN_CHOOSE == singleChooseCheck(rb_ICH) ){
-            errorMessage = "是否有颅内出血";
-            return false;
-        }
+//        //新生儿窒息
+//        int stifle = singleChooseCheck(rb_stifle);
+//        if ( UN_CHOOSE == stifle ){
+//            errorMessage = "是否有新生儿窒息";
+//            return false;
+//        }
+//
+//        //颅内出血
+//        int ICH = singleChooseCheck(rb_ICH);
+//        if ( UN_CHOOSE == singleChooseCheck(rb_ICH) ){
+//            errorMessage = "是否有颅内出血";
+//            return false;
+//        }
 
         //家族遗传史
         int geneticHistoryId = singleChooseCheck(rb_genetic_history);
@@ -720,19 +720,19 @@ public class BaseInfoLayout extends LinearLayout {
             babyInfo.setBirthInjury("1");
         }
 
-        int stifle = singleChooseCheck(rb_stifle);
-        if ( R.id.rb_istifle_none == stifle ){
-            babyInfo.setNeonatalAsphyxia("0");
-        } else {
-            babyInfo.setNeonatalAsphyxia("1");
-        }
-
-        int ICH = singleChooseCheck(rb_ICH);
-        if ( R.id.rb_ICH_none == ICH ){
-            babyInfo.setIntracranialHemorrhage("0");
-        } else {
-            babyInfo.setIntracranialHemorrhage("1");
-        }
+//        int stifle = singleChooseCheck(rb_stifle);
+//        if ( R.id.rb_istifle_none == stifle ){
+//            babyInfo.setNeonatalAsphyxia("0");
+//        } else {
+//            babyInfo.setNeonatalAsphyxia("1");
+//        }
+//
+//        int ICH = singleChooseCheck(rb_ICH);
+//        if ( R.id.rb_ICH_none == ICH ){
+//            babyInfo.setIntracranialHemorrhage("0");
+//        } else {
+//            babyInfo.setIntracranialHemorrhage("1");
+//        }
 
         int geneticHistoryId = singleChooseCheck(rb_genetic_history);
         if ( R.id.rb_genetic_none == geneticHistoryId ){

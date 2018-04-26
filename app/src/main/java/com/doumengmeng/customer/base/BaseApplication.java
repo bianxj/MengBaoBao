@@ -257,8 +257,8 @@ public class BaseApplication extends Application {
         userData.setDeliverymethods(babyInfo.getDeliveryMethods());
         userData.setAssistedreproductive(babyInfo.getAssistedReproductive());
         userData.setBirthinjury(babyInfo.getBirthInjury());
-        userData.setNeonatalasphyxia(babyInfo.getNeonatalAsphyxia());
-        userData.setIntracranialhemorrhage(babyInfo.getIntracranialHemorrhage());
+//        userData.setNeonatalasphyxia(babyInfo.getNeonatalAsphyxia());
+//        userData.setIntracranialhemorrhage(babyInfo.getIntracranialHemorrhage());
         userData.setHereditaryhistory(babyInfo.getHereditaryHistory());
         userData.setHereditaryhistorydesc(babyInfo.getHereditaryHistoryDesc());
         userData.setAllergichistory(babyInfo.getAllergicHistory());
@@ -324,21 +324,21 @@ public class BaseApplication extends Application {
         return parentInfo;
     }
 
-    public void saveRegisterVc(String registerVc){
-        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_REGISTER_VC,registerVc);
-    }
-
-    public String getRegisterVc(){
-        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_REGISTER_VC,null);
-    }
-
-    public void saveForgetVc(String forgetVc){
-        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_FORGET_VC,forgetVc);
-    }
-
-    public String getForgetVc(){
-        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_FORGET_VC,null);
-    }
+//    public void saveRegisterVc(String registerVc){
+//        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_REGISTER_VC,registerVc);
+//    }
+//
+//    public String getRegisterVc(){
+//        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_REGISTER_VC,null);
+//    }
+//
+//    public void saveForgetVc(String forgetVc){
+//        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_FORGET_VC,forgetVc);
+//    }
+//
+//    public String getForgetVc(){
+//        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_FORGET_VC,null);
+//    }
 
     public void saveDayList(DayList dayList){
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_DAY_LIST,GsonUtil.getInstance().toJson(dayList));

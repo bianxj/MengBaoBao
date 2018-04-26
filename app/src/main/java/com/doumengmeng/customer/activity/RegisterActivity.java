@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseActivity;
-import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.config.Constants;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
@@ -163,9 +162,13 @@ public class RegisterActivity extends BaseActivity {
         @Override
         public void onPostExecute(String result) {
             VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
-            BaseApplication.getInstance().saveRegisterVc(response.getResult().getCode());
-            countDown = Constants.VC_OVER_TIME;
-            handler.sendEmptyMessage(RegisterHandler.COUNT_DOWN);
+            if ( ResponseErrorCode.SUCCESS == response.getErrorId() ) {
+                countDown = Constants.VC_OVER_TIME;
+                handler.sendEmptyMessage(RegisterHandler.COUNT_DOWN);
+            } else {
+                bt_get_vc.setEnabled(true);
+                tv_prompt.setText("验证码获取失败");
+            }
         }
     };
 
@@ -250,7 +253,7 @@ public class RegisterActivity extends BaseActivity {
         try {
             object.put("accountMobile",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
-            object.put("code", BaseApplication.getInstance().getRegisterVc());
+//            object.put("code", BaseApplication.getInstance().getRegisterVc());
             object.put("checkCode",et_vc.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();

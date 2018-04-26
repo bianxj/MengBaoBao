@@ -174,10 +174,10 @@ public class InputUserInfo {
         public String AssistedReproductive;
         //产伤  0无 1有
         public String BirthInjury;
-        //新生儿窒息 0无 1有
-        public String NeonatalAsphyxia;
-        //颅内出血 0无 1有
-        public String IntracranialHemorrhage;
+//        //新生儿窒息 0无 1有
+//        public String NeonatalAsphyxia;
+//        //颅内出血 0无 1有
+//        public String IntracranialHemorrhage;
         //家族遗传史 0无 1有
         public String HereditaryHistory;
         //家族遗传史内容
@@ -317,21 +317,21 @@ public class InputUserInfo {
             BirthInjury = birthInjury;
         }
 
-        public String getNeonatalAsphyxia() {
-            return NeonatalAsphyxia;
-        }
-
-        public void setNeonatalAsphyxia(String neonatalAsphyxia) {
-            NeonatalAsphyxia = neonatalAsphyxia;
-        }
-
-        public String getIntracranialHemorrhage() {
-            return IntracranialHemorrhage;
-        }
-
-        public void setIntracranialHemorrhage(String intracranialHemorrhage) {
-            IntracranialHemorrhage = intracranialHemorrhage;
-        }
+//        public String getNeonatalAsphyxia() {
+//            return NeonatalAsphyxia;
+//        }
+//
+//        public void setNeonatalAsphyxia(String neonatalAsphyxia) {
+//            NeonatalAsphyxia = neonatalAsphyxia;
+//        }
+//
+//        public String getIntracranialHemorrhage() {
+//            return IntracranialHemorrhage;
+//        }
+//
+//        public void setIntracranialHemorrhage(String intracranialHemorrhage) {
+//            IntracranialHemorrhage = intracranialHemorrhage;
+//        }
 
         public String getHereditaryHistory() {
             return HereditaryHistory;

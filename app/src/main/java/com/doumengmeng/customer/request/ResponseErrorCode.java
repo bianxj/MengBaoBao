@@ -139,7 +139,7 @@ public class ResponseErrorCode {
 
         errorCodeArray.put(ERROR_VCODE_WRONG,"输入的校验码与发送验证码不一致");
         errorCodeArray.put(ERROR_CHECKCODE_EMPTY,"校验码为空");
-        errorCodeArray.put(ERROR_VCODE_SEND,"未发送验证码");
+        errorCodeArray.put(ERROR_VCODE_SEND,"验证码校验失败,请重新获取验证码");
         errorCodeArray.put(ERROR_PHONENUMBER,"手机号格式有误");
         errorCodeArray.put(ERROR_REGISTER_ROLE_EXIST,"注册账号已存在");
 

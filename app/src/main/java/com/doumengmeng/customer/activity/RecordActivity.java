@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
@@ -379,10 +378,9 @@ public class RecordActivity extends BaseActivity {
 
             Uri uri = data.getData();
             source = PictureUtils.getFilePath(RecordActivity.this,uri);
-            DisplayMetrics display = BaseApplication.getInstance().getDisplayInfo();
             String target = BaseApplication.getInstance().getUploadPicture();
 
-            PictureUtils.compressPicture(source,target,display.widthPixels,display.heightPixels);
+            PictureUtils.compressPicture(source,target);
             adapter.addPicture(target);
             setGridViewHeight(gv_upload_report);
         }

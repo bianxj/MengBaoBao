@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseActivity;
-import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.config.Constants;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
@@ -162,10 +161,14 @@ public class ForgotPwdActivity extends BaseActivity {
         @Override
         public void onPostExecute(String result) {
             VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
-            BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
-
-            countDown = Constants.VC_OVER_TIME;
-            handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
+//            BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
+            if ( ResponseErrorCode.SUCCESS == response.getErrorId() ) {
+                countDown = Constants.VC_OVER_TIME;
+                handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
+            } else {
+                bt_get_vc.setEnabled(true);
+                disposeError("验证码获取失败");
+            }
         }
     };
 
@@ -252,12 +255,12 @@ public class ForgotPwdActivity extends BaseActivity {
             return false;
         }
 
-        String saveVc = BaseApplication.getInstance().getForgetVc();
-        if ( TextUtils.isEmpty(saveVc) ){
-            tv_prompt.setText(R.string.prompt_no_save_vc);
-
-            return false;
-        }
+//        String saveVc = BaseApplication.getInstance().getForgetVc();
+//        if ( TextUtils.isEmpty(saveVc) ){
+//            tv_prompt.setText(R.string.prompt_no_save_vc);
+//
+//            return false;
+//        }
 
         String vc = et_vc.getText().toString().trim();
         if ( TextUtils.isEmpty(vc) ){
@@ -283,7 +286,7 @@ public class ForgotPwdActivity extends BaseActivity {
         try {
             object.put("accountMobile",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
-            object.put("code", BaseApplication.getInstance().getForgetVc());
+//            object.put("code", BaseApplication.getInstance().getForgetVc());
             object.put("checkCode",et_vc.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();

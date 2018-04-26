@@ -45,7 +45,10 @@
                     android:text=""
                     android:textColor="@color/second_black"
                     android:includeFontPadding="false"
-                    android:textSize="@dimen/y30px" />
+                    android:textSize="@dimen/y30px"
+                    android:lines="1"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="end" />
             </RelativeLayout>
 
             <View
@@ -63,6 +66,9 @@
                 android:textSize="@dimen/y23px"
                 android:textColor="#808080"
                 android:includeFontPadding="false"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:ellipsize="end"
                 />
 
         </LinearLayout>

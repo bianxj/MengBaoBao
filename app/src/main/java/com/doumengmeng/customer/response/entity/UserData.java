@@ -271,7 +271,7 @@ public class UserData {
         if (TextUtils.isEmpty(headimg)){
             return null;
         } else {
-            return UrlAddressList.BASE_URL + headimg;
+            return UrlAddressList.IMAGE_URL + headimg;
         }
     }
 

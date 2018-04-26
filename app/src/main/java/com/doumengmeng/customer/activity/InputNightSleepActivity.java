@@ -98,8 +98,8 @@ public class InputNightSleepActivity extends BaseInputDataActivity {
         }
 
         float hour = Float.parseFloat(hourString);
-        if ( hour < 0 || hour > 24 ){
-            showPromptTitle("睡眠时间 0~24");
+        if ( hour < 0 || hour > 12 ){
+            showPromptTitle("睡眠时间 0~12");
             return false;
         }
         return true;

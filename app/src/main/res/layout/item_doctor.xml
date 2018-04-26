@@ -76,6 +76,9 @@
                 android:textSize="@dimen/y23px"
                 android:textColor="#808080"
                 android:includeFontPadding="false"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:ellipsize="end"
                 />
 
             <TextView
@@ -87,6 +90,9 @@
                 android:textSize="@dimen/y23px"
                 android:textColor="#808080"
                 android:includeFontPadding="false"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:ellipsize="end"
                 />
 
         </LinearLayout>

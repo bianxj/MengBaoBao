@@ -831,7 +831,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/unuse_tv_stifle"
@@ -891,7 +891,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/unuse_tv_ICH"

@@ -175,7 +175,7 @@ public class SpacialistServiceActivity extends BaseActivity {
 
         @Override
         public void onLoadMore() {
-
+            xrv_search.setNoMore(true);
         }
     };
 
@@ -196,6 +196,7 @@ public class SpacialistServiceActivity extends BaseActivity {
                             public void choose(String city) {
                                 executeRotateAnimation();
                                 if ( DaoManager.getInstance().getHospitalDao().hasHospitalInCity(SpacialistServiceActivity.this,city) ) {
+                                    setNoNeedLocation(true);
                                     setCity(city);
                                 } else {
                                     Toast.makeText(SpacialistServiceActivity.this,"该地区还在开发中",Toast.LENGTH_SHORT).show();
@@ -323,6 +324,9 @@ public class SpacialistServiceActivity extends BaseActivity {
 
     //---------------------------------检查权限------------------------------------------------
     private void checkLocationPermission(){
+        if ( isNoNeedLocation() ){
+            return;
+        }
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if ( manager.isProviderEnabled(LocationManager.GPS_PROVIDER) ) {
             if (PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -331,6 +335,15 @@ public class SpacialistServiceActivity extends BaseActivity {
         } else {
             skipToLocationService();
         }
+    }
+
+    private boolean isNoNeedLocation = false;
+    private boolean isNoNeedLocation(){
+        return isNoNeedLocation;
+    }
+
+    private void setNoNeedLocation(boolean isNoNeedLocation){
+        this.isNoNeedLocation = isNoNeedLocation;
     }
 
     private void skipToLocationService(){
@@ -406,6 +419,7 @@ public class SpacialistServiceActivity extends BaseActivity {
             if ( bdLocation != null && !TextUtils.isEmpty(bdLocation.getProvince())){
                 String city = bdLocation.getProvince();
                 setCity(city);
+                setNoNeedLocation(true);
             } else {
                 locationFailed();
             }

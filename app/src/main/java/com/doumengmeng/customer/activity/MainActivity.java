@@ -369,7 +369,10 @@ public class MainActivity extends BaseFragmentActivity {
             if ( dl_main.isDrawerOpen(Gravity.LEFT) ) {
                 dl_main.closeDrawer(Gravity.LEFT);
             } else {
-                BaseApplication.getInstance().finishApp(this);
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
             }
             return true;
         }

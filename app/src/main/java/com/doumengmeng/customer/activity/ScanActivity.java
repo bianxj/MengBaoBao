@@ -239,10 +239,17 @@ public class ScanActivity extends BaseActivity {
     }
 
     private void resultBack(String value){
-        Intent intent = new Intent();
-        intent.putExtra(RESULT_QR_VALUE,value);
-        setResult(Activity.RESULT_OK,intent);
-        finish();
+        if(value.startsWith("http://sj.qq.com/myapp/detail.htm?apkName=com.doumengmeng.customer&doctorId=")){
+            String doctorId = value.replace("http://sj.qq.com/myapp/detail.htm?apkName=com.doumengmeng.customer&doctorId=","");
+            Intent intent = new Intent(this,DoctorInfoActivity.class);
+            intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_ID,doctorId);
+            startActivity(intent);
+            finish();
+        }
+//        Intent intent = new Intent();
+//        intent.putExtra(RESULT_QR_VALUE,value);
+//        setResult(Activity.RESULT_OK,intent);
+//        finish();
     }
 
     //--------------------------------------扫码处理代码--------------------------------------------

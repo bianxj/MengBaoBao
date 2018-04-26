@@ -142,7 +142,7 @@ public class DoctorInfoActivity extends BaseActivity {
                 doctor = DaoManager.getInstance().getDaotorDao().searchDoctorById(this, doctorId);
             }
             if (doctor != null) {
-                hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this, doctor.getDoctorid());
+                hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this, doctor.getHospitalid());
                 initView();
             } else {
                 MyDialog.showPromptDialog(this, "查无此人", new MyDialog.PromptDialogCallback() {
@@ -290,8 +290,8 @@ public class DoctorInfoActivity extends BaseActivity {
             object.put("accountmobile",userData.getAccountmobile());
             object.put("orderdevice","1");
             object.put("doctorid",doctor.getDoctorid());
-            object.put("totalamout",doctor.getCost());
-//            object.put("totalamout","0.01");
+//            object.put("totalamout",doctor.getCost());
+            object.put("totalamout","0.01");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -411,8 +411,8 @@ public class DoctorInfoActivity extends BaseActivity {
             object.put("accountmobile",userData.getAccountmobile());
             object.put("orderdevice","1");
             object.put("doctorid",doctor.getDoctorid());
-            object.put("totalamout",Integer.parseInt(doctor.getCost())*100+"");
-//            object.put("totalamout","2");
+//            object.put("totalamout",Integer.parseInt(doctor.getCost())*100+"");
+            object.put("totalamout","2");
         } catch (JSONException e) {
             e.printStackTrace();
         }

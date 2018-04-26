@@ -3,23 +3,16 @@ package com.doumengmeng.customer.util;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Base64;
-import android.util.DisplayMetrics;
 
-import com.doumengmeng.customer.base.BaseApplication;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -215,47 +208,40 @@ public class PictureUtils {
      *
      * @param options
      * @param reqWidth
-     * @param reqHeight
      * @return
      */
-    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        int height;
+    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth) {
         int width;
         int inSampleSize = 1;
 
         if ( options.outHeight > options.outWidth ){
-            height = options.outHeight;
             width = options.outWidth;
         } else {
-            height = options.outWidth;
             width = options.outHeight;
         }
 
-        if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height
-                    / (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        if (width > reqWidth) {
+            inSampleSize = Math.round((float) width / (float) reqWidth);
         }
         return inSampleSize;
     }
 
-    /**
-     * 压缩指定byte[]图片，并得到压缩后的图像
-     *
-     * @param bts
-     * @param reqsW
-     * @param reqsH
-     * @return
-     */
-    public static Bitmap getSmallBitmap(byte[] bts, int reqsW, int reqsH) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
-        options.inSampleSize = calculateInSampleSize(options, reqsW, reqsH);
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
-    }
+//    /**
+//     * 压缩指定byte[]图片，并得到压缩后的图像
+//     *
+//     * @param bts
+//     * @param reqsW
+//     * @param reqsH
+//     * @return
+//     */
+//    public static Bitmap getSmallBitmap(byte[] bts, int reqsW, int reqsH) {
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+//        BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
+//        options.inSampleSize = calculateInSampleSize(options, reqsW, reqsH);
+//        options.inJustDecodeBounds = false;
+//        return BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
+//    }
 
 
         /**
@@ -264,12 +250,12 @@ public class PictureUtils {
          * @param filePath
          * @return
          */
-    public static Bitmap getSmallBitmap(String filePath, int reqWidth, int reqHeight) {
+    public static Bitmap getSmallBitmap(String filePath) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;  //只返回图片的大小信息
         BitmapFactory.decodeFile(filePath, options);
         // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        options.inSampleSize = calculateInSampleSize(options, 1280);
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(filePath, options);
@@ -296,16 +282,16 @@ public class PictureUtils {
         }
     }
 
-    /**
-     * 将照片添加到相册中
-     */
-    public static void galleryAddPic(String mPublicPhotoPath, Context context) {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(mPublicPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        context.sendBroadcast(mediaScanIntent);
-    }
+//    /**
+//     * 将照片添加到相册中
+//     */
+//    public static void galleryAddPic(String mPublicPhotoPath, Context context) {
+//        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        File f = new File(mPublicPhotoPath);
+//        Uri contentUri = Uri.fromFile(f);
+//        mediaScanIntent.setData(contentUri);
+//        context.sendBroadcast(mediaScanIntent);
+//    }
 //    /**
 //     * 创建临时图片存储的路径
 //     *
@@ -322,21 +308,21 @@ public class PictureUtils {
 //        return file;
 //    }
 
-    /**
-     * 图片转成string
-     *
-     * @param bitmap
-     * @return
-     */
-    public static String convertBitmapToString(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();// outputstream
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] bytes = baos.toByteArray();// 转为byte数组
-        return Base64.encodeToString(bytes, Base64.DEFAULT);
-    }
+//    /**
+//     * 图片转成string
+//     *
+//     * @param bitmap
+//     * @return
+//     */
+//    public static String convertBitmapToString(Bitmap bitmap) {
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();// outputstream
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        byte[] bytes = baos.toByteArray();// 转为byte数组
+//        return Base64.encodeToString(bytes, Base64.DEFAULT);
+//    }
 
-    public static void compressPicture(String source , String target, int reqWidth, int reqHeight) {
-        Bitmap bitmap = getSmallBitmap(source, reqWidth, reqHeight);
+    public static void compressPicture(String source , String target) {
+        Bitmap bitmap = getSmallBitmap(source);
         saveBitmapToPath(bitmap,target);
     }
 
@@ -356,36 +342,36 @@ public class PictureUtils {
         }
     }
 
-    public static void rotationNormalDegree(String path){
-        int degree = getRotationDegree(path);
-        DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
-        if ( degree > 0 ){
-            Bitmap bitmap = getSmallBitmap(path,metrics.widthPixels,metrics.heightPixels);
-            bitmap = rotateToPortrait(bitmap,degree);
-            saveBitmapToPath(bitmap,path);
-        }
-    }
-
-    private static int getRotationDegree(String path){
-        int degree = 0;
-        try {
-            ExifInterface exifInterface = new ExifInterface(path);
-            int type = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL);
-            switch (type) {
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    degree = 90;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    degree = 180;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    degree = 270;
-                    break;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return degree;
-    }
+//    public static void rotationNormalDegree(String path){
+//        int degree = getRotationDegree(path);
+//        DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
+//        if ( degree > 0 ){
+//            Bitmap bitmap = getSmallBitmap(path,metrics.widthPixels,metrics.heightPixels);
+//            bitmap = rotateToPortrait(bitmap,degree);
+//            saveBitmapToPath(bitmap,path);
+//        }
+//    }
+//
+//    private static int getRotationDegree(String path){
+//        int degree = 0;
+//        try {
+//            ExifInterface exifInterface = new ExifInterface(path);
+//            int type = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL);
+//            switch (type) {
+//                case ExifInterface.ORIENTATION_ROTATE_90:
+//                    degree = 90;
+//                    break;
+//                case ExifInterface.ORIENTATION_ROTATE_180:
+//                    degree = 180;
+//                    break;
+//                case ExifInterface.ORIENTATION_ROTATE_270:
+//                    degree = 270;
+//                    break;
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return degree;
+//    }
 
 }

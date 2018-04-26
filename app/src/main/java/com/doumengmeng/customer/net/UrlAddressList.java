@@ -12,8 +12,9 @@ public class UrlAddressList {
     public final static String SESSION_ID = "sesId";
 
 //    public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneServerV2/";
-//    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneServerV2/";
-    public final static String BASE_URL = "http://app.mengbaobao.com/mbbPhoneServerV2/";
+    public final static String BASE_URL = "http://app.mengbaobao.com:8090/mbbPhoneServerV2/";
+//    public final static String BASE_URL = "http://app.mengbaobao.com/mbbPhoneServerV2/";
+    public final static String IMAGE_URL = "http://app.mengbaobao.com:8083/";
 
     public final static String URL_GET_VC = BASE_URL + "babyUser.do?method=SendMessage";
 //    public final static String URL_REGISTER_CHECT = BASE_URL + "babyUser.do?method=RegisterCheck";
@@ -42,7 +43,7 @@ public class UrlAddressList {
     public final static String URL_UPDATE_INFO = BASE_URL + "system.do?method=GetVersion";
     public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";
 
-    public final static String URL_MENG_LESSION = "http://app.mengbaobao.com/class/index.html";
+    public final static String URL_MENG_LESSION = "http://app.mengbaobao.com:8090/class/index.html";
 
 //    public static String mergeUrlAndParam(String url , String value){
 //        String result = null;

@@ -168,7 +168,7 @@ public class AssessmentActivity extends BaseActivity {
         userData = BaseApplication.getInstance().getUserData();
         record = GsonUtil.getInstance().fromJson(recordString,Record.class);
         doctor = DaoManager.getInstance().getDaotorDao().searchDoctorById(this,record.getDoctorid());
-        hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this,doctor.getDoctorid());
+        hospital = DaoManager.getInstance().getHospitalDao().searchHospitalById(this,doctor.getHospitalid());
 
         initDoctorData();
         initUserData();

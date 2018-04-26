@@ -92,7 +92,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
                 player.setVisibility(View.GONE);
             } else {
                 player.setVisibility(View.VISIBLE);
-                player.setDrawable(UrlAddressList.BASE_URL + feature.getExampleimgurl());
+                player.setDrawable(UrlAddressList.IMAGE_URL + feature.getExampleimgurl());
                 player.setCustomerListener(listener);
             }
         }
@@ -123,7 +123,7 @@ public class BehaviorAdapter extends RecyclerView.Adapter<BehaviorAdapter.ViewHo
         private final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyDialog.showGifDialog(view.getContext(),UrlAddressList.BASE_URL + feature.getExampleimgurl());
+                MyDialog.showGifDialog(view.getContext(),UrlAddressList.IMAGE_URL + feature.getExampleimgurl());
             }
         };
 

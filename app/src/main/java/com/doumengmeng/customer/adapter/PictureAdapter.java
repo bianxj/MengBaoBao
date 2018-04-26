@@ -2,7 +2,6 @@ package com.doumengmeng.customer.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,8 +145,7 @@ public class PictureAdapter extends BaseAdapter {
 
         public Bitmap getSmallBitmap() {
             if ( smallBitmap == null ){
-                DisplayMetrics display = BaseApplication.getInstance().getDisplayInfo();
-                smallBitmap = PictureUtils.getSmallBitmap(picturePath,display.widthPixels,display.heightPixels);
+                smallBitmap = PictureUtils.getSmallBitmap(picturePath);
                 smallBitmap = PictureUtils.rotateToPortrait(smallBitmap);
             }
             return smallBitmap;
