@@ -4,7 +4,7 @@ package com.doumengmeng.doctor.response;
  * Created by Administrator on 2018/3/8.
  */
 
-public class VCResponse extends BaseResponse {
+public class VCForgotResponse extends BaseResponse {
 
     private Result result;
 
@@ -17,14 +17,14 @@ public class VCResponse extends BaseResponse {
     }
 
     public static class Result{
-        private String registerSesId;
+        private String forgetSesId;
 
-        public String getRegisterSesId() {
-            return registerSesId;
+        public String getForgetSesId() {
+            return forgetSesId;
         }
 
-        public void setRegisterSesId(String registerSesId) {
-            this.registerSesId = registerSesId;
+        public void setForgetSesId(String forgetSesId) {
+            this.forgetSesId = forgetSesId;
         }
     }
 

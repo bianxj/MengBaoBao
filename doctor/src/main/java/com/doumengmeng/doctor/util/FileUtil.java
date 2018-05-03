@@ -20,19 +20,14 @@ public class FileUtil {
         return util;
     }
 
-    public File createNewFile(String path){
+    public File createNewFile(String path) throws IOException {
         if ( TextUtils.isEmpty(path) ){
             return null;
         }
         deleteFile(path);
         File file = new File(path);
         createFolder(file.getParent());
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        file.createNewFile();
         return file;
     }
 

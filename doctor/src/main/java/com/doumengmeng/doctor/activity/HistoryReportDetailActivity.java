@@ -3,9 +3,7 @@ package com.doumengmeng.doctor.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -14,19 +12,15 @@ import android.widget.TextView;
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
-import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.response.entity.HistoryReport;
 import com.doumengmeng.doctor.util.FormulaUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.view.CircleImageView;
+import com.doumengmeng.doctor.view.DevelopmentView;
 import com.doumengmeng.doctor.view.GraphModule;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Administrator on 2018/3/1.
@@ -48,10 +42,6 @@ public class HistoryReportDetailActivity extends BaseActivity {
     //曲线图
     private GraphModule graph_module;
 
-    //发育行为
-//    private LinearLayout ll_developmental_behavior;
-    private LinearLayout ll_developmental_content;
-    private TextView tv_developmental_title;
 
     //评估结果
     private LinearLayout ll_assessment_result;
@@ -112,10 +102,6 @@ public class HistoryReportDetailActivity extends BaseActivity {
         //曲线图
         graph_module = findViewById(R.id.graph_module);
 
-        //发育行为
-//        ll_developmental_behavior = findViewById(R.id.ll_developmental_behavior);
-        ll_developmental_content = findViewById(R.id.ll_developmental_content);
-        tv_developmental_title = findViewById(R.id.tv_developmental_title);
 
         //评估结果
         ll_assessment_result = findViewById(R.id.ll_assessment_result);
@@ -208,15 +194,35 @@ public class HistoryReportDetailActivity extends BaseActivity {
         graph_module.setData(report.getImageData(), report.getMonthAge(),user.isMale(), true);
     }
 
+
+    //发育行为
+//    private LinearLayout ll_developmental_behavior;
+//    private LinearLayout ll_developmental_content;
+//    private TextView tv_developmental_title;
+
+    private DevelopmentView v_development;
     /**
      * 作者: 边贤君
      * 描述: 初始化发育行为
      * 日期: 2018/1/16 16:37
      */
     private void initDevelopmentalBehavior(){
-        tv_developmental_title.setText(String.format(getResources().getString(R.string.assessment_develop_month), report.getCorrectMonthAge()<0?0: report.getCorrectMonthAge()));
-        Map<String,List<String>> maps = DaoManager.getInstance().getFeatureDao().searchFeatureListById(this, report.getFeatureList());
-        initDevelopment(maps);
+
+        String featureAge = String.valueOf(report.getCorrectMonthAge()<0?0: report.getCorrectMonthAge());
+        v_development = findViewById(R.id.v_development);
+        v_development.initDevelopment(featureAge,report.getRecordTime(),report.getFeatureList(),false);
+//        //发育行为
+////        ll_developmental_behavior = findViewById(R.id.ll_developmental_behavior);
+//        ll_developmental_content = findViewById(R.id.ll_developmental_content);
+//        tv_developmental_title = findViewById(R.id.tv_developmental_title);
+//
+//
+//        tv_developmental_title.setText(String.format(getResources().getString(R.string.assessment_develop_month), report.getCorrectMonthAge()<0?0: report.getCorrectMonthAge()));
+//
+//        initDevelopment(generateDevelopmentData(featureAge,report.getRecordTime(),report.getFeatureList()));
+
+//        Map<String,List<String>> maps = DaoManager.getInstance().getFeatureDao().searchFeatureListById(this, report.getFeatureList());
+//        initDevelopment(maps);
     }
 
     /**
@@ -296,91 +302,255 @@ public class HistoryReportDetailActivity extends BaseActivity {
 
     //------------------------------------------发育行为--------------------------------------------
 
-    //初始化发行为
-    private void initDevelopment(Map<String,List<String>> maps){
-        Set<String> keys = maps.keySet();
-        for (String key:keys){
-            ll_developmental_content.addView(createSubItem(key,maps.get(key)),0);
-        }
-    }
+//    private Map<String,List<HistoryReportDetailActivity.DevelopmentalItem>> generateDevelopmentData(String correntMonth , String recordTime, List<String> selected){
+//        Map<String,List<HistoryReportDetailActivity.DevelopmentalItem>> map = new HashMap<>();
+//
+//        List<String> ages = new ArrayList<>();
+//        ages.add(correntMonth);
+//        List<Feature> features = DaoManager.getInstance().getFeatureDao().searchFeatureList(this,ages,recordTime);
+//
+//        for (Feature feature:features){
+//            List<HistoryReportDetailActivity.DevelopmentalItem> developmentalItems;
+//            if ( !map.containsKey(feature.getFeaturetype()) ){
+//                developmentalItems = new ArrayList<>();
+//                map.put(feature.getFeaturetype(),developmentalItems);
+//            } else {
+//                developmentalItems = map.get(feature.getFeaturetype());
+//            }
+//            HistoryReportDetailActivity.DevelopmentalItem item = new HistoryReportDetailActivity.DevelopmentalItem();
+//            item.setValue(feature.getDetaildesc());
+//            if ( selected != null ) {
+//                item.setCheck(selected.contains(feature.getId()));
+//            } else {
+//                item.setCheck(false);
+//            }
+//            item.setMark(!"0".equals(feature.getPointtag()));
+//            developmentalItems.add(item);
+//        }
+//        return map;
+//    }
+//
+//    //初始化发行为
+//    private void initDevelopment(Map<String,List<HistoryReportDetailActivity.DevelopmentalItem>> maps){
+//        Set<String> keys = maps.keySet();
+//        for (String key:keys){
+//            ll_developmental_content.addView(createSubItem(key,maps.get(key)),0);
+//        }
+//    }
+//
+//    /**
+//     * 作者: 边贤君
+//     * 描述: 创建发育行为条目
+//     * 日期: 2018/1/18 9:44
+//     */
+//    private View createSubItem(String title , List<HistoryReportDetailActivity.DevelopmentalItem> contents){
+//        RelativeLayout layout = new RelativeLayout(this);
+//        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        layout.setLayoutParams(layoutParams);
+//
+//        View divider = new View(this);
+//        divider.setBackgroundColor(getResources().getColor(R.color.linePink));
+//        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelOffset(R.dimen.y1px)));
+//        layout.addView(divider);
+//
+//        TextView tv_title = new TextView(this);
+//        tv_title.setText(title);
+//        tv_title.setTextColor(getResources().getColor(R.color.second_black));
+//        tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+//        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
+//        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y20px);
+//        tv_title.setLayoutParams(params);
+//        layout.addView(tv_title);
+//
+//        View right = createCheckLine(contents);
+//        layout.addView(right);
+//
+//        return layout;
+//    }
+//
+//    /**
+//     * 作者: 边贤君
+//     * 描述: 创建发育行为条目中的选项
+//     * 日期: 2018/1/18 9:44
+//     */
+//    private View createCheckLine(List<HistoryReportDetailActivity.DevelopmentalItem> contents){
+//        LinearLayout layout = new LinearLayout(this);
+//        layout.setOrientation(LinearLayout.VERTICAL);
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y24px);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_TOP|RelativeLayout.ALIGN_PARENT_LEFT);
+//        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
+//        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.x159px);
+//        params.rightMargin = getResources().getDimensionPixelOffset(R.dimen.x20px);
+//        layout.setLayoutParams(params);
+//
+//        for (HistoryReportDetailActivity.DevelopmentalItem content:contents){
+//            LinearLayout subLayout = new LinearLayout(this);
+//            LinearLayout.LayoutParams layoutParams = (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+//            layoutParams.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
+//            subLayout.setOrientation(LinearLayout.HORIZONTAL);
+//            subLayout.setLayoutParams(layoutParams);
+//
+//            CheckBox checkBox = new CheckBox(this);
+//            checkBox.setButtonDrawable(null);
+//            checkBox.setBackgroundResource(R.drawable.cb_history_report);
+//            checkBox.setLayoutParams(new LinearLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x34px),getResources().getDimensionPixelOffset(R.dimen.x34px)));
+//            checkBox.setChecked(content.isCheck());
+//            subLayout.addView(checkBox);
+//
+//            TextView tv_content = new TextView(this);
+//            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+//            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
+//            textParam.topMargin = -1*getResources().getDimensionPixelOffset(R.dimen.y5px);
+//            tv_content.setLayoutParams(textParam);
+//            if ( content.isMark ) {
+//                String value = content.getValue()+"*";
+//                SpannableStringBuilder style = new SpannableStringBuilder(value);
+//                style.setSpan(new ForegroundColorSpan(Color.RED), value.length()-1, value.length(),
+//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                tv_content.setText(style);
+//            } else {
+//                tv_content.setText(content.getValue());
+//            }
+//            tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
+//            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
+//            subLayout.addView(tv_content);
+//
+////            if ( content.isMark ){
+////                TextView tv_mark = new TextView(this);
+////                LinearLayout.LayoutParams markParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+////                textParam.topMargin = -1*getResources().getDimensionPixelOffset(R.dimen.y5px);
+////                tv_mark.setLayoutParams(markParam);
+////                tv_mark.setText("*");
+////                tv_mark.setTextColor(Color.RED);
+////                tv_mark.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
+////                subLayout.addView(tv_mark);
+////            }
+//
+//            layout.addView(subLayout);
+//        }
+//
+//        return layout;
+//    }
+//
+//    public static class DevelopmentalItem{
+//        private String value;
+//        private boolean isCheck;
+//        private boolean isMark;
+//
+//        public String getValue() {
+//            return value;
+//        }
+//
+//        public void setValue(String value) {
+//            this.value = value;
+//        }
+//
+//        public boolean isCheck() {
+//            return isCheck;
+//        }
+//
+//        public void setCheck(boolean check) {
+//            isCheck = check;
+//        }
+//
+//        public boolean isMark() {
+//            return isMark;
+//        }
+//
+//        public void setMark(boolean mark) {
+//            isMark = mark;
+//        }
+//    }
 
-    /**
-     * 作者: 边贤君
-     * 描述: 创建发育行为条目
-     * 日期: 2018/1/18 9:44
-     */
-    private View createSubItem(String title , List<String> contents){
-        RelativeLayout layout = new RelativeLayout(this);
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layout.setLayoutParams(layoutParams);
-
-        View divider = new View(this);
-        divider.setBackgroundColor(getResources().getColor(R.color.linkLightPink));
-        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelOffset(R.dimen.y2px)));
-        layout.addView(divider);
-
-        TextView tv_title = new TextView(this);
-        tv_title.setText(title);
-        tv_title.setTextColor(getResources().getColor(R.color.second_black));
-        tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
-        tv_title.setLayoutParams(params);
-        layout.addView(tv_title);
-
-        View right = createCheckLine(contents);
-        layout.addView(right);
-
-        return layout;
-    }
-
-    /**
-     * 作者: 边贤君
-     * 描述: 创建发育行为条目中的选项
-     * 日期: 2018/1/18 9:44
-     */
-    private View createCheckLine(List<String> contents){
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y24px);
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP|RelativeLayout.ALIGN_PARENT_LEFT);
-        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
-        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.x139px);
-        layout.setLayoutParams(params);
-
-        for (String content:contents){
-            LinearLayout subLayout = new LinearLayout(this);
-            LinearLayout.LayoutParams layoutParams = (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
-            layoutParams.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
-            subLayout.setOrientation(LinearLayout.HORIZONTAL);
-            subLayout.setLayoutParams(layoutParams);
-
-            ImageView icon = new ImageView(this);
-            icon.setImageResource(R.drawable.icon_choose);
-            icon.setLayoutParams(new LinearLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x34px),getResources().getDimensionPixelOffset(R.dimen.x36px)));
-            subLayout.addView(icon);
-
-            TextView tv_content = new TextView(this);
-            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y5px);
-            tv_content.setLayoutParams(textParam);
-            tv_content.setText(content);
-            tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
-            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
-            subLayout.addView(tv_content);
-
-            layout.addView(subLayout);
-        }
-
-        return layout;
-    }
-
-    private boolean isLowerThanTwoYear(){
-        return report.getMonthAge() <= 24;
-    }
+//    //初始化发行为
+//    private void initDevelopment(Map<String,List<String>> maps){
+//        Set<String> keys = maps.keySet();
+//        for (String key:keys){
+//            ll_developmental_content.addView(createSubItem(key,maps.get(key)),0);
+//        }
+//    }
+//
+//    /**
+//     * 作者: 边贤君
+//     * 描述: 创建发育行为条目
+//     * 日期: 2018/1/18 9:44
+//     */
+//    private View createSubItem(String title , List<String> contents){
+//        RelativeLayout layout = new RelativeLayout(this);
+//        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        layout.setLayoutParams(layoutParams);
+//
+//        View divider = new View(this);
+//        divider.setBackgroundColor(getResources().getColor(R.color.linkLightPink));
+//        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelOffset(R.dimen.y2px)));
+//        layout.addView(divider);
+//
+//        TextView tv_title = new TextView(this);
+//        tv_title.setText(title);
+//        tv_title.setTextColor(getResources().getColor(R.color.second_black));
+//        tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+//        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
+//        tv_title.setLayoutParams(params);
+//        layout.addView(tv_title);
+//
+//        View right = createCheckLine(contents);
+//        layout.addView(right);
+//
+//        return layout;
+//    }
+//
+//    /**
+//     * 作者: 边贤君
+//     * 描述: 创建发育行为条目中的选项
+//     * 日期: 2018/1/18 9:44
+//     */
+//    private View createCheckLine(List<String> contents){
+//        LinearLayout layout = new LinearLayout(this);
+//        layout.setOrientation(LinearLayout.VERTICAL);
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y24px);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_TOP|RelativeLayout.ALIGN_PARENT_LEFT);
+//        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
+//        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.x139px);
+//        layout.setLayoutParams(params);
+//
+//        for (String content:contents){
+//            LinearLayout subLayout = new LinearLayout(this);
+//            LinearLayout.LayoutParams layoutParams = (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+//            layoutParams.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
+//            subLayout.setOrientation(LinearLayout.HORIZONTAL);
+//            subLayout.setLayoutParams(layoutParams);
+//
+//            ImageView icon = new ImageView(this);
+//            icon.setImageResource(R.drawable.cb_square_check);
+//            icon.setLayoutParams(new LinearLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x34px),getResources().getDimensionPixelOffset(R.dimen.x36px)));
+//            subLayout.addView(icon);
+//
+//            TextView tv_content = new TextView(this);
+//            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+//            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y5px);
+//            tv_content.setLayoutParams(textParam);
+//            tv_content.setText(content);
+//            tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
+//            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
+//            subLayout.addView(tv_content);
+//
+//            layout.addView(subLayout);
+//        }
+//
+//        return layout;
+//    }
+//
+//    private boolean isLowerThanTwoYear(){
+//        return report.getMonthAge() <= 24;
+//    }
 
     //------------------------------------------养育指导--------------------------------------------
     private final View.OnClickListener parentingGuideListener = new View.OnClickListener() {

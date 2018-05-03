@@ -11,7 +11,7 @@ public class UrlAddressList {
     public final static String PARAM = "paramStr";
     public final static String SESSION_ID = "sesId";
 
-//    public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneServerV2/";
+//    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneServerV2/";
     public final static String BASE_URL = "http://app.mengbaobao.com:8090/mbbPhoneServerV2/";
 //    public final static String BASE_URL = "http://app.mengbaobao.com/mbbPhoneServerV2/";
     public final static String IMAGE_URL = "http://app.mengbaobao.com:8083/";

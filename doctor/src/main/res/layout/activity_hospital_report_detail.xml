@@ -464,7 +464,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
+
+                <com.doumengmeng.doctor.view.DevelopmentView
+                    android:id="@+id/v_development"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.doumengmeng.doctor.view.DevelopmentView>
+
+<!--                <TextView
                     android:id="@+id/tv_develop_behavior"
                     style="@style/SecondBlack.Text26px"
                     android:layout_width="wrap_content"
@@ -479,7 +485,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
 
             <View

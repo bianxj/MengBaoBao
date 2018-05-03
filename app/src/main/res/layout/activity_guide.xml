@@ -26,7 +26,9 @@
         android:id="@+id/ll_guide_botttom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent"
+        >
 
         <Button
             android:id="@+id/bt_guide_register"
@@ -45,5 +47,4 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x80px"/>
     </RelativeLayout>
-
 </RelativeLayout>

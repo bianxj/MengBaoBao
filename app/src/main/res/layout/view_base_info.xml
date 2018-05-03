@@ -98,7 +98,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="女"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/x12px"
                     />
@@ -116,7 +116,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="男"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/x12px"
                     />

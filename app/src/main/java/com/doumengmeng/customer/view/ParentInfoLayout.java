@@ -142,22 +142,32 @@ public class ParentInfoLayout extends LinearLayout {
         public void onFocusChange(View view, boolean hasFocus) {
             if ( !hasFocus ){
                 if ( R.id.et_father_height == view.getId() || R.id.et_father_weight == view.getId() ){
-                    String height = et_father_height.getText().toString().trim();
-                    String weight = et_father_weight.getText().toString().trim();
-                    if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
-                        tv_father_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
-                    }
+                    calculateBMI(tv_father_BMI,et_father_weight,et_father_height);
+//                    String height = et_father_height.getText().toString().trim();
+//                    String weight = et_father_weight.getText().toString().trim();
+//                    if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
+//                        tv_father_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
+//                    }
                 }
                 if ( R.id.et_mother_height == view.getId() || R.id.et_mother_weight == view.getId() ){
-                    String height = et_mother_height.getText().toString().trim();
-                    String weight = et_mother_weight.getText().toString().trim();
-                    if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
-                        tv_mother_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
-                    }
+                    calculateBMI(tv_mother_BMI,et_mother_weight,et_mother_height);
+//                    String height = et_mother_height.getText().toString().trim();
+//                    String weight = et_mother_weight.getText().toString().trim();
+//                    if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
+//                        tv_mother_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
+//                    }
                 }
             }
         }
     };
+
+    private void calculateBMI(TextView tv_bmi,TextView tv_weight,TextView tv_height){
+        String height = tv_height.getText().toString().trim();
+        String weight = tv_weight.getText().toString().trim();
+        if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
+            tv_bmi.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
+        }
+    }
 
     private final TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
         @Override
@@ -284,12 +294,14 @@ public class ParentInfoLayout extends LinearLayout {
         parentInfo.setDadName(et_father_name.getText().toString().trim());
         parentInfo.setDadHeight(et_father_height.getText().toString().trim());
         parentInfo.setDadWeight(et_father_weight.getText().toString().trim());
+        calculateBMI(tv_father_BMI,et_father_weight,et_father_height);
         parentInfo.setDadBMI(tv_father_BMI.getText().toString().trim());
         parentInfo.setDadEducation(getCurrentCalture(fatherButtons));
 
         parentInfo.setMumName(et_mother_name.getText().toString().trim());
         parentInfo.setMumHeight(et_mother_height.getText().toString().trim());
         parentInfo.setMumWeight(et_mother_weight.getText().toString().trim());
+        calculateBMI(tv_mother_BMI,et_mother_weight,et_mother_height);
         parentInfo.setMumBMI(tv_mother_BMI.getText().toString().trim());
         parentInfo.setMumEducation(getCurrentCalture(motherButtons));
         return parentInfo;

@@ -7,8 +7,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.doumengmeng.doctor.R;
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.util.MyDialog;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.List;
 public class PictureAdapter extends BaseAdapter {
 
     private List<AssessmentDetailResponse.ReportImage> images;
+    private DisplayImageOptions options;
 
     public PictureAdapter(List<AssessmentDetailResponse.ReportImage> images) {
         if ( images == null ) {
@@ -28,6 +31,7 @@ public class PictureAdapter extends BaseAdapter {
         } else {
             this.images = images;
         }
+        options = BaseApplication.getInstance().defaultDisplayImage().build();
     }
 
     @Override
@@ -52,7 +56,7 @@ public class PictureAdapter extends BaseAdapter {
         }
         AssessmentDetailResponse.ReportImage image = images.get(i);
         ImageView iv_picture = view.findViewById(R.id.iv_picture);
-        ImageLoader.getInstance().displayImage(image.getImgurl(),iv_picture);
+        ImageLoader.getInstance().displayImage(image.getImgurl(),iv_picture,options);
         iv_picture.setOnClickListener(listener);
         iv_picture.setTag(image.getImgurl());
         return view;

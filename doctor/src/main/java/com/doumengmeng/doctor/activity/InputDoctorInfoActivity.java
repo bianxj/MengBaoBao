@@ -37,6 +37,7 @@ import com.doumengmeng.doctor.util.PermissionUtil;
 import com.doumengmeng.doctor.util.PictureUtils;
 import com.doumengmeng.doctor.view.CheckBoxLayout;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -264,8 +265,10 @@ public class InputDoctorInfoActivity extends BaseActivity {
         });
     }
 
-    private String firstCertificatePath;
-    private String secondCertificatePath;
+    private boolean hasFirstCertificate = false;
+    private boolean hasSecondCertificate = false;
+//    private String firstCertificatePath;
+//    private String secondCertificatePath;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -279,17 +282,27 @@ public class InputDoctorInfoActivity extends BaseActivity {
             saveDepartmentName(data);
         }
         if ( REQUEST_FIRST_CERTIFICATE == requestCode && Activity.RESULT_OK == resultCode ){
-            firstCertificatePath = PictureUtils.getFilePath(this,data.getData());
-            loadImageView(firstCertificatePath,iv_first_certificate);
+            try {
+                PictureUtils.saveGalleryBitmapToLocal(BaseApplication.getInstance().getCertificateOnePath(),this,data.getData());
+                loadImageView(BaseApplication.getInstance().getCertificateOnePath(),iv_first_certificate);
+                hasFirstCertificate = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if ( REQUEST_SECOND_CERTIFICATE == requestCode && Activity.RESULT_OK == resultCode ){
-            secondCertificatePath = PictureUtils.getFilePath(this,data.getData());
-            loadImageView(secondCertificatePath,iv_second_certificate);
+            try {
+                PictureUtils.saveGalleryBitmapToLocal(BaseApplication.getInstance().getCertificateTwoPath(),this,data.getData());
+                loadImageView(BaseApplication.getInstance().getCertificateTwoPath(),iv_second_certificate);
+                hasSecondCertificate = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private void loadImageView(String path,ImageView imageView){
-        Bitmap bitmap = PictureUtils.getSmallBitmap(path,imageView.getWidth(),imageView.getHeight());
+        Bitmap bitmap = PictureUtils.getSmallBitmap(path,imageView.getWidth());
         imageView.setImageBitmap(bitmap);
     }
 
@@ -360,7 +373,7 @@ public class InputDoctorInfoActivity extends BaseActivity {
             return false;
         }
 
-        if ( TextUtils.isEmpty(firstCertificatePath) || TextUtils.isEmpty(secondCertificatePath) ){
+        if ( !hasFirstCertificate || !hasSecondCertificate ){
             showPrompt("证书信息不完全");
             return false;
         }
@@ -390,8 +403,8 @@ public class InputDoctorInfoActivity extends BaseActivity {
 
         List<HttpUtil.UploadFile> uploadFiles = new ArrayList<>();
         uploadFiles.add(new HttpUtil.UploadFile("doctorHead",BaseApplication.getInstance().getHeadCropPath()));
-        uploadFiles.add(new HttpUtil.UploadFile("certificate1",firstCertificatePath));
-        uploadFiles.add(new HttpUtil.UploadFile("certificate2",secondCertificatePath));
+        uploadFiles.add(new HttpUtil.UploadFile("certificate1",BaseApplication.getInstance().getCertificateOnePath()));
+        uploadFiles.add(new HttpUtil.UploadFile("certificate2",BaseApplication.getInstance().getCertificateTwoPath()));
 
         map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getSessionId());
         map.put(UrlAddressList.PARAM, GsonUtil.getInstance().toJson(doctorInfo));

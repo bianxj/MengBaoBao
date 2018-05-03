@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
@@ -186,8 +187,8 @@ public class RegisterActivity extends BaseActivity {
         @Override
         public void onPostExecute(String result) {
             VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
-//            BaseApplication.getInstance().saveRegisterVc(response.getResult().getCode());
             if ( ResponseErrorCode.SUCCESS == response.getErrorId() ) {
+                BaseApplication.getInstance().saveRegisterSession(response.getResult().getRegisterSesId());
                 countDown = 60;
                 handler.sendEmptyMessage(RegisterHandler.COUNT_DOWN);
             } else {
@@ -258,13 +259,13 @@ public class RegisterActivity extends BaseActivity {
             //TODO
             object.put("doctorPhone",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
-//            object.put("code", BaseApplication.getInstance().getRegisterVc());
             object.put("checkCode",et_vc.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Map<String,String> map = new HashMap<>();
         map.put(UrlAddressList.PARAM,object.toString());
+        map.put("registerSesId",BaseApplication.getInstance().getRegisterSession());
         return map;
     }
 

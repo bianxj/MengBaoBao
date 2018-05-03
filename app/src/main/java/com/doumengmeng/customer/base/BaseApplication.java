@@ -178,8 +178,8 @@ public class BaseApplication extends Application {
     private final static String COLUMN_LOGIN = "login";
     private final static String COLUMN_USER = "user";
     private final static String COLUMN_PARENT = "parent";
-    private final static String COLUMN_REGISTER_VC = "register_vc";
-    private final static String COLUMN_FORGET_VC = "forget_vc";
+    private final static String COLUMN_REGISTER_SESSION = "register_vc";
+    private final static String COLUMN_FORGET_SESSION = "forget_vc";
 
     private final static String COLUMN_DAY_LIST = "day_list";
 
@@ -324,21 +324,21 @@ public class BaseApplication extends Application {
         return parentInfo;
     }
 
-//    public void saveRegisterVc(String registerVc){
-//        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_REGISTER_VC,registerVc);
-//    }
-//
-//    public String getRegisterVc(){
-//        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_REGISTER_VC,null);
-//    }
-//
-//    public void saveForgetVc(String forgetVc){
-//        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_FORGET_VC,forgetVc);
-//    }
-//
-//    public String getForgetVc(){
-//        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_FORGET_VC,null);
-//    }
+    public void saveRegisterSession(String registerVc){
+        SharedPreferencesUtil.saveString(this,TABLE_USER, COLUMN_REGISTER_SESSION,registerVc);
+    }
+
+    public String getRegisterSession(){
+        return SharedPreferencesUtil.loadString(this,TABLE_USER, COLUMN_REGISTER_SESSION,null);
+    }
+
+    public void saveForgetSession(String forgetVc){
+        SharedPreferencesUtil.saveString(this,TABLE_USER, COLUMN_FORGET_SESSION,forgetVc);
+    }
+
+    public String getForgetSession(){
+        return SharedPreferencesUtil.loadString(this,TABLE_USER, COLUMN_FORGET_SESSION,null);
+    }
 
     public void saveDayList(DayList dayList){
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_DAY_LIST,GsonUtil.getInstance().toJson(dayList));

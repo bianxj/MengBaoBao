@@ -10,6 +10,7 @@ import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.util.GsonUtil;
+import com.doumengmeng.doctor.util.MyDialog;
 
 /**
  * Created by Administrator on 2018/3/1.
@@ -36,12 +37,22 @@ public class ParentInfoActivity extends BaseActivity {
     private void findView(){
         loadParentData();
         initTitle();
-        initFatherInfo();
-        initMotherInfo();
+        if ( parentData != null ) {
+            initFatherInfo();
+            initMotherInfo();
+        }
     }
 
     private void loadParentData(){
         parentData = GsonUtil.getInstance().fromJson(getIntent().getStringExtra(IN_PARAM_PARENT_INFO), AssessmentDetailResponse.ParentData.class);
+        if ( parentData == null ){
+            MyDialog.showPromptDialog(this, "未获取到父母信息", new MyDialog.PromptDialogCallback() {
+                @Override
+                public void sure() {
+                    back();
+                }
+            });
+        }
     }
 
     private void initTitle(){

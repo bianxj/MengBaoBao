@@ -24,6 +24,7 @@ import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
 import com.umeng.commonsdk.UMConfigure;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,8 +135,8 @@ public class BaseApplication extends Application {
 
     private final static String COLUMN_USER_DATA = "user_data";
     private final static String COLUMN_SESSION_ID = "session_id";
-    private final static String COLUMN_REGISTER_VC = "register_vc";
-    private final static String COLUMN_FORGET_VC = "forget_vc";
+    private final static String COLUMN_REGISTER_SESSION = "register_vc";
+    private final static String COLUMN_FORGET_SESSION = "forget_vc";
     private final static String COLUMN_IS_ABNORMAL_EXIT = "is_abnormal_exit";
     private final static String COLUMN_IS_TO_EXAMINE = "is_to_examine";
     private final static String COLUMN_LOGIN = "login";
@@ -178,6 +179,7 @@ public class BaseApplication extends Application {
     }
 
     public void saveUserData(UserData userData){
+        this.userData = userData;
         SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_USER_DATA, GsonUtil.getInstance().toJson(userData));
     }
 
@@ -192,21 +194,21 @@ public class BaseApplication extends Application {
         return userData;
     }
 
-//    public void saveRegisterVc(String registerVc){
-//        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_REGISTER_VC,registerVc);
-//    }
-//
-//    public String getRegisterVc(){
-//        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_REGISTER_VC,null);
-//    }
-//
-//    public void saveForgetVc(String forgetVc){
-//        SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_FORGET_VC,forgetVc);
-//    }
-//
-//    public String getForgetVc(){
-//        return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_FORGET_VC,null);
-//    }
+    public void saveRegisterSession(String registerSession){
+        SharedPreferencesUtil.saveString(this,TABLE_USER, COLUMN_REGISTER_SESSION,registerSession);
+    }
+
+    public String getRegisterSession(){
+        return SharedPreferencesUtil.loadString(this,TABLE_USER, COLUMN_REGISTER_SESSION,"");
+    }
+
+    public void saveForgetSession(String forgetSession){
+        SharedPreferencesUtil.saveString(this,TABLE_USER, COLUMN_FORGET_SESSION,forgetSession);
+    }
+
+    public String getForgetSession(){
+        return SharedPreferencesUtil.loadString(this,TABLE_USER, COLUMN_FORGET_SESSION,"");
+    }
 
     public String getSessionId(){
         return SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_SESSION_ID,"");
@@ -269,6 +271,20 @@ public class BaseApplication extends Application {
     private final static String PERSON_DIR = "person";
     private final static String PERSON_HEAD_IMG = "headimg.jpg";
     private final static String PERSON_CROP_HEAD_IMG = "cropheadimg.jpg";
+    private final static String PERSON_CERTIFICATE_ONE = "certificate_one.jpg";
+    private final static String PERSON_CERTIFICATE_TWO = "certificate_two.jpg";
+
+    public String getCertificateOnePath(){
+        String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
+        FileUtil.getIntance().createFolder(dirPath);
+        return dirPath + File.separator + PERSON_CERTIFICATE_ONE;
+    }
+
+    public String getCertificateTwoPath(){
+        String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
+        FileUtil.getIntance().createFolder(dirPath);
+        return dirPath + File.separator + PERSON_CERTIFICATE_TWO;
+    }
 
     public String getDoctorHeadImgPath(){
         String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
@@ -284,7 +300,7 @@ public class BaseApplication extends Application {
         return EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR+File.separator+PERSON_HEAD_IMG;
     }
 
-    public File getHeadCropFile(){
+    public File getHeadCropFile() throws IOException {
         return FileUtil.getIntance().createNewFile(getHeadCropPath());
     }
 

@@ -374,13 +374,10 @@ public class RecordActivity extends BaseActivity {
 
         //照片返回
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
-            String source;
-
             Uri uri = data.getData();
-            source = PictureUtils.getFilePath(RecordActivity.this,uri);
             String target = BaseApplication.getInstance().getUploadPicture();
 
-            PictureUtils.compressPicture(source,target);
+            PictureUtils.compressPicture(RecordActivity.this,uri,target);
             adapter.addPicture(target);
             setGridViewHeight(gv_upload_report);
         }

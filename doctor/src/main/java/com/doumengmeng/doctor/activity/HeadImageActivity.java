@@ -27,6 +27,7 @@ import com.doumengmeng.doctor.util.PictureUtils;
 import com.doumengmeng.doctor.view.CircleImageView;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * 作者: 边贤君
@@ -123,7 +124,7 @@ public class HeadImageActivity extends BaseActivity {
         }
     }
 
-    private void cropFromCamera(File src){
+    private void cropFromCamera(File src) throws IOException {
         File dest = BaseApplication.getInstance().getHeadCropFile();
         boolean needPermission = false;
         Uri srcUri = null;
@@ -149,7 +150,7 @@ public class HeadImageActivity extends BaseActivity {
         }
     }
 
-    private void cropFromPicture(Uri src) {
+    private void cropFromPicture(Uri src) throws IOException {
         File dest = BaseApplication.getInstance().getHeadCropFile();
         destUri = Uri.fromFile(dest);
         cropPicture(src,destUri,false);
@@ -228,18 +229,30 @@ public class HeadImageActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ( REQUEST_CAMERA == requestCode && Activity.RESULT_OK == resultCode){
-            cropFromCamera(new File(BaseApplication.getInstance().getDoctorHeadImgPath()));
+            try {
+                cropFromCamera(new File(BaseApplication.getInstance().getDoctorHeadImgPath()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if ( REQUEST_IMAGE == requestCode && Activity.RESULT_OK == resultCode && null != data ) {
             Uri uri = data.getData();
-            cropFromPicture(uri);
+            try {
+                cropFromPicture(uri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if ( REQUEST_CROP == requestCode && Activity.RESULT_OK == resultCode ) {
             Bitmap bitmap = BitmapFactory.decodeFile(BaseApplication.getInstance().getHeadCropPath());// BitmapFactory.decodeStream(getContentResolver().openInputStream(destUri));
             civ_head.setImageBitmap(bitmap);
-            PictureUtils.saveBitmap(BaseApplication.getInstance().getHeadCropFile(), bitmap);
+            try {
+                PictureUtils.saveBitmap(BaseApplication.getInstance().getHeadCropFile(), bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

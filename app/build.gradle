@@ -65,4 +65,5 @@ dependencies {
     implementation files('libs/umeng-common-1.4.3.jar')
     implementation project(':PushSDK')
     implementation files('libs/umeng-analytics-7.4.1.jar')
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }

@@ -1771,7 +1771,14 @@
                 android:paddingLeft="@dimen/x24px"
                 android:paddingRight="@dimen/x24px">
 
-                <TextView
+                <com.doumengmeng.doctor.view.DevelopmentView
+                    android:id="@+id/v_development"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.doumengmeng.doctor.view.DevelopmentView>
+
+<!--                <TextView
                     android:id="@+id/tv_developmental_title"
                     style="@style/SecondBlack.Text28px"
                     android:layout_width="match_parent"
@@ -1787,7 +1794,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
 
 

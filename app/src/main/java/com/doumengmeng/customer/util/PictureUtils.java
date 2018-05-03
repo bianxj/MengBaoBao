@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Administrator on 2017/12/28.
@@ -258,29 +260,47 @@ public class PictureUtils {
         options.inSampleSize = calculateInSampleSize(options, 1280);
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(filePath, options);
+        return getSmallBitmap(BitmapFactory.decodeFile(filePath, options),1280);
     }
 
-    public static Bitmap rotateToPortrait(Bitmap bitmap){
-        return rotateToPortrait(bitmap,90F);
-    }
-
-    private static Bitmap rotateToPortrait(Bitmap bitmap,float degree){
-        int height = bitmap.getHeight();
+    private static Bitmap getSmallBitmap(Bitmap bitmap,int reqWidth){
         int width = bitmap.getWidth();
-        if ( height < width ){
-            Matrix matrix = new Matrix();
-            matrix.setRotate(degree);
-            Bitmap rotateBitmap = Bitmap.createBitmap(bitmap,0,0,width,height,matrix,false);
-            if ( rotateBitmap.equals(bitmap) ){
-                return bitmap;
-            }
-            bitmap.recycle();
-            return rotateBitmap;
+        int height = bitmap.getHeight();
+        float scale;
+        if ( width > height ){
+            scale = ((float) reqWidth)/width;
         } else {
-            return bitmap;
+            scale = ((float) reqWidth)/height;
         }
+        Matrix matrix = new Matrix();
+        matrix.postScale(scale,scale);
+        Bitmap smaller = Bitmap.createBitmap(bitmap,0,0,width,height,matrix,false);
+        if ( smaller != bitmap ){
+            bitmap.recycle();
+        }
+        return smaller;
     }
+
+//    public static Bitmap rotateToPortrait(Bitmap bitmap){
+//        return rotateToPortrait(bitmap,90F);
+//    }
+//
+//    private static Bitmap rotateToPortrait(Bitmap bitmap,float degree){
+//        int height = bitmap.getHeight();
+//        int width = bitmap.getWidth();
+//        if ( height < width ){
+//            Matrix matrix = new Matrix();
+//            matrix.setRotate(degree);
+//            Bitmap rotateBitmap = Bitmap.createBitmap(bitmap,0,0,width,height,matrix,false);
+//            if ( rotateBitmap.equals(bitmap) ){
+//                return bitmap;
+//            }
+//            bitmap.recycle();
+//            return rotateBitmap;
+//        } else {
+//            return bitmap;
+//        }
+//    }
 
 //    /**
 //     * 将照片添加到相册中
@@ -321,6 +341,14 @@ public class PictureUtils {
 //        return Base64.encodeToString(bytes, Base64.DEFAULT);
 //    }
 
+    public static void compressPicture(Context context,Uri uri,String target){
+        String path = getFilePath(context,uri);
+        int degree = getRotationDegree(path);
+        Bitmap bitmap = getSmallBitmap(path);
+        bitmap = rotateBitmap(bitmap,degree);
+        saveBitmapToPath(bitmap,target);
+    }
+
     public static void compressPicture(String source , String target) {
         Bitmap bitmap = getSmallBitmap(source);
         saveBitmapToPath(bitmap,target);
@@ -342,6 +370,23 @@ public class PictureUtils {
         }
     }
 
+    private static Bitmap rotateBitmap(Bitmap bitmap, float degree){
+        int height = bitmap.getHeight();
+        int width = bitmap.getWidth();
+//        if ( height < width ){
+        Matrix matrix = new Matrix();
+        matrix.setRotate(degree);
+        Bitmap rotateBitmap = Bitmap.createBitmap(bitmap,0,0,width,height,matrix,false);
+        if ( rotateBitmap.equals(bitmap) ){
+            return bitmap;
+        }
+        bitmap.recycle();
+        return rotateBitmap;
+//        } else {
+//            return bitmap;
+//        }
+    }
+
 //    public static void rotationNormalDegree(String path){
 //        int degree = getRotationDegree(path);
 //        DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
@@ -352,26 +397,52 @@ public class PictureUtils {
 //        }
 //    }
 //
-//    private static int getRotationDegree(String path){
-//        int degree = 0;
-//        try {
-//            ExifInterface exifInterface = new ExifInterface(path);
-//            int type = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL);
-//            switch (type) {
-//                case ExifInterface.ORIENTATION_ROTATE_90:
-//                    degree = 90;
-//                    break;
-//                case ExifInterface.ORIENTATION_ROTATE_180:
-//                    degree = 180;
-//                    break;
-//                case ExifInterface.ORIENTATION_ROTATE_270:
-//                    degree = 270;
-//                    break;
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return degree;
-//    }
+    private static int getRotationDegree(String path){
+        int degree = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface(path);
+            int type = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL);
+            switch (type) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return degree;
+    }
+
+    public static Bitmap loadBitmapFromResouce(Context context,int resId) throws Exception {
+        InputStream is = null;
+        try{
+            BitmapFactory.Options opt = new BitmapFactory.Options();
+            opt.inPreferredConfig = Bitmap.Config.RGB_565;
+            opt.inPurgeable = true;
+            opt.inInputShareable = true;
+            is = context.getResources().openRawResource(resId);
+
+            Bitmap bm = BitmapFactory.decodeStream(is, null, opt);
+            return bm;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally{
+            try {
+                if(is != null){
+                    is.close();
+                    is = null;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

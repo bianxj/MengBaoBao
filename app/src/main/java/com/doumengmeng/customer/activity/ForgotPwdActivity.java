@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.config.Constants;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
@@ -24,7 +25,7 @@ import com.doumengmeng.customer.request.RequestTask;
 import com.doumengmeng.customer.request.ResponseErrorCode;
 import com.doumengmeng.customer.request.task.LoginTask;
 import com.doumengmeng.customer.response.ForgotPwdResponse;
-import com.doumengmeng.customer.response.VCResponse;
+import com.doumengmeng.customer.response.VCForgotResponse;
 import com.doumengmeng.customer.util.FormatCheckUtil;
 import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.util.MyDialog;
@@ -160,9 +161,9 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
-//            BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
+            VCForgotResponse response = GsonUtil.getInstance().fromJson(result,VCForgotResponse.class);
             if ( ResponseErrorCode.SUCCESS == response.getErrorId() ) {
+                BaseApplication.getInstance().saveForgetSession(response.getResult().getForgetSesId());
                 countDown = Constants.VC_OVER_TIME;
                 handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
             } else {
@@ -286,13 +287,13 @@ public class ForgotPwdActivity extends BaseActivity {
         try {
             object.put("accountMobile",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
-//            object.put("code", BaseApplication.getInstance().getForgetVc());
             object.put("checkCode",et_vc.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Map<String,String> map = new HashMap<>();
         map.put(UrlAddressList.PARAM,object.toString());
+        map.put("forgetSesId",BaseApplication.getInstance().getForgetSession());
         return map;
     }
 

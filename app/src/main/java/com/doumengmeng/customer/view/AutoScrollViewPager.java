@@ -2,6 +2,7 @@ package com.doumengmeng.customer.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import android.widget.RadioGroup;
 import android.widget.Scroller;
 
 import com.doumengmeng.customer.R;
+import com.doumengmeng.customer.util.PictureUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -162,7 +164,14 @@ public class AutoScrollViewPager extends FrameLayout {
         ImageView imageView = new ImageView(context);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         imageView.setLayoutParams(params);
-        imageView.setImageResource(imageId);
+        Bitmap bitmap = null;
+        try {
+            bitmap = PictureUtils.loadBitmapFromResouce(getContext(),imageId);
+            imageView.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        imageView.setImageResource(imageId);
         return imageView;
     }
 

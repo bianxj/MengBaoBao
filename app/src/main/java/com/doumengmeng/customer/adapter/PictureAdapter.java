@@ -146,7 +146,7 @@ public class PictureAdapter extends BaseAdapter {
         public Bitmap getSmallBitmap() {
             if ( smallBitmap == null ){
                 smallBitmap = PictureUtils.getSmallBitmap(picturePath);
-                smallBitmap = PictureUtils.rotateToPortrait(smallBitmap);
+//                smallBitmap = PictureUtils.rotateToPortrait(smallBitmap);
             }
             return smallBitmap;
         }

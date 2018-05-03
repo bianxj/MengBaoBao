@@ -27,7 +27,7 @@ import com.doumengmeng.doctor.request.RequestTask;
 import com.doumengmeng.doctor.request.ResponseErrorCode;
 import com.doumengmeng.doctor.request.task.LoginTask;
 import com.doumengmeng.doctor.response.ForgotPwdResponse;
-import com.doumengmeng.doctor.response.VCResponse;
+import com.doumengmeng.doctor.response.VCForgotResponse;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.FormatCheckUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
@@ -179,9 +179,9 @@ public class ForgotPwdActivity extends BaseActivity {
 
         @Override
         public void onPostExecute(String result) {
-            VCResponse response = GsonUtil.getInstance().fromJson(result,VCResponse.class);
-//            BaseApplication.getInstance().saveForgetVc(response.getResult().getCode());
+            VCForgotResponse response = GsonUtil.getInstance().fromJson(result,VCForgotResponse.class);
             if ( ResponseErrorCode.SUCCESS ==  response.getErrorId() ) {
+                BaseApplication.getInstance().saveForgetSession(response.getResult().getForgetSesId());
                 countDown = 60;
                 handler.sendEmptyMessage(ForgotHandler.COUNT_DOWN);
             } else {
@@ -261,13 +261,13 @@ public class ForgotPwdActivity extends BaseActivity {
         try {
             object.put("doctorPhone",et_phone.getText().toString().trim());
             object.put("loginPwd",et_login_pwd.getText().toString().trim());
-//            object.put("code", BaseApplication.getInstance().getForgetVc());
             object.put("checkCode",et_vc.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Map<String,String> map = new HashMap<>();
         map.put(UrlAddressList.PARAM,object.toString());
+        map.put("forgetSesId",BaseApplication.getInstance().getForgetSession());
         return map;
     }
 

@@ -156,7 +156,7 @@ public class MLog {
         Arrays.sort(files, new Comparator<File>() {
             @Override
             public int compare(File o1, File o2) {
-                return o1.getName().compareTo(o2.getName());
+                return o2.getName().compareTo(o1.getName());
             }
         });
 

@@ -3,7 +3,6 @@ package com.doumengmeng.doctor.util;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,9 +13,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Base64;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -37,7 +34,16 @@ public class PictureUtils {
         }
     }
 
-    public static String getFilePath(Context context,Uri uri){
+    public static void saveGalleryBitmapToLocal(String savePath,Context context,Uri uri) throws IOException {
+        File saveFile = FileUtil.getIntance().createNewFile(savePath);
+        String path = getGalleryImagePath(context,uri);
+        int degree = getRotationDegree(path);
+        Bitmap bitmap = getSmallBitmap(path,1280);
+        bitmap = rotateBitmap(bitmap,degree);
+        saveBitmap(saveFile,bitmap);
+    }
+
+    private static String getGalleryImagePath(Context context,Uri uri){
         int sdkVersion = Build.VERSION.SDK_INT;
         if (sdkVersion >= 19) {
             return PictureUtils.getPath_above19(context, uri);
@@ -212,47 +218,40 @@ public class PictureUtils {
      *
      * @param options
      * @param reqWidth
-     * @param reqHeight
      * @return
      */
-    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        int height;
+    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth) {
         int width;
         int inSampleSize = 1;
 
         if ( options.outHeight > options.outWidth ){
-            height = options.outHeight;
             width = options.outWidth;
         } else {
-            height = options.outWidth;
             width = options.outHeight;
         }
 
-        if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height
-                    / (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        if ( width > reqWidth ){
+            inSampleSize = Math.round((float) width / (float) reqWidth);
         }
         return inSampleSize;
     }
 
-    /**
-     * 压缩指定byte[]图片，并得到压缩后的图像
-     *
-     * @param bts
-     * @param reqsW
-     * @param reqsH
-     * @return
-     */
-    public static Bitmap getSmallBitmap(byte[] bts, int reqsW, int reqsH) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
-        options.inSampleSize = calculateInSampleSize(options, reqsW, reqsH);
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
-    }
+//    /**
+//     * 压缩指定byte[]图片，并得到压缩后的图像
+//     *
+//     * @param bts
+//     * @param reqsW
+//     * @param reqsH
+//     * @return
+//     */
+//    public static Bitmap getSmallBitmap(byte[] bts, int reqsW, int reqsH) {
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+//        BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
+//        options.inSampleSize = calculateInSampleSize(options, reqsW, reqsH);
+//        options.inJustDecodeBounds = false;
+//        return BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
+//    }
 
 
         /**
@@ -261,25 +260,39 @@ public class PictureUtils {
          * @param filePath
          * @return
          */
-    public static Bitmap getSmallBitmap(String filePath, int reqWidth, int reqHeight) {
+    public static Bitmap getSmallBitmap(String filePath, int width) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;  //只返回图片的大小信息
         BitmapFactory.decodeFile(filePath, options);
         // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        options.inSampleSize = calculateInSampleSize(options, width);
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(filePath, options);
+        return getSmallBitmap(BitmapFactory.decodeFile(filePath, options),width);
     }
 
-    public static Bitmap rotateToPortrait(Bitmap bitmap){
-        return rotateToPortrait(bitmap,90F);
+    private static Bitmap getSmallBitmap(Bitmap bitmap,int reqWidth){
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float scale;
+        if ( width > height ){
+            scale = ((float)reqWidth)/width;
+        } else {
+            scale = ((float)reqWidth)/height;
+        }
+        Matrix matrix = new Matrix();
+        matrix.setScale(scale,scale);
+        Bitmap smaller = Bitmap.createBitmap(bitmap,0,0,width,height,matrix,false);
+        if ( smaller != bitmap ){
+            bitmap.recycle();
+        }
+        return smaller;
     }
 
-    private static Bitmap rotateToPortrait(Bitmap bitmap,float degree){
+    private static Bitmap rotateBitmap(Bitmap bitmap, float degree){
         int height = bitmap.getHeight();
         int width = bitmap.getWidth();
-        if ( height < width ){
+//        if ( height < width ){
             Matrix matrix = new Matrix();
             matrix.setRotate(degree);
             Bitmap rotateBitmap = Bitmap.createBitmap(bitmap,0,0,width,height,matrix,false);
@@ -288,21 +301,21 @@ public class PictureUtils {
             }
             bitmap.recycle();
             return rotateBitmap;
-        } else {
-            return bitmap;
-        }
+//        } else {
+//            return bitmap;
+//        }
     }
 
-    /**
-     * 将照片添加到相册中
-     */
-    public static void galleryAddPic(String mPublicPhotoPath, Context context) {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(mPublicPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        context.sendBroadcast(mediaScanIntent);
-    }
+//    /**
+//     * 将照片添加到相册中
+//     */
+//    public static void galleryAddPic(String mPublicPhotoPath, Context context) {
+//        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        File f = new File(mPublicPhotoPath);
+//        Uri contentUri = Uri.fromFile(f);
+//        mediaScanIntent.setData(contentUri);
+//        context.sendBroadcast(mediaScanIntent);
+//    }
 //    /**
 //     * 创建临时图片存储的路径
 //     *
@@ -318,50 +331,50 @@ public class PictureUtils {
 //        File file = new File(appDir, fileName);
 //        return file;
 //    }
+//
+//    /**
+//     * 图片转成string
+//     *
+//     * @param bitmap
+//     * @return
+//     */
+//    public static String convertBitmapToString(Bitmap bitmap) {
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();// outputstream
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        byte[] bytes = baos.toByteArray();// 转为byte数组
+//        return Base64.encodeToString(bytes, Base64.DEFAULT);
+//    }
 
-    /**
-     * 图片转成string
-     *
-     * @param bitmap
-     * @return
-     */
-    public static String convertBitmapToString(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();// outputstream
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] bytes = baos.toByteArray();// 转为byte数组
-        return Base64.encodeToString(bytes, Base64.DEFAULT);
-    }
-
-    public static void compressPicture(String source , String target, int reqWidth, int reqHeight) {
-        Bitmap bitmap = getSmallBitmap(source, reqWidth, reqHeight);
-        saveBitmapToPath(bitmap,target);
-    }
-
-    private static void saveBitmapToPath(Bitmap bitmap,String path){
-        File file = new File(path);
-        try {
-            if ( !file.exists() ){
-                file.createNewFile();
-            }
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if ( bitmap != null ){
-                bitmap.recycle();
-            }
-        }
-    }
-
-    public static void rotationNormalDegree(String path){
+//    public static void compressPicture(String source , String target, int reqWidth, int reqHeight) {
+//        Bitmap bitmap = getSmallBitmap(source, reqWidth, reqHeight);
+//        saveBitmapToPath(bitmap,target);
+//    }
+//
+//    private static void saveBitmapToPath(Bitmap bitmap,String path){
+//        File file = new File(path);
+//        try {
+//            if ( !file.exists() ){
+//                file.createNewFile();
+//            }
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if ( bitmap != null ){
+//                bitmap.recycle();
+//            }
+//        }
+//    }
+//
+//    public static void rotationNormalDegree(String path){
 //        int degree = getRotationDegree(path);
 //        DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
 //        if ( degree > 0 ){
 //            Bitmap bitmap = getSmallBitmap(path,metrics.widthPixels,metrics.heightPixels);
-//            bitmap = rotateToPortrait(bitmap,degree);
+//            bitmap = rotateBitmap(bitmap,degree);
 //            saveBitmapToPath(bitmap,path);
 //        }
-    }
+//    }
 
     private static int getRotationDegree(String path){
         int degree = 0;
@@ -385,10 +398,10 @@ public class PictureUtils {
         return degree;
     }
 
-    public static byte[] convertBitmapToByte(Bitmap bitmap){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        return baos.toByteArray();
-    }
+//    public static byte[] convertBitmapToByte(Bitmap bitmap){
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//        return baos.toByteArray();
+//    }
 
 }
