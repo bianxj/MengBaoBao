@@ -16,6 +16,7 @@ import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.db.DaoManager;
+import com.doumengmeng.customer.entity.AssessmentStatus;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
@@ -208,7 +209,7 @@ public class AssessmentActivity extends BaseActivity {
         String weight = record.getWeight();
         tv_height.setText(height);
         tv_weight.setText(weight);
-        tv_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(height),Float.parseFloat(weight))));
+        tv_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
     }
 
     private void initDiagram(){
@@ -232,7 +233,9 @@ public class AssessmentActivity extends BaseActivity {
      * 日期: 2018/1/16 16:48
      */
     private void initAssessmentResult(){
-        if ( "3".equals(record.getRecordStatus()) || "4".equals(record.getRecordStatus()) ){
+        if (AssessmentStatus.CUSTOMER_UNREAD.equals(record.getRecordStatus())
+                || AssessmentStatus.CUSTOMER_READED.equals(record.getRecordStatus())
+                || AssessmentStatus.REFUND.equals(record.getRecordStatus()) ){
             ll_assessment_result.setVisibility(View.VISIBLE);
             tv_weight_content.setText(record.getWeightEvaluation());
             tv_height_content.setText(record.getHeightEvaluation());
@@ -249,7 +252,8 @@ public class AssessmentActivity extends BaseActivity {
      * 日期: 2018/1/16 16:48
      */
     private void initReportInterpretation(){
-        if ( "3".equals(record.getRecordStatus()) || "4".equals(record.getRecordStatus()) ){
+        if ( AssessmentStatus.CUSTOMER_UNREAD.equals(record.getRecordStatus())
+                || AssessmentStatus.CUSTOMER_READED.equals(record.getRecordStatus()) ){
             ll_report_interpretation.setVisibility(View.VISIBLE);
             tv_report_content_1.setText(record.getGrowthTendencyAppraisal());
             tv_report_content_2.setText(record.getGrowthLevelAppraisal());
@@ -266,7 +270,8 @@ public class AssessmentActivity extends BaseActivity {
      * 日期: 2018/1/16 16:51
      */
     private void initParentingGuide(){
-        if ( "3".equals(record.getRecordStatus()) || "4".equals(record.getRecordStatus()) ){
+        if ( AssessmentStatus.CUSTOMER_UNREAD.equals(record.getRecordStatus())
+                || AssessmentStatus.CUSTOMER_READED.equals(record.getRecordStatus()) ){
             rl_parenting_guide.setVisibility(View.VISIBLE);
         } else {
             rl_parenting_guide.setVisibility(View.GONE);
@@ -274,10 +279,11 @@ public class AssessmentActivity extends BaseActivity {
     }
 
     private void initPromptMessage(){
-        if ( "1".equals(record.getRecordStatus()) || "2".equals(record.getRecordStatus()) ){
+        if ( AssessmentStatus.CUSTOMER_SUBMIT.equals(record.getRecordStatus())
+                || AssessmentStatus.DOCTOR_UNREAD.equals(record.getRecordStatus()) ){
             rl_prompt_message.setVisibility(View.VISIBLE);
             tv_prompt_message.setText(getResources().getString(R.string.assessment_wait_message));
-        } else if ( "5".equals(record.getRecordStatus()) ){
+        } else if ( AssessmentStatus.REFUND.equals(record.getRecordStatus()) ){
             rl_prompt_message.setVisibility(View.VISIBLE);
             tv_prompt_message.setText(getResources().getString(R.string.assessment_refund_message));
         } else {
@@ -567,7 +573,7 @@ public class AssessmentActivity extends BaseActivity {
 
     private RequestTask updateRequestTask;
     private void updateReadState(){
-        if ( "3".equals(record.getRecordStatus()) ) {
+        if ( AssessmentStatus.CUSTOMER_UNREAD.equals(record.getRecordStatus()) ) {
             try {
                 updateRequestTask = new RequestTask.Builder(this, callBack)
                         .setUrl(UrlAddressList.URL_UPDATE_RECORD_STATE)

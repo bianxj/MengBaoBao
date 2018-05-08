@@ -76,6 +76,7 @@ public class ResponseErrorCode {
     private static final int ERROR_CLIENT_PARAMS_EMPTY = -200;			//空参数
     private static final int ERROR_CLIENT_PARAM_FORMAT = -201;			//客户端参数格式错误
     private static final int ERROR_CLIENT_PARAM_COUNT = -202;			//客户端参数数目错误
+    private static final int ERROR_EVALUATION = -203;                   //医生端评估未成功
 
     //其他
     private static final int ERROR_UNKNOWN = -300;						//未知错误
@@ -146,6 +147,7 @@ public class ResponseErrorCode {
         errorCodeArray.put(ERROR_CLIENT_PARAMS_EMPTY,"空参数");
         errorCodeArray.put(ERROR_CLIENT_PARAM_FORMAT,"客户端参数格式错误");
         errorCodeArray.put(ERROR_CLIENT_PARAM_COUNT,"客户端参数数目错误");
+        errorCodeArray.put(ERROR_EVALUATION,"医生端评估未成功");
 
         errorCodeArray.put(ERROR_UNKNOWN,"未知错误");
         errorCodeArray.put(ERROR_MEMCACHE_DATA_NOT_EXIST,"没有相应的缓存数据");

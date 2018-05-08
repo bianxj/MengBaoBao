@@ -101,7 +101,6 @@ public class SpacialistServiceFragment extends BaseFragment {
             ll_buy.setVisibility(View.VISIBLE);
             rl_unbuy.setVisibility(View.GONE);
 
-            getRecord();
             String recordTimes = userData.getRecordtimes();
             tv_appraisal_count.setText(String.format(getResources().getString(R.string.spacialist_service_count),recordTimes));
             tv_baby_name.setText(userData.getTruename());
@@ -120,6 +119,7 @@ public class SpacialistServiceFragment extends BaseFragment {
                     rl_add_record.setVisibility(View.VISIBLE);
                 }
             }
+            getRecord();
         } else {
             ll_buy.setVisibility(View.GONE);
             rl_unbuy.setVisibility(View.VISIBLE);

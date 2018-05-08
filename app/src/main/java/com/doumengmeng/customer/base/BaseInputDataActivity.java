@@ -27,6 +27,16 @@ public class BaseInputDataActivity extends BaseActivity {
         initData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
     private void initData(){
         DayList dayList = BaseApplication.getInstance().getDayList();
         month = Integer.parseInt(dayList.getCurrentMonth());

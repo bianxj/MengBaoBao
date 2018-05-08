@@ -96,16 +96,18 @@ public class ViewfinderView extends View {
         laserDesRect = new Rect(rect.left+LASER_LANDSCAPE_BORDER,laserTopBorder,rect.right-LASER_LANDSCAPE_BORDER,laserTopBorder+ laserHeight);
 
         a.recycle();
+        setWillNotDraw(false);
     }
 
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+//        super.onDraw(canvas);
         drawMask(canvas);
         drawBorder(canvas);
-        drawLaser(canvas);
-        postInvalidateDelayed(ANIMATION_DELAY,rect.left+borderSize,rect.top+borderSize,rect.right-borderSize,rect.bottom-borderSize);
+//        drawLaser(canvas);
+//        invalidate();
+//        postInvalidateDelayed(ANIMATION_DELAY,rect.left+borderSize,rect.top+borderSize,rect.right-borderSize,rect.bottom-borderSize);
     }
 
     private void drawMask(Canvas canvas){
@@ -150,6 +152,10 @@ public class ViewfinderView extends View {
             laserDesRect.bottom = laserDesRect.bottom+laserMove;
         }
         canvas.drawBitmap(lazer, laserSrcRect, laserDesRect,paint);
+    }
+
+    public Rect getFrameRect(){
+        return rect;
     }
 
     public Rect getScanRect(int top,int left){

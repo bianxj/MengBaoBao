@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.DiskCacheUtils;
 import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 
 import java.io.File;
@@ -46,7 +47,7 @@ public class BaseApplication extends Application {
         initImageLoader();
         initMLog();
         initCrashHandler();
-        initPush();
+        initUMeng();
         application = this;
     }
 
@@ -65,9 +66,10 @@ public class BaseApplication extends Application {
         return application;
     }
 
-    public void initPush(){
+    public void initUMeng(){
         UMConfigure.setLogEnabled(true);
-        UMConfigure.init(this,"5a6e8ad4f43e4803e300008d","Umeng",UMConfigure.DEVICE_TYPE_PHONE,"5aa0b627542b2f3d0a297401addd6ee1");
+        UMConfigure.init(this,"5aefba74f29d9835520000f7","Umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
     }
 
     public MLog getMLog(){

@@ -63,15 +63,15 @@ public class HospitalReportFragment extends BaseFragment {
         if ( isVisible() && !isHidden() ) {
             initView();
             MobclickAgent.onPageStart(getClass().getSimpleName());
-            MobclickAgent.onResume(getContext());
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(getContext());
-        MobclickAgent.onPageEnd(getClass().getSimpleName());
+        if ( isVisible() && !isHidden() ) {
+            MobclickAgent.onPageEnd(getClass().getSimpleName());
+        }
     }
 
     private void findView(View view){

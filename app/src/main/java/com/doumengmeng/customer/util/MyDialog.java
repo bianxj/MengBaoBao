@@ -28,6 +28,8 @@ import android.widget.Toast;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.view.MyGifPlayer;
 import com.doumengmeng.customer.view.PayItemLayout;
+import com.github.chrisbanes.photoview.OnOutsidePhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.List;
 
@@ -357,8 +359,15 @@ public class MyDialog {
         synchronized (pictureLock){
             pictureDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_picture,null);
-            ImageView iv_picture = view.findViewById(R.id.iv_picture);
+            LinearLayout ll = view.findViewById(R.id.ll);
+            PhotoView iv_picture = view.findViewById(R.id.iv_picture);
             iv_picture.setImageBitmap(bitmap);
+            iv_picture.setOnOutsidePhotoTapListener(new OnOutsidePhotoTapListener() {
+                @Override
+                public void onOutsidePhotoTap(ImageView imageView) {
+                    dismissPictureDialog();
+                }
+            });
             pictureDialog.setContentView(view);
             pictureDialog.show();
         }

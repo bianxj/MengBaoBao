@@ -203,10 +203,14 @@ public class MainActivity extends BaseFragmentActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //截取返回键
         if ( keyCode == KeyEvent.KEYCODE_BACK ){
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            startActivity(intent);
+            if ( currentFragment == fragmentMap.get(PAGE_MESSAGE_DETAIL) ){
+                switchFragment(MainActivity.PAGE_MESSAGE);
+            } else {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
+            }
             return true;
         }
         return super.onKeyDown(keyCode, event);

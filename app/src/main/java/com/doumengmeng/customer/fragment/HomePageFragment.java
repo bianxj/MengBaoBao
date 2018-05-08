@@ -165,14 +165,20 @@ public class HomePageFragment extends BaseFragment {
     private final AutoScrollViewPager.OnClickCallBack onClickCallBack = new AutoScrollViewPager.OnClickCallBack() {
         @Override
         public void onClick(int position) {
-            String doctorName = "马骏";
-            if ( 1 == position ) {
-                doctorName = "金星明";
+//            String doctorName = "马骏";
+//            if ( 1 == position ) {
+//                doctorName = "金星明";
+//            } else if ( 2 == position ){
+//                doctorName = "章依雯";
+//            }
+            String doctorId = "17";
+            if ( 1 == position ){
+                doctorId = "4";
             } else if ( 2 == position ){
-                doctorName = "章依雯";
+                doctorId = "49";
             }
             Intent intent = new Intent(getContext(),DoctorInfoActivity.class);
-            intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_NAME , doctorName);
+            intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_ID , doctorId);
             startActivity(intent);
         }
     };

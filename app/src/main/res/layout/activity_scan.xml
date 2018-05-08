@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <SurfaceView
-            android:id="@+id/sv_scan"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <SurfaceView
+        android:id="@+id/sv_scan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-        <FrameLayout
-            android:id="@+id/fl_shade"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible">
+    <FrameLayout
+        android:id="@+id/fl_shade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
 
         <com.doumengmeng.customer.view.ViewfinderView
             android:id="@+id/vfv_scan"
@@ -24,39 +24,47 @@
             app:cent_x="@dimen/x360px"
             app:cent_y="@dimen/y600px"
             app:mask_color="@color/scanMask"
-            app:side_size="@dimen/x400px"/>
+            app:side_size="@dimen/x400px" />
 
         <CheckBox
             android:id="@+id/cb_flash"
             android:layout_width="@dimen/y40px"
             android:layout_height="@dimen/y59px"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/y713px"
             android:background="@drawable/icon_flash"
             android:button="@null"
-            android:checked="false"
-            android:layout_gravity="center_horizontal"
-            />
+            android:checked="false" />
 
         <TextView
+            style="@style/FirstWhite.Text26px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/FirstWhite.Text26px"
-            android:text="@string/scan_hint"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/y810px"
-            android:layout_gravity="center_horizontal"/>
+            android:text="@string/scan_hint" />
 
         <TextView
             android:id="@+id/tv_photo_album"
+            style="@style/FirstWhite.Text34px"
             android:layout_width="@dimen/x100px"
             android:layout_height="@dimen/y49px"
-            android:text="@string/scan_photo_album"
             android:layout_gravity="bottom|right"
-            android:gravity="center"
-            style="@style/FirstWhite.Text34px"
-            android:layout_marginRight="@dimen/x40px"
             android:layout_marginBottom="@dimen/y60px"
-            />
-        </FrameLayout>
+            android:layout_marginRight="@dimen/x40px"
+            android:gravity="center"
+            android:text="@string/scan_photo_album" />
 
-        <include layout="@layout/include_title_back" />
+        <ImageView
+            android:id="@+id/iv_lazer"
+            android:layout_width="@dimen/x386px"
+            android:layout_height="@dimen/x10px"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/icon_lazer"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
+
+    <include layout="@layout/include_title_back" />
 </FrameLayout>

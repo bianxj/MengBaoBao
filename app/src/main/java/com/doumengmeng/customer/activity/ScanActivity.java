@@ -19,9 +19,12 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +73,7 @@ public class ScanActivity extends BaseActivity {
     private CheckBox cb_flash;
     private ViewfinderView vfv_scan;
     private FrameLayout fl_shade;
+    private ImageView iv_lazer;
 
     private SurfaceView sv_scan;
 
@@ -194,6 +198,7 @@ public class ScanActivity extends BaseActivity {
         cb_flash = findViewById(R.id.cb_flash);
         vfv_scan = findViewById(R.id.vfv_scan);
         fl_shade = findViewById(R.id.fl_shade);
+        iv_lazer = findViewById(R.id.iv_lazer);
     }
 
     private void initView(){
@@ -205,6 +210,25 @@ public class ScanActivity extends BaseActivity {
         holder = sv_scan.getHolder();
         holder.addCallback(holderCallback);
         cameraManager = new CameraManager(getApplicationContext());
+//        fl_shade.setVisibility(View.VISIBLE);
+    }
+
+    private void startLazerAnime(){
+        Rect rect = vfv_scan.getFrameRect();
+        iv_lazer.setVisibility(View.VISIBLE);
+        Animation animation = new TranslateAnimation(0,0,rect.top,rect.bottom-20);
+        animation.setDuration(1500);
+        animation.setRepeatCount(Animation.INFINITE);
+        iv_lazer.clearAnimation();
+        iv_lazer.startAnimation(animation);
+    }
+
+    private void stopLazerAnime(){
+        Animation animation = iv_lazer.getAnimation();
+        if ( animation != null ){
+            animation.cancel();
+        }
+        iv_lazer.clearAnimation();
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -275,6 +299,8 @@ public class ScanActivity extends BaseActivity {
 
     private void startScan(){
         fl_shade.setVisibility(View.VISIBLE);
+        startLazerAnime();
+
         canScan = true;
         if ( !hasSurface ){
             return;
@@ -310,12 +336,31 @@ public class ScanActivity extends BaseActivity {
             cameraManager.stopPreview();
             cameraManager.closeDriver();
         }
+        stopLazerAnime();
     }
 
     private final CameraManager.PreviewCallback previewCallback = new CameraManager.PreviewCallback() {
 
         @Override
         public void onPreviewFrame(byte[] data, Camera camera, int height, int width) {
+            new Thread(new ScanDecodeRunnable(data,height,width)).start();
+        }
+    };
+
+    private class ScanDecodeRunnable implements Runnable{
+
+        private byte[] data;
+        private int height;
+        private int width;
+
+        public ScanDecodeRunnable(byte[] data, int height, int width) {
+            this.data = data;
+            this.height = height;
+            this.width = width;
+        }
+
+        @Override
+        public void run() {
             byte[] rotatedData = new byte[data.length];
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++)
@@ -329,13 +374,17 @@ public class ScanActivity extends BaseActivity {
 
             Result result = cameraManager.decode(rect,rotatedData,width,height);
             if ( result != null ){
-                resultBack(result.getText());
+//                resultBack(result.getText());
+                Message message = handler.obtainMessage();
+                message.what = MESSAGE_DECODE_RESULT;
+                message.obj = result;
+                handler.sendMessage(message);
 //                Toast.makeText(ScanActivity.this,result.getText(), Toast.LENGTH_SHORT).show();
             } else {
                 cameraManager.requestPreviewFrame(previewCallback);
             }
         }
-    };
+    }
 
     private final SurfaceHolder.Callback holderCallback = new SurfaceHolder.Callback() {
         @Override

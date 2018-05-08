@@ -113,17 +113,17 @@ public class AssessmentParentingGuideActivity extends BaseTimeFragmentActivity {
         }
         nurtureMap = classifyNurtures(nurtures);
         buildTabTitles(tab_layout,nurtureMap.keySet());
-        buildPageFragments(vp,fragments,nurtureMap);
+        buildPageFragments(vp,fragments,nurtureMap,age+"");
     }
 
-    private void buildPageFragments(ViewPager vp,List<ParentingGuideFragment> fragments,Map<String, List<Nurture>> nurtureMap){
+    private void buildPageFragments(ViewPager vp,List<ParentingGuideFragment> fragments,Map<String, List<Nurture>> nurtureMap,String age){
         adapter = new ParentingGuideAdapter(fm);
         Set<String> keys = nurtureMap.keySet();
         for (String key:keys){
             ParentingGuideFragment fragment = new ParentingGuideFragment();
             List<Nurture> nurtures = nurtureMap.get(key);
             nurtures.add(buildCustomNurture(nurtures.get(0)));
-            fragment.setNurtures(nurtureMap.get(key));
+            fragment.setNurtures(age,nurtureMap.get(key));
             adapter.addFragment(fragment);
             fragments.add(fragment);
         }

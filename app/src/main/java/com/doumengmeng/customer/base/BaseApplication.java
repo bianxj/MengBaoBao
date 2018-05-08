@@ -28,9 +28,6 @@ import com.nostra13.universalimageloader.utils.DiskCacheUtils;
 import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
-import com.umeng.message.IUmengRegisterCallback;
-import com.umeng.message.MsgConstant;
-import com.umeng.message.PushAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,23 +77,22 @@ public class BaseApplication extends Application {
 
     public void initPush(){
         UMConfigure.setLogEnabled(true);
-        UMConfigure.init(this,"5a6e8ad4f43e4803e300008d","Umeng",UMConfigure.DEVICE_TYPE_PHONE,"5aa0b627542b2f3d0a297401addd6ee1");
-
-        PushAgent mPushAgent = PushAgent.getInstance(this);
-        mPushAgent.setNotificationPlaySound(MsgConstant.NOTIFICATION_PLAY_SDK_ENABLE);
-
-        //注册推送服务 每次调用register都会回调该接口
-        mPushAgent.register(new IUmengRegisterCallback() {
-            @Override
-            public void onSuccess(String deviceToken) {
-            }
-
-            @Override
-            public void onFailure(String s, String s1) {
-            }
-        });
-
+        UMConfigure.init(this,"5a6e8ad4f43e4803e300008d","Umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
+//        PushAgent mPushAgent = PushAgent.getInstance(this);
+//        mPushAgent.setNotificationPlaySound(MsgConstant.NOTIFICATION_PLAY_SDK_ENABLE);
+//
+//        //注册推送服务 每次调用register都会回调该接口
+//        mPushAgent.register(new IUmengRegisterCallback() {
+//            @Override
+//            public void onSuccess(String deviceToken) {
+//            }
+//
+//            @Override
+//            public void onFailure(String s, String s1) {
+//            }
+//        });
     }
 
     public MLog getMLog(){
@@ -379,7 +375,7 @@ public class BaseApplication extends Application {
 
     public void payRoleType(){
         RoleType roleType = getRoleType();
-        UserData userData = getUserData();
+//        UserData userData = getUserData();
         if ( roleType == RoleType.FREE_NET_USER ){
             setRoleType(RoleType.PAY_NET_USER);
         } else if ( roleType == RoleType.FREE_HOSPITAL_USER ){

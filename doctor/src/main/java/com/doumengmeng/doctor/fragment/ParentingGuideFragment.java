@@ -38,7 +38,8 @@ public class ParentingGuideFragment extends BaseFragment {
     private List<CheckBox> ages = new ArrayList<>();
     private List<View> contents = new ArrayList<>();
 
-    private int position = 0;
+    private String age;
+    private int position = -1;
 
     @Nullable
     @Override
@@ -51,7 +52,21 @@ public class ParentingGuideFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        ages.get(position).setChecked(true);
+        if ( position == -1 ){
+            for (int i=0;i<ages.size();i++){
+                if ( age.equals(ages.get(i).getText()) ){
+                    position = i;
+                    ages.get(i).setChecked(true);
+                    break;
+                }
+            }
+            if ( position == -1 ){
+                position = ages.size()/2;
+                ages.get(ages.size()/2).setChecked(true);
+            }
+        } else {
+            ages.get(position).setChecked(true);
+        }
         loadCustomerNurture();
     }
 
@@ -175,7 +190,8 @@ public class ParentingGuideFragment extends BaseFragment {
         return null;
     }
 
-    public void setNurtures(List<Nurture> nurtures){
+    public void setNurtures(String age,List<Nurture> nurtures){
+        this.age = age;
         this.nurtures = nurtures;
     }
 

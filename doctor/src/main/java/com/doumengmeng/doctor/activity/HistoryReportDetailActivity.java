@@ -187,7 +187,7 @@ public class HistoryReportDetailActivity extends BaseActivity {
         String weight = report.getWeight();
         tv_height.setText(height);
         tv_weight.setText(weight);
-        tv_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(height),Float.parseFloat(weight))));
+        tv_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
     }
 
     private void initDiagram(){

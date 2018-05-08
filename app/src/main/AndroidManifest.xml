@@ -29,6 +29,15 @@
             android:value="FfGPctd4m1kK0zTOF9el2C5fepRDLYZ9" />
 
         <!--android:name=".activity.GuideActivity"-->
+<!--        <activity
+            android:name=".test.TestActivity"
+            android:screenOrientation="portrait"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>
+        </activity>-->
         <activity
             android:name=".activity.GuideActivity"
             android:screenOrientation="portrait"

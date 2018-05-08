@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by Administrator on 2018/2/26.
@@ -33,6 +34,18 @@ public class GuideActivity extends BaseActivity {
             intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     private void initView(){

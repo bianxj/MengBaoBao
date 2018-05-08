@@ -46,13 +46,11 @@ public class BabyKnowledgeDetailsActivity extends BaseActivity {
         super.onResume();
         System.out.println(getClass().getSimpleName());
         MobclickAgent.onPageStart(getClass().getSimpleName());
-        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
         MobclickAgent.onPageEnd(getClass().getSimpleName());
     }
 

@@ -121,7 +121,7 @@ public class LoadingActivity extends BaseActivity {
         PermissionUtil.onRequestPermissionsResult(this, requestCode, permissions, grantResults, new PermissionUtil.RequestPermissionSuccess() {
             @Override
             public void success(String permission) {
-                BaseApplication.getInstance().initPush();
+                BaseApplication.getInstance().initUMeng();
                 loading();
             }
 
