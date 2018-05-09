@@ -21,6 +21,7 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:fitsSystemWindows="true"
         android:theme="@style/AppTheme"
         android:name="com.doumengmeng.customer.base.BaseApplication"
         android:fullBackupContent="false">
@@ -42,14 +43,15 @@
             android:name=".activity.GuideActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppLauncher"
+            android:launchMode="singleTop"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
-        <activity android:name="com.doumengmeng.customer.activity.LoginActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name="com.doumengmeng.customer.activity.RegisterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.LoginActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.RegisterActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.ForgotPwdActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.AgreementActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.LoadingActivity" android:screenOrientation="portrait"></activity>
@@ -139,6 +141,14 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
+
+        <receiver android:name=".receiver.NotificationReceiver"
+            android:exported="false"
+            >
+            <intent-filter>
+                <action android:name="com.doumengmeng.customer.show.notification"></action>
+            </intent-filter>
+        </receiver>
 
     </application>
 </manifest>

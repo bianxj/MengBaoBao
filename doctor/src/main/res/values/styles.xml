@@ -13,6 +13,20 @@
         <item name="android:screenOrientation">portrait</item>
     </style>
 
+    <style name="StatusBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:activityOpenEnterAnimation">@anim/left_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/right_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/right_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/left_out</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
     <style name="EditTextView">
         <item name="android:textSize">@dimen/y30px</item>
         <item name="android:textColor">@color/colorEditText</item>

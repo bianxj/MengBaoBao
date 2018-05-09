@@ -28,16 +28,9 @@ public class GuideActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_guide);
         findView();
         initView();
-
-        if (BaseApplication.getInstance().hasAccountData()){
-            Intent intent = new Intent(this,LoadingActivity.class);
-            intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
-            startActivity(intent);
-        }
     }
 
     @SuppressLint("WrongConstant")
@@ -45,6 +38,11 @@ public class GuideActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (BaseApplication.getInstance().hasAccountData()){
+            Intent intent = new Intent(this,LoadingActivity.class);
+            intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
+            startActivity(intent);
+        }
     }
 
     @Override

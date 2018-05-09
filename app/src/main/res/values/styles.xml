@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -11,6 +11,18 @@
         <item name="android:activityCloseEnterAnimation">@anim/right_in</item>
         <item name="android:activityCloseExitAnimation">@anim/left_out</item>
         <item name="android:screenOrientation">portrait</item>
+    </style>
+
+    <style name="StatusBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:activityOpenEnterAnimation">@anim/left_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/right_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/right_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/left_out</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <!--FirstBlack start-->

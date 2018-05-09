@@ -31,6 +31,7 @@
         <activity android:name=".activity.GuideActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppLauncher"
+            android:launchMode="singleTop"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

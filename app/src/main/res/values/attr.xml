@@ -28,6 +28,7 @@
         <attr name="page_height" format="dimension" />
         <attr name="page_margin_top" format="dimension" />
         <attr name="canLoop" format="boolean" />
+        <attr name="fitxy" format="boolean"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyGifPlayer">

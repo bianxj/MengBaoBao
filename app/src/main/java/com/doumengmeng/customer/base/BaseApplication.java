@@ -13,11 +13,13 @@ import com.doumengmeng.customer.activity.GuideActivity;
 import com.doumengmeng.customer.entity.LoginInfo;
 import com.doumengmeng.customer.entity.RoleType;
 import com.doumengmeng.customer.request.entity.InputUserInfo;
+import com.doumengmeng.customer.response.InitConfigureResponse;
 import com.doumengmeng.customer.response.entity.DayList;
 import com.doumengmeng.customer.response.entity.ParentInfo;
 import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.util.MLog;
+import com.doumengmeng.customer.util.NotificationUtil;
 import com.doumengmeng.customer.util.SharedPreferencesUtil;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -181,11 +183,46 @@ public class BaseApplication extends Application {
 
     public final static String COLUMN_CORRENT_DAY = "corrent_day";
     public final static String COLUMN_CORRENT_MONTH = "corrent_month";
-    public final static String COLUMN_CURRENT_DAY = "current_day";    public void clearUserData(){
+    public final static String COLUMN_CURRENT_DAY = "current_day";
+
+    public final static String COLUMN_NOTIFICATION_DATA = "notification_data";
+    public final static String[] COLUMN_NOTIFICATION_NAME = {
+            "first_notification",
+            "second_notification"
+    };
+
+    public void saveNotificationData(InitConfigureResponse.NotificationData data){
+        InitConfigureResponse.NotificationData history = loadNotificationData();
+        if ( !data.equals(history) ){
+            SharedPreferencesUtil.saveString(this,TABLE_USER,COLUMN_NOTIFICATION_DATA,GsonUtil.getInstance().toJson(data));
+            for (String key:COLUMN_NOTIFICATION_NAME){
+                saveNotificationStatus(key,false);
+            }
+        }
+    }
+
+    public void saveNotificationStatus(String name,boolean isShowed){
+        SharedPreferencesUtil.saveBoolean(this,TABLE_USER,name,isShowed);
+    }
+
+    public  boolean loadNotificationStatus(String name){
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_USER,name,false);
+    }
+
+    public InitConfigureResponse.NotificationData loadNotificationData(){
+        String data = SharedPreferencesUtil.loadString(this,TABLE_USER,COLUMN_NOTIFICATION_DATA,null);
+        if ( data != null ){
+            return GsonUtil.getInstance().fromJson(data, InitConfigureResponse.NotificationData.class);
+        }
+        return null;
+    }
+
+    public void clearUserData(){
         userData = null;
         parentInfo = null;
         loginInfo = null;
         SharedPreferencesUtil.clearTable(this,TABLE_USER);
+        NotificationUtil.clearReserve(this);
     }
     public final static String COLUMN_CURRENT_MONTH = "current_month";
 

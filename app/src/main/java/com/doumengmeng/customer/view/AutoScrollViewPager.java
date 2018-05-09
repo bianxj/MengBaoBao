@@ -45,6 +45,7 @@ public class AutoScrollViewPager extends FrameLayout {
     private int pageHeight;
     private int pageMarginTop;
     private boolean canLoop = false;
+    private boolean fitxy = false;
 
     private final Context context;
     private CustomViewPager viewPager;
@@ -82,13 +83,19 @@ public class AutoScrollViewPager extends FrameLayout {
         pageHeight = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_page_height,0);
         pageMarginTop = array.getDimensionPixelSize(R.styleable.AutoScrollViewPager_page_margin_top,0);
         canLoop = array.getBoolean(R.styleable.AutoScrollViewPager_canLoop,false);
+        fitxy = array.getBoolean(R.styleable.AutoScrollViewPager_fitxy,false);
         array.recycle();
     }
 
     private void initViewPager(){
         viewPager = new CustomViewPager(context);
         viewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,pageHeight);
+        LayoutParams params = null;
+        if ( 0 == pageHeight ) {
+            params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        } else {
+            params = new LayoutParams(LayoutParams.MATCH_PARENT, pageHeight);
+        }
         params.topMargin = pageMarginTop;
         viewPager.setLayoutParams(params);
         addView(viewPager);
@@ -162,7 +169,13 @@ public class AutoScrollViewPager extends FrameLayout {
 
     private ImageView createImageView(int imageId){
         ImageView imageView = new ImageView(context);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams params = null;
+        if ( fitxy ){
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        } else {
+            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
         imageView.setLayoutParams(params);
         Bitmap bitmap = null;
         try {
@@ -178,6 +191,7 @@ public class AutoScrollViewPager extends FrameLayout {
     private void initDotLayout(){
         if ( isDotVisible() ) {
             dotLayout = new RadioGroup(context);
+            dotLayout.setBackgroundColor(getContext().getResources().getColor(R.color.transparent));
             LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
             params.bottomMargin = dotMarginBottom;

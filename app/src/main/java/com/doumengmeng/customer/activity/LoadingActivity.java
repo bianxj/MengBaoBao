@@ -38,14 +38,18 @@ import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.util.AppUtil;
 import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.util.MyDialog;
+import com.doumengmeng.customer.util.NotificationUtil;
 import com.doumengmeng.customer.util.PermissionUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -467,6 +471,7 @@ public class LoadingActivity extends BaseActivity {
 
     private final Handler loadingHandler = new LoadingHandler(this);
 
+    private final static long DAY = 24*60*60*1000;
     private class SaveDataRunnable implements Runnable{
 
         private final InitConfigureResponse response;
@@ -493,8 +498,37 @@ public class LoadingActivity extends BaseActivity {
             BaseApplication.getInstance().saveParentInfo(result.getParentInfo());
             BaseApplication.getInstance().saveDayList(result.getDayList());
 
+            InitConfigureResponse.NotificationData notificationData = result.getNextTimeList();
+
+            if ( !TextUtils.isEmpty(notificationData.getNexttime()) ){
+                BaseApplication.getInstance().saveNotificationData(notificationData);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+                try {
+                    long now = System.currentTimeMillis();
+                    long lastTime = format.parse(notificationData.getNexttime()).getTime();
+                    long secondTime = lastTime - DAY;
+                    long firstTime = lastTime  - (2*DAY);
+
+                    reserveNotification(now,firstTime,0,notificationData.getNoticeTitle(),notificationData.getNoticeContent());
+                    reserveNotification(now,secondTime,1,notificationData.getNoticeTitle(),notificationData.getNoticeContent());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
             BaseApplication.getInstance().removeMainPage();
             loadingHandler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
+        }
+    }
+
+    private void reserveNotification(long now,long notificationTime,int index,String title,String content){
+        if (!BaseApplication.getInstance().loadNotificationStatus(BaseApplication.COLUMN_NOTIFICATION_NAME[index])) {
+            if (now < notificationTime) {
+                NotificationUtil.reserveNotification(this, notificationTime, index);
+            } else if ((now - notificationTime) < DAY) {
+                NotificationUtil.showNotification(this, title, content);
+                BaseApplication.getInstance().saveNotificationStatus(BaseApplication.COLUMN_NOTIFICATION_NAME[index], true);
+            }
         }
     }
 
