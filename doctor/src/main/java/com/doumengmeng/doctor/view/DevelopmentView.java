@@ -1,11 +1,14 @@
 package com.doumengmeng.doctor.view;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -21,7 +24,7 @@ import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.response.entity.Feature;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -87,12 +90,12 @@ public class DevelopmentView extends LinearLayout {
     private void initDevelopment(Map<String,List<DevelopmentView.DevelopmentalItem>> maps){
         Set<String> keys = maps.keySet();
         for (String key:keys){
-            ll_content.addView(createSubItem(key,maps.get(key)),0);
+            ll_content.addView(createSubItem(key,maps.get(key)));
         }
     }
 
     private Map<String,List<DevelopmentView.DevelopmentalItem>> generateDevelopmentData(String correntMonth , String recordTime, List<String> selected){
-        Map<String,List<DevelopmentView.DevelopmentalItem>> map = new HashMap<>();
+        Map<String,List<DevelopmentView.DevelopmentalItem>> map = new LinkedHashMap<>();
 
         List<String> ages = new ArrayList<>();
         ages.add(correntMonth);
@@ -193,11 +196,15 @@ public class DevelopmentView extends LinearLayout {
             textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
             textParam.topMargin = -1*getResources().getDimensionPixelOffset(R.dimen.y5px);
             tv_content.setLayoutParams(textParam);
+            tv_content.setGravity(Gravity.CENTER_VERTICAL);
             if ( content.isMark ) {
-                String value = content.getValue()+"*";
+                String value = content.getValue()+" *";
                 SpannableStringBuilder style = new SpannableStringBuilder(value);
-                style.setSpan(new ForegroundColorSpan(Color.RED), value.length()-1, value.length(),
+                style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.first_pink)), value.length()-1, value.length(),
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                style.setSpan(new StyleSpan(Typeface.BOLD), value.length()-1, value.length(),
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                style.setSpan(new AbsoluteSizeSpan(((int)tv_content.getTextSize())+2), value.length()-1, value.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 tv_content.setText(style);
             } else {
                 tv_content.setText(content.getValue());

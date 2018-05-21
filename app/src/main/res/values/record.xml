@@ -2,6 +2,7 @@
 <resources>
     //身高数据
     <string-array name="height_reference_girl">
+        <item>参考值：49.00~53.00厘米</item>
         <item>参考值：51.80~59.60厘米</item>
         <item>参考值：55.50~62.60厘米</item>
         <item>参考值：58.40~66.60厘米</item>
@@ -40,6 +41,7 @@
         <item>参考值：92.50~106.20厘米</item>
     </string-array>
     <string-array name="height_reference_boy">
+        <item>参考值：49.00~53.00厘米</item>
         <item>参考值：52.50~60.50厘米</item>
         <item>参考值：56.40~64.00厘米</item>
         <item>参考值：60.20~67.30厘米</item>
@@ -78,6 +80,7 @@
         <item>参考值：93.00~107.60厘米</item>
     </string-array>
     <string-array name="height_increase">
+        <item />
         <item />
         <item>平均每月增长约4厘米</item>
         <item>比初生时平均增长约11–13厘米 </item>
@@ -128,6 +131,7 @@
 
     //体重数据
     <string-array name="weight_reference_girl">
+        <item>参考值：3.20~4.90公斤</item>
         <item>参考值：3.66~5.81公斤</item>
         <item>参考值：4.70~7.15公斤</item>
         <item>参考值：5.40~8.00公斤</item>
@@ -164,9 +168,9 @@
         <item>参考值：11.15~17.37公斤</item>
         <item>参考值：11.15~17.37公斤</item>
         <item>参考值：12.20~19.08公斤</item>
-        <item>参考值：12.20~19.08公斤</item>
     </string-array>
     <string-array name="weight_reference_boy">
+        <item>参考值：3.20~4.90公斤</item>
         <item>参考值：3.98~6.30公斤</item>
         <item>参考值：5.00~7.80公斤</item>
         <item>参考值：5.95~8.60公斤</item>
@@ -205,6 +209,7 @@
         <item>参考值：12.50~20.15公斤</item>
     </string-array>
     <string-array name="weight_increase">
+        <item />
         <item />
         <item>平均每个月增长1000–1200克</item>
         <item>平均每个月增长1000–1200克     满3个月体重约等于出生体重的2倍</item>
@@ -256,6 +261,7 @@
 
     //奶量数据
     <string-array name="milk_reference">
+        <item>参考值：24小时母乳摄入量400–1000ml，平均每次50~100ml，8~10次</item>
         <item>参考值：24小时母乳摄入量440–1220ml，平均每次60~100ml，每次40分钟， 平均每天约800ml。配方奶须严格按照产品说明的方法进行奶粉调配，避免过稀或过浓，或额外加糖。奶量约为500–750ml</item>
         <item>参考值：0~3个月的小婴儿每日多次、按需哺乳，3月龄内婴儿应按需喂哺，8~12次，每次100~150ml，每次30分钟，乳量约500~750ml/天</item>
         <item>参考值：0~3个月的小婴儿每日多次、按需哺乳，3月龄内婴儿应按需喂哺，8~12次，每次100~150ml，每次30分钟，乳量约500~750ml/天</item>
@@ -311,6 +317,7 @@
 
     //夜间睡眠
     <string-array name="sleep_reference">
+        <item>参考值：平均夜间睡眠时间为8.5小时，平均日间睡眠时间为8.75小时，平均总计睡眠时间17.25小时。</item>
         <item>参考值：平均夜间睡眠时间为8.5小时，平均日间睡眠时间为7小时，平均总计睡眠时间15.5小时。</item>
         <item>参考值：平均夜间睡眠时间为8.5小时，平均日间睡眠时间为7小时，平均总计睡眠时间15.5小时。</item>
         <item>参考值：平均夜间睡眠时间为10小时，平均日间睡眠时间为5小时，平均总计睡眠时间15小时。</item>
@@ -357,6 +364,7 @@
 
     //排便
     <string-array name="cacation_content">
+        <item>每天2–4次</item>
         <item>2个月后的母乳喂养婴儿，每天1–2次，以牛乳或其它替代乳品喂养者，大便次数较少，每天1次或2~3天1次；母乳不足可使婴儿大便次数减少</item>
         <item>2个月后的母乳喂养婴儿，每天1–2次，以牛乳或其它替代乳品喂养者，大便次数较少，每天1次或2~3天1次；母乳不足可使婴儿大便次数减少</item>
         <item>这个期间，母乳或配方乳喂养婴儿的大便次数会下降，有些母乳喂养婴儿没3–4天仅有一次大便，一些健康状况良好的孩子每周仅有一次大便。只要你的孩子吃得好、体重增加、大便不软不硬，那么就没有理由对大便的次数下降感到惊慌。</item>
@@ -397,6 +405,7 @@
     
     //头围
     <string-array name="head_reference_girl">
+        <item>参考值：33.00~35.25厘米</item>
         <item>参考值：37.14厘米</item>
         <item>参考值：38.82厘米</item>
         <item>参考值：40.14厘米</item>
@@ -435,6 +444,7 @@
         <item>参考值：49.28厘米</item>
     </string-array>
     <string-array name="head_std_girl">
+        <item></item>
         <item>标准差：1.07厘米</item>
         <item>标准差：1.19厘米</item>
         <item>标准差：1.14厘米</item>
@@ -473,6 +483,7 @@
         <item>标准差：1.22厘米</item>
     </string-array>
     <string-array name="head_reference_boy">
+        <item>参考值：33.00~35.25厘米</item>
         <item>参考值：37.93厘米</item>
         <item>参考值：39.69厘米</item>
         <item>参考值：41.18厘米</item>
@@ -511,6 +522,7 @@
         <item>参考值：50.07厘米</item>
     </string-array>
     <string-array name="head_std_boy">
+        <item></item>
         <item>标准差：1.32厘米</item>
         <item>标准差：1.12厘米</item>
         <item>标准差：1.28厘米</item>
@@ -549,6 +561,7 @@
         <item>标准差：1.25厘米</item>
     </string-array>
     <string-array name="head_increase">
+        <item></item>
         <item>新生儿头围平均34厘米。\n0–6个月，增长9厘米。</item>
         <item>新生儿头围平均34厘米。\n0–6个月，增长9厘米。</item>
         <item>0–6个月，增长9厘米。</item>
@@ -599,6 +612,7 @@
 
     //胸围
     <string-array name="chest_reference_girl">
+        <item>参考值：32.00-34.00厘米</item>
         <item>参考值：36.56厘米</item>
         <item>参考值：38.73厘米</item>
         <item>参考值：40.70厘米</item>
@@ -637,6 +651,7 @@
         <item>参考值：50.04厘米</item>
     </string-array>
     <string-array name="chest_std_girl">
+        <item></item>
         <item>标准差：1.63厘米</item>
         <item>标准差：1.72厘米</item>
         <item>标准差：1.67厘米</item>
@@ -675,6 +690,7 @@
         <item>标准差：2.35厘米</item>
     </string-array>
     <string-array name="chest_reference_boy">
+        <item>参考值：32.00-34.00厘米</item>
         <item>参考值：37.61厘米</item>
         <item>参考值：40.07厘米</item>
         <item>参考值：41.89厘米</item>
@@ -713,6 +729,7 @@
         <item>参考值：51.49厘米</item>
     </string-array>
     <string-array name="chest_std_boy">
+        <item></item>
         <item>标准差：1.91厘米</item>
         <item>标准差：1.96厘米</item>
         <item>标准差：1.94厘米</item>
@@ -751,6 +768,7 @@
         <item>标准差：2.63厘米</item>
     </string-array>
     <string-array name="chest_increase">
+        <item></item>
         <item>新生儿胸围平均32厘米。</item>
         <item>新生儿胸围平均32厘米。</item>
         <item />

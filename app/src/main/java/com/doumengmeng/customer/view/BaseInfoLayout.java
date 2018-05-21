@@ -421,6 +421,9 @@ public class BaseInfoLayout extends LinearLayout {
     }
 
     private void selectCheckBox(List<CompoundButton> checkBoxes , List<String> value ){
+        if ( value == null || value.size() == 0 ){
+            return;
+        }
         for (int i=0;i<checkBoxes.size();i++){
             CompoundButton checkBox = checkBoxes.get(i);
             if ( value.contains(checkBox.getText().toString().trim()) ){
@@ -446,18 +449,6 @@ public class BaseInfoLayout extends LinearLayout {
     }
 
     private boolean checkEditableNetType(){
-        //胎次
-        String parityCount = et_parity_count.getText().toString().trim();
-        if (TextUtils.isEmpty(parityCount)){
-            errorMessage = "请填写胎次";
-            return false;
-        }
-
-        if ( 0 > Integer.parseInt(parityCount) || Integer.parseInt(parityCount) > 9 ){
-            errorMessage = "胎次 0~9";
-            return false;
-        }
-
         //产次
         String birthCount = et_birth_count.getText().toString().trim();
         if (TextUtils.isEmpty(birthCount)){
@@ -467,6 +458,18 @@ public class BaseInfoLayout extends LinearLayout {
 
         if ( 0 > Integer.parseInt(birthCount) || Integer.parseInt(birthCount) > 9 ){
             errorMessage = "产次 0~9";
+            return false;
+        }
+
+        //胎次
+        String parityCount = et_parity_count.getText().toString().trim();
+        if (TextUtils.isEmpty(parityCount)){
+            errorMessage = "请填写胎次";
+            return false;
+        }
+
+        if ( 0 > Integer.parseInt(parityCount) || Integer.parseInt(parityCount) > 9 ){
+            errorMessage = "胎次 0~9";
             return false;
         }
 

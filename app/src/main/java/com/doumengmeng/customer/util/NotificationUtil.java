@@ -11,7 +11,6 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.activity.GuideActivity;
 import com.doumengmeng.customer.base.BaseApplication;
 
 /**
@@ -44,28 +43,41 @@ public class NotificationUtil {
     public static void showNotification(Context context , String title , String content){
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent intent = new Intent(context, GuideActivity.class);
-        PendingIntent sender = PendingIntent.getActivity(context, 1, intent, 0);
+//        Intent intent = new Intent(context, GuideActivity.class);
+//        PendingIntent sender = PendingIntent.getActivity(context, 1, intent, 0);
 
         if( android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context,channelId);
             builder.setContentTitle(title);
             builder.setContentText(content);
+
+            NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle();
+            style.setBigContentTitle(title);
+            style.bigText(content);
+
+            builder.setStyle(style);
             builder.setDefaults(NotificationCompat.DEFAULT_SOUND);
             builder.setSmallIcon(R.mipmap.ic_launcher);
 
             //这句是重点
-            builder.setContentIntent(sender);
+//            builder.setContentIntent(sender);
             builder.setFullScreenIntent(null, true);
             builder.setAutoCancel(true);
-            manager.notify(1,builder.build());
+            manager.notify(3,builder.build());
         } else {
             Notification.Builder builder = new Notification.Builder(context);
             builder.setSmallIcon(R.mipmap.ic_launcher);
             builder.setContentTitle(title);
             builder.setContentText(content);
-            builder.setContentIntent(sender);
-            manager.notify(1,builder.build());
+
+            Notification.BigTextStyle style = new Notification.BigTextStyle();
+            style.setBigContentTitle(title);
+            style.bigText(content);
+
+            builder.setStyle(style);
+
+//            builder.setContentIntent(sender);
+            manager.notify(3,builder.build());
         }
     }
 

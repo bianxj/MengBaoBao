@@ -24,6 +24,7 @@ import android.widget.Scroller;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.util.PictureUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class AutoScrollViewPager extends FrameLayout {
     private CustomViewPager viewPager;
     private RadioGroup dotLayout;
 
+    private boolean isUrl = false;
     private int index = 0;
     private ScrollPagerAdapter adapter;
     private Timer timer;
@@ -125,46 +127,162 @@ public class AutoScrollViewPager extends FrameLayout {
         this.callBack = onClickCallBack;
     }
 
-    public void setImageList(int[] imageList){
+    public void setUrlList(List<String> urls){
+        isUrl = true;
+        mUrls = new ArrayList<>();
+
         if ( canLoop() ){
-            List<ImageView> imageViews = new ArrayList<>();
-            for (int i = 0; i < imageList.length+2; i++) {
-                ImageView imageView;
-                if ( i == 0 ) {
-                    imageView = createImageView(imageList[imageList.length-1]);
-                } else if ( i == imageList.length+1 ){
-                    imageView = createImageView(imageList[0]);
-                } else {
-                    imageView = createImageView(imageList[i-1]);
-                }
-                imageViews.add(imageView);
-            }
-            index = imageList.length;
-            initDotList(index);
-            this.adapter = new ScrollPagerAdapter(imageViews);
-            viewPager.setAdapter(this.adapter);
-            viewPager.addOnPageChangeListener(pageChangeListener);
-            viewPager.setCustomOnTouchListener(onTouchListener);
-            this.adapter.notifyDataSetChanged();
-            viewPager.setCurrentItem(1);
-            startLoop();
-        } else {
-            List<ImageView> imageViews = new ArrayList<>();
-            for (int anImageList : imageList) {
-                ImageView imageView = createImageView(anImageList);
-                imageViews.add(imageView);
-            }
-            index = imageList.length;
-            initDotList(index);
-            this.adapter = new ScrollPagerAdapter(imageViews);
-            viewPager.setAdapter(this.adapter);
-            viewPager.addOnPageChangeListener(pageChangeListener);
-            this.adapter.notifyDataSetChanged();
+            mUrls.add(urls.get(urls.size()-1));
         }
+        for (String url:urls){
+            mUrls.add(url);
+        }
+        if ( canLoop() ){
+            mUrls.add(urls.get(0));
+        }
+        index = urls.size();
+        buildImageViewList(mUrls.size());
     }
+
+    public void setImageList(List<Integer> images){
+        isUrl = false;
+        mResources = new ArrayList<>();
+        if ( canLoop() ){
+            mResources.add(images.get(images.size()-1));
+        }
+        for (Integer image:images){
+            mResources.add(image);
+        }
+        if ( canLoop() ){
+            mResources.add(images.get(0));
+        }
+        index = images.size();
+        buildImageViewList(mResources.size());
+    }
+
+//    public void setImageList(int[] imageList){
+//        if ( canLoop() ){
+//            List<ImageView> imageViews = new ArrayList<>();
+//            for (int i = 0; i < imageList.length+2; i++) {
+//                ImageView imageView;
+//                if ( i == 0 ) {
+//                    imageView = createImageView(imageList[imageList.length-1]);
+//                } else if ( i == imageList.length+1 ){
+//                    imageView = createImageView(imageList[0]);
+//                } else {
+//                    imageView = createImageView(imageList[i-1]);
+//                }
+//                imageViews.add(imageView);
+//            }
+//            index = imageList.length;
+//            initDotList(index);
+//            this.adapter = new ScrollPagerAdapter(imageViews);
+//            viewPager.setAdapter(this.adapter);
+//            viewPager.addOnPageChangeListener(pageChangeListener);
+//            viewPager.setCustomOnTouchListener(onTouchListener);
+//            this.adapter.notifyDataSetChanged();
+//            viewPager.setCurrentItem(1);
+//            startLoop();
+//        } else {
+//            List<ImageView> imageViews = new ArrayList<>();
+//            for (int anImageList : imageList) {
+//                ImageView imageView = createImageView(anImageList);
+//                imageViews.add(imageView);
+//            }
+//            index = imageList.length;
+//            initDotList(index);
+//            this.adapter = new ScrollPagerAdapter(imageViews);
+//            viewPager.setAdapter(this.adapter);
+//            viewPager.addOnPageChangeListener(pageChangeListener);
+//            this.adapter.notifyDataSetChanged();
+//        }
+//    }
 
     private boolean canLoop(){
         return canLoop;
+    }
+
+    private boolean isUrl(){
+        return isUrl;
+    }
+
+    private void buildImageViewList(int count){
+        imageViews = new ArrayList<>();
+        for (int i=0;i<count;i++){
+            ImageView iv = createImageView();
+            imageViews.add(iv);
+        }
+        initDotList(count);
+        this.adapter = new ScrollPagerAdapter(imageViews);
+        viewPager.setAdapter(this.adapter);
+        viewPager.addOnPageChangeListener(pageChangeListener);
+        this.adapter.notifyDataSetChanged();
+        initImageViewData();
+        initLoop();
+    }
+
+    private List<ImageView> imageViews;
+    private List<Integer> mResources;
+    private List<String> mUrls;
+
+//    private void buildImageViewList(int count){
+//        for (int i=0;i<count;i++){
+//            ImageView iv = createImageView();
+//            imageViews.add(iv);
+//        }
+//        initDotList(count);
+//        this.adapter = new ScrollPagerAdapter(imageViews);
+//        viewPager.setAdapter(this.adapter);
+//        viewPager.addOnPageChangeListener(pageChangeListener);
+//        this.adapter.notifyDataSetChanged();
+//        initImageViewData();
+//    }
+
+    private void initImageViewData(){
+        if ( isUrl() ){
+            for (int i = 0;i<imageViews.size();i++){
+                ImageLoader.getInstance().displayImage(mUrls.get(i),imageViews.get(i));
+            }
+        } else {
+            for (int i = 0;i<imageViews.size();i++){
+                Bitmap bitmap = null;
+                try {
+                    bitmap = PictureUtils.loadBitmapFromResouce(getContext(),mResources.get(i));
+                    imageViews.get(i).setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void initLoop(){
+        if ( canLoop() ){
+            viewPager.setCustomOnTouchListener(onTouchListener);
+            viewPager.setCurrentItem(1);
+            startLoop();
+        }
+    }
+
+    private ImageView createImageView(){
+        ImageView imageView = new ImageView(context);
+        ViewGroup.LayoutParams params = null;
+        if ( fitxy ){
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        } else {
+            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        imageView.setLayoutParams(params);
+//        Bitmap bitmap = null;
+//        try {
+//            bitmap = PictureUtils.loadBitmapFromResouce(getContext(),imageId);
+//            imageView.setImageBitmap(bitmap);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        imageView.setImageResource(imageId);
+        return imageView;
     }
 
     private ImageView createImageView(int imageId){
@@ -203,8 +321,9 @@ public class AutoScrollViewPager extends FrameLayout {
 
     private void initDotList(int dotCount){
         if ( isDotVisible() ) {
+            int count = canLoop()?dotCount-2:dotCount;
             dotLayout.removeAllViews();
-            for (int i = 0; i < dotCount; i++) {
+            for (int i = 0; i < count; i++) {
                 RadioButton radioButton = createDot();
                 if (0 == i) {
                     RadioGroup.LayoutParams layoutParams = (RadioGroup.LayoutParams) radioButton.getLayoutParams();

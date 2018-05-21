@@ -10,7 +10,7 @@
         android:layout_height="@dimen/y96px"
         android:background="@color/first_white"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             style="@style/SecondBlack.Text28px"
@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/y30px"
-            android:text="@string/assessment_source" />
+            android:text="@string/assessment_source"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout

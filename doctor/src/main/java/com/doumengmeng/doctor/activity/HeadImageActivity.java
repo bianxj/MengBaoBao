@@ -151,9 +151,12 @@ public class HeadImageActivity extends BaseActivity {
     }
 
     private void cropFromPicture(Uri src) throws IOException {
-        File dest = BaseApplication.getInstance().getHeadCropFile();
-        destUri = Uri.fromFile(dest);
-        cropPicture(src,destUri,false);
+        String path = PictureUtils.getGalleryImagePath(this,src);
+        if ( !BaseApplication.getInstance().getHeadCropPath().equals(path) ) {
+            File dest = BaseApplication.getInstance().getHeadCropFile();
+            destUri = Uri.fromFile(dest);
+            cropPicture(src, destUri, false);
+        }
     }
 
     private void cropPicture(Uri srcUri , Uri destUri , boolean needPermission){

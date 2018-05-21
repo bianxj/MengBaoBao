@@ -34,7 +34,7 @@ import java.util.Map;
 public class InputInfoActivity extends BaseActivity {
 
     //-------------------------------Title控件----------------------------------------
-    private RelativeLayout rl_back;
+    private RelativeLayout rl_back,rl_close;
     private TextView tv_title;
     private RelativeLayout rl_complete;
 
@@ -58,6 +58,7 @@ public class InputInfoActivity extends BaseActivity {
 
     private void findView(){
         rl_back = findViewById(R.id.rl_back);
+        rl_close = findViewById(R.id.rl_close);
         rl_back.setVisibility(View.GONE);
 
         tv_title = findViewById(R.id.tv_title);
@@ -73,6 +74,7 @@ public class InputInfoActivity extends BaseActivity {
 
     private void initView(){
         rl_back.setVisibility(View.GONE);
+        rl_close.setOnClickListener(listener);
         rl_complete.setOnClickListener(listener);
 
         rl_complete.setVisibility(View.VISIBLE);
@@ -88,6 +90,9 @@ public class InputInfoActivity extends BaseActivity {
                     break;
                 case R.id.rl_complete:
                     complete();
+                    break;
+                case R.id.rl_close:
+                    clearPromptTitle();
                     break;
             }
         }
@@ -172,12 +177,14 @@ public class InputInfoActivity extends BaseActivity {
 
     private boolean checkData(){
         if ( !baby_info.checkBaseInfo() ){
-            tv_title.setText(baby_info.getCheckErrorMsg());
+//            tv_title.setText(baby_info.getCheckErrorMsg());
+            showPromptTitle(baby_info.getCheckErrorMsg());
             return false;
         }
 
         if ( !parent_info.checkParentInfo() ){
-            tv_title.setText(parent_info.getErrorMsg());
+//            tv_title.setText(parent_info.getErrorMsg());
+            showPromptTitle(parent_info.getErrorMsg());
             return false;
         }
         return true;
@@ -186,6 +193,20 @@ public class InputInfoActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
+    }
+
+    protected void clearPromptTitle(){
+        tv_title.setText(R.string.input_info);
+        rl_complete.setVisibility(View.VISIBLE);
+//        rl_back.setVisibility(View.VISIBLE);
+        rl_close.setVisibility(View.GONE);
+    }
+
+    protected void showPromptTitle(String message){
+        tv_title.setText(message);
+//        rl_back.setVisibility(View.GONE);
+        rl_complete.setVisibility(View.GONE);
+        rl_close.setVisibility(View.VISIBLE);
     }
 
 }

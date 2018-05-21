@@ -20,7 +20,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/y29px"
             android:includeFontPadding="false"
-            android:text="童梅玲"/>
+            android:text=""/>
 
         <RelativeLayout
             android:id="@+id/rl_qr"
@@ -52,10 +52,11 @@
             app:civ_border_width="@dimen/y2px"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/y118px"
             android:layout_marginLeft="@dimen/x284px"
+            android:layout_marginRight="@dimen/y20px"
             android:orientation="vertical">
 
             <TextView
@@ -64,14 +65,16 @@
                 android:layout_height="wrap_content"
                 style="@style/FirstWhite.Text24px"
                 android:includeFontPadding="false"
-                android:text="主任医师"/>
+                android:text=""/>
             <TextView
                 android:id="@+id/tv_hospital"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/FirstWhite.Text24px"
                 android:includeFontPadding="false"
-                android:text="南京市妇幼保健院"
+                android:lines="1"
+                android:ellipsize="end"
+                android:text=""
                 android:layout_marginTop="@dimen/y12px"/>
             <TextView
                 android:id="@+id/tv_doctor_department"
@@ -79,12 +82,24 @@
                 android:layout_height="wrap_content"
                 style="@style/FirstWhite.Text24px"
                 android:includeFontPadding="false"
-                android:text="儿保科"
+                android:text=""
+                android:lines="1"
+                android:ellipsize="end"
                 android:layout_marginTop="@dimen/y12px"/>
 
         </LinearLayout>
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y50px"
+        android:text="@string/accessment_hint"
+        style="@style/FirstPink.Text25px"
+        android:background="@color/thirdGray"
+        android:gravity="center"
+        />
 
     <FrameLayout
         android:id="@+id/rl_content"

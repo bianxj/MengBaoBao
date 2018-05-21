@@ -172,6 +172,10 @@ public class MyDialog {
 //    }
 
     public static void showChooseDialog(Context context,String content,int cancel,int sure,final ChooseDialogCallback callback){
+        showChooseDialog( context, content, cancel, R.color.second_pink, sure, R.color.second_pink,  callback);
+    }
+
+    public static void showChooseDialog(Context context,String content,int cancel,int cancelColor,int sure,int sureColor,final ChooseDialogCallback callback){
         synchronized (chooseLock){
             if ( chooseDialog != null ){
                 chooseDialog.dismiss();
@@ -183,8 +187,10 @@ public class MyDialog {
             TextView tv_prompt = view.findViewById(R.id.tv_prompt);
             TextView tv_sure = view.findViewById(R.id.tv_sure);
             tv_sure.setText(sure);
+            tv_sure.setTextColor(context.getResources().getColor(sureColor));
             TextView tv_cancel = view.findViewById(R.id.tv_cancel);
             tv_cancel.setText(cancel);
+            tv_cancel.setTextColor(context.getResources().getColor(cancelColor));
 
             tv_prompt.setText(content);
             tv_sure.setOnClickListener(new View.OnClickListener() {
@@ -357,6 +363,7 @@ public class MyDialog {
 
     public static void showPictureDialog(Context context, Bitmap bitmap){
         synchronized (pictureLock){
+            dismissPictureDialog();
             pictureDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_picture,null);
             LinearLayout ll = view.findViewById(R.id.ll);

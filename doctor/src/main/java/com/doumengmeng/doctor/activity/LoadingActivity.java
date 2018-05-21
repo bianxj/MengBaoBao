@@ -70,10 +70,10 @@ public class LoadingActivity extends BaseActivity {
         setContentView(R.layout.activity_loading);
         findView();
 //        loading();
-        if ( !BaseApplication.getInstance().isToExamine() ){
-            startActivity(LoginActivity.class);
-            back();
-        }
+//        if ( !BaseApplication.getInstance().isToExamine() || BaseApplication.getInstance().isAbnormalExit() ){
+//            startActivity(LoginActivity.class);
+//            back();
+//        }
     }
 
     @Override
@@ -408,7 +408,17 @@ public class LoadingActivity extends BaseActivity {
                     @Override
                     public void onPostExecute(String result) {
 //                        checkVersionAndWifi();
-                        initConfigure();
+//                        if (BaseApplication.getInstance().isToExamine()){
+                            initConfigure();
+//                        } else {
+//                            MyDialog.showPromptDialog(LoadingActivity.this, "请等待审核\n" +
+//                                    " 审核通过后将会以短信形式通知您", R.string.sure, new MyDialog.PromptDialogCallback() {
+//                                @Override
+//                                public void sure() {
+//
+//                                }
+//                            });
+//                        }
                     }
                 },RequestTask.JSON);
                 loginTask.execute();
@@ -511,6 +521,11 @@ public class LoadingActivity extends BaseActivity {
             DaoManager.getInstance().getNurtureDao().saveNurtureList(LoadingActivity.this,result.getNurtureGuideInfoList());
 
             BaseApplication.getInstance().saveMaintain("");
+            if ( TextUtils.isEmpty(result.getNewsCount()) ){
+                BaseApplication.getInstance().saveMessageCount(0);
+            } else {
+                BaseApplication.getInstance().saveMessageCount(Integer.parseInt(result.getNewsCount()));
+            }
             handler.sendEmptyMessage(LoadingHandler.MESSAGE_JUMP_TO_MAIN);
         }
     }

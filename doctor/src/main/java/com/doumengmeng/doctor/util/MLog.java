@@ -37,11 +37,15 @@ public class MLog {
     }
 
     public void info(String string){
+        if ( builder.isClose() )
+            return;
         String content = getLogPrintInfo(Log.INFO,string,4);
         printLog(Log.INFO,content);
         writeLogToFile(content);
     }
     public void info(Throwable throwable){
+        if ( builder.isClose() )
+            return;
         String s = cnvThrowToStr(throwable);
         String content = getLogPrintInfo(Log.INFO,s,4);
         printLog(Log.INFO,content);
@@ -49,11 +53,15 @@ public class MLog {
     }
 
     public void warning(String string){
+        if ( builder.isClose() )
+            return;
         String content = getLogPrintInfo(Log.WARN,string,4);
         printLog(Log.WARN,content);
         writeLogToFile(content);
     }
     public void warning(Throwable throwable){
+        if ( builder.isClose() )
+            return;
         String s = cnvThrowToStr(throwable);
         String content = getLogPrintInfo(Log.WARN,s,4);
         printLog(Log.WARN,content);
@@ -61,11 +69,15 @@ public class MLog {
     }
 
     public void error(String string){
+        if ( builder.isClose() )
+            return;
         String content = getLogPrintInfo(Log.ERROR,string,4);
         printLog(Log.ERROR,content);
         writeLogToFile(content);
     }
     public void error(Throwable throwable){
+        if ( builder.isClose() )
+            return;
         String s = cnvThrowToStr(throwable);
         String content = getLogPrintInfo(Log.ERROR,s,4);
         printLog(Log.ERROR,content);
@@ -73,11 +85,15 @@ public class MLog {
     }
 
     public void debug(String string){
+        if ( builder.isClose() )
+            return;
         String content = getLogPrintInfo(Log.DEBUG,string,4);
         printLog(Log.DEBUG,content);
         writeLogToFile(content);
     }
     public void debug(Throwable throwable){
+        if ( builder.isClose() )
+            return;
         String s = cnvThrowToStr(throwable);
         String content = getLogPrintInfo(Log.DEBUG,s,4);
         printLog(Log.DEBUG,content);
@@ -257,6 +273,7 @@ public class MLog {
         private boolean isShow = true;
         private boolean isInner = true;
         private boolean isSaveLog = false;
+        private boolean isClose = false;
         private boolean isDebug = false;
         private int saveDay = 5;
         private String logDirName;
@@ -315,6 +332,13 @@ public class MLog {
 
         public int getSaveDay() {
             return saveDay;
+        }
+        public boolean isClose() {
+            return isClose;
+        }
+
+        public void setClose(boolean close) {
+            isClose = close;
         }
 
         public String getLogDirName() {

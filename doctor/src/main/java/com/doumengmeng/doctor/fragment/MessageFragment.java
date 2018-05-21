@@ -40,8 +40,8 @@ import java.util.Map;
 
 public class MessageFragment extends BaseFragment {
 
-    private RelativeLayout rl_back;
-    private TextView tv_title;
+    private RelativeLayout rl_back,rl_complete;
+    private TextView tv_title,tv_complete;
 
     private LinearLayout ll_no_message;
     private XRecyclerView xrv;
@@ -88,12 +88,38 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void initTitle(View view){
+        rl_complete = view.findViewById(R.id.rl_complete);
         rl_back = view.findViewById(R.id.rl_back);
         tv_title = view.findViewById(R.id.tv_title);
+        tv_complete = view.findViewById(R.id.tv_complete);
 
+        tv_complete.setText("全部删除");
         tv_title.setText(getString(R.string.message));
+//        rl_complete.setVisibility(View.VISIBLE);
         rl_back.setVisibility(View.GONE);
+        rl_complete.setOnClickListener(listener);
     }
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.rl_complete:
+                    MyDialog.showChooseDialog(getContext(), getString(R.string.dialog_content_clear_message), R.string.prompt_bt_cancel, R.string.prompt_bt_clean, new MyDialog.ChooseDialogCallback() {
+                        @Override
+                        public void sure() {
+                            clearAllMessage();
+                        }
+
+                        @Override
+                        public void cancel() {
+
+                        }
+                    });
+                    break;
+            }
+        }
+    };
 
     private void initMessageList(View view){
         ll_no_message = view.findViewById(R.id.ll_no_message);
@@ -115,6 +141,60 @@ public class MessageFragment extends BaseFragment {
         }
         adapter.notifyDataSetChanged();
     }
+
+    private RequestTask clearAllMessageTask;
+    private void clearAllMessage() {
+        try {
+            clearAllMessageTask = new RequestTask.Builder(getContext(), clearAllMessageCallback)
+                    .setContent(buildClearAllMessageContent())
+                    .setUrl(UrlAddressList.URL_DELETE_ALL_MESSAGE)
+                    .setType(RequestTask.JSON)
+                    .build();
+            clearAllMessageTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private Map<String,String> buildClearAllMessageContent(){
+        Map<String,String> map = new HashMap<>();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("doctorId",BaseApplication.getInstance().getUserData().getDoctorId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.PARAM, object.toString());
+        map.put(UrlAddressList.SESSION_ID, BaseApplication.getInstance().getSessionId());
+        return map;
+    }
+
+    private RequestCallBack clearAllMessageCallback = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONObject res = object.getJSONObject("result");
+                if ( 1 == res.optInt("isDeleted") ){
+                    searchMessage();
+                } else {
+                    MyDialog.showPromptDialog(getContext(),"删除失败",null);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
     private RequestTask searchMessageTask;
     private void searchMessage(){
@@ -242,7 +322,13 @@ public class MessageFragment extends BaseFragment {
     };
 
     private void saveAndFreshScript(){
-        BaseApplication.getInstance().saveMessageCount(adapter.getUnReadMessageCount());
+        int count = adapter.getUnReadMessageCount();
+        if ( count > 0 ){
+            rl_complete.setVisibility(View.VISIBLE);
+        } else {
+            rl_complete.setVisibility(View.GONE);
+        }
+        BaseApplication.getInstance().saveMessageCount(count);
         ((MainActivity)getActivity()).refreshSuperScript();
         refreshMessageList();
     }

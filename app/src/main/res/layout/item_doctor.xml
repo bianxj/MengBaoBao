@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightSky"
     >
     <RelativeLayout
+        android:id="@+id/rl_layout"
         android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/y163px"
         android:layout_marginTop="@dimen/y19px"
@@ -65,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/y1px"
                 android:background="@color/translucenceLinkPink"
+                android:clickable="false"
                 android:layout_marginTop="@dimen/y10px" />
 
             <TextView
@@ -77,7 +78,6 @@
                 android:textColor="#808080"
                 android:includeFontPadding="false"
                 android:lines="1"
-                android:scrollHorizontally="true"
                 android:ellipsize="end"
                 />
 
@@ -91,10 +91,14 @@
                 android:textColor="#808080"
                 android:includeFontPadding="false"
                 android:lines="1"
-                android:scrollHorizontally="true"
                 android:ellipsize="end"
                 />
 
         </LinearLayout>
     </RelativeLayout>
-</LinearLayout>
+    <View
+        android:id="@+id/v_click"
+        android:layout_width="@dimen/x720px"
+        android:layout_height="@dimen/y163px"
+        android:layout_marginTop="@dimen/y19px"></View>
+</FrameLayout>

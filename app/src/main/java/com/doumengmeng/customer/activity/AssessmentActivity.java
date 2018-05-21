@@ -184,7 +184,7 @@ public class AssessmentActivity extends BaseActivity {
     }
 
     private void initDoctorData(){
-        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_doctor,initDisplayImageOptions());
+        ImageLoader.getInstance().displayImage(doctor.getDoctorImageUrl(),civ_doctor,initDisplayImageOptions());
         tv_doctor_name.setText(doctor.getDoctorname());
         tv_doctor_hospital.setText(hospital.getHospitalname());
         tv_doctor_position.setText(doctor.getPositionaltitles());
@@ -335,7 +335,7 @@ public class AssessmentActivity extends BaseActivity {
     private void initDevelopment(Map<String,List<String>> maps){
         Set<String> keys = maps.keySet();
         for (String key:keys){
-            ll_developmental_content.addView(createSubItem(key,maps.get(key)),0);
+            ll_developmental_content.addView(createSubItem(key,maps.get(key)));
         }
     }
 

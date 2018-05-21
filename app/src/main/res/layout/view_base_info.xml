@@ -407,25 +407,25 @@
             android:visibility="visible">
 
             <TextView
-                android:id="@+id/unuse_tv_parity_count"
+                android:id="@+id/unuse_tv_birth_count"
                 style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="@string/parity_count" />
+                android:text="@string/birth_count" />
 
             <TextView
                 style="@style/FirstPink.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/unuse_tv_parity_count"
+                android:layout_toRightOf="@+id/unuse_tv_birth_count"
                 android:text="@string/mark"
-                android:tag="@string/TagMark"/>
+                android:tag="@string/TagMark" />
 
             <EditText
-                android:id="@+id/et_parity_count"
+                android:id="@+id/et_birth_count"
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="number"
@@ -454,25 +454,25 @@
             android:visibility="visible">
 
             <TextView
-                android:id="@+id/unuse_tv_birth_count"
+                android:id="@+id/unuse_tv_parity_count"
                 style="@style/SecondBlack.Text28px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="@string/birth_count" />
+                android:text="@string/parity_count" />
 
             <TextView
                 style="@style/FirstPink.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/unuse_tv_birth_count"
+                android:layout_toRightOf="@+id/unuse_tv_parity_count"
                 android:text="@string/mark"
-                android:tag="@string/TagMark" />
+                android:tag="@string/TagMark"/>
 
             <EditText
-                android:id="@+id/et_birth_count"
+                android:id="@+id/et_parity_count"
                 style="@style/InputDataNormalEditText"
                 android:layout_centerVertical="true"
                 android:inputType="number"

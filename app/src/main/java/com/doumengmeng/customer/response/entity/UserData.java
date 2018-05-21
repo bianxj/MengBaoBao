@@ -2,6 +2,7 @@ package com.doumengmeng.customer.response.entity;
 
 import android.text.TextUtils;
 
+import com.doumengmeng.customer.entity.RoleType;
 import com.doumengmeng.customer.net.UrlAddressList;
 
 import java.util.List;
@@ -72,6 +73,9 @@ public class UserData {
     }
 
     public boolean isMale(){
+        if ( !roletype.equals(RoleType.PAY_HOSPITAL_USER) && !roletype.equals(RoleType.PAY_NET_USER) ){
+            return true;
+        }
         return MALE.equals(sex);
     }
 

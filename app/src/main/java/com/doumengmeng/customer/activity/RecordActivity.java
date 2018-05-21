@@ -73,8 +73,9 @@ public class RecordActivity extends BaseActivity {
     private final static int REQUEST_DEVELOPMENTAL_ACTION = 0x11;
 
     //------------------------------------------控件-----------------------------------------------
-    private RelativeLayout rl_back,rl_complete;
+    private RelativeLayout rl_back,rl_complete,rl_close;
     private TextView tv_title,tv_complete;
+    private ImageView iv_close;
 
     private RelativeLayout rl_correct_month;
     private TextView tv_really_month,tv_correct_month;
@@ -130,8 +131,10 @@ public class RecordActivity extends BaseActivity {
     private void findView(){
         rl_back = findViewById(R.id.rl_back);
         rl_complete = findViewById(R.id.rl_complete);
+        rl_close = findViewById(R.id.rl_close);
         tv_title = findViewById(R.id.tv_title);
         tv_complete = findViewById(R.id.tv_complete);
+        iv_close = findViewById(R.id.iv_close);
 
         rl_correct_month = findViewById(R.id.rl_correct_month);
         tv_really_month = findViewById(R.id.tv_really_month);
@@ -228,6 +231,7 @@ public class RecordActivity extends BaseActivity {
         rl_complete.setVisibility(View.VISIBLE);
         tv_title.setText(R.string.record);
 
+        rl_close.setOnClickListener(listener);
         tv_height.setOnClickListener(listener);
         tv_weight.setOnClickListener(listener);
         tv_chest_circumference.setOnClickListener(listener);
@@ -260,7 +264,7 @@ public class RecordActivity extends BaseActivity {
         } else {
             tv_really_month.setText(String.format(getResources().getString(R.string.record_month_age),dayList.getCurrentMonth(),dayList.getCurrentDay()));
             tv_correct_month.setText(String.format(getResources().getString(R.string.record_month_age),dayList.getCorrentMonth(),dayList.getCorrentDay()));
-            if ( tv_correct_month.getText().toString().trim().equals(tv_correct_month.getText().toString().trim()) ){
+            if ( tv_really_month.getText().toString().trim().equals(tv_correct_month.getText().toString().trim()) ){
                 rl_correct_month.setVisibility(View.INVISIBLE);
             }
         }
@@ -303,9 +307,10 @@ public class RecordActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ( keyCode == KeyEvent.KEYCODE_BACK ){
-            back();
-            return true;
+        if ( rl_close.getVisibility() == View.VISIBLE ){
+            if ( keyCode == KeyEvent.KEYCODE_BACK ){
+                return true;
+            }
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -354,16 +359,23 @@ public class RecordActivity extends BaseActivity {
                     inputMicturitionCallBack.request();
                     break;
                 case R.id.iv_develop_action:
-                        Intent intent = new Intent(RecordActivity.this, DevelopmentalBehaviorActivity.class);
-                        String development = GsonUtil.getInstance().toJson(developments);
-                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_DEVELOPMENT, development);
-                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_MONTH_AGE, Integer.parseInt(dayList.getCorrentMonth())<0?"0":dayList.getCorrentMonth());
-                        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_RECORD_TIME, FormulaUtil.getCurrentTime());
-                        startActivityForResult(intent, REQUEST_DEVELOPMENTAL_ACTION);
+                    gotoDevelopment();
+                    break;
+                case R.id.rl_close:
+                    clearPromptTitle();
                     break;
             }
         }
     };
+
+    private void gotoDevelopment(){
+        Intent intent = new Intent(RecordActivity.this, DevelopmentalBehaviorActivity.class);
+        String development = GsonUtil.getInstance().toJson(developments);
+        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_DEVELOPMENT, development);
+        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_MONTH_AGE, Integer.parseInt(dayList.getCorrentMonth())<0?"0":dayList.getCorrentMonth());
+        intent.putExtra(DevelopmentalBehaviorActivity.IN_PARAM_RECORD_TIME, FormulaUtil.getCurrentTime());
+        startActivityForResult(intent, REQUEST_DEVELOPMENTAL_ACTION);
+    }
 
     private void back(){
         Intent intent = new Intent(RecordActivity.this,MainActivity.class);
@@ -759,7 +771,21 @@ public class RecordActivity extends BaseActivity {
     private RequestTask submitRecordTask;
     private void submit(){
         if ( checkData() ) {
-            submitRecord();
+            if ( developments.size() > 0 ) {
+                submitRecord();
+            } else {
+                MyDialog.showChooseDialog(this, getString(R.string.dialog_content_development), R.string.dialog_btn_prompt_back_choose, R.color.second_pink, R.string.dialog_btn_prompt_submit, R.color.first_black, new MyDialog.ChooseDialogCallback() {
+                    @Override
+                    public void sure() {
+                        submitRecord();
+                    }
+
+                    @Override
+                    public void cancel() {
+                        gotoDevelopment();
+                    }
+                });
+            }
         }
     }
 
@@ -810,8 +836,12 @@ public class RecordActivity extends BaseActivity {
         record.setOther(et_parent_message.getText().toString().trim());
         record.setOtherfood(et_other.getText().toString().trim());
 
-        RadioButton button = findViewById(rg_appetite.getCheckedRadioButtonId());
-        record.setOrexia(button.getText().toString().trim());
+        if ( -1 != rg_appetite.getCheckedRadioButtonId() ) {
+            RadioButton button = findViewById(rg_appetite.getCheckedRadioButtonId());
+            record.setOrexia(button.getText().toString().trim());
+        } else {
+            record.setOrexia("");
+        }
 
         record.setFeature(developments);
 
@@ -862,10 +892,15 @@ public class RecordActivity extends BaseActivity {
         if (isTextContentEmpty(tv_micturition_count)){showPromptTitle("请输入排尿信息");return false;}
         if (isTextContentEmpty(tv_night_sleep)){showPromptTitle("请输入夜间睡眠信息");return false;}
         if (isTextContentEmpty(tv_day_sleep)){showPromptTitle("请输入日间睡眠信息");return false;}
-        if (isTextContentEmpty(tv_breastfeeding)){showPromptTitle("请输入人乳喂养信息");return false;}
-        if (isTextContentEmpty(tv_breastfeeding_count)){showPromptTitle("请输入人乳喂养信息");return false;}
-        if (isTextContentEmpty(tv_formula_milk)){showPromptTitle("请输入配方奶信息");return false;}
-        if (isTextContentEmpty(tv_formula_milk_count)){showPromptTitle("请输入配方奶信息");return false;}
+
+        if ( isTextContentEmpty(tv_breastfeeding) && isTextContentEmpty(tv_formula_milk) ){
+            showPromptTitle("请填写喂养信息");
+            return false;
+        }
+//        if (isTextContentEmpty(tv_breastfeeding)){showPromptTitle("请输入人乳喂养信息");return false;}
+//        if (isTextContentEmpty(tv_breastfeeding_count)){showPromptTitle("请输入人乳喂养信息");return false;}
+//        if (isTextContentEmpty(tv_formula_milk)){showPromptTitle("请输入配方奶信息");return false;}
+//        if (isTextContentEmpty(tv_formula_milk_count)){showPromptTitle("请输入配方奶信息");return false;}
 
         float milk = getTextContentToFloat(et_milk);
         if ( 0 > milk || milk > 2000 ){showPromptTitle("牛奶 范围为0~2000");return false;}
@@ -899,8 +934,18 @@ public class RecordActivity extends BaseActivity {
         return true;
     }
 
+    private void clearPromptTitle(){
+        tv_title.setText(R.string.record);
+        rl_complete.setVisibility(View.VISIBLE);
+        rl_back.setVisibility(View.VISIBLE);
+        rl_close.setVisibility(View.GONE);
+    }
+
     private void showPromptTitle(String message){
         tv_title.setText(message);
+        rl_back.setVisibility(View.GONE);
+        rl_complete.setVisibility(View.GONE);
+        rl_close.setVisibility(View.VISIBLE);
     }
 
     private float getTextContentToFloat(TextView textView){
@@ -976,6 +1021,7 @@ public class RecordActivity extends BaseActivity {
             editText.clearFocus();
         }
     }
+
 
 
 }

@@ -54,4 +54,10 @@ public class FormatCheckUtil {
         return matcher.matches();
     }
 
+    public static boolean isIdentityCard(String identity){
+        Pattern pattern = Pattern.compile("(^\\d{17}([0-9]|X)$)");
+        Matcher matcher = pattern.matcher(identity);
+        return matcher.matches();
+    }
+
 }

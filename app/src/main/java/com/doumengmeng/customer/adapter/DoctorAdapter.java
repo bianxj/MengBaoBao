@@ -39,12 +39,13 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
     @Override
     public void onBindViewHolder(DoctorHolder holder, int position) {
         DoctorEntity doctor = doctors.get(position);
-        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),holder.civ_head,getDisplayImageOption());
-        holder.tv_doctor_hospital.setText(doctor.getHospital());
-        holder.tv_doctor_position.setText(doctor.getPositionaltitles());
-        holder.tv_doctor_name.setText(doctor.getDoctorname());
-        holder.tv_doctor_skill.setText(doctor.getSpeciality());
-        holder.doctor = doctor;
+        holder.initValue(doctor,getDisplayImageOption());
+//        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),holder.civ_head,getDisplayImageOption());
+//        holder.tv_doctor_hospital.setText(doctor.getHospital());
+//        holder.tv_doctor_position.setText(doctor.getPositionaltitles());
+//        holder.tv_doctor_name.setText(doctor.getDoctorname());
+//        holder.tv_doctor_skill.setText(doctor.getSpeciality());
+//        holder.doctor = doctor;
     }
 
     @Override
@@ -59,6 +60,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
         private final TextView tv_doctor_position;
         private final TextView tv_doctor_hospital;
         private final TextView tv_doctor_skill;
+        private final View v_click;
         private DoctorEntity doctor;
 
         public DoctorHolder(View itemView) {
@@ -68,7 +70,17 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
             tv_doctor_position = itemView.findViewById(R.id.tv_doctor_position);
             tv_doctor_hospital = itemView.findViewById(R.id.tv_doctor_hospital);
             tv_doctor_skill = itemView.findViewById(R.id.tv_doctor_skill);
-            itemView.setOnClickListener(listener);
+            v_click = itemView.findViewById(R.id.v_click);
+            v_click.setOnClickListener(listener);
+        }
+
+        private void initValue(DoctorEntity doctor,DisplayImageOptions options){
+            this.doctor = doctor;
+            ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_head,options);
+            tv_doctor_hospital.setText(doctor.getHospital());
+            tv_doctor_position.setText(doctor.getPositionaltitles());
+            tv_doctor_name.setText(doctor.getDoctorname());
+            tv_doctor_skill.setText(doctor.getSpeciality());
         }
 
         private final View.OnClickListener listener = new View.OnClickListener() {
@@ -80,8 +92,6 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
                 context.startActivity(intent);
             }
         };
-
-
     }
 
     private DisplayImageOptions options = null;
@@ -91,6 +101,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorHold
             builder.showImageOnFail(R.drawable.default_icon_doctor);
             builder.showImageForEmptyUri(R.drawable.default_icon_doctor);
             builder.showImageOnLoading(R.drawable.default_icon_doctor);
+            builder.cacheInMemory(true);
+            builder.cacheOnDisk(true);
             options = builder.build();
         }
         return options;

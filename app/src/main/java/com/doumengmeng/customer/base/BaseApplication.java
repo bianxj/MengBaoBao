@@ -21,6 +21,7 @@ import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.util.MLog;
 import com.doumengmeng.customer.util.NotificationUtil;
 import com.doumengmeng.customer.util.SharedPreferencesUtil;
+import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -70,6 +71,7 @@ public class BaseApplication extends Application {
         builder.setSaveDay(5);
         builder.setSaveLog(true);
         builder.setShow(true);
+        builder.setClose(true);
         log = builder.build();
     }
 
@@ -169,6 +171,23 @@ public class BaseApplication extends Application {
         return preferences.getString("verification",null);
     }
 
+    private final static String TABLE_BANNER = "banner";
+    private final static String COLUMN_BANNER_DATA = "banner_data";
+
+    public void saveBannerData(List<InitConfigureResponse.Banner> banners){
+        SharedPreferencesUtil.saveString(this,TABLE_BANNER,COLUMN_BANNER_DATA,GsonUtil.getInstance().toJson(banners));
+    }
+
+    public List<InitConfigureResponse.Banner> loadBannerData(){
+        List<InitConfigureResponse.Banner> banners;
+        String value = SharedPreferencesUtil.loadString(this,TABLE_BANNER,COLUMN_BANNER_DATA,null);
+        if ( value == null ){
+            banners = new ArrayList<>();
+        } else {
+            banners = GsonUtil.getInstance().fromJson(value,new TypeToken<List<InitConfigureResponse.Banner>>(){}.getType());
+        }
+        return banners;
+    }
 
     //----------------------------------------------------------------------------------------------
     private final static String TABLE_USER = "user";
@@ -501,23 +520,29 @@ public class BaseApplication extends Application {
     private final static String PERSON_DIR = "person";
     private final static String EXTERNAL_STORAGE_DIR = Environment.getExternalStorageDirectory().getPath() + File.separator + "doumegmeng";
     private final static String PERSON_HEAD_IMG = "headimg.jpg";
-    public String getPersonHeadImgPath(){
-//        String dirPath = getFilesDir().getPath()+File.separator+PERSON_DIR;
-        String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
-        File dir = new File(dirPath);
+
+    private File getHeadImgDir(){
+        File dir = new File(getExternalCacheDir()+File.separator+PERSON_DIR);
         if ( !dir.exists() || !dir.isDirectory() ){
             if ( !dir.mkdirs() ){
                 //TODO
                 BaseApplication.getInstance().getMLog().error("目录创建失败");
             }
         }
-        return dirPath + File.separator + PERSON_HEAD_IMG;
+        return dir;
+    }
+
+    public String getPersonHeadImgPath(){
+//        String dirPath = getFilesDir().getPath()+File.separator+PERSON_DIR;
+        File dir = getHeadImgDir();
+        return dir.getPath() + File.separator + PERSON_HEAD_IMG;
     }
 
     private final static String PERSON_CROP_HEAD_IMG = "cropheadimg.jpg";
 
     public String getHeadCropPath(){
-        return EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR+File.separator+PERSON_CROP_HEAD_IMG;
+        File dir = getHeadImgDir();
+        return dir.getPath()+File.separator+PERSON_CROP_HEAD_IMG;
     }
 
     public File getHeadCropFile(){

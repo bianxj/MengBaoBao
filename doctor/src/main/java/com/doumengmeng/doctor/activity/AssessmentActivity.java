@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -367,15 +368,19 @@ public class AssessmentActivity extends BaseTimeActivity {
         tv_appetite.setText(supplementFood.getOrexia());
     }
 
+    private LinearLayout ll_message_borad;
     private TextView tv_message_board;
     private void initMessageBoard(){
+        ll_message_borad = findViewById(R.id.ll_message_borad);
         tv_message_board = findViewById(R.id.tv_message_board);
         tv_message_board.setText(dataResult.getRecordList().getOther());
     }
 
+    private LinearLayout ll_upload_report;
     private GridView gv_upload_report;
     private PictureAdapter adapter;
     private void initPictureView(){
+        ll_upload_report = findViewById(R.id.ll_upload_report);
         gv_upload_report = findViewById(R.id.gv_upload_report);
         adapter = new PictureAdapter(dataResult.getReportImgList());
         gv_upload_report.setAdapter(adapter);
@@ -872,5 +877,15 @@ public class AssessmentActivity extends BaseTimeActivity {
                 tv_over_time.setText(time);
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ( rl_prompt.getVisibility() == View.VISIBLE ){
+            if ( keyCode == KeyEvent.KEYCODE_BACK ){
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

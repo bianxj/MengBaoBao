@@ -51,6 +51,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
 
         private WeakReference<Context> weakReference;
         private AssessmentItem item;
+//        private RelativeLayout rl_click;
         private RelativeLayout rl_assessment;
         private CircleImageView civ_head;
         private TextView tv_month_age,tv_over_time,tv_accessment_time;
@@ -59,16 +60,19 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
             super(itemView);
             weakReference = new WeakReference<Context>(context);
             rl_assessment = itemView.findViewById(R.id.rl_assessment);
+//            rl_click = itemView.findViewById(R.id.rl_click);
             civ_head = itemView.findViewById(R.id.civ_head);
             tv_month_age = itemView.findViewById(R.id.tv_month_age);
             tv_over_time = itemView.findViewById(R.id.tv_over_time);
             tv_accessment_time = itemView.findViewById(R.id.tv_accessment_time);
             rl_assessment.setOnClickListener(listener);
+//            rl_click.setOnClickListener(listener);
         }
 
         public void initView(AssessmentItem item){
             this.item = item;
-            ImageLoader.getInstance().displayImage(item.getHeadImgUrl(),civ_head);
+//            ImageLoader.getInstance().displayImage(item.getHeadImgUrl(),civ_head);
+            loadHeadImg(civ_head,item.isMale(),item.getHeadImgUrl());
             tv_month_age.setText(String.format(weakReference.get().getString(R.string.format_month_age),Integer.parseInt(item.getMonthAge()),Integer.parseInt(item.getMonthDay())));
             tv_accessment_time.setText(item.getRecordTime().split(" ")[0].replace("-","."));
             tv_over_time.setText(FormulaUtil.getTimeDifference(item.getValidityTime()));
@@ -83,20 +87,20 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.Vi
             }
         };
 
-    }
-
-    private void loadHeadImg(ImageView imageView,boolean isMale, String urlHeadImg){
-        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
-        if ( isMale ){
-            builder.showImageOnLoading(R.drawable.default_icon_boy);
-            builder.showImageForEmptyUri(R.drawable.default_icon_boy);
-            builder.showImageOnFail(R.drawable.default_icon_boy);
-        } else {
-            builder.showImageOnLoading(R.drawable.default_icon_girl);
-            builder.showImageForEmptyUri(R.drawable.default_icon_girl);
-            builder.showImageOnFail(R.drawable.default_icon_girl);
+        private void loadHeadImg(ImageView imageView,boolean isMale, String urlHeadImg){
+            DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
+            if ( isMale ){
+                builder.showImageOnLoading(R.drawable.default_icon_boy);
+                builder.showImageForEmptyUri(R.drawable.default_icon_boy);
+                builder.showImageOnFail(R.drawable.default_icon_boy);
+            } else {
+                builder.showImageOnLoading(R.drawable.default_icon_girl);
+                builder.showImageForEmptyUri(R.drawable.default_icon_girl);
+                builder.showImageOnFail(R.drawable.default_icon_girl);
+            }
+            ImageLoader.getInstance().displayImage(urlHeadImg,imageView,builder.build());
         }
-        ImageLoader.getInstance().displayImage(urlHeadImg,imageView,builder.build());
+
     }
 
 }

@@ -8,9 +8,6 @@
         android:layout_width="@dimen/x720px"
         android:layout_height="@dimen/y210px"
         android:orientation="vertical">
-        <android.support.v4.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y18px" />
         <RelativeLayout
             android:id="@+id/rl_assessment"
             android:layout_width="match_parent"
@@ -21,7 +18,7 @@
                 android:layout_width="@dimen/x144px"
                 android:layout_height="@dimen/x144px"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x72px"
+                android:layout_marginLeft="@dimen/x42px"
                 app:civ_border_color="@color/first_pink"
                 app:civ_border_width="@dimen/y2px"
                 />
@@ -31,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:orientation="vertical"
-                android:layout_marginLeft="@dimen/x283px"
+                android:layout_marginLeft="@dimen/x253px"
                 >
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -118,7 +115,38 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <RelativeLayout
+                android:id="@+id/rl_click"
+                android:layout_width="@dimen/x130px"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                >
+                <LinearLayout
+                    android:layout_width="@dimen/x60px"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:gravity="left"
+                    >
+                    <ImageView
+                        android:layout_width="@dimen/x56px"
+                        android:layout_height="@dimen/x78px"
+                        android:src="@drawable/icon_click"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FirstPink.Text23px"
+                        android:text="@string/click_into"
+                        android:gravity="center"
+                        android:includeFontPadding="true"/>
+                </LinearLayout>
+            </RelativeLayout>
+
         </RelativeLayout>
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y18px" />
     </LinearLayout>
     
 </LinearLayout>

@@ -55,6 +55,7 @@ public class UrlAddressList {
     public final static String URL_ACCOUNT_DETAIL = BASE_URL + "babyDoctor.do?method=GetDetailed";
 
     public final static String URL_SUBMIT_MESSAGE_BOARD = BASE_URL + "babyDoctor.do?method=MessageBoard";
+    public final static String URL_DELETE_ALL_MESSAGE = BASE_URL + "babyDoctor.do?method=DeleteAllNews";
 
     public final static String URL_UPDATE_INFO = BASE_URL + "system.do?method=GetVersion";
     public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";

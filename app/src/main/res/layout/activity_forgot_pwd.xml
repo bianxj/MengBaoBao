@@ -147,12 +147,25 @@
             android:button="@drawable/cb_agreement"
             android:checked="true"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x32px"
             style="@style/SecondWhite.Text30px"
-            android:text="@string/prompt_read_agreement"/>
+            android:text="@string/prompt_read_agree"/>
+        <TextView
+            android:id="@+id/tv_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SecondWhite.Text30px"
+            android:text="@string/prompt_agreement"/>
+<!--        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x32px"
+            style="@style/SecondWhite.Text30px"
+            android:text="@string/prompt_read_agreement"/>-->
     </LinearLayout>
 
     <TextView

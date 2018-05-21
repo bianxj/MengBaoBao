@@ -1,5 +1,9 @@
 package com.doumengmeng.customer.response.entity;
 
+import android.text.TextUtils;
+
+import com.doumengmeng.customer.net.UrlAddressList;
+
 /**
  * Created by Administrator on 2017/12/11.
  */
@@ -22,6 +26,13 @@ public class Doctor {
     private String hospitalid;
     private String speciality;
     private String doctordesc;
+
+    public String getDoctorImageUrl(){
+        if (!TextUtils.isEmpty(doctorimg)){
+            return UrlAddressList.IMAGE_URL + doctorimg;
+        }
+        return doctorimg;
+    }
 
     public String getDoctorimg() {
         return doctorimg;

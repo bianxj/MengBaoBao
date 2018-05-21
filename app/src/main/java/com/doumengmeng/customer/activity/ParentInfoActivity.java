@@ -2,6 +2,7 @@ package com.doumengmeng.customer.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ import java.util.Map;
 
 public class ParentInfoActivity extends BaseActivity {
 
-    private RelativeLayout rl_back,rl_complete;
+    private RelativeLayout rl_back,rl_complete,rl_close;
     private TextView tv_title,tv_complete;
 
     private ParentInfoLayout parent_info;
@@ -51,6 +52,7 @@ public class ParentInfoActivity extends BaseActivity {
     private void findView(){
         rl_back = findViewById(R.id.rl_back);
         rl_complete = findViewById(R.id.rl_complete);
+        rl_close = findViewById(R.id.rl_close);
         tv_title = findViewById(R.id.tv_title);
         tv_complete = findViewById(R.id.tv_complete);
 
@@ -58,6 +60,7 @@ public class ParentInfoActivity extends BaseActivity {
     }
 
     private void initView(){
+        rl_close.setOnClickListener(listener);
         rl_back.setOnClickListener(listener);
         rl_complete.setOnClickListener(listener);
         rl_complete.setVisibility(View.VISIBLE);
@@ -76,6 +79,9 @@ public class ParentInfoActivity extends BaseActivity {
                     break;
                 case R.id.rl_complete:
                     uploadParentInfo();
+                    break;
+                case R.id.rl_close:
+                    clearPromptTitle();
                     break;
             }
         }
@@ -102,7 +108,8 @@ public class ParentInfoActivity extends BaseActivity {
 
     private boolean checkData(){
         if ( !parent_info.checkParentInfo() ){
-            tv_title.setText(parent_info.getErrorMsg());
+            showPromptTitle(parent_info.getErrorMsg());
+//            tv_title.setText(parent_info.getErrorMsg());
 //            showPromptDialog(parent_info.getErrorMsg());
             return false;
         }
@@ -146,5 +153,30 @@ public class ParentInfoActivity extends BaseActivity {
             }
         }
     };
+
+
+    protected void clearPromptTitle(){
+        tv_title.setText(R.string.parent_info);
+        rl_complete.setVisibility(View.VISIBLE);
+        rl_back.setVisibility(View.VISIBLE);
+        rl_close.setVisibility(View.GONE);
+    }
+
+    protected void showPromptTitle(String message){
+        tv_title.setText(message);
+        rl_back.setVisibility(View.GONE);
+        rl_complete.setVisibility(View.GONE);
+        rl_close.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ( rl_close.getVisibility() == View.VISIBLE ){
+            if ( keyCode == KeyEvent.KEYCODE_BACK ){
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

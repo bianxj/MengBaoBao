@@ -1102,6 +1102,9 @@ public class AssessmentDetailResponse extends BaseResponse {
         }
 
         public String getPasthistory() {
+            if ( pasthistory.contains("其他、") ){
+                return pasthistory.replaceFirst("其他、","");
+            }
             return pasthistory;
         }
 

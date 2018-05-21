@@ -14,6 +14,9 @@
     <string name="mark">*</string>
     <string name="title_save">保存</string>
 
+    <string name="prompt_read_agree">我已阅读同意</string>
+    <string name="prompt_agreement">萌宝宝用户协议</string>
+
 
     <!--GuideActivity信息-->
     <string name="guide_register">注册</string>
@@ -183,8 +186,8 @@
 
     <string name="birth_weight">出生体重</string>
     <string name="birth_height">出生身长</string>
-    <string name="parity_count">产次</string>
-    <string name="birth_count">胎次</string>
+    <string name="parity_count">胎次</string>
+    <string name="birth_count">产次</string>
     <string name="birth_age">母亲生育年龄</string>
     
     <string name="birth_state">出生状态</string>
@@ -344,7 +347,7 @@
     <string name="assessment_growth_level">2.生长水平（本次测量的水平）</string>
     <string name="assessment_growth_result">二、发育评价：</string>
     <string name="assessment_doctor_suggest">三、医生的指导建议（包含对家长留言回复）</string>
-    <string name="assessment_wait_message">72小时内看到医生的养育指导和评估</string>
+    <string name="assessment_wait_message">48小时内查看医生的养育指导和评估</string>
     <string name="assessment_refund_message">抱歉，医生未能按约给予评估及指导，
 已为您退款或在途中！</string>
 
@@ -392,6 +395,7 @@
     <string name="diagram_data_month_day">%d个月%d天</string>
 
     <!--Dialog-->
+    <string name="dialog_content_development">*您没有勾选 "发育行为\n观察" ，请确认。</string>
     <string name="dialog_content_camera_permission">请打开相机权限</string>
     <string name="dialog_content_storage_permission">请打开存储权限</string>
     <string name="dialog_content_location_permission">定位服务为开启,请在系统中开启定位服务</string>
@@ -402,7 +406,9 @@
     <string name="dialog_minute_second">%d:%02d</string>
     <string name="dialog_btn_prompt_later">暂不</string>
     <string name="dialog_btn_prompt_go_setting">去设置</string>
-    
+    <string name="dialog_btn_prompt_back_choose">返回勾选</string>
+    <string name="dialog_btn_prompt_submit">继续提交</string>
+
     <string name="update_content">的用户正在使用新版本</string>
     <string name="dialog_content_pwd_change_success">修改密码成功</string>
     <string name="dialog_content_pwd_change_failed">修改密码失败</string>
@@ -457,7 +463,7 @@
     <string name="prompt_old_passwd_empty">旧密码为空</string>
     <string name="prompt_new_passwd_empty">新密码为空</string>
     <string name="prompt_confirm_passwd_empty">请确认密码</string>
-    <string name="prompt_confirm_passwd_error">两次输入的面膜不一致</string>
+    <string name="prompt_confirm_passwd_error">两次输入的密码不一致</string>
 
 
     <!--Other-->

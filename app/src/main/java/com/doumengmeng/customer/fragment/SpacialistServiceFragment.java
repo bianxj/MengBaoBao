@@ -43,7 +43,7 @@ import java.util.Map;
  */
 public class SpacialistServiceFragment extends BaseFragment {
 
-    private LinearLayout ll_buy;
+    private LinearLayout ll_buy,ll_btn_buy;
     private RelativeLayout rl_supplement_record;
     private TextView tv_baby_name,tv_appraisal_count,tv_buy;
     private CircleImageView civ_baby;
@@ -70,7 +70,7 @@ public class SpacialistServiceFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if ( isVisible() && !isHidden() ){
+        if ( !isHidden() ){
             initView();
         }
     }
@@ -86,6 +86,7 @@ public class SpacialistServiceFragment extends BaseFragment {
         rl_supplement_record = view.findViewById(R.id.rl_supplement_record);
         tv_baby_name = view.findViewById(R.id.tv_baby_name);
         tv_appraisal_count = view.findViewById(R.id.tv_appraisal_count);
+        ll_btn_buy = view.findViewById(R.id.ll_btn_buy);
         tv_buy = view.findViewById(R.id.tv_buy);
         civ_baby = view.findViewById(R.id.civ_baby);
         rl_add_record = view.findViewById(R.id.rl_add_record);
@@ -106,7 +107,8 @@ public class SpacialistServiceFragment extends BaseFragment {
             tv_baby_name.setText(userData.getTruename());
             loadHeadImg(userData.isMale(), userData.getHeadimg());
             rl_supplement_record.setOnClickListener(listener);
-            tv_buy.setOnClickListener(listener);
+            ll_btn_buy.setOnClickListener(listener);
+//            tv_buy.setOnClickListener(listener);
             rl_add_record.setOnClickListener(listener);
 
             if ( BaseApplication.getInstance().isUpperThan37Month() ){
@@ -161,7 +163,7 @@ public class SpacialistServiceFragment extends BaseFragment {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
-                case R.id.bt_buy:
+                case R.id.ll_btn_buy:
                     startActivity(SpacialistServiceActivity.class);
                     break;
                 case R.id.tv_buy:
@@ -169,6 +171,9 @@ public class SpacialistServiceFragment extends BaseFragment {
                     break;
                 case R.id.rl_add_record:
                     startActivity(RecordActivity.class);
+                    break;
+                case R.id.bt_buy:
+                    startActivity(SpacialistServiceActivity.class);
                     break;
             }
         }

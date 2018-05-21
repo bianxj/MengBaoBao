@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
@@ -26,8 +25,8 @@ public class InputWeightActivity extends BaseInputDataActivity {
     public final static String OUT_PARAM_WEIGHT = "weight";
 
     private MyGifPlayer player;
-    private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title;
+//    private RelativeLayout rl_back,rl_complete;
+//    private TextView tv_title;
 
     private EditText et_input_data;
     private TextView tv_reference,tv_increase,tv_input_title;
@@ -35,15 +34,15 @@ public class InputWeightActivity extends BaseInputDataActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initChildData() {
         setContentView(R.layout.activity_weight);
         findView();
     }
 
     private void findView(){
-        rl_back = findViewById(R.id.rl_back);
-        rl_complete = findViewById(R.id.rl_complete);
-        tv_title = findViewById(R.id.tv_title);
-
         player = findViewById(R.id.player);
         et_input_data = findViewById(R.id.et_input_data);
         tv_reference = findViewById(R.id.tv_reference);
@@ -55,11 +54,6 @@ public class InputWeightActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.assessment_weight);
-        rl_complete.setVisibility(View.VISIBLE);
-
-        rl_complete.setOnClickListener(listener);
-        rl_back.setOnClickListener(listener);
         new EditTextUtil(et_input_data);
         player.setGif(R.drawable.gif_weight);
 
@@ -90,26 +84,14 @@ public class InputWeightActivity extends BaseInputDataActivity {
         }
     }
 
-    private final View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.rl_back:
-                    back();
-                    break;
-                case R.id.rl_complete:
-                    complete();
-                    break;
-            }
-        }
-    };
-
-    private void back() {
+    @Override
+    protected void back() {
         setResult(Activity.RESULT_CANCELED);
         finish();
     }
 
-    private void complete(){
+    @Override
+    protected void complete(){
         if ( checkData() ){
             Intent intent = new Intent();
             intent.putExtra(OUT_PARAM_WEIGHT,et_input_data.getText().toString());
@@ -133,8 +115,10 @@ public class InputWeightActivity extends BaseInputDataActivity {
         return true;
     }
 
-    private void showPromptTitle(String message){
-        tv_title.setText(message);
+    @Override
+    protected int getTitleName() {
+        return R.string.assessment_weight;
     }
+
 
 }

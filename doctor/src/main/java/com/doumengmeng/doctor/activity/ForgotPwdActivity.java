@@ -312,12 +312,20 @@ public class ForgotPwdActivity extends BaseActivity {
 
                 @Override
                 public void onPostExecute(String result) {
-                    if (BaseApplication.getInstance().isToExamine()){
+                    if (BaseApplication.getInstance().isAbnormalExit()){
                         startActivity(LoadingActivity.class);
-                    } else {
+                    } else if (BaseApplication.getInstance().isToExamine()){
                         MyDialog.showPromptDialog(ForgotPwdActivity.this,"请等待审核\n" +
                                 " 审核通过后将会以短信形式通知您",R.string.sure,null);
+                    } else {
+                        startActivity(LoadingActivity.class);
                     }
+//                    if (BaseApplication.getInstance().isToExamine()){
+//                        startActivity(LoadingActivity.class);
+//                    } else {
+//                        MyDialog.showPromptDialog(ForgotPwdActivity.this,"请等待审核\n" +
+//                                " 审核通过后将会以短信形式通知您",R.string.sure,null);
+//                    }
                 }
             });
             loginTask.execute();

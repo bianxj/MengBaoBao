@@ -150,6 +150,7 @@ public class LoadingActivity extends BaseActivity {
 
     private void findView(){
         rl_back = findViewById(R.id.rl_back);
+        rl_back.setVisibility(View.INVISIBLE);
         tv_loading_percent = findViewById(R.id.tv_loading_percent);
         iv_loading_icon = findViewById(R.id.iv_loading_icon);
         initView();
@@ -498,6 +499,8 @@ public class LoadingActivity extends BaseActivity {
             BaseApplication.getInstance().saveParentInfo(result.getParentInfo());
             BaseApplication.getInstance().saveDayList(result.getDayList());
 
+            BaseApplication.getInstance().saveBannerData(result.getBannerList());
+
             InitConfigureResponse.NotificationData notificationData = result.getNextTimeList();
 
             if ( !TextUtils.isEmpty(notificationData.getNexttime()) ){
@@ -507,9 +510,9 @@ public class LoadingActivity extends BaseActivity {
                     long now = System.currentTimeMillis();
                     long lastTime = format.parse(notificationData.getNexttime()).getTime();
                     long secondTime = lastTime - DAY;
-                    long firstTime = lastTime  - (2*DAY);
+//                    long firstTime = lastTime  - (2*DAY);
 
-                    reserveNotification(now,firstTime,0,notificationData.getNoticeTitle(),notificationData.getNoticeContent());
+//                    reserveNotification(now,firstTime,0,notificationData.getNoticeTitle(),notificationData.getNoticeContent());
                     reserveNotification(now,secondTime,1,notificationData.getNoticeTitle(),notificationData.getNoticeContent());
                 } catch (ParseException e) {
                     e.printStackTrace();

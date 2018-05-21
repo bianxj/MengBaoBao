@@ -105,7 +105,7 @@ public class MainActivity extends BaseFragmentActivity {
         if ( page == null ) {
             page = PAGE_HOME;
         }
-        switchFragment(page);
+//        switchFragment(page);
     }
 
     private void findView(){
@@ -243,6 +243,7 @@ public class MainActivity extends BaseFragmentActivity {
         Intent intent = getIntent();
         if ( intent != null && intent.getStringExtra(SHOW_PAGE) != null ){
             page = intent.getStringExtra(SHOW_PAGE);
+            setIntent(null);
         }
         switchFragment(page);
     }
@@ -282,7 +283,7 @@ public class MainActivity extends BaseFragmentActivity {
                         switchFragment(PAGE_HOSPITAL_REPORT);
                         dl_main.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     } else {
-                        MyDialog.showPromptDialog(MainActivity.this,"权限不足",null);
+                        MyDialog.showPromptDialog(MainActivity.this,"您在医院里没有做过“萌宝宝”测评，所以没有报告哦！",null);
                     }
                     break;
                 case R.id.rl_meng_lesson:

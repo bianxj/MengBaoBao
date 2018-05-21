@@ -9,7 +9,6 @@ import com.doumengmeng.customer.response.entity.Feature;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,7 +126,7 @@ public class FeatureDao {
     }
 
     public Map<String,List<String>> searchFeatureListById(Context context,List<String> ids){
-        Map<String,List<String>> maps = new HashMap<>();
+        Map<String,List<String>> maps = new LinkedHashMap<>();
 
         String builder = "select " +
                 FEATURE_TYPE + "," +

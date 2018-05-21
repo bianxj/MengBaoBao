@@ -106,6 +106,8 @@
     <!--HomeFragment-->
     <string name="accessment_no_data_hint">还没有宝妈购买您的服务，加油哦！</string>
     <string name="accessment_complete_hint">恭喜您，您的评估都已完成了！</string>
+    <string name="accessment_hint">以下萌宝等待您的评估</string>
+    <string name="click_into">点击\n进入</string>
 
     <!--AssessmentActivity-->
     <string name="assessment_baby_base_info">宝宝基本信息</string>
@@ -342,10 +344,12 @@
     <string name="dialog_content_submit_error">提交失败</string>
     <string name="dialog_content_pwd_change_success">修改密码成功</string>
     <string name="dialog_content_pwd_change_failed">修改密码失败</string>
+    <string name="dialog_content_clear_message">是否清空全部消息？</string>
 
     <string name="dialog_friend_circle">朋友圈</string>
 
     <string name="prompt_bt_cancel">取消</string>
+    <string name="prompt_bt_clean">清空</string>
     <string name="prompt_bt_sure">确认</string>
     <string name="prompt_no_wifi">当前不在wifi状态下，可能会产生流量费用</string>
     <string name="prompt_rates_content">按平台协议规定\n实际所得为服务费的50%</string>
@@ -353,7 +357,7 @@
     <string name="prompt_old_passwd_empty">旧密码为空</string>
     <string name="prompt_new_passwd_empty">新密码为空</string>
     <string name="prompt_confirm_passwd_empty">请确认密码</string>
-    <string name="prompt_confirm_passwd_error">两次输入的面膜不一致</string>
+    <string name="prompt_confirm_passwd_error">两次输入的密码不一致</string>
     <string name="prompt_scan_qr">扫一扫上面的二维码，购买服务</string>
     <string name="prompt_friend_circle">朋友圈</string>
     <string name="prompt_weixin">微信</string>

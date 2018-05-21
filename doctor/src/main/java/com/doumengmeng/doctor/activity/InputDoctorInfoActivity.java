@@ -31,6 +31,7 @@ import com.doumengmeng.doctor.response.InputDoctorInfoResponse;
 import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.EditTextUtil;
+import com.doumengmeng.doctor.util.FormatCheckUtil;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.util.PermissionUtil;
@@ -373,6 +374,11 @@ public class InputDoctorInfoActivity extends BaseActivity {
             return false;
         }
 
+        if (!FormatCheckUtil.isIdentityCard(et_identity_num.getText().toString().trim())){
+            showPrompt("身份证格式不正确");
+            return false;
+        }
+
         if ( !hasFirstCertificate || !hasSecondCertificate ){
             showPrompt("证书信息不完全");
             return false;
@@ -442,7 +448,7 @@ public class InputDoctorInfoActivity extends BaseActivity {
     };
 
     private void goLoginActivity(){
-        startActivity(LoginActivity.class);
+        startActivity(GuideActivity.class);
         finish();
     }
 

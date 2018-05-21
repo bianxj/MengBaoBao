@@ -22,12 +22,17 @@ import com.doumengmeng.customer.activity.MainActivity;
 import com.doumengmeng.customer.activity.ObserveActivity;
 import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.base.BaseFragment;
+import com.doumengmeng.customer.net.UrlAddressList;
+import com.doumengmeng.customer.response.InitConfigureResponse;
 import com.doumengmeng.customer.response.entity.DayList;
 import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.view.AutoScrollViewPager;
 import com.doumengmeng.customer.view.CircleImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者: 边贤君
@@ -48,6 +53,8 @@ public class HomePageFragment extends BaseFragment {
     private CheckBox cb_male;
     private TextView tv_baby_age;
     private AutoScrollViewPager asvp;
+
+    private List<InitConfigureResponse.Banner> banners;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -87,8 +94,21 @@ public class HomePageFragment extends BaseFragment {
         rl_baby_head.setOnClickListener(listener);
 
         //初始化轮播图
-        int[] images = new int[]{R.drawable.banner1,R.drawable.banner2,R.drawable.banner3};
-        asvp.setImageList(images);
+        banners = BaseApplication.getInstance().loadBannerData();
+        List<String> urls = new ArrayList<>();
+        for (InitConfigureResponse.Banner banner:banners) {
+            urls.add(UrlAddressList.IMAGE_URL + banner.getImgurl());
+        }
+//
+//        List<Integer> images = new ArrayList<>();
+//        images.add(R.drawable.banner1);
+//        images.add(R.drawable.banner2);
+//        images.add(R.drawable.banner3);
+
+        asvp.setUrlList(urls);
+
+//        int[] images = new int[]{R.drawable.banner1,R.drawable.banner2,R.drawable.banner3};
+//        asvp.setImageList(images);
         asvp.setOnClickCallBack(onClickCallBack);
     }
 
@@ -171,15 +191,23 @@ public class HomePageFragment extends BaseFragment {
 //            } else if ( 2 == position ){
 //                doctorName = "章依雯";
 //            }
-            String doctorId = "17";
-            if ( 1 == position ){
-                doctorId = "4";
-            } else if ( 2 == position ){
-                doctorId = "49";
-            }
+
+            InitConfigureResponse.Banner banner = banners.get(position-1);
+
             Intent intent = new Intent(getContext(),DoctorInfoActivity.class);
-            intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_ID , doctorId);
+            intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_ID , banner.getDoctorid());
             startActivity(intent);
+
+
+//            String doctorId = "17";
+//            if ( 1 == position ){
+//                doctorId = "4";
+//            } else if ( 2 == position ){
+//                doctorId = "49";
+//            }
+//            Intent intent = new Intent(getContext(),DoctorInfoActivity.class);
+//            intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_ID , doctorId);
+//            startActivity(intent);
         }
     };
 

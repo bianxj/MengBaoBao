@@ -25,8 +25,9 @@
             />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/y20px"
             android:layout_marginLeft="@dimen/x42px"
             android:layout_marginTop="@dimen/y59px"
             android:orientation="vertical">
@@ -36,7 +37,7 @@
                 android:layout_height="wrap_content"
                 style="@style/SecondBlack.Text52px"
                 android:includeFontPadding="false"
-                android:text="童梅玲"/>
+                android:text=""/>
             <TextView
                 android:id="@+id/tv_positional_titles"
                 android:layout_width="wrap_content"
@@ -44,15 +45,17 @@
                 android:layout_marginTop="@dimen/y25px"
                 style="@style/SecondBlack.Text28px"
                 android:includeFontPadding="false"
-                android:text="主任医师"/>
+                android:text=""/>
             <TextView
                 android:id="@+id/tv_hospital"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y10px"
                 style="@style/SecondBlack.Text28px"
                 android:includeFontPadding="false"
-                android:text="南京市妇幼保健院"/>
+                android:text=""
+                android:lines="1"
+                android:ellipsize="end"/>
             <TextView
                 android:id="@+id/tv_doctor_department"
                 android:layout_width="wrap_content"
@@ -60,7 +63,9 @@
                 android:layout_marginTop="@dimen/y10px"
                 style="@style/SecondBlack.Text28px"
                 android:includeFontPadding="false"
-                android:text="儿保科"/>
+                android:lines="1"
+                android:ellipsize="end"
+                android:text=""/>
         </LinearLayout>
 
     </LinearLayout>

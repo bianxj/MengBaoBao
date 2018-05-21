@@ -104,12 +104,20 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onPostExecute(String result) {
                         //跳转至Loading界面
-                        if (BaseApplication.getInstance().isToExamine()){
+                        if (BaseApplication.getInstance().isAbnormalExit()){
                             startActivity(LoadingActivity.class);
-                        } else {
+                        } else if (BaseApplication.getInstance().isToExamine()){
                             MyDialog.showPromptDialog(LoginActivity.this,"请等待审核\n" +
                                     " 审核通过后将会以短信形式通知您",R.string.sure,null);
+                        } else {
+                            startActivity(LoadingActivity.class);
                         }
+//                        if (BaseApplication.getInstance().isToExamine()){
+//                            startActivity(LoadingActivity.class);
+//                        } else {
+//                            MyDialog.showPromptDialog(LoginActivity.this,"请等待审核\n" +
+//                                    " 审核通过后将会以短信形式通知您",R.string.sure,null);
+//                        }
                     }
                 });
                 loginTask.execute();

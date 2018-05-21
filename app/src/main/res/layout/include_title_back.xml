@@ -33,6 +33,20 @@
         android:text=""/>
 
     <RelativeLayout
+        android:id="@+id/rl_close"
+        android:layout_width="@dimen/x100px"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="@dimen/x26px"
+            android:layout_height="@dimen/x26px"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_close"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/rl_complete"
         android:layout_width="@dimen/x100px"
         android:layout_height="match_parent"

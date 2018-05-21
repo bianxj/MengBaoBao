@@ -155,12 +155,32 @@
             android:clickable="false"
             android:checked="true"
             />
-        <TextView
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x32px"
+                style="@style/SecondWhite.Text30px"
+                android:includeFontPadding="false"
+                android:text="@string/prompt_read_agree"/>
+            <TextView
+                android:id="@+id/tv_agreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/SecondWhite.Text30px"
+                android:includeFontPadding="false"
+                android:text="@string/prompt_agreement"/>
+        </LinearLayout>
+<!--        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x32px"
             style="@style/SecondWhite.Text30px"
-            android:text="@string/prompt_read_agreement"/>
+            android:text="@string/prompt_read_agreement"/>-->
     </LinearLayout>
 
     <TextView

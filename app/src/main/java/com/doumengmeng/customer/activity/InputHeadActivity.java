@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
@@ -26,8 +25,8 @@ public class InputHeadActivity extends BaseInputDataActivity {
     public final static String IN_PARAM_HEAD = "in_head";
     public final static String OUT_PARAM_HEAD = "head";
 
-    private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title;
+//    private RelativeLayout rl_back,rl_complete;
+//    private TextView tv_title;
 
     private TextView tv_increase,tv_reference,tv_std;
     private TextView tv_input_title;
@@ -39,15 +38,15 @@ public class InputHeadActivity extends BaseInputDataActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initChildData() {
         setContentView(R.layout.activity_head);
         findView();
     }
 
     private void findView(){
-        rl_back = findViewById(R.id.rl_back);
-        rl_complete = findViewById(R.id.rl_complete);
-        tv_title = findViewById(R.id.tv_title);
-
         tv_increase = findViewById(R.id.tv_increase);
         tv_reference = findViewById(R.id.tv_reference);
         tv_std = findViewById(R.id.tv_std);
@@ -60,11 +59,6 @@ public class InputHeadActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.record_head_circumference);
-        rl_complete.setVisibility(View.VISIBLE);
-
-        rl_complete.setOnClickListener(listener);
-        rl_back.setOnClickListener(listener);
         player.setGif(R.drawable.gif_head);
         new EditTextUtil(et_input_data);
 
@@ -97,26 +91,14 @@ public class InputHeadActivity extends BaseInputDataActivity {
         }
     }
 
-    private final View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.rl_back:
-                    back();
-                    break;
-                case R.id.rl_complete:
-                    complete();
-                    break;
-            }
-        }
-    };
-
-    private void back() {
+    @Override
+    protected void back() {
         setResult(Activity.RESULT_CANCELED);
         finish();
     }
 
-    private void complete(){
+    @Override
+    protected void complete(){
         if ( checkData() ){
             Intent intent = new Intent();
             intent.putExtra(OUT_PARAM_HEAD,et_input_data.getText().toString());
@@ -140,7 +122,9 @@ public class InputHeadActivity extends BaseInputDataActivity {
         return true;
     }
 
-    private void showPromptTitle(String message){
-        tv_title.setText(message);
+    @Override
+    protected int getTitleName() {
+        return R.string.record_head_circumference;
     }
+
 }

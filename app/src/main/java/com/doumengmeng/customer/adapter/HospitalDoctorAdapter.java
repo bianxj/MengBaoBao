@@ -87,6 +87,7 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private final CircleImageView civ_hospital;
         private final TextView tv_hospital_name;
         private final TextView tv_hospital_address;
+        private final View v_click;
         private HospitalEntity hospital;
 
         public HospitalHolder(View itemView) {
@@ -94,7 +95,8 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             civ_hospital = itemView.findViewById(R.id.civ_hospital);
             tv_hospital_name = itemView.findViewById(R.id.tv_hospital_name);
             tv_hospital_address = itemView.findViewById(R.id.tv_hospital_address);
-            itemView.setOnClickListener(listener);
+            v_click = itemView.findViewById(R.id.v_click);
+            v_click.setOnClickListener(listener);
         }
 
         private void initValue(HospitalEntity hospital){
@@ -134,6 +136,7 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private final TextView tv_doctor_position;
         private final TextView tv_doctor_hospital;
         private final TextView tv_doctor_skill;
+        private final View v_click;
         private DoctorEntity doctor;
 
         public DoctorHolder(View itemView) {
@@ -143,7 +146,8 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             tv_doctor_position = itemView.findViewById(R.id.tv_doctor_position);
             tv_doctor_hospital = itemView.findViewById(R.id.tv_doctor_hospital);
             tv_doctor_skill = itemView.findViewById(R.id.tv_doctor_skill);
-            itemView.setOnClickListener(listener);
+            v_click = itemView.findViewById(R.id.v_click);
+            v_click.setOnClickListener(listener);
         }
 
         private final View.OnClickListener listener = new View.OnClickListener() {
@@ -172,6 +176,8 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 builder.showImageOnFail(R.drawable.default_icon_doctor);
                 builder.showImageForEmptyUri(R.drawable.default_icon_doctor);
                 builder.showImageOnLoading(R.drawable.default_icon_doctor);
+                builder.cacheInMemory(true);
+                builder.cacheOnDisk(true);
                 options = builder.build();
             }
             return options;

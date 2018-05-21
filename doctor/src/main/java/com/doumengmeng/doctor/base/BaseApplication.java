@@ -2,7 +2,6 @@ package com.doumengmeng.doctor.base;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -59,6 +58,7 @@ public class BaseApplication extends Application {
         builder.setSaveDay(5);
         builder.setSaveLog(true);
         builder.setShow(true);
+        builder.setClose(true);
         log = builder.build();
     }
 
@@ -133,6 +133,17 @@ public class BaseApplication extends Application {
     }
 
     /**-------------------------------------------SharedPerference Start---------------------------------------------------*/
+    private final static String TABLE_GUIDE = "guide";
+    private final static String COLUMN_GUIDE_STATE = "state";
+
+    public void saveGuideState(){
+        SharedPreferencesUtil.saveBoolean(this,TABLE_GUIDE,COLUMN_GUIDE_STATE,true);
+    }
+
+    public boolean loadGuideState(){
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_GUIDE,COLUMN_GUIDE_STATE,false);
+    }
+
     private final static String TABLE_USER = "user";
 
     private final static String COLUMN_USER_DATA = "user_data";
@@ -221,7 +232,7 @@ public class BaseApplication extends Application {
     }
 
     public boolean isAbnormalExit(){
-        return SharedPreferencesUtil.loadBoolean(this,TABLE_USER,COLUMN_IS_ABNORMAL_EXIT,false);
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_USER,COLUMN_IS_ABNORMAL_EXIT,true);
     }
 
     public void saveAbnormalExit(boolean isAbnormalExit){
@@ -229,7 +240,7 @@ public class BaseApplication extends Application {
     }
 
     public boolean isToExamine(){
-        return SharedPreferencesUtil.loadBoolean(this,TABLE_USER,COLUMN_IS_TO_EXAMINE,false)||isAbnormalExit();
+        return SharedPreferencesUtil.loadBoolean(this,TABLE_USER,COLUMN_IS_TO_EXAMINE,true);
     }
 
     public void saveToExamine(boolean isToExamine){
@@ -273,33 +284,56 @@ public class BaseApplication extends Application {
     private final static String PERSON_DIR = "person";
     private final static String PERSON_HEAD_IMG = "headimg.jpg";
     private final static String PERSON_CROP_HEAD_IMG = "cropheadimg.jpg";
+
+    private final static String PERSON_CERTIFICATE_DIR = "certificate";
     private final static String PERSON_CERTIFICATE_ONE = "certificate_one.jpg";
     private final static String PERSON_CERTIFICATE_TWO = "certificate_two.jpg";
 
+    private File getCertificateDir(){
+        String dirPath = getFilesDir().getPath()+File.separator+PERSON_CERTIFICATE_DIR;
+        File dir = new File(dirPath);
+        if ( !dir.exists() || !dir.isDirectory() ){
+            if ( !dir.mkdirs() ){
+                BaseApplication.getInstance().getMLog().error("目录创建失败");
+            }
+        }
+        return dir;
+    }
+
     public String getCertificateOnePath(){
-        String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
-        FileUtil.getIntance().createFolder(dirPath);
-        return dirPath + File.separator + PERSON_CERTIFICATE_ONE;
+        File dir = getCertificateDir();
+        return dir.getPath() + File.separator + PERSON_CERTIFICATE_ONE;
     }
 
     public String getCertificateTwoPath(){
-        String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
-        FileUtil.getIntance().createFolder(dirPath);
-        return dirPath + File.separator + PERSON_CERTIFICATE_TWO;
+        File dir = getCertificateDir();
+        return dir.getPath() + File.separator + PERSON_CERTIFICATE_TWO;
+    }
+
+    private File getDoctorHeadImgDir(){
+        String dirPath = getExternalCacheDir().getPath()+File.separator+PERSON_DIR;
+        File dir = new File(dirPath);
+        if ( !dir.exists() || !dir.isDirectory() ){
+            if ( !dir.mkdirs() ){
+                BaseApplication.getInstance().getMLog().error("目录创建失败");
+            }
+        }
+        return dir;
     }
 
     public String getDoctorHeadImgPath(){
-        String dirPath = EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR;
-        FileUtil.getIntance().createFolder(dirPath);
-        return dirPath + File.separator + PERSON_HEAD_IMG;
+        File dir = getDoctorHeadImgDir();
+        return dir.getPath() + File.separator + PERSON_HEAD_IMG;
     }
 
     public String getHeadCropPath(){
-        return EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR+File.separator+PERSON_CROP_HEAD_IMG;
+        File dir = getDoctorHeadImgDir();
+        return dir.getPath()+File.separator+PERSON_CROP_HEAD_IMG;
     }
 
     public String getHeadImgPath(){
-        return EXTERNAL_STORAGE_DIR+File.separator+PERSON_DIR+File.separator+PERSON_HEAD_IMG;
+        File dir = getDoctorHeadImgDir();
+        return dir.getPath()+File.separator+PERSON_HEAD_IMG;
     }
 
     public File getHeadCropFile() throws IOException {
@@ -311,7 +345,8 @@ public class BaseApplication extends Application {
         FileUtil.getIntance().deleteFile(getHeadCropPath());
     }
 
-    public void skipToGuide(Context context){
+    public void skipToGuide(Activity context){
+        finishApp(context);
         activities.clear();
         clearImageLoaderCache();
         clearUserData();

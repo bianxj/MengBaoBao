@@ -117,11 +117,12 @@
                 android:layout_width="@dimen/x405px"
                 android:layout_height="@dimen/x405px" />
 
-            <ImageView
+            <com.doumengmeng.doctor.view.CircularCoverView
                 android:layout_width="@dimen/x84px"
                 android:layout_height="@dimen/x84px"
                 android:layout_gravity="center"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_qr"
+                app:radius="@dimen/x10px"
                 />
         </FrameLayout>
 

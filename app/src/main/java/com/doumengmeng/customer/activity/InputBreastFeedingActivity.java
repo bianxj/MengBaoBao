@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
@@ -28,8 +26,8 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
     public final static String OUT_PARAM_BREAST_FEEDING = "breast_feeding";
     public final static String OUT_PARAM_BREAST_FEEDING_COUNT = "breast_feeding_count";
 
-    private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title;
+//    private RelativeLayout rl_back,rl_complete;
+//    private TextView tv_title;
 
     private EditText et_input_data_one,et_input_data_two;
     private MyGifPlayer player;
@@ -39,15 +37,15 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initChildData() {
         setContentView(R.layout.activity_brest_feeding);
         findView();
     }
 
     private void findView(){
-        rl_back = findViewById(R.id.rl_back);
-        rl_complete = findViewById(R.id.rl_complete);
-        tv_title = findViewById(R.id.tv_title);
-
         et_input_data_one = findViewById(R.id.et_input_data);
         et_input_data_two = findViewById(R.id.et_input_data_two);
         player = findViewById(R.id.player);
@@ -58,12 +56,6 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.record_breastfeeding_title);
-        rl_complete.setVisibility(View.VISIBLE);
-
-        rl_complete.setOnClickListener(listener);
-        rl_back.setOnClickListener(listener);
-
         player.setGif(R.drawable.gif_breast);
 
         tv_reference.setText(getResources().getStringArray(R.array.milk_reference)[month]);
@@ -80,26 +72,14 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
         }
     }
 
-    private final View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.rl_back:
-                    back();
-                    break;
-                case R.id.rl_complete:
-                    complete();
-                    break;
-            }
-        }
-    };
-
-    private void back() {
+    @Override
+    protected void back() {
         setResult(Activity.RESULT_CANCELED);
         finish();
     }
 
-    private void complete(){
+    @Override
+    protected void complete(){
         if ( checkData() ){
             Intent intent = new Intent();
             intent.putExtra(OUT_PARAM_BREAST_FEEDING,et_input_data_one.getText().toString());
@@ -113,6 +93,10 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
         String ml = et_input_data_one.getText().toString().trim();
         String count = et_input_data_two.getText().toString().trim();
 
+        if ( TextUtils.isEmpty(ml) && TextUtils.isEmpty(count) ){
+            return true;
+        }
+
         if ( TextUtils.isEmpty(ml) ) {
             showPromptTitle("请输入母乳喂养量");
             return false;
@@ -121,18 +105,20 @@ public class InputBreastFeedingActivity extends BaseInputDataActivity {
             showPromptTitle("请输入喂养次数");
             return false;
         }
-        if ( Float.parseFloat(ml) < 0 || Float.parseFloat(ml) > 2000  ){
+        if ( Float.parseFloat(ml) <= 0 || Float.parseFloat(ml) > 2000  ){
             showPromptTitle("母乳喂养量 0~2000");
             return false;
         }
-        if ( Float.parseFloat(count) < 0 || Float.parseFloat(count) > 30 ){
+        if ( Float.parseFloat(count) <= 0 || Float.parseFloat(count) > 30 ){
             showPromptTitle("喂养次数 0~30");
             return false;
         }
         return true;
     }
 
-    private void showPromptTitle(String message){
-        tv_title.setText(message);
+    @Override
+    protected int getTitleName() {
+        return R.string.record_breastfeeding_title;
     }
+
 }

@@ -51,6 +51,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
         private final CircleImageView civ_hospital;
         private final TextView tv_hospital_name;
         private final TextView tv_hospital_address;
+        private final View v_click;
         private HospitalEntity hospital;
 
         public ViewHolder(View itemView) {
@@ -58,7 +59,8 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
             civ_hospital = itemView.findViewById(R.id.civ_hospital);
             tv_hospital_name = itemView.findViewById(R.id.tv_hospital_name);
             tv_hospital_address = itemView.findViewById(R.id.tv_hospital_address);
-            itemView.setOnClickListener(listener);
+            v_click = itemView.findViewById(R.id.v_click);
+            v_click.setOnClickListener(listener);
         }
 
         private void initValue(HospitalEntity hospital){
@@ -86,6 +88,8 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
                 builder.showImageOnFail(R.drawable.default_icon_hospital);
                 builder.showImageForEmptyUri(R.drawable.default_icon_hospital);
                 builder.showImageOnLoading(R.drawable.default_icon_hospital);
+                builder.cacheInMemory(true);
+                builder.cacheOnDisk(true);
                 options = builder.build();
             }
             return options;

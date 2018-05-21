@@ -97,7 +97,6 @@ public class DoctorListActivity extends BaseActivity {
         xrv_doctor.setLoadingListener(doctorLoadingListener);
         doctorAdapter = new DoctorAdapter(doctors);
         xrv_doctor.setAdapter(doctorAdapter);
-
         searchDoctorData();
     }
 

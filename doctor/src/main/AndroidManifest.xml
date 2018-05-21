@@ -23,27 +23,37 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="false">
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="mjFnnk87mnZUXfMBPSHZXLu7CUUizr1M" />
+            android:value="oR7tiOEY1k6Z7iDxP8yvmqtaai8vKvsu" />
 
-        <activity android:name=".activity.GuideActivity"
+        <activity android:name=".activity.LauncherActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppLauncher"
-            android:launchMode="singleTop"
-            >
+            android:theme="@style/AppLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.GuideActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/GuideLauncher"
+            >
+        </activity>
         <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.LoginActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.RegisterActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ForgotPwdActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.LoadingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.LoadingActivity" android:theme="@style/StatusBarTheme"  android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.AgreementActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ChangePwdActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.DiagramDataActivity" android:screenOrientation="portrait"></activity>

@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +126,11 @@ public class AppUtil {
             }
         }
         return pName.contains(packageName);// 判断pName中是否有目标程序的包名，有TRUE，没有FALSE
+    }
+
+    public static void hideSoftInput(Context context, Window window){
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(window.getDecorView().getWindowToken(),0);
     }
 
 }

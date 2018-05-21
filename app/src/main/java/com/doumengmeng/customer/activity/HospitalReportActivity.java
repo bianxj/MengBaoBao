@@ -19,7 +19,7 @@ import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.view.GraphModule;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -199,7 +199,7 @@ public class HospitalReportActivity extends BaseActivity {
     //------------------------------------发育行为--------------------------------------------------
 
     private Map<String,List<DevelopmentalItem>> generateDevelopmentData(String correntMonth , String recordTime,List<String> selected){
-        Map<String,List<DevelopmentalItem>> map = new HashMap<>();
+        Map<String,List<DevelopmentalItem>> map = new LinkedHashMap<>();
 
         List<String> ages = new ArrayList<>();
         ages.add(correntMonth);
@@ -229,7 +229,7 @@ public class HospitalReportActivity extends BaseActivity {
     private void initDevelopment(Map<String,List<DevelopmentalItem>> maps){
         Set<String> keys = maps.keySet();
         for (String key:keys){
-            ll_develop_behavior.addView(createSubItem(key,maps.get(key)),0);
+            ll_develop_behavior.addView(createSubItem(key,maps.get(key)));
         }
     }
 

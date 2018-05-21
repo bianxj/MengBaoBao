@@ -183,7 +183,7 @@ public class DoctorInfoActivity extends BaseActivity {
         tv_doctor_introduce.setText(doctor.getDoctordesc());
         tv_doctor_skill.setText(doctor.getSpeciality());
         tv_hospital.setText(hospital.getHospitalname());
-        ImageLoader.getInstance().displayImage(doctor.getDoctorimg(),civ_head,initDisplayImageOptions());
+        ImageLoader.getInstance().displayImage(doctor.getDoctorImageUrl(),civ_head,initDisplayImageOptions());
     }
 
     private DisplayImageOptions initDisplayImageOptions(){

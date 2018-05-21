@@ -1184,7 +1184,6 @@
                             android:layout_height="@dimen/y56px"
                             android:background="@drawable/bg_circle"
                             android:button="@null"
-                            android:checked="true"
                             android:gravity="center"
                             android:text="@string/record_good"
                             android:textColor="@drawable/bg_circle_text_color" />

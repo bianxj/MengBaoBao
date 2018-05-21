@@ -363,7 +363,13 @@
     </style>
     <!--Activity start-->
     <style name="AppLauncher" parent="AppTheme">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@drawable/bg_launcher</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="GuideLauncher" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="windowActionBar">false</item>

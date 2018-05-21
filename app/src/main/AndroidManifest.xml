@@ -26,8 +26,11 @@
         android:name="com.doumengmeng.customer.base.BaseApplication"
         android:fullBackupContent="false">
         <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+        <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="FfGPctd4m1kK0zTOF9el2C5fepRDLYZ9" />
+            android:value="jG9oLZFQToA6RhZFLN0USZolSIiijUs2" />
 
         <!--android:name=".activity.GuideActivity"-->
 <!--        <activity
@@ -39,22 +42,27 @@
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>-->
-        <activity
-            android:name=".activity.GuideActivity"
+        <activity android:name=".activity.LauncherActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppLauncher"
-            android:launchMode="singleTop"
-            >
+            android:theme="@style/AppLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.GuideActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/GuideLauncher"
+            >
+        </activity>
         <activity android:name="com.doumengmeng.customer.activity.LoginActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.RegisterActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.ForgotPwdActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.AgreementActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name="com.doumengmeng.customer.activity.LoadingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.LoadingActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.MainActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name="com.doumengmeng.customer.activity.PersonCenterActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.BaseInfoActivity" android:screenOrientation="portrait"></activity>

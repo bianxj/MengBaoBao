@@ -90,7 +90,7 @@ public class LoginTask {
 
             BaseApplication.getInstance().saveLogin(accountMobile,loginPwd);
             BaseApplication.getInstance().saveAbnormalExit(response.getResult().getIsAbnormalExit() != 0);
-            BaseApplication.getInstance().saveToExamine(response.getResult().getIsToExamine() != 0);
+            BaseApplication.getInstance().saveToExamine(response.getResult().getIsToExamine() == 0);
             if (loginCallBack != null) {
                 loginCallBack.onPostExecute(result);
             }

@@ -27,6 +27,7 @@ public class InitConfigureResponse extends BaseResponse {
         private List<Hospital> HospitalList;
         private List<Feature> FeatureList;
         private List<Nurture> NurtureGuideInfoList;
+        private String newsCount;
 
         public void setHospitalList(List<Hospital> hospitalList) {
             HospitalList = hospitalList;
@@ -50,6 +51,14 @@ public class InitConfigureResponse extends BaseResponse {
 
         public void setNurtureGuideInfoList(List<Nurture> nurtureGuideInfoList) {
             NurtureGuideInfoList = nurtureGuideInfoList;
+        }
+
+        public String getNewsCount() {
+            return newsCount;
+        }
+
+        public void setNewsCount(String newsCount) {
+            this.newsCount = newsCount;
         }
     }
 

@@ -1,5 +1,9 @@
 package com.doumengmeng.customer.entity;
 
+import android.text.TextUtils;
+
+import com.doumengmeng.customer.net.UrlAddressList;
+
 /**
  * Created by Administrator on 2017/12/11.
  */
@@ -12,6 +16,9 @@ public class HospitalEntity {
     private String hospitaladdress;
 
     public String getHospitalicon() {
+        if (!TextUtils.isEmpty(hospitalicon)){
+            return UrlAddressList.IMAGE_URL + hospitalicon;
+        }
         return hospitalicon;
     }
 

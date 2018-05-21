@@ -94,9 +94,7 @@
                         android:layout_marginLeft="@dimen/x174px"
                         android:includeFontPadding="false"
                         style="@style/SecondBlack.Text28px"
-                        android:lines="1"
-                        android:scrollHorizontally="true"
-                        android:ellipsize="end"/>
+                        android:scrollHorizontally="true"/>
 
                 </RelativeLayout>
                 <View

@@ -1688,6 +1688,7 @@
                 android:layout_height="@dimen/y19px" />
 
         <LinearLayout
+            android:id="@+id/ll_message_borad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/first_white"
@@ -1719,6 +1720,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_upload_report"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/first_white"
@@ -1934,6 +1936,7 @@
                         android:padding="@dimen/x20px"
                         android:minHeight="@dimen/y115px"
                         android:gravity="top"
+                        android:inputType="text"
                         android:text="" />
 
                     <TextView
@@ -1953,6 +1956,7 @@
                         android:padding="@dimen/x20px"
                         android:minHeight="@dimen/y115px"
                         android:gravity="top"
+                        android:inputType="text"
                         android:text="" />
                 </LinearLayout>
 
@@ -1986,6 +1990,7 @@
                         android:padding="@dimen/x20px"
                         android:minHeight="@dimen/y115px"
                         android:gravity="top"
+                        android:inputType="text"
                         android:text="" />
                 </LinearLayout>
 
@@ -2019,6 +2024,7 @@
                         android:padding="@dimen/x20px"
                         android:minHeight="@dimen/y115px"
                         android:gravity="top"
+                        android:inputType="text"
                         android:text="" />
                 </LinearLayout>
             </LinearLayout>

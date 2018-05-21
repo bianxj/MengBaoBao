@@ -50,6 +50,7 @@ public class HomeFragment extends BaseTimeFragment {
 
     private TextView tv_doctor_name,tv_doctor_positionaltitle,tv_hospital,tv_doctor_department;
     private RelativeLayout rl_qr;
+    private TextView tv_hint;
     private LinearLayout ll_no_data , ll_complete;
     private CircleImageView civ_head;
     private XRecyclerView xrv;
@@ -109,6 +110,7 @@ public class HomeFragment extends BaseTimeFragment {
         tv_doctor_positionaltitle = view.findViewById(R.id.tv_doctor_positionaltitle);
         tv_hospital = view.findViewById(R.id.tv_hospital);
         rl_qr = view.findViewById(R.id.rl_qr);
+        tv_hint = view.findViewById(R.id.tv_hint);
 
         UserData userData = BaseApplication.getInstance().getUserData();
         if ( userData != null ){
@@ -224,18 +226,21 @@ public class HomeFragment extends BaseTimeFragment {
         ll_no_data.setVisibility(View.VISIBLE);
         ll_complete.setVisibility(View.GONE);
         xrv.setVisibility(View.GONE);
+        tv_hint.setVisibility(View.GONE);
     }
 
     public void showAllComplete(){
         ll_no_data.setVisibility(View.GONE);
         ll_complete.setVisibility(View.VISIBLE);
         xrv.setVisibility(View.GONE);
+        tv_hint.setVisibility(View.GONE);
     }
 
     public void refreshAssessment(List<AssessmentItem> serviceItems){
         ll_no_data.setVisibility(View.GONE);
         ll_complete.setVisibility(View.GONE);
         xrv.setVisibility(View.VISIBLE);
+        tv_hint.setVisibility(View.VISIBLE);
 
         items.clear();
         if ( serviceItems != null ) {

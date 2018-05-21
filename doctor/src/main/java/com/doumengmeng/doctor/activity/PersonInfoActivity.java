@@ -13,6 +13,7 @@ import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -68,14 +69,23 @@ public class PersonInfoActivity extends BaseActivity {
         tv_hospital.setText(DaoManager.getInstance().getHospitalDao().searchHospitalNameById(this,userData.getHospitalId()));
         tv_department.setText(userData.getDepartmentName());
         tv_professional_title.setText(userData.getPositionalTitles());
-        tv_service_cost.setText(userData.getCost());
-        tv_income.setText(Integer.parseInt(userData.getCost())/2+"");
+        tv_service_cost.setText(userData.getCost()+"元");
+        tv_income.setText(Integer.parseInt(userData.getCost())/2+"元");
         tv_speciality.setText(userData.getSpeciality());
         tv_intro.setText(userData.getDoctorDesc());
         tv_identity_num.setText(userData.getDoctorCode());
-        ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+//        ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+        loadHeadImg(civ_head,userData.getHeadimg());
         ImageLoader.getInstance().displayImage(userData.getCertificateAUrl(),iv_certification_p1);
         ImageLoader.getInstance().displayImage(userData.getCertificateBUrl(),iv_certification_p2);
+    }
+
+    private void loadHeadImg(ImageView imageView, String urlHeadImg){
+        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
+        builder.showImageOnLoading(R.drawable.default_icon_doctor);
+        builder.showImageForEmptyUri(R.drawable.default_icon_doctor);
+        builder.showImageOnFail(R.drawable.default_icon_doctor);
+        ImageLoader.getInstance().displayImage(urlHeadImg,imageView,builder.build());
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

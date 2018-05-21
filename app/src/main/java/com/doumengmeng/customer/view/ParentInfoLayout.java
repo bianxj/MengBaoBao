@@ -237,7 +237,7 @@ public class ParentInfoLayout extends LinearLayout {
 
         int fatherCalture = singleChooseCheck(father_culture_id);
         if ( UN_CHOOSE == fatherCalture ){
-            errorMessage = "请选择文化程度";
+            errorMessage = "请选择父亲文化程度";
             return false;
         }
 
@@ -267,7 +267,7 @@ public class ParentInfoLayout extends LinearLayout {
 
         int motherCalture = singleChooseCheck(mother_culture_id);
         if ( UN_CHOOSE == motherCalture ){
-            errorMessage = "请选择文化程度";
+            errorMessage = "请选择母亲文化程度";
             return false;
         }
         return true;

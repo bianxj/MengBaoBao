@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.activity.AssessmentActivity;
+import com.doumengmeng.customer.entity.AssessmentStatus;
 import com.doumengmeng.customer.response.entity.Record;
 import com.doumengmeng.customer.util.GsonUtil;
 
@@ -72,16 +73,29 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
 
         private void initView(Record record){
             tv_baby_month.setText(record.getBabyMonth());
-            tv_bmi.setText(record.getHwResultString());
-            tv_develop.setText(record.getFeatureResultString());
-            tv_height.setText(record.getHeightResultString());
+            if (AssessmentStatus.DOCTOR_UNREAD.equals(record.getRecordStatus())
+                    ){
+                tv_bmi.setText("待评");
+                tv_develop.setText("待评");
+                tv_height.setText("待评");
+                tv_weight.setText("待评");
+            } else if (AssessmentStatus.REFUND.equals(record.getRecordStatus())) {
+                tv_bmi.setText("?");
+                tv_develop.setText("?");
+                tv_height.setText("?");
+                tv_weight.setText("?");
+            } else {
+                tv_bmi.setText(record.getHwResultString());
+                tv_develop.setText(record.getFeatureResultString());
+                tv_height.setText(record.getHeightResultString());
+                tv_weight.setText(record.getWeightResultString());
+            }
             if ( record.isShowRecordState() ){
                 tv_read_state.setVisibility(View.VISIBLE);
             } else {
                 tv_read_state.setVisibility(View.INVISIBLE);
             }
             tv_record_date.setText(record.getRecordDay());
-            tv_weight.setText(record.getWeightResultString());
             this.record = record;
         }
 

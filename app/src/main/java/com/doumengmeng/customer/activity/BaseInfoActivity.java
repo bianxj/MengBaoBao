@@ -2,6 +2,7 @@ package com.doumengmeng.customer.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -32,7 +33,7 @@ import java.util.Map;
  */
 public class BaseInfoActivity extends BaseActivity {
 
-    private RelativeLayout rl_back,rl_complete;
+    private RelativeLayout rl_back,rl_complete,rl_close;
     private TextView tv_title,tv_complete;
 
     private ScrollView sv;
@@ -55,6 +56,7 @@ public class BaseInfoActivity extends BaseActivity {
     private void findView(){
         rl_back = findViewById(R.id.rl_back);
         rl_complete = findViewById(R.id.rl_complete);
+        rl_close = findViewById(R.id.rl_close);
         tv_complete = findViewById(R.id.tv_complete);
         tv_title = findViewById(R.id.tv_title);
         base_info = findViewById(R.id.base_info);
@@ -63,6 +65,7 @@ public class BaseInfoActivity extends BaseActivity {
     }
 
     private void initView(){
+        rl_close.setOnClickListener(listener);
         rl_back.setOnClickListener(listener);
         rl_complete.setOnClickListener(listener);
 
@@ -87,6 +90,9 @@ public class BaseInfoActivity extends BaseActivity {
                     break;
                 case R.id.rl_complete:
                     changeBaseInfo();
+                    break;
+                case R.id.rl_close:
+                    clearPromptTitle();
                     break;
             }
         }
@@ -114,7 +120,8 @@ public class BaseInfoActivity extends BaseActivity {
 
     private boolean checkBaseInfo(){
         if ( !base_info.checkBaseInfo() ){
-            tv_title.setText(base_info.getCheckErrorMsg());
+            showPromptTitle(base_info.getCheckErrorMsg());
+//            tv_title.setText(base_info.getCheckErrorMsg());
             return false;
         }
         return true;
@@ -161,4 +168,27 @@ public class BaseInfoActivity extends BaseActivity {
         }
     };
 
+    protected void clearPromptTitle(){
+        tv_title.setText(R.string.base_info);
+        rl_complete.setVisibility(View.VISIBLE);
+        rl_back.setVisibility(View.VISIBLE);
+        rl_close.setVisibility(View.GONE);
+    }
+
+    protected void showPromptTitle(String message){
+        tv_title.setText(message);
+        rl_back.setVisibility(View.GONE);
+        rl_complete.setVisibility(View.GONE);
+        rl_close.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ( rl_close.getVisibility() == View.VISIBLE ){
+            if ( keyCode == KeyEvent.KEYCODE_BACK ){
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

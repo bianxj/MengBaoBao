@@ -15,6 +15,9 @@ import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.view.AutoScrollViewPager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 作者: 边贤君
  * 描述: 引导页
@@ -65,7 +68,11 @@ public class GuideActivity extends BaseActivity {
         bt_guide_login.setOnClickListener(listener);
         asvp = findViewById(R.id.asvp);
 
-        int[] images = new int[]{R.drawable.icon_guide_1,R.drawable.icon_guide_2,R.drawable.icon_guide_3};
+        List<Integer> images = new ArrayList<>();
+        images.add(R.drawable.icon_guide_1);
+        images.add(R.drawable.icon_guide_2);
+        images.add(R.drawable.icon_guide_3);
+//        int[] images = new int[]{R.drawable.icon_guide_1,R.drawable.icon_guide_2,R.drawable.icon_guide_3};
         asvp.setImageList(images);
     }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="day_chinese">天</string>
+    <string name="second_chinese">秒</string>
+    <string name="count_chinese">次</string>
+    <string name="gram_day_chinese">克/日</string>
+    <string name="mg_day_chinese">毫克/日</string>
+    <string name="ml_day_chinese">毫升/日</string>
+    <string name="mount_day_chinese">只/日</string>
+    <string name="hour_day_chinese">小时/日</string>
+    <string name="cm_chinese">厘米</string>
+    <string name="kg_chinese">公斤</string>
+    <string name="day_count_chinese">天/次</string>
+    <string name="count_day_chinese">次/日</string>
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
+    <string name="kg_divide_m_square">kg/m²</string>
+    <string name="age_chinese">岁</string>
+    <string name="week_chinese">周</string>
+    <string name="ml_chinese">毫升</string>
+    <string name="ml_count_chinese">毫升/次</string>
+
+</resources>

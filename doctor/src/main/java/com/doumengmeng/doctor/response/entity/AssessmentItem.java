@@ -25,6 +25,8 @@ public class AssessmentItem {
     private String userId;
     @SerializedName("validitytime")
     private String validityTime;
+    @SerializedName("sex")
+    private String sex;
 
     public String getHeadImgUrl(){
         if ( !TextUtils.isEmpty(headImg) ){
@@ -87,5 +89,17 @@ public class AssessmentItem {
 
     public void setValidityTime(String validityTime) {
         this.validityTime = validityTime;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public boolean isMale(){
+        return "1".equals(sex);
     }
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.doumengmeng.doctor.base.BaseFragment;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -73,11 +75,20 @@ public class AboutFragment extends BaseFragment {
         tv_doctor_department = view.findViewById(R.id.tv_doctor_department);
 
         UserData userData = BaseApplication.getInstance().getUserData();
-        ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+        loadHeadImg(civ_head,userData.getHeadimg());
+//        ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
         tv_doctor_name.setText(userData.getDoctorName());
         tv_positional_titles.setText(userData.getPositionalTitles());
         tv_hospital.setText(DaoManager.getInstance().getHospitalDao().searchHospitalNameById(getContext(),userData.getHospitalId()));
         tv_doctor_department.setText(userData.getDepartmentName());
+    }
+
+    private void loadHeadImg(ImageView imageView, String urlHeadImg){
+        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
+        builder.showImageOnLoading(R.drawable.default_icon_doctor);
+        builder.showImageForEmptyUri(R.drawable.default_icon_doctor);
+        builder.showImageOnFail(R.drawable.default_icon_doctor);
+        ImageLoader.getInstance().displayImage(urlHeadImg,imageView,builder.build());
     }
 
     private void initAboutList(View view){
@@ -148,7 +159,7 @@ public class AboutFragment extends BaseFragment {
     }
 
     private void logout(){
-        BaseApplication.getInstance().skipToGuide(getContext());
+        BaseApplication.getInstance().skipToGuide(getActivity());
     }
 
 }

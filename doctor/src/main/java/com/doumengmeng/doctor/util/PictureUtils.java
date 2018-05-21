@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Administrator on 2017/12/28.
@@ -35,15 +36,17 @@ public class PictureUtils {
     }
 
     public static void saveGalleryBitmapToLocal(String savePath,Context context,Uri uri) throws IOException {
-        File saveFile = FileUtil.getIntance().createNewFile(savePath);
         String path = getGalleryImagePath(context,uri);
-        int degree = getRotationDegree(path);
-        Bitmap bitmap = getSmallBitmap(path,1280);
-        bitmap = rotateBitmap(bitmap,degree);
-        saveBitmap(saveFile,bitmap);
+        if ( !savePath.equals(path) ) {
+            File saveFile = FileUtil.getIntance().createNewFile(savePath);
+            int degree = getRotationDegree(path);
+            Bitmap bitmap = getSmallBitmap(path, 1280);
+            bitmap = rotateBitmap(bitmap, degree);
+            saveBitmap(saveFile, bitmap);
+        }
     }
 
-    private static String getGalleryImagePath(Context context,Uri uri){
+    public static String getGalleryImagePath(Context context,Uri uri){
         int sdkVersion = Build.VERSION.SDK_INT;
         if (sdkVersion >= 19) {
             return PictureUtils.getPath_above19(context, uri);
@@ -396,6 +399,32 @@ public class PictureUtils {
             e.printStackTrace();
         }
         return degree;
+    }
+
+    public static Bitmap loadBitmapFromResouce(Context context,int resId) throws Exception {
+        InputStream is = null;
+        try{
+            BitmapFactory.Options opt = new BitmapFactory.Options();
+            opt.inPreferredConfig = Bitmap.Config.RGB_565;
+            opt.inPurgeable = true;
+            opt.inInputShareable = true;
+            is = context.getResources().openRawResource(resId);
+
+            Bitmap bm = BitmapFactory.decodeStream(is, null, opt);
+            return bm;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally{
+            try {
+                if(is != null){
+                    is.close();
+                    is = null;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 //    public static byte[] convertBitmapToByte(Bitmap bitmap){

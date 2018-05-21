@@ -94,17 +94,23 @@
                         android:background="@drawable/bg_rect_circle"
                         android:gravity="center"/>
 
-                    <TextView
-                        android:id="@+id/tv_buy"
-                        style="@style/FirstWhite.Text22px"
-                        android:layout_width="@dimen/y62px"
+                    <LinearLayout
+                        android:id="@+id/ll_btn_buy"
+                        android:layout_width="@dimen/y82px"
                         android:layout_height="@dimen/y40px"
+                        android:orientation="vertical"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/x13px"
-                        android:layout_toRightOf="@+id/tv_appraisal_count"
-                        android:background="@drawable/bg_circle_read"
-                        android:gravity="center"
-                        android:text="@string/spacialist_service_buy" />
+                        android:layout_toRightOf="@+id/tv_appraisal_count">
+                        <TextView
+                            android:id="@+id/tv_buy"
+                            style="@style/FirstWhite.Text22px"
+                            android:layout_width="@dimen/y62px"
+                            android:layout_height="@dimen/y40px"
+                            android:background="@drawable/bg_circle_read"
+                            android:gravity="center"
+                            android:text="@string/spacialist_service_buy" />
+                    </LinearLayout>
 
                 </RelativeLayout>
             </LinearLayout>

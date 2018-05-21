@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseInputDataActivity;
@@ -27,23 +24,23 @@ public class InputCacationActivity extends BaseInputDataActivity {
     public final static String OUT_PARAM_CACATION_DAY = "cacation_day";
     public final static String OUT_PARAM_CACATION_COUNT = "cacation_count";
 
-    private RelativeLayout rl_back,rl_complete;
-    private TextView tv_title;
+//    private RelativeLayout rl_back,rl_complete;
+//    private TextView tv_title;
 
     private LinearLayout ll_content;
     private EditText et_input_data_one,et_input_data_two;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initChildData() {
         setContentView(R.layout.activity_cacation);
         findView();
     }
 
     private void findView(){
-        rl_back = findViewById(R.id.rl_back);
-        rl_complete = findViewById(R.id.rl_complete);
-        tv_title = findViewById(R.id.tv_title);
-
         et_input_data_one = findViewById(R.id.et_input_data_one);
         et_input_data_two = findViewById(R.id.et_input_data_two);
         ll_content = findViewById(R.id.ll_content);
@@ -51,12 +48,6 @@ public class InputCacationActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        tv_title.setText(R.string.record_cacation);
-        rl_complete.setVisibility(View.VISIBLE);
-
-        rl_complete.setOnClickListener(listener);
-        rl_back.setOnClickListener(listener);
-
         String content = getResources().getStringArray(R.array.cacation_content)[month];
         generateListView(ll_content,content.split("。"));
 
@@ -69,26 +60,14 @@ public class InputCacationActivity extends BaseInputDataActivity {
         }
     }
 
-    private final View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.rl_back:
-                    back();
-                    break;
-                case R.id.rl_complete:
-                    complete();
-                    break;
-            }
-        }
-    };
-
-    private void back() {
+    @Override
+    protected void back() {
         setResult(Activity.RESULT_CANCELED);
         finish();
     }
 
-    private void complete(){
+    @Override
+    protected void complete(){
         if ( checkData() ){
             Intent intent = new Intent();
             intent.putExtra(OUT_PARAM_CACATION_DAY,et_input_data_one.getText().toString());
@@ -125,8 +104,13 @@ public class InputCacationActivity extends BaseInputDataActivity {
         return true;
     }
 
-    private void showPromptTitle(String message){
-        tv_title.setText(message);
+    @Override
+    protected int getTitleName() {
+        return R.string.record_cacation;
     }
+
+    //    private void showPromptTitle(String message){
+//        tv_title.setText(message);
+//    }
 
 }

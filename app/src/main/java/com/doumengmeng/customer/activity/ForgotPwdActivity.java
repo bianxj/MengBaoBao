@@ -26,6 +26,7 @@ import com.doumengmeng.customer.request.ResponseErrorCode;
 import com.doumengmeng.customer.request.task.LoginTask;
 import com.doumengmeng.customer.response.ForgotPwdResponse;
 import com.doumengmeng.customer.response.VCForgotResponse;
+import com.doumengmeng.customer.util.AppUtil;
 import com.doumengmeng.customer.util.FormatCheckUtil;
 import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.util.MyDialog;
@@ -50,6 +51,7 @@ public class ForgotPwdActivity extends BaseActivity {
     private EditText et_phone , et_vc , et_login_pwd;
     private LinearLayout ll_agreement;
     private CheckBox cb_agreement;
+    private TextView tv_agreement;
 
     private int countDown;
 
@@ -82,6 +84,8 @@ public class ForgotPwdActivity extends BaseActivity {
         et_login_pwd = findViewById(R.id.et_login_pwd);
         et_phone = findViewById(R.id.et_phone);
         et_vc = findViewById(R.id.et_vc);
+        tv_agreement = findViewById(R.id.tv_agreement);
+        tv_agreement.getPaint().setUnderlineText(true);
 
         tv_prompt = findViewById(R.id.tv_prompt);
         bt_sure = findViewById(R.id.bt_sure);
@@ -95,6 +99,7 @@ public class ForgotPwdActivity extends BaseActivity {
         bt_get_vc.setOnClickListener(listener);
         bt_sure.setOnClickListener(listener);
         ll_agreement.setOnClickListener(listener);
+        tv_agreement.setOnClickListener(listener);
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -113,6 +118,10 @@ public class ForgotPwdActivity extends BaseActivity {
                 case R.id.ll_agreement:
                     clickAgreement();
                     break;
+                case R.id.tv_agreement:
+                    Intent intent = new Intent(ForgotPwdActivity.this,AgreementActivity.class);
+                    startActivityForResult(intent,REQUEST_AGREEMENT);
+                    break;
             }
         }
     };
@@ -128,6 +137,7 @@ public class ForgotPwdActivity extends BaseActivity {
      * 日期: 2018/1/8 9:52
      */
     private void getVerificationCode(){
+        AppUtil.hideSoftInput(this,getWindow());
         if ( checkVerificationCode() ) {
             try {
                 getVerificationCodeTask = new RequestTask.Builder(this,getVerificationCodeCallBack)

@@ -141,10 +141,10 @@ public class AccountDetailActivity extends BaseActivity {
         datas.clear();
         for (AccountDetailResponse.Detail detail:details){
             AccountDetailAdapter.AccountDetailData data = new AccountDetailAdapter.AccountDetailData();
-            data.setDate(detail.getEvaluationtime().split(" ")[0]);
+            data.setDate(detail.getBuytime().split(" ")[0]);
             data.setName(detail.getTruename());
             data.setCost(detail.getBuyprice());
-            data.setTime(detail.getEvaluationtime().split(" ")[1]);
+            data.setTime(detail.getBuytime().split(" ")[1]);
             datas.add(data);
         }
         adapter.notifyDataSetChanged();

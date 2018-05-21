@@ -26,6 +26,7 @@ public class InitConfigureResponse extends BaseResponse {
 
     public static class Result{
         private com.doumengmeng.customer.response.entity.ParentInfo ParentInfo;
+        private List<Banner> bannerList;
         private List<Doctor> DoctorList;
         private List<Hospital> HospitalList;
         private List<MengClass> MengClassList;
@@ -36,6 +37,14 @@ public class InitConfigureResponse extends BaseResponse {
 
         public NotificationData getNextTimeList() {
             return nextTimeList;
+        }
+
+        public List<Banner> getBannerList() {
+            return bannerList;
+        }
+
+        public void setBannerList(List<Banner> bannerList) {
+            this.bannerList = bannerList;
         }
 
         public void setNextTimeList(NotificationData nextTimeList) {
@@ -96,6 +105,36 @@ public class InitConfigureResponse extends BaseResponse {
 
         public void setParentInfo(com.doumengmeng.customer.response.entity.ParentInfo parentInfo) {
             ParentInfo = parentInfo;
+        }
+    }
+
+    public static class Banner{
+        private String id;
+        private String doctorid;
+        private String imgurl;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getDoctorid() {
+            return doctorid;
+        }
+
+        public void setDoctorid(String doctorid) {
+            this.doctorid = doctorid;
+        }
+
+        public String getImgurl() {
+            return imgurl;
+        }
+
+        public void setImgurl(String imgurl) {
+            this.imgurl = imgurl;
         }
     }
 
