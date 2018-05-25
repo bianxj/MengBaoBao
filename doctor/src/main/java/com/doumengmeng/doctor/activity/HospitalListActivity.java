@@ -145,6 +145,7 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
                     executeRotateAnimation();
                     if ( DaoManager.getInstance().getHospitalDao().hasHospitalInCity(HospitalListActivity.this,city) ) {
                         setCity(city);
+                        refreshHospitalList();
                     } else {
                         Toast.makeText(HospitalListActivity.this,"该地区还在开发中", Toast.LENGTH_SHORT).show();
                     }

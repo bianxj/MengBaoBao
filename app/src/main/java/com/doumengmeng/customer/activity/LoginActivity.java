@@ -152,11 +152,24 @@ public class LoginActivity extends BaseActivity {
     private void gotoRegister(){
         //跳转至注册界面
         startActivity(RegisterActivity.class);
+        clearData();
+    }
+
+    private void clearData(){
+        tv_prompt.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                et_login_pwd.setText("");
+                et_phone.setText("");
+                tv_prompt.setText("");
+            }
+        },300);
     }
 
     private void gotoChangePwd(){
         //跳转至忘记密码界面
         startActivity(ForgotPwdActivity.class);
+        clearData();
     }
 
 

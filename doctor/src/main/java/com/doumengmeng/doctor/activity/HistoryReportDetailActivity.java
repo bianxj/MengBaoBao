@@ -39,6 +39,8 @@ public class HistoryReportDetailActivity extends BaseActivity {
     private TextView tv_baby_name,tv_baby_gender,tv_baby_birthday,tv_realy_age,tv_correct_age,
             tv_height,tv_weight,tv_BMI;
 
+    private RelativeLayout rl_correct_age;
+
     //曲线图
     private GraphModule graph_module;
 
@@ -83,6 +85,7 @@ public class HistoryReportDetailActivity extends BaseActivity {
         rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);
 
+        rl_correct_age = findViewById(R.id.rl_correct_age);
         //医生信息
         civ_doctor = findViewById(R.id.civ_doctor);
         tv_doctor_name = findViewById(R.id.tv_doctor_name);
@@ -182,6 +185,9 @@ public class HistoryReportDetailActivity extends BaseActivity {
         tv_baby_birthday.setText(user.getBirthday());
 
         tv_realy_age.setText(report.getCurrentMonthAgeString());
+        if ( report.getCurrentMonthAgeString().equals(report.getCorrectMonthAgeString()) ){
+            rl_correct_age.setVisibility(View.GONE);
+        }
         tv_correct_age.setText(report.getCorrectMonthAgeString());
         String height = report.getHeight();
         String weight = report.getWeight();

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.Space;
 import android.util.AttributeSet;
@@ -122,7 +123,11 @@ public class CheckBoxLayout extends LinearLayout {
 
     private CheckBox generateCheckBox(String content){
         CheckBox checkBox = new CheckBox(getContext());
-        int width = (int)checkBox.getPaint().measureText(content) + getResources().getDimensionPixelOffset(R.dimen.x20px)*2;
+
+        Paint paint = checkBox.getPaint();
+        paint.setTextSize(getResources().getDimension(R.dimen.y26px));
+        int width = (int)paint.measureText(content) + getResources().getDimensionPixelOffset(R.dimen.x20px)*2;
+
         LayoutParams params = new LayoutParams(width,getResources().getDimensionPixelOffset(R.dimen.y56px));
         checkBox.setPadding(getResources().getDimensionPixelOffset(R.dimen.x20px),0,getResources().getDimensionPixelOffset(R.dimen.x20px),0);
         checkBox.setLayoutParams(params);

@@ -86,6 +86,7 @@ public class DoctorInfoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyDialog.dismissPayDialog();
         unregisterIWXApi();
         stopTask(preAliPayTask);
         stopTask(preIwxPayTask);
@@ -169,8 +170,11 @@ public class DoctorInfoActivity extends BaseActivity {
 
     private void initView(){
         if ( BaseApplication.getInstance().isUpperThan37Month() ){
-            bt_choose.setVisibility(View.GONE);
+            bt_choose.setEnabled(false);
+            bt_choose.setBackgroundColor(getResources().getColor(R.color.eight_gray));
+//            bt_choose.setVisibility(View.GONE);
         } else {
+            bt_choose.setEnabled(true);
             bt_choose.setVisibility(View.VISIBLE);
         }
 

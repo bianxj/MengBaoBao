@@ -3,6 +3,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tv_main_title"
+        style="@style/FirstBlack.Text27px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x67px"
+        android:layout_marginTop="@dimen/y13px"
+        android:layout_marginBottom="@dimen/y13px"
+        android:includeFontPadding="false"
+        android:text="医生补充"
+        android:visibility="gone"
+        android:textStyle="bold" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

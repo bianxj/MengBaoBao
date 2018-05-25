@@ -74,6 +74,8 @@ public class BaseInfoLayout extends LinearLayout {
 
     private TYPE type;
 
+    private RelativeLayout rl_phone;
+
     private EditText et_baby_name , et_baby_gender , et_baby_birthday
             ,et_phone,et_baby_weight, et_baby_height,et_week,et_day
             ,et_parity_count,et_birth_count,et_birth_age;
@@ -128,6 +130,7 @@ public class BaseInfoLayout extends LinearLayout {
 
         ll_parturition_state = findViewById(R.id.ll_parturition_state);
 
+        rl_phone = findViewById(R.id.rl_phone);
         rg_genetic_history = findViewById(R.id.rg_genetic_history);
         rg_allergy_disease = findViewById(R.id.rg_allergy_disease);
         rl_genetic_history = findViewById(R.id.rl_genetic_history);
@@ -310,6 +313,7 @@ public class BaseInfoLayout extends LinearLayout {
     }
 
     private void initEditableArea(){
+        rl_phone.setVisibility(View.GONE);
         et_baby_birthday.setVisibility(View.GONE);
         et_baby_gender.setVisibility(View.GONE);
     }
@@ -585,7 +589,7 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
-        if ( 0 > Integer.parseInt(day) || Integer.parseInt(day) > 7 ){
+        if ( 0 > Integer.parseInt(day) || Integer.parseInt(day) >= 7 ){
             errorMessage = "孕周(天) 0~7";
             return false;
         }

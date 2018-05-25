@@ -79,6 +79,8 @@ public class HeadImageActivity extends BaseActivity {
         Bitmap bitmap = BitmapFactory.decodeFile(BaseApplication.getInstance().getHeadCropPath());
         if ( bitmap != null ){
             civ_head.setImageBitmap(bitmap);
+        } else {
+            civ_head.setImageResource(R.drawable.default_icon_doctor);
         }
     }
 

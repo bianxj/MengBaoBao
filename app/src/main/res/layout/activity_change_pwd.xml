@@ -91,7 +91,7 @@
     <Button
         android:id="@+id/bt_sure"
         android:layout_width="@dimen/x639px"
-        android:layout_height="@dimen/y127px"
+        android:layout_height="@dimen/x127px"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y643px"
         android:background="@drawable/btn_red_submit"/>

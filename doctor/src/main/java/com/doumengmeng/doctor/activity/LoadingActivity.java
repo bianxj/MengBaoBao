@@ -465,6 +465,7 @@ public class LoadingActivity extends BaseActivity {
                     Intent intent = new Intent(weakReference.get(), MainActivity.class);
                     weakReference.get().startActivity(intent);
                 }
+                weakReference.get().finish();
             } else if ( msg.what == MESSAGE_LOADING_PERCENT) {
                 removeMessages(MESSAGE_LOADING_PERCENT);
                 if ( weakReference.get().percent < 99 ){

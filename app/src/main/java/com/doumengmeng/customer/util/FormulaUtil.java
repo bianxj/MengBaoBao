@@ -9,6 +9,10 @@ import java.util.Locale;
 
 public class FormulaUtil {
 
+    public static String getDoubleDigit(int number){
+        return (number<10)?"0"+number:number+"";
+    }
+
     public static String getCurrentTime(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.CHINA);
         return format.format(System.currentTimeMillis());
@@ -16,6 +20,74 @@ public class FormulaUtil {
 
     public static float formulaBMI(float weight,float height){
         return (Math.round((weight * 10000) / (height*height)*100))/100f;
+    }
+
+    public static String getHeightResultString(int heightResult){
+        switch (heightResult){
+            case -3:
+                return "下（生长迟缓）";
+            case -2:
+                return "中下";
+            case -1:
+            case 0:
+            case 1:
+                return "中";
+            case 2:
+                return "中上";
+            case 3:
+                return "上";
+            default:
+                return "上";
+        }
+    }
+    public static String getHwResultString(int hwResult){
+        switch (hwResult){
+            case -3:
+            case -2:
+                return "下（消瘦）";
+            case -1:
+            case 0:
+            case 1:
+                return "中（正常）";
+            case 2:
+                return "中上（超重）";
+            case 3:
+                return "上（肥胖）";
+            case 4:
+                return "上（重度肥胖）";
+            default:
+                return "中（正常）";
+        }
+    }
+
+    public static String getWeightResultString(int weightResult){
+        switch (weightResult){
+            case -3:
+                return "下（低体重）";
+            case -2:
+                return "中下";
+            case -1:
+            case 0:
+            case 1:
+                return "中";
+            case 2:
+                return "中上";
+            case 3:
+                return "上";
+            default:
+                return "上";
+        }
+    }
+
+    public static String getFeatureResultString(int featureResult){
+        switch (featureResult){
+            case 0:
+                return "正常";
+            case -1:
+                return "异常";
+            default:
+                return "可疑";
+        }
     }
 
 //    /**

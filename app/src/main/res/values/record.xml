@@ -612,7 +612,7 @@
 
     //胸围
     <string-array name="chest_reference_girl">
-        <item>参考值：32.00-34.00厘米</item>
+        <item>参考值：32.00~34.00厘米</item>
         <item>参考值：36.56厘米</item>
         <item>参考值：38.73厘米</item>
         <item>参考值：40.70厘米</item>
@@ -690,7 +690,7 @@
         <item>标准差：2.35厘米</item>
     </string-array>
     <string-array name="chest_reference_boy">
-        <item>参考值：32.00-34.00厘米</item>
+        <item>参考值：32.00~34.00厘米</item>
         <item>参考值：37.61厘米</item>
         <item>参考值：40.07厘米</item>
         <item>参考值：41.89厘米</item>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+    <string name="format_age">%s岁</string>
     <string name="format_month_age">%d个月%02d天</string>
     <string name="format_pregnancy_weeks">%s周%s天</string>
     <string name="format_kg">%skg</string>
@@ -8,7 +10,7 @@
     <string name="format_head">%scm</string>
     <string name="format_chest">%scm</string>
     <string name="format_hour">%s小时</string>
-    <string name="format_sleep">%s时/日</string>
+    <string name="format_sleep">%s小时/日</string>
     <string name="format_cacation">%s天%s次</string>
     <string name="format_micturition">%s次/日</string>
     <string name="format_feed_milk">%s毫升/次</string>

@@ -28,7 +28,7 @@ public class InputHeadActivity extends BaseInputDataActivity {
 //    private RelativeLayout rl_back,rl_complete;
 //    private TextView tv_title;
 
-    private TextView tv_increase,tv_reference,tv_std;
+    private TextView tv_increase,tv_reference,tv_std,tv_dest;
     private TextView tv_input_title;
     private LinearLayout ll_content;
     private MyGifPlayer player;
@@ -47,6 +47,7 @@ public class InputHeadActivity extends BaseInputDataActivity {
     }
 
     private void findView(){
+        tv_dest = findViewById(R.id.tv_dest);
         tv_increase = findViewById(R.id.tv_increase);
         tv_reference = findViewById(R.id.tv_reference);
         tv_std = findViewById(R.id.tv_std);
@@ -61,6 +62,12 @@ public class InputHeadActivity extends BaseInputDataActivity {
     private void initView(){
         player.setGif(R.drawable.gif_head);
         new EditTextUtil(et_input_data);
+
+        if ( month < 36 ){
+            tv_dest.setText(getString(R.string.head_reference_dest_2015));
+        } else {
+            tv_dest.setText(getString(R.string.head_reference_dest_2005));
+        }
 
         //增长
         String increase = getResources().getStringArray(R.array.head_increase)[month];
@@ -82,7 +89,7 @@ public class InputHeadActivity extends BaseInputDataActivity {
         //内容
         generateListView(ll_content,getResources().getStringArray(R.array.head_content));
         //备注
-        generateListView(ll_remark,getResources().getStringArray(R.array.head_remark));
+        generateListView(ll_remark,getResources().getStringArray(R.array.head_remark),true);
 
         Intent intent = getIntent();
         if ( intent != null ){

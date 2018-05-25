@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.text.Spannable;
-import android.text.SpannableStringBuilder;
+import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
@@ -174,10 +174,9 @@ public class DevelopmentView extends LinearLayout {
         layout.setLayoutParams(params);
 
         for (DevelopmentView.DevelopmentalItem content:contents){
-            LinearLayout subLayout = new LinearLayout(getContext());
-            LinearLayout.LayoutParams layoutParams = (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+            RelativeLayout subLayout = new RelativeLayout(getContext());
+            LayoutParams layoutParams = (new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
             layoutParams.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
-            subLayout.setOrientation(LinearLayout.HORIZONTAL);
             subLayout.setLayoutParams(layoutParams);
 
             CheckBox checkBox = new CheckBox(getContext());
@@ -187,19 +186,22 @@ public class DevelopmentView extends LinearLayout {
             } else {
                 checkBox.setBackgroundResource(R.drawable.cb_history_report);
             }
-            checkBox.setLayoutParams(new LinearLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x34px),getResources().getDimensionPixelOffset(R.dimen.x34px)));
+            RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x34px),getResources().getDimensionPixelOffset(R.dimen.x34px));
+            p.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.x2px);
+            checkBox.setLayoutParams(p);
             checkBox.setChecked(content.isCheck());
             subLayout.addView(checkBox);
 
             TextView tv_content = new TextView(getContext());
-            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
-            textParam.topMargin = -1*getResources().getDimensionPixelOffset(R.dimen.y5px);
+            RelativeLayout.LayoutParams textParam = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.x44px);
             tv_content.setLayoutParams(textParam);
             tv_content.setGravity(Gravity.CENTER_VERTICAL);
+            tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
+            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
             if ( content.isMark ) {
                 String value = content.getValue()+" *";
-                SpannableStringBuilder style = new SpannableStringBuilder(value);
+                SpannableString style = new SpannableString(value);
                 style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.first_pink)), value.length()-1, value.length(),
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 style.setSpan(new StyleSpan(Typeface.BOLD), value.length()-1, value.length(),
@@ -209,8 +211,6 @@ public class DevelopmentView extends LinearLayout {
             } else {
                 tv_content.setText(content.getValue());
             }
-            tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
-            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y24px));
             subLayout.addView(tv_content);
 
 //            if ( content.isMark ){

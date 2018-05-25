@@ -117,7 +117,12 @@ public class GraphModule extends LinearLayout {
             int type = imageData.getType();
 
             dataMap.get(GRAPH_TYPE.WEIGHT).getLine().getBlueLine().add(new GraphView.GraphPoint(currentDayInYear,weight,type));
-            dataMap.get(GRAPH_TYPE.WEIGHT).getLine().getRedLine().add(new GraphView.GraphPoint(correntDayInYear, weight, type));
+            if ( imageData.getMonthAge() >= 24 ){
+                dataMap.get(GRAPH_TYPE.WEIGHT).getLine().getRedLine().add(new GraphView.GraphPoint(currentDayInYear, weight, type));
+            } else {
+                dataMap.get(GRAPH_TYPE.WEIGHT).getLine().getRedLine().add(new GraphView.GraphPoint(correntDayInYear, weight, type));
+            }
+//            dataMap.get(GRAPH_TYPE.WEIGHT).getLine().getRedLine().add(new GraphView.GraphPoint(correntDayInYear, weight, type));
 
             dataMap.get(GRAPH_TYPE.HEIGHT).getLine().getBlueLine().add(new GraphView.GraphPoint(currentDayInYear,height,type));
             dataMap.get(GRAPH_TYPE.HEIGHT).getLine().getRedLine().add(new GraphView.GraphPoint(correntDayInYear, height, type));

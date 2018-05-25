@@ -3,10 +3,8 @@ package com.doumengmeng.customer.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,6 +25,7 @@ import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.util.FormulaUtil;
 import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.view.CircleImageView;
+import com.doumengmeng.customer.view.DevelopmentView;
 import com.doumengmeng.customer.view.GraphModule;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -35,9 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 作者: 边贤君
@@ -51,6 +48,8 @@ public class AssessmentActivity extends BaseActivity {
     private RelativeLayout rl_back;
     private TextView tv_title;
 
+    private RelativeLayout rl_correct_age;
+
     private CircleImageView civ_doctor;
     private TextView tv_doctor_name,tv_doctor_hospital,tv_doctor_position;
     private TextView tv_baby_name,tv_baby_gender,tv_baby_birthday,tv_realy_age,tv_correct_age,
@@ -59,10 +58,6 @@ public class AssessmentActivity extends BaseActivity {
     //曲线图
     private GraphModule graph_module;
 
-    //发育行为
-//    private LinearLayout ll_developmental_behavior;
-    private LinearLayout ll_developmental_content;
-    private TextView tv_developmental_title;
 
     //评估结果
     private LinearLayout ll_assessment_result;
@@ -115,6 +110,7 @@ public class AssessmentActivity extends BaseActivity {
         tv_baby_gender = findViewById(R.id.tv_baby_gender);
         tv_baby_birthday = findViewById(R.id.tv_baby_birthday);
         tv_realy_age = findViewById(R.id.tv_realy_age);
+        rl_correct_age = findViewById(R.id.rl_correct_age);
         tv_correct_age = findViewById(R.id.tv_correct_age);
         tv_height = findViewById(R.id.tv_height);
         tv_weight = findViewById(R.id.tv_weight);
@@ -123,10 +119,6 @@ public class AssessmentActivity extends BaseActivity {
         //曲线图
         graph_module = findViewById(R.id.graph_module);
 
-        //发育行为
-//        ll_developmental_behavior = findViewById(R.id.ll_developmental_behavior);
-        ll_developmental_content = findViewById(R.id.ll_developmental_content);
-        tv_developmental_title = findViewById(R.id.tv_developmental_title);
 
         //评估结果
         ll_assessment_result = findViewById(R.id.ll_assessment_result);
@@ -204,27 +196,43 @@ public class AssessmentActivity extends BaseActivity {
         tv_baby_birthday.setText(userData.getBirthday());
 
         tv_realy_age.setText(record.getCurrentMonthAgeString());
+        if ( record.getCurrentMonthAgeString().equals(record.getCorrectMonthAgeString()) ){
+            rl_correct_age.setVisibility(View.GONE);
+        }
         tv_correct_age.setText(record.getCorrectMonthAgeString());
         String height = record.getHeight();
         String weight = record.getWeight();
-        tv_height.setText(height);
-        tv_weight.setText(weight);
-        tv_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
+        tv_height.setText(String.format(getString(R.string.format_cm),height));
+        tv_weight.setText(String.format(getString(R.string.format_kg),weight));
+        tv_BMI.setText(String.format(getString(R.string.format_kg_divide_m_square),String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height)))));
     }
 
     private void initDiagram(){
         graph_module.setData(record.getImageData(),record.getMonthAge(),userData.isMale(), true);
     }
 
+    //发育行为
+//    private LinearLayout ll_developmental_behavior;
+//    private LinearLayout ll_developmental_content;
+//    private TextView tv_developmental_title;
+    private DevelopmentView v_development;
     /**
      * 作者: 边贤君
      * 描述: 初始化发育行为
      * 日期: 2018/1/16 16:37
      */
     private void initDevelopmentalBehavior(){
-        tv_developmental_title.setText(String.format(getResources().getString(R.string.assessment_develop_month),record.getCorrectMonthAge()<0?0:record.getCorrectMonthAge()));
-        Map<String,List<String>> maps = DaoManager.getInstance().getFeatureDao().searchFeatureListById(this,record.getFeatureList());
-        initDevelopment(maps);
+        //发育行为
+//        ll_developmental_behavior = findViewById(R.id.ll_developmental_behavior);
+//        ll_developmental_content = findViewById(R.id.ll_developmental_content);
+//        tv_developmental_title = findViewById(R.id.tv_developmental_title);
+
+        v_development = findViewById(R.id.v_development);
+        String featureAge = record.getCorrectMonthAge()<0?"0":record.getCorrectMonthAge()+"";
+        v_development.initDevelopment(featureAge,record.getRecordTime(),record.getFeatureList(),false);
+//        tv_developmental_title.setText(String.format(getResources().getString(R.string.assessment_develop_month),record.getCorrectMonthAge()<0?0:record.getCorrectMonthAge()));
+//        Map<String,List<String>> maps = DaoManager.getInstance().getFeatureDao().searchFeatureListById(this,record.getFeatureList());
+//        initDevelopment(maps);
     }
 
     /**
@@ -234,8 +242,7 @@ public class AssessmentActivity extends BaseActivity {
      */
     private void initAssessmentResult(){
         if (AssessmentStatus.CUSTOMER_UNREAD.equals(record.getRecordStatus())
-                || AssessmentStatus.CUSTOMER_READED.equals(record.getRecordStatus())
-                || AssessmentStatus.REFUND.equals(record.getRecordStatus()) ){
+                || AssessmentStatus.CUSTOMER_READED.equals(record.getRecordStatus()) ){
             ll_assessment_result.setVisibility(View.VISIBLE);
             tv_weight_content.setText(record.getWeightEvaluation());
             tv_height_content.setText(record.getHeightEvaluation());
@@ -331,87 +338,87 @@ public class AssessmentActivity extends BaseActivity {
 
     //------------------------------------------发育行为--------------------------------------------
 
-    //初始化发行为
-    private void initDevelopment(Map<String,List<String>> maps){
-        Set<String> keys = maps.keySet();
-        for (String key:keys){
-            ll_developmental_content.addView(createSubItem(key,maps.get(key)));
-        }
-    }
-
-    /**
-     * 作者: 边贤君
-     * 描述: 创建发育行为条目
-     * 日期: 2018/1/18 9:44
-     */
-    private View createSubItem(String title , List<String> contents){
-        RelativeLayout layout = new RelativeLayout(this);
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layout.setLayoutParams(layoutParams);
-
-        View divider = new View(this);
-        divider.setBackgroundColor(getResources().getColor(R.color.linkLightPink));
-        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelOffset(R.dimen.y2px)));
-        layout.addView(divider);
-
-        TextView tv_title = new TextView(this);
-        tv_title.setText(title);
-        tv_title.setTextColor(getResources().getColor(R.color.second_black));
-        tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
-        tv_title.setLayoutParams(params);
-        layout.addView(tv_title);
-
-        View right = createCheckLine(contents);
-        layout.addView(right);
-
-        return layout;
-    }
-
-    /**
-     * 作者: 边贤君
-     * 描述: 创建发育行为条目中的选项
-     * 日期: 2018/1/18 9:44
-     */
-    private View createCheckLine(List<String> contents){
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y24px);
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP|RelativeLayout.ALIGN_PARENT_LEFT);
-        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
-        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.x139px);
-        layout.setLayoutParams(params);
-
-        for (String content:contents){
-            LinearLayout subLayout = new LinearLayout(this);
-            LinearLayout.LayoutParams layoutParams = (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
-            layoutParams.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
-            subLayout.setOrientation(LinearLayout.HORIZONTAL);
-            subLayout.setLayoutParams(layoutParams);
-
-            ImageView icon = new ImageView(this);
-            icon.setImageResource(R.drawable.icon_choose);
-            icon.setLayoutParams(new LinearLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x34px),getResources().getDimensionPixelOffset(R.dimen.x36px)));
-            subLayout.addView(icon);
-
-            TextView tv_content = new TextView(this);
-            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y5px);
-            tv_content.setLayoutParams(textParam);
-            tv_content.setText(content);
-            tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
-            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
-            subLayout.addView(tv_content);
-
-            layout.addView(subLayout);
-        }
-
-        return layout;
-    }
+//    //初始化发行为
+//    private void initDevelopment(Map<String,List<String>> maps){
+//        Set<String> keys = maps.keySet();
+//        for (String key:keys){
+//            ll_developmental_content.addView(createSubItem(key,maps.get(key)));
+//        }
+//    }
+//
+//    /**
+//     * 作者: 边贤君
+//     * 描述: 创建发育行为条目
+//     * 日期: 2018/1/18 9:44
+//     */
+//    private View createSubItem(String title , List<String> contents){
+//        RelativeLayout layout = new RelativeLayout(this);
+//        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        layout.setLayoutParams(layoutParams);
+//
+//        View divider = new View(this);
+//        divider.setBackgroundColor(getResources().getColor(R.color.linkLightPink));
+//        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelOffset(R.dimen.y2px)));
+//        layout.addView(divider);
+//
+//        TextView tv_title = new TextView(this);
+//        tv_title.setText(title);
+//        tv_title.setTextColor(getResources().getColor(R.color.second_black));
+//        tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y28px));
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+//        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
+//        tv_title.setLayoutParams(params);
+//        layout.addView(tv_title);
+//
+//        View right = createCheckLine(contents);
+//        layout.addView(right);
+//
+//        return layout;
+//    }
+//
+//    /**
+//     * 作者: 边贤君
+//     * 描述: 创建发育行为条目中的选项
+//     * 日期: 2018/1/18 9:44
+//     */
+//    private View createCheckLine(List<String> contents){
+//        LinearLayout layout = new LinearLayout(this);
+//        layout.setOrientation(LinearLayout.VERTICAL);
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y24px);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_TOP|RelativeLayout.ALIGN_PARENT_LEFT);
+//        params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y35px);
+//        params.leftMargin = getResources().getDimensionPixelOffset(R.dimen.x139px);
+//        layout.setLayoutParams(params);
+//
+//        for (String content:contents){
+//            LinearLayout subLayout = new LinearLayout(this);
+//            LinearLayout.LayoutParams layoutParams = (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+//            layoutParams.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.y10px);
+//            subLayout.setOrientation(LinearLayout.HORIZONTAL);
+//            subLayout.setLayoutParams(layoutParams);
+//
+//            ImageView icon = new ImageView(this);
+//            icon.setImageResource(R.drawable.icon_choose);
+//            icon.setLayoutParams(new LinearLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x34px),getResources().getDimensionPixelOffset(R.dimen.x36px)));
+//            subLayout.addView(icon);
+//
+//            TextView tv_content = new TextView(this);
+//            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+//            textParam.leftMargin = getResources().getDimensionPixelOffset(R.dimen.y5px);
+//            tv_content.setLayoutParams(textParam);
+//            tv_content.setText(content);
+//            tv_content.setTextColor(getResources().getColor(R.color.fourth_gray));
+//            tv_content.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimension(R.dimen.y26px));
+//            subLayout.addView(tv_content);
+//
+//            layout.addView(subLayout);
+//        }
+//
+//        return layout;
+//    }
 
     //--------------------------------------曲线图界面----------------------------------------------
 //    private int currentIndex;

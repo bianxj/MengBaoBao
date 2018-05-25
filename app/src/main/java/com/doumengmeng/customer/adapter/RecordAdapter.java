@@ -73,12 +73,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
 
         private void initView(Record record){
             tv_baby_month.setText(record.getBabyMonth());
-            if (AssessmentStatus.DOCTOR_UNREAD.equals(record.getRecordStatus())
+            if (AssessmentStatus.CUSTOMER_SUBMIT.equals(record.getRecordStatus())||
+                    AssessmentStatus.DOCTOR_UNREAD.equals(record.getRecordStatus())
                     ){
-                tv_bmi.setText("待评");
-                tv_develop.setText("待评");
-                tv_height.setText("待评");
-                tv_weight.setText("待评");
+                tv_bmi.setText("等待测评");
+                tv_develop.setText("等待测评");
+                tv_height.setText("等待测评");
+                tv_weight.setText("等待测评");
             } else if (AssessmentStatus.REFUND.equals(record.getRecordStatus())) {
                 tv_bmi.setText("?");
                 tv_develop.setText("?");

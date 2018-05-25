@@ -11,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
+import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.base.BaseInputDataActivity;
+import com.doumengmeng.customer.response.entity.DayList;
 import com.doumengmeng.customer.util.EditTextUtil;
 import com.doumengmeng.customer.view.MyGifPlayer;
 
@@ -57,6 +59,11 @@ public class InputWeightActivity extends BaseInputDataActivity {
         new EditTextUtil(et_input_data);
         player.setGif(R.drawable.gif_weight);
 
+        DayList dayList = BaseApplication.getInstance().getDayList();
+        if ( Integer.parseInt(dayList.getCurrentMonth()) >= 24 ){
+            month = Integer.parseInt(dayList.getCurrentMonth());
+        }
+
         //参考值
         if ( isBoy ) {
             tv_reference.setText(getResources().getStringArray(R.array.weight_reference_boy)[month]);
@@ -75,7 +82,7 @@ public class InputWeightActivity extends BaseInputDataActivity {
         //内容
         generateListView(ll_content,getResources().getStringArray(R.array.weight_content));
         //备注
-        generateListView(ll_remark,getResources().getStringArray(R.array.weight_remark));
+        generateListView(ll_remark,getResources().getStringArray(R.array.weight_remark),true);
 
         Intent intent = getIntent();
         if ( intent != null ){

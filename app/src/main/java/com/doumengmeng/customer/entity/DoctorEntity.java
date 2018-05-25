@@ -18,6 +18,7 @@ public class DoctorEntity {
     private String doctordesc;
     private String hospitalid;
     private String hospital;
+    private String doctororder;
 
     public String getDoctorimg() {
         if (!TextUtils.isEmpty(doctorimg)){
@@ -84,5 +85,27 @@ public class DoctorEntity {
 
     public void setHospitalid(String hospitalid) {
         this.hospitalid = hospitalid;
+    }
+
+    public String getDoctororder() {
+        return doctororder;
+    }
+
+    public void setDoctororder(String doctororder) {
+        this.doctororder = doctororder;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if ( null == obj ){
+            return false;
+        }
+        if ( obj instanceof DoctorEntity ){
+            DoctorEntity temp = (DoctorEntity)obj;
+            if ( this.doctorid.equals(temp.getDoctorid()) ){
+                return true;
+            }
+        }
+        return false;
     }
 }

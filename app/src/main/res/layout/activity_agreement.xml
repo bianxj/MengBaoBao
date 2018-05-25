@@ -52,7 +52,7 @@
         <Button
             android:id="@+id/bt_agree"
             android:layout_width="@dimen/x418px"
-            android:layout_height="@dimen/y117px"
+            android:layout_height="@dimen/x117px"
             android:background="@drawable/btn_agree"
             android:layout_marginTop="@dimen/y68px"
             android:layout_centerHorizontal="true"

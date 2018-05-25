@@ -10,6 +10,7 @@ import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.adapter.HospitalReportAdapter;
 import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseLoadingListener;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
@@ -74,6 +75,7 @@ public class HospitalReportActivity extends BaseActivity {
         rl_back.setOnClickListener(listener);
     }
 
+    private BaseLoadingListener loadingListener;
     private void initListView(){
         xrv = findViewById(R.id.xrv);
         xrv.setLoadingMoreEnabled(true);
@@ -81,6 +83,11 @@ public class HospitalReportActivity extends BaseActivity {
 
         adapter = new HospitalReportAdapter(reports);
         xrv.setAdapter(adapter);
+
+        if ( loadingListener == null ){
+            loadingListener = new BaseLoadingListener(xrv);
+        }
+        xrv.setLoadingListener(loadingListener);
 
         user = GsonUtil.getInstance().fromJson(getIntent().getStringExtra(IN_PARAM_USER_DATA), AssessmentDetailResponse.User.class);
         doctorId = getIntent().getStringExtra(IN_PARAM_DOCTOR_ID);
@@ -130,7 +137,6 @@ public class HospitalReportActivity extends BaseActivity {
         public void onPostExecute(String result) {
             HospitalReportResponse response = GsonUtil.getInstance().fromJson(result,HospitalReportResponse.class);
 
-            xrv.setNoMore(true);
             if ( null != response.getResult().getChildRecordList() ) {
                 reports.addAll(response.getResult().getChildRecordList());
                 for (HospitalReport report:reports){

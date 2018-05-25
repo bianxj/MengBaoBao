@@ -31,20 +31,20 @@
         >
 
         <Button
-            android:id="@+id/bt_guide_login"
+            android:id="@+id/bt_guide_register"
             android:layout_width="@dimen/x120px"
             android:layout_height="@dimen/x60px"
-            android:background="@drawable/btn_login"
             android:layout_alignParentRight="true"
+            android:background="@drawable/btn_register"
             android:layout_marginRight="@dimen/x200px"
             android:layout_marginBottom="@dimen/y30px"
             />
 
         <Button
-            android:id="@+id/bt_guide_register"
+            android:id="@+id/bt_guide_login"
             android:layout_width="@dimen/x120px"
             android:layout_height="@dimen/x60px"
-            android:background="@drawable/btn_register"
+            android:background="@drawable/btn_login"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/x200px"
             android:layout_marginBottom="@dimen/y30px"/>

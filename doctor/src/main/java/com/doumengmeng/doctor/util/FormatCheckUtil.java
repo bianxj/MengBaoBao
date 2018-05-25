@@ -19,7 +19,7 @@ public class FormatCheckUtil {
     }
 
     public static boolean isPhone(String phone){
-        Pattern p = Pattern.compile("^[1][3,4,5,8][0-9]{9}$");
+        Pattern p = Pattern.compile("^[1][0-9]{10}$");
         Matcher m = p.matcher(phone);
         return m.matches();
     }

@@ -2,6 +2,7 @@ package com.doumengmeng.customer.response.entity;
 
 import android.text.TextUtils;
 
+import com.doumengmeng.customer.util.FormulaUtil;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -383,7 +384,7 @@ public class HospitalReport {
     }
 
     public String getFeatureEvaluation() {
-        return featureEvaluation;
+        return "神经心理、发育行为评估："+featureEvaluation;
     }
 
     public void setFeatureEvaluation(String featureEvaluation) {
@@ -487,54 +488,28 @@ public class HospitalReport {
     }
 
     public String getHeightResultString(){
-        if ( "1".equals(heightResult) ){
-            return "生长迟缓";
-        } else {
-            return "正常";
-        }
+        return FormulaUtil.getHeightResultString(Integer.parseInt(heightResultSD));
     }
-
     public String getHwResultString(){
-        if ( "-1".equals(hwResult) ){
-            return "消瘦";
-        } else if ( "1".equals(hwResult) ){
-            return "超重";
-        } else if ( "2".equals(hwResult) ){
-            return "肥胖";
-        } else if ( "3".equals(hwResult) ){
-            return "重度肥胖";
-        } else {
-            return "正常";
-        }
-
+        return FormulaUtil.getHwResultString(Integer.parseInt(hwResultSD));
     }
-
     public String getWeightResultString(){
-        if ( "1".equals(weightResult) ){
-            return "低体重";
-        }
-        return "正常";
+        return FormulaUtil.getWeightResultString(Integer.parseInt(weightResultSD));
     }
-
     public String getFeatureResultString(){
-        if ( "1".equals(featureResult) ){
-            return "可疑";
-        } else if ( "-1".equals(featureResult) ){
-            return "异常";
-        }
-        return "正常";
+        return FormulaUtil.getFeatureResultString(Integer.parseInt(featureResult));
     }
 
     public String getBabyMonth(){
-        return monthAge + "月" + monthDay + "日";
+        return monthAge + "月" + FormulaUtil.getDoubleDigit(Integer.parseInt(monthDay)) + "天";
     }
 
     public String getCurrentMonthAgeString(){
-        return monthAge + "个月" + monthDay +"天";
+        return monthAge + "个月" + FormulaUtil.getDoubleDigit(Integer.parseInt(monthDay)) +"天";
     }
 
     public String getCorrectMonthAgeString(){
-        return correctMonthAge + "个月" + correctMonthDay +"天";
+        return correctMonthAge + "个月" + FormulaUtil.getDoubleDigit(Integer.parseInt(correctMonthDay)) +"天";
     }
 
     public String getRecordDay(){

@@ -307,8 +307,9 @@ public class RecordActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ( rl_close.getVisibility() == View.VISIBLE ){
+        if ( rl_close.getVisibility() == View.GONE ){
             if ( keyCode == KeyEvent.KEYCODE_BACK ){
+                back();
                 return true;
             }
         }
@@ -774,15 +775,15 @@ public class RecordActivity extends BaseActivity {
             if ( developments.size() > 0 ) {
                 submitRecord();
             } else {
-                MyDialog.showChooseDialog(this, getString(R.string.dialog_content_development), R.string.dialog_btn_prompt_back_choose, R.color.second_pink, R.string.dialog_btn_prompt_submit, R.color.first_black, new MyDialog.ChooseDialogCallback() {
+                MyDialog.showChooseDialog(this, getString(R.string.dialog_content_development), R.string.dialog_btn_prompt_submit, R.color.first_black,R.string.dialog_btn_prompt_back_choose, R.color.second_pink,  new MyDialog.ChooseDialogCallback() {
                     @Override
                     public void sure() {
-                        submitRecord();
+                        gotoDevelopment();
                     }
 
                     @Override
                     public void cancel() {
-                        gotoDevelopment();
+                        submitRecord();
                     }
                 });
             }

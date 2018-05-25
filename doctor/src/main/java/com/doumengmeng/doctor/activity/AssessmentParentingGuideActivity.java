@@ -25,10 +25,10 @@ import com.doumengmeng.doctor.util.GsonUtil;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 /**
  * Created by Administrator on 2018/3/1.
@@ -163,7 +163,7 @@ public class AssessmentParentingGuideActivity extends BaseTimeFragmentActivity {
     }
 
     private Map<String,List<Nurture>> classifyNurtures(List<Nurture> nurtures){
-        Map<String,List<Nurture>> map = new TreeMap<>();
+        Map<String,List<Nurture>> map = new LinkedHashMap<>();
         for (Nurture nurture:nurtures){
             if ( map.containsKey(nurture.getNurtureType()) ){
                 map.get(nurture.getNurtureType()).add(nurture);

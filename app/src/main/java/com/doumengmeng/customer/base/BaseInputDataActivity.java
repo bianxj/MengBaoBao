@@ -2,6 +2,9 @@ package com.doumengmeng.customer.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
@@ -44,7 +47,7 @@ public abstract class BaseInputDataActivity extends BaseActivity {
 
     private void initData(){
         DayList dayList = BaseApplication.getInstance().getDayList();
-        month = Integer.parseInt(dayList.getCurrentMonth())-1;
+        month = Integer.parseInt(dayList.getCorrentMonth());
         month = month<0?0:month;
         month = month>36?36:month;
         isBoy = BaseApplication.getInstance().getUserData().isMale();
@@ -63,11 +66,12 @@ public abstract class BaseInputDataActivity extends BaseActivity {
         rl_back.setOnClickListener(listener);
     }
 
-    protected void generateListView(ViewGroup container ,String[] contents){
+    protected void generateListView(ViewGroup container ,String[] contents,boolean isMark){
         if ( contents == null || contents.length <= 0 ){
             container.setVisibility(View.GONE);
             return;
         }
+        int index = 0;
         for (String content:contents){
             TextView tv = new TextView(this);
             tv.setTextColor(getResources().getColor(R.color.second_black));
@@ -75,10 +79,23 @@ public abstract class BaseInputDataActivity extends BaseActivity {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y28px);
             tv.setLayoutParams(params);
-            tv.setText(content);
+            if ( isMark && index == 0 ){
+                String value = "*建议："+content;
+                SpannableString style = new SpannableString(value);
+                style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.first_pink)), 0, 4,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                tv.setText(style);
+            } else {
+                tv.setText(content);
+            }
             container.addView(tv);
+            index++;
         }
         container.setVisibility(View.VISIBLE);
+    }
+
+    protected void generateListView(ViewGroup container ,String[] contents){
+        generateListView(container ,contents,false);
     }
 
     protected RelativeLayout rl_back,rl_complete,rl_close;

@@ -73,10 +73,23 @@ public class UserData {
     }
 
     public boolean isMale(){
-        if ( !roletype.equals(RoleType.PAY_HOSPITAL_USER) && !roletype.equals(RoleType.PAY_NET_USER) ){
+        if ( !getRoleType().equals(RoleType.PAY_HOSPITAL_USER) && !getRoleType().equals(RoleType.PAY_NET_USER) ){
             return true;
         }
         return MALE.equals(sex);
+    }
+
+    private RoleType getRoleType(){
+        if ( "3".equals(roletype) ) {
+            return RoleType.FREE_HOSPITAL_USER;
+        } else if ( "1".equals(roletype) ){
+            return RoleType.PAY_NET_USER;
+        } else if ( "2".equals(roletype) ){
+            return RoleType.PAY_HOSPITAL_USER;
+        } else {
+            return RoleType.FREE_NET_USER;
+        }
+//        return RoleType.FREE_NET_USER;
     }
 
     public String getSexString(){

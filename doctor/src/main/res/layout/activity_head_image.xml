@@ -9,7 +9,6 @@
         android:id="@+id/civ_head"
         android:layout_width="@dimen/y470px"
         android:layout_height="@dimen/y470px"
-        android:src="@drawable/frame_head"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y324px"
         />

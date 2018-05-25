@@ -17,14 +17,16 @@ import com.doumengmeng.customer.activity.SpacialistServiceActivity;
 import com.doumengmeng.customer.adapter.RecordAdapter;
 import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.base.BaseFragment;
+import com.doumengmeng.customer.base.BaseLoadingListener;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
+import com.doumengmeng.customer.response.AllRecordResponse;
 import com.doumengmeng.customer.response.entity.Record;
 import com.doumengmeng.customer.response.entity.RecordResult;
 import com.doumengmeng.customer.response.entity.UserData;
-import com.doumengmeng.customer.response.AllRecordResponse;
 import com.doumengmeng.customer.util.GsonUtil;
+import com.doumengmeng.customer.util.MyDialog;
 import com.doumengmeng.customer.view.CircleImageView;
 import com.doumengmeng.customer.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -111,16 +113,18 @@ public class SpacialistServiceFragment extends BaseFragment {
 //            tv_buy.setOnClickListener(listener);
             rl_add_record.setOnClickListener(listener);
 
-            if ( BaseApplication.getInstance().isUpperThan37Month() ){
-                rl_add_record.setVisibility(View.GONE);
-                tv_buy.setVisibility(View.GONE);
-            } else {
-                if (TextUtils.isEmpty(recordTimes) || Integer.parseInt(recordTimes) <= 0) {
-                    rl_add_record.setVisibility(View.GONE);
-                } else {
-                    rl_add_record.setVisibility(View.VISIBLE);
-                }
-            }
+            rl_add_record.setVisibility(View.VISIBLE);
+//            //TODO
+//            if ( BaseApplication.getInstance().isUpperThan37Month() ){
+//                rl_add_record.setVisibility(View.GONE);
+//                tv_buy.setVisibility(View.GONE);
+//            } else {
+//                if (TextUtils.isEmpty(recordTimes) || Integer.parseInt(recordTimes) <= 0) {
+//                    rl_add_record.setVisibility(View.GONE);
+//                } else {
+//                    rl_add_record.setVisibility(View.VISIBLE);
+//                }
+//            }
             getRecord();
         } else {
             ll_buy.setVisibility(View.GONE);
@@ -150,10 +154,14 @@ public class SpacialistServiceFragment extends BaseFragment {
         ImageLoader.getInstance().displayImage(urlHeadImg,civ_baby,builder.build());
     }
 
+    private BaseLoadingListener loadingListener;
     private void initRecyclerView(){
         xrv_record.setLoadingMoreEnabled(true);
         xrv_record.setFootView(new XLoadMoreFooter(getContext()));
 
+        if ( loadingListener == null ){
+            loadingListener = new BaseLoadingListener(xrv_record);
+        }
         xrv_record.setLoadingListener(loadingListener);
         adapter = new RecordAdapter(records);
         xrv_record.setAdapter(adapter);
@@ -170,7 +178,31 @@ public class SpacialistServiceFragment extends BaseFragment {
                     startActivity(SpacialistServiceActivity.class);
                     break;
                 case R.id.rl_add_record:
-                    startActivity(RecordActivity.class);
+                    String recordTimes = userData.getRecordtimes();
+                    if ( BaseApplication.getInstance().isUpperThan37Month() ){
+                        MyDialog.showPromptDialog(getContext(), getString(R.string.prompt_over_36), new MyDialog.PromptDialogCallback() {
+                            @Override
+                            public void sure() {
+
+                            }
+                        });
+                    } else {
+                        if (TextUtils.isEmpty(recordTimes) || Integer.parseInt(recordTimes) <= 0) {
+                            MyDialog.showChooseDialog(getContext(), getString(R.string.prompt_lost_zero), R.string.prompt_bt_cancel, R.string.prompt_bt_buy, new MyDialog.ChooseDialogCallback() {
+                                @Override
+                                public void sure() {
+                                    startActivity(SpacialistServiceActivity.class);
+                                }
+
+                                @Override
+                                public void cancel() {
+
+                                }
+                            });
+                        } else {
+                            startActivity(RecordActivity.class);
+                        }
+                    }
                     break;
                 case R.id.bt_buy:
                     startActivity(SpacialistServiceActivity.class);
@@ -233,17 +265,7 @@ public class SpacialistServiceFragment extends BaseFragment {
                 records.add(record);
             }
             adapter.notifyDataSetChanged();
-            xrv_record.setNoMore(true);
-        }
-    };
-
-    private final XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
-        @Override
-        public void onRefresh() {}
-
-        @Override
-        public void onLoadMore() {
-
+//            xrv_record.setNoMore(true);
         }
     };
 

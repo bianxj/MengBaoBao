@@ -12,7 +12,7 @@
 
     <ImageView
         android:layout_width="@dimen/x184px"
-        android:layout_height="@dimen/y258px"
+        android:layout_height="@dimen/x258px"
         android:scaleType="fitXY"
         android:src="@drawable/logo_about"
         android:layout_centerHorizontal="true"

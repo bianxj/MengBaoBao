@@ -29,6 +29,7 @@ import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.view.MyGifPlayer;
 import com.doumengmeng.customer.view.PayItemLayout;
 import com.github.chrisbanes.photoview.OnOutsidePhotoTapListener;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.List;
@@ -352,7 +353,7 @@ public class MyDialog {
         },1000);
     }
 
-    private static void dismissPayDialog(){
+    public static void dismissPayDialog(){
         synchronized (payLock){
             if ( payDialog != null && payDialog.isShowing() ) {
                 payDialog.dismiss();
@@ -369,6 +370,15 @@ public class MyDialog {
             LinearLayout ll = view.findViewById(R.id.ll);
             PhotoView iv_picture = view.findViewById(R.id.iv_picture);
             iv_picture.setImageBitmap(bitmap);
+            iv_picture.setOnPhotoTapListener(new OnPhotoTapListener() {
+                @Override
+                public void onPhotoTap(ImageView view, float x, float y) {
+                    PhotoView pv = (PhotoView) view;
+                    if ( pv.getScale() == 1 ) {
+                        dismissPictureDialog();
+                    }
+                }
+            });
             iv_picture.setOnOutsidePhotoTapListener(new OnOutsidePhotoTapListener() {
                 @Override
                 public void onOutsidePhotoTap(ImageView imageView) {

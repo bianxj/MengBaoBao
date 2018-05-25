@@ -100,6 +100,7 @@ public class DoctorDao {
                 "a." + POSITIONAL_TITLES + "," +
                 "a." + SPECIALITY + "," +
                 "a." + DOCTOR_DESC + "," +
+                "a." + DOCTOR_ORDER + "," +
                 "b." + HospitalDao.HOSPITAL_ID + "," +
                 "b." + HospitalDao.HOSPITAL_NAME +
                 " from " + TABLE_NAME + " a ," + HospitalDao.TABLE_NAME + " b " +
@@ -122,6 +123,7 @@ public class DoctorDao {
                 entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
                 entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
+                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
                 doctorEntities.add(entity);
             }
             cursor.close();
@@ -139,6 +141,7 @@ public class DoctorDao {
                 "a." + POSITIONAL_TITLES + "," +
                 "a." + SPECIALITY + "," +
                 "a." + DOCTOR_DESC + "," +
+                "a." + DOCTOR_ORDER + "," +
                 "b." + HospitalDao.HOSPITAL_ID + "," +
                 "b." + HospitalDao.HOSPITAL_NAME +
                 " from " + TABLE_NAME + " a ," + HospitalDao.TABLE_NAME + " b " +
@@ -160,6 +163,7 @@ public class DoctorDao {
                 entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
                 entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
+                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
                 doctorEntities.add(entity);
             }
             cursor.close();
@@ -178,6 +182,7 @@ public class DoctorDao {
                 "a." + POSITIONAL_TITLES + "," +
                 "a." + SPECIALITY + "," +
                 "a." + DOCTOR_DESC + "," +
+                "a." + DOCTOR_ORDER + "," +
                 "b." + HospitalDao.HOSPITAL_ID + "," +
                 "b." + HospitalDao.HOSPITAL_NAME +
                 " from " + TABLE_NAME + " a ," + HospitalDao.TABLE_NAME + " b " +
@@ -199,6 +204,7 @@ public class DoctorDao {
                 entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
                 entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
+                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
                 doctorEntities.add(entity);
             }
             cursor.close();
@@ -218,6 +224,7 @@ public class DoctorDao {
                 "a." + POSITIONAL_TITLES + "," +
                 "a." + SPECIALITY + "," +
                 "a." + DOCTOR_DESC + "," +
+                "a." + DOCTOR_ORDER + "," +
                 "b." + HospitalDao.HOSPITAL_ID + "," +
                 "b." + HospitalDao.HOSPITAL_NAME +
                 " from " + TABLE_NAME + " a ," + HospitalDao.TABLE_NAME + " b " +
@@ -237,12 +244,61 @@ public class DoctorDao {
                 entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
                 entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
+                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
                 doctorEntities.add(entity);
             }
             cursor.close();
         }
         DataBaseUtil.closeDataBase();
         return doctorEntities;
+    }
+
+    public List<DoctorEntity> searchDoctorsByHospitalIds(Context context,List<String> hospitalIds){
+        List<DoctorEntity> entities = new ArrayList<>();
+        StringBuilder builder = new StringBuilder();
+        builder.append("select ");
+        builder.append("a." + DOCTOR_ID + ",");
+        builder.append("a." + DOCTOR_IMG + ",");
+        builder.append("a." + DOCTOR_NAME + ",");
+        builder.append("a." + POSITIONAL_TITLES + ",");
+        builder.append("a." + SPECIALITY + ",");
+        builder.append("a." + DOCTOR_DESC + ",");
+        builder.append("a." + DOCTOR_ORDER + ",");
+        builder.append("b." + HospitalDao.HOSPITAL_ID + ",");
+        builder.append("b." + HospitalDao.HOSPITAL_NAME);
+        builder.append(" from " + TABLE_NAME + " a ," + HospitalDao.TABLE_NAME + " b ");
+        builder.append(" where ");
+        builder.append("a." + HOSPITAL_ID + " = " + "b." + HospitalDao.HOSPITAL_ID);
+        builder.append(" and b." + HOSPITAL_ID + " in (");
+        for (String hospital:hospitalIds){
+            builder.append(hospital+",");
+        }
+        builder.delete(builder.length()-1,builder.length());
+        builder.append(")");
+        builder.append(" order by " + DOCTOR_ORDER);
+
+//        String sql = "select * from " + TABLE_NAME + " where " + HOSPITAL_ID + " in " + hospitalId + " order by " + DOCTOR_ORDER;
+        SQLiteDatabase db = DataBaseUtil.openDataBase(context);
+        Cursor cursor = db.rawQuery(builder.toString(),null);
+        if ( cursor != null ){
+            while(cursor.moveToNext()){
+                DoctorEntity entity = new DoctorEntity();
+                entity.setDoctorid(cursor.getString(cursor.getColumnIndex(DOCTOR_ID)));
+                entity.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
+                entity.setDoctorimg(cursor.getString(cursor.getColumnIndex(DOCTOR_IMG)));
+                entity.setDoctorname(cursor.getString(cursor.getColumnIndex(DOCTOR_NAME)));
+                entity.setHospital(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_NAME)));
+                entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
+                entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
+                entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
+                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
+
+                entities.add(entity);
+            }
+            cursor.close();
+        }
+        DataBaseUtil.closeDataBase();
+        return entities;
     }
 
     public List<DoctorEntity> searchDoctorsByHospitalId(Context context,String hospitalId){

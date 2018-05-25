@@ -123,7 +123,7 @@
     <Button
         android:id="@+id/bt_sure"
         android:layout_width="@dimen/x656px"
-        android:layout_height="@dimen/y134px"
+        android:layout_height="@dimen/x134px"
         android:layout_marginTop="@dimen/y855px"
         android:layout_centerHorizontal="true"
         android:background="@drawable/btn_sure"/>
@@ -157,8 +157,7 @@
         android:layout_marginTop="@dimen/y1133px"
         android:layout_centerHorizontal="true"
         android:includeFontPadding="false"
-        style="@style/FirstWhite.Text32px"
-        android:text="@string/loading_message"/>
+        style="@style/FirstWhite.Text32px"/>
 
     </RelativeLayout>
 </LinearLayout>

@@ -2,6 +2,7 @@
 <resources>
     //身高数据
     <string-array name="height_reference_girl">
+        <item>49.00~53.00</item>
         <item>51.80~59.60</item>
         <item>55.50~62.60</item>
         <item>58.40~66.60</item>
@@ -40,6 +41,7 @@
         <item>92.50~106.20</item>
     </string-array>
     <string-array name="height_reference_boy">
+        <item>49.00~53.00</item>
         <item>52.50~60.50</item>
         <item>56.40~64.00</item>
         <item>60.20~67.30</item>
@@ -80,6 +82,7 @@
 
     //体重数据
     <string-array name="weight_reference_girl">
+        <item>3.20~4.90</item>
         <item>3.66~5.81</item>
         <item>4.70~7.15</item>
         <item>5.40~8.00</item>
@@ -119,6 +122,7 @@
         <item>12.20~19.08</item>
     </string-array>
     <string-array name="weight_reference_boy">
+        <item>3.20~4.90</item>
         <item>3.98~6.30</item>
         <item>5.00~7.80</item>
         <item>5.95~8.60</item>
@@ -159,6 +163,7 @@
 
     //头围
     <string-array name="head_reference_girl">
+        <item>33.00~35.25</item>
         <item>37.14</item>
         <item>38.82</item>
         <item>40.14</item>
@@ -197,6 +202,7 @@
         <item>49.28</item>
     </string-array>
     <string-array name="head_reference_boy">
+        <item>33.00~35.25</item>
         <item>37.93</item>
         <item>39.69</item>
         <item>41.18</item>
@@ -237,6 +243,7 @@
 
     //胸围
     <string-array name="chest_reference_girl">
+        <item>32.00~34.00</item>
         <item>36.56</item>
         <item>38.73</item>
         <item>40.70</item>
@@ -275,6 +282,7 @@
         <item>50.04</item>
     </string-array>   
     <string-array name="chest_reference_boy">
+        <item>32.00~34.00</item>
         <item>37.61</item>
         <item>40.07</item>
         <item>41.89</item>
@@ -317,6 +325,7 @@
     <string-array name="night_sleep_reference">
         <item>8.5</item>
         <item>8.5</item>
+        <item>8.5</item>
         <item>10</item>
         <item>10</item>
         <item>10</item>
@@ -356,6 +365,7 @@
 
     //日间睡眠
     <string-array name="day_sleep_reference">
+        <item>8.75</item>
         <item>7</item>
         <item>7</item>
         <item>5</item>

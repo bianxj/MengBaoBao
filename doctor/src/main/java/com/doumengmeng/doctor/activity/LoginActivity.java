@@ -106,11 +106,13 @@ public class LoginActivity extends BaseActivity {
                         //跳转至Loading界面
                         if (BaseApplication.getInstance().isAbnormalExit()){
                             startActivity(LoadingActivity.class);
+                            finish();
                         } else if (BaseApplication.getInstance().isToExamine()){
                             MyDialog.showPromptDialog(LoginActivity.this,"请等待审核\n" +
                                     " 审核通过后将会以短信形式通知您",R.string.sure,null);
                         } else {
                             startActivity(LoadingActivity.class);
+                            finish();
                         }
 //                        if (BaseApplication.getInstance().isToExamine()){
 //                            startActivity(LoadingActivity.class);
@@ -151,12 +153,27 @@ public class LoginActivity extends BaseActivity {
         return true;
     }
 
+    private void clearData(){
+        tv_prompt.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                et_login_pwd.setText("");
+                et_phone.setText("");
+                tv_prompt.setText("");
+            }
+        },300);
+    }
+
     private void gotoRegister(){
         startActivity(RegisterActivity.class);
+        clearData();
     }
 
     private void gotoChangePwd(){
         startActivity(ForgotPwdActivity.class);
+        clearData();
     }
+
+
 
 }

@@ -71,7 +71,7 @@ public class BaseApplication extends Application {
         builder.setSaveDay(5);
         builder.setSaveLog(true);
         builder.setShow(true);
-        builder.setClose(true);
+        builder.setClose(false);
         log = builder.build();
     }
 
@@ -359,6 +359,7 @@ public class BaseApplication extends Application {
 
     public void saveParentInfo(ParentInfo parentInfo){
         if ( parentInfo == null ){
+            SharedPreferencesUtil.deleteColumn(this,TABLE_USER,COLUMN_PARENT);
             return;
         }
         this.parentInfo = parentInfo;

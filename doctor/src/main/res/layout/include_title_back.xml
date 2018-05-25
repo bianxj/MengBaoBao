@@ -37,7 +37,7 @@
         android:layout_width="@dimen/x240px"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:visibility="visible"
+        android:visibility="invisible"
         >
         <TextView
             android:id="@+id/tv_complete"

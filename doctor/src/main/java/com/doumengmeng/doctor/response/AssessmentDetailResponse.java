@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.response.entity.ImageData;
+import com.doumengmeng.doctor.util.FormulaUtil;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -401,6 +402,13 @@ public class AssessmentDetailResponse extends BaseResponse {
         @SerializedName("recordtime")
         private String recordtime;
 
+        @SerializedName("heightresultsd")
+        private String heightResultSd;
+        @SerializedName("hwresultsd")
+        private String hwResultSd;
+        @SerializedName("weightresultsd")
+        private String weightResultSd;
+
         @SerializedName("heightresult")
         private String heightresult;
         @SerializedName("hwresult")
@@ -444,6 +452,19 @@ public class AssessmentDetailResponse extends BaseResponse {
             this.doctorid = doctorid;
         }
 
+        public String getHeightResultString(){
+            return FormulaUtil.getHeightResultString(Integer.parseInt(heightResultSd));
+        }
+        public String getHwResultString(){
+            return FormulaUtil.getHwResultString(Integer.parseInt(hwResultSd));
+        }
+        public String getWeightResultString(){
+            return FormulaUtil.getWeightResultString(Integer.parseInt(weightResultSd));
+        }
+        public String getFeatureResultString(){
+            return FormulaUtil.getFeatureResultString(Integer.parseInt(featureresult));
+        }
+
         public String getHeightevaluation() {
             return heightevaluation;
         }
@@ -461,7 +482,7 @@ public class AssessmentDetailResponse extends BaseResponse {
         }
 
         public String getFeatureevaluation() {
-            return featureevaluation;
+            return "神经心理、发育行为评估："+featureevaluation;
         }
 
         public void setFeatureevaluation(String featureevaluation) {
@@ -529,14 +550,6 @@ public class AssessmentDetailResponse extends BaseResponse {
             return recordTimes[0].replace("-",".");
         }
 
-        public String getHeightResultString(){
-            if ( "1".equals(heightresult) ){
-                return "生长迟缓";
-            } else {
-                return "正常";
-            }
-        }
-
         public String getHeightresult() {
             return heightresult;
         }
@@ -545,20 +558,6 @@ public class AssessmentDetailResponse extends BaseResponse {
             this.heightresult = heightresult;
         }
 
-        public String getHwResultString(){
-            if ( "-1".equals(hwresult) ){
-                return "消瘦";
-            } else if ( "1".equals(hwresult) ){
-                return "超重";
-            } else if ( "2".equals(hwresult) ){
-                return "肥胖";
-            } else if ( "3".equals(hwresult) ){
-                return "重度肥胖";
-            } else {
-                return "正常";
-            }
-
-        }
 
         public String getHwresult() {
             return hwresult;
@@ -566,13 +565,6 @@ public class AssessmentDetailResponse extends BaseResponse {
 
         public void setHwresult(String hwresult) {
             this.hwresult = hwresult;
-        }
-
-        public String getWeightResultString(){
-            if ( "1".equals(weightresult) ){
-                return "低体重";
-            }
-            return "正常";
         }
 
         public String getWeightresult() {
@@ -583,25 +575,12 @@ public class AssessmentDetailResponse extends BaseResponse {
             this.weightresult = weightresult;
         }
 
-        public String getFeatureResultString(){
-            if ( "1".equals(featureresult) ){
-                return "可疑";
-            } else if ( "-1".equals(featureresult) ){
-                return "异常";
-            }
-            return "正常";
-        }
-
         public String getFeatureresult() {
             return featureresult;
         }
 
         public void setFeatureresult(String featureresult) {
             this.featureresult = featureresult;
-        }
-
-        public String getBabyMonth(){
-            return monthage + "月" + monthday + "日";
         }
 
         public boolean isShowRecordState(){
@@ -614,14 +593,6 @@ public class AssessmentDetailResponse extends BaseResponse {
 
         public void setFeature(List<String> feature) {
             this.feature = feature;
-        }
-
-        public String getCurrentMonthAgeString(){
-            return monthage + "月" + monthday +"日";
-        }
-
-        public String getCorrectMonthAgeString(){
-            return correctmonthage + "月" + correctmonthday +"日";
         }
 
         public String getHeight() {
@@ -766,6 +737,30 @@ public class AssessmentDetailResponse extends BaseResponse {
 
         public void setValiditytime(String validitytime) {
             this.validitytime = validitytime;
+        }
+
+        public String getHeightResultSd() {
+            return heightResultSd;
+        }
+
+        public void setHeightResultSd(String heightResultSd) {
+            this.heightResultSd = heightResultSd;
+        }
+
+        public String getHwResultSd() {
+            return hwResultSd;
+        }
+
+        public void setHwResultSd(String hwResultSd) {
+            this.hwResultSd = hwResultSd;
+        }
+
+        public String getWeightResultSd() {
+            return weightResultSd;
+        }
+
+        public void setWeightResultSd(String weightResultSd) {
+            this.weightResultSd = weightResultSd;
         }
     }
 

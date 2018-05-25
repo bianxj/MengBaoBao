@@ -80,12 +80,12 @@
     <!--DiagramDataActivity-->
     <string name="diagram_data_date">日期</string>
 
-    <string name="diagram_data_height_record">身高记录</string>
+    <string name="diagram_data_height_record">身长记录</string>
     <string name="diagram_data_baby_age">宝宝年龄</string>
-    <string name="diagram_data_height">身高cm</string>
+    <string name="diagram_data_height">身长cm</string>
     <string name="diagram_data_weight_record">体重记录</string>
     <string name="diagram_data_weight">体重kg</string>
-    <string name="diagram_data_height_weight_ratio">身长体重比</string>
+    <string name="diagram_data_height_weight_ratio">身长体重比记录</string>
     <string name="diagram_data_month_day">%d个月%d天</string>
 
     <!--ContactActivity信息-->
@@ -196,6 +196,8 @@
 
     <!--HospitalListActivity-->
     <string name="appraisal_result">测评结果</string>
+    <string name="appraisal_date">测评时间</string>
+    <string name="appraisal_month">测评时月龄</string>
 
     <!--HospitalReportActivity-->
     <string name="hospital_report_title">婴幼儿生长发育监测评估报告单</string>
@@ -242,7 +244,7 @@
     <string name="baby_birthday">出生日期</string>
 
     <!--ParentInfo-->
-    <string name="culture">文化程度*</string>
+    <string name="culture">文化程度</string>
     <string name="choose">请选择</string>
     <string name="primary">小学及以下</string>
     <string name="junior">初中</string>

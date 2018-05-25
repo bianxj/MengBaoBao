@@ -52,7 +52,8 @@
             <ImageView
                 android:id="@+id/iv_ad"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x157px" />
+                android:layout_height="@dimen/x157px"
+                android:visibility="gone"/>
         </LinearLayout>
     </RelativeLayout>
 

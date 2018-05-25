@@ -135,8 +135,10 @@ public class MessageFragment extends BaseFragment {
 
     private void refreshMessageList(){
         if ( datas.size() > 0 ) {
+            rl_complete.setVisibility(View.VISIBLE);
             ll_no_message.setVisibility(View.GONE);
         } else {
+            rl_complete.setVisibility(View.GONE);
             ll_no_message.setVisibility(View.VISIBLE);
         }
         adapter.notifyDataSetChanged();
@@ -323,11 +325,6 @@ public class MessageFragment extends BaseFragment {
 
     private void saveAndFreshScript(){
         int count = adapter.getUnReadMessageCount();
-        if ( count > 0 ){
-            rl_complete.setVisibility(View.VISIBLE);
-        } else {
-            rl_complete.setVisibility(View.GONE);
-        }
         BaseApplication.getInstance().saveMessageCount(count);
         ((MainActivity)getActivity()).refreshSuperScript();
         refreshMessageList();

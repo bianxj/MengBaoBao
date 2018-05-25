@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="format_month_age1">%d月%02d天</string>
+    <string name="format_month_age">%d个月%02d天</string>
+    <string name="format_pregnancy_weeks">%s周%s天</string>
+    <string name="format_kg">%skg</string>
+    <string name="format_cm">%scm</string>
+    <string name="format_head">%scm</string>
+    <string name="format_chest">%scm</string>
+    <string name="format_hour">%s小时</string>
+    <string name="format_sleep">%s小时/日</string>
+    <string name="format_cacation">%s天%s次</string>
+    <string name="format_micturition">%s次/日</string>
+    <string name="format_feed_milk">%s毫升/次</string>
+    <string name="format_feed_milk_count">%s次/日</string>
+    <string name="format_feed_milk_day">%d毫升/日</string>
+    <string name="format_ml_day">%s毫升/日</string>
+    <string name="format_gram_day">%s克/日</string>
+    <string name="format_mg_day">%s毫克/日</string>
+    <string name="format_count_day">%s只/日</string>
+    <string name="format_kg_divide_m_square">%skg/m²</string>
+    <string name="format_person">%d人</string>
+    <string name="format_money">￥%,.2f</string>
+
+</resources>

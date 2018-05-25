@@ -95,7 +95,8 @@ public class GuideActivity extends BaseActivity {
     private ImageView createImageView(int imageId) {
         ImageView imageView = new ImageView(this);
         ViewGroup.LayoutParams params = null;
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setScaleType(ImageView.ScaleType.FIT_END);
+        imageView.setBackgroundColor(getResources().getColor(R.color.first_white));
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         imageView.setLayoutParams(params);
         Bitmap bitmap = null;

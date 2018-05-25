@@ -23,9 +23,11 @@ import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.HospitalDoctorAdapter;
 import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseLoadingListener;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.DoctorEntity;
 import com.doumengmeng.customer.entity.HospitalEntity;
+import com.doumengmeng.customer.util.DoctorComparator;
 import com.doumengmeng.customer.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -34,6 +36,7 @@ import org.json.JSONException;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -128,12 +131,18 @@ public class SearchActivity extends BaseActivity {
         initSearchHistory();
     }
 
+    private BaseLoadingListener loadingListener;
     private void initSearchList(){
         xrv_search.setLoadingMoreEnabled(true);
         xrv_search.setFootView(new XLoadMoreFooter(this));
 
+        if ( loadingListener == null ){
+            loadingListener = new BaseLoadingListener(xrv_search);
+        }
+
         adapter = new HospitalDoctorAdapter(hospitals,doctors);
         xrv_search.setAdapter(adapter);
+        xrv_search.setLoadingListener(loadingListener);
         adapter.notifyDataSetChanged();
     }
 
@@ -196,7 +205,7 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void updateList(String history){
-        xrv_search.setNoMore(true);
+//        xrv_search.setNoMore(true);
         hospitals.clear();
         doctors.clear();
         if (tempDoctors != null || tempHospitals != null) {
@@ -223,6 +232,7 @@ public class SearchActivity extends BaseActivity {
         }
     }
 
+    private DoctorComparator comparator = new DoctorComparator();
     private List<DoctorEntity> tempDoctors = null;
     private List<HospitalEntity> tempHospitals = null;
     private final Runnable searchRunnable = new Runnable() {
@@ -231,6 +241,24 @@ public class SearchActivity extends BaseActivity {
             String search = et_search.getText().toString().trim();
             tempDoctors = DaoManager.getInstance().getDaotorDao().searchDoctorListByName(SearchActivity.this,search);
             tempHospitals = DaoManager.getInstance().getHospitalDao().searchHospitalListByName(SearchActivity.this,search);
+
+            if ( tempHospitals != null && tempHospitals.size() > 0 ){
+                List<String> hospitalids = new ArrayList<>();
+                for (HospitalEntity entity:tempHospitals){
+                    hospitalids.add(entity.getHospitalid());
+                }
+                List<DoctorEntity> doctorEntities = DaoManager.getInstance().getDaotorDao().searchDoctorsByHospitalIds(SearchActivity.this,hospitalids);
+
+                if ( doctorEntities != null && doctorEntities.size() > 0 ) {
+                    for (DoctorEntity entity : doctorEntities) {
+                        if (!tempDoctors.contains(entity)) {
+                            tempDoctors.add(entity);
+                        }
+                    }
+                    doctorEntities.clear();
+                }
+                Collections.sort(tempDoctors,comparator);
+            }
 
             Message message = searchHandler.obtainMessage();
             message.what = SearchHandler.MESSAGE_SEARCH;

@@ -32,17 +32,49 @@
             android:layout_centerVertical="true"
             android:contentDescription="@string/contentDescription" />
 
-        <TextView
-            android:id="@+id/tv_record_date"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x133px"
             android:layout_marginTop="@dimen/y22px"
-            android:includeFontPadding="false"
-            android:text=""
-            style="@style/SecondBlack.Text28px"
-            android:textSize="@dimen/y26px"
-            />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/appraisal_date"
+                style="@style/FirstGray.Text24px"
+                />
+
+            <TextView
+                android:id="@+id/tv_record_date"
+                android:layout_width="@dimen/x180px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x15px"
+                android:includeFontPadding="false"
+                android:text=""
+                style="@style/SecondBlack.Text28px"
+                android:textSize="@dimen/y26px"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/appraisal_month"
+                style="@style/FirstGray.Text24px"
+                />
+
+            <TextView
+                android:id="@+id/tv_baby_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x15px"
+                android:includeFontPadding="false"
+                style="@style/SecondBlack.Text28px"
+                android:textSize="@dimen/y26px"
+                />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,17 +83,6 @@
             android:layout_marginTop="@dimen/y94px"
             android:includeFontPadding="false"
             android:text="@string/appraisal_result"
-            style="@style/SecondBlack.Text28px"
-            android:textSize="@dimen/y26px"
-            />
-
-        <TextView
-            android:id="@+id/tv_baby_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x367px"
-            android:layout_marginTop="@dimen/y22px"
-            android:includeFontPadding="false"
             style="@style/SecondBlack.Text28px"
             android:textSize="@dimen/y26px"
             />
@@ -78,7 +99,7 @@
             android:layout_width="@dimen/y46px"
             android:layout_height="@dimen/y46px"
             android:src="@drawable/icon_develop"
-            android:layout_marginLeft="@dimen/x437px"
+            android:layout_marginLeft="@dimen/x452px"
             android:layout_marginTop="@dimen/y118px"
             android:contentDescription="@string/contentDescription" />
 
@@ -86,7 +107,7 @@
             android:layout_width="@dimen/y46px"
             android:layout_height="@dimen/y46px"
             android:src="@drawable/icon_bmi"
-            android:layout_marginLeft="@dimen/x437px"
+            android:layout_marginLeft="@dimen/x452px"
             android:layout_marginTop="@dimen/y66px"
             android:contentDescription="@string/contentDescription" />
 
@@ -103,7 +124,7 @@
             android:layout_height="@dimen/y33px"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x48px"
+            android:layout_marginRight="@dimen/x28px"
             android:src="@drawable/right_allow"
             android:contentDescription="@string/contentDescription" />
 
@@ -135,7 +156,7 @@
             android:layout_height="wrap_content"
             style="@style/FirstGray.Text24px"
             android:text=""
-            android:layout_marginLeft="@dimen/x488px"
+            android:layout_marginLeft="@dimen/x503px"
             android:layout_marginTop="@dimen/y76px"
             android:includeFontPadding="false"
             />
@@ -146,7 +167,7 @@
             android:layout_height="wrap_content"
             style="@style/FirstGray.Text24px"
             android:text=""
-            android:layout_marginLeft="@dimen/x488px"
+            android:layout_marginLeft="@dimen/x503px"
             android:layout_marginTop="@dimen/y125px"
             android:includeFontPadding="false"
             />

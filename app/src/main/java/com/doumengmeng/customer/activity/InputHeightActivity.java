@@ -80,7 +80,7 @@ public class InputHeightActivity extends BaseInputDataActivity {
         //内容
         generateListView(ll_content,getResources().getStringArray(R.array.height_content));
         //备注
-        generateListView(ll_remark,getResources().getStringArray(R.array.height_remark));
+        generateListView(ll_remark,getResources().getStringArray(R.array.height_remark),true);
 
         Intent intent = getIntent();
         if ( intent != null ) {

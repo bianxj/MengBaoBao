@@ -77,7 +77,9 @@ public class NurtureDao {
                 NURTURE_TYPE_ID +
                 " from " + TABLE_NAME +
                 " where " + AGE + " between '" + (age-2) + "' and '" + (age+2) +
-                "' order by " + NURTURE_TYPE_ID + " , " + AGE + " , " + NURTURE_ORDER ;
+                "' order by " + NURTURE_TYPE_ID + " , " + AGE + " , " + ID + " DESC" ;
+//                "' order by " + ID + " DESC";
+//                "' order by " + NURTURE_TYPE_ID + " , " + AGE + " , " + NURTURE_ORDER ;
 
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         Cursor cursor = db.rawQuery(builder,null);

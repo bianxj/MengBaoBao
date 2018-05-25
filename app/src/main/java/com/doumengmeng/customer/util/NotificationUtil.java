@@ -6,11 +6,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
 import com.doumengmeng.customer.R;
+import com.doumengmeng.customer.activity.GuideActivity;
 import com.doumengmeng.customer.base.BaseApplication;
 
 /**
@@ -43,9 +46,10 @@ public class NotificationUtil {
     public static void showNotification(Context context , String title , String content){
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-//        Intent intent = new Intent(context, GuideActivity.class);
-//        PendingIntent sender = PendingIntent.getActivity(context, 1, intent, 0);
+        Intent intent = new Intent(context, GuideActivity.class);
+        PendingIntent sender = PendingIntent.getActivity(context, 1, intent, 0);
 
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),R.mipmap.ic_notification );
         if( android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context,channelId);
             builder.setContentTitle(title);
@@ -57,16 +61,18 @@ public class NotificationUtil {
 
             builder.setStyle(style);
             builder.setDefaults(NotificationCompat.DEFAULT_SOUND);
-            builder.setSmallIcon(R.mipmap.ic_launcher);
+            builder.setLargeIcon(icon);
+            builder.setSmallIcon(R.drawable.ic_action_bar);
 
             //这句是重点
-//            builder.setContentIntent(sender);
+            builder.setContentIntent(sender);
             builder.setFullScreenIntent(null, true);
             builder.setAutoCancel(true);
             manager.notify(3,builder.build());
         } else {
             Notification.Builder builder = new Notification.Builder(context);
-            builder.setSmallIcon(R.mipmap.ic_launcher);
+            builder.setLargeIcon(icon);
+            builder.setSmallIcon(R.drawable.ic_action_bar);
             builder.setContentTitle(title);
             builder.setContentText(content);
 
@@ -76,7 +82,7 @@ public class NotificationUtil {
 
             builder.setStyle(style);
 
-//            builder.setContentIntent(sender);
+            builder.setContentIntent(sender);
             manager.notify(3,builder.build());
         }
     }

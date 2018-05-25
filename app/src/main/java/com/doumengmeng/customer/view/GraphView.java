@@ -188,7 +188,7 @@ public class GraphView extends View {
         float cx = (p.getX()-baseInfo.getLowerLimitX())*xUnit+originX;
         float cy = getHeight()-(p.getY()-baseInfo.getLowerLimitY())*yUnit-originY;
 //        canvas.drawCircle(cx,cy,outerRadius,whitePaint);
-        if ( p.getType() != 2 ){
+        if ( p.getType() == 2 ){
             canvas.drawCircle(cx,cy,radius,whitePaint);
             canvas.drawCircle(cx, cy, innerRadius, paint);
         } else {

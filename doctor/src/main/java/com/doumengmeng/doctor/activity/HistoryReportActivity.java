@@ -10,6 +10,7 @@ import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.adapter.HistoryReportAdapter;
 import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseLoadingListener;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
@@ -74,6 +75,7 @@ public class HistoryReportActivity extends BaseActivity {
         tv_title.setText(R.string.history_report);
     }
 
+    private BaseLoadingListener loadingListener;
     private void initListView(){
         xrv = findViewById(R.id.xrv);
         xrv.setLoadingMoreEnabled(true);
@@ -81,6 +83,10 @@ public class HistoryReportActivity extends BaseActivity {
 
         user = GsonUtil.getInstance().fromJson(getIntent().getStringExtra(IN_PARAM_USER_DATA), AssessmentDetailResponse.User.class);
         doctorId = getIntent().getStringExtra(IN_PARAM_DOCTOR_ID);
+
+        if ( loadingListener == null ){
+            loadingListener = new BaseLoadingListener(xrv);
+        }
 
         xrv.setLoadingListener(loadingListener);
         adapter = new HistoryReportAdapter(reports,user);
@@ -155,17 +161,6 @@ public class HistoryReportActivity extends BaseActivity {
                 reports.add(record);
             }
             adapter.notifyDataSetChanged();
-            xrv.setNoMore(true);
-        }
-    };
-
-    private final XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
-        @Override
-        public void onRefresh() {}
-
-        @Override
-        public void onLoadMore() {
-
         }
     };
 

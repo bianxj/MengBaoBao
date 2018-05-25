@@ -91,26 +91,58 @@ public class AppUtil {
     }
 
     public static void openSoftwareMarket(Context context){
+        String marketPkg = null;
         if (isAvilible(context, "com.tencent.android.qqdownloader")) {
-            launchAppDetail(context, context.getPackageName(), "com.tencent.android.qqdownloader");
-        } else {
-            launchAppDetail(context, context.getPackageName(), null);
+            marketPkg = "com.tencent.android.qqdownloader";
+        }
+
+        try {
+            launchAppDetail(context, context.getPackageName(), marketPkg);
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                goToSamsungMarket(context,context.getPackageName());
+            } catch (Exception e1) {
+                e1.printStackTrace();
+//                goToSonyMarket(context,context.getPackageName());
+            }
         }
     }
 
-    private static void launchAppDetail(Context context, String appPkg, String marketPkg) {
+    public static void goToSamsungMarket(Context context, String packageName) throws Exception {
+        Uri uri = Uri.parse("http://www.samsungapps.com/appquery/appDetail.as?appId=" + packageName);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setPackage("com.sec.android.app.samsungapps");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    public static boolean goToSonyMarket(Context context, String appId) {
+        Uri uri = Uri.parse("http://m.sonyselect.cn/" + appId);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
-            if (TextUtils.isEmpty(appPkg))
-                return;
-            Uri uri = Uri.parse("market://details?id=" + appPkg);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            if (!TextUtils.isEmpty(marketPkg))
-                intent.setPackage(marketPkg);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
         }
+    }
+
+    private static void launchAppDetail(Context context, String appPkg, String marketPkg) throws Exception {
+//        try {
+//            if (TextUtils.isEmpty(appPkg))
+//                return;
+        Uri uri = Uri.parse("market://details?id=" + appPkg);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (!TextUtils.isEmpty(marketPkg))
+            intent.setPackage(marketPkg);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private static boolean isAvilible(Context context, String packageName) {

@@ -11,6 +11,9 @@ public class DayList {
     private String correntMonth;
 
     public String getCorrentDay() {
+        if ( Integer.parseInt(correntDay) > 0 && Integer.parseInt(correntDay) < 10 ){
+            return "0"+correntDay;
+        }
         return correntDay;
     }
 
@@ -19,6 +22,9 @@ public class DayList {
     }
 
     public String getCurrentDay() {
+        if ( Integer.parseInt(currentDay) > 0 && Integer.parseInt(currentDay) < 10 ){
+            return "0"+currentDay;
+        }
         return currentDay;
     }
 

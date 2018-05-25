@@ -45,10 +45,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 /**
  * Created by Administrator on 2018/3/1.
@@ -219,7 +219,7 @@ public class AssessmentActivity extends BaseTimeActivity {
         tv_born_height.setText(String.format(getString(R.string.format_cm),user.getBornheight()));
         tv_parity_count.setText(user.getPregnancies());
         tv_birth_count.setText(user.getBirthtimes());
-        tv_mon_age.setText(user.getMumbearage());
+        tv_mon_age.setText(String.format(getString(R.string.format_age),user.getMumbearage()));
         tv_born_type.setText(user.getBorntypeString());
         tv_delivery_methods.setText(user.getDeliverymethods());
         tv_assisted_reproductive.setText(user.getAssistedreproductiveString());
@@ -283,19 +283,32 @@ public class AssessmentActivity extends BaseTimeActivity {
         String chest = null;
         String night = null;
         String day = null;
+
+        int month = record.getCorrectmonthage();
+        month = record.getCorrectmonthage()<0?0:record.getCorrectmonthage();
+        month = record.getCorrectmonthage()>36?36:record.getCorrectmonthage();
+        
         if ( user.isMale() ){
-            height = getResources().getStringArray(R.array.height_reference_boy)[record.getMonthage()>35?35:record.getMonthage()];
-            weight = getResources().getStringArray(R.array.weight_reference_boy)[record.getMonthage()>35?35:record.getMonthage()];
-            head = getResources().getStringArray(R.array.head_reference_boy)[record.getMonthage()>35?35:record.getMonthage()];
-            chest = getResources().getStringArray(R.array.chest_reference_boy)[record.getMonthage()>35?35:record.getMonthage()];
+            height = getResources().getStringArray(R.array.height_reference_boy)[month];
+            if ( record.getCorrectmonthage() >= 24 ) {
+                weight = getResources().getStringArray(R.array.weight_reference_boy)[record.getCorrectmonthage()];
+            } else {
+                weight = getResources().getStringArray(R.array.weight_reference_boy)[month];
+            }
+            head = getResources().getStringArray(R.array.head_reference_boy)[month];
+            chest = getResources().getStringArray(R.array.chest_reference_boy)[month];
         } else {
-            height = getResources().getStringArray(R.array.height_reference_girl)[record.getMonthage()>35?35:record.getMonthage()];
-            weight = getResources().getStringArray(R.array.weight_reference_girl)[record.getMonthage()>35?35:record.getMonthage()];
-            head = getResources().getStringArray(R.array.head_reference_girl)[record.getMonthage()>35?35:record.getMonthage()];
-            chest = getResources().getStringArray(R.array.chest_reference_boy)[record.getMonthage()>35?35:record.getMonthage()];
+            height = getResources().getStringArray(R.array.height_reference_girl)[month];
+            if ( record.getCorrectmonthage() >= 24 ) {
+                weight = getResources().getStringArray(R.array.weight_reference_boy)[record.getCorrectmonthage()];
+            } else {
+                weight = getResources().getStringArray(R.array.weight_reference_girl)[month];
+            }
+            head = getResources().getStringArray(R.array.head_reference_girl)[month];
+            chest = getResources().getStringArray(R.array.chest_reference_boy)[month];
         }
-        night = getResources().getStringArray(R.array.night_sleep_reference)[record.getMonthage()>35?35:record.getMonthage()];
-        day = getResources().getStringArray(R.array.day_sleep_reference)[record.getMonthage()>35?35:record.getMonthage()];
+        night = getResources().getStringArray(R.array.night_sleep_reference)[month];
+        day = getResources().getStringArray(R.array.day_sleep_reference)[month];
 
         tv_height_reference_value.setText(String.format(getString(R.string.format_cm),height));
         tv_weight_reference_value.setText(String.format(getString(R.string.format_kg),weight));
@@ -414,7 +427,7 @@ public class AssessmentActivity extends BaseTimeActivity {
     private GraphModule graph_module;
     private void initGraphModule(){
         graph_module = findViewById(R.id.graph_module);
-        graph_module.setData(dataResult.getImgList(),dataResult.getRecordList().getMonthage(),dataResult.getUserList().isMale(),false);
+        graph_module.setData(dataResult.getImgList(),dataResult.getRecordList().getMonthage(),dataResult.getUserList().isMale(),true);
     }
 
     private TextView tv_developmental_title;
@@ -782,7 +795,7 @@ public class AssessmentActivity extends BaseTimeActivity {
     }
 
     private Map<String,List<Nurture>> classifyNurtures(List<Nurture> nurtures){
-        Map<String,List<Nurture>> map = new TreeMap<>();
+        Map<String,List<Nurture>> map = new LinkedHashMap<>();
         for (Nurture nurture:nurtures){
             if ( map.containsKey(nurture.getNurtureType()) ){
                 map.get(nurture.getNurtureType()).add(nurture);
@@ -825,16 +838,17 @@ public class AssessmentActivity extends BaseTimeActivity {
     private void buildParentingGuideCustom(ViewGroup parent , List<Nurture> nurtures){
         for (Nurture nurture:nurtures){
             if ( nurture.isCustom() ){
-                View view = LayoutInflater.from(this).inflate(R.layout.item_customer_parenting_guide,null);
-                EditText et_custom_title = view.findViewById(R.id.et_custom_title);
-                EditText et_custom_content = view.findViewById(R.id.et_custom_content);
-                et_custom_title.setEnabled(false);
-                et_custom_content.setEnabled(false);
-
-                et_custom_title.setText(nurture.getNurtureTitle());
-                et_custom_content.setText(nurture.getNurtureDesc());
-
-                parent.addView(view);
+                parent.addView(buildParentingGuideNurturesItem(nurture,true));
+//                View view = LayoutInflater.from(this).inflate(R.layout.item_customer_parenting_guide,null);
+//                EditText et_custom_title = view.findViewById(R.id.et_custom_title);
+//                EditText et_custom_content = view.findViewById(R.id.et_custom_content);
+//                et_custom_title.setEnabled(false);
+//                et_custom_content.setEnabled(false);
+//
+//                et_custom_title.setText(nurture.getNurtureTitle());
+//                et_custom_content.setText(nurture.getNurtureDesc());
+//
+//                parent.addView(view);
             }
         }
     }
@@ -848,12 +862,17 @@ public class AssessmentActivity extends BaseTimeActivity {
     }
 
     private View buildParentingGuideNurturesItem(Nurture nurture){
+        return buildParentingGuideNurturesItem(nurture,false);
+    }
+
+    private View buildParentingGuideNurturesItem(Nurture nurture,boolean isCustom){
         View view = LayoutInflater.from(this).inflate(R.layout.item_nurture_content, null);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.topMargin = getResources().getDimensionPixelOffset(R.dimen.y18px);
         view.setLayoutParams(params);
 
         LinearLayout ll_content = view.findViewById(R.id.ll_content);
+//        TextView tv_main_title = view.findViewById(R.id.tv_main_title);
         TextView tv_title = view.findViewById(R.id.tv_title);
         TextView tv_content = view.findViewById(R.id.tv_content);
         CheckBox cb = view.findViewById(R.id.cb);
@@ -861,10 +880,17 @@ public class AssessmentActivity extends BaseTimeActivity {
         ll_content.setTag(nurture);
         cb.setTag(ll_content);
 
-        tv_title.setText(nurture.getNurtureTitle());
+        if ( isCustom ) {
+//            tv_main_title.setVisibility(View.VISIBLE);
+            tv_title.setText("医生补充："+nurture.getNurtureTitle());
+        } else {
+            tv_title.setText(nurture.getNurtureTitle());
+        }
         tv_content.setText(nurture.getNurtureDesc());
-        cb.setChecked(nurture.isChoose());
-        ll_content.setEnabled(nurture.isChoose());
+        cb.setChecked(true);
+//        cb.setChecked(nurture.isChoose());
+        ll_content.setEnabled(true);
+        ll_content.setBackgroundResource(R.drawable.bg_frame_check);
         cb.setEnabled(false);
         return view;
     }

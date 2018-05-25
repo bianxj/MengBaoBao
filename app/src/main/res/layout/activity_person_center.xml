@@ -179,7 +179,7 @@
     <ImageView
         android:id="@+id/iv_logout"
         android:layout_width="@dimen/x408px"
-        android:layout_height="@dimen/y108px"
+        android:layout_height="@dimen/x108px"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/y100px"
         android:src="@drawable/btn_logout"/>

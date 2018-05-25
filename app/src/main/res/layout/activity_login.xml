@@ -12,7 +12,7 @@
 
     <ImageView
         android:layout_width="@dimen/x184px"
-        android:layout_height="@dimen/y267px"
+        android:layout_height="@dimen/x267px"
         android:scaleType="fitXY"
         android:src="@drawable/logo"
         android:contentDescription="@string/contentDescription" />
@@ -95,7 +95,7 @@
     <Button
         android:id="@+id/bt_sure"
         android:layout_width="@dimen/x639px"
-        android:layout_height="@dimen/y117px"
+        android:layout_height="@dimen/x117px"
         android:layout_marginTop="@dimen/y48px"
         android:background="@drawable/btn_sure"/>
 

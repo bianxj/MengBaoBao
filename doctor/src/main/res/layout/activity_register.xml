@@ -196,7 +196,7 @@
     <Button
         android:id="@+id/bt_sure"
         android:layout_width="@dimen/x639px"
-        android:layout_height="@dimen/y127px"
+        android:layout_height="@dimen/x127px"
         android:layout_marginTop="@dimen/y858px"
         android:layout_centerHorizontal="true"
         android:background="@drawable/btn_next"/>

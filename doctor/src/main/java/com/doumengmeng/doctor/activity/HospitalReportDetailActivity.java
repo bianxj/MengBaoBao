@@ -156,8 +156,8 @@ public class HospitalReportDetailActivity extends BaseActivity {
 
         tv_suggest.setText(report.getDoctorAdvice());
 
-        tv_doctor_name.setText(String.format(getString(R.string.hospital_report_doctor_name),report.getDoctorName()));
-        tv_report_name.setText(String.format(getString(R.string.hospital_report_reporter_name),report.getCureDoctor()));
+        tv_doctor_name.setText(String.format(getString(R.string.hospital_report_doctor_name),report.getCureDoctor()));
+        tv_report_name.setText(String.format(getString(R.string.hospital_report_reporter_name),report.getDoctorName()));
         tv_report_time.setText(String.format(getString(R.string.hospital_report_time),report.getRecordDay()));
 
         initDevelopBehavior();

@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.github.chrisbanes.photoview.OnOutsidePhotoTapListener;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -463,6 +464,15 @@ public class MyDialog {
             pictureDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_picture,null);
             PhotoView iv_picture = view.findViewById(R.id.iv_picture);
+            iv_picture.setOnPhotoTapListener(new OnPhotoTapListener() {
+                @Override
+                public void onPhotoTap(ImageView view, float x, float y) {
+                    PhotoView pv = (PhotoView) view;
+                    if ( pv.getScale() == 1 ) {
+                        dismissPictureDialog();
+                    }
+                }
+            });
             iv_picture.setOnOutsidePhotoTapListener(new OnOutsidePhotoTapListener() {
                 @Override
                 public void onOutsidePhotoTap(ImageView imageView) {

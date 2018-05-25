@@ -32,10 +32,12 @@ import com.baidu.location.LocationClientOption;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.HospitalDoctorAdapter;
 import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseLoadingListener;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.DoctorEntity;
 import com.doumengmeng.customer.entity.HospitalEntity;
 import com.doumengmeng.customer.util.AppUtil;
+import com.doumengmeng.customer.util.DoctorComparator;
 import com.doumengmeng.customer.util.MyDialog;
 import com.doumengmeng.customer.util.PermissionUtil;
 import com.doumengmeng.customer.view.XLoadMoreFooter;
@@ -43,6 +45,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -154,10 +157,14 @@ public class SpacialistServiceActivity extends BaseActivity {
         handler = new SpacialistServiceHandler(this);
     }
 
+    private BaseLoadingListener loadingListener;
     private void initListView(){
         xrv_search.setLoadingMoreEnabled(true);
         xrv_search.setFootView(new XLoadMoreFooter(this));
-        xrv_search.setLoadingListener(searchLoadingListener);
+        if ( loadingListener == null ){
+            loadingListener = new BaseLoadingListener(xrv_search);
+        }
+        xrv_search.setLoadingListener(loadingListener);
 
 
         adapter = new HospitalDoctorAdapter(hospitals,doctors);
@@ -168,16 +175,6 @@ public class SpacialistServiceActivity extends BaseActivity {
         tv_location.setText(city);
         tv_location.setTag(city);
     }
-
-    private final XRecyclerView.LoadingListener searchLoadingListener = new XRecyclerView.LoadingListener() {
-        @Override
-        public void onRefresh() {}
-
-        @Override
-        public void onLoadMore() {
-            xrv_search.setNoMore(true);
-        }
-    };
 
     private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -198,6 +195,7 @@ public class SpacialistServiceActivity extends BaseActivity {
                                 if ( DaoManager.getInstance().getHospitalDao().hasHospitalInCity(SpacialistServiceActivity.this,city) ) {
                                     setNoNeedLocation(true);
                                     setCity(city);
+                                    search();
                                 } else {
                                     Toast.makeText(SpacialistServiceActivity.this,"该地区还在开发中",Toast.LENGTH_SHORT).show();
                                 }
@@ -299,6 +297,7 @@ public class SpacialistServiceActivity extends BaseActivity {
         }
     }
 
+    private DoctorComparator comparator = new DoctorComparator();
     private List<DoctorEntity> tempDoctors;
     private List<HospitalEntity> tempHospitals;
     private void search(){
@@ -309,6 +308,23 @@ public class SpacialistServiceActivity extends BaseActivity {
                 String city = (String) tv_location.getTag();
                 tempDoctors = DaoManager.getInstance().getDaotorDao().searchDoctorListByNameAndCity(SpacialistServiceActivity.this,name,city);
                 tempHospitals = DaoManager.getInstance().getHospitalDao().searchHospitalListByNameAndCity(SpacialistServiceActivity.this,name,city);
+                if ( tempHospitals != null && tempHospitals.size() > 0 ){
+                    List<String> hospitalids = new ArrayList<>();
+                    for (HospitalEntity entity:tempHospitals){
+                        hospitalids.add(entity.getHospitalid());
+                    }
+                    List<DoctorEntity> doctorEntities = DaoManager.getInstance().getDaotorDao().searchDoctorsByHospitalIds(SpacialistServiceActivity.this,hospitalids);
+
+                    if ( doctorEntities != null && doctorEntities.size() > 0 ) {
+                        for (DoctorEntity entity : doctorEntities) {
+                            if (!tempDoctors.contains(entity)) {
+                                tempDoctors.add(entity);
+                            }
+                        }
+                        doctorEntities.clear();
+                    }
+                    Collections.sort(tempDoctors,comparator);
+                }
                 handler.sendEmptyMessage(SpacialistServiceHandler.UPDATAE_LIST);
             }
         }).start();
@@ -420,6 +436,7 @@ public class SpacialistServiceActivity extends BaseActivity {
                 String city = bdLocation.getProvince();
                 setCity(city);
                 setNoNeedLocation(true);
+                search();
             } else {
                 locationFailed();
             }

@@ -188,6 +188,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_correct_age"
                     android:layout_width="@dimen/x672px"
                     android:layout_height="@dimen/y96px">
 

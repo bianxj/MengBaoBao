@@ -1,7 +1,6 @@
 package com.doumengmeng.customer.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +14,7 @@ import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.HospitalReportAdapter;
 import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.base.BaseFragment;
+import com.doumengmeng.customer.base.BaseLoadingListener;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
@@ -80,6 +80,7 @@ public class HospitalReportFragment extends BaseFragment {
         tv_title = view.findViewById(R.id.tv_title);
     }
 
+    private BaseLoadingListener loadingListener;
     private void initView(){
         rl_back.setVisibility(View.GONE);
         tv_title.setText(R.string.hospital_report);
@@ -89,12 +90,15 @@ public class HospitalReportFragment extends BaseFragment {
         xrv_report.setLoadingMoreEnabled(true);
         xrv_report.setFootView(new XLoadMoreFooter(getContext()));
 
+        if ( loadingListener == null ){
+            loadingListener = new BaseLoadingListener(xrv_report);
+        }
+
         xrv_report.setLoadingListener(loadingListener);
         hospitalReportAdapter = new HospitalReportAdapter(reports);
         xrv_report.setAdapter(hospitalReportAdapter);
         xrv_report.setLayoutManager(new LinearLayoutManager(getContext()));
         hospitalReportAdapter.notifyDataSetChanged();
-
         searchHospitalRecord();
     }
 
@@ -107,21 +111,6 @@ public class HospitalReportFragment extends BaseFragment {
             stopTask(searchHospitalRecordTask);
         }
     }
-
-    private final XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
-        @Override
-        public void onRefresh() {}
-
-        @Override
-        public void onLoadMore() {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    xrv_report.setNoMore(true);
-                }
-            },2000);
-        }
-    };
 
     private RequestTask searchHospitalRecordTask;
     private void searchHospitalRecord(){
@@ -160,7 +149,7 @@ public class HospitalReportFragment extends BaseFragment {
         public void onPostExecute(String result) {
             HospitalReportResponse response = GsonUtil.getInstance().fromJson(result,HospitalReportResponse.class);
 
-            xrv_report.setNoMore(true);
+//            xrv_report.setNoMore(true);
             if ( null != response.getResult().getChildRecordList() ) {
                 reports.addAll(response.getResult().getChildRecordList());
                 for (HospitalReport report:reports){

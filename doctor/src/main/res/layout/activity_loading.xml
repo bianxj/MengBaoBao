@@ -12,8 +12,8 @@
     <include layout="@layout/include_title_back_no_bg" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/x184px"
+        android:layout_height="@dimen/x267px"
         android:src="@drawable/logo"
         android:scaleType="fitXY"
         android:layout_centerHorizontal="true"

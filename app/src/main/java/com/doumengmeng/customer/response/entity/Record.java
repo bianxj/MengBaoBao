@@ -1,5 +1,6 @@
 package com.doumengmeng.customer.response.entity;
 
+import com.doumengmeng.customer.util.FormulaUtil;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -39,14 +40,21 @@ public class Record {
     @SerializedName("recordtime")
     private String recordTime;
 
+    @SerializedName("heightresultsd")
+    private String heightResultSd;
+    @SerializedName("hwresultsd")
+    private String hwResultSd;
+    @SerializedName("weightresultsd")
+    private String weightResultSd;
+    @SerializedName("featureresult")
+    private String featureResult;
+
     @SerializedName("heightresult")
     private String heightResult;
     @SerializedName("hwresult")
     private String hwResult;
     @SerializedName("weightresult")
     private String weightResult;
-    @SerializedName("featureresult")
-    private String featureResult;
     @SerializedName("feature")
     private List<String> featureList;
 
@@ -102,7 +110,7 @@ public class Record {
     }
 
     public String getFeatureEvaluation() {
-        return featureEvaluation;
+        return "神经心理、发育行为评估："+featureEvaluation;
     }
 
     public void setFeatureEvaluation(String featureEvaluation) {
@@ -171,11 +179,16 @@ public class Record {
     }
 
     public String getHeightResultString(){
-        if ( "1".equals(heightResult) ){
-            return "生长迟缓";
-        } else {
-            return "正常";
-        }
+        return FormulaUtil.getHeightResultString(Integer.parseInt(heightResultSd));
+    }
+    public String getHwResultString(){
+        return FormulaUtil.getHwResultString(Integer.parseInt(hwResultSd));
+    }
+    public String getWeightResultString(){
+        return FormulaUtil.getWeightResultString(Integer.parseInt(weightResultSd));
+    }
+    public String getFeatureResultString(){
+        return FormulaUtil.getFeatureResultString(Integer.parseInt(featureResult));
     }
 
     public String getHeightResult() {
@@ -186,20 +199,6 @@ public class Record {
         this.heightResult = heightResult;
     }
 
-    public String getHwResultString(){
-        if ( "-1".equals(hwResult) ){
-            return "消瘦";
-        } else if ( "1".equals(hwResult) ){
-            return "超重";
-        } else if ( "2".equals(hwResult) ){
-            return "肥胖";
-        } else if ( "3".equals(hwResult) ){
-            return "重度肥胖";
-        } else {
-            return "正常";
-        }
-
-    }
 
     public String getHwResult() {
         return hwResult;
@@ -209,12 +208,6 @@ public class Record {
         this.hwResult = hwResult;
     }
 
-    public String getWeightResultString(){
-        if ( "1".equals(weightResult) ){
-            return "低体重";
-        }
-        return "正常";
-    }
 
     public String getWeightResult() {
         return weightResult;
@@ -224,14 +217,6 @@ public class Record {
         this.weightResult = weightResult;
     }
 
-    public String getFeatureResultString(){
-        if ( "1".equals(featureResult) ){
-            return "可疑";
-        } else if ( "-1".equals(featureResult) ){
-            return "异常";
-        }
-        return "正常";
-    }
 
     public String getFeatureResult() {
         return featureResult;
@@ -242,7 +227,7 @@ public class Record {
     }
 
     public String getBabyMonth(){
-        return monthAge + "月" + monthDay + "日";
+        return monthAge + "月" + FormulaUtil.getDoubleDigit(monthDay) + "天";
     }
 
     public boolean isShowRecordState(){
@@ -266,11 +251,11 @@ public class Record {
     }
 
     public String getCurrentMonthAgeString(){
-        return monthAge + "月" + monthDay +"日";
+        return monthAge + "月" + FormulaUtil.getDoubleDigit(monthDay) +"天";
     }
 
     public String getCorrectMonthAgeString(){
-        return correctMonthAge + "月" + correctMonthDay +"日";
+        return correctMonthAge + "月" + FormulaUtil.getDoubleDigit(correctMonthDay) +"天";
     }
 
     public String getHeight() {
@@ -319,5 +304,29 @@ public class Record {
 
     public void setDoctorAdvice(String doctorAdvice) {
         this.doctorAdvice = doctorAdvice;
+    }
+
+    public String getHeightResultSd() {
+        return heightResultSd;
+    }
+
+    public void setHeightResultSd(String heightResultSd) {
+        this.heightResultSd = heightResultSd;
+    }
+
+    public String getHwResultSd() {
+        return hwResultSd;
+    }
+
+    public void setHwResultSd(String hwResultSd) {
+        this.hwResultSd = hwResultSd;
+    }
+
+    public String getWeightResultSd() {
+        return weightResultSd;
+    }
+
+    public void setWeightResultSd(String weightResultSd) {
+        this.weightResultSd = weightResultSd;
     }
 }

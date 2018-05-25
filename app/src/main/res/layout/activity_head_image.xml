@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,9 +10,10 @@
         android:id="@+id/civ_head"
         android:layout_width="@dimen/y470px"
         android:layout_height="@dimen/y470px"
-        android:src="@drawable/frame_head"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y324px"
+        app:civ_border_width="@dimen/x2px"
+        app:civ_border_color="@color/thinPink"
         />
 
     <ImageView

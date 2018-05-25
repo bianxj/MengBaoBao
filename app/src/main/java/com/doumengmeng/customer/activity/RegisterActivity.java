@@ -371,6 +371,12 @@ public class RegisterActivity extends BaseActivity {
         cb_agreement.setChecked(!cb_agreement.isChecked());
     }
 
+    private void clearData(){
+        et_login_pwd.setText("");
+        et_phone.setText("");
+        tv_prompt.setText("");
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

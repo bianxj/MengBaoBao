@@ -269,9 +269,10 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_phone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96px"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/unuse_tv_phone"
@@ -282,7 +283,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/phone" />
 
-            <TextView
+<!--            <TextView
                 style="@style/FirstPink.Text26px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -290,7 +291,7 @@
                 android:layout_toRightOf="@+id/unuse_tv_phone"
                 android:text="@string/mark"
                 android:tag="@string/TagMark"
-                />
+                />-->
 
             <EditText
                 android:id="@+id/et_phone"

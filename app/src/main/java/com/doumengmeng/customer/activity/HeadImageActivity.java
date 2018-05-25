@@ -12,7 +12,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -33,6 +32,7 @@ import com.doumengmeng.customer.util.MyDialog;
 import com.doumengmeng.customer.util.PermissionUtil;
 import com.doumengmeng.customer.util.PictureUtils;
 import com.doumengmeng.customer.view.CircleImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
@@ -87,9 +87,30 @@ public class HeadImageActivity extends BaseActivity {
         tv_title.setText(R.string.head_image);
 
         userData = BaseApplication.getInstance().getUserData();
-        if ( !TextUtils.isEmpty(userData.getHeadimg()) ) {
-            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+        loadHeadImg(userData.isMale(),userData.getHeadimg());
+//        if ( !TextUtils.isEmpty(userData.getHeadimg()) ) {
+//            ImageLoader.getInstance().displayImage(userData.getHeadimg(),civ_head);
+//        }
+    }
+
+    /**
+     * 作者: 边贤君
+     * 描述: 加载头像
+     * 参数:
+     * 日期: 2018/1/8 10:35
+     */
+    private void loadHeadImg(boolean isMale,String urlHeadImg){
+        DisplayImageOptions.Builder builder = BaseApplication.getInstance().defaultDisplayImage();
+        if ( isMale ){
+            builder.showImageOnLoading(R.drawable.default_icon_boy);
+            builder.showImageForEmptyUri(R.drawable.default_icon_boy);
+            builder.showImageOnFail(R.drawable.default_icon_boy);
+        } else {
+            builder.showImageOnLoading(R.drawable.default_icon_girl);
+            builder.showImageForEmptyUri(R.drawable.default_icon_girl);
+            builder.showImageOnFail(R.drawable.default_icon_girl);
         }
+        ImageLoader.getInstance().displayImage(urlHeadImg,civ_head,builder.build());
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {

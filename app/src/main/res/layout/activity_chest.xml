@@ -74,22 +74,22 @@
                     android:text="@string/chest_reference_value"
                     style="@style/FirstPink.Text23px"
                     android:includeFontPadding="false"
-                    android:layout_marginLeft="@dimen/x76px"
+                    android:layout_marginLeft="@dimen/x51px"
                     />
 
                 <View
                     android:layout_width="@dimen/x10px"
                     android:layout_height="@dimen/x10px"
                     android:background="@drawable/bg_circle_point_10"
-                    android:layout_marginLeft="@dimen/x310px"
+                    android:layout_marginLeft="@dimen/x335px"
                     android:layout_centerVertical="true" />
                 <TextView
+                    android:id="@+id/tv_dest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/chest_reference_dest"
                     style="@style/FirstGray.Text21px"
                     android:includeFontPadding="false"
-                    android:layout_marginLeft="@dimen/x329px"
+                    android:layout_marginLeft="@dimen/x354px"
                     android:layout_centerVertical="true"
                     />
             </RelativeLayout>
@@ -105,14 +105,14 @@
                     android:text="@string/chest_diff_value"
                     style="@style/FirstPink.Text23px"
                     android:includeFontPadding="false"
-                    android:layout_marginLeft="@dimen/x76px"
+                    android:layout_marginLeft="@dimen/x51px"
                     />
 
                 <View
                     android:layout_width="@dimen/x10px"
                     android:layout_height="@dimen/x10px"
                     android:background="@drawable/bg_circle_point_10"
-                    android:layout_marginLeft="@dimen/x310px"
+                    android:layout_marginLeft="@dimen/x335px"
                     android:layout_centerVertical="true" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
                     android:text="@string/chest_diff_desc"
                     style="@style/FirstGray.Text21px"
                     android:includeFontPadding="false"
-                    android:layout_marginLeft="@dimen/x329px"
+                    android:layout_marginLeft="@dimen/x354px"
                     android:layout_centerVertical="true"
                     />
             </RelativeLayout>

@@ -188,6 +188,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_correct_age"
                     android:layout_width="@dimen/x672px"
                     android:layout_height="@dimen/y96px">
 
@@ -402,8 +403,22 @@
 
                 </RelativeLayout>
             </LinearLayout>-->
-
             <LinearLayout
+                android:id="@+id/ll_developmental_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20px"
+                android:background="@color/first_white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x24px"
+                android:paddingRight="@dimen/x24px">
+
+                <com.doumengmeng.customer.view.DevelopmentView
+                    android:id="@+id/v_development"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.doumengmeng.customer.view.DevelopmentView>
+            </LinearLayout>
+ <!--           <LinearLayout
                 android:id="@+id/ll_developmental_behavior"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -430,7 +445,7 @@
                     android:orientation="vertical">
 
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/ll_assessment_result"

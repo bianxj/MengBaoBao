@@ -21,6 +21,7 @@
         android:nextFocusDown="@+id/et_contact"
         style="@style/SecondBlack.Text26px"
         android:hint="@string/message_board_hint"
+        android:maxLength="1000"
         android:background="@drawable/bg_circle_edittext_multi_line"/>
 
     <TextView

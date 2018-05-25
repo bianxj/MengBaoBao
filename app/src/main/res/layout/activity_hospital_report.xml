@@ -560,6 +560,20 @@
                 android:visibility="gone" />
 
             <LinearLayout
+                android:id="@+id/ll_developmental_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20px"
+                android:background="@color/first_white"
+                android:orientation="vertical">
+
+                <com.doumengmeng.customer.view.DevelopmentView
+                    android:id="@+id/v_development"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.doumengmeng.customer.view.DevelopmentView>
+            </LinearLayout>
+
+<!--            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -579,7 +593,7 @@
                     android:orientation="vertical">
 
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"

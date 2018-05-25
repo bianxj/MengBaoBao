@@ -50,7 +50,7 @@
     <string name="home_page_observe_point_content">宝妈，您有注意到宝宝的这些变化吗？</string>
     <string name="home_page_doctor_list">萌宝宝医生</string>
     <string name="home_page_doctor_list_content">宝妈，你可以为您的宝宝选择专属医生</string>
-    <string name="home_page_month_age">%s月%s天</string>
+    <string name="home_page_month_age">%s月%s日</string>
 
     <!--SpacialistServiceFragment-->
     <string name="spacialist_service_buy">购买</string>
@@ -58,6 +58,8 @@
     <string name="slogan">宝宝生长发育好不好，\n可以请儿保专家来评估一下哦！</string>
     <string name="add_record">增加新记录</string>
     <string name="appraisal_result">测评结果</string>
+    <string name="appraisal_date">测评时间</string>
+    <string name="appraisal_month">测评时月龄</string>
 
     <!--SpacialistServiceActivity-->
     <string name="spacialist_location_failed">定位失败，请点击重试GPS定位</string>
@@ -131,7 +133,8 @@
 
     <!--HeadInputActivity信息-->
     <string name="head_reference_value">参考值：48.78厘米</string>
-    <string name="head_reference_dest">参考值为2005年上海市平均标准</string>
+    <string name="head_reference_dest_2015">参考值为2015年上海市平均标准</string>
+    <string name="head_reference_dest_2005">参考值为2005年上海市平均标准</string>
     <string name="head_diff_value">标准差：1.27厘米</string>
     <string name="head_diff_desc">标准差指的是平均值的上下标准差</string>
     <string name="head_title">家庭正确的头围测量方法</string>
@@ -386,12 +389,12 @@
     <!--DiagramDataActivity-->
     <string name="diagram_data_date">日期</string>
 
-    <string name="diagram_data_height_record">身高记录</string>
+    <string name="diagram_data_height_record">身长记录</string>
     <string name="diagram_data_baby_age">宝宝年龄</string>
-    <string name="diagram_data_height">身高cm</string>
+    <string name="diagram_data_height">身长cm</string>
     <string name="diagram_data_weight_record">体重记录</string>
     <string name="diagram_data_weight">体重kg</string>
-    <string name="diagram_data_height_weight_ratio">身长体重比</string>
+    <string name="diagram_data_height_weight_ratio">身长体重比记录</string>
     <string name="diagram_data_month_day">%d个月%d天</string>
 
     <!--Dialog-->
@@ -457,13 +460,16 @@
     <string name="prompt_error_password">请输入6–16位由数字、字母组成的密码</string>
 
     <string name="prompt_no_wifi">当前不在wifi状态下，可能会产生流量费用</string>
-    <string name="prompt_need_buy">只有付费用户才能填写</string>
+    <string name="prompt_need_buy">只有付费用户才能填写哦</string>
     <string name="prompt_submit_base_info">提交后将不能修改宝宝姓名、宝宝性别、出生日期、出生体重、出生身长、孕周</string>
 
     <string name="prompt_old_passwd_empty">旧密码为空</string>
     <string name="prompt_new_passwd_empty">新密码为空</string>
     <string name="prompt_confirm_passwd_empty">请确认密码</string>
     <string name="prompt_confirm_passwd_error">两次输入的密码不一致</string>
+
+    <string name="prompt_lost_zero">您还剩0次测评\n次数，请购买我们的服务</string>
+    <string name="prompt_over_36">我们只做0-36个月的测评，您的宝宝已超龄。</string>
 
 
     <!--Other-->

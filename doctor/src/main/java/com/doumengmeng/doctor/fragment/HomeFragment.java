@@ -17,6 +17,7 @@ import com.doumengmeng.doctor.activity.MainActivity;
 import com.doumengmeng.doctor.activity.QRActivity;
 import com.doumengmeng.doctor.adapter.AssessmentAdapter;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseLoadingListener;
 import com.doumengmeng.doctor.base.BaseTimeFragment;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.net.UrlAddressList;
@@ -131,13 +132,19 @@ public class HomeFragment extends BaseTimeFragment {
         ImageLoader.getInstance().displayImage(urlHeadImg,imageView,builder.build());
     }
 
+    private BaseLoadingListener loadingListener;
     private void initAssessmentList(View view){
         xrv = view.findViewById(R.id.xrv);
         xrv.setLoadingMoreEnabled(true);
         xrv.setFootView(new XLoadMoreFooter(getContext()));
 
+        if ( loadingListener == null ){
+            loadingListener = new BaseLoadingListener(xrv);
+        }
+
         adapter = new AssessmentAdapter(items);
         xrv.setAdapter(adapter);
+        xrv.setLoadingListener(loadingListener);
         ll_no_data = view.findViewById(R.id.ll_no_data);
         ll_complete = view.findViewById(R.id.ll_complete);
     }
