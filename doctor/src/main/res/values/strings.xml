@@ -364,6 +364,9 @@
     <string name="prompt_friend_circle">朋友圈</string>
     <string name="prompt_weixin">微信</string>
 
+    <string name="prompt_submit_message">确认后用户将收到您的评估\n不可修改</string>
+    <string name="prompt_btn_edit">返回修改</string>
+
 
     <string name="default_city">北京市</string>
     <string-array name="citys">

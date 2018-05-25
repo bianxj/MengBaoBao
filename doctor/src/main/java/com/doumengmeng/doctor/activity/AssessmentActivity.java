@@ -285,8 +285,8 @@ public class AssessmentActivity extends BaseTimeActivity {
         String day = null;
 
         int month = record.getCorrectmonthage();
-        month = record.getCorrectmonthage()<0?0:record.getCorrectmonthage();
-        month = record.getCorrectmonthage()>36?36:record.getCorrectmonthage();
+        month = month<0?0:month;
+        month = month>36?36:month;
         
         if ( user.isMale() ){
             height = getResources().getStringArray(R.array.height_reference_boy)[month];
@@ -624,16 +624,26 @@ public class AssessmentActivity extends BaseTimeActivity {
     private RequestTask evaluationTask;
     private void submitAssessment(){
         if ( checkAssessment() ){
-            try {
-                evaluationTask = new RequestTask.Builder(this,evaluationCallBack)
-                        .setUrl(UrlAddressList.URL_EVALUTION)
-                        .setContent(buildRequestEvalution())
-                        .setType(RequestTask.DEFAULT)
-                        .build();
-                evaluationTask.execute();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
+            MyDialog.showChooseDialog(this, getString(R.string.prompt_submit_message), R.string.prompt_btn_edit, R.string.prompt_bt_sure, new MyDialog.ChooseDialogCallback() {
+                @Override
+                public void sure() {
+                    try {
+                        evaluationTask = new RequestTask.Builder(AssessmentActivity.this,evaluationCallBack)
+                                .setUrl(UrlAddressList.URL_EVALUTION)
+                                .setContent(buildRequestEvalution())
+                                .setType(RequestTask.DEFAULT)
+                                .build();
+                        evaluationTask.execute();
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void cancel() {
+
+                }
+            });
         }
     }
 

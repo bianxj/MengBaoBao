@@ -17,7 +17,7 @@
         android:gravity="top"
         android:scrollbars="vertical"
         android:textColorHint="@color/sixth_gray"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:nextFocusDown="@+id/et_contact"
         style="@style/SecondBlack.Text26px"
         android:hint="@string/message_board_hint"
