@@ -40,7 +40,8 @@
     
     <!--MainActivity信息-->
     <string name="home_page">首页</string>
-    <string name="baby_knowledge">育儿知识</string>
+    <!--<string name="baby_knowledge">育儿知识</string>-->
+    <string name="baby_knowledge">月龄指导</string>
     <string name="spacialist_service">专家服务</string>
     <string name="hospital_report">医院报告</string>
     <string name="meng_lesson">萌课堂</string>
@@ -89,7 +90,7 @@
 
     <!--AboutActivity信息-->
     <string name="about_company_name">上海豆蒙萌健康管理咨询有限公司</string>
-    <string name="about_company_location">上海市徐汇区南丹东路300弄9号亚都商务楼409室</string>
+    <string name="about_company_location">上海市南丹东路300弄9号楼409室</string>
     <string name="about_company_phone">021-64335531</string>
     <string name="about_company_mail">customerservice@mengbaobao.com</string>
     <string name="about_company_website">www.mengbaobao.com</string>
@@ -133,8 +134,11 @@
 
     <!--HeadInputActivity信息-->
     <string name="head_reference_value">参考值：48.78厘米</string>
-    <string name="head_reference_dest_2015">参考值为2015年上海市平均标准</string>
-    <string name="head_reference_dest_2005">参考值为2005年上海市平均标准</string>
+<!--    <string name="head_reference_dest_2015">参考值为2015年上海市平均标准</string>
+    <string name="head_reference_dest_2005">参考值为2005年上海市平均标准</string>-->
+    <string name="head_reference_dest">参考值引用WHO标准</string>
+<!--    <string name="head_reference_dest_2015">参考值引用WHO标准</string>
+    <string name="head_reference_dest_2005">参考值引用WHO标准</string>-->
     <string name="head_diff_value">标准差：1.27厘米</string>
     <string name="head_diff_desc">标准差指的是平均值的上下标准差</string>
     <string name="head_title">家庭正确的头围测量方法</string>
@@ -350,7 +354,7 @@
     <string name="assessment_growth_level">2.生长水平（本次测量的水平）</string>
     <string name="assessment_growth_result">二、发育评价：</string>
     <string name="assessment_doctor_suggest">三、医生的指导建议（包含对家长留言回复）</string>
-    <string name="assessment_wait_message">48小时内查看医生的养育指导和评估</string>
+    <string name="assessment_wait_message">48小时内查看医生的评估结果解读和养育指导</string>
     <string name="assessment_refund_message">抱歉，医生未能按约给予评估及指导，
 已为您退款或在途中！</string>
 
@@ -367,7 +371,7 @@
     <string name="hospital_report_weight">体重：%skg</string>
     <string name="hospital_report_head">头围：%scm</string>
     <string name="hospital_report_chest">胸围：%scm</string>
-    <string name="hospital_report_bmi">BMI：%scm</string>
+    <string name="hospital_report_bmi">BMI：%skg/m²</string>
     <string name="hospital_report_weight_result">体重：%s</string>
     <string name="hospital_report_height_result">身长：%s</string>
     <string name="hospital_report_hw_result">身长体重比：%s</string>
@@ -432,7 +436,8 @@
     <string name="dialog_content_open_phone">请打开定位权限</string>
 
     <string name="dialog_title_notification">请允许我们向您发送通知</string>
-    <string name="dialog_content_notification">让您不错过每一条育儿知识</string>
+    <!--<string name="dialog_content_notification">让您不错过每一条育儿知识</string>-->
+    <string name="dialog_content_notification">让您不错过每一条月龄指导</string>
     <string name="dialog_updating">正在更新…</string>
 
     <string name="dialog_lost_pay_time">支付剩余时间</string>
@@ -525,7 +530,11 @@
 
     <!--Observer-->
     <string-array name="free_observe_content">
-        <item>0–3岁是孩子生长发育的高峰期，日长夜大。宝妈需要了解孩子的发育进程，对孩子可能出现的问题做到“早发现、早干预、早治疗”，让孩子健康成长。</item>
+        <!--<item>0–3岁是孩子生长发育的高峰期，日长夜大。宝妈需要了解孩子的发育进程，对孩子可能出现的问题做到“早发现、早干预、早治疗”，让孩子健康成长。</item>-->
+        <item>0-3岁是生命早期脑发育的关键期，又是儿童生长发育的高峰期，宝宝在这个时期可谓是“日长夜大”，而每一个阶段的成长都有一定的规律和共性。萌宝宝测评系统可以为您的宝宝进行科学精确的能力评估，并由我们的萌宝宝医生向您提供个性化的养育指导。</item>
+        <item>在萌宝宝观察要点中罗列了0-36个月宝宝每个月会发生的生长变化的内容，让您了解到宝宝每个月的不同的发育进程，提醒家长们去细心观察并体会宝宝每一次的进步，让您在辛勤养育的同时一起感受陪伴儿女成长的欣慰和快乐。</item>
+        <item>您需要点击“购买”进入查看，我们将为您提供的是医疗级的科学评估方法，帮助您正确地了解宝宝的生长水平、生长趋势和发育状况，也能及早发现宝宝可能出现的问题，我们的医生团队会为您的宝宝做出精确的评估、解读评估报告、提供养育指导，做到早发现、早干预、早治疗。</item>
+        <item>欢迎您一起加入萌宝宝的大家庭！</item>
     </string-array>
 
 </resources>

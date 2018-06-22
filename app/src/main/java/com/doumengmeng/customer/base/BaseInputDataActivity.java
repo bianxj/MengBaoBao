@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.response.entity.DayList;
+import com.doumengmeng.customer.util.MyDialog;
 
 /**
  * Created by Administrator on 2018/1/18.
@@ -33,6 +34,12 @@ public abstract class BaseInputDataActivity extends BaseActivity {
         initData();
         initChildData();
         initView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyDialog.dismissPromptTopDialog();
     }
 
     @Override
@@ -110,10 +117,11 @@ public abstract class BaseInputDataActivity extends BaseActivity {
     }
 
     protected void showPromptTitle(String message){
-        tv_title.setText(message);
-        rl_back.setVisibility(View.GONE);
-        rl_complete.setVisibility(View.GONE);
-        rl_close.setVisibility(View.VISIBLE);
+        MyDialog.showPromptTopDialog(this,getWindow().getDecorView(),message);
+//        tv_title.setText(message);
+//        rl_back.setVisibility(View.GONE);
+//        rl_complete.setVisibility(View.GONE);
+//        rl_close.setVisibility(View.VISIBLE);
     }
 
     protected View.OnClickListener listener = new View.OnClickListener() {

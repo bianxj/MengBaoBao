@@ -14,6 +14,7 @@ import com.doumengmeng.customer.activity.HospitalDoctorActivity;
 import com.doumengmeng.customer.entity.DoctorEntity;
 import com.doumengmeng.customer.entity.HospitalEntity;
 import com.doumengmeng.customer.view.CircleImageView;
+import com.doumengmeng.customer.view.HorizontalScrollTextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -85,7 +86,7 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public static class HospitalHolder extends RecyclerView.ViewHolder{
         private final CircleImageView civ_hospital;
-        private final TextView tv_hospital_name;
+        private final HorizontalScrollTextView tv_hospital_name;
         private final TextView tv_hospital_address;
         private final View v_click;
         private HospitalEntity hospital;
@@ -104,6 +105,8 @@ public class HospitalDoctorAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             ImageLoader.getInstance().displayImage(hospital.getHospitalicon(),civ_hospital,getDisplayImageOption());
             tv_hospital_address.setText(hospital.getHospitaladdress());
             tv_hospital_name.setText(hospital.getHospitalname());
+            tv_hospital_name.init();
+            tv_hospital_name.startScroll();
         }
 
         private final View.OnClickListener listener = new View.OnClickListener() {

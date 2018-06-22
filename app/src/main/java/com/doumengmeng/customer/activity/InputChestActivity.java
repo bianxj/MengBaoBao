@@ -8,11 +8,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseInputDataActivity;
 import com.doumengmeng.customer.util.EditTextUtil;
+import com.doumengmeng.customer.util.FormatCheckUtil;
 import com.doumengmeng.customer.view.MyGifPlayer;
 
 /**
@@ -32,6 +34,7 @@ public class InputChestActivity extends BaseInputDataActivity {
     private LinearLayout ll_content;
     private MyGifPlayer player;
     private LinearLayout ll_remark;
+    private RelativeLayout rl_std;
 
     private EditText et_input_data;
     @Override
@@ -55,6 +58,7 @@ public class InputChestActivity extends BaseInputDataActivity {
         ll_content = findViewById(R.id.ll_content);
         player = findViewById(R.id.player);
         ll_remark = findViewById(R.id.ll_remark);
+        rl_std = findViewById(R.id.rl_std);
         initView();
     }
 
@@ -62,20 +66,22 @@ public class InputChestActivity extends BaseInputDataActivity {
         new EditTextUtil(et_input_data);
         player.setGif(R.drawable.gif_chest);
 
-        if ( month < 36 ){
-            tv_dest.setText(getString(R.string.head_reference_dest_2005));
-        } else {
-            tv_dest.setText(getString(R.string.head_reference_dest_2015));
-        }
+//        if ( month < 36 ){
+//            tv_dest.setText(getString(R.string.head_reference_dest_2005));
+//        } else {
+//            tv_dest.setText(getString(R.string.head_reference_dest_2015));
+//        }
 
         //增长
         String increase = getResources().getStringArray(R.array.chest_increase)[month];
         if (TextUtils.isEmpty(increase) ){
             tv_increase.setVisibility(View.GONE);
         } else {
+            tv_increase.setVisibility(View.VISIBLE);
             tv_increase.setText(increase);
         }
         //参考值
+
         if ( isBoy ){
             tv_reference.setText(getResources().getStringArray(R.array.chest_reference_boy)[month]);
             tv_std.setText(getResources().getStringArray(R.array.chest_std_boy)[month]);
@@ -83,6 +89,15 @@ public class InputChestActivity extends BaseInputDataActivity {
             tv_reference.setText(getResources().getStringArray(R.array.chest_reference_girl)[month]);
             tv_std.setText(getResources().getStringArray(R.array.chest_std_girl)[month]);
         }
+
+        if ( TextUtils.isEmpty(tv_std.getText().toString().trim()) ){
+            tv_std.setVisibility(View.GONE);
+            rl_std.setVisibility(View.GONE);
+        } else {
+            tv_std.setVisibility(View.VISIBLE);
+            rl_std.setVisibility(View.VISIBLE);
+        }
+
         //标题
         tv_input_title.setText(getResources().getString(R.string.chest_input_title));
         //内容
@@ -118,6 +133,11 @@ public class InputChestActivity extends BaseInputDataActivity {
 
         if ( TextUtils.isEmpty(chestString) ) {
             showPromptTitle("请输入胸围信息");
+            return false;
+        }
+
+        if (!FormatCheckUtil.isDecimalNumber(chestString)){
+            showPromptTitle("胸围格式不正确");
             return false;
         }
         float chest = Float.parseFloat(et_input_data.getText().toString().trim());

@@ -15,6 +15,7 @@ import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.base.BaseInputDataActivity;
 import com.doumengmeng.customer.response.entity.DayList;
 import com.doumengmeng.customer.util.EditTextUtil;
+import com.doumengmeng.customer.util.FormatCheckUtil;
 import com.doumengmeng.customer.view.MyGifPlayer;
 
 /**
@@ -75,6 +76,7 @@ public class InputWeightActivity extends BaseInputDataActivity {
         if (TextUtils.isEmpty(increase) ){
             tv_increase.setVisibility(View.GONE);
         } else {
+            tv_increase.setVisibility(View.VISIBLE);
             tv_increase.setText(increase);
         }
         //标题
@@ -114,6 +116,12 @@ public class InputWeightActivity extends BaseInputDataActivity {
             showPromptTitle("请输入体重信息");
             return false;
         }
+
+        if (!FormatCheckUtil.isDecimalNumber(weightString)){
+            showPromptTitle("体重格式不正确");
+            return false;
+        }
+
         float weight = Float.parseFloat(et_input_data.getText().toString().trim());
         if ( weight <= 0 || weight > 150 ){
             showPromptTitle("体重 0~150kg");

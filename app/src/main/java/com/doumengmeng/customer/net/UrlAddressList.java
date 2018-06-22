@@ -13,7 +13,10 @@ public class UrlAddressList {
 
 //    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneServerV2/";
     public final static String BASE_URL = "http://app.mengbaobao.com:8090/mbbPhoneServerV2/";
-//    public final static String BASE_URL = "http://app.mengbaobao.com/mbbPhoneServerV2/";
+
+    //测试地址
+//    public final static String BASE_URL = "http://app.mengbaobao.com:8092/mbbPhoneTestServer/";
+
     public final static String IMAGE_URL = "http://app.mengbaobao.com:8083/";
 
     public final static String URL_GET_VC = BASE_URL + "babyUser.do?method=SendMessage";

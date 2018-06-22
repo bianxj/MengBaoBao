@@ -66,7 +66,8 @@
                 android:layout_marginTop="@dimen/y32px">
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
                 <TextView
                     android:id="@+id/tv_reference"
                     android:layout_width="wrap_content"
@@ -74,30 +75,9 @@
                     android:text="@string/chest_reference_value"
                     style="@style/FirstPink.Text23px"
                     android:includeFontPadding="false"
-                    android:layout_marginLeft="@dimen/x51px"
                     />
 
-                <View
-                    android:layout_width="@dimen/x10px"
-                    android:layout_height="@dimen/x10px"
-                    android:background="@drawable/bg_circle_point_10"
-                    android:layout_marginLeft="@dimen/x335px"
-                    android:layout_centerVertical="true" />
-                <TextView
-                    android:id="@+id/tv_dest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/FirstGray.Text21px"
-                    android:includeFontPadding="false"
-                    android:layout_marginLeft="@dimen/x354px"
-                    android:layout_centerVertical="true"
-                    />
-            </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y32px">
                 <TextView
                     android:id="@+id/tv_std"
                     android:layout_width="wrap_content"
@@ -105,14 +85,49 @@
                     android:text="@string/chest_diff_value"
                     style="@style/FirstPink.Text23px"
                     android:includeFontPadding="false"
-                    android:layout_marginLeft="@dimen/x51px"
+                    android:layout_marginLeft="@dimen/x31px"
+                    android:layout_toRightOf="@+id/tv_reference"
                     />
 
                 <View
                     android:layout_width="@dimen/x10px"
                     android:layout_height="@dimen/x10px"
-                    android:background="@drawable/bg_circle_point_10"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x335px"
+                    android:background="@drawable/bg_circle_point_10"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_dest"
+                    style="@style/FirstGray.Text21px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x354px"
+                    android:includeFontPadding="false"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_std"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x42px"
+                android:layout_centerHorizontal="true">
+<!--                <TextView
+                    android:id="@+id/tv_std"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chest_diff_value"
+                    style="@style/FirstPink.Text23px"
+                    android:includeFontPadding="false"
+                    android:layout_marginLeft="@dimen/x51px"
+                    />-->
+
+                <View
+                    android:layout_width="@dimen/x10px"
+                    android:layout_height="@dimen/x10px"
+                    android:background="@drawable/bg_circle_point_10"
                     android:layout_centerVertical="true" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -120,8 +135,8 @@
                     android:text="@string/chest_diff_desc"
                     style="@style/FirstGray.Text21px"
                     android:includeFontPadding="false"
-                    android:layout_marginLeft="@dimen/x354px"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x19px"
                     />
             </RelativeLayout>
             </RelativeLayout>

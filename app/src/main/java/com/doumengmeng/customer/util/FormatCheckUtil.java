@@ -11,6 +11,10 @@ import java.util.regex.Pattern;
 
 public class FormatCheckUtil {
 
+//    public static boolean isDecimalNumber(String number){
+//        Pattern p = Pattern.compile("^[0-9]");
+//    }
+
     public static boolean isChinese(String chinese){
         Pattern p = Pattern.compile("[\u4e00-\u9fa5]+");
         Matcher m = p.matcher(chinese);
@@ -40,6 +44,12 @@ public class FormatCheckUtil {
             }
         }
         return false;
+    }
+
+    public static boolean isDecimalNumber(String number){
+        Pattern pattern = Pattern.compile("^(\\d*)|(\\d+\\.{1}\\d+)$");
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
     }
 
     public static boolean isOnlyPointNumber(String number) {//保留两位小数正则

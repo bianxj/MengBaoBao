@@ -23,7 +23,7 @@
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@+id/top_view"
             android:layout_marginLeft="@dimen/x10px"
-            style="@style/SecondBlack.Text28px"
+            style="@style/SecondBlack.Text32px"
             />
 
     </RelativeLayout>

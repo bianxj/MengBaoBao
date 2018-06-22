@@ -62,7 +62,7 @@ public class SpacialistServiceActivity extends BaseActivity {
     private TextView tv_title;
 
     private TextView tv_location;
-    private RelativeLayout rl_location_area;
+    private RelativeLayout rl_location_area,rl_search;
     private EditText et_search;
     private ImageView iv_scan;
     private XRecyclerView xrv_search;
@@ -129,6 +129,7 @@ public class SpacialistServiceActivity extends BaseActivity {
         rl_back = findViewById(R.id.rl_back);
         tv_title = findViewById(R.id.tv_title);
 
+        rl_search = findViewById(R.id.rl_search);
         tv_location = findViewById(R.id.tv_location);
         rl_location_area = findViewById(R.id.rl_location_area);
         et_search = findViewById(R.id.et_search);
@@ -148,10 +149,13 @@ public class SpacialistServiceActivity extends BaseActivity {
         tv_location_failed.setOnClickListener(listener);
         tv_location_failed.setVisibility(View.GONE);
 
+        rl_search.setOnClickListener(listener);
+
         tv_title.setText(R.string.spacialist_service);
 
         tv_location.setText("北京市");
         tv_location.setTag("北京市");
+        et_search.setOnClickListener(listener);
         et_search.setOnEditorActionListener(onEditorActionListener);
 
         handler = new SpacialistServiceHandler(this);
@@ -212,9 +216,23 @@ public class SpacialistServiceActivity extends BaseActivity {
                     isSkipToApp = true;
                     checkLocationPermission();
                     break;
+                case R.id.et_search:
+                    //TODO
+                    showSoftKeyBroad();
+                    break;
+                case R.id.rl_search:
+                    search();
+                    break;
             }
         }
     };
+
+    private void showSoftKeyBroad(){
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if ( !imm.isActive(et_search) ){
+            imm.showSoftInput(et_search,InputMethodManager.SHOW_FORCED);
+        }
+    }
 
     private void back(){
         finish();
@@ -413,6 +431,7 @@ public class SpacialistServiceActivity extends BaseActivity {
 
     private void initLocation(){
 //        rl_location_area.setEnabled(false);
+
         client = new LocationClient(getApplicationContext());
         client.setLocOption(initLocationClientOption());
         client.registerLocationListener(locationListener);

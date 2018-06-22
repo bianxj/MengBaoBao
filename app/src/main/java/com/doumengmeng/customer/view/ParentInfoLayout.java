@@ -19,6 +19,7 @@ import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.request.entity.InputUserInfo;
 import com.doumengmeng.customer.response.entity.ParentInfo;
+import com.doumengmeng.customer.util.EditTextUtil;
 import com.doumengmeng.customer.util.FormatCheckUtil;
 import com.doumengmeng.customer.util.FormulaUtil;
 
@@ -34,7 +35,8 @@ public class ParentInfoLayout extends LinearLayout {
 
     public enum TYPE{
         EDITABLE_SHOW_MARK,
-        EDITABLE_NO_MARK
+        EDITABLE_NO_MARK,
+        EDITABLE_NO_MARK_EXCEPT_EDUCATION
     }
 
 //    private Context context;
@@ -81,10 +83,14 @@ public class ParentInfoLayout extends LinearLayout {
 
         et_father_height.setOnFocusChangeListener(focusChangeListener);
         et_father_weight.setOnFocusChangeListener(focusChangeListener);
+        new EditTextUtil(et_father_height);
+        new EditTextUtil(et_father_weight);
 
         et_mother_name = findViewById(R.id.et_mother_name);
         et_mother_height = findViewById(R.id.et_mother_height);
         et_mother_weight = findViewById(R.id.et_mother_weight);
+        new EditTextUtil(et_mother_height);
+        new EditTextUtil(et_mother_weight);
         tv_mother_BMI = findViewById(R.id.tv_mother_BMI);
 
         et_mother_height.setOnFocusChangeListener(focusChangeListener);
@@ -166,6 +172,8 @@ public class ParentInfoLayout extends LinearLayout {
         String weight = tv_weight.getText().toString().trim();
         if ( !TextUtils.isEmpty(height) && !TextUtils.isEmpty(weight) ){
             tv_bmi.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
+        } else {
+            tv_bmi.setText("");
         }
     }
 
@@ -201,11 +209,15 @@ public class ParentInfoLayout extends LinearLayout {
     }
 
     private void initCalture(List<? extends CompoundButton> radioButtons,String selectContent){
+        initCalture(radioButtons,selectContent,true);
+    }
+
+    private void initCalture(List<? extends CompoundButton> radioButtons,String selectContent,boolean isEnable){
         for (CompoundButton button:radioButtons){
             if ( selectContent.equals(button.getText().toString()) ){
                 button.setChecked(true);
-                break;
             }
+            button.setEnabled(isEnable);
         }
     }
 
@@ -220,16 +232,27 @@ public class ParentInfoLayout extends LinearLayout {
         }
 
         String fatherHeight = et_father_height.getText().toString().trim();
+
+        if ( !FormatCheckUtil.isDecimalNumber(fatherHeight) ){
+            errorMessage = "父亲身高格式不正确";
+            return false;
+        }
+
         if ( !TextUtils.isEmpty(fatherHeight) ){
-            if ( 0 >= Float.parseFloat(fatherHeight) || Float.parseFloat(fatherHeight) > 250 ){
+            if ( 0 > Float.parseFloat(fatherHeight) || Float.parseFloat(fatherHeight) > 250 ){
                 errorMessage = "父亲身高 0~250cm";
                 return false;
             }
         }
 
         String fatherWeight = et_father_weight.getText().toString().trim();
+
+        if ( !FormatCheckUtil.isDecimalNumber(fatherWeight) ){
+            errorMessage = "父亲体重格式不正确";
+            return false;
+        }
         if ( !TextUtils.isEmpty(fatherWeight) ){
-            if ( 0 >= Float.parseFloat(fatherWeight) || Float.parseFloat(fatherWeight) > 150 ){
+            if ( 0 > Float.parseFloat(fatherWeight) || Float.parseFloat(fatherWeight) > 150 ){
                 errorMessage = "父亲体重 0~150kg";
                 return false;
             }
@@ -250,16 +273,27 @@ public class ParentInfoLayout extends LinearLayout {
         }
 
         String motherHeight = et_mother_height.getText().toString().trim();
+
+        if ( !FormatCheckUtil.isDecimalNumber(motherHeight) ){
+            errorMessage = "母亲身高格式不正确";
+            return false;
+        }
+
         if ( !TextUtils.isEmpty(motherHeight) ){
-            if ( 0 >= Float.parseFloat(motherHeight) || Float.parseFloat(motherHeight) > 250 ){
+            if ( 0 > Float.parseFloat(motherHeight) || Float.parseFloat(motherHeight) > 250 ){
                 errorMessage = "母亲身高 0~250cm";
                 return false;
             }
         }
 
         String motherWeight = et_mother_weight.getText().toString().trim();
+
+        if ( !FormatCheckUtil.isDecimalNumber(motherWeight) ){
+            errorMessage = "母亲体重格式不正确";
+            return false;
+        }
         if ( !TextUtils.isEmpty(motherWeight) ){
-            if ( 0 >= Float.parseFloat(motherWeight) || Float.parseFloat(motherWeight) > 150 ){
+            if ( 0 > Float.parseFloat(motherWeight) || Float.parseFloat(motherWeight) > 150 ){
                 errorMessage = "母亲体重 0~150kg";
                 return false;
             }
@@ -308,8 +342,8 @@ public class ParentInfoLayout extends LinearLayout {
     }
 
     public void setType(TYPE type){
+        ParentInfo parentInfo = BaseApplication.getInstance().getParentInfo();
         if ( TYPE.EDITABLE_NO_MARK == type ) {
-            ParentInfo parentInfo = BaseApplication.getInstance().getParentInfo();
             if ( parentInfo != null ) {
                 et_father_name.setText(parentInfo.getDadName());
                 et_father_height.setText(parentInfo.getDadHeight());
@@ -321,6 +355,20 @@ public class ParentInfoLayout extends LinearLayout {
                 et_mother_weight.setText(parentInfo.getMumWeight());
                 tv_mother_BMI.setText(parentInfo.getMumBMI());
                 initCalture(motherButtons, parentInfo.getMumEducation());
+                hiddenMark();
+            }
+        } else if ( TYPE.EDITABLE_NO_MARK_EXCEPT_EDUCATION == type ){
+            if ( parentInfo != null ) {
+                et_father_name.setText(parentInfo.getDadName());
+                et_father_height.setText(parentInfo.getDadHeight());
+                et_father_weight.setText(parentInfo.getDadWeight());
+                tv_father_BMI.setText(parentInfo.getDadBMI());
+                initCalture(fatherButtons, parentInfo.getDadEducation(),false);
+                et_mother_name.setText(parentInfo.getMumName());
+                et_mother_height.setText(parentInfo.getMumHeight());
+                et_mother_weight.setText(parentInfo.getMumWeight());
+                tv_mother_BMI.setText(parentInfo.getMumBMI());
+                initCalture(motherButtons, parentInfo.getMumEducation(),false);
                 hiddenMark();
             }
         }

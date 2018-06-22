@@ -73,7 +73,7 @@ public class HospitalReportAdapter extends RecyclerView.Adapter<HospitalReportAd
             tv_bmi.setText(report.getHwResultString());
             tv_develop.setText(report.getFeatureResultString());
             tv_height.setText(report.getHeightResultString());
-            tv_record_date.setText(report.getRecordDay());
+            tv_record_date.setText(report.getRecordDayPoint());
             tv_weight.setText(report.getWeightResultString());
             this.report = report;
         }

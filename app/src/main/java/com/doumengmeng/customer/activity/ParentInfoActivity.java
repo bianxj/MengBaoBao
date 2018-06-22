@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.entity.RoleType;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
@@ -46,6 +47,7 @@ public class ParentInfoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyDialog.dismissPromptTopDialog();
         stopTask(uploadParentInfoTask);
     }
 
@@ -67,7 +69,11 @@ public class ParentInfoActivity extends BaseActivity {
 
         tv_title.setText(R.string.parent_info);
         tv_complete.setText(R.string.title_save);
-        parent_info.setType(ParentInfoLayout.TYPE.EDITABLE_NO_MARK);
+        if (RoleType.PAY_NET_USER == BaseApplication.getInstance().getRoleType() ){
+            parent_info.setType(ParentInfoLayout.TYPE.EDITABLE_NO_MARK_EXCEPT_EDUCATION);
+        } else {
+            parent_info.setType(ParentInfoLayout.TYPE.EDITABLE_NO_MARK);
+        }
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -163,10 +169,11 @@ public class ParentInfoActivity extends BaseActivity {
     }
 
     protected void showPromptTitle(String message){
-        tv_title.setText(message);
-        rl_back.setVisibility(View.GONE);
-        rl_complete.setVisibility(View.GONE);
-        rl_close.setVisibility(View.VISIBLE);
+        MyDialog.showPromptTopDialog(this,getWindow().getDecorView(),message);
+//        tv_title.setText(message);
+//        rl_back.setVisibility(View.GONE);
+//        rl_complete.setVisibility(View.GONE);
+//        rl_close.setVisibility(View.VISIBLE);
     }
 
     @Override

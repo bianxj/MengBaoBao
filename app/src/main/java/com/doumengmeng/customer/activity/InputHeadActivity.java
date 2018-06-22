@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseInputDataActivity;
 import com.doumengmeng.customer.util.EditTextUtil;
+import com.doumengmeng.customer.util.FormatCheckUtil;
 import com.doumengmeng.customer.view.MyGifPlayer;
 
 /**
@@ -63,17 +64,18 @@ public class InputHeadActivity extends BaseInputDataActivity {
         player.setGif(R.drawable.gif_head);
         new EditTextUtil(et_input_data);
 
-        if ( month < 36 ){
-            tv_dest.setText(getString(R.string.head_reference_dest_2015));
-        } else {
-            tv_dest.setText(getString(R.string.head_reference_dest_2005));
-        }
+//        if ( month < 36 ){
+//            tv_dest.setText(getString(R.string.head_reference_dest_2015));
+//        } else {
+//            tv_dest.setText(getString(R.string.head_reference_dest_2005));
+//        }
 
         //增长
         String increase = getResources().getStringArray(R.array.head_increase)[month];
         if (TextUtils.isEmpty(increase) ){
             tv_increase.setVisibility(View.GONE);
         } else {
+            tv_increase.setVisibility(View.VISIBLE);
             tv_increase.setText(increase);
         }
         //参考值
@@ -119,6 +121,11 @@ public class InputHeadActivity extends BaseInputDataActivity {
 
         if ( TextUtils.isEmpty(headString) ) {
             showPromptTitle("请输入头围信息");
+            return false;
+        }
+
+        if (!FormatCheckUtil.isDecimalNumber(headString)){
+            showPromptTitle("头围格式不正确");
             return false;
         }
         float head = Float.parseFloat(et_input_data.getText().toString().trim());

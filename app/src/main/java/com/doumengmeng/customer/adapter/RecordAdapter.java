@@ -76,10 +76,10 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
             if (AssessmentStatus.CUSTOMER_SUBMIT.equals(record.getRecordStatus())||
                     AssessmentStatus.DOCTOR_UNREAD.equals(record.getRecordStatus())
                     ){
-                tv_bmi.setText("等待测评");
-                tv_develop.setText("等待测评");
-                tv_height.setText("等待测评");
-                tv_weight.setText("等待测评");
+                tv_bmi.setText("等待评估");
+                tv_develop.setText("等待评估");
+                tv_height.setText("等待评估");
+                tv_weight.setText("等待评估");
             } else if (AssessmentStatus.REFUND.equals(record.getRecordStatus())) {
                 tv_bmi.setText("?");
                 tv_develop.setText("?");

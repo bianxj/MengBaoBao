@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseInputDataActivity;
 import com.doumengmeng.customer.util.EditTextUtil;
+import com.doumengmeng.customer.util.FormatCheckUtil;
 
 /**
  * 作者: 边贤君
@@ -77,7 +78,10 @@ public class InputDaySleepActivity extends BaseInputDataActivity {
             showPromptTitle("请输入睡眠时间");
             return false;
         }
-
+        if (!FormatCheckUtil.isDecimalNumber(hourString)){
+            showPromptTitle("睡眠格式不正确");
+            return false;
+        }
         float hour = Float.parseFloat(hourString);
         if ( hour < 0 || hour > 12 ){
             showPromptTitle("输入有误");

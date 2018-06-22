@@ -27,7 +27,7 @@ public class GrowthDao {
         String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + AGE + " varchar," +
                 OBSERVE_CONTENT + " varchar," +
                 OBSERVE_ID + " varchar," +
-                OBSERVE_ORDER + " varchar" +
+                OBSERVE_ORDER + " integer" +
                 ")";
         db.execSQL(builder);
     }
@@ -48,7 +48,7 @@ public class GrowthDao {
             values.put(AGE,growth.getAge());
             values.put(OBSERVE_CONTENT,growth.getObservecontent());
             values.put(OBSERVE_ID,growth.getObserveid());
-            values.put(OBSERVE_ORDER,growth.getObserveorder());
+            values.put(OBSERVE_ORDER,Integer.parseInt(growth.getObserveorder()));
             db.insert(TABLE_NAME,null,values);
         }
         db.setTransactionSuccessful();

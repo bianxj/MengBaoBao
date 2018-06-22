@@ -43,7 +43,7 @@ public class HospitalDao {
                 HOSPITAL_ICON + " varchar," +
                 HOSPITAL_MAP + " varchar," +
                 HOSPITAL_NAME + " varchar," +
-                HOSPITAL_ORDER + " varchar," +
+                HOSPITAL_ORDER + " int," +
                 HOSPITAL_PHONE + " varchar," +
                 HOSPITAL_TYPE + " varchar," +
                 HOSPITAL_URL + " varchar," +
@@ -76,7 +76,7 @@ public class HospitalDao {
             values.put(HOSPITAL_ICON,hospital.getHospitalicon());
             values.put(HOSPITAL_MAP,hospital.getHospitalmap());
             values.put(HOSPITAL_NAME,hospital.getHospitalname());
-            values.put(HOSPITAL_ORDER,hospital.getHospitalorder());
+            values.put(HOSPITAL_ORDER,Integer.parseInt(hospital.getHospitalorder()));
             values.put(HOSPITAL_PHONE,hospital.getHospitalphone());
             values.put(HOSPITAL_ID,hospital.getHospitalid());
             values.put(HOSPITAL_TYPE,hospital.getHospitaltype());
@@ -250,7 +250,7 @@ public class HospitalDao {
             hospital.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
             hospital.setHospitalmap(cursor.getString(cursor.getColumnIndex(HOSPITAL_MAP)));
             hospital.setHospitalname(cursor.getString(cursor.getColumnIndex(HOSPITAL_NAME)));
-            hospital.setHospitalorder(cursor.getString(cursor.getColumnIndex(HOSPITAL_ORDER)));
+            hospital.setHospitalorder(String.valueOf(cursor.getInt(cursor.getColumnIndex(HOSPITAL_ORDER))));
             hospital.setHospitalphone(cursor.getString(cursor.getColumnIndex(HOSPITAL_PHONE)));
             hospital.setHospitaltype(cursor.getString(cursor.getColumnIndex(HOSPITAL_TYPE)));
             hospital.setHospitalurl(cursor.getString(cursor.getColumnIndex(HOSPITAL_URL)));

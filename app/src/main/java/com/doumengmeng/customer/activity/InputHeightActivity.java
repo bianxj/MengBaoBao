@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseInputDataActivity;
 import com.doumengmeng.customer.util.EditTextUtil;
+import com.doumengmeng.customer.util.FormatCheckUtil;
 import com.doumengmeng.customer.view.MyGifPlayer;
 
 /**
@@ -73,6 +74,7 @@ public class InputHeightActivity extends BaseInputDataActivity {
         if (TextUtils.isEmpty(increase) ){
             tv_increase.setVisibility(View.GONE);
         } else {
+            tv_increase.setVisibility(View.VISIBLE);
             tv_increase.setText(increase);
         }
         //标题
@@ -112,6 +114,12 @@ public class InputHeightActivity extends BaseInputDataActivity {
             showPromptTitle("请输入身高");
             return false;
         }
+
+        if (!FormatCheckUtil.isDecimalNumber(heightString)){
+            showPromptTitle("身高格式不正确");
+            return false;
+        }
+
         float height = Float.parseFloat(et_input_data.getText().toString().trim());
         if ( height <= 0 || height > 250 ){
             showPromptTitle("身高 0~250cm");

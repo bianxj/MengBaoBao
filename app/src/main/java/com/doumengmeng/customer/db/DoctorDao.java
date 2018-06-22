@@ -49,7 +49,7 @@ public class DoctorDao {
                 POSITIONAL_TITLES + " varchar," +
                 HOSPITAL_ID + " varchar," +
                 SPECIALITY + " varchar," +
-                DOCTOR_ORDER + " varchar," +
+                DOCTOR_ORDER + " int," +
                 DOCTOR_DESC + " varchar" +
                 ")";
         db.execSQL(builder);
@@ -76,7 +76,7 @@ public class DoctorDao {
             values.put(COST,doctor.getCost());
             values.put(DOCTOR_DESC,doctor.getDoctordesc());
             values.put(DOCTOR_IMG,doctor.getDoctorimg());
-            values.put(DOCTOR_ORDER,doctor.getDoctororder());
+            values.put(DOCTOR_ORDER,Integer.parseInt(doctor.getDoctororder()));
             values.put(DOCTOR_PHONE,doctor.getDoctorphone());
             values.put(HOSPITAL_ID,doctor.getHospitalid());
             values.put(LOGIN_PWD,doctor.getLoginpwd());
@@ -123,7 +123,7 @@ public class DoctorDao {
                 entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
                 entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
-                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
+                entity.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
                 doctorEntities.add(entity);
             }
             cursor.close();
@@ -163,7 +163,7 @@ public class DoctorDao {
                 entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
                 entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
-                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
+                entity.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
                 doctorEntities.add(entity);
             }
             cursor.close();
@@ -204,7 +204,7 @@ public class DoctorDao {
                 entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
                 entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
-                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
+                entity.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
                 doctorEntities.add(entity);
             }
             cursor.close();
@@ -244,7 +244,7 @@ public class DoctorDao {
                 entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
                 entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
-                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
+                entity.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
                 doctorEntities.add(entity);
             }
             cursor.close();
@@ -291,7 +291,7 @@ public class DoctorDao {
                 entity.setHospitalid(cursor.getString(cursor.getColumnIndex(HospitalDao.HOSPITAL_ID)));
                 entity.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
                 entity.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
-                entity.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
+                entity.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
 
                 entities.add(entity);
             }
@@ -345,7 +345,7 @@ public class DoctorDao {
             doctor.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
             doctor.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
             doctor.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
-            doctor.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
+            doctor.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
         }
         cursor.close();
         DataBaseUtil.closeDataBase();
@@ -373,7 +373,7 @@ public class DoctorDao {
             doctor.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
             doctor.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
             doctor.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
-            doctor.setDoctororder(cursor.getString(cursor.getColumnIndex(DOCTOR_ORDER)));
+            doctor.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
         }
         cursor.close();
         DataBaseUtil.closeDataBase();

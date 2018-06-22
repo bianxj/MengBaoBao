@@ -221,7 +221,7 @@ public class DoctorInfoActivity extends BaseActivity {
             List<PayItemLayout.PayData> datas = new ArrayList<>();
             datas.add(new PayItemLayout.PayData(R.drawable.alipay_logo_60,"支付宝",true));
             if (api.isWXAppInstalled()) {
-                datas.add(new PayItemLayout.PayData(R.drawable.iwx_logo, "微信", false));
+                datas.add(new PayItemLayout.PayData(R.drawable.iwx_logo, "微信支付", false));
             }
             if (PermissionUtil.checkPermissionAndRequest(this,Manifest.permission.READ_PHONE_STATE)){
                 MyDialog.showPayDialog(this, rl_parent, new MyDialog.PayCallBack() {
@@ -258,14 +258,19 @@ public class DoctorInfoActivity extends BaseActivity {
      * 描述: 跳转至下一个界面
      * 日期: 2018/1/19 14:30
      */
-    private void goNext(){
+    private void goNext() {
         BaseApplication.getInstance().addRecordTimes();
-        if (RoleType.FREE_NET_USER == BaseApplication.getInstance().getRoleType() ){
-            startActivity(InputInfoActivity.class);
-        } else {
-            startActivity(RecordActivity.class);
-        }
-        BaseApplication.getInstance().payRoleType();
+        tv_doctor_introduce.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (RoleType.FREE_NET_USER == BaseApplication.getInstance().getRoleType()) {
+                    startActivity(InputInfoActivity.class);
+                } else {
+                    startActivity(RecordActivity.class);
+                }
+                BaseApplication.getInstance().payRoleType();
+            }
+        }, 100);
     }
 
     //-----------------------------------支付------------------------------------------------
@@ -294,8 +299,8 @@ public class DoctorInfoActivity extends BaseActivity {
             object.put("accountmobile",userData.getAccountmobile());
             object.put("orderdevice","1");
             object.put("doctorid",doctor.getDoctorid());
-//            object.put("totalamout",doctor.getCost());
-            object.put("totalamout","0.01");
+            object.put("totalamout",doctor.getCost());
+//            object.put("totalamout","0.01");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -415,8 +420,8 @@ public class DoctorInfoActivity extends BaseActivity {
             object.put("accountmobile",userData.getAccountmobile());
             object.put("orderdevice","1");
             object.put("doctorid",doctor.getDoctorid());
-//            object.put("totalamout",Integer.parseInt(doctor.getCost())*100+"");
-            object.put("totalamout","2");
+            object.put("totalamout",String.valueOf((int)(Float.parseFloat(doctor.getCost())*100)));
+//            object.put("totalamout","2");
         } catch (JSONException e) {
             e.printStackTrace();
         }

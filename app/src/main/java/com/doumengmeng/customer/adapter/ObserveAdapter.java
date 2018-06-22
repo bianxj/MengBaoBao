@@ -2,6 +2,7 @@ package com.doumengmeng.customer.adapter;
 
 import android.content.Context;
 import android.support.v4.widget.Space;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,12 @@ public class ObserveAdapter extends BaseAdapter {
         } else {
             space.setVisibility(View.GONE);
         }
-        tv_content.setText(contents.get(i));
+        String content = contents.get(i);
+        if ( content.contains("“购买”") ){
+            tv_content.setText(Html.fromHtml(content.replace("“购买”","<b>“购买”</b>")));
+        } else {
+            tv_content.setText(contents.get(i));
+        }
         return view;
     }
 }

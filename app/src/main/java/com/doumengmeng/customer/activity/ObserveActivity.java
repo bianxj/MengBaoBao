@@ -59,7 +59,7 @@ public class ObserveActivity extends BaseActivity {
             contents = new ArrayList<>();
             contents.addAll(Arrays.asList(getResources().getStringArray(R.array.free_observe_content)));
             bt_buy.setVisibility(View.VISIBLE);
-            iv_ad.setVisibility(View.VISIBLE);
+//            iv_ad.setVisibility(View.VISIBLE);
         } else {
             //付费用户
             bt_buy.setVisibility(View.GONE);

@@ -333,7 +333,7 @@ public class BaseInfoLayout extends LinearLayout {
     }
 
     private void initReadableArea(){
-        findViewById(R.id.cb_other_disease).setVisibility(View.GONE);
+//        findViewById(R.id.cb_other_disease).setVisibility(View.GONE);
 
         rg_gender.setVisibility(View.GONE);
         tv_calendar.setVisibility(View.GONE);
@@ -453,18 +453,6 @@ public class BaseInfoLayout extends LinearLayout {
     }
 
     private boolean checkEditableNetType(){
-        //产次
-        String birthCount = et_birth_count.getText().toString().trim();
-        if (TextUtils.isEmpty(birthCount)){
-            errorMessage = "请填写产次";
-            return false;
-        }
-
-        if ( 0 > Integer.parseInt(birthCount) || Integer.parseInt(birthCount) > 9 ){
-            errorMessage = "产次 0~9";
-            return false;
-        }
-
         //胎次
         String parityCount = et_parity_count.getText().toString().trim();
         if (TextUtils.isEmpty(parityCount)){
@@ -474,6 +462,18 @@ public class BaseInfoLayout extends LinearLayout {
 
         if ( 0 > Integer.parseInt(parityCount) || Integer.parseInt(parityCount) > 9 ){
             errorMessage = "胎次 0~9";
+            return false;
+        }
+
+        //产次
+        String birthCount = et_birth_count.getText().toString().trim();
+        if (TextUtils.isEmpty(birthCount)){
+            errorMessage = "请填写产次";
+            return false;
+        }
+
+        if ( 0 > Integer.parseInt(birthCount) || Integer.parseInt(birthCount) > 9 ){
+            errorMessage = "产次 0~9";
             return false;
         }
 
@@ -614,6 +614,11 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
+        if (!FormatCheckUtil.isDecimalNumber(weight)){
+            errorMessage = "出生体重格式不正确";
+            return false;
+        }
+
         if ( 0 >= Float.parseFloat(weight) || Float.parseFloat(weight) > 150 ){
             errorMessage = "出生体重 0~150kg";
             return false;
@@ -626,8 +631,13 @@ public class BaseInfoLayout extends LinearLayout {
             return false;
         }
 
+        if (!FormatCheckUtil.isDecimalNumber(height)){
+            errorMessage = "出生身长 格式不正确";
+            return false;
+        }
+
         if ( 0 >= Float.parseFloat(height) || Float.parseFloat(height) > 250 ){
-            errorMessage = "出生身高 0~250cm";
+            errorMessage = "出生身长 0~250cm";
             return false;
         }
 

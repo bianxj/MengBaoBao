@@ -69,7 +69,7 @@ public class BaseApplication extends Application {
         builder.setInner(false);
         builder.setLogDirName("/log");
         builder.setSaveDay(5);
-        builder.setSaveLog(true);
+        builder.setSaveLog(false);
         builder.setShow(true);
         builder.setClose(false);
         log = builder.build();

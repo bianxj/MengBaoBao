@@ -124,6 +124,7 @@ public class RecordActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyDialog.dismissPromptTopDialog();
         stopTask(currentRecordTask);
         stopTask(submitRecordTask);
     }
@@ -943,10 +944,11 @@ public class RecordActivity extends BaseActivity {
     }
 
     private void showPromptTitle(String message){
-        tv_title.setText(message);
-        rl_back.setVisibility(View.GONE);
-        rl_complete.setVisibility(View.GONE);
-        rl_close.setVisibility(View.VISIBLE);
+        MyDialog.showPromptTopDialog(this,getWindow().getDecorView(),message);
+//        tv_title.setText(message);
+//        rl_back.setVisibility(View.GONE);
+//        rl_complete.setVisibility(View.GONE);
+//        rl_close.setVisibility(View.VISIBLE);
     }
 
     private float getTextContentToFloat(TextView textView){

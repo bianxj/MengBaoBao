@@ -16,8 +16,8 @@ import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
 import com.doumengmeng.customer.request.entity.InputUserInfo;
-import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.response.SubmitInfoResponse;
+import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.util.MyDialog;
 import com.doumengmeng.customer.view.BaseInfoLayout;
@@ -53,6 +53,7 @@ public class InputInfoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyDialog.dismissPromptTopDialog();
         stopTask(submitInfoTask);
     }
 
@@ -68,6 +69,7 @@ public class InputInfoActivity extends BaseActivity {
         baby_info.setType(BaseInfoLayout.TYPE.EDITABLE);
 
         parent_info = findViewById(R.id.parent_info);
+
         parent_info.setType(ParentInfoLayout.TYPE.EDITABLE_SHOW_MARK);
         initView();
     }
@@ -203,10 +205,11 @@ public class InputInfoActivity extends BaseActivity {
     }
 
     protected void showPromptTitle(String message){
-        tv_title.setText(message);
-//        rl_back.setVisibility(View.GONE);
-        rl_complete.setVisibility(View.GONE);
-        rl_close.setVisibility(View.VISIBLE);
+        MyDialog.showPromptTopDialog(this,getWindow().getDecorView(),message);
+//        tv_title.setText(message);
+////        rl_back.setVisibility(View.GONE);
+//        rl_complete.setVisibility(View.GONE);
+//        rl_close.setVisibility(View.VISIBLE);
     }
 
 }

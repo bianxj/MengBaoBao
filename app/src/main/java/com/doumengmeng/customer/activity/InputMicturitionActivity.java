@@ -11,6 +11,10 @@ import android.widget.LinearLayout;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseInputDataActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 作者: 边贤君
  * 描述: 排尿
@@ -44,7 +48,13 @@ public class InputMicturitionActivity extends BaseInputDataActivity {
     }
 
     private void initView(){
-        generateListView(ll_content,getResources().getStringArray(R.array.micturition_content));
+        List<String> value = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.micturition_content)));
+        if ( month == 0 ){
+            value.remove(1);
+        } else {
+            value.remove(0);
+        }
+        generateListView(ll_content, value.toArray(new String[0]));
 
         Intent intent = getIntent();
         if ( intent != null ){

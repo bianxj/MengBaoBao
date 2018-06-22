@@ -79,6 +79,22 @@
                 />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_search"
+            android:layout_width="@dimen/x100px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            >
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/search"
+                style="@style/SecondWhite.Text28px"
+                />
+        </RelativeLayout>
+
         <ImageView
             android:id="@+id/iv_scan"
             android:layout_width="@dimen/y60px"
@@ -87,6 +103,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x34px"
+            android:visibility="invisible"
             android:contentDescription="@string/contentDescription">
 
         </ImageView>
