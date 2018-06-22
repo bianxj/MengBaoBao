@@ -49,7 +49,7 @@
             android:textColorHint="@color/eight_gray"
             android:hint="@string/custom_content_hint"
             android:minHeight="@dimen/y240px"
-            android:maxLength="200"
+            android:maxLength="400"
             android:background="@drawable/bg_circle_edittext_multi_line"/>
 
     </LinearLayout>

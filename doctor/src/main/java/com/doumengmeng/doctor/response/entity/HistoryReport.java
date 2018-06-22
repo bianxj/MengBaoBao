@@ -1,5 +1,6 @@
 package com.doumengmeng.doctor.response.entity;
 
+import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.util.FormulaUtil;
 import com.google.gson.annotations.SerializedName;
 
@@ -73,7 +74,7 @@ public class HistoryReport {
     private String doctorImg;
     @SerializedName("doctorname")
     private String doctorName;
-    @SerializedName("positionalTitles")
+    @SerializedName("positionaltitles")
     private String positionalTitles;
     @SerializedName("hospitalname")
     private String hospitalName;
@@ -330,7 +331,7 @@ public class HistoryReport {
     }
 
     public String getDoctorImg() {
-        return doctorImg;
+        return UrlAddressList.BASE_IMAGE_URL+doctorImg;
     }
 
     public void setDoctorImg(String doctorImg) {

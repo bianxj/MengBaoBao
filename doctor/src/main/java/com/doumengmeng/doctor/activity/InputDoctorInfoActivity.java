@@ -39,6 +39,7 @@ import com.doumengmeng.doctor.util.PermissionUtil;
 import com.doumengmeng.doctor.util.PictureUtils;
 import com.doumengmeng.doctor.view.CheckBoxLayout;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,6 +84,7 @@ public class InputDoctorInfoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyDialog.dismissPromptTopDialog();
         stopTask(uploadDoctorInfoTask);
     }
 
@@ -197,8 +199,9 @@ public class InputDoctorInfoActivity extends BaseActivity {
     }
 
     private void showPrompt(String content){
-        rl_prompt.setVisibility(View.VISIBLE);
-        tv_prompt.setText(content);
+        MyDialog.showPromptTopDialog(this,getWindow().getDecorView(),content);
+//        rl_prompt.setVisibility(View.VISIBLE);
+//        tv_prompt.setText(content);
     }
 
     private void chooseHeadImage(){
@@ -350,6 +353,11 @@ public class InputDoctorInfoActivity extends BaseActivity {
             return false;
         }
 
+        if ( !hasHeadImg() ){
+            showPrompt("请拍摄头像");
+            return false;
+        }
+
         if ( TextUtils.isEmpty(tv_hospital.getText().toString().trim()) ){
             showPrompt("请勾选执业医院");
             return false;
@@ -370,6 +378,16 @@ public class InputDoctorInfoActivity extends BaseActivity {
             return false;
         }
 
+        if ( TextUtils.isEmpty(et_speciality.getText().toString().trim()) ){
+            showPrompt("请填写专长");
+            return false;
+        }
+
+        if ( TextUtils.isEmpty(et_intro.getText().toString().trim()) ){
+            showPrompt("请填写简介");
+            return false;
+        }
+
         if ( TextUtils.isEmpty(et_identity_num.getText().toString().trim()) ){
             showPrompt("请输入身份证号");
             return false;
@@ -380,12 +398,21 @@ public class InputDoctorInfoActivity extends BaseActivity {
             return false;
         }
 
-        if ( !hasFirstCertificate || !hasSecondCertificate ){
-            showPrompt("证书信息不完全");
+        if ( !hasFirstCertificate ){
+            showPrompt("请上传职业证书正面");
             return false;
         }
 
+        if ( !hasSecondCertificate ){
+            showPrompt("请上传职业证书背面");
+        }
+
         return true;
+    }
+
+    public boolean hasHeadImg(){
+        File file = new File(BaseApplication.getInstance().getHeadCropPath());
+        return file.exists();
     }
 
     private Map<String,String> buildUploadDoctorContent(){

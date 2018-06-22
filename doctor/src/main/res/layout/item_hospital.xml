@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.doumengmeng.doctor.view.HorizontalScrollTextView
                     android:id="@+id/tv_hospital_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,7 +44,12 @@
                     android:text=""
                     android:textColor="@color/second_black"
                     android:includeFontPadding="false"
-                    android:textSize="@dimen/y30px" />
+                    android:textSize="@dimen/y30px"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    />
             </RelativeLayout>
 
             <View

@@ -83,6 +83,7 @@ public class DevelopmentView extends LinearLayout {
             tv_title.setLayoutParams(params);
         }
         tv_title.setText(String.format(getResources().getString(R.string.assessment_develop_month), Integer.parseInt(correntMonth)));
+        tv_title.getPaint().setFakeBoldText(true);
         initDevelopment(generateDevelopmentData(correntMonth , recordTime, selected));
     }
 
@@ -190,6 +191,7 @@ public class DevelopmentView extends LinearLayout {
             p.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.x2px);
             checkBox.setLayoutParams(p);
             checkBox.setChecked(content.isCheck());
+            checkBox.setEnabled(false);
             subLayout.addView(checkBox);
 
             TextView tv_content = new TextView(getContext());

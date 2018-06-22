@@ -73,9 +73,15 @@ public class ParentInfoActivity extends BaseActivity {
         //TODO
         tv_father_name.setText(parentData.getDadname());
         tv_father_culture.setText(parentData.getDadeducation());
-        tv_father_height.setText(String.format(getString(R.string.format_cm),parentData.getDadheight()));
-        tv_father_weight.setText(String.format(getString(R.string.format_kg),parentData.getDadweight()));
-        tv_father_BMI.setText(String.format(getString(R.string.format_kg_divide_m_square),parentData.getDadBmi()));
+        if ( 0f != Float.parseFloat(parentData.getDadheight()) ) {
+            tv_father_height.setText(String.format(getString(R.string.format_cm), parentData.getDadheight()));
+        }
+        if ( 0f != Float.parseFloat(parentData.getDadweight()) ) {
+            tv_father_weight.setText(String.format(getString(R.string.format_kg), parentData.getDadweight()));
+        }
+        if ( 0f != Float.parseFloat(parentData.getDadBmi()) ) {
+            tv_father_BMI.setText(String.format(getString(R.string.format_kg_divide_m_square), parentData.getDadBmi()));
+        }
     }
 
     private void initMotherInfo(){
@@ -88,9 +94,16 @@ public class ParentInfoActivity extends BaseActivity {
         //TODO
         tv_mother_name.setText(parentData.getMumname());
         tv_mother_culture.setText(parentData.getMumeducation());
-        tv_mother_height.setText(String.format(getString(R.string.format_cm),parentData.getMumheight()));
-        tv_mother_weight.setText(String.format(getString(R.string.format_kg),parentData.getMumweight()));
-        tv_mother_BMI.setText(String.format(getString(R.string.format_kg_divide_m_square),parentData.getMumbmi()));
+
+        if ( 0f != Float.parseFloat(parentData.getMumheight()) ) {
+            tv_mother_height.setText(String.format(getString(R.string.format_cm), parentData.getMumheight()));
+        }
+        if ( 0f != Float.parseFloat(parentData.getMumweight()) ) {
+            tv_mother_weight.setText(String.format(getString(R.string.format_kg), parentData.getMumweight()));
+        }
+        if ( 0f != Float.parseFloat(parentData.getMumbmi()) ) {
+            tv_mother_BMI.setText(String.format(getString(R.string.format_kg_divide_m_square), parentData.getMumbmi()));
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

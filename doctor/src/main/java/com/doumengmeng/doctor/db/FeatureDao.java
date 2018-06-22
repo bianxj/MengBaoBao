@@ -37,7 +37,7 @@ public class FeatureDao {
     public static void createTable(SQLiteDatabase db){
         String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + ID + " varchar," +
                 FEATURE_TYPE_ID + " varchar," +
-                FEATURE_ORDER + " varchar," +
+                FEATURE_ORDER + " int," +
                 POINT_TAG + " varchar," +
                 DETAIL_DESC + " varchar," +
                 EXAMPLE_IMG_URL + " varchar," +
@@ -65,7 +65,7 @@ public class FeatureDao {
             ContentValues values = new ContentValues();
             values.put(ID,feature.getId());
             values.put(FEATURE_TYPE_ID,feature.getFeaturetypeid());
-            values.put(FEATURE_ORDER,feature.getFeatureorder());
+            values.put(FEATURE_ORDER,Integer.parseInt(feature.getFeatureorder()));
             values.put(POINT_TAG,feature.getPointtag());
             values.put(DETAIL_DESC,feature.getDetaildesc());
             values.put(EXAMPLE_IMG_URL,feature.getExampleimgurl());

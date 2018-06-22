@@ -95,6 +95,8 @@ public class AssessmentParentingGuideActivity extends BaseTimeFragmentActivity {
 
         //TODO
         int age = getIntent().getIntExtra(IN_PARAM_MONTH_AGE,0);
+        age = age<0?0:age;
+        age = age>36?36:age;
         String nurturesValue =  getIntent().getStringExtra(IN_PARAM_SELECTED_NURTURE);
 
         List<Nurture> nurtures = DaoManager.getInstance().getNurtureDao().searchNurtureByAge(this,age);

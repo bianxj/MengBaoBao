@@ -173,7 +173,7 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
             Hospital hospital = tempHospitals.get(i);
             data.setHospitalName(hospital.getHospitalname());
             data.setHospitalAddress(hospital.getHospitaladdress());
-            data.setHospitalUrl(hospital.getHospitalurl());
+            data.setHospitalUrl(hospital.getHospitalicon());
             data.setHospitalId(hospital.getHospitalid());
             hospitals.add(data);
         }

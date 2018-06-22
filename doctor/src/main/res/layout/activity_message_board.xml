@@ -36,8 +36,8 @@
     <EditText
         android:id="@+id/et_contact"
         android:layout_width="@dimen/x576px"
-        android:layout_height="@dimen/y86px"
-        android:layout_marginTop="@dimen/y28px"
+        android:layout_height="@dimen/x86px"
+        android:layout_marginTop="@dimen/x28px"
         android:padding="@dimen/x27px"
         android:gravity="top"
         android:lines="1"

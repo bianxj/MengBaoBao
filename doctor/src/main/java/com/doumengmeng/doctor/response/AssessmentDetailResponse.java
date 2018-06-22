@@ -1089,7 +1089,7 @@ public class AssessmentDetailResponse extends BaseResponse {
         }
 
         public String getBirthinjuryString(){
-            if ( "0".equals(birthday) ){
+            if ( "0".equals(birthinjury) ){
                 return "无";
             } else {
                 return "有";
@@ -1097,8 +1097,8 @@ public class AssessmentDetailResponse extends BaseResponse {
         }
 
         public String getPasthistory() {
-            if ( pasthistory.contains("其他、") ){
-                return pasthistory.replaceFirst("其他、","");
+            if ( pasthistory.contains("其他") ){
+                return pasthistory.replaceFirst("其他","");
             }
             return pasthistory;
         }

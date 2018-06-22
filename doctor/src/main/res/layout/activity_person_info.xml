@@ -295,13 +295,13 @@
 
                     <TextView
                         android:id="@+id/tv_intro"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxHeight="@dimen/x300px"
                         android:layout_marginLeft="@dimen/x174px"
                         android:includeFontPadding="false"
-                        android:maxLines="6"
-                        android:scrollHorizontally="true"
                         style="@style/SecondBlack.Text28px"
+                        android:scrollbars="vertical"
                         />
 
                 </RelativeLayout>
@@ -364,17 +364,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
-                    <ImageView
+                    <com.doumengmeng.doctor.view.CircularCoverView
                         android:id="@+id/iv_certification_p1"
                         android:layout_width="@dimen/x269px"
                         android:layout_height="@dimen/x203px"
-                        android:scaleType="fitXY"/>
-                    <ImageView
+                        android:scaleType="fitXY"
+                        app:radius="@dimen/x15px"/>
+                    <com.doumengmeng.doctor.view.CircularCoverView
                         android:id="@+id/iv_certification_p2"
                         android:layout_width="@dimen/x269px"
                         android:layout_height="@dimen/x203px"
                         android:layout_marginLeft="@dimen/x28px"
-                        android:scaleType="fitXY"/>
+                        android:scaleType="fitXY"
+                        app:radius="@dimen/x15px"/>
                 </LinearLayout>
             </LinearLayout>
 

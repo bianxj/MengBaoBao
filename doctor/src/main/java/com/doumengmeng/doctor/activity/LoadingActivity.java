@@ -230,6 +230,7 @@ public class LoadingActivity extends BaseActivity {
                     MyDialog.showPromptDialog(LoadingActivity.this, "版本信息获取失败,请检查网络", new MyDialog.PromptDialogCallback() {
                         @Override
                         public void sure() {
+                            startActivity(LoginActivity.class);
                             finish();
                         }
                     });
@@ -258,7 +259,6 @@ public class LoadingActivity extends BaseActivity {
             initConfigure();
         }
     }
-
 
     private RequestTask updateInfoTask = null;
     private void getUpdateInfo(){
@@ -305,7 +305,7 @@ public class LoadingActivity extends BaseActivity {
 
                     @Override
                     public void cancel() {
-                        initConfigure();
+                        afterCheckVersion();
                     }
                 });
             } catch (PackageManager.NameNotFoundException e) {

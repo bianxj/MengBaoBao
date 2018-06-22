@@ -26,17 +26,29 @@
             android:id="@+id/rl_qr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentRight="true"
+            android:visibility="visible">
 
             <ImageView
                 android:layout_width="@dimen/x51px"
                 android:layout_height="@dimen/x51px"
-                android:scaleType="fitXY"
-                android:src="@drawable/btn_qr"
-                android:layout_marginTop="@dimen/y35px"
-                android:layout_marginRight="@dimen/x47px"
+                android:layout_marginBottom="@dimen/y20px"
                 android:layout_marginLeft="@dimen/x15px"
-                android:layout_marginBottom="@dimen/y20px"/>
+                android:layout_marginRight="@dimen/x47px"
+                android:layout_marginTop="@dimen/y35px"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_qr" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/order_receiving"
+                android:layout_marginRight="@dimen/x47px"
+                android:layout_marginLeft="@dimen/x11px"
+                android:layout_marginTop="@dimen/x83px"
+                style="@style/FirstWhite.Text30px"
+                />
+
 
         </RelativeLayout>
 

@@ -420,4 +420,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="PromptAnimation">
+        <item name="android:windowEnterAnimation">@anim/top_in</item>
+        <item name="android:windowExitAnimation">@anim/top_out</item>
+    </style>
 </resources>

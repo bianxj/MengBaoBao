@@ -357,6 +357,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y34px"
+                    android:textStyle="bold"
                     android:text="@string/assessment_result" />
 
                 <LinearLayout
@@ -413,6 +414,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y34px"
+                    android:textStyle="bold"
                     android:text="@string/assessment_analysis" />
 
                 <LinearLayout
@@ -433,6 +435,7 @@
                         style="@style/FirstGray.Text26px"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/x10px"
                         android:text="@string/assessment_growth_tendency" />
 
                     <TextView

@@ -2,6 +2,8 @@ package com.doumengmeng.doctor.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.method.ScrollingMovementMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -64,13 +66,16 @@ public class PersonInfoActivity extends BaseActivity {
         iv_certification_p1 = findViewById(R.id.iv_certification_p1);
         iv_certification_p2 = findViewById(R.id.iv_certification_p2);
 
+        tv_intro.setOnTouchListener(touchListener);
+        tv_intro.setMovementMethod(ScrollingMovementMethod.getInstance());
+
         UserData userData = BaseApplication.getInstance().getUserData();
         tv_name.setText(userData.getDoctorName());
         tv_hospital.setText(DaoManager.getInstance().getHospitalDao().searchHospitalNameById(this,userData.getHospitalId()));
         tv_department.setText(userData.getDepartmentName());
         tv_professional_title.setText(userData.getPositionalTitles());
         tv_service_cost.setText(userData.getCost()+"元");
-        tv_income.setText(Integer.parseInt(userData.getCost())/2+"元");
+        tv_income.setText(Float.parseFloat(userData.getCost())/2+"元");
         tv_speciality.setText(userData.getSpeciality());
         tv_intro.setText(userData.getDoctorDesc());
         tv_identity_num.setText(userData.getDoctorCode());
@@ -102,5 +107,25 @@ public class PersonInfoActivity extends BaseActivity {
     private void back(){
         finish();
     }
+
+
+    private View.OnTouchListener touchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            // TODO Auto-generated method stub
+            if(event.getAction()==MotionEvent.ACTION_DOWN){
+                //通知父控件不要干扰
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+            }
+            if(event.getAction()==MotionEvent.ACTION_MOVE){
+                //通知父控件不要干扰
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+            }
+            if(event.getAction()==MotionEvent.ACTION_UP){
+                v.getParent().requestDisallowInterceptTouchEvent(false);
+            }
+            return false;
+        }
+    };
 
 }

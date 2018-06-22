@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">医生端</string>
+    <string name="app_name">萌宝宝医生端</string>
 
     <!--异常退出提示-->
     <string name="error_exit_message">很抱歉，程序出现异常，即将退出</string>
@@ -67,7 +67,7 @@
 
     <!--AboutActivity信息-->
     <string name="about_company_name">上海豆蒙萌健康管理咨询有限公司</string>
-    <string name="about_company_location">上海市徐汇区南丹东路300弄9号亚都商务楼409室</string>
+    <string name="about_company_location">上海市南丹东路300弄9号楼409室</string>
     <string name="about_company_phone">021-64335531</string>
     <string name="about_company_mail">customerservice@mengbaobao.com</string>
     <string name="about_company_website">www.mengbaobao.com</string>
@@ -116,7 +116,7 @@
     <string name="assessment_birthday">出生日期</string>
     <string name="assessment_pregnancy_weeks">孕周（胎龄）</string>
     <string name="assessment_born_weight">出生体重</string>
-    <string name="assessment_born_height">出生生长</string>
+    <string name="assessment_born_height">出生身长</string>
     <string name="assessment_parity_count">胎次</string>
     <string name="assessment_birth_count">产次</string>
     <string name="assessment_mon_age">母亲生育年龄</string>
@@ -192,7 +192,7 @@
     <string name="month_age">月龄</string>
     <string name="doctor_supplement">医生补充</string>
     <string name="custom_title_hint">添加自定义养育指导标题</string>
-    <string name="custom_content_hint">添加自定义养育指导内容，每个类别限一条，100字上限。</string>
+    <string name="custom_content_hint">添加自定义养育指导内容，每个类别限一条，200字上限。</string>
 
     <!--HospitalListActivity-->
     <string name="appraisal_result">测评结果</string>
@@ -212,7 +212,7 @@
     <string name="hospital_report_weight">体重：%skg</string>
     <string name="hospital_report_head">头围：%scm</string>
     <string name="hospital_report_chest">胸围：%scm</string>
-    <string name="hospital_report_bmi">BMI：%scm</string>
+    <string name="hospital_report_bmi">BMI：%skg/m²</string>
     <string name="hospital_report_weight_result">体重：%s</string>
     <string name="hospital_report_height_result">身长：%s</string>
     <string name="hospital_report_hw_result">身长体重比：%s</string>
@@ -360,12 +360,15 @@
     <string name="prompt_new_passwd_empty">新密码为空</string>
     <string name="prompt_confirm_passwd_empty">请确认密码</string>
     <string name="prompt_confirm_passwd_error">两次输入的密码不一致</string>
-    <string name="prompt_scan_qr">扫一扫上面的二维码，购买服务</string>
+    <!--<string name="prompt_scan_qr">扫一扫上面的二维码，购买服务</string>-->
+    <string name="prompt_scan_qr">扫一扫，购买医生咨询服务</string>
     <string name="prompt_friend_circle">朋友圈</string>
     <string name="prompt_weixin">微信</string>
 
-    <string name="prompt_submit_message">确认后用户将收到您的评估\n不可修改</string>
+    <!--<string name="prompt_submit_message">确认后用户将收到您的评估\n不可修改</string>-->
+    <string name="prompt_submit_message">一旦确认，您的评估和指导意见将直接发给用户了！</string>
     <string name="prompt_btn_edit">返回修改</string>
+    <string name="order_receiving">接单</string>
 
 
     <string name="default_city">北京市</string>

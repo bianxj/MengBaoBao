@@ -60,6 +60,7 @@ public class ParentingGuideFragment extends BaseFragment {
                     break;
                 }
             }
+            //TODO
             if ( position == -1 ){
                 position = ages.size()/2;
                 ages.get(ages.size()/2).setChecked(true);

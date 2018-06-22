@@ -191,9 +191,9 @@ public class HistoryReportDetailActivity extends BaseActivity {
         tv_correct_age.setText(report.getCorrectMonthAgeString());
         String height = report.getHeight();
         String weight = report.getWeight();
-        tv_height.setText(height);
-        tv_weight.setText(weight);
-        tv_BMI.setText(String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height))));
+        tv_height.setText(String.format(getString(R.string.format_cm),height));
+        tv_weight.setText(String.format(getString(R.string.format_kg),weight));
+        tv_BMI.setText(String.format(getString(R.string.format_kg_divide_m_square),String.valueOf(FormulaUtil.formulaBMI(Float.parseFloat(weight),Float.parseFloat(height)))));
     }
 
     private void initDiagram(){

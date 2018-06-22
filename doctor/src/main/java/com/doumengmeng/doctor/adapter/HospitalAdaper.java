@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.adapter.viewholder.InputContentHolder;
+import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.view.CircleImageView;
+import com.doumengmeng.doctor.view.HorizontalScrollTextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -72,7 +74,8 @@ public class HospitalAdaper extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private HospitalData data;
         private RelativeLayout rl_hospital;
         private CircleImageView civ_hospital;
-        private TextView tv_hospital_name,tv_hospital_address;
+        private HorizontalScrollTextView tv_hospital_name;
+        private TextView tv_hospital_address;
 
         public HospitalHolder(View itemView,DisplayImageOptions options,WeakReference<InputContentHolder.InputCompleteAction> weakReference) {
             super(itemView);
@@ -81,8 +84,8 @@ public class HospitalAdaper extends RecyclerView.Adapter<RecyclerView.ViewHolder
             rl_hospital = itemView.findViewById(R.id.rl_hospital);
             civ_hospital = itemView.findViewById(R.id.civ_hospital);
             tv_hospital_name = itemView.findViewById(R.id.tv_hospital_name);
-            tv_hospital_address = itemView.findViewById(R.id.tv_hospital_address);
 
+            tv_hospital_address = itemView.findViewById(R.id.tv_hospital_address);
             rl_hospital.setOnClickListener(listener);
         }
 
@@ -90,6 +93,8 @@ public class HospitalAdaper extends RecyclerView.Adapter<RecyclerView.ViewHolder
             this.data = data;
             ImageLoader.getInstance().displayImage(data.getHospitalUrl(),civ_hospital,options);
             tv_hospital_name.setText(data.getHospitalName());
+            tv_hospital_name.init();
+            tv_hospital_name.startScroll();
             tv_hospital_address.setText(data.getHospitalAddress());
         }
 
@@ -121,7 +126,7 @@ public class HospitalAdaper extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private String hospitalAddress;
 
         public String getHospitalUrl() {
-            return hospitalUrl;
+            return UrlAddressList.BASE_IMAGE_URL+hospitalUrl;
         }
 
         public void setHospitalUrl(String hospitalUrl) {

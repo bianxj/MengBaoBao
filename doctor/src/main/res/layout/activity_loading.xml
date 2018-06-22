@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/FirstGray.Text28px"
-            android:textColor="@color/second_blue"
+            android:textColor="@color/first_white"
             android:gravity="center"
             />
     </FrameLayout>

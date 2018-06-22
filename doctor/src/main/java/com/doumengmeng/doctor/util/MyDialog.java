@@ -3,8 +3,10 @@ package com.doumengmeng.doctor.util;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
+import com.doumengmeng.doctor.base.BaseApplication;
 import com.github.chrisbanes.photoview.OnOutsidePhotoTapListener;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -47,6 +50,7 @@ public class MyDialog {
     private final static Object exampleLock = new Object();
     private final static Object shareLock = new Object();
     private final static Object maintainLock = new Object();
+    private final static Object topLock = new Object();
 
     private static Dialog updateDialog;
     private static Dialog promptDialog;
@@ -61,6 +65,7 @@ public class MyDialog {
     private static Dialog exampleDialog;
     private static Dialog shareDialog;
     private static Dialog maintainDialog;
+    private static PopupWindow topDialog;
 //
 
     public static void showMaintainDialog(Context context,String content){
@@ -464,13 +469,12 @@ public class MyDialog {
             pictureDialog = new Dialog(context,R.style.MyDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_picture,null);
             PhotoView iv_picture = view.findViewById(R.id.iv_picture);
+            DisplayMetrics display = BaseApplication.getInstance().getDisplayInfo();
+            iv_picture.setLayoutParams(new LinearLayout.LayoutParams(display.widthPixels,display.heightPixels-AppUtil.getStatusBarHeight(context)));
             iv_picture.setOnPhotoTapListener(new OnPhotoTapListener() {
                 @Override
                 public void onPhotoTap(ImageView view, float x, float y) {
-                    PhotoView pv = (PhotoView) view;
-                    if ( pv.getScale() == 1 ) {
-                        dismissPictureDialog();
-                    }
+                    dismissPictureDialog();
                 }
             });
             iv_picture.setOnOutsidePhotoTapListener(new OnOutsidePhotoTapListener() {
@@ -630,6 +634,72 @@ public class MyDialog {
             if ( loadingDialog != null ){
                 loadingDialog.dismiss();
                 loadingDialog = null;
+            }
+        }
+    }
+
+    public static void showPromptTopDialog(Context context,View parent,String title){
+        synchronized (topLock){
+            if ( topDialog != null ){
+                topDialog.getContentView().removeCallbacks(dismissRunnable);
+                topDialog.dismiss();
+                topDialog = null;
+            }
+
+            topDialog = new PopupWindow(context);
+            topDialog.setWidth(context.getResources().getDimensionPixelSize(R.dimen.x720px));
+
+
+            topDialog.setBackgroundDrawable(new BitmapDrawable());
+            topDialog.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+            topDialog.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+            View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_top_prompt, null);
+            contentView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            topDialog.setContentView(contentView);
+            topDialog.setAnimationStyle(R.style.PromptAnimation);
+
+            RelativeLayout rl_layout = contentView.findViewById(R.id.rl_layout);
+            int height = AppUtil.getStatusBarHeight(context) + context.getResources().getDimensionPixelOffset(R.dimen.SelfActionBarHeight);
+            rl_layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,height));
+            RelativeLayout rl_close = contentView.findViewById(R.id.rl_close);
+            /*ImageView iv_close = contentView.findViewById(R.id.iv_close);*/
+            rl_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismissPromptTopDialog();
+                }
+            });
+
+            final TextView tv_title = contentView.findViewById(R.id.tv_title);
+            tv_title.setText(title);
+
+            topDialog.getContentView().postDelayed(dismissRunnable,3000);
+//            tv_title.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    dismissPromptTopDialog();
+//                }
+//            },3000);
+
+            topDialog.setClippingEnabled(false);
+            topDialog.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            topDialog.showAtLocation(parent,Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,0);
+        }
+    }
+
+    private static Runnable dismissRunnable = new Runnable() {
+        @Override
+        public void run() {
+            dismissPromptTopDialog();
+        }
+    };
+
+    public static void dismissPromptTopDialog(){
+        synchronized (topLock){
+            if ( topDialog != null ){
+                topDialog.getContentView().removeCallbacks(dismissRunnable);
+                topDialog.dismiss();
+                topDialog = null;
             }
         }
     }

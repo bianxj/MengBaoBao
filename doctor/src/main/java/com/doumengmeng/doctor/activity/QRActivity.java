@@ -81,8 +81,9 @@ public class QRActivity extends BaseActivity {
         ll_qr_content = findViewById(R.id.ll_qr_content);
         iv_qr = findViewById(R.id.iv_qr);
 
-        String url = "http://sj.qq.com/myapp/detail.htm?apkName=com.doumengmeng.customer&doctorId="+BaseApplication.getInstance().getUserData().getDoctorId();
+//        String url = "http://sj.qq.com/myapp/detail.htm?apkName=com.doumengmeng.customer&doctorId="+BaseApplication.getInstance().getUserData().getDoctorId();
 
+        String url = "http://weixin.mengbaobao.com/phoneWebServer/login.jsp?doctorId="+BaseApplication.getInstance().getUserData().getDoctorId();
         try {
             Bitmap bitmap = ZxingUtil.getInstance().encodeQR(url,getResources().getDimensionPixelOffset(R.dimen.x405px));
             iv_qr.setImageBitmap(bitmap);

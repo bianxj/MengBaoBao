@@ -97,9 +97,9 @@ public class HospitalReport {
     @SerializedName("correctmonthday")
     private String correctMonthDay;
 
-    @SerializedName("presentillnesshistory")
+    @SerializedName("presentillnesshistroy")
     private String presentIllnessHistory;
-    @SerializedName("otherpresentillnesshistory")
+    @SerializedName("presentillnesshistroyother")
     private String otherPresentIllnessHistory;
 
     @SerializedName("featureage")
@@ -384,7 +384,7 @@ public class HospitalReport {
     }
 
     public String getFeatureEvaluation() {
-        return "神经心理、发育行为评估："+featureEvaluation;
+        return featureEvaluation;
     }
 
     public void setFeatureEvaluation(String featureEvaluation) {
@@ -511,10 +511,14 @@ public class HospitalReport {
     public String getCorrectMonthAgeString(){
         return correctMonthAge + "个月" + FormulaUtil.getDoubleDigit(Integer.parseInt(correctMonthDay)) +"天";
     }
+    public String getRecordDayPoint(){
+        String[] recordTimes = recordTime.split(" ");
+        return recordTimes[0].replace("-",".");
+    }
 
     public String getRecordDay(){
         String[] recordTimes = recordTime.split(" ");
-        return recordTimes[0].replace("-",".");
+        return recordTimes[0];
     }
 
     public boolean isMale(){

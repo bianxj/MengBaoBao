@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Intent;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 
 import com.doumengmeng.doctor.activity.LoginActivity;
 import com.doumengmeng.doctor.entity.LoginInfo;
@@ -56,7 +57,7 @@ public class BaseApplication extends Application {
         builder.setInner(false);
         builder.setLogDirName("/log");
         builder.setSaveDay(5);
-        builder.setSaveLog(true);
+        builder.setSaveLog(false);
         builder.setShow(true);
         builder.setClose(false);
         log = builder.build();
@@ -370,6 +371,14 @@ public class BaseApplication extends Application {
             }
         }
         currentActivity.finish();
+    }
+
+    private DisplayMetrics display;
+    public DisplayMetrics getDisplayInfo(){
+        if ( display == null ) {
+            display = getResources().getDisplayMetrics();
+        }
+        return display;
     }
 
 }

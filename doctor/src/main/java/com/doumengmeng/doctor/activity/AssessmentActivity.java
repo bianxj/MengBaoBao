@@ -78,6 +78,7 @@ public class AssessmentActivity extends BaseTimeActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyDialog.dismissPromptTopDialog();
         stopTask(searchItemDetailTask);
         stopTask(evaluationTask);
     }
@@ -737,8 +738,9 @@ public class AssessmentActivity extends BaseTimeActivity {
     }
 
     private void showPrompt(String content){
-        rl_prompt.setVisibility(View.VISIBLE);
-        tv_prompt.setText(content);
+//        rl_prompt.setVisibility(View.VISIBLE);
+//        tv_prompt.setText(content);
+        MyDialog.showPromptTopDialog(this,getWindow().getDecorView(),content);
     }
 
     private void goHospitalReportActivity(){
@@ -769,7 +771,7 @@ public class AssessmentActivity extends BaseTimeActivity {
     private static final int REQUEST_PARENTING_GUIDE = 0x01;
     private void goParentingGuideActivity(){
         Intent intent = new Intent(this,AssessmentParentingGuideActivity.class);
-        intent.putExtra(AssessmentParentingGuideActivity.IN_PARAM_MONTH_AGE,dataResult.getRecordList().getMonthage());
+        intent.putExtra(AssessmentParentingGuideActivity.IN_PARAM_MONTH_AGE,dataResult.getRecordList().getCorrectmonthage());
         intent.putExtra(AssessmentParentingGuideActivity.IN_PARAM_VALIDITY_TIME,item.getValidityTime());
         intent.putExtra(AssessmentParentingGuideActivity.IN_PARAM_SELECTED_NURTURE,GsonUtil.getInstance().toJson(nurtures));
         startActivityForResult(intent,REQUEST_PARENTING_GUIDE);

@@ -26,13 +26,13 @@ public class NurtureDao {
     private final static String NURTURE_TYPE_ID = "nurture_type_id";
 
     public static void createTable(SQLiteDatabase db){
-        String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + ID + " varchar," +
+        String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + ID + " int," +
                 NURTURE_TYPE + " varchar," +
                 NURTURE_TITLE + " varchar," +
                 NURTURE_DESC + " varchar," +
                 AGE + " int," +
                 NURTURE_ORDER + " varchar," +
-                NURTURE_TYPE_ID + " varchar" +
+                NURTURE_TYPE_ID + " int" +
                 ")";
         db.execSQL(builder);
     }
@@ -51,13 +51,13 @@ public class NurtureDao {
         for (int i = 0; i < nurtures.size() ;i++){
             Nurture nurture = nurtures.get(i);
             ContentValues values = new ContentValues();
-            values.put(ID,nurture.getId());
+            values.put(ID,Integer.parseInt(nurture.getId()));
             values.put(NURTURE_TYPE,nurture.getNurtureType());
             values.put(NURTURE_TITLE,nurture.getNurtureTitle());
             values.put(NURTURE_DESC,nurture.getNurtureDesc());
             values.put(AGE,Integer.parseInt(nurture.getAge()));
             values.put(NURTURE_ORDER,nurture.getNurtureOrder());
-            values.put(NURTURE_TYPE_ID,nurture.getNurtureTypeId());
+            values.put(NURTURE_TYPE_ID,Integer.parseInt(nurture.getNurtureTypeId()));
             db.insert(TABLE_NAME,null,values);
         }
         db.setTransactionSuccessful();
@@ -77,7 +77,7 @@ public class NurtureDao {
                 NURTURE_TYPE_ID +
                 " from " + TABLE_NAME +
                 " where " + AGE + " between '" + (age-2) + "' and '" + (age+2) +
-                "' order by " + NURTURE_TYPE_ID + " , " + AGE + " , " + ID + " DESC" ;
+                "' order by " + NURTURE_TYPE_ID + " , " + AGE + " , " + ID;
 //                "' order by " + ID + " DESC";
 //                "' order by " + NURTURE_TYPE_ID + " , " + AGE + " , " + NURTURE_ORDER ;
 
@@ -86,13 +86,13 @@ public class NurtureDao {
         if ( cursor != null ){
             while ( cursor.moveToNext() ){
                 Nurture nurture = new Nurture();
-                nurture.setId(cursor.getString(cursor.getColumnIndex(ID)));
+                nurture.setId(String.valueOf(cursor.getInt(cursor.getColumnIndex(ID))));
                 nurture.setAge(cursor.getInt(cursor.getColumnIndex(AGE))+"");
                 nurture.setNurtureDesc(cursor.getString(cursor.getColumnIndex(NURTURE_DESC)));
                 nurture.setNurtureOrder(cursor.getString(cursor.getColumnIndex(NURTURE_ORDER)));
                 nurture.setNurtureTitle(cursor.getString(cursor.getColumnIndex(NURTURE_TITLE)));
                 nurture.setNurtureType(cursor.getString(cursor.getColumnIndex(NURTURE_TYPE)));
-                nurture.setNurtureTypeId(cursor.getString(cursor.getColumnIndex(NURTURE_TYPE_ID)));
+                nurture.setNurtureTypeId(String.valueOf(cursor.getInt(cursor.getColumnIndex(NURTURE_TYPE_ID))));
                 nurture.setChoose(false);
                 nurture.setCustom(false);
                 nurtures.add(nurture);
