@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
+import com.doumengmeng.customer.activity.AssessmentActivity;
 import com.doumengmeng.customer.activity.DoctorInfoActivity;
 import com.doumengmeng.customer.activity.DoctorListActivity;
 import com.doumengmeng.customer.activity.HeadImageActivity;
@@ -22,17 +23,27 @@ import com.doumengmeng.customer.activity.MainActivity;
 import com.doumengmeng.customer.activity.ObserveActivity;
 import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.base.BaseFragment;
+import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.net.UrlAddressList;
+import com.doumengmeng.customer.request.RequestCallBack;
+import com.doumengmeng.customer.request.RequestTask;
+import com.doumengmeng.customer.response.AllRecordResponse;
 import com.doumengmeng.customer.response.InitConfigureResponse;
 import com.doumengmeng.customer.response.entity.DayList;
+import com.doumengmeng.customer.response.entity.Doctor;
+import com.doumengmeng.customer.response.entity.Record;
+import com.doumengmeng.customer.response.entity.RecordResult;
 import com.doumengmeng.customer.response.entity.UserData;
+import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.view.AutoScrollViewPager;
 import com.doumengmeng.customer.view.CircleImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者: 边贤君
@@ -47,12 +58,14 @@ public class HomePageFragment extends BaseFragment {
     private TextView tv_baby_name;
     private RelativeLayout rl_male;
     private Space space_observ_point;
-    private LinearLayout ll_observe_point,ll_doctor_list;
+    private RelativeLayout rl_observe_point,rl_doctor_list;
     private FrameLayout rl_baby_head;
     private CircleImageView civ_baby;
     private CheckBox cb_male;
     private TextView tv_baby_age;
     private AutoScrollViewPager asvp;
+
+    private LinearLayout ll_unread_report;
 
     private List<InitConfigureResponse.Banner> banners;
 
@@ -71,26 +84,28 @@ public class HomePageFragment extends BaseFragment {
         tv_baby_name = view.findViewById(R.id.tv_baby_name);
         rl_male = view.findViewById(R.id.rl_male);
         space_observ_point = view.findViewById(R.id.space_observ_point);
-        ll_observe_point = view.findViewById(R.id.ll_observe_point);
-        ll_doctor_list = view.findViewById(R.id.ll_doctor_list);
+        rl_observe_point = view.findViewById(R.id.rl_observe_point);
+        rl_doctor_list = view.findViewById(R.id.rl_doctor_list);
         rl_baby_head = view.findViewById(R.id.rl_baby_head);
         civ_baby = view.findViewById(R.id.civ_baby);
         cb_male = view.findViewById(R.id.cb_male);
         tv_baby_age = view.findViewById(R.id.tv_baby_age);
         asvp = view.findViewById(R.id.asvp);
+
+        ll_unread_report = view.findViewById(R.id.ll_unread_report);
     }
 
     private void initView(){
         if ( BaseApplication.getInstance().isUpperThan37Month() ){
             space_observ_point.setVisibility(View.GONE);
-            ll_observe_point.setVisibility(View.GONE);
+            rl_observe_point.setVisibility(View.GONE);
         } else {
             space_observ_point.setVisibility(View.VISIBLE);
-            ll_observe_point.setVisibility(View.VISIBLE);
+            rl_observe_point.setVisibility(View.VISIBLE);
         }
         rl_side_menu.setOnClickListener(listener);
-        ll_observe_point.setOnClickListener(listener);
-        ll_doctor_list.setOnClickListener(listener);
+        rl_observe_point.setOnClickListener(listener);
+        rl_doctor_list.setOnClickListener(listener);
         rl_baby_head.setOnClickListener(listener);
 
         //初始化轮播图
@@ -154,6 +169,9 @@ public class HomePageFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         initData();
+        if ( !isHidden() ){
+            getRecord();
+        }
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -164,11 +182,11 @@ public class HomePageFragment extends BaseFragment {
                     //切换抽屉
                     activity.toggleSideMenu();
                     break;
-                case R.id.ll_observe_point:
+                case R.id.rl_observe_point:
                     //观察要点
                     startActivity(ObserveActivity.class);
                     break;
-                case R.id.ll_doctor_list:
+                case R.id.rl_doctor_list:
                     //医院医生列表
                     startActivity(DoctorListActivity.class);
                     break;
@@ -208,6 +226,96 @@ public class HomePageFragment extends BaseFragment {
 //            Intent intent = new Intent(getContext(),DoctorInfoActivity.class);
 //            intent.putExtra(DoctorInfoActivity.IN_PARAM_DOCTOR_ID , doctorId);
 //            startActivity(intent);
+        }
+    };
+
+
+    private List<Record> records = new ArrayList<>();
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if ( !hidden ){
+            getRecord();
+        } else {
+            stopTask(recordTask);
+        }
+    }
+
+    private RequestTask recordTask;
+    private void getRecord(){
+        try {
+            recordTask = new RequestTask.Builder(getActivity(),getRecordCallBack)
+                    .setUrl(UrlAddressList.URL_SEARCH_UNREAD_RECORD)
+                    .setType(RequestTask.NO_LOADING)
+                    .setContent(buildRecordContent())
+                    .build();
+            recordTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private Map<String, String> buildRecordContent() {
+        UserData userData = BaseApplication.getInstance().getUserData();
+        Map<String ,String> map = new HashMap<>();
+        map.put(UrlAddressList.PARAM,userData.getUserid());
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        return map;
+    }
+
+    private final RequestCallBack getRecordCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            AllRecordResponse response = GsonUtil.getInstance().fromJson(result, AllRecordResponse.class);
+            RecordResult result1 = response.getResult();
+            List<Record> list = result1.getRecordList();
+
+            records.clear();
+            for (Record record : list) {
+                record.setImageData(result1.getImgList());
+                records.add(record);
+            }
+            buildRecordList();
+//            xrv_record.setNoMore(true);
+        }
+    };
+
+    private void buildRecordList(){
+        ll_unread_report.removeAllViews();
+        if ( records != null && records.size() > 0 ) {
+            for (int i = 0; i < records.size(); i++) {
+                ll_unread_report.addView(buildRecordView(i, records.get(i)));
+            }
+        }
+    }
+
+    private View buildRecordView(int index,Record record){
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_unread_report,null);
+        TextView tv_content = view.findViewById(R.id.tv_content);
+        Doctor doctor = DaoManager.getInstance().getDaotorDao().searchDoctorById(getContext(),record.getDoctorid());
+        tv_content.setText("宝妈，"+doctor.getDoctorname()+"医生给你家宝宝做的评估出来了～～");
+        view.setTag(index);
+        view.setOnClickListener(recordListener);
+        return view;
+    }
+
+    private View.OnClickListener recordListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int index = (int) view.getTag();
+            Intent intent = new Intent(getContext(), AssessmentActivity.class);
+            intent.putExtra(AssessmentActivity.IN_PARAM_RECORD, GsonUtil.getInstance().toJson(records.get(index)));
+            getContext().startActivity(intent);
         }
     };
 

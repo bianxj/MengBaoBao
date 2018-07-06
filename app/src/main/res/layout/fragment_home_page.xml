@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="@dimen/y1075px"
-    android:background="@color/lightSky">
+    android:background="@color/lightSky"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,9 +28,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="@dimen/x41px"
                     android:layout_marginTop="@dimen/y32px"
+                    android:contentDescription="@string/contentDescription"
                     android:scaleType="fitXY"
-                    android:src="@drawable/btn_more"
-                    android:contentDescription="@string/contentDescription" />
+                    android:src="@drawable/btn_more" />
             </RelativeLayout>
 
             <TextView
@@ -67,11 +66,11 @@
                 <ImageView
                     android:layout_width="@dimen/y25px"
                     android:layout_height="@dimen/y25px"
-                    android:src="@drawable/icon_head"
                     android:layout_gravity="right|bottom"
                     android:layout_marginBottom="@dimen/y13px"
                     android:layout_marginRight="@dimen/y2px"
-                    android:contentDescription="@string/contentDescription" />
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/icon_head" />
             </FrameLayout>
 
             <RelativeLayout
@@ -88,10 +87,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x32px"
                     android:background="@drawable/icon_white_gender"
-                    android:clickable="false"
-                    android:checked="true"
                     android:button="@null"
-                    />
+                    android:checked="true"
+                    android:clickable="false" />
 
                 <TextView
                     android:id="@+id/tv_baby_age"
@@ -113,101 +111,154 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/RowSplitLine" />
 
-    <com.doumengmeng.customer.view.AutoScrollViewPager
-        android:id="@+id/asvp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y476px"
-        app:dot_src="@drawable/icon_dot"
-        app:dot_gap="@dimen/x8px"
-        app:dot_size="@dimen/x16px"
-        app:dot_margin_bottom="@dimen/y23px"
-        app:page_height="@dimen/y477px"
-        app:page_margin_top="@dimen/y1px"
-        app:canLoop="true"
-        android:background="@color/first_white"
-        >
+        android:layout_height="match_parent">
 
-    </com.doumengmeng.customer.view.AutoScrollViewPager>
-
-    <android.support.v4.widget.Space
-        android:id="@+id/space_observ_point"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y8px" />
-    <LinearLayout
-        android:id="@+id/ll_observe_point"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y124px"
-        android:background="@color/first_white"
-        android:orientation="vertical">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/y19px"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="@dimen/y30px"
-                android:layout_height="@dimen/y28px"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_bud"
-                android:layout_marginLeft="@dimen/x40px"
-                android:contentDescription="@string/contentDescription" />
-            <TextView
-                android:id="@+id/tv_observe_point"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/FirstPink.Text28px"
-                android:text="@string/home_page_observe_point"
-                android:layout_marginLeft="@dimen/x11px"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tv_observe_point_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/SecondBlack.Text32px"
-            android:text="@string/home_page_observe_point_content"
-            android:layout_marginLeft="@dimen/x40px"
-            android:layout_marginTop="@dimen/y10px"/>
-    </LinearLayout>
-    <android.support.v4.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y8px" />
-    <LinearLayout
-        android:id="@+id/ll_doctor_list"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y124px"
-        android:background="@color/first_white"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/y19px"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="@dimen/y30px"
-                android:layout_height="@dimen/y28px"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_bud"
-                android:layout_marginLeft="@dimen/x40px"
-                android:contentDescription="@string/contentDescription" />
-            <TextView
-                android:id="@+id/tv_doctor_list"
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_unread_report"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/FirstPink.Text28px"
-                android:text="@string/home_page_doctor_list"
-                android:layout_marginLeft="@dimen/x11px"/>
+                android:orientation="vertical"
+                >
+            </LinearLayout>
+
+            <com.doumengmeng.customer.view.AutoScrollViewPager
+                android:id="@+id/asvp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y476px"
+                android:background="@color/first_white"
+                app:canLoop="true"
+                app:dot_gap="@dimen/x8px"
+                app:dot_margin_bottom="@dimen/y23px"
+                app:dot_size="@dimen/x16px"
+                app:dot_src="@drawable/icon_dot"
+                app:page_height="@dimen/y477px"
+                app:page_margin_top="@dimen/y1px">
+
+            </com.doumengmeng.customer.view.AutoScrollViewPager>
+
+            <android.support.v4.widget.Space
+                android:id="@+id/space_observ_point"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y8px" />
+
+            <RelativeLayout
+                android:id="@+id/rl_observe_point"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y124px"
+                android:background="@color/first_white">
+                <LinearLayout
+                    android:layout_width="@dimen/x680px"
+                    android:layout_height="@dimen/y124px"
+                    android:background="@color/first_white"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y19px"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/y30px"
+                            android:layout_height="@dimen/y28px"
+                            android:layout_marginLeft="@dimen/x40px"
+                            android:contentDescription="@string/contentDescription"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/icon_bud" />
+
+                        <TextView
+                            android:id="@+id/tv_observe_point"
+                            style="@style/FirstPink.Text28px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x11px"
+                            android:text="@string/home_page_observe_point" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_observe_point_content"
+                        style="@style/SecondBlack.Text32px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x40px"
+                        android:layout_marginTop="@dimen/y10px"
+                        android:text="@string/home_page_observe_point_content" />
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/x21px"
+                    android:layout_height="@dimen/y33px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x40px"
+                    android:src="@drawable/right_allow"
+                    android:contentDescription="@string/contentDescription" />
+            </RelativeLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y8px" />
+
+            <RelativeLayout
+                android:id="@+id/rl_doctor_list"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y124px"
+                android:background="@color/first_white">
+                <LinearLayout
+                    android:layout_width="@dimen/x680px"
+                    android:layout_height="@dimen/y124px"
+                    android:background="@color/first_white"
+                    android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y19px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/y30px"
+                        android:layout_height="@dimen/y28px"
+                        android:layout_marginLeft="@dimen/x40px"
+                        android:contentDescription="@string/contentDescription"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icon_bud" />
+
+                    <TextView
+                        android:id="@+id/tv_doctor_list"
+                        style="@style/FirstPink.Text28px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x11px"
+                        android:text="@string/home_page_doctor_list" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_doctor_list_content"
+                    style="@style/SecondBlack.Text32px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x40px"
+                    android:layout_marginTop="@dimen/y10px"
+                    android:text="@string/home_page_doctor_list_content" />
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/x21px"
+                    android:layout_height="@dimen/y33px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x40px"
+                    android:src="@drawable/right_allow"
+                    android:contentDescription="@string/contentDescription" />
+            </RelativeLayout>
         </LinearLayout>
-        <TextView
-            android:id="@+id/tv_doctor_list_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/SecondBlack.Text32px"
-            android:text="@string/home_page_doctor_list_content"
-            android:layout_marginLeft="@dimen/x40px"
-            android:layout_marginTop="@dimen/y10px"/>
-    </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

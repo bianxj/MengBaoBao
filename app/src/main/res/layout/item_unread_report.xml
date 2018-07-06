@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightSky">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y124px"
+        android:background="@color/first_white"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="@dimen/x85px"
+            android:layout_height="@dimen/x85px"
+            android:src="@drawable/icon_report"
+            android:layout_marginLeft="@dimen/x40px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x145px"
+            android:layout_marginRight="@dimen/x100px"
+            android:layout_alignParentLeft="true"
+            style="@style/SecondBlack.Text32px"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="@dimen/x21px"
+            android:layout_height="@dimen/y33px"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right_allow"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x40px"
+            />
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x10px" />
+
+</LinearLayout>

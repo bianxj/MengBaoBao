@@ -113,6 +113,7 @@
         <activity android:name="com.doumengmeng.customer.activity.ParentingGuideActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name="com.doumengmeng.customer.activity.DiagramDataActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.LessonActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name="com.doumengmeng.customer.wxapi.WXPayEntryActivity"
             android:screenOrientation="portrait"

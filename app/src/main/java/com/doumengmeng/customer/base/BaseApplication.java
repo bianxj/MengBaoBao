@@ -71,7 +71,7 @@ public class BaseApplication extends Application {
         builder.setSaveDay(5);
         builder.setSaveLog(false);
         builder.setShow(true);
-        builder.setClose(false);
+        builder.setClose(true);
         log = builder.build();
     }
 

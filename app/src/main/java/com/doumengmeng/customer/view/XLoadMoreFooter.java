@@ -45,9 +45,10 @@ public class XLoadMoreFooter extends BaseLoadMoreFooter {
 
     @Override
     protected void loading() {
-        line1.setVisibility(GONE);
-        line2.setVisibility(GONE);
-        tv_loading_text.setText("……正在载入");
+        line1.setVisibility(VISIBLE);
+        line2.setVisibility(VISIBLE);
+        tv_loading_text.setText("没有更多内容了");
+//        tv_loading_text.setText("……正在载入");
     }
 
     @Override
@@ -60,5 +61,12 @@ public class XLoadMoreFooter extends BaseLoadMoreFooter {
         line1.setVisibility(VISIBLE);
         line2.setVisibility(VISIBLE);
         tv_loading_text.setText("没有更多内容了");
+    }
+
+    @Override
+    protected void loadMoreFailed() {
+        line1.setVisibility(VISIBLE);
+        line2.setVisibility(VISIBLE);
+        tv_loading_text.setText("加载失败");
     }
 }

@@ -12,6 +12,8 @@ public class UrlAddressList {
     public final static String SESSION_ID = "sesId";
 
 //    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneServerV2/";
+//    public final static String IMAGE_URL = "http://192.168.31.167:8083/";
+
     public final static String BASE_URL = "http://app.mengbaobao.com:8090/mbbPhoneServerV2/";
 
     //测试地址
@@ -46,6 +48,8 @@ public class UrlAddressList {
     public final static String URL_UPDATE_INFO = BASE_URL + "system.do?method=GetVersion";
     public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";
 
+    public final static String URL_SEARCH_UNREAD_RECORD = BASE_URL + "babyUser.do?method=LoadHome";
+    public final static String URL_SEARCH_LESSON = BASE_URL + "babyUser.do?method=GetMengClass";
     public final static String URL_MENG_LESSION = "http://app.mengbaobao.com:8090/class/index.html";
 
 //    public static String mergeUrlAndParam(String url , String value){
