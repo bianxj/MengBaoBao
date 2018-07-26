@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.DoctorAdapter;
-import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.DoctorEntity;
 import com.doumengmeng.customer.util.MyDialog;
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Administrator on 2017/12/12.
  */
 
-public class HospitalDoctorActivity extends BaseActivity {
+public class HospitalDoctorActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_HOSPITAL_ID = "hospitalId";
     public final static String IN_PARAM_HOSPITAL_NAME = "hospitalName";
@@ -96,7 +96,7 @@ public class HospitalDoctorActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

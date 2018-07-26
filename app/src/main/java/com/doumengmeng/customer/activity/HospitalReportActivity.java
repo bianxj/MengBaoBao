@@ -8,7 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.response.entity.HospitalReport;
 import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.view.DevelopmentView;
@@ -19,7 +19,7 @@ import com.doumengmeng.customer.view.GraphModule;
  * 描述: 医院报告
  * 创建日期: 2018/1/22 13:19
  */
-public class HospitalReportActivity extends BaseActivity {
+public class HospitalReportActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_REPORT_DATA = "report";
 
@@ -326,7 +326,7 @@ public class HospitalReportActivity extends BaseActivity {
 //        }
 //    }
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

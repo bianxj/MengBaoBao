@@ -258,7 +258,7 @@ public class ScanActivity extends BaseActivity {
         startActivityForResult(albumIntent, REQUEST_ALBUM);
     }
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

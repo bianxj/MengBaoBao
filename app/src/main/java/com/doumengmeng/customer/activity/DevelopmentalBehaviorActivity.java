@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.BehaviorAdapter;
-import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.response.entity.Feature;
 import com.doumengmeng.customer.util.GsonUtil;
@@ -26,7 +26,7 @@ import java.util.List;
  * 描述: 发育行为
  * 创建日期: 2018/1/9 11:23
  */
-public class DevelopmentalBehaviorActivity extends BaseActivity {
+public class DevelopmentalBehaviorActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_DEVELOPMENT = "in_param_development";
     public final static String IN_PARAM_MONTH_AGE = "in_param_month_age";
@@ -121,7 +121,7 @@ public class DevelopmentalBehaviorActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         setResult(Activity.RESULT_CANCELED);
         finish();
     }

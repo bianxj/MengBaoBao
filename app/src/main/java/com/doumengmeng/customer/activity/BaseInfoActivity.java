@@ -9,16 +9,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.entity.RoleType;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
 import com.doumengmeng.customer.request.ResponseErrorCode;
 import com.doumengmeng.customer.request.entity.InputUserInfo;
-import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.response.SubmitInfoResponse;
+import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.util.GsonUtil;
 import com.doumengmeng.customer.util.MyDialog;
 import com.doumengmeng.customer.view.BaseInfoLayout;
@@ -31,7 +31,7 @@ import java.util.Map;
  * 描述: 基本信息
  * 创建日期: 2018/1/16 10:02
  */
-public class BaseInfoActivity extends BaseActivity {
+public class BaseInfoActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back,rl_complete,rl_close;
     private TextView tv_title,tv_complete;
@@ -99,7 +99,7 @@ public class BaseInfoActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

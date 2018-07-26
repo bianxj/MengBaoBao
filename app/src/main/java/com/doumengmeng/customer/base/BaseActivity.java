@@ -27,6 +27,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 //        immersionStatusBar();
         BaseApplication.getInstance().addActivity(this);
     }
@@ -95,5 +96,4 @@ public class BaseActivity extends Activity {
     protected void showPromptDialog(String message){
         MyDialog.showPromptDialog(this,message,null);
     }
-
 }

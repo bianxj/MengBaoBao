@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.util.AppUtil;
 
 /**
@@ -17,7 +17,7 @@ import com.doumengmeng.customer.util.AppUtil;
  * 描述: 设置
  * 创建日期: 2018/1/8 10:47
  */
-public class SettingActivity extends BaseActivity {
+public class SettingActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back;
     private TextView tv_title,tv_version;
@@ -72,7 +72,7 @@ public class SettingActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

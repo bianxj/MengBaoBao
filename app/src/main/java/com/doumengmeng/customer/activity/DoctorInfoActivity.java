@@ -20,8 +20,8 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.config.Constants;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.RoleType;
@@ -58,7 +58,7 @@ import java.util.Map;
  * 描述: 医生详情界面
  * 创建日期: 2018/1/23 15:23
  */
-public class DoctorInfoActivity extends BaseActivity {
+public class DoctorInfoActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_DOCTOR_ID = "doctor_id";
     public final static String IN_PARAM_DOCTOR_NAME = "doctor_name";
@@ -212,7 +212,7 @@ public class DoctorInfoActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

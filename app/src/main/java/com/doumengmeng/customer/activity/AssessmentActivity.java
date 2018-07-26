@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.AssessmentStatus;
 import com.doumengmeng.customer.net.UrlAddressList;
@@ -41,7 +41,7 @@ import java.util.Map;
  * 描述: 评估页面
  * 创建日期: 2018/1/11 9:21
  */
-public class AssessmentActivity extends BaseActivity {
+public class AssessmentActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_RECORD = "in_param_record";
 
@@ -317,7 +317,7 @@ public class AssessmentActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private void back(){
+    protected void back(){
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra(MainActivity.SHOW_PAGE,MainActivity.PAGE_SPACIALIST_SERVICE);
         startActivity(intent);

@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.DoctorAdapter;
 import com.doumengmeng.customer.adapter.HospitalAdapter;
-import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.DoctorEntity;
 import com.doumengmeng.customer.entity.HospitalEntity;
@@ -29,7 +29,7 @@ import java.util.List;
  * 描述: 萌宝宝医生医院
  * 创建日期: 2018/1/8 11:28
  */
-public class DoctorListActivity extends BaseActivity {
+public class DoctorListActivity extends BaseSwipeActivity {
 
     private final static int PAGE_SIZE = 100;
     private int doctor_page = 0;
@@ -163,7 +163,7 @@ public class DoctorListActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

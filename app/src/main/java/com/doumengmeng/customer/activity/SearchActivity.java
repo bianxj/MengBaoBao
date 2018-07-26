@@ -24,6 +24,7 @@ import com.doumengmeng.customer.adapter.HospitalDoctorAdapter;
 import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.base.BaseLoadingListener;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.DoctorEntity;
 import com.doumengmeng.customer.entity.HospitalEntity;
@@ -44,7 +45,7 @@ import java.util.List;
  * 描述: 搜索
  * 创建日期: 2018/1/8 11:51
  */
-public class SearchActivity extends BaseActivity {
+public class SearchActivity extends BaseSwipeActivity {
 
     private LinearLayout ll_back,ll_search;
     private RelativeLayout rl_close;
@@ -268,7 +269,7 @@ public class SearchActivity extends BaseActivity {
     };
 
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

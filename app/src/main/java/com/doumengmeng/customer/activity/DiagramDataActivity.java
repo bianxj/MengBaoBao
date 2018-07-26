@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.DiagramDataAdapter;
-import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.response.entity.ImageData;
 import com.doumengmeng.customer.util.GsonUtil;
 import com.google.gson.reflect.TypeToken;
@@ -22,7 +22,7 @@ import java.util.List;
  * 描述: 曲线图详情
  * 创建日期: 2018/1/17 13:42
  */
-public class DiagramDataActivity extends BaseActivity {
+public class DiagramDataActivity extends BaseSwipeActivity {
 
     public enum DIAGRAM_TYPE{
         TYPE_HEIGHT,
@@ -101,7 +101,7 @@ public class DiagramDataActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

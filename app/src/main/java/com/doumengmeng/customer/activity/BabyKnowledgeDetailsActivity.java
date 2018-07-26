@@ -1,6 +1,5 @@
 package com.doumengmeng.customer.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
@@ -15,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -22,7 +22,7 @@ import com.umeng.analytics.MobclickAgent;
  * 描述: 育儿知识详细信息
  * 创建日期: 2018/1/12 15:44
  */
-public class BabyKnowledgeDetailsActivity extends Activity {
+public class BabyKnowledgeDetailsActivity extends BaseSwipeActivity {
 
     public static final String IN_PARAM_TITLE = "title";
     public static final String IN_PARAM_PAGE = "page";
@@ -121,7 +121,7 @@ public class BabyKnowledgeDetailsActivity extends Activity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

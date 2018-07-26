@@ -18,8 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.net.HttpUtil;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
@@ -46,7 +46,7 @@ import java.util.Map;
  * 描述: 上传头像
  * 创建日期: 2018/1/8 13:53
  */
-public class HeadImageActivity extends BaseActivity {
+public class HeadImageActivity extends BaseSwipeActivity {
 
     private final static int REQUEST_CAMERA = 0x01;
     private final static int REQUEST_IMAGE = 0x02;
@@ -130,7 +130,7 @@ public class HeadImageActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

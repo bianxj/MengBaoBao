@@ -69,7 +69,7 @@ public class BaseApplication extends Application {
         builder.setInner(false);
         builder.setLogDirName("/log");
         builder.setSaveDay(5);
-        builder.setSaveLog(false);
+        builder.setSaveLog(true);
         builder.setShow(true);
         builder.setClose(true);
         log = builder.build();
@@ -469,6 +469,7 @@ public class BaseApplication extends Application {
     private final static String TABLE_CONFIG = "config";
     private final static String COLUMN_IS_FIRST = "isFirstLogin";
     private final static String COLUMN_IS_ABNORMAL_EXIT = "isAbnormalExit";
+    private final static String COLUMN_FEATURE_VERSION = "featureVersion";
     public boolean isFistLogin(){
         return SharedPreferencesUtil.loadBoolean(this,TABLE_CONFIG,COLUMN_IS_FIRST,true);
     }
@@ -483,6 +484,14 @@ public class BaseApplication extends Application {
 
     public void saveAbnormalExit(boolean isAbnormalExit){
         SharedPreferencesUtil.saveBoolean(this,TABLE_CONFIG,COLUMN_IS_ABNORMAL_EXIT,isAbnormalExit);
+    }
+
+    public void saveFeatureVersion(String version){
+        SharedPreferencesUtil.saveString(this,TABLE_CONFIG,COLUMN_FEATURE_VERSION,version);
+    }
+
+    public String loadFeatureVersion(){
+        return SharedPreferencesUtil.loadString(this,TABLE_CONFIG,COLUMN_FEATURE_VERSION,"");
     }
 
     public boolean isPay(){

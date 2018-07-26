@@ -126,7 +126,7 @@ public class ForgotPwdActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

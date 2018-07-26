@@ -21,10 +21,6 @@ public class LauncherActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DisplayMetrics metrics = BaseApplication.getInstance().getDisplayInfo();
-
-        System.out.println("Pixels:"+metrics.densityDpi);
-        System.out.println("Pixels:"+metrics.ydpi);
-
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

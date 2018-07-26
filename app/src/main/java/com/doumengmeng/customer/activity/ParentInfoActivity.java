@@ -8,8 +8,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.entity.RoleType;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
@@ -28,7 +28,7 @@ import java.util.Map;
  * Created by Administrator on 2017/12/13.
  */
 
-public class ParentInfoActivity extends BaseActivity {
+public class ParentInfoActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back,rl_complete,rl_close;
     private TextView tv_title,tv_complete;
@@ -93,7 +93,7 @@ public class ParentInfoActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

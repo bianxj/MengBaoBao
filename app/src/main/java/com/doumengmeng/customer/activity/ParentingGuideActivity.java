@@ -221,7 +221,7 @@ public class ParentingGuideActivity extends BaseFragmentActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

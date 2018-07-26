@@ -15,9 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 
-public class LessonActivity extends BaseActivity {
+public class LessonActivity extends BaseSwipeActivity {
 
     public final static String URL_TITLE = "url_title";
 
@@ -85,7 +85,7 @@ public class LessonActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

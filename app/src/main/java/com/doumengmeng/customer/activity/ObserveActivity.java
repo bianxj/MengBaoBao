@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.ObserveAdapter;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.RoleType;
 
@@ -25,7 +25,7 @@ import java.util.List;
  * 描述: 观察要点
  * 创建日期: 2018/1/8 10:53
  */
-public class ObserveActivity extends BaseActivity {
+public class ObserveActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -91,7 +91,7 @@ public class ObserveActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

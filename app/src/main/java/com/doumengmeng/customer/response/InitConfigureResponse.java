@@ -34,6 +34,7 @@ public class InitConfigureResponse extends BaseResponse {
         private List<Feature> FeatureList;
         private com.doumengmeng.customer.response.entity.DayList DayList;
         private NotificationData nextTimeList;
+        private String featureVersion;
 
         public NotificationData getNextTimeList() {
             return nextTimeList;
@@ -105,6 +106,14 @@ public class InitConfigureResponse extends BaseResponse {
 
         public void setParentInfo(com.doumengmeng.customer.response.entity.ParentInfo parentInfo) {
             ParentInfo = parentInfo;
+        }
+
+        public String getFeatureVersion() {
+            return featureVersion;
+        }
+
+        public void setFeatureVersion(String featureVersion) {
+            this.featureVersion = featureVersion;
         }
     }
 

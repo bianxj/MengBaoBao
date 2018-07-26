@@ -22,7 +22,7 @@ import com.doumengmeng.customer.util.MyDialog;
  * Created by Administrator on 2018/1/18.
  */
 
-public abstract class BaseInputDataActivity extends BaseActivity {
+public abstract class BaseInputDataActivity extends BaseSwipeActivity {
 
 
     protected int month;

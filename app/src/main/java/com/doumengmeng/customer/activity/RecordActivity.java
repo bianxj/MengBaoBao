@@ -24,8 +24,8 @@ import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.PictureAdapter;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.net.HttpUtil;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
@@ -57,7 +57,7 @@ import java.util.Map;
  * 描述: 记录
  * 创建日期: 2018/1/10 13:56
  */
-public class RecordActivity extends BaseActivity {
+public class RecordActivity extends BaseSwipeActivity {
 
     //--------------------------------------回调CODE------------------------------------------------
     private final static int REQUEST_HEIGHT = 0x01;
@@ -379,7 +379,7 @@ public class RecordActivity extends BaseActivity {
         startActivityForResult(intent, REQUEST_DEVELOPMENTAL_ACTION);
     }
 
-    private void back(){
+    protected void back(){
         Intent intent = new Intent(RecordActivity.this,MainActivity.class);
         intent.putExtra(MainActivity.SHOW_PAGE,MainActivity.PAGE_SPACIALIST_SERVICE);
         startActivity(intent);

@@ -31,8 +31,8 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.adapter.HospitalDoctorAdapter;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseLoadingListener;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.db.DaoManager;
 import com.doumengmeng.customer.entity.DoctorEntity;
 import com.doumengmeng.customer.entity.HospitalEntity;
@@ -53,7 +53,7 @@ import java.util.List;
  * 描述: 专家服务界面
  * 创建日期: 2018/1/23 14:55
  */
-public class SpacialistServiceActivity extends BaseActivity {
+public class SpacialistServiceActivity extends BaseSwipeActivity {
 
     private final static int REQUEST_QR = 0x01;
     private final static int REQUEST_LOCATION = 0x02;
@@ -234,7 +234,7 @@ public class SpacialistServiceActivity extends BaseActivity {
         }
     }
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

@@ -7,12 +7,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 
 /**
  * Created by Administrator on 2017/12/8.
  */
-public class ContactActivity extends BaseActivity {
+public class ContactActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -43,7 +43,7 @@ public class ContactActivity extends BaseActivity {
         });
     }
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

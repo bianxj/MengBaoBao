@@ -346,6 +346,7 @@ public class LoadingActivity extends BaseActivity {
         JSONObject object = new JSONObject();
         try {
             object.put("userId",userData.getUserid());
+            object.put("featureVersion",BaseApplication.getInstance().loadFeatureVersion());
             map.put(UrlAddressList.PARAM,object.toString());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -412,7 +413,7 @@ public class LoadingActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 
@@ -488,7 +489,6 @@ public class LoadingActivity extends BaseActivity {
             DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
             DaoManager.getInstance().deleteTable(LoadingActivity.this, GrowthDao.TABLE_NAME);
             DaoManager.getInstance().deleteTable(LoadingActivity.this, MengClassDao.TABLE_NAME);
-            DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
 
             InitConfigureResponse.Result result = response.getResult();
 
@@ -496,7 +496,13 @@ public class LoadingActivity extends BaseActivity {
             DaoManager.getInstance().getGrowthDao().saveGrowthList(LoadingActivity.this, result.getGrowthList());
             DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, result.getHospitalList());
             DaoManager.getInstance().getMengClassDao().saveMengClassList(LoadingActivity.this, result.getMengClassList());
-            DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,result.getFeatureList());
+
+            if ( result.getFeatureList() != null && result.getFeatureList().size() > 0 ) {
+                DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
+                DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this, result.getFeatureList());
+                BaseApplication.getInstance().saveFeatureVersion(result.getFeatureVersion());
+            }
+
             BaseApplication.getInstance().saveParentInfo(result.getParentInfo());
             BaseApplication.getInstance().saveDayList(result.getDayList());
 

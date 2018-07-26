@@ -18,10 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.util.MyDialog;
 
-public class AgreementActivity extends BaseActivity {
+public class AgreementActivity extends BaseSwipeActivity {
 
     public static final String HIDE_BOTTOM = "hide_bottom";
 
@@ -116,7 +116,7 @@ public class AgreementActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         setResult(Activity.RESULT_CANCELED);
         finish();
     }

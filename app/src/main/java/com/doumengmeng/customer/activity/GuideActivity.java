@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.view.AutoScrollViewPager;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.List;
  * 描述: 引导页
  * 创建日期: 2018/2/9 14:47
  */
-public class GuideActivity extends BaseActivity {
+public class GuideActivity extends BaseSwipeActivity {
 
     private AutoScrollViewPager asvp;
     private Button bt_guide_register , bt_guide_login;
@@ -32,6 +32,7 @@ public class GuideActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
+//        setSwipeEnabled(false);
         findView();
         initView();
     }
@@ -79,6 +80,7 @@ public class GuideActivity extends BaseActivity {
     private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Intent intent;
             switch(v.getId()){
                 case R.id.bt_guide_register:
                     startActivity(RegisterActivity.class);

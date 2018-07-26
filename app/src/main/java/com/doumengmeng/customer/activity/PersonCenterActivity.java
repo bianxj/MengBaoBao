@@ -9,8 +9,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.customer.R;
-import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
+import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.response.entity.DayList;
 import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.util.MyDialog;
@@ -23,7 +23,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * 描述: 个人中心
  * 创建日期: 2018/1/8 10:39
  */
-public class PersonCenterActivity extends BaseActivity {
+public class PersonCenterActivity extends BaseSwipeActivity {
 
     private TextView tv_baby_name ,tv_baby_age;
     private TextView tv_title;
@@ -126,7 +126,7 @@ public class PersonCenterActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

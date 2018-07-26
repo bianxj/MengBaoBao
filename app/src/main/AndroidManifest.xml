@@ -64,11 +64,12 @@
             android:theme="@style/GuideLauncher"
             >
         </activity>
-        <activity android:name="com.doumengmeng.customer.activity.LoginActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
-        <activity android:name="com.doumengmeng.customer.activity.RegisterActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.LoginActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.TransitionActivity" android:theme="@style/TransitionLauncher" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.RegisterActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.ForgotPwdActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.AgreementActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name="com.doumengmeng.customer.activity.LoadingActivity" android:theme="@style/StatusBarTheme" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.doumengmeng.customer.activity.LoadingActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.MainActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name="com.doumengmeng.customer.activity.PersonCenterActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.BaseInfoActivity" android:screenOrientation="portrait"></activity>
