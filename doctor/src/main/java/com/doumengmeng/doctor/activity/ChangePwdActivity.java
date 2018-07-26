@@ -10,8 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.entity.LoginInfo;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
@@ -32,7 +32,7 @@ import java.util.Map;
  * 描述: 修改密码
  * 创建日期: 2018/1/8 10:47
  */
-public class ChangePwdActivity extends BaseActivity {
+public class ChangePwdActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back;
     private TextView tv_title,tv_prompt;
@@ -85,7 +85,7 @@ public class ChangePwdActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

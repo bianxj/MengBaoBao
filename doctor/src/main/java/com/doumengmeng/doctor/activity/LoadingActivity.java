@@ -348,6 +348,8 @@ public class LoadingActivity extends BaseActivity {
         JSONObject object = new JSONObject();
         try {
             object.put("doctorId",userData.getDoctorId());
+            object.put("featureVersion",BaseApplication.getInstance().loadFeatureVersion());
+            object.put("nurtureVersion",BaseApplication.getInstance().loadNurtureVersion());
             map.put(UrlAddressList.PARAM,object.toString());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -407,18 +409,17 @@ public class LoadingActivity extends BaseActivity {
 
                     @Override
                     public void onPostExecute(String result) {
-//                        checkVersionAndWifi();
-//                        if (BaseApplication.getInstance().isToExamine()){
+                        if (BaseApplication.getInstance().isToExamine()){
+                            MyDialog.showPromptDialog(LoadingActivity.this, "请等待审核\n" +
+                                    " 审核通过后将会以短信形式通知您", R.string.sure, new MyDialog.PromptDialogCallback() {
+                                @Override
+                                public void sure() {
+                                    BaseApplication.getInstance().skipToGuideNoClear(LoadingActivity.this);
+                                }
+                            });
+                        } else {
                             initConfigure();
-//                        } else {
-//                            MyDialog.showPromptDialog(LoadingActivity.this, "请等待审核\n" +
-//                                    " 审核通过后将会以短信形式通知您", R.string.sure, new MyDialog.PromptDialogCallback() {
-//                                @Override
-//                                public void sure() {
-//
-//                                }
-//                            });
-//                        }
+                        }
                     }
                 },RequestTask.JSON);
                 loginTask.execute();
@@ -439,7 +440,7 @@ public class LoadingActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 
@@ -512,14 +513,24 @@ public class LoadingActivity extends BaseActivity {
         @Override
         public void run() {
             DaoManager.getInstance().deleteTable(LoadingActivity.this, HospitalDao.TABLE_NAME);
-            DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
-            DaoManager.getInstance().deleteTable(LoadingActivity.this, NurtureDao.TABLE_NAME);
+
 
             InitConfigureResponse.Result result = response.getResult();
 
             DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, result.getHospitalList());
-            DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this,result.getFeatureList());
-            DaoManager.getInstance().getNurtureDao().saveNurtureList(LoadingActivity.this,result.getNurtureGuideInfoList());
+            if ( result.getFeatureList() != null && result.getFeatureList().size() > 0 ) {
+                DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
+                DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this, result.getFeatureList());
+                BaseApplication.getInstance().saveFeatureVersion(result.getFeatureVersion());
+            }
+            if ( result.getNurtureGuideInfoList() != null && result.getNurtureGuideInfoList().size() > 0 ) {
+                DaoManager.getInstance().deleteTable(LoadingActivity.this, NurtureDao.TABLE_NAME);
+                DaoManager.getInstance().getNurtureDao().saveNurtureList(LoadingActivity.this, result.getNurtureGuideInfoList());
+                BaseApplication.getInstance().saveNurtureVersion(result.getNurtureVersion());
+            }
+
+            BaseApplication.getInstance().saveIncomeRatio(result.getIncomeRatio());
+            BaseApplication.getInstance().savePlatformProtocol(result.getPlatformProtocol());
 
             BaseApplication.getInstance().saveMaintain("");
             if ( TextUtils.isEmpty(result.getNewsCount()) ){

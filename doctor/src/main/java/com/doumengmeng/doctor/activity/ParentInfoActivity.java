@@ -7,7 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.util.MyDialog;
@@ -16,7 +16,7 @@ import com.doumengmeng.doctor.util.MyDialog;
  * Created by Administrator on 2018/3/1.
  */
 
-public class ParentInfoActivity extends BaseActivity {
+public class ParentInfoActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_PARENT_INFO = "in_parent_info";
 
@@ -117,7 +117,7 @@ public class ParentInfoActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

@@ -28,6 +28,10 @@ public class InitConfigureResponse extends BaseResponse {
         private List<Feature> FeatureList;
         private List<Nurture> NurtureGuideInfoList;
         private String newsCount;
+        private String featureVersion;
+        private String nurtureVersion;
+        private String incomeRatio;
+        private String platformProtocol;
 
         public void setHospitalList(List<Hospital> hospitalList) {
             HospitalList = hospitalList;
@@ -59,6 +63,38 @@ public class InitConfigureResponse extends BaseResponse {
 
         public void setNewsCount(String newsCount) {
             this.newsCount = newsCount;
+        }
+
+        public String getFeatureVersion() {
+            return featureVersion;
+        }
+
+        public void setFeatureVersion(String featureVersion) {
+            this.featureVersion = featureVersion;
+        }
+
+        public String getNurtureVersion() {
+            return nurtureVersion;
+        }
+
+        public void setNurtureVersion(String nurtureVersion) {
+            this.nurtureVersion = nurtureVersion;
+        }
+
+        public String getIncomeRatio() {
+            return incomeRatio;
+        }
+
+        public void setIncomeRatio(String incomeRatio) {
+            this.incomeRatio = incomeRatio;
+        }
+
+        public String getPlatformProtocol() {
+            return platformProtocol;
+        }
+
+        public void setPlatformProtocol(String platformProtocol) {
+            this.platformProtocol = platformProtocol;
         }
     }
 

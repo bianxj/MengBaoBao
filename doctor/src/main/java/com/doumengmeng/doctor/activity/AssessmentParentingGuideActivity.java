@@ -234,7 +234,7 @@ public class AssessmentParentingGuideActivity extends BaseTimeFragmentActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

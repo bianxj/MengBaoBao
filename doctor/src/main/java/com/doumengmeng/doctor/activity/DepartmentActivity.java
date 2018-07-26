@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.adapter.DepartmentAdapter;
 import com.doumengmeng.doctor.adapter.viewholder.InputContentHolder;
-import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Administrator on 2018/3/1.
  */
 
-public class DepartmentActivity extends BaseActivity implements InputContentHolder.InputCompleteAction {
+public class DepartmentActivity extends BaseSwipeActivity implements InputContentHolder.InputCompleteAction {
 
     public final static String OUT_PARAM_DEPARTMENT_NAME = "department_name";
 
@@ -82,7 +82,7 @@ public class DepartmentActivity extends BaseActivity implements InputContentHold
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.base.Constant;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.response.entity.UserData;
@@ -27,7 +27,7 @@ import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-public class QRActivity extends BaseActivity {
+public class QRActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back,rl_share;
     private TextView tv_title;
@@ -106,7 +106,7 @@ public class QRActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.adapter.HistoryReportAdapter;
-import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
 import com.doumengmeng.doctor.base.BaseLoadingListener;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
@@ -35,7 +35,7 @@ import java.util.Map;
  * Created by Administrator on 2018/3/1.
  */
 
-public class HistoryReportActivity extends BaseActivity {
+public class HistoryReportActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_USER_DATA = "in_user_data";
     public final static String IN_PARAM_DOCTOR_ID = "in_doctor_id";
@@ -106,7 +106,7 @@ public class HistoryReportActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

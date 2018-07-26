@@ -18,8 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.util.AppUtil;
 import com.doumengmeng.doctor.util.MyDialog;
 import com.doumengmeng.doctor.util.PermissionUtil;
@@ -34,7 +34,7 @@ import java.io.IOException;
  * 描述: 上传头像
  * 创建日期: 2018/1/8 13:53
  */
-public class HeadImageActivity extends BaseActivity {
+public class HeadImageActivity extends BaseSwipeActivity {
 
     private final static int REQUEST_CAMERA = 0x01;
     private final static int REQUEST_IMAGE = 0x02;
@@ -101,7 +101,7 @@ public class HeadImageActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

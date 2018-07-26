@@ -10,8 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.response.AssessmentDetailResponse;
 import com.doumengmeng.doctor.response.entity.HistoryReport;
 import com.doumengmeng.doctor.util.FormulaUtil;
@@ -26,7 +26,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * Created by Administrator on 2018/3/1.
  */
 
-public class HistoryReportDetailActivity extends BaseActivity {
+public class HistoryReportDetailActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_HISTORY_REPORT = "in_history_report";
     public final static String IN_PARAM_USER_DATA = "in_user_data";
@@ -301,7 +301,7 @@ public class HistoryReportDetailActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

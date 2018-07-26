@@ -28,7 +28,7 @@ import com.baidu.location.LocationClientOption;
 import com.doumengmeng.doctor.R;
 import com.doumengmeng.doctor.adapter.HospitalAdaper;
 import com.doumengmeng.doctor.adapter.viewholder.InputContentHolder;
-import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.response.entity.Hospital;
 import com.doumengmeng.doctor.util.AppUtil;
@@ -45,7 +45,7 @@ import java.util.List;
  * Created by Administrator on 2018/3/1.
  */
 
-public class HospitalListActivity extends BaseActivity implements InputContentHolder.InputCompleteAction {
+public class HospitalListActivity extends BaseSwipeActivity implements InputContentHolder.InputCompleteAction {
 
     private final static int REQUEST_LOCATION = 0x01;
 
@@ -130,7 +130,7 @@ public class HospitalListActivity extends BaseActivity implements InputContentHo
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

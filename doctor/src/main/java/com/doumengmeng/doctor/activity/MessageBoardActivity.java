@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
 import com.doumengmeng.doctor.request.RequestTask;
@@ -34,7 +34,7 @@ import java.util.Map;
  * Created by Administrator on 2018/3/1.
  */
 
-public class MessageBoardActivity extends BaseActivity {
+public class MessageBoardActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -94,7 +94,7 @@ public class MessageBoardActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

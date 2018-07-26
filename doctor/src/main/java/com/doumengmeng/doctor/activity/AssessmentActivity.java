@@ -618,7 +618,7 @@ public class AssessmentActivity extends BaseTimeActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

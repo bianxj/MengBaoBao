@@ -20,8 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.net.HttpUtil;
 import com.doumengmeng.doctor.net.UrlAddressList;
 import com.doumengmeng.doctor.request.RequestCallBack;
@@ -51,7 +51,7 @@ import java.util.Map;
  * Created by Administrator on 2018/3/1.
  */
 
-public class InputDoctorInfoActivity extends BaseActivity {
+public class InputDoctorInfoActivity extends BaseSwipeActivity {
 
     private final static int REQUEST_HEAD_IMG = 0x01;
     private final static int REQUEST_HOSPITAL = 0x02;
@@ -69,7 +69,7 @@ public class InputDoctorInfoActivity extends BaseActivity {
     private ImageView civ_head;
     private RelativeLayout rl_hospital,rl_department;
     private TextView tv_hospital ,tv_department;
-    private TextView tv_income;
+    private TextView tv_income,tv_platform_protocol;
     private ImageView iv_certificate_example,iv_first_certificate, iv_second_certificate;
     private Button bt_submit;
     private CheckBoxLayout cbl_professional_title , cbl_service_cost;
@@ -131,12 +131,14 @@ public class InputDoctorInfoActivity extends BaseActivity {
         bt_submit = findViewById(R.id.bt_submit);
         cbl_professional_title = findViewById(R.id.cbl_professional_title);
         cbl_service_cost = findViewById(R.id.cbl_service_cost);
+        tv_platform_protocol = findViewById(R.id.tv_platform_protocol);
 
         cbl_professional_title.setCheckBoxes(Arrays.asList(getResources().getStringArray(R.array.professional_titles)),true);
         cbl_service_cost.setCheckBoxes(Arrays.asList(getResources().getStringArray(R.array.service_cost)),true);
         cbl_service_cost.setOnItemSelectListener(selectListener);
         EditTextUtil.scrollEditText(et_intro);
         EditTextUtil.scrollEditText(et_speciality);
+        tv_platform_protocol.setText(BaseApplication.getInstance().loadPlatformProtocol());
 
         civ_head.setOnClickListener(listener);
         rl_hospital.setOnClickListener(listener);
@@ -489,7 +491,7 @@ public class InputDoctorInfoActivity extends BaseActivity {
         finish();
     }
 
-    private void back(){
+    protected void back(){
         startActivity(LoginActivity.class);
         finish();
     }

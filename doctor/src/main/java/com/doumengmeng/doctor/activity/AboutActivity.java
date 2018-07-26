@@ -8,14 +8,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.util.AppUtil;
 
 /**
  * Created by Administrator on 2018/3/1.
  */
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseSwipeActivity {
     private RelativeLayout rl_back;
     private TextView tv_title;
 
@@ -62,7 +62,7 @@ public class AboutActivity extends BaseActivity {
         }
     }
 
-    private void back(){
+    protected void back(){
         finish();
     }
 }

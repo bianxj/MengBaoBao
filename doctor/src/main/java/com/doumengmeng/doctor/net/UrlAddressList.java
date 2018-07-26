@@ -12,9 +12,10 @@ public class UrlAddressList {
     public final static String SESSION_ID = "sesId";
 
 //    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneDoctorServerV2/";
-    public  final static String BASE_IMAGE_URL = "http://app.mengbaobao.com:8083/";
+//    public final static String BASE_IMAGE_URL = "http://192.168.31.167:8083/";
 
     public final static String BASE_URL = "http://app.mengbaobao.com:8091/mbbPhoneDoctorServerV2/";
+    public  final static String BASE_IMAGE_URL = "http://app.mengbaobao.com:8083/";
 
     public final static String URL_GET_VC = BASE_URL + "babyDoctor.do?method=SendMessage";
     //    public final static String URL_REGISTER_CHECT = BASE_URL + "babyUser.do?method=RegisterCheck";

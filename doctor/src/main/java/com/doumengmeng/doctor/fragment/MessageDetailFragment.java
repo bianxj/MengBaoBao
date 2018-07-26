@@ -109,7 +109,7 @@ public class MessageDetailFragment extends BaseFragment {
         }
     };
 
-    private void back(){
+    protected void back(){
         ((MainActivity)getContext()).switchFragment(MainActivity.PAGE_MESSAGE);
     }
 

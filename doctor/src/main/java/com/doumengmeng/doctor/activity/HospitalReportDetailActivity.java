@@ -8,7 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.response.entity.HospitalReport;
 import com.doumengmeng.doctor.util.GsonUtil;
 import com.doumengmeng.doctor.view.DevelopmentView;
@@ -18,7 +18,7 @@ import com.doumengmeng.doctor.view.GraphModule;
  * Created by Administrator on 2018/3/1.
  */
 
-public class HospitalReportDetailActivity extends BaseActivity {
+public class HospitalReportDetailActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_REPORT_DATA = "in_report_data";
 
@@ -354,7 +354,7 @@ public class HospitalReportDetailActivity extends BaseActivity {
 //        }
 //    }
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

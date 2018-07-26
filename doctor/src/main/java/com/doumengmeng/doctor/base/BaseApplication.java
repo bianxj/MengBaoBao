@@ -57,9 +57,9 @@ public class BaseApplication extends Application {
         builder.setInner(false);
         builder.setLogDirName("/log");
         builder.setSaveDay(5);
-        builder.setSaveLog(false);
+        builder.setSaveLog(true);
         builder.setShow(true);
-        builder.setClose(false);
+        builder.setClose(true);
         log = builder.build();
     }
 
@@ -134,6 +134,45 @@ public class BaseApplication extends Application {
     }
 
     /**-------------------------------------------SharedPerference Start---------------------------------------------------*/
+
+    private final static String TABLE_CONFIG = "config";
+    private final static String COLUMN_FEATURE_VERSION = "feature";
+    private final static String COLUMN_NURTURE_VERSION = "nurture";
+    private final static String COLUMN_INCOME_RATIO = "incomeratio";
+    private final static String COLUMN_PLATFORM_PROTOCOL = "platformprotocol";
+
+    public void saveNurtureVersion(String version){
+        SharedPreferencesUtil.saveString(this,TABLE_CONFIG,COLUMN_NURTURE_VERSION,version);
+    }
+
+    public String loadNurtureVersion(){
+        return SharedPreferencesUtil.loadString(this,TABLE_CONFIG,COLUMN_NURTURE_VERSION,"");
+    }
+
+    public void saveFeatureVersion(String version){
+        SharedPreferencesUtil.saveString(this,TABLE_CONFIG,COLUMN_FEATURE_VERSION,version);
+    }
+
+    public String loadFeatureVersion(){
+        return SharedPreferencesUtil.loadString(this,TABLE_CONFIG,COLUMN_FEATURE_VERSION,"");
+    }
+
+    public void saveIncomeRatio(String incomeRatio){
+        SharedPreferencesUtil.saveString(this,TABLE_CONFIG,COLUMN_INCOME_RATIO,incomeRatio);
+    }
+
+    public String loadIncomeRatio(){
+        return SharedPreferencesUtil.loadString(this,TABLE_CONFIG,COLUMN_INCOME_RATIO,"");
+    }
+
+    public void savePlatformProtocol(String platformProtocol){
+        SharedPreferencesUtil.saveString(this,TABLE_CONFIG,COLUMN_PLATFORM_PROTOCOL,platformProtocol);
+    }
+
+    public String loadPlatformProtocol(){
+        return SharedPreferencesUtil.loadString(this,TABLE_CONFIG,COLUMN_PLATFORM_PROTOCOL,"");
+    }
+
     private final static String TABLE_GUIDE = "guide";
     private final static String COLUMN_GUIDE_STATE = "state";
 
@@ -344,6 +383,14 @@ public class BaseApplication extends Application {
     public void clearHeadFile(){
         FileUtil.getIntance().deleteFile(getHeadImgPath());
         FileUtil.getIntance().deleteFile(getHeadCropPath());
+    }
+
+    public void skipToGuideNoClear(Activity context){
+        finishApp(context);
+        activities.clear();
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     public void skipToGuide(Activity context){

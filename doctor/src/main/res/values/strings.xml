@@ -263,7 +263,7 @@
     <string name="mother_BMI">BMI（母亲）</string>
 
     <!--FragmentAccount-->
-    <string name="account_month_income">本月所得(元)</string>
+    <string name="account_month_income">本月所得(税前)</string>
     <string name="account_month_buy">本月购买</string>
     <string name="account_month_assessment">本月评估</string>
     <string name="account_total_buy">累计购买</string>
@@ -294,7 +294,7 @@
     <string name="department">科室</string>
     <string name="professional_title">职称</string>
     <string name="service_cost">服务费</string>
-    <string name="income">实际所得</string>
+    <string name="income">税前所得</string>
     <string name="speciality">专长</string>
     <string name="intro">简介</string>
     <string name="identity_num">身份证号</string>

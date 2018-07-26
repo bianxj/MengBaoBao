@@ -302,12 +302,12 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/tv_platform_protocol"
                     style="@style/SecondBlue.Text24px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/y23px"
-                    android:includeFontPadding="false"
-                    android:text="@string/income_hint" />
+                    android:includeFontPadding="false" />
             </LinearLayout>
 
             <android.support.v4.widget.Space

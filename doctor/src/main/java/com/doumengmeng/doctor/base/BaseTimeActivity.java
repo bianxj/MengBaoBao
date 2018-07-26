@@ -9,7 +9,7 @@ import android.content.IntentFilter;
  * Created by Administrator on 2018/3/13.
  */
 
-public abstract class BaseTimeActivity extends BaseActivity {
+public abstract class BaseTimeActivity extends BaseSwipeActivity {
 
     @Override
     protected void onResume() {

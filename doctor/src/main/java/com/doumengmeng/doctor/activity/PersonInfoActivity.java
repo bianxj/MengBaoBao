@@ -2,6 +2,7 @@ package com.doumengmeng.doctor.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,8 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
 import com.doumengmeng.doctor.base.BaseApplication;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 import com.doumengmeng.doctor.db.DaoManager;
 import com.doumengmeng.doctor.response.entity.UserData;
 import com.doumengmeng.doctor.view.CircleImageView;
@@ -22,7 +23,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * Created by Administrator on 2018/3/1.
  */
 
-public class PersonInfoActivity extends BaseActivity {
+public class PersonInfoActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -75,7 +76,12 @@ public class PersonInfoActivity extends BaseActivity {
         tv_department.setText(userData.getDepartmentName());
         tv_professional_title.setText(userData.getPositionalTitles());
         tv_service_cost.setText(userData.getCost()+"元");
-        tv_income.setText(Float.parseFloat(userData.getCost())/2+"元");
+        String rateString = BaseApplication.getInstance().loadIncomeRatio();
+        int rate = 0;
+        if (!TextUtils.isEmpty(rateString) && TextUtils.isDigitsOnly(rateString) ){
+            rate = Integer.parseInt(rateString);
+        }
+        tv_income.setText(Float.parseFloat(userData.getCost())*rate/100+"元");
         tv_speciality.setText(userData.getSpeciality());
         tv_intro.setText(userData.getDoctorDesc());
         tv_identity_num.setText(userData.getDoctorCode());
@@ -104,7 +110,7 @@ public class PersonInfoActivity extends BaseActivity {
         }
     };
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

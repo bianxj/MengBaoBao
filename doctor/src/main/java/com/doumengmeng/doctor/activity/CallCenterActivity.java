@@ -8,12 +8,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doumengmeng.doctor.R;
-import com.doumengmeng.doctor.base.BaseActivity;
+import com.doumengmeng.doctor.base.BaseSwipeActivity;
 
 /**
  * Created by Administrator on 2017/12/8.
  */
-public class CallCenterActivity extends BaseActivity {
+public class CallCenterActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -64,7 +64,7 @@ public class CallCenterActivity extends BaseActivity {
         startActivity(MessageBoardActivity.class);
     }
 
-    private void back(){
+    protected void back(){
         finish();
     }
 

@@ -132,6 +132,8 @@ public class AccountFragment extends BaseFragment {
                 ratesDialog.dismiss();
             }
         });
+        TextView tv_content = view.findViewById(R.id.tv_content);
+        tv_content.setText(BaseApplication.getInstance().loadPlatformProtocol().replace("，","\n"));
         ratesDialog.setContentView(view);
         ratesDialog.show();
     }
