@@ -22,6 +22,8 @@ import java.util.List;
 
 public class PayItemLayout extends LinearLayout {
 
+    public final static int UNSELECT = -1;
+
     public PayItemLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
@@ -84,7 +86,7 @@ public class PayItemLayout extends LinearLayout {
                 return i;
             }
         }
-        return -1;
+        return UNSELECT;
     }
 
     public static class PayData{

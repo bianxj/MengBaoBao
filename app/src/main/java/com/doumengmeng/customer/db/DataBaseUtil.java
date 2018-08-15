@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 class DataBaseUtil extends SQLiteOpenHelper {
 
     private final static String DB_NAME = "MENG_BAOBAO_DB";
-    private final static int DB_VERSION = 1;
+    private final static int DB_VERSION = 2;
     private static DataBaseUtil dbUtil;
     private static SQLiteDatabase db;
     private static Integer openCout = 0;

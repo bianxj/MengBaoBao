@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="@dimen/x244px"
+        android:layout_height="@dimen/x160px">
+        <CheckBox
+            android:id="@+id/bg_check"
+            android:layout_width="@dimen/x244px"
+            android:layout_height="@dimen/x148px"
+            android:layout_gravity="bottom"
+            android:button="@null"
+            android:clickable="false"
+            android:background="@drawable/bg_discount"/>
+        <TextView
+            android:id="@+id/tv_spare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FirstBlue.Text25px"
+            android:text="已省2元"
+            android:layout_gravity="top|center_horizontal"
+            android:background="@color/first_white"
+            />
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FourthBlack.Text40px"
+            android:layout_marginTop="@dimen/x42px"
+            android:includeFontPadding="false"
+            android:text="1次"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:id="@+id/tv_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FirstPink.Text28px"
+            android:layout_marginTop="@dimen/x45px"
+            android:layout_marginBottom="@dimen/x30px"
+            android:includeFontPadding="false"
+            android:text="￥170.00"
+            android:layout_gravity="bottom|center_horizontal" />
+    </FrameLayout>
+
+</LinearLayout>

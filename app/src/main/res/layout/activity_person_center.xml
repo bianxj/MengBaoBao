@@ -176,6 +176,46 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/rl_apply_refund"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y144px"
+        android:background="@color/first_white"
+        android:layout_marginTop="@dimen/y19px"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/y46px"
+            android:layout_height="@dimen/y44px"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_refund"
+            android:layout_alignBottom="@+id/tv_apply_refund"
+            android:layout_marginLeft="@dimen/x91px"
+            android:contentDescription="@string/contentDescription" />
+
+        <TextView
+            android:id="@+id/tv_apply_refund"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SecondBlack.Text30px"
+            android:text="@string/apply_refund"
+            android:layout_marginLeft="@dimen/x210px"
+            android:includeFontPadding="false"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/x21px"
+            android:layout_height="@dimen/y33px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x48px"
+            android:src="@drawable/right_allow"
+            android:contentDescription="@string/contentDescription" />
+
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/iv_logout"
         android:layout_width="@dimen/x408px"

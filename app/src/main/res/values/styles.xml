@@ -53,7 +53,10 @@
     <style name="SecondBlack">
         <item name="android:textColor">@color/second_black</item>
     </style>
-
+    <style name="SecondBlack.Text50px">
+        <item name="android:textSize">@dimen/x50px</item>
+        <item name="android:lineSpacingExtra">@dimen/x10px</item>
+    </style>
     <style name="SecondBlack.Text26px">
         <item name="android:textSize">@dimen/x26px</item>
         <item name="android:lineSpacingExtra">@dimen/x10px</item>
@@ -102,6 +105,10 @@
         <item name="android:textColor">@color/third_black</item>
     </style>
 
+    <style name="ThirdBlack.Text35px">
+        <item name="android:textSize">@dimen/x35px</item>
+    </style>
+
     <style name="ThirdBlack.Text28px">
         <item name="android:textSize">@dimen/x28px</item>
     </style>
@@ -115,7 +122,9 @@
     <style name="FourthBlack">
         <item name="android:textColor">@color/fourth_black</item>
     </style>
-
+    <style name="FourthBlack.Text40px">
+        <item name="android:textSize">@dimen/x40px</item>
+    </style>
     <style name="FourthBlack.Text26px">
         <item name="android:textSize">@dimen/x26px</item>
     </style>
@@ -165,6 +174,9 @@
     <style name="SecondGray.Text27px">
         <item name="android:textSize">@dimen/x27px</item>
     </style>
+    <style name="SecondGray.Text28px">
+        <item name="android:textSize">@dimen/x28px</item>
+    </style>
     <!--SecondGray end-->
 
     <!--FourthGray start-->
@@ -192,6 +204,9 @@
     </style>
     <style name="SixthGray.Text23px">
         <item name="android:textSize">@dimen/x23px</item>
+    </style>
+    <style name="SixthGray.Text27px">
+        <item name="android:textSize">@dimen/x27px</item>
     </style>
     <!--SixthGray end-->
     <!--SevenGray start-->
@@ -250,9 +265,19 @@
     <style name="FirstPink">
         <item name="android:textColor">@color/first_pink</item>
     </style>
+    <style name="FirstPink.Text48px">
+        <item name="android:textSize">@dimen/x48px</item>
+    </style>
+    <style name="FirstPink.Text72px">
+        <item name="android:textSize">@dimen/x72px</item>
+    </style>
 
     <style name="FirstPink.Text28px">
         <item name="android:textSize">@dimen/x28px</item>
+    </style>
+    <style name="FirstPink.Text35px">
+        <item name="android:textSize">@dimen/x35px</item>
+        <item name="android:lineSpacingExtra">@dimen/x10px</item>
     </style>
 
     <style name="FirstPink.Text32px">
@@ -285,6 +310,16 @@
         <item name="android:lineSpacingExtra">@dimen/x10px</item>
     </style>
     <!--SecondPink end-->
+
+    <!--FirstBlue start-->
+    <style name="FirstBlue">
+        <item name="android:color">@color/first_blue</item>
+        <item name="android:textColor">@color/first_blue</item>
+    </style>
+    <style name="FirstBlue.Text25px">
+        <item name="android:textSize">@dimen/x25px</item>
+    </style>
+    <!--FirstBlue end-->
 
     <!--CheckBox start-->
     <style name="CheckText">

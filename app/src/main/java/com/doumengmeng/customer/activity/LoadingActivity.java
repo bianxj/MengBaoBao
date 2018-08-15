@@ -34,6 +34,8 @@ import com.doumengmeng.customer.request.ResponseErrorCode;
 import com.doumengmeng.customer.request.task.LoginTask;
 import com.doumengmeng.customer.response.InitConfigureResponse;
 import com.doumengmeng.customer.response.UpdateContentResponse;
+import com.doumengmeng.customer.response.entity.Doctor;
+import com.doumengmeng.customer.response.entity.DoctorTrans;
 import com.doumengmeng.customer.response.entity.UserData;
 import com.doumengmeng.customer.util.AppUtil;
 import com.doumengmeng.customer.util.GsonUtil;
@@ -47,6 +49,7 @@ import org.json.JSONObject;
 import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -492,7 +495,13 @@ public class LoadingActivity extends BaseActivity {
 
             InitConfigureResponse.Result result = response.getResult();
 
-            DaoManager.getInstance().getDaotorDao().saveDoctorList(LoadingActivity.this, result.getDoctorList());
+            List<DoctorTrans> trans = result.getDoctorList();
+            List<Doctor> doctors = new ArrayList<>();
+            for (DoctorTrans temp:trans){
+                doctors.add(DoctorTrans.transToDoctor(temp));
+            }
+
+            DaoManager.getInstance().getDaotorDao().saveDoctorList(LoadingActivity.this, doctors);
             DaoManager.getInstance().getGrowthDao().saveGrowthList(LoadingActivity.this, result.getGrowthList());
             DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, result.getHospitalList());
             DaoManager.getInstance().getMengClassDao().saveMengClassList(LoadingActivity.this, result.getMengClassList());

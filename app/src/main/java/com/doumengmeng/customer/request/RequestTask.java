@@ -1,12 +1,11 @@
 package com.doumengmeng.customer.request;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
-import com.doumengmeng.customer.activity.LoadingActivity;
+import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.net.HttpUtil;
 import com.doumengmeng.customer.util.MyDialog;
 
@@ -96,7 +95,7 @@ public class RequestTask extends AsyncTask<String,Void,String> {
                     builder.getCallBack().onPostExecute(s);
                 } else {
                     if ( isLoginTimeOut(s) ){
-                        skipToLoading();
+                        BaseApplication.getInstance().skipToLoading(builder.getWeakReference().get());
                     } else {
                         builder.getCallBack().onError(s);
                     }
@@ -105,12 +104,12 @@ public class RequestTask extends AsyncTask<String,Void,String> {
         }
     }
 
-    private void skipToLoading(){
-        Context context = builder.getWeakReference().get();
-        Intent intent = new Intent(context, LoadingActivity.class);
-        intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
-        context.startActivity(intent);
-    }
+//    private void skipToLoading(){
+//        Context context = builder.getWeakReference().get();
+//        Intent intent = new Intent(context, LoadingActivity.class);
+//        intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
+//        context.startActivity(intent);
+//    }
 
     private boolean isLoginTimeOut(String json){
         return ResponseErrorCode.ERROR_LOGIN_ROLE_EXIST == ResponseErrorCode.getErrorCode(json);

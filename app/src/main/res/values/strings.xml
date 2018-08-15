@@ -82,6 +82,7 @@
     <!--PersonCenterActivity信息-->
     <string name="base_info">基本信息</string>
     <string name="parent_info">父母信息</string>
+    <string name="apply_refund">申请退款</string>
 
     <!--ContactActivity信息-->
     <string name="contact_hotline">客服热线</string>
@@ -401,6 +402,25 @@
     <string name="diagram_data_height_weight_ratio">身长体重比记录</string>
     <string name="diagram_data_month_day">%d个月%d天</string>
 
+    <!--PayActivity-->
+    <string name="pay_title">支付</string>
+    <string name="pay_count">%d次</string>
+    <string name="pay_cost">￥%.2f</string>
+    <string name="pay_spare">已省%d元</string>
+    <string name="pay_choose_discount">选择套餐</string>
+    <string name="pay_choose_format">选择付款方式</string>
+
+    <!--ApplyRefundActivity-->
+    <string name="apply_refund_title">申请退款</string>
+    <string name="apply_refund_confirm">确认退款</string>
+
+    <!--RefundResultActivity-->
+    <string name="refund_result_title">退款结果</string>
+    <string name="refund_result_tel">客服电话：021-64335531</string>
+    <string name="refund_result_success">申请退款成功！</string>
+    <string name="refund_result_describe">退款将在7个工作日内到账</string>
+    <string name="refund_result_details">退款详情</string>
+
     <!--Dialog-->
     <string name="dialog_content_development">*您没有勾选 "发育行为\n观察" ，请确认。</string>
     <string name="dialog_content_camera_permission">请打开相机权限</string>
@@ -476,6 +496,11 @@
     <string name="prompt_lost_zero">您还剩0次测评\n次数，请购买我们的服务</string>
     <string name="prompt_over_36">我们只做0-36个月的测评，您的宝宝已超龄。</string>
 
+    <!--退款-->
+    <string name="prompt_refund_add_record">您已申请退款，待完成退款手续后才能提交新记录</string>
+    <string name="prompt_refund_buy">您已申请退款，待完成退款手续后才能购买新服务</string>
+    <string name="prompt_refund_again">您已申请退款，抱歉不能重复申请退款</string>
+    <string name="prompt_no_refund">抱歉您没有可退的款项</string>
 
     <!--Other-->
     <string name="contentDescription">image</string>

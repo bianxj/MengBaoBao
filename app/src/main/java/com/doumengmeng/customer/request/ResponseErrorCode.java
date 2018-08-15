@@ -69,8 +69,14 @@ public class ResponseErrorCode {
     private static final int ERROR_ROLE_SALON_MAX = -112;				//角色沙龙次数到达上限
     private static final int ERROR_ROLE_MENU = -113;						//角色套餐信息获得失败
     private static final int ERROR_ROLE_MENU_LIMIT = -114;				//角色套餐即将失效
-    private static final int ERROR_ROLE_MENU_OVER = -115;				//角色套餐结束
+    public static final int ERROR_ROLE_MENU_OVER = -115;				//角色套餐结束
     private static final int ERROR_ROLE_UPDATE_LINKMAN = -116;			//角色修改联系人信息错误
+
+    //退款
+//    public static final int ERROR_REFUND_SUBMIT = -150;					//已申请退款，按提交按钮
+//    public static final int ERROR_REFUND_BUY = -151;					//已申请退款，按购买按钮
+    public static final int ERROR_REFUND_APPLY = -152;					//已申请退款
+    public static final int ERROR_REFUND_NOTIMES = -153;				//没有剩余次数
 
     //客户端
     private static final int ERROR_CLIENT_PARAMS_EMPTY = -200;			//空参数

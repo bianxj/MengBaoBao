@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/first_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/include_title_back"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ThirdBlack.Text35px"
+                android:text="退款服务"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/x30px"
+                android:layout_marginLeft="@dimen/x40px"
+                />
+
+            <TextView
+                android:id="@+id/tv_refund_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SecondBlack.Text32px"
+                android:layout_marginLeft="@dimen/x81px"
+                android:layout_marginRight="@dimen/x76px"
+                android:layout_marginTop="@dimen/x30px"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x74px"
+                android:layout_marginTop="@dimen/x30px"
+                android:layout_marginBottom="@dimen/x30px"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/FirstPink.Text32px"
+                    android:text="*"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/SecondGray.Text28px"
+                    android:text="退款金额=付款总金额-单价*已使用次数"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x20px"
+                android:background="@color/lightSky"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:layout_marginLeft="@dimen/x26px"
+                    style="@style/FirstPink.Text35px"
+                    android:layout_alignBaseline="@+id/unuse_refund_reason"/>
+                <TextView
+                    android:id="@+id/unuse_refund_reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/ThirdBlack.Text35px"
+                    android:text="退款原因"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/x30px"
+                    android:layout_marginLeft="@dimen/x40px"
+                    />
+            </RelativeLayout>
+
+            <com.doumengmeng.customer.view.CheckBoxLayout
+                android:id="@+id/cbl_refund_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:default_grap="@dimen/x30px"
+                app:vertical_grap="@dimen/x20px"
+                app:justify_align="false"
+                app:checkbox_selector="@drawable/bg_rect"
+                app:text_selector="@drawable/bg_rect_text_color"
+                android:layout_marginTop="@dimen/x30px"
+                android:layout_marginLeft="@dimen/x80px"
+                android:layout_marginRight="@dimen/x80px">
+
+            </com.doumengmeng.customer.view.CheckBoxLayout>
+
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="@dimen/x596px"
+                android:layout_height="@dimen/y85px"
+                android:text="@string/apply_refund_confirm"
+                android:gravity="center"
+                style="@style/FirstPink.Text32px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/x252px"
+                android:layout_marginBottom="@dimen/x30px"
+                android:background="@drawable/bg_pay_text_pink"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

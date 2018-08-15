@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.doumengmeng.customer.entity.DoctorEntity;
 import com.doumengmeng.customer.response.entity.Doctor;
+import com.doumengmeng.customer.util.GsonUtil;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,8 @@ public class DoctorDao {
     private final static String SPECIALITY = "speciality";
     private final static String DOCTOR_DESC = "doctordesc";
     private final static String DOCTOR_ORDER = "doctororder";
+    private final static String DISCOUNTS = "discounts";
+    private final static String DISCOUNTS_COST = "discounts_cost";
 
     public static void createTable(SQLiteDatabase db){
         String builder = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + DOCTOR_ID + " varchar," +
@@ -50,13 +54,21 @@ public class DoctorDao {
                 HOSPITAL_ID + " varchar," +
                 SPECIALITY + " varchar," +
                 DOCTOR_ORDER + " int," +
-                DOCTOR_DESC + " varchar" +
+                DOCTOR_DESC + " varchar," +
+                DISCOUNTS + " varchar," +
+                DISCOUNTS_COST + " varchar" +
                 ")";
         db.execSQL(builder);
     }
 
     public static void updateTable(SQLiteDatabase db , int oldVersion, int newVersion){
-
+        String builder = null;
+        if ( newVersion == 2 ){
+            builder = "ALTER TABLE " + TABLE_NAME + " ADD " + DISCOUNTS + " varchar";
+            db.execSQL(builder);
+            builder = "ALTER TABLE " + TABLE_NAME + " ADD " + DISCOUNTS_COST + " varchar";
+            db.execSQL(builder);
+        }
     }
 
     public void saveDoctorList(Context context,List<Doctor> doctors){
@@ -84,10 +96,14 @@ public class DoctorDao {
             values.put(POSITIONAL_TITLES,doctor.getPositionaltitles());
             values.put(SPECIALITY,doctor.getSpeciality());
             values.put(STATE,doctor.getState());
+
+            values.put(DISCOUNTS, GsonUtil.getInstance().toJson(doctor.getDiscounts()));
+            values.put(DISCOUNTS_COST,GsonUtil.getInstance().toJson(doctor.getDiscountsCost()));
             db.insert(TABLE_NAME,null,values);
         }
         db.setTransactionSuccessful();
         db.endTransaction();
+
         DataBaseUtil.closeDataBase();
     }
 
@@ -190,7 +206,6 @@ public class DoctorDao {
                 " order by a." + DOCTOR_ORDER +
                 " limit " + limit +
                 " offset " + offset * limit;
-
         Cursor cursor = db.rawQuery(builder,null);
 
         if ( cursor != null ){
@@ -330,22 +345,7 @@ public class DoctorDao {
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         Cursor cursor = db.rawQuery(sql,null);
         if ( cursor.moveToNext() ){
-            doctor = new Doctor();
-            doctor.setDoctorid(cursor.getString(cursor.getColumnIndex(DOCTOR_ID)));
-            doctor.setDoctorcode(cursor.getString(cursor.getColumnIndex(DOCTOR_CODE)));
-            doctor.setState(cursor.getString(cursor.getColumnIndex(STATE)));
-            doctor.setCertificatea(cursor.getString(cursor.getColumnIndex(CERTIFICATE_A)));
-            doctor.setCertificateb(cursor.getString(cursor.getColumnIndex(CERTIFICATE_B)));
-            doctor.setDoctorphone(cursor.getString(cursor.getColumnIndex(DOCTOR_PHONE)));
-            doctor.setCost(cursor.getString(cursor.getColumnIndex(COST)));
-            doctor.setLoginpwd(cursor.getString(cursor.getColumnIndex(LOGIN_PWD)));
-            doctor.setDoctorimg(cursor.getString(cursor.getColumnIndex(DOCTOR_IMG)));
-            doctor.setDoctorname(cursor.getString(cursor.getColumnIndex(DOCTOR_NAME)));
-            doctor.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
-            doctor.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
-            doctor.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
-            doctor.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
-            doctor.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
+            doctor = convertToDoctor(cursor);
         }
         cursor.close();
         DataBaseUtil.closeDataBase();
@@ -358,25 +358,38 @@ public class DoctorDao {
         SQLiteDatabase db = DataBaseUtil.openDataBase(context);
         Cursor cursor = db.rawQuery(sql,null);
         if ( cursor.moveToNext() ){
-            doctor = new Doctor();
-            doctor.setDoctorid(cursor.getString(cursor.getColumnIndex(DOCTOR_ID)));
-            doctor.setDoctorcode(cursor.getString(cursor.getColumnIndex(DOCTOR_CODE)));
-            doctor.setState(cursor.getString(cursor.getColumnIndex(STATE)));
-            doctor.setCertificatea(cursor.getString(cursor.getColumnIndex(CERTIFICATE_A)));
-            doctor.setCertificateb(cursor.getString(cursor.getColumnIndex(CERTIFICATE_B)));
-            doctor.setDoctorphone(cursor.getString(cursor.getColumnIndex(DOCTOR_PHONE)));
-            doctor.setCost(cursor.getString(cursor.getColumnIndex(COST)));
-            doctor.setLoginpwd(cursor.getString(cursor.getColumnIndex(LOGIN_PWD)));
-            doctor.setDoctorimg(cursor.getString(cursor.getColumnIndex(DOCTOR_IMG)));
-            doctor.setDoctorname(cursor.getString(cursor.getColumnIndex(DOCTOR_NAME)));
-            doctor.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
-            doctor.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
-            doctor.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
-            doctor.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
-            doctor.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
+            doctor = convertToDoctor(cursor);
         }
         cursor.close();
         DataBaseUtil.closeDataBase();
+        return doctor;
+    }
+
+    private Doctor convertToDoctor(Cursor cursor){
+        Doctor doctor = new Doctor();
+        doctor.setDoctorid(cursor.getString(cursor.getColumnIndex(DOCTOR_ID)));
+        doctor.setDoctorcode(cursor.getString(cursor.getColumnIndex(DOCTOR_CODE)));
+        doctor.setState(cursor.getString(cursor.getColumnIndex(STATE)));
+        doctor.setCertificatea(cursor.getString(cursor.getColumnIndex(CERTIFICATE_A)));
+        doctor.setCertificateb(cursor.getString(cursor.getColumnIndex(CERTIFICATE_B)));
+        doctor.setDoctorphone(cursor.getString(cursor.getColumnIndex(DOCTOR_PHONE)));
+        doctor.setCost(cursor.getString(cursor.getColumnIndex(COST)));
+        doctor.setLoginpwd(cursor.getString(cursor.getColumnIndex(LOGIN_PWD)));
+        doctor.setDoctorimg(cursor.getString(cursor.getColumnIndex(DOCTOR_IMG)));
+        doctor.setDoctorname(cursor.getString(cursor.getColumnIndex(DOCTOR_NAME)));
+        doctor.setPositionaltitles(cursor.getString(cursor.getColumnIndex(POSITIONAL_TITLES)));
+        doctor.setHospitalid(cursor.getString(cursor.getColumnIndex(HOSPITAL_ID)));
+        doctor.setSpeciality(cursor.getString(cursor.getColumnIndex(SPECIALITY)));
+        doctor.setDoctordesc(cursor.getString(cursor.getColumnIndex(DOCTOR_DESC)));
+        doctor.setDoctororder(String.valueOf(cursor.getInt(cursor.getColumnIndex(DOCTOR_ORDER))));
+
+        String discounts = String.valueOf(cursor.getString(cursor.getColumnIndex(DISCOUNTS)));
+        List<String> discountList = GsonUtil.getInstance().fromJson(discounts,new TypeToken<List<String>>(){}.getType());
+        doctor.setDiscounts(discountList);
+
+        String discountsCost = String.valueOf(cursor.getString(cursor.getColumnIndex(DISCOUNTS_COST)));
+        List<String> discountCostList = GsonUtil.getInstance().fromJson(discountsCost,new TypeToken<List<String>>(){}.getType());
+        doctor.setDiscountsCost(discountCostList);
         return doctor;
     }
 

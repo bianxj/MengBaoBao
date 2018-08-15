@@ -870,11 +870,32 @@ public class RecordActivity extends BaseSwipeActivity {
 
         @Override
         public void onError(String result) {
-            MyDialog.showPromptDialog(RecordActivity.this,ResponseErrorCode.getErrorMsg(result),null);
+            if ( ResponseErrorCode.ERROR_ROLE_MENU_OVER == ResponseErrorCode.getErrorCode(result)
+                    || ResponseErrorCode.ERROR_REFUND_NOTIMES == ResponseErrorCode.getErrorCode(result) ){
+                MyDialog.showPromptDialog(RecordActivity.this, "您还剩0次测评\n次数，请购买我们的服务", new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        finish();
+                        BaseApplication.getInstance().skipToLoading(RecordActivity.this);
+                    }
+                });
+            } else {
+                MyDialog.showPromptDialog(RecordActivity.this,ResponseErrorCode.getErrorMsg(result),null);
+            }
         }
 
         @Override
         public void onPostExecute(String result) {
+            if ( ResponseErrorCode.ERROR_ROLE_MENU_OVER == ResponseErrorCode.getErrorCode(result) ){
+                MyDialog.showPromptDialog(RecordActivity.this, "您已申请退款，待完成退款手续后才能提交新记录", new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        finish();
+                        BaseApplication.getInstance().skipToLoading(RecordActivity.this);
+                    }
+                });
+                return;
+            }
             SubmitRecordResponse response = GsonUtil.getInstance().fromJson(result,SubmitRecordResponse.class);
             if ( 1 == response.getResult().getIsSuccess() ){
                 getCurrentRecord();

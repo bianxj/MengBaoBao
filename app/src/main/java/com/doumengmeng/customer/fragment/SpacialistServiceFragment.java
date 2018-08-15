@@ -21,6 +21,7 @@ import com.doumengmeng.customer.base.BaseLoadingListener;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
+import com.doumengmeng.customer.request.task.RefundCheckTask;
 import com.doumengmeng.customer.response.AllRecordResponse;
 import com.doumengmeng.customer.response.entity.Record;
 import com.doumengmeng.customer.response.entity.RecordResult;
@@ -81,6 +82,9 @@ public class SpacialistServiceFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         stopTask(recordTask);
+        if ( task != null ){
+            stopTask(task.getRequestTask());
+        }
     }
 
     private void findView(View view){
@@ -178,31 +182,8 @@ public class SpacialistServiceFragment extends BaseFragment {
                     startActivity(SpacialistServiceActivity.class);
                     break;
                 case R.id.rl_add_record:
-                    String recordTimes = userData.getRecordtimes();
-                    if ( BaseApplication.getInstance().isUpperThan37Month() ){
-                        MyDialog.showPromptDialog(getContext(), getString(R.string.prompt_over_36), new MyDialog.PromptDialogCallback() {
-                            @Override
-                            public void sure() {
-
-                            }
-                        });
-                    } else {
-                        if (TextUtils.isEmpty(recordTimes) || Integer.parseInt(recordTimes) <= 0) {
-                            MyDialog.showChooseDialog(getContext(), getString(R.string.prompt_lost_zero), R.string.prompt_bt_cancel, R.string.prompt_bt_buy, new MyDialog.ChooseDialogCallback() {
-                                @Override
-                                public void sure() {
-                                    startActivity(SpacialistServiceActivity.class);
-                                }
-
-                                @Override
-                                public void cancel() {
-
-                                }
-                            });
-                        } else {
-                            startActivity(RecordActivity.class);
-                        }
-                    }
+                    //TODO
+                    addRecordCheck();
                     break;
                 case R.id.bt_buy:
                     startActivity(SpacialistServiceActivity.class);
@@ -210,6 +191,34 @@ public class SpacialistServiceFragment extends BaseFragment {
             }
         }
     };
+
+    private void addRecord(){
+//        String recordTimes = userData.getRecordtimes();
+//        if ( BaseApplication.getInstance().isUpperThan37Month() ){
+//            MyDialog.showPromptDialog(getContext(), getString(R.string.prompt_over_36), new MyDialog.PromptDialogCallback() {
+//                @Override
+//                public void sure() {
+//
+//                }
+//            });
+//        } else {
+//            if (TextUtils.isEmpty(recordTimes) || Integer.parseInt(recordTimes) <= 0) {
+//                MyDialog.showChooseDialog(getContext(), getString(R.string.prompt_lost_zero), R.string.prompt_bt_cancel, R.string.prompt_bt_buy, new MyDialog.ChooseDialogCallback() {
+//                    @Override
+//                    public void sure() {
+//                        startActivity(SpacialistServiceActivity.class);
+//                    }
+//
+//                    @Override
+//                    public void cancel() {
+//
+//                    }
+//                });
+//            } else {
+                startActivity(RecordActivity.class);
+//            }
+//        }
+    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -268,5 +277,86 @@ public class SpacialistServiceFragment extends BaseFragment {
 //            xrv_record.setNoMore(true);
         }
     };
+
+    private RefundCheckTask task;
+    private void addRecordCheck(){
+        String recordTimes = userData.getRecordtimes();
+        if ( BaseApplication.getInstance().isUpperThan37Month() ){
+            MyDialog.showPromptDialog(getContext(), getString(R.string.prompt_over_36), new MyDialog.PromptDialogCallback() {
+                @Override
+                public void sure() {
+
+                }
+            });
+        } else {
+            if (TextUtils.isEmpty(recordTimes) || Integer.parseInt(recordTimes) <= 0) {
+                MyDialog.showChooseDialog(getContext(), getString(R.string.prompt_lost_zero), R.string.prompt_bt_cancel, R.string.prompt_bt_buy, new MyDialog.ChooseDialogCallback() {
+                    @Override
+                    public void sure() {
+                        startActivity(SpacialistServiceActivity.class);
+                    }
+
+                    @Override
+                    public void cancel() {
+
+                    }
+                });
+            } else {
+                task = new RefundCheckTask(getContext(), RefundCheckTask.RefundType.ADD_RECORD, new RefundCheckTask.RefundCallBack() {
+                    @Override
+                    public void success() {
+                        addRecord();
+                    }
+                });
+                task.startTask();
+            }
+        }
+    }
+
+
+//    private RequestTask refundCheckTask = null;
+//    private void refundCheck(){
+//        try {
+//            refundCheckTask = new RequestTask.Builder(getContext(),refundCheckCallback)
+//                    .setContent(buildRefundCheckData())
+//                    .setType(RequestTask.LOADING|RequestTask.JSON)
+//                    .setUrl(UrlAddressList.URL_REFUND_CHECK).build();
+//            refundCheckTask.execute();
+//        } catch (Throwable throwable) {
+//            throwable.printStackTrace();
+//        }
+//    }
+//
+//    private Map<String,String> buildRefundCheckData(){
+//        Map<String,String> map = new HashMap<>();
+//        JSONObject object = new JSONObject();
+//        try {
+//            object.put("userId",userData.getUserid());
+//            map.put(UrlAddressList.PARAM,object.toString());
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
+//        return map;
+//    }
+//
+//    private RequestCallBack refundCheckCallback = new RequestCallBack() {
+//        @Override
+//        public void onPreExecute() {}
+//
+//        @Override
+//        public void onError(String result) {
+//            if (ResponseErrorCode.getErrorCode(result) == 1 ){
+//                MyDialog.showPromptDialog(getContext(),getString(R.string.prompt_refund_add_record),null);
+//            } else {
+//                MyDialog.showPromptDialog(getContext(),ResponseErrorCode.getErrorMsg(result),null);
+//            }
+//        }
+//
+//        @Override
+//        public void onPostExecute(String result) {
+//            addRecord();
+//        }
+//    };
 
 }

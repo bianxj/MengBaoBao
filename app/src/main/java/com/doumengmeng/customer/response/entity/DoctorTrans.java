@@ -1,16 +1,8 @@
 package com.doumengmeng.customer.response.entity;
 
-import android.text.TextUtils;
+import java.util.Arrays;
 
-import com.doumengmeng.customer.net.UrlAddressList;
-
-import java.util.List;
-
-/**
- * Created by Administrator on 2017/12/11.
- */
-
-public class Doctor {
+public class DoctorTrans {
 
     private String doctorid;
     private String doctorcode;
@@ -29,15 +21,9 @@ public class Doctor {
     private String speciality;
     private String doctordesc;
 
-    private List<String> discounts;
-    private List<String> discountsCost;
-
-    public String getDoctorImageUrl(){
-        if (!TextUtils.isEmpty(doctorimg)){
-            return UrlAddressList.IMAGE_URL + doctorimg;
-        }
-        return doctorimg;
-    }
+    private String threeprices;
+    private String sixprices;
+    private String twelveprices;
 
     public String getDoctorimg() {
         return doctorimg;
@@ -159,19 +145,52 @@ public class Doctor {
         this.hospitalid = hospitalid;
     }
 
-    public List<String> getDiscounts() {
-        return discounts;
+    public String getThreeprices() {
+        return threeprices;
     }
 
-    public void setDiscounts(List<String> discounts) {
-        this.discounts = discounts;
+    public void setThreeprices(String threeprices) {
+        this.threeprices = threeprices;
     }
 
-    public List<String> getDiscountsCost() {
-        return discountsCost;
+    public String getSixprices() {
+        return sixprices;
     }
 
-    public void setDiscountsCost(List<String> discountsCost) {
-        this.discountsCost = discountsCost;
+    public void setSixprices(String sixprices) {
+        this.sixprices = sixprices;
+    }
+
+    public String getTwelveprices() {
+        return twelveprices;
+    }
+
+    public void setTwelveprices(String twelveprices) {
+        this.twelveprices = twelveprices;
+    }
+
+    public static Doctor transToDoctor(DoctorTrans temp){
+        if ( temp == null ){
+            return null;
+        }
+        Doctor doctor = new Doctor();
+        doctor.setCertificatea(temp.getCertificatea());
+        doctor.setCertificateb(temp.getCertificateb());
+        doctor.setCost(temp.getCost());
+        doctor.setDiscounts(Arrays.asList("1","3","6","12"));
+        doctor.setDiscountsCost(Arrays.asList(temp.getCost(),temp.getThreeprices(),temp.getSixprices(),temp.getTwelveprices()));
+        doctor.setDoctorcode(temp.getDoctorcode());
+        doctor.setDoctorid(temp.getDoctorid());
+        doctor.setDoctordesc(temp.getDoctordesc());
+        doctor.setDoctorimg(temp.getDoctorimg());
+        doctor.setDoctororder(temp.getDoctororder());
+        doctor.setDoctorname(temp.getDoctorname());
+        doctor.setDoctorphone(temp.getDoctorphone());
+        doctor.setHospitalid(temp.getHospitalid());
+        doctor.setState(temp.getState());
+        doctor.setSpeciality(temp.getSpeciality());
+        doctor.setPositionaltitles(temp.getPositionaltitles());
+        doctor.setLoginpwd(temp.getLoginpwd());
+        return doctor;
     }
 }

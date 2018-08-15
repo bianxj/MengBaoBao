@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
 import com.doumengmeng.customer.activity.GuideActivity;
+import com.doumengmeng.customer.activity.LoadingActivity;
 import com.doumengmeng.customer.entity.LoginInfo;
 import com.doumengmeng.customer.entity.RoleType;
 import com.doumengmeng.customer.request.entity.InputUserInfo;
@@ -69,7 +70,7 @@ public class BaseApplication extends Application {
         builder.setInner(false);
         builder.setLogDirName("/log");
         builder.setSaveDay(5);
-        builder.setSaveLog(true);
+        builder.setSaveLog(false);
         builder.setShow(true);
         builder.setClose(true);
         log = builder.build();
@@ -416,6 +417,18 @@ public class BaseApplication extends Application {
         return month >= 37;
     }
 
+    public int getRecordTimes(){
+        if ( TextUtils.isEmpty(userData.getRecordtimes()) ){
+            return 0;
+        }
+        return Integer.parseInt(userData.getRecordtimes());
+    }
+
+    public void setRecordTimes(String recordTimes){
+        userData.setRecordtimes(recordTimes);
+        saveUserData(userData);
+    }
+
     public void minusRecordTimes(){
         int recordTimes = Integer.parseInt(userData.getRecordtimes());
         recordTimes--;
@@ -423,11 +436,19 @@ public class BaseApplication extends Application {
         saveUserData(userData);
     }
 
-    public void addRecordTimes(){
+    public void addRecordTimes(int count){
         int recordTimes = Integer.parseInt(userData.getRecordtimes());
-        recordTimes++;
+        recordTimes+=count;
         userData.setRecordtimes(recordTimes+"");
         saveUserData(userData);
+    }
+
+    public void addRecordTimes(){
+        addRecordTimes(1);
+//        int recordTimes = Integer.parseInt(userData.getRecordtimes());
+//        recordTimes++;
+//        userData.setRecordtimes(recordTimes+"");
+//        saveUserData(userData);
     }
 
     public void payRoleType(){
@@ -607,6 +628,13 @@ public class BaseApplication extends Application {
         Intent intent = new Intent(context, GuideActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    public void skipToLoading(Context context){
+//        Context context = builder.getWeakReference().get();
+        Intent intent = new Intent(context, LoadingActivity.class);
+        intent.putExtra(LoadingActivity.IN_PARAM_AUTO_LOGIN,true);
+        context.startActivity(intent);
     }
 
     public void addActivity(Activity activity){

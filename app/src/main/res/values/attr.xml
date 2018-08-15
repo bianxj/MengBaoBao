@@ -47,4 +47,12 @@
         <attr name="cover_color" format="reference"></attr>
     </declare-styleable>
 
+    <declare-styleable name="CheckBoxLayout">
+        <attr name="default_grap" format="dimension"></attr>
+        <attr name="vertical_grap" format="dimension"></attr>
+        <attr name="justify_align" format="boolean"></attr>
+        <attr name="checkbox_selector" format="reference"></attr>
+        <attr name="text_selector" format="reference"></attr>
+    </declare-styleable>
+
 </resources>

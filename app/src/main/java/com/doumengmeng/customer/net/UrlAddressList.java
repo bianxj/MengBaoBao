@@ -11,15 +11,18 @@ public class UrlAddressList {
     public final static String PARAM = "paramStr";
     public final static String SESSION_ID = "sesId";
 
-//    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneServerV2/";
-//    public final static String IMAGE_URL = "http://192.168.31.167:8083/";
 
     public final static String BASE_URL = "http://app.mengbaobao.com:8090/mbbPhoneServerV2/";
+    public final static String IMAGE_URL = "http://app.mengbaobao.com:8083/";
 
     //测试地址
+//    public final static String BASE_URL = "http://app.mengbaobao.com:8092/mbbPhoneTestServerV2/";
 //    public final static String BASE_URL = "http://app.mengbaobao.com:8092/mbbPhoneTestServer/";
+//    public final static String BASE_URL = "http://app.mengbaobao.com:8092/mbbPhoneTestServerV2/";
+//    public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneTestServerV2/";
+////    public final static String IMAGE_URL = "http://192.168.31.112:8083/";
+//    public final static String BASE_URL = "http://app.mengbaobao.com:8093/mbbPhoneServer2_4_0/";
 
-    public final static String IMAGE_URL = "http://app.mengbaobao.com:8083/";
 
     public final static String URL_GET_VC = BASE_URL + "babyUser.do?method=SendMessage";
 //    public final static String URL_REGISTER_CHECT = BASE_URL + "babyUser.do?method=RegisterCheck";
@@ -46,11 +49,16 @@ public class UrlAddressList {
     public final static String URL_SEARCH_HOSPITAL_RECODR = BASE_URL + "babyUser.do?method=GetChildRecord";
 
     public final static String URL_UPDATE_INFO = BASE_URL + "system.do?method=GetVersion";
-    public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";
+//    public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";
+    public final static String URL_VERSION_FILE = "http://app.mengbaobao.com:8083/andriodUserVersion.txt";
 
     public final static String URL_SEARCH_UNREAD_RECORD = BASE_URL + "babyUser.do?method=LoadHome";
     public final static String URL_SEARCH_LESSON = BASE_URL + "babyUser.do?method=GetMengClass";
     public final static String URL_MENG_LESSION = "http://app.mengbaobao.com:8090/class/index.html";
+
+    public final static String URL_REFUND_CHECK = BASE_URL + "babyUser.do?method=GetRefundState";
+    public final static String ULR_SEARCH_REFUND = BASE_URL + "babyUser.do?method=ApplyRefund";
+    public final static String URL_CONFIRM_REFUND = BASE_URL + "babyUser.do?method=Refunds";
 
 //    public static String mergeUrlAndParam(String url , String value){
 //        String result = null;

@@ -1,6 +1,6 @@
 package com.doumengmeng.customer.response;
 
-import com.doumengmeng.customer.response.entity.Doctor;
+import com.doumengmeng.customer.response.entity.DoctorTrans;
 import com.doumengmeng.customer.response.entity.Feature;
 import com.doumengmeng.customer.response.entity.Growth;
 import com.doumengmeng.customer.response.entity.Hospital;
@@ -27,7 +27,7 @@ public class InitConfigureResponse extends BaseResponse {
     public static class Result{
         private com.doumengmeng.customer.response.entity.ParentInfo ParentInfo;
         private List<Banner> bannerList;
-        private List<Doctor> DoctorList;
+        private List<DoctorTrans> DoctorList;
         private List<Hospital> HospitalList;
         private List<MengClass> MengClassList;
         private List<Growth> GrowthList;
@@ -52,7 +52,11 @@ public class InitConfigureResponse extends BaseResponse {
             this.nextTimeList = nextTimeList;
         }
 
-        public void setDoctorList(List<Doctor> doctorList) {
+        public List<DoctorTrans> getDoctorList() {
+            return DoctorList;
+        }
+
+        public void setDoctorList(List<DoctorTrans> doctorList) {
             DoctorList = doctorList;
         }
 
@@ -68,9 +72,6 @@ public class InitConfigureResponse extends BaseResponse {
             GrowthList = growthList;
         }
 
-        public List<Doctor> getDoctorList() {
-            return DoctorList;
-        }
 
         public List<Hospital> getHospitalList() {
             return HospitalList;

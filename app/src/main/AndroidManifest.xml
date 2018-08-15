@@ -115,6 +115,10 @@
 
         <activity android:name="com.doumengmeng.customer.activity.DiagramDataActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.LessonActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ApplyRefundActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.RefundResultActivity" android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.PayActivity" android:screenOrientation="portrait"></activity>
 
         <activity android:name="com.doumengmeng.customer.wxapi.WXPayEntryActivity"
             android:screenOrientation="portrait"
