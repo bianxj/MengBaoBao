@@ -11,11 +11,18 @@ public class UrlAddressList {
     public final static String PARAM = "paramStr";
     public final static String SESSION_ID = "sesId";
 
-//    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneDoctorServerV2/";
-//    public final static String BASE_IMAGE_URL = "http://192.168.31.167:8083/";
+    //废弃地址
+    //    public final static String BASE_URL = "http://app.mengbaobao.com:8091/mbbPhoneDoctorServerV2/";
 
-    public final static String BASE_URL = "http://app.mengbaobao.com:8091/mbbPhoneDoctorServerV2/";
+    //生产地址
+    public final static String BASE_URL = "http://app.mengbaobao.com:8091/mbbPhoneDoctorServer1_3_0/";
     public  final static String BASE_IMAGE_URL = "http://app.mengbaobao.com:8083/";
+
+    //测试地址
+    //    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneDoctorServerV2/";
+//    public final static String BASE_IMAGE_URL = "http://192.168.31.167:8083/";
+//    public final static String BASE_URL = "http://app.mengbaobao.com:8093/mbbPhoneDoctorTestServer/";
+//    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneDoctorServer1_3_0/";
 
     public final static String URL_GET_VC = BASE_URL + "babyDoctor.do?method=SendMessage";
     //    public final static String URL_REGISTER_CHECT = BASE_URL + "babyUser.do?method=RegisterCheck";
@@ -58,8 +65,10 @@ public class UrlAddressList {
     public final static String URL_DELETE_ALL_MESSAGE = BASE_URL + "babyDoctor.do?method=DeleteAllNews";
 
     public final static String URL_UPDATE_INFO = BASE_URL + "system.do?method=GetVersion";
-    public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";
+//    public final static String URL_VERSION_FILE = BASE_URL + "androidVersion.txt";
+    public final static String URL_VERSION_FILE = "http://app.mengbaobao.com:8083/androidDoctorVersion.txt";
 
+    public final static String URL_ORDER_RECEIVE = BASE_URL + "babyDoctor.do?method=UpdateReceptionStatus";
 //    public final static String URL_MENG_LESSION = "http://app.mengbaobao.com/class/index.html";
 
 //    public static String mergeUrlAndParam(String url , String value){

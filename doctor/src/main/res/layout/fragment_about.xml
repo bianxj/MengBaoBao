@@ -74,12 +74,26 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y10px" />
 
-    <ListView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/first_white"
+        android:overScrollMode="never">
+        <LinearLayout
+            android:id="@+id/ll_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+<!--    <ListView
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/first_white"
         android:divider="@null"
-        android:overScrollMode="never"></ListView>
+        android:overScrollMode="never"></ListView>-->
 
 </LinearLayout>

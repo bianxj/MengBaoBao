@@ -39,6 +39,8 @@ public class UserData {
     private String certificateB;
     @SerializedName("departmentname")
     private String departmentName;
+    @SerializedName("receptionstatus")
+    private String receptionStatus;
 
     public String getDoctorId() {
         return doctorId;
@@ -150,6 +152,14 @@ public class UserData {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    public String getReceptionStatus() {
+        return receptionStatus;
+    }
+
+    public void setReceptionStatus(String receptionStatus) {
+        this.receptionStatus = receptionStatus;
     }
 
     public String getHeadimg() {

@@ -78,6 +78,9 @@ public class ResponseErrorCode {
     private static final int ERROR_CLIENT_PARAM_COUNT = -202;			//客户端参数数目错误
     private static final int ERROR_EVALUATION = -203;                   //医生端评估未成功
 
+    //医生接单
+    public static final int ERROR_CLOSE_RECEPTION = -204;               //医生端有记录未做评估时关闭接诊
+
     //其他
     private static final int ERROR_UNKNOWN = -300;						//未知错误
     private static final int ERROR_MEMCACHE_DATA_NOT_EXIST = -301;		//没有相应的缓存数据
@@ -161,6 +164,8 @@ public class ResponseErrorCode {
 
         errorCodeArray.put(ERROR_REQUEST_FAILED,"请求失败");
         errorCodeArray.put(ERROR_ANALYSIS_FAILED,"解析失败");
+
+        errorCodeArray.put(ERROR_CLOSE_RECEPTION,"医生端有记录未做评估时关闭接诊");
 
 //        errorCodeMap = new HashMap<>();
 //        errorCodeMap.put(ERROR_SERVER_MAINTENANCE,"服务器正在维护");

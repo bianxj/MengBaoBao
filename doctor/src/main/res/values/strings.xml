@@ -279,6 +279,7 @@
 
     <!--FragmentAbout-->
     <string name="i">我</string>
+    <string name="order_receive">接单</string>
     <string name="person_info">个人信息</string>
     <string name="call_center">客服中心</string>
     <string name="about">关于我们</string>
@@ -369,6 +370,11 @@
     <string name="prompt_submit_message">一旦确认，您的评估和指导意见将直接发给用户了！</string>
     <string name="prompt_btn_edit">返回修改</string>
     <string name="order_receiving">接单</string>
+
+    <string name="prompt_order_close">您确认要关闭“接单”吗？</string>
+    <string name="prompt_order_close_failed">您还有评估未完成，请完成后再关闭“接单”按钮。</string>
+    <string name="prompt_order_close_after">“接单”已关闭，如需接单，请重新开启“接单”。</string>
+    <string name="prompt_order_receive">您可以开始接单了，请在48小时内完成评估和养育指导。</string>
 
 
     <string name="default_city">北京市</string>
