@@ -21,6 +21,7 @@ import com.doumengmeng.customer.base.BaseLoadingListener;
 import com.doumengmeng.customer.net.UrlAddressList;
 import com.doumengmeng.customer.request.RequestCallBack;
 import com.doumengmeng.customer.request.RequestTask;
+import com.doumengmeng.customer.request.ResponseErrorCode;
 import com.doumengmeng.customer.request.task.RefundCheckTask;
 import com.doumengmeng.customer.response.AllRecordResponse;
 import com.doumengmeng.customer.response.entity.Record;
@@ -33,6 +34,9 @@ import com.doumengmeng.customer.view.XLoadMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,6 +86,7 @@ public class SpacialistServiceFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         stopTask(recordTask);
+        stopTask(addRecordCheckTask);
         if ( task != null ){
             stopTask(task.getRequestTask());
         }
@@ -302,16 +307,66 @@ public class SpacialistServiceFragment extends BaseFragment {
                     }
                 });
             } else {
-                task = new RefundCheckTask(getContext(), RefundCheckTask.RefundType.ADD_RECORD, new RefundCheckTask.RefundCallBack() {
-                    @Override
-                    public void success() {
-                        addRecord();
-                    }
-                });
-                task.startTask();
+                checkRecord();
             }
         }
     }
+
+    private RequestTask addRecordCheckTask;
+
+    private void checkRecord(){
+        try {
+            addRecordCheckTask = new RequestTask.Builder(getContext(),addRecordCheckCallBack)
+                    .setContent(initAddRecordCheckData())
+                    .setType(RequestTask.DEFAULT)
+                    .setUrl(UrlAddressList.URL_ADD_RECORD_CHECK)
+                    .build();
+            addRecordCheckTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private Map<String,String> initAddRecordCheckData(){
+        Map<String,String> map = new HashMap<>();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("userId",userData.getUserid());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        map.put(UrlAddressList.PARAM,object.toString());
+        map.put(UrlAddressList.SESSION_ID,userData.getSessionId());
+        return map;
+    }
+
+    private RequestCallBack addRecordCheckCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public void onError(String result) {
+            if (ResponseErrorCode.getErrorCode(result) == ResponseErrorCode.ERROR_DOCTOR_ALREADY_CLOSE){
+                MyDialog.showPromptDialog(getContext(),getString(R.string.prompt_not_order_call),null);
+            } else {
+                MyDialog.showPromptDialog(getContext(),ResponseErrorCode.getErrorMsg(result),null);
+            }
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            task = new RefundCheckTask(getContext(), RefundCheckTask.RefundType.ADD_RECORD, new RefundCheckTask.RefundCallBack() {
+                @Override
+                public void success() {
+                    addRecord();
+                }
+            });
+            task.startTask();
+        }
+    };
 
 
 //    private RequestTask refundCheckTask = null;

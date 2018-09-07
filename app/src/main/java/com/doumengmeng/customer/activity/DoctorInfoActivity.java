@@ -15,6 +15,10 @@ import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseApplication;
 import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.db.DaoManager;
+import com.doumengmeng.customer.net.UrlAddressList;
+import com.doumengmeng.customer.request.RequestCallBack;
+import com.doumengmeng.customer.request.RequestTask;
+import com.doumengmeng.customer.request.ResponseErrorCode;
 import com.doumengmeng.customer.request.task.RefundCheckTask;
 import com.doumengmeng.customer.response.entity.Doctor;
 import com.doumengmeng.customer.response.entity.Hospital;
@@ -24,6 +28,12 @@ import com.doumengmeng.customer.util.PermissionUtil;
 import com.doumengmeng.customer.view.CircleImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 作者: 边贤君
@@ -58,6 +68,7 @@ public class DoctorInfoActivity extends BaseSwipeActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopTask(checkOrderTask);
 //        MyDialog.dismissPayDialog();
 //        unregisterIWXApi();
 //        stopTask(preAliPayTask);
@@ -178,7 +189,8 @@ public class DoctorInfoActivity extends BaseSwipeActivity {
                     back();
                     break;
                 case R.id.bt_choose:
-                    choose();
+//                    choose();
+                    checkOrder();
                     break;
             }
         }
@@ -212,6 +224,55 @@ public class DoctorInfoActivity extends BaseSwipeActivity {
         });
         task.startTask();
     }
+
+    private RequestTask checkOrderTask;
+    private void checkOrder(){
+        try {
+            checkOrderTask = new RequestTask.Builder(this,checkOrderCallBack)
+                    .setContent(initCheckOrderContent())
+                    .setType(RequestTask.DEFAULT)
+                    .setUrl(UrlAddressList.URL_ORDER_CHECK)
+                    .build();
+            checkOrderTask.execute();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private Map<String,String> initCheckOrderContent(){
+        Map<String,String> map = new HashMap<>();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("doctorId",doctor.getDoctorid());
+            object.put("userId",BaseApplication.getInstance().getUserData().getUserid());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        map.put(UrlAddressList.PARAM, object.toString());
+        map.put(UrlAddressList.SESSION_ID,BaseApplication.getInstance().getUserData().getSessionId());
+        return map;
+    }
+
+    private RequestCallBack checkOrderCallBack = new RequestCallBack() {
+        @Override
+        public void onPreExecute() {
+
+        }
+
+        @Override
+        public void onError(String result) {
+            if (ResponseErrorCode.getErrorCode(result) == ResponseErrorCode.ERROR_DOCTOR_ALREADY_CLOSE){
+                MyDialog.showPromptDialog(DoctorInfoActivity.this,getString(R.string.prompt_not_order),null);
+            } else {
+                MyDialog.showPromptDialog(DoctorInfoActivity.this,ResponseErrorCode.getErrorMsg(result),null);
+            }
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            choose();
+        }
+    };
 
 //    private void choose(){
 //        if (PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){

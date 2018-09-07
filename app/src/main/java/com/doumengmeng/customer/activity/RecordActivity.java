@@ -879,6 +879,13 @@ public class RecordActivity extends BaseSwipeActivity {
                         BaseApplication.getInstance().skipToLoading(RecordActivity.this);
                     }
                 });
+            } else if ( ResponseErrorCode.ERROR_DOCTOR_ALREADY_CLOSE == ResponseErrorCode.getErrorCode(result) ) {
+                MyDialog.showPromptDialog(RecordActivity.this, getString(R.string.prompt_not_order_call), new MyDialog.PromptDialogCallback() {
+                    @Override
+                    public void sure() {
+                        finish();
+                    }
+                });
             } else {
                 MyDialog.showPromptDialog(RecordActivity.this,ResponseErrorCode.getErrorMsg(result),null);
             }

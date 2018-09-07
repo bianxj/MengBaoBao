@@ -72,6 +72,9 @@ public class ResponseErrorCode {
     public static final int ERROR_ROLE_MENU_OVER = -115;				//角色套餐结束
     private static final int ERROR_ROLE_UPDATE_LINKMAN = -116;			//角色修改联系人信息错误
 
+    //接单
+    public static final int ERROR_DOCTOR_ALREADY_CLOSE = -117;          //医生已经关闭接单开关
+
     //退款
 //    public static final int ERROR_REFUND_SUBMIT = -150;					//已申请退款，按提交按钮
 //    public static final int ERROR_REFUND_BUY = -151;					//已申请退款，按购买按钮
@@ -162,6 +165,8 @@ public class ResponseErrorCode {
 
         errorCodeArray.put(ERROR_DB_INSERT,"数据库插入数据失败");
         errorCodeArray.put(ERROR_DB_RECORD_HELP,"数据库获取在线月记录规则失败");
+
+        errorCodeArray.put(ERROR_DOCTOR_ALREADY_CLOSE,"医生已经关闭接单开关");
 
         errorCodeArray.put(ERROR_REQUEST_FAILED,"请求失败");
         errorCodeArray.put(ERROR_ANALYSIS_FAILED,"解析失败");

@@ -502,6 +502,10 @@
     <string name="prompt_refund_again">您已申请退款，抱歉不能重复申请退款</string>
     <string name="prompt_no_refund">抱歉您没有可退的款项</string>
 
+    <!--医生接单-->
+    <string name="prompt_not_order">医生工作繁忙，暂不接单。</string>
+    <string name="prompt_not_order_call">医生工作繁忙，暂不接单，请联系客服。</string>
+
     <!--Other-->
     <string name="contentDescription">image</string>
 

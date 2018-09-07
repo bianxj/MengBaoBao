@@ -11,8 +11,11 @@ public class UrlAddressList {
     public final static String PARAM = "paramStr";
     public final static String SESSION_ID = "sesId";
 
+    //废弃地址
+//    public final static String BASE_URL = "http://app.mengbaobao.com:8090/mbbPhoneServerV2/";
 
-    public final static String BASE_URL = "http://app.mengbaobao.com:8090/mbbPhoneServerV2/";
+    //生产地址
+    public final static String BASE_URL = "http://app.mengbaobao.com:8090/mbbPhoneServer2_5_0/";
     public final static String IMAGE_URL = "http://app.mengbaobao.com:8083/";
 
     //测试地址
@@ -20,9 +23,10 @@ public class UrlAddressList {
 //    public final static String BASE_URL = "http://app.mengbaobao.com:8092/mbbPhoneTestServer/";
 //    public final static String BASE_URL = "http://app.mengbaobao.com:8092/mbbPhoneTestServerV2/";
 //    public final static String BASE_URL = "http://192.168.31.112:8080/mbbPhoneTestServerV2/";
-////    public final static String IMAGE_URL = "http://192.168.31.112:8083/";
+//    public final static String IMAGE_URL = "http://192.168.31.112:8083/";
 //    public final static String BASE_URL = "http://app.mengbaobao.com:8093/mbbPhoneServer2_4_0/";
 
+//    public final static String BASE_URL = "http://192.168.31.167:8080/mbbPhoneServer2_5_0/";
 
     public final static String URL_GET_VC = BASE_URL + "babyUser.do?method=SendMessage";
 //    public final static String URL_REGISTER_CHECT = BASE_URL + "babyUser.do?method=RegisterCheck";
@@ -34,7 +38,7 @@ public class UrlAddressList {
     public final static String URL_EIDT_PASSWORD = BASE_URL + "babyUser.do?method=EditPwd";
 
     public final static String URL_SAVE_USER_INFO = BASE_URL + "babyUser.do?method=SaveUser";
-    public final static String URL_UPLOAD_HEAD_IMG = BASE_URL + "babyUser.do?method=UploadUserHead";
+    public final static String URL_UPLOAD_HEAD_IMG = BASE_URL + "babyUser.do?   method=UploadUserHead";
     public final static String URL_GET_ALL_RECORD = BASE_URL + "babyUser.do?method=GetAllRecord";
     public final static String URL_UPDATE_RECORD_STATE = BASE_URL + "babyUser.do?method=UpdateIsRead";
 //    public final static String URL_SAVE_PARENT_INFO = BASE_URL + "babyUser.do?method=EditParent";
@@ -59,6 +63,9 @@ public class UrlAddressList {
     public final static String URL_REFUND_CHECK = BASE_URL + "babyUser.do?method=GetRefundState";
     public final static String ULR_SEARCH_REFUND = BASE_URL + "babyUser.do?method=ApplyRefund";
     public final static String URL_CONFIRM_REFUND = BASE_URL + "babyUser.do?method=Refunds";
+
+    public final static String URL_ORDER_CHECK = BASE_URL + "babyUser.do?method=CheckChooseDoctor";
+    public final static String URL_ADD_RECORD_CHECK = BASE_URL + "babyUser.do?method=CheckNewRecord";
 
 //    public static String mergeUrlAndParam(String url , String value){
 //        String result = null;

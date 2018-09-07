@@ -66,7 +66,7 @@ public class BaseApplication extends Application {
 
     private void initMLog(){
         MLog.Builder builder = new MLog.Builder(this);
-        builder.setDebug(true);
+        builder.setDebug(false);
         builder.setInner(false);
         builder.setLogDirName("/log");
         builder.setSaveDay(5);
