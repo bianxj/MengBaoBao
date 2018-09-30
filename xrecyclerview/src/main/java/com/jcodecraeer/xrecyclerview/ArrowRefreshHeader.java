@@ -19,7 +19,7 @@ import com.jcodecraeer.xrecyclerview.progressindicator.AVLoadingIndicatorView;
 
 import java.util.Date;
 
-public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeader {
+public class ArrowRefreshHeader extends LinearLayout implements IArrowRefreshHeader {
 
 	private LinearLayout mContainer;
 	private ImageView mArrowImageView;
@@ -162,7 +162,12 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
         }, 200);
 	}
 
-	public void setVisibleHeight(int height) {
+    @Override
+    public void refreshFailed() {
+
+    }
+
+    public void setVisibleHeight(int height) {
 		if (height < 0) height = 0;
 		LayoutParams lp = (LayoutParams) mContainer .getLayoutParams();
 		lp.height = height;

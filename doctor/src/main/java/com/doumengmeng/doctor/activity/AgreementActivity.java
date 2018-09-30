@@ -97,7 +97,7 @@ public class AgreementActivity extends BaseSwipeActivity {
                 handler.proceed();
             }
         });
-        wv.loadUrl("file:///android_asset/agreement.html");
+        wv.loadUrl("http://app.mengbaobao.com:8083/agreement.html");
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {

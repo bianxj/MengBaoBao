@@ -12,9 +12,13 @@ import android.widget.LinearLayout;
 
 public abstract class BaseLoadMoreFooter extends LinearLayout {
 
+    public final static int DO_NOTHING = -1;
     public final static int STATE_LOADING = 0;
     public final static int STATE_COMPLETE = 1;
     public final static int STATE_NOMORE = 2;
+    public final static int STATE_FAILED = 3;
+
+    public int state = DO_NOTHING;
 
     public BaseLoadMoreFooter(Context context) {
         super(context);
@@ -27,6 +31,11 @@ public abstract class BaseLoadMoreFooter extends LinearLayout {
     protected abstract void loading();
     protected abstract void loadingComplete();
     protected abstract void noMoreLoading();
+    protected abstract void loadMoreFailed();
+
+    public void fresh(){
+        setState(state);
+    }
 
     public void  setState(int state) {
         switch(state) {
@@ -42,7 +51,12 @@ public abstract class BaseLoadMoreFooter extends LinearLayout {
                 noMoreLoading();
                 this.setVisibility(View.VISIBLE);
                 break;
+            case STATE_FAILED:
+                loadMoreFailed();
+                this.setVisibility(View.VISIBLE);
+                break;
         }
+        this.state = state;
     }
 
 }

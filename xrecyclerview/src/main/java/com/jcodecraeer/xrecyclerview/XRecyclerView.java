@@ -31,7 +31,7 @@ public class XRecyclerView extends RecyclerView {
     private static final float DRAG_RATE = 3;
 //    private CustomFooterViewCallBack footerViewCallBack;
     private LoadingListener mLoadingListener;
-    private ArrowRefreshHeader mRefreshHeader;
+    private IArrowRefreshHeader mRefreshHeader;
     private boolean pullRefreshEnabled = true;
     private boolean loadingMoreEnabled = true;
     //下面的ItemViewType是保留值(ReservedItemViewType),如果用户的adapter与它们重复将会强制抛出异常。不过为了简化,我们检测到重复时对用户的提示是ItemViewType必须小于10000
@@ -69,6 +69,8 @@ public class XRecyclerView extends RecyclerView {
         mRefreshHeader = new ArrowRefreshHeader(getContext());
         mRefreshHeader.setProgressStyle(mRefreshProgressStyle);
         setLayoutManager(new LinearLayoutManager(getContext()));
+
+        getHeight();
 //        LoadingMoreFooter footView = new LoadingMoreFooter(getContext());
 //        footView.setProgressStyle(mLoadingMoreProgressStyle);
 //        mFootView = footView;
@@ -130,6 +132,11 @@ public class XRecyclerView extends RecyclerView {
         mFootView.setVisibility(View.GONE);
     }
 
+    public void loadMoreFailed(){
+        isLoadingData = false;
+        mFootView.setState(BaseLoadMoreFooter.STATE_FAILED);
+    }
+
     public void loadMoreComplete() {
         isLoadingData = false;
         mFootView.setState(BaseLoadMoreFooter.STATE_COMPLETE);
@@ -157,7 +164,11 @@ public class XRecyclerView extends RecyclerView {
         setNoMore(false);
     }
 
-    public void setRefreshHeader(ArrowRefreshHeader refreshHeader) {
+    public void refreshFailed(){
+        mRefreshHeader.refreshFailed();
+    }
+
+    public void setRefreshHeader(IArrowRefreshHeader refreshHeader) {
         mRefreshHeader = refreshHeader;
     }
 
@@ -360,7 +371,7 @@ public class XRecyclerView extends RecyclerView {
     }
 
     private boolean isOnTop() {
-        if (mRefreshHeader.getParent() != null) {
+        if (((ViewGroup)mRefreshHeader).getParent() != null) {
             return true;
         } else {
             return false;
@@ -450,7 +461,7 @@ public class XRecyclerView extends RecyclerView {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == TYPE_REFRESH_HEADER) {
-                return new SimpleViewHolder(mRefreshHeader);
+                return new SimpleViewHolder((View) mRefreshHeader);
             } else if (isHeaderType(viewType)) {
                 return new SimpleViewHolder(getHeaderViewByType(viewType));
             } else if (viewType == TYPE_FOOTER) {
@@ -479,6 +490,10 @@ public class XRecyclerView extends RecyclerView {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position,List<Object> payloads) {
             if (isHeader(position) || isRefreshHeader(position)) {
                 return;
+            }
+
+            if (isFooter(position)){
+                mFootView.fresh();
             }
 
             int adjPosition = position - (getHeadersCount() + 1);
@@ -807,4 +822,22 @@ public class XRecyclerView extends RecyclerView {
         void onAlphaChange(int alpha);  /** you can handle the alpha insert it */
         int setLimitHeight(); /** set a height for the begging of the alpha start to change */
     }
+
+    @Override
+    protected void onMeasure(int widthSpec, int heightSpec) {
+        super.onMeasure(widthSpec, heightSpec);
+    }
+
+    private void test(){
+        if ( computeVerticalScrollExtent() >= (computeVerticalScrollRange()-computeVerticalScrollOffset()) ){
+            if ( loadingMoreEnabled ){
+                loadingMoreEnabled = false;
+                mWrapAdapter.notifyDataSetChanged();
+            }
+        }
+        System.out.println("onMeasure:Extent:"+computeVerticalScrollExtent());
+        System.out.println("onMeasure:Offset:"+computeVerticalScrollOffset());
+        System.out.println("onMeasure:Range:"+computeVerticalScrollRange());
+    }
+
 }

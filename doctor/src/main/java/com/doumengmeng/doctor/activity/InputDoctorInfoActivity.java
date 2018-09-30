@@ -158,7 +158,13 @@ public class InputDoctorInfoActivity extends BaseSwipeActivity {
 
     private void refreshCost(String cost){
         int realCost = Integer.parseInt(cost.replace("元",""));
-        tv_income.setText(realCost/2+"元");
+        String rateString = BaseApplication.getInstance().loadIncomeRatio();
+        int rate = 0;
+        if (!TextUtils.isEmpty(rateString) && TextUtils.isDigitsOnly(rateString) ){
+            rate = Integer.parseInt(rateString);
+        }
+        tv_income.setText(realCost*rate/100+"元");
+//        tv_income.setText(realCost/2+"元");
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
