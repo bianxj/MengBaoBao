@@ -20,8 +20,8 @@ android {
         multiDexEnabled true
         minSdkVersion 18
         targetSdkVersion 23
-        versionCode 6
-        versionName "2.5.0"
+        versionCode 7
+        versionName "2.6.0"
 //        versionName "0.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -67,4 +67,5 @@ dependencies {
     implementation files('libs/umeng-common-1.4.3.jar')
     implementation files('libs/umeng-analytics-7.4.1.jar')
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation project(':captchalib')
 }

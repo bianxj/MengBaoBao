@@ -110,7 +110,8 @@ public class ForgotPwdActivity extends BaseActivity {
                     back();
                     break;
                 case R.id.bt_get_vc:
-                    getVerificationCode();
+//                    getVerificationCode();
+                    gotoVerificationPuzzle();
                     break;
                 case R.id.bt_sure:
                     changePwd();
@@ -128,6 +129,15 @@ public class ForgotPwdActivity extends BaseActivity {
 
     protected void back(){
         finish();
+    }
+
+    private final static int REQUEST_PUZZLE = 0x11;
+    private void gotoVerificationPuzzle(){
+        AppUtil.hideSoftInput(this,getWindow());
+        if ( checkVerificationCode() ) {
+            Intent intent = new Intent(this, PuzzleActivity.class);
+            startActivityForResult(intent, REQUEST_PUZZLE);
+        }
     }
 
     private RequestTask getVerificationCodeTask;
@@ -369,6 +379,12 @@ public class ForgotPwdActivity extends BaseActivity {
         if ( requestCode == REQUEST_AGREEMENT ){
             if ( resultCode == Activity.RESULT_OK){
                 cb_agreement.setChecked(true);
+            }
+        }
+
+        if ( requestCode  == REQUEST_PUZZLE ){
+            if ( resultCode == Activity.RESULT_OK ){
+                getVerificationCode();
             }
         }
     }

@@ -64,6 +64,8 @@
             android:theme="@style/GuideLauncher"
             >
         </activity>
+
+        <activity android:name=".activity.PuzzleActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.LoginActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.TransitionActivity" android:theme="@style/TransitionLauncher" android:screenOrientation="portrait"></activity>
         <activity android:name="com.doumengmeng.customer.activity.RegisterActivity" android:screenOrientation="portrait"></activity>

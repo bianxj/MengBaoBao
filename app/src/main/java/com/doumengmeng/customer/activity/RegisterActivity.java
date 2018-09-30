@@ -109,7 +109,8 @@ public class RegisterActivity extends BaseActivity {
                     back();
                     break;
                 case R.id.bt_get_vc:
-                    getVerificationCode();
+//                    getVerificationCode();
+                    gotoVerificationPuzzle();
                     break;
                 case R.id.bt_sure:
                     register();
@@ -129,6 +130,14 @@ public class RegisterActivity extends BaseActivity {
         finish();
     }
 
+    private final static int REQUEST_PUZZLE = 0x11;
+    private void gotoVerificationPuzzle(){
+        AppUtil.hideSoftInput(this,getWindow());
+        if ( checkVerificationCode() ) {
+            Intent intent = new Intent(this, PuzzleActivity.class);
+            startActivityForResult(intent, REQUEST_PUZZLE);
+        }
+    }
 
     private RequestTask getVerificationTask;
     /**
@@ -383,6 +392,11 @@ public class RegisterActivity extends BaseActivity {
         if ( requestCode == REQUEST_AGREEMENT ){
             if ( resultCode == Activity.RESULT_OK){
                 cb_agreement.setChecked(true);
+            }
+        }
+        if ( requestCode  == REQUEST_PUZZLE ){
+            if ( resultCode == Activity.RESULT_OK ){
+                getVerificationCode();
             }
         }
     }

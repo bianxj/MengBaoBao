@@ -86,6 +86,7 @@ public class MyDialog {
             TextView tv_use_percent = view.findViewById(R.id.tv_use_percent);
             TextView tv_update_version = view.findViewById(R.id.tv_update_version);
 
+            tv_use_percent.setText("82%");
             tv_update_version.setText(updateVersion);
             tv_update_content.setText(content);
             if ( isForce ){
