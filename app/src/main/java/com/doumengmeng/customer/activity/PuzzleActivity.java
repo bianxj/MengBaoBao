@@ -16,6 +16,10 @@ import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.util.MyDialog;
 import com.mcxtzhang.captchalib.SwipeCaptchaView;
 
+/**
+ * 作者: 边贤君
+ * 描述: 拼图页面
+ */
 public class PuzzleActivity extends BaseActivity {
 
 

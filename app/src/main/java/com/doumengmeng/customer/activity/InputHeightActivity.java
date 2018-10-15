@@ -18,7 +18,7 @@ import com.doumengmeng.customer.view.MyGifPlayer;
 
 /**
  * 作者: 边贤君
- * 描述: 测量升高页面
+ * 描述: 测量身高页面
  * 创建日期: 2018/1/10 11:43
  */
 public class InputHeightActivity extends BaseInputDataActivity {

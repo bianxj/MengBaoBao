@@ -17,6 +17,10 @@ import android.widget.TextView;
 import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseSwipeActivity;
 
+/**
+ * 作者: 边贤君
+ * 描述: 萌课堂详情页面
+ */
 public class LessonActivity extends BaseSwipeActivity {
 
     public final static String URL_TITLE = "url_title";

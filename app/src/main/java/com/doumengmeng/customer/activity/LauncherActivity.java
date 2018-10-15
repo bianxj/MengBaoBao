@@ -10,9 +10,11 @@ import com.doumengmeng.customer.base.BaseActivity;
 import com.doumengmeng.customer.base.BaseApplication;
 
 /**
- * Created by Administrator on 2018/5/14.
+ * 作者: 边贤君
+ * 描述: 启动页
+ * 等待1秒后跳转至引导页
+ * 创建日期: 2018/2/9 14:47
  */
-
 public class LauncherActivity extends BaseActivity {
 
     private Handler handler;

@@ -18,9 +18,10 @@ import com.doumengmeng.customer.util.FormatCheckUtil;
 import com.doumengmeng.customer.view.MyGifPlayer;
 
 /**
- * Created by Administrator on 2017/12/26.
+ * 作者: 边贤君
+ * 描述: 测量胸围
+ * 创建日期: 2018/1/10 13:20
  */
-
 public class InputChestActivity extends BaseInputDataActivity {
 
     public final static String IN_PARAM_CHEST = "in_chest";

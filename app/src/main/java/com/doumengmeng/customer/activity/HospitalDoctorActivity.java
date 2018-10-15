@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/12.
+ * 作者: 边贤君
+ * 描述: 医院下的医生列表页面
  */
-
 public class HospitalDoctorActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_HOSPITAL_ID = "hospitalId";

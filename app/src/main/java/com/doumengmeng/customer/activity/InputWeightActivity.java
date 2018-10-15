@@ -19,9 +19,10 @@ import com.doumengmeng.customer.util.FormatCheckUtil;
 import com.doumengmeng.customer.view.MyGifPlayer;
 
 /**
- * Created by Administrator on 2017/12/12.
+ * 作者: 边贤君
+ * 描述: 测量体重
+ * 创建日期: 2018/1/17 13:23
  */
-
 public class InputWeightActivity extends BaseInputDataActivity {
 
     public final static String IN_PARAM_WEIGHT = "in_weight";

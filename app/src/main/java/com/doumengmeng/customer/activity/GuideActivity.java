@@ -69,6 +69,7 @@ public class GuideActivity extends BaseSwipeActivity {
         bt_guide_login.setOnClickListener(listener);
         asvp = findViewById(R.id.asvp);
 
+        //加载引导页图片
         List<Integer> images = new ArrayList<>();
         images.add(R.drawable.icon_guide_1);
         images.add(R.drawable.icon_guide_2);
@@ -80,12 +81,13 @@ public class GuideActivity extends BaseSwipeActivity {
     private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent;
             switch(v.getId()){
                 case R.id.bt_guide_register:
+                    //跳转至注册页面
                     startActivity(RegisterActivity.class);
                     break;
                 case R.id.bt_guide_login:
+                    //跳转至登录页面
                     startActivity(LoginActivity.class);
                     break;
             }

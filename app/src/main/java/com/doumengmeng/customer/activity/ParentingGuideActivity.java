@@ -31,7 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * 作者: 边贤君
+ * 描述: 养育指导页面
+ */
 public class ParentingGuideActivity extends BaseFragmentActivity {
 
     public final static String IN_PARAM_RECORD_ID = "record_id";

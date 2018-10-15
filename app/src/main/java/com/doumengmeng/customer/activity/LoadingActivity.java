@@ -113,6 +113,9 @@ public class LoadingActivity extends BaseActivity {
         super.onDestroy();
     }
 
+    /**
+     * 检查存储权限
+     */
     private void checkExternalStorage(){
         if ( PermissionUtil.checkPermissionAndRequest(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ){
             loading();
@@ -177,6 +180,9 @@ public class LoadingActivity extends BaseActivity {
 //        initConfigure();
     }
 
+    /**
+     * 检查是否处于Wifi连接状态
+     */
     private void checkVersionAndWifi(){
         if ( isWifi() ){
             loadRemoteVersion();
@@ -197,6 +203,10 @@ public class LoadingActivity extends BaseActivity {
 
     private RequestTask loadRemoteVersionTask;
     private String remoteVersion;
+
+    /**
+     * 获取最新版本
+     */
     private void loadRemoteVersion() {
         try {
             loadRemoteVersionTask = new RequestTask.Builder(this, loadRemoteVersionCallBack)
@@ -232,6 +242,10 @@ public class LoadingActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 远程版本获取失败
+     * @param describe
+     */
     private void loadingFailed(String describe){
         stopLoadingPercent();
         MyDialog.showPromptDialog(LoadingActivity.this, describe, new MyDialog.PromptDialogCallback() {
@@ -242,14 +256,20 @@ public class LoadingActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 远程版本获取成功
+     * @param version
+     */
     private void loadRemoteVersionSuccess(String version){
         remoteVersion = version;
         String versionName = null;
         try {
             versionName = AppUtil.getVersionName(LoadingActivity.this);
             if (AppUtil.isNeedUpdate(versionName, version)) {
+                //获取更新信息
                 getUpdateInfo();
             } else {
+                //无需更新
                 noNeedUpdate();
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -261,13 +281,19 @@ public class LoadingActivity extends BaseActivity {
         Intent intent = getIntent();
         boolean isAutoLogin = intent.getBooleanExtra(IN_PARAM_AUTO_LOGIN,false);
         if ( isAutoLogin ){
+            //自动登录
             login();
         } else {
+            //加载数据
             initConfigure();
         }
     }
 
     private RequestTask updateInfoTask = null;
+
+    /**
+     * 获取更新信息
+     */
     private void getUpdateInfo(){
         try {
             updateInfoTask = new RequestTask.Builder(this,updateInfoCallback)
@@ -330,6 +356,10 @@ public class LoadingActivity extends BaseActivity {
     }
 
     private RequestTask initConfigureTask = null;
+
+    /**
+     * 获取配置信息
+     */
     private void initConfigure(){
         try {
             initConfigureTask = new RequestTask.Builder(this,initConfigureCallback)
@@ -478,6 +508,11 @@ public class LoadingActivity extends BaseActivity {
     private final Handler loadingHandler = new LoadingHandler(this);
 
     private final static long DAY = 24*60*60*1000;
+
+    /**
+     * 保存配置信息
+     * 医生、医院数据等等
+     */
     private class SaveDataRunnable implements Runnable{
 
         private final InitConfigureResponse response;
@@ -501,20 +536,27 @@ public class LoadingActivity extends BaseActivity {
                 doctors.add(DoctorTrans.transToDoctor(temp));
             }
 
+            //保存医生信息
             DaoManager.getInstance().getDaotorDao().saveDoctorList(LoadingActivity.this, doctors);
+            //保存观察要点
             DaoManager.getInstance().getGrowthDao().saveGrowthList(LoadingActivity.this, result.getGrowthList());
+            //保存医院信息
             DaoManager.getInstance().getHospitalDao().saveHospitalList(LoadingActivity.this, result.getHospitalList());
+            //保存萌课堂信息
             DaoManager.getInstance().getMengClassDao().saveMengClassList(LoadingActivity.this, result.getMengClassList());
 
+            //保存发育行为
             if ( result.getFeatureList() != null && result.getFeatureList().size() > 0 ) {
                 DaoManager.getInstance().deleteTable(LoadingActivity.this, FeatureDao.TABLE_NAME);
                 DaoManager.getInstance().getFeatureDao().saveFeatureList(LoadingActivity.this, result.getFeatureList());
                 BaseApplication.getInstance().saveFeatureVersion(result.getFeatureVersion());
             }
 
+            //保存父母信息
             BaseApplication.getInstance().saveParentInfo(result.getParentInfo());
+            //保存月龄数据
             BaseApplication.getInstance().saveDayList(result.getDayList());
-
+            //保存首页Banner条数据
             BaseApplication.getInstance().saveBannerData(result.getBannerList());
 
             InitConfigureResponse.NotificationData notificationData = result.getNextTimeList();

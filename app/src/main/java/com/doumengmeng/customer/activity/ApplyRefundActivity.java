@@ -30,6 +30,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 作者: 边贤君
+ * 描述: 申请退款页面
+ */
 public class ApplyRefundActivity extends BaseSwipeActivity {
 
     @Override

@@ -16,6 +16,10 @@ import com.doumengmeng.customer.util.GsonUtil;
 
 import java.util.List;
 
+/**
+ * 作者: 边贤君
+ * 描述: 退款结果页面
+ */
 public class RefundResultActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_REFUND_DATA = "refund_data";

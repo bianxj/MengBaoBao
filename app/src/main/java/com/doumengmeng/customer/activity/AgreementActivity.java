@@ -21,6 +21,10 @@ import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseSwipeActivity;
 import com.doumengmeng.customer.util.MyDialog;
 
+/**
+ * 作者: 边贤君
+ * 描述: 使用协议
+ */
 public class AgreementActivity extends BaseSwipeActivity {
 
     public static final String HIDE_BOTTOM = "hide_bottom";

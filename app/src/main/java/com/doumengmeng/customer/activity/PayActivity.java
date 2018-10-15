@@ -45,6 +45,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 作者: 边贤君
+ * 描述: 支付页面
+ */
 public class PayActivity extends BaseSwipeActivity {
 
     public final static String IN_PARAM_DOCTOR_ID = "doctor_id";

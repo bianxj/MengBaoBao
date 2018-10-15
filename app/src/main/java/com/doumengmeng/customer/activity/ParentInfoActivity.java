@@ -25,9 +25,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2017/12/13.
+ * 作者: 边贤君
+ * 描述: 父母信息页面
  */
-
 public class ParentInfoActivity extends BaseSwipeActivity {
 
     private RelativeLayout rl_back,rl_complete,rl_close;

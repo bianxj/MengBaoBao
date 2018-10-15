@@ -39,7 +39,7 @@ import java.util.Map;
 
 /**
  * 作者: 边贤君
- * 描述
+ * 描述: 注册页面
  * 创建日期: 2018/1/8 9:23
  * 萌宝宝用户注册界面
  */
@@ -131,6 +131,11 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private final static int REQUEST_PUZZLE = 0x11;
+    /**
+     * 作者: 边贤君
+     * 描述: 跳转至拼图页面
+     * 日期: 2018/1/8 9:24
+     */
     private void gotoVerificationPuzzle(){
         AppUtil.hideSoftInput(this,getWindow());
         if ( checkVerificationCode() ) {
@@ -206,6 +211,7 @@ public class RegisterActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if ( msg.what == COUNT_DOWN ){
+                //验证码倒计时
                 RegisterActivity activity = weakReference.get();
                 if ( activity.countDown <= 0 ){
                     activity.bt_get_vc.setText(activity.getString(R.string.replay));
@@ -269,6 +275,10 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 构建注册提交内容
+     * @return
+     */
     private Map<String, String> buildRegisterContent() {
         JSONObject object = new JSONObject();
         try {
@@ -390,11 +400,13 @@ public class RegisterActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ( requestCode == REQUEST_AGREEMENT ){
+            //协议返回信息
             if ( resultCode == Activity.RESULT_OK){
                 cb_agreement.setChecked(true);
             }
         }
         if ( requestCode  == REQUEST_PUZZLE ){
+            //拼图返回信息
             if ( resultCode == Activity.RESULT_OK ){
                 getVerificationCode();
             }

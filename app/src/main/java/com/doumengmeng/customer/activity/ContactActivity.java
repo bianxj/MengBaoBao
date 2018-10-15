@@ -10,7 +10,8 @@ import com.doumengmeng.customer.R;
 import com.doumengmeng.customer.base.BaseSwipeActivity;
 
 /**
- * Created by Administrator on 2017/12/8.
+ * 作者: 边贤君
+ * 描述: 客服中心页面
  */
 public class ContactActivity extends BaseSwipeActivity {
 
